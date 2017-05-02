@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a486d77_21c8ab73",
+        "filename": "lineage-push.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 15734
+      },
+      "writtenOn": "2017-05-02T13:42:17Z",
+      "side": 1,
+      "message": "Probably replace \"lineage-push\" with $0\n(Also in Line 5 and Line 19)\n\nOr replace it with \"lineage-push.sh\"",
+      "parentUuid": "",
+      "revId": "05e1ff44e6b48a5ce60e52aad6109a09ff5a057c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a486d77_61cea385",
+        "filename": "lineage-push.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 15734
+      },
+      "writtenOn": "2017-05-02T13:42:17Z",
+      "side": 1,
+      "message": "Not everyone may have set this",
+      "revId": "05e1ff44e6b48a5ce60e52aad6109a09ff5a057c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a486d77_41cba772",
+        "filename": "lineage-push.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 15734
+      },
+      "writtenOn": "2017-05-02T13:42:17Z",
+      "side": 1,
+      "message": "If you want to be super-correct, you should take the port from here: https://review.lineageos.org/ssh_info\n\nBut it\u0027s unlikely that the port changes anyways, so hardcoding it shouldn\u0027t be a problem",
+      "revId": "05e1ff44e6b48a5ce60e52aad6109a09ff5a057c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
