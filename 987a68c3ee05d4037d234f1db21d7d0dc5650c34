@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1a486d77_17213ffb",
+        "filename": "maintainer-checks/maintainers.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 11801
+      },
+      "writtenOn": "2017-05-20T14:45:30Z",
+      "side": 1,
+      "message": "Any better ideas? I didn\u0027t write this, it worked so I left it alone",
+      "parentUuid": "1a486d77_37cd5b5e",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 29
+      },
+      "revId": "987a68c3ee05d4037d234f1db21d7d0dc5650c34",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a486d77_57d21701",
         "filename": "maintainer-checks/maintainers.py",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2017-05-20T14:35:59Z",
       "side": 1,
       "message": "Maybe `ignore`?",
+      "range": {
+        "startLine": 25,
+        "startChar": 10,
+        "endLine": 25,
+        "endChar": 16
+      },
+      "revId": "987a68c3ee05d4037d234f1db21d7d0dc5650c34",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a486d77_f74463b8",
+        "filename": "maintainer-checks/maintainers.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 11801
+      },
+      "writtenOn": "2017-05-20T14:45:30Z",
+      "side": 1,
+      "message": "Yeah, holdover from when i actually was using .remove()\nDone",
+      "parentUuid": "1a486d77_57d21701",
       "range": {
         "startLine": 25,
         "startChar": 10,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "1a486d77_d713a7b6",
+        "filename": "maintainer-checks/maintainers.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 11801
+      },
+      "writtenOn": "2017-05-20T14:45:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a486d77_77ebd3b0",
+      "range": {
+        "startLine": 28,
+        "startChar": 10,
+        "endLine": 28,
+        "endChar": 16
+      },
+      "revId": "987a68c3ee05d4037d234f1db21d7d0dc5650c34",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a486d77_97e88fb5",
         "filename": "maintainer-checks/maintainers.py",
         "patchSetId": 3
@@ -82,6 +154,30 @@
       "writtenOn": "2017-05-20T14:35:59Z",
       "side": 1,
       "message": "s/\u003d/ \u003d /",
+      "range": {
+        "startLine": 38,
+        "startChar": 13,
+        "endLine": 38,
+        "endChar": 14
+      },
+      "revId": "987a68c3ee05d4037d234f1db21d7d0dc5650c34",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a486d77_b716eba5",
+        "filename": "maintainer-checks/maintainers.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 11801
+      },
+      "writtenOn": "2017-05-20T14:45:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a486d77_97e88fb5",
       "range": {
         "startLine": 38,
         "startChar": 13,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "1a486d77_970d2f93",
+        "filename": "maintainer-checks/maintainers.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 11801
+      },
+      "writtenOn": "2017-05-20T14:45:30Z",
+      "side": 1,
+      "message": "\\w matches underscore, which I\u0027m trying to avoid (as discussed)",
+      "parentUuid": "1a486d77_f7bfc3a8",
+      "range": {
+        "startLine": 44,
+        "startChar": 41,
+        "endLine": 44,
+        "endChar": 53
+      },
+      "revId": "987a68c3ee05d4037d234f1db21d7d0dc5650c34",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a486d77_d7de0711",
         "filename": "maintainer-checks/maintainers.py",
         "patchSetId": 3
@@ -128,6 +248,30 @@
       "writtenOn": "2017-05-20T14:35:59Z",
       "side": 1,
       "message": "s/\u003d/ \u003d /",
+      "range": {
+        "startLine": 53,
+        "startChar": 17,
+        "endLine": 53,
+        "endChar": 18
+      },
+      "revId": "987a68c3ee05d4037d234f1db21d7d0dc5650c34",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a486d77_771073a8",
+        "filename": "maintainer-checks/maintainers.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 11801
+      },
+      "writtenOn": "2017-05-20T14:45:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a486d77_d7de0711",
       "range": {
         "startLine": 53,
         "startChar": 17,
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "1a486d77_5727b712",
+        "filename": "maintainer-checks/maintainers.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 11801
+      },
+      "writtenOn": "2017-05-20T14:45:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a486d77_b7e14bd2",
+      "range": {
+        "startLine": 66,
+        "startChar": 17,
+        "endLine": 66,
+        "endChar": 18
+      },
+      "revId": "987a68c3ee05d4037d234f1db21d7d0dc5650c34",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a486d77_d705e77a",
         "filename": "maintainer-checks/maintainers.py",
         "patchSetId": 3
@@ -174,6 +342,30 @@
       "writtenOn": "2017-05-20T14:35:59Z",
       "side": 1,
       "message": "Maybe return instead of else?",
+      "range": {
+        "startLine": 69,
+        "startChar": 3,
+        "endLine": 69,
+        "endChar": 9
+      },
+      "revId": "987a68c3ee05d4037d234f1db21d7d0dc5650c34",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a486d77_3722fb01",
+        "filename": "maintainer-checks/maintainers.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 11801
+      },
+      "writtenOn": "2017-05-20T14:45:30Z",
+      "side": 1,
+      "message": "It\u0027s a loop, so continue\nDone",
+      "parentUuid": "1a486d77_d705e77a",
       "range": {
         "startLine": 69,
         "startChar": 3,
