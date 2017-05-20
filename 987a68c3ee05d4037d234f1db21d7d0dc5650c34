@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a486d77_37cd5b5e",
+        "filename": "maintainer-checks/maintainers.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2017-05-20T14:35:59Z",
+      "side": 1,
+      "message": "I am kinda skeptical about aligning them like this...",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 29
+      },
+      "revId": "987a68c3ee05d4037d234f1db21d7d0dc5650c34",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a486d77_57d21701",
+        "filename": "maintainer-checks/maintainers.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2017-05-20T14:35:59Z",
+      "side": 1,
+      "message": "Maybe `ignore`?",
+      "range": {
+        "startLine": 25,
+        "startChar": 10,
+        "endLine": 25,
+        "endChar": 16
+      },
+      "revId": "987a68c3ee05d4037d234f1db21d7d0dc5650c34",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a486d77_77ebd3b0",
+        "filename": "maintainer-checks/maintainers.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2017-05-20T14:35:59Z",
+      "side": 1,
+      "message": "Maybe `ignore`?",
+      "range": {
+        "startLine": 28,
+        "startChar": 10,
+        "endLine": 28,
+        "endChar": 16
+      },
+      "revId": "987a68c3ee05d4037d234f1db21d7d0dc5650c34",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a486d77_97e88fb5",
+        "filename": "maintainer-checks/maintainers.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2017-05-20T14:35:59Z",
+      "side": 1,
+      "message": "s/\u003d/ \u003d /",
+      "range": {
+        "startLine": 38,
+        "startChar": 13,
+        "endLine": 38,
+        "endChar": 14
+      },
+      "revId": "987a68c3ee05d4037d234f1db21d7d0dc5650c34",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a486d77_f7bfc3a8",
+        "filename": "maintainer-checks/maintainers.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2017-05-20T14:35:59Z",
+      "side": 1,
+      "message": "Does the \\w work in python?",
+      "range": {
+        "startLine": 44,
+        "startChar": 41,
+        "endLine": 44,
+        "endChar": 53
+      },
+      "revId": "987a68c3ee05d4037d234f1db21d7d0dc5650c34",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a486d77_d7de0711",
+        "filename": "maintainer-checks/maintainers.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2017-05-20T14:35:59Z",
+      "side": 1,
+      "message": "s/\u003d/ \u003d /",
+      "range": {
+        "startLine": 53,
+        "startChar": 17,
+        "endLine": 53,
+        "endChar": 18
+      },
+      "revId": "987a68c3ee05d4037d234f1db21d7d0dc5650c34",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a486d77_b7e14bd2",
+        "filename": "maintainer-checks/maintainers.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2017-05-20T14:35:59Z",
+      "side": 1,
+      "message": "s/\u003d/ \u003d /",
+      "range": {
+        "startLine": 66,
+        "startChar": 17,
+        "endLine": 66,
+        "endChar": 18
+      },
+      "revId": "987a68c3ee05d4037d234f1db21d7d0dc5650c34",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a486d77_d705e77a",
+        "filename": "maintainer-checks/maintainers.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2017-05-20T14:35:59Z",
+      "side": 1,
+      "message": "Maybe return instead of else?",
+      "range": {
+        "startLine": 69,
+        "startChar": 3,
+        "endLine": 69,
+        "endChar": 9
+      },
+      "revId": "987a68c3ee05d4037d234f1db21d7d0dc5650c34",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
