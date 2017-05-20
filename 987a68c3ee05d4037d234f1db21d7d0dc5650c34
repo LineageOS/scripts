@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "1a486d77_d761673a",
+        "filename": "maintainer-checks/maintainers.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 11801
+      },
+      "writtenOn": "2017-05-20T14:54:29Z",
+      "side": 1,
+      "message": "Implemented your proposed solution\nDone",
+      "parentUuid": "1a486d77_778753d8",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 29
+      },
+      "revId": "987a68c3ee05d4037d234f1db21d7d0dc5650c34",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a486d77_57d21701",
         "filename": "maintainer-checks/maintainers.py",
         "patchSetId": 3
