@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a486d77_cab77ed7",
+        "filename": "lineage-push/lineage-push.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 16082
+      },
+      "writtenOn": "2017-05-20T17:14:14Z",
+      "side": 1,
+      "message": "wut",
+      "range": {
+        "startLine": 11,
+        "startChar": 25,
+        "endLine": 11,
+        "endChar": 31
+      },
+      "revId": "9dd13cb7303234059815d910ca9b00166a7404b5",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
