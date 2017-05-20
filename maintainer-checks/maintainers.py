@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 
-from pathlib import Path
 import yaml
-import json
 import re
+import os
+import json
 
 # Paths to certain repos
 repo = {
@@ -21,7 +21,7 @@ cve_entries = []
 updater_pages = []
 
 # Open file and input lines as items in list
-hudson_file = repo["hudson" + "/lineage-build-targets")
+hudson_file = repo["hudson"] + "/lineage-build-targets"
 with open(hudson_file) as f:
     for line in f:
         # Ignore lines containing comments
@@ -66,7 +66,7 @@ for codename in codenames:
 # Wiki checking
 for codename in codenames:
     wiki_yml_file = repo["wiki"] + "/_data/devices/" + codename + ".yml"
-    if not Path(wiki_yml_file).is_file():
+    if not os.path.isfile(wiki_yml_file):
         print("{} doesn't have a wiki page".format(codename))
         continue
     with open(wiki_yml_file) as f:
