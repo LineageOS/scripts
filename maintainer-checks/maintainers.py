@@ -5,6 +5,8 @@ import re
 import os
 import json
 
+mydir = os.path.dirname(os.path.abspath(__file__))
+
 # Paths to certain repos
 repo = {
     "updater": "../../updater",
@@ -21,7 +23,7 @@ cve_entries = []
 updater_pages = []
 
 # Open file and input lines as items in list
-hudson_file = repo["hudson"] + "/lineage-build-targets"
+hudson_file = os.path.join(mydir, repo["hudson"] + "/lineage-build-targets")
 with open(hudson_file) as f:
     for line in f:
         # Ignore blank lines or lines with comments
@@ -34,7 +36,7 @@ with open(hudson_file) as f:
 codenames.sort()
 
 # Create list of devices in cve tracker
-cve_json_file = repo["cve"] + "/kernels.json"
+cve_json_file = os.path.join(mydir, repo["cve"] + "/kernels.json")
 with open(cve_json_file) as f:
     json_file = json.load(f)
 
@@ -49,7 +51,7 @@ for codename in codenames:
         print("{} doesn't have an entry in the CVE tracker".format(codename))
 
 # Create list of updater pages
-updater_json_file = repo["updater"] + "/devices.json"
+updater_json_file = os.path.join(mydir, repo["updater"] + "/devices.json")
 with open(updater_json_file) as f:
     json_file = json.load(f)
 for device in json_file:
@@ -62,7 +64,7 @@ for codename in codenames:
 
 # Wiki checking
 for codename in codenames:
-    wiki_yml_file = repo["wiki"] + "/_data/devices/" + codename + ".yml"
+    wiki_yml_file = os.path.join(mydir, repo["wiki"] + "/_data/devices/" + codename + ".yml")
     if not os.path.isfile(wiki_yml_file):
         print("{} doesn't have a wiki page".format(codename))
         continue
