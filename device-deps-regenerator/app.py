@@ -1,6 +1,7 @@
 import concurrent.futures
 import github
 import json
+import re
 import traceback
 
 from github import Github
@@ -55,7 +56,8 @@ def get_cm_dependencies(repo):
         if '_device_' not in el['repository']:
             non_device_repos.add(el['repository'])
         depbranch = el.get('branch', branch.name)
-        mydeps.append({'repo': el['repository'], 'branch': depbranch})
+        repoappend = re.sub(r'cm-\d\d\.\d', '', depbranch)
+        mydeps.append({'repo': str(el['repository'] + repoappend), 'branch': depbranch})
 
     return [mydeps, non_device_repos]
 
