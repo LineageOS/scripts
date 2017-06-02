@@ -91,3 +91,8 @@ for codename in codenames:
                 print("{} doesn't have a root method field".format(codename))
     except KeyError:
         print("{} doesn't have an install method field".format(codename))
+    try:
+        if yml["twrp_site"]:
+            print("{} uses unofficial TWRP".format(codename))
+    except KeyError:
+        pass
