@@ -78,5 +78,16 @@ for codename in codenames:
     try:
         if not yml["install_method"] or "TODO" in yml["install_method"]:
             print("{} doesn't have an install method listed".format(codename))
+        if "dd" in yml["install_method"]:
+            try:
+                if not yml["recovery_partition"]:
+                    print("{} doesn't have a recovery partition listed".format(codename))
+            except KeyError:
+                print("{} doesn't have a recovery partition field".format(codename))
+            try:
+                if not yml["root_method"]:
+                    print("{} doesn't have a root method listed".format(codename))
+            except KeyError:
+                print("{} doesn't have a root method field".format(codename))
     except KeyError:
         print("{} doesn't have an install method field".format(codename))
