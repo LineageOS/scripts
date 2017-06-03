@@ -4,8 +4,13 @@ import yaml
 import re
 import os
 import json
+import argparse
 
 mydir = os.path.dirname(os.path.abspath(__file__))
+
+parser = argparse.ArgumentParser()
+parser.add_argument('-m', '--maintainers', help='list maintainers for devices', action='store_true', required=False)
+args = parser.parse_args()
 
 # Paths to certain repos
 repo = {
@@ -91,3 +96,23 @@ for codename in codenames:
                 print("{} doesn't have a root method field".format(codename))
     except KeyError:
         print("{} doesn't have an install method field".format(codename))
+
+# Optionally print out all maintainer info
+if args.maintainers:
+    print("---------------MAINTAINER INFO DUMP---------------")
+    for codename in codenames:
+        wiki_yml_file = os.path.join(mydir, repo["wiki"] + "/_data/devices/" + codename + ".yml")
+        toprint = "{}:".format(codename)
+        if not os.path.isfile(wiki_yml_file):
+            # Skip devices without wiki pages, we already errored about it
+            continue
+        with open(wiki_yml_file) as f:
+            yml = yaml.load(f)
+
+        try:
+            for maintainer in yml["maintainers"]:
+                toprint += ", {}".format(maintainer)
+        except KeyError:
+            # Skip devices without maintainer fields, we already errored about it
+            continue
+        print(toprint.replace(":,", ":"))
