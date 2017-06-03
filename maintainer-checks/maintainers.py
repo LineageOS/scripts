@@ -4,8 +4,13 @@ import yaml
 import re
 import os
 import json
+import argparse
 
 mydir = os.path.dirname(os.path.abspath(__file__))
+
+parser = argparse.ArgumentParser()
+parser.add_argument('-m', '--maintainers', help='list maintainers for devices only', action='store_true', required=False)
+args = parser.parse_args()
 
 # Paths to certain repos
 repo = {
@@ -35,59 +40,76 @@ with open(hudson_file) as f:
 # Sort codenames alphabetically
 codenames.sort()
 
-# Create list of devices in cve tracker
-cve_json_file = os.path.join(mydir, repo["cve"] + "/kernels.json")
-with open(cve_json_file) as f:
-    json_file = json.load(f)
+if args.maintainers:
+    for codename in codenames:
+        wiki_yml_file = os.path.join(mydir, repo["wiki"] + "/_data/devices/" + codename + ".yml")
+        if not os.path.isfile(wiki_yml_file):
+            print("{} doesn't have a wiki page".format(codename))
+            continue
+        with open(wiki_yml_file) as f:
+            yml = yaml.load(f)
+        try:
+            if not yml["maintainers"]:
+                print("{}: doesn't have a maintainer listed".format(codename))
+            else:
+                print("{codename}: {maintainers}".format(codename=codename, maintainers=", ".join(yml["maintainers"])))
+        except KeyError:
+            print("{} doesn't have a maintainers field".format(codename))
 
-for kernel in json_file:
-    for device in json_file[kernel]:
-        device = re.sub(r"android_device_[a-zA-Z0-9]*_", "", device)
-        cve_entries.append(device)
+else:
+    # Create list of devices in cve tracker
+    cve_json_file = os.path.join(mydir, repo["cve"] + "/kernels.json")
+    with open(cve_json_file) as f:
+        json_file = json.load(f)
 
-# CVE tracker checking
-for codename in codenames:
-    if codename not in cve_entries:
-        print("{} doesn't have an entry in the CVE tracker".format(codename))
+    for kernel in json_file:
+        for device in json_file[kernel]:
+            device = re.sub(r"android_device_[a-zA-Z0-9]*_", "", device)
+            cve_entries.append(device)
 
-# Create list of updater pages
-updater_json_file = os.path.join(mydir, repo["updater"] + "/devices.json")
-with open(updater_json_file) as f:
-    json_file = json.load(f)
-for device in json_file:
-    updater_pages.append(device["model"])
+    # CVE tracker checking
+    for codename in codenames:
+        if codename not in cve_entries:
+            print("{} doesn't have an entry in the CVE tracker".format(codename))
 
-# Updater checking
-for codename in codenames:
-    if codename not in updater_pages:
-        print("{} doesn't have an updater page".format(codename))
+    # Create list of updater pages
+    updater_json_file = os.path.join(mydir, repo["updater"] + "/devices.json")
+    with open(updater_json_file) as f:
+        json_file = json.load(f)
+    for device in json_file:
+        updater_pages.append(device["model"])
 
-# Wiki checking
-for codename in codenames:
-    wiki_yml_file = os.path.join(mydir, repo["wiki"] + "/_data/devices/" + codename + ".yml")
-    if not os.path.isfile(wiki_yml_file):
-        print("{} doesn't have a wiki page".format(codename))
-        continue
-    with open(wiki_yml_file) as f:
-        yml = yaml.load(f)
-    try:
-        if not yml["maintainers"]:
-            print("{} doesn't have a maintainer listed".format(codename))
-    except KeyError:
-        print("{} doesn't have a maintainers field".format(codename))
-    try:
-        if not yml["install_method"] or "TODO" in yml["install_method"]:
-            print("{} doesn't have an install method listed".format(codename))
-        if "dd" in yml["install_method"]:
-            try:
-                if not yml["recovery_partition"]:
-                    print("{} doesn't have a recovery partition listed".format(codename))
-            except KeyError:
-                print("{} doesn't have a recovery partition field".format(codename))
-            try:
-                if not yml["root_method"]:
-                    print("{} doesn't have a root method listed".format(codename))
-            except KeyError:
-                print("{} doesn't have a root method field".format(codename))
-    except KeyError:
-        print("{} doesn't have an install method field".format(codename))
+    # Updater checking
+    for codename in codenames:
+        if codename not in updater_pages:
+            print("{} doesn't have an updater page".format(codename))
+
+    # Wiki checking
+    for codename in codenames:
+        wiki_yml_file = os.path.join(mydir, repo["wiki"] + "/_data/devices/" + codename + ".yml")
+        if not os.path.isfile(wiki_yml_file):
+            print("{} doesn't have a wiki page".format(codename))
+            continue
+        with open(wiki_yml_file) as f:
+            yml = yaml.load(f)
+        try:
+            if not yml["maintainers"]:
+                print("{} doesn't have a maintainer listed".format(codename))
+        except KeyError:
+            print("{} doesn't have a maintainers field".format(codename))
+        try:
+            if not yml["install_method"] or "TODO" in yml["install_method"]:
+                print("{} doesn't have an install method listed".format(codename))
+            if "dd" in yml["install_method"]:
+                try:
+                    if not yml["recovery_partition"]:
+                        print("{} doesn't have a recovery partition listed".format(codename))
+                except KeyError:
+                    print("{} doesn't have a recovery partition field".format(codename))
+                try:
+                    if not yml["root_method"]:
+                        print("{} doesn't have a root method listed".format(codename))
+                except KeyError:
+                    print("{} doesn't have a root method field".format(codename))
+        except KeyError:
+            print("{} doesn't have an install method field".format(codename))
