@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da87b5cf_dbba2b0a",
+        "filename": "maintainer-checks/maintainers.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 16082
+      },
+      "writtenOn": "2017-06-03T18:18:47Z",
+      "side": 1,
+      "message": "No longer \u0027only\u0027",
+      "revId": "8d90ed3d521b76db41e91adb4c3a5eb029522d9e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
