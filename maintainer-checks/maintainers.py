@@ -4,8 +4,13 @@ import yaml
 import re
 import os
 import json
+import argparse
 
 mydir = os.path.dirname(os.path.abspath(__file__))
+
+parser = argparse.ArgumentParser()
+parser.add_argument('-m', '--maintainers', help='list maintainers for devices', action='store_true', required=False)
+args = parser.parse_args()
 
 # Paths to certain repos
 repo = {
@@ -73,6 +78,8 @@ for codename in codenames:
     try:
         if not yml["maintainers"]:
             print("{} doesn't have a maintainer listed".format(codename))
+        elif args.maintainers:
+            print("{codename}: {maintainers}".format(codename=codename, maintainers=yml["maintainers"]))
     except KeyError:
         print("{} doesn't have a maintainers field".format(codename))
     try:
