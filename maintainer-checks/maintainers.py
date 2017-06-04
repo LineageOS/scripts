@@ -83,6 +83,8 @@ for codename in codenames:
     try:
         if not yml["install_method"] or "TODO" in yml["install_method"]:
             print("{} doesn't have an install method listed".format(codename))
+        elif "fastboot_generic" in yml["install_method"]:
+            print("{} uses fastboot_generic install method".format(codename))
         elif "dd" in yml["install_method"]:
             try:
                 if not yml["recovery_partition"]:
