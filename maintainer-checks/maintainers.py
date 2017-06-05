@@ -3,6 +3,7 @@
 import yaml
 import re
 import os
+import os.path
 import json
 import argparse
 
@@ -10,6 +11,7 @@ mydir = os.path.dirname(os.path.abspath(__file__))
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-m', '--maintainers', help='list maintainers for devices', action='store_true', required=False)
+parser.add_argument('-u', '--unofficial', help='include devices in the wiki, but not on the nightly list', action='store_true', required=False)
 args = parser.parse_args()
 
 # Paths to certain repos
@@ -36,6 +38,15 @@ with open(hudson_file) as f:
             continue
         # Add codenames to list
         codenames.append(re.sub(r" .*", "", line.strip()))
+
+# also add devices present in wiki but not in hudson
+if args.unofficial:
+    ymlfolder = os.path.join(mydir, repo["wiki"] + "/_data/devices/")
+    wikiymls = [f for f in os.listdir(ymlfolder) if os.path.isfile(os.path.join(ymlfolder, f))]
+    for i in wikiymls:
+        codename = re.sub(r"\.yml", "", i)
+        if codename not in codenames:
+            codenames.append(re.sub(r"\.yml", "", i))
 
 # Sort codenames alphabetically
 codenames.sort()
