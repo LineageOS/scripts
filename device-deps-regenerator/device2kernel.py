@@ -7,6 +7,7 @@ COMMON_DEVICE = [
     'android_device_asus_flo',
     'android_device_asus_grouper',
     'android_device_google_marlin',
+    'android_device_htc_flounder',
     'android_device_samsung_espressowifi',
     'android_device_samsung_n1awifi',
     'android_device_samsung_t0lte',
