@@ -7,7 +7,7 @@ from github import Github
 from base64 import b64decode
 
 with open('token') as f:
-    g = Github(f.readline().strip(), per_page=200)
+    g = Github(f.readline().strip(), per_page=100)
 
 
 print(g.rate_limiting_resettime)
@@ -35,13 +35,15 @@ def get_cm_dependencies(repo):
     except github.GithubException:
         return None
     blob_sha = None
+    common = True
     for el in tree.tree:
         if el.path == 'cm.dependencies' or el.path == 'lineage.dependencies':
             blob_sha = el.sha
-            break
+        elif el.path == 'lineage.mk' or el.path == 'cm.mk':
+            common = False
 
     if blob_sha is None:
-        return [[], set()]
+        return [{'common': common, 'deps': []}, set()]
 
     blob = repo.get_git_blob(blob_sha)
 
@@ -57,7 +59,7 @@ def get_cm_dependencies(repo):
         depbranch = el.get('branch', branch.name)
         mydeps.append({'repo': el['repository'], 'branch': depbranch})
 
-    return [mydeps, non_device_repos]
+    return [{'common': common, 'deps': mydeps}, non_device_repos]
 
 futures = {}
 n = 1
