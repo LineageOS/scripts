@@ -1,10 +1,15 @@
 #!/usr/bin/python3
 
-import yaml
 import re
 import os
 import json
 import argparse
+
+try:
+    import yaml
+except ImportError:
+    print("Please install the pyyaml package via pip3")
+    exit(1)
 
 mydir = os.path.dirname(os.path.abspath(__file__))
 
