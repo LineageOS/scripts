@@ -10,6 +10,7 @@ mydir = os.path.dirname(os.path.abspath(__file__))
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-m', '--maintainers', help='list maintainers for devices', action='store_true', required=False)
+parser.add_argument('-j', '--jira', dest="jira_file", required=False, help='Path to list of jira developers', metavar='FILE')
 args = parser.parse_args()
 
 # Paths to certain repos
@@ -26,6 +27,10 @@ codenames = []
 cve_entries = []
 # List of devices with updater pages
 updater_pages = []
+# List of jira developers
+jira_devs = []
+# List of bad maintainers
+bad_maintainers = []
 
 # Open file and input lines as items in list
 hudson_file = os.path.join(mydir, repo["hudson"] + "/lineage-build-targets")
@@ -70,11 +75,12 @@ for codename in codenames:
 # Wiki checking
 for codename in codenames:
     wiki_yml_file = os.path.join(mydir, repo["wiki"] + "/_data/devices/" + codename + ".yml")
-    if not os.path.isfile(wiki_yml_file):
+    try:
+        with open(wiki_yml_file) as f:
+            yml = yaml.load(f)
+    except FileNotFoundError:
         print("{} doesn't have a wiki page".format(codename))
         continue
-    with open(wiki_yml_file) as f:
-        yml = yaml.load(f)
     try:
         if not yml["maintainers"]:
             print("{} doesn't have a maintainer listed".format(codename))
@@ -110,12 +116,12 @@ if args.maintainers:
     for codename in codenames:
         wiki_yml_file = os.path.join(mydir, repo["wiki"] + "/_data/devices/" + codename + ".yml")
         toprint = "{}:".format(codename)
-        if not os.path.isfile(wiki_yml_file):
+        try:
+            with open(wiki_yml_file) as f:
+                yml = yaml.load(f)
+        except FileNotFoundError:
             # Skip devices without wiki pages, we already errored about it
             continue
-        with open(wiki_yml_file) as f:
-            yml = yaml.load(f)
-
         try:
             for maintainer in yml["maintainers"]:
                 toprint += ", {}".format(maintainer)
@@ -123,3 +129,25 @@ if args.maintainers:
             # Skip devices without maintainer fields, we already errored about it
             continue
         print(toprint.replace(":,", ":"))
+
+if args.jira_file:
+    with open(args.jira_file) as f:
+        for line in f:
+            jira_devs.append(line.strip())
+
+    for codename in codenames:
+        wiki_yml_file = os.path.join(mydir, repo["wiki"] + "/_data/devices/" + codename + ".yml")
+        try:
+            with open(wiki_yml_file) as f:
+                yml = yaml.load(f)
+        except FileNotFoundError:
+            # Skip devices without wiki pages, we already errored about it
+            continue
+        try:
+            for maintainer in yml["maintainers"]:
+                if maintainer not in jira_devs and maintainer not in bad_maintainers:
+                    bad_maintainers.append(maintainer)
+                    print("{} is listed as a maintainer but doesn't have a jira developer account".format(maintainer))
+        except KeyError:
+            # Skip devices without maintainer fields, we already errored about it
+            continue
