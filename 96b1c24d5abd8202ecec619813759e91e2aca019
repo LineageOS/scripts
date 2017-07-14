@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aefd7db6_b1a21298",
+        "filename": "key-migration/export-keys.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 16082
+      },
+      "writtenOn": "2017-07-14T11:49:31Z",
+      "side": 1,
+      "message": "Oops",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 28
+      },
+      "revId": "96b1c24d5abd8202ecec619813759e91e2aca019",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
