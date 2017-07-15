@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7fbeb6c8_76052550",
+        "filename": "key-migration/migration.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 13897
+      },
+      "writtenOn": "2017-07-15T19:15:44Z",
+      "side": 1,
+      "message": "This probably shouldn\u0027t be in a flashable zip, or it should be handled differently.",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 2
+      },
+      "revId": "468722a08fdfbf6c4a6c1d99aa337d660e19e3a8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
