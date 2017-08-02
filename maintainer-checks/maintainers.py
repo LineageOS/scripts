@@ -5,6 +5,7 @@ import re
 import os
 import json
 import argparse
+import urllib.request, urllib.error
 
 mydir = os.path.dirname(os.path.abspath(__file__))
 
@@ -99,10 +100,20 @@ for codename in codenames:
     except KeyError:
         print("{} doesn't have an install method field".format(codename))
     try:
-        if yml["twrp_site"]:
-            print("{} uses unofficial TWRP".format(codename))
-    except KeyError:
-        pass
+        twrp_url = "https://dl.twrp.me/" + codename
+        conn = urllib.request.urlopen(twrp_url)
+    except urllib.error.HTTPError as e:
+        try:
+            if e.code == 404 and not yml["custom_twrp_link"]:
+                print("{} doesn't have official twrp or a custom twrp link listed".format(codename))
+        except KeyError:
+            print("{} doesn't have official twrp or a custom twrp link field".format(codename))
+    else:
+        try:
+            if yml["custom_twrp_link"]:
+                print("{} has both official twrp and a custom twrp link field".format(codename))
+        except KeyError:
+            continue
 
 # Optionally print out all maintainer info
 if args.maintainers:
