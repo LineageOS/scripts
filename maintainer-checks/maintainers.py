@@ -5,6 +5,7 @@ import re
 import os
 import json
 import argparse
+import urllib.request, urllib.error
 
 mydir = os.path.dirname(os.path.abspath(__file__))
 
@@ -100,10 +101,24 @@ for codename in codenames:
     except KeyError:
         print("{} doesn't have an install method field".format(codename))
     try:
-        if yml["twrp_site"]:
-            print("{} uses unofficial TWRP".format(codename))
-    except KeyError:
-        pass
+        if yml["custom_twrp_codename"]:
+            twrp_url = "https://dl.twrp.me/" + yml["custom_twrp_codename"]
+        else:
+            twrp_url = "https://dl.twrp.me/" + codename
+
+        conn = urllib.request.urlopen(twrp_url)
+    except urllib.error.HTTPError as e:
+        try:
+            if e.code == 404 and not yml["custom_twrp_link"]:
+                print("{} doesn't have official twrp or a custom twrp link listed".format(codename))
+        except KeyError:
+            print("{} doesn't have official twrp or a custom twrp link field".format(codename))
+    else:
+        try:
+            if yml["custom_twrp_link"]:
+                print("{} has both official twrp and a custom twrp link listed".format(codename))
+        except KeyError:
+            continue
 
 wiki_yml_dir = os.path.join(mydir, repo["wiki"] + "/_data/devices")
 for wiki_yml in os.listdir(wiki_yml_dir):
