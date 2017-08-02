@@ -5,6 +5,7 @@ import re
 import os
 import json
 import argparse
+import urllib2
 
 mydir = os.path.dirname(os.path.abspath(__file__))
 
@@ -102,6 +103,14 @@ for codename in codenames:
         if yml["twrp_site"]:
             print("{} uses unofficial TWRP".format(codename))
     except KeyError:
+        pass
+    try:
+        twrp_url = "https://dl.twrp.me/" + codename
+        req = urllib2.Request(twrp_url)
+        resp = urllib2.urlopen(req)
+        if resp.getcode() == 404:
+            print("{} doesn't have official TWRP".format(codename))
+    except URLError:
         pass
 
 # Optionally print out all maintainer info
