@@ -85,7 +85,7 @@ for codename in codenames:
     except KeyError:
         print("{} doesn't have a maintainers field".format(codename))
     try:
-        if not yml["install_method"] or "TODO" in yml["install_method"]:
+        if not yml["install_method"]:
             print("{} doesn't have an install method listed".format(codename))
         elif "fastboot_generic" in yml["install_method"]:
             print("{} uses fastboot_generic install method".format(codename))
