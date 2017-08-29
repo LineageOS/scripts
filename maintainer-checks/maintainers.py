@@ -29,6 +29,8 @@ cve_entries = []
 updater_pages = []
 # List of jira developers
 jira_devs = []
+# Discontinued devices
+discontinued_devices = []
 
 # Open file and input lines as items in list
 hudson_file = os.path.join(mydir, repo["hudson"] + "/lineage-build-targets")
@@ -64,11 +66,6 @@ with open(updater_json_file) as f:
     json_file = json.load(f)
 for device in json_file:
     updater_pages.append(device["model"])
-
-# Updater checking
-for codename in codenames:
-    if codename not in updater_pages:
-        print("{} doesn't have an updater page".format(codename))
 
 # Wiki checking
 for codename in codenames:
@@ -107,6 +104,27 @@ for codename in codenames:
             print("{} uses unofficial TWRP".format(codename))
     except KeyError:
         pass
+
+wiki_yml_dir = os.path.join(mydir, repo["wiki"] + "/_data/devices")
+for wiki_yml in os.listdir(wiki_yml_dir):
+    codename = re.sub(r"\.yml", "", wiki_yml.strip())
+    if codename not in codenames:
+        wiki_yml_file = os.path.join(mydir, repo["wiki"] + "/_data/devices/" + wiki_yml)
+        with open(wiki_yml_file) as f:
+            yml = yaml.load(f)
+            if "discontinued" not in yml["channels"]:
+                print("{} has a wiki page but isn't in hudson".format(codename))
+            else:
+                discontinued_devices.append(codename)
+
+# Updater checking
+for codename in codenames:
+    if codename not in updater_pages:
+        print("{} doesn't have an updater page".format(codename))
+
+for codename in updater_pages:
+    if codename not in codenames and codename not in discontinued_devices:
+         print("{} has an updater page but is not in hudson".format(codename))
 
 # Optionally print out all maintainer info
 if args.maintainers:
