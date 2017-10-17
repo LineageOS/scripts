@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 if ! cd "$1"; then
     echo "USAGE: $0 PATH"
