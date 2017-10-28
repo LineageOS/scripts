@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "73a71a7c_89c98745",
+        "filename": "aosp-merger/aosp-merger.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 16082
+      },
+      "writtenOn": "2017-10-28T19:00:30Z",
+      "side": 1,
+      "message": "Why not `echo -e \"merged\\t\\t$line\" | tee $LINEAGE_ROOT/merged_repos.txt` ?",
+      "range": {
+        "startLine": 71,
+        "startChar": 7,
+        "endLine": 72,
+        "endChar": 32
+      },
+      "revId": "efcb5cf0589f4d860da5fcf97c1babe0e06fbfdf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
