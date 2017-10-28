@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "db235eb3_b2a511c1",
+        "filename": "aosp-merger/aosp-merger.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 16082
+      },
+      "writtenOn": "2017-10-28T19:03:29Z",
+      "side": 1,
+      "message": "Maybe move this below the `.repo` folder check? Otherwise you get:\n\n    dyn241061:test harry$ ./thing.sh \n    grep: .repo/manifest.xml: No such file or directory\n    grep: .repo/manifest.xml: No such file or directory\n    This script must be run from the root lineage dir",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 116
+      },
+      "revId": "efcb5cf0589f4d860da5fcf97c1babe0e06fbfdf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "73a71a7c_89c98745",
         "filename": "aosp-merger/aosp-merger.sh",
         "patchSetId": 6
