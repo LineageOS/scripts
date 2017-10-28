@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "ebc9940a_8fc01393",
+        "filename": "aosp-merger/aosp-merger.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 3962
+      },
+      "writtenOn": "2017-10-28T19:34:44Z",
+      "side": 1,
+      "message": "Derp. Yeah good idea",
+      "parentUuid": "db235eb3_b2a511c1",
+      "revId": "efcb5cf0589f4d860da5fcf97c1babe0e06fbfdf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "73a71a7c_89c98745",
         "filename": "aosp-merger/aosp-merger.sh",
         "patchSetId": 6
@@ -42,6 +60,24 @@
         "endLine": 72,
         "endChar": 32
       },
+      "revId": "efcb5cf0589f4d860da5fcf97c1babe0e06fbfdf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d683b9e5_78469d83",
+        "filename": "aosp-merger/aosp-merger.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 3962
+      },
+      "writtenOn": "2017-10-28T19:34:44Z",
+      "side": 1,
+      "message": "Contrary to popular opinion I don\u0027t actually know shell that well :P I just copied the result reporting from Dan\u0027s old script",
+      "parentUuid": "73a71a7c_89c98745",
       "revId": "efcb5cf0589f4d860da5fcf97c1babe0e06fbfdf",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
