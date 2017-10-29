@@ -43,6 +43,98 @@
     },
     {
       "key": {
+        "uuid": "1071496e_b8a30b9e",
+        "filename": "aosp-merger/aosp-merger.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 13897
+      },
+      "writtenOn": "2017-10-29T08:34:01Z",
+      "side": 1,
+      "message": "Since you source envsetup.sh, you can just use $ANDROID_BUILD_TOP",
+      "range": {
+        "startLine": 30,
+        "startChar": 2,
+        "endLine": 30,
+        "endChar": 21
+      },
+      "revId": "efcb5cf0589f4d860da5fcf97c1babe0e06fbfdf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37db7652_d07ee4c9",
+        "filename": "aosp-merger/aosp-merger.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 13897
+      },
+      "writtenOn": "2017-10-29T08:34:01Z",
+      "side": 1,
+      "message": "No argument here?",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 12
+      },
+      "revId": "efcb5cf0589f4d860da5fcf97c1babe0e06fbfdf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "84db426e_6de66e6f",
+        "filename": "aosp-merger/aosp-merger.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 13897
+      },
+      "writtenOn": "2017-10-29T08:34:01Z",
+      "side": 1,
+      "message": "You don\u0027t really need a temp file:\n\n    paths\u003d$(grep \"LineageOS\" .repo/manifest.xml | sed \u0027s/.*path\u003d\"\\([^\"]\\+\\)\".*/\\1/g\u0027)\n    for path in $paths; do\n        cd \"$ANDROID_BUILD_TOP/$path\"\n        ...\n    done",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 10
+      },
+      "revId": "efcb5cf0589f4d860da5fcf97c1babe0e06fbfdf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b43863d9_38e9802d",
+        "filename": "aosp-merger/aosp-merger.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 13897
+      },
+      "writtenOn": "2017-10-29T08:34:01Z",
+      "side": 1,
+      "message": "Maybe you could check the operation at the beginning of the script and print the help in case the operation is not valid. You could also print a message in case the number of arguments isn\u0027t the one expected, which would implicitly include \u0027-h\u0027 and \u0027--help\u0027.",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 10
+      },
+      "revId": "efcb5cf0589f4d860da5fcf97c1babe0e06fbfdf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "73a71a7c_89c98745",
         "filename": "aosp-merger/aosp-merger.sh",
         "patchSetId": 6
