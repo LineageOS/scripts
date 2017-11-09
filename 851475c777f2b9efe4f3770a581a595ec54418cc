@@ -19,6 +19,29 @@
     },
     {
       "key": {
+        "uuid": "7571c650_e19a08fc",
+        "filename": "aosp-merger/aosp-merger.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-11-09T12:59:33Z",
+      "side": 1,
+      "message": "As Artem found and I was able to confirm, in our case git status returns: \"nothing to commit, working tree clean\". Don\u0027t know if it could be because of different git versions or something else.",
+      "range": {
+        "startLine": 62,
+        "startChar": 23,
+        "endLine": 62,
+        "endChar": 65
+      },
+      "revId": "851475c777f2b9efe4f3770a581a595ec54418cc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "313ccd2a_3fa914af",
         "filename": "aosp-merger/aosp-merger.sh",
         "patchSetId": 7
