@@ -37,6 +37,23 @@
     },
     {
       "key": {
+        "uuid": "315375f8_346f1e7e",
+        "filename": "aosp-merger/aosp-merger.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 13589
+      },
+      "writtenOn": "2017-11-09T19:43:09Z",
+      "side": 1,
+      "message": "Code style, mixing both $var and ${var}.\nI prefer ${} everywhere but that\u0027s my opinion.",
+      "revId": "851475c777f2b9efe4f3770a581a595ec54418cc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7571c650_e19a08fc",
         "filename": "aosp-merger/aosp-merger.sh",
         "patchSetId": 7
@@ -84,6 +101,23 @@
     },
     {
       "key": {
+        "uuid": "37f5d9d3_311fb46b",
+        "filename": "aosp-merger/aosp-merger.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 13589
+      },
+      "writtenOn": "2017-11-09T19:43:09Z",
+      "side": 1,
+      "message": "An inline \"if ! ... | grep -q ...; then\" would be better,\nand what I do for that type of local git check is \"if ! git diff --cached --quiet; then\"\n\nPS10: Same comment",
+      "revId": "851475c777f2b9efe4f3770a581a595ec54418cc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "313ccd2a_3fa914af",
         "filename": "aosp-merger/aosp-merger.sh",
         "patchSetId": 7
@@ -95,6 +129,91 @@
       "writtenOn": "2017-11-09T11:08:55Z",
       "side": 1,
       "message": "Since we\u0027ve already sourced envsetup, just use reposync to get multithreading?",
+      "revId": "851475c777f2b9efe4f3770a581a595ec54418cc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "08844635_6f1a2cc1",
+        "filename": "aosp-merger/aosp-merger.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 13589
+      },
+      "writtenOn": "2017-11-09T19:43:09Z",
+      "side": 1,
+      "message": "Should the abandon be done before or after the sync ?",
+      "revId": "851475c777f2b9efe4f3770a581a595ec54418cc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e6c1da78_87cd2c56",
+        "filename": "aosp-merger/aosp-merger.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 13589
+      },
+      "writtenOn": "2017-11-09T19:43:09Z",
+      "side": 1,
+      "message": "No need to use [[, [ -z is supported.\nAnd \"if git diff --quiet HEAD $OLDTAG; then\" would pass.",
+      "revId": "851475c777f2b9efe4f3770a581a595ec54418cc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dec65ada_eee3386b",
+        "filename": "aosp-merger/aosp-merger.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 13589
+      },
+      "writtenOn": "2017-11-09T19:43:09Z",
+      "side": 1,
+      "message": "Same comment",
+      "revId": "851475c777f2b9efe4f3770a581a595ec54418cc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "268f776b_83d32726",
+        "filename": "aosp-merger/aosp-merger.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 13589
+      },
+      "writtenOn": "2017-11-09T19:43:09Z",
+      "side": 1,
+      "message": "\"if [ \"$OPERATION\" \u003d \u0027merge\u0027 ]; then\"",
+      "revId": "851475c777f2b9efe4f3770a581a595ec54418cc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b3a4ccac_e6c7856a",
+        "filename": "aosp-merger/aosp-merger.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 13589
+      },
+      "writtenOn": "2017-11-09T19:43:09Z",
+      "side": 1,
+      "message": "\"else if\" is not needed, an elif would be fine here.",
       "revId": "851475c777f2b9efe4f3770a581a595ec54418cc",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
