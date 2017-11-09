@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "df52d933_88ab44b3",
+        "filename": "aosp-merger/aosp-merger.sh",
+        "patchSetId": 10
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 13897
+      },
+      "writtenOn": "2017-11-09T20:58:39Z",
+      "side": 1,
+      "message": "But that doesn\u0027t include untracked files, which can cause issues if they files are the leftover of a previous failed merge.",
+      "parentUuid": "6507351f_e332d660",
+      "range": {
+        "startLine": 61,
+        "startChar": 16,
+        "endLine": 61,
+        "endChar": 38
+      },
+      "revId": "78bf131d5d6c164684d87c3d001b3b105b2f622f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8a705b87_99a2fab2",
         "filename": "aosp-merger/aosp-merger.sh",
         "patchSetId": 10
