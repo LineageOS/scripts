@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "d4520270_81610e41",
+        "filename": "aosp-merger/aosp-merger.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 3075
+      },
+      "writtenOn": "2017-11-09T22:40:54Z",
+      "side": 1,
+      "message": "I agree we should be consistent (some of this is multiple author issue).  ${} everywhere is more robust to future changes.",
+      "parentUuid": "315375f8_346f1e7e",
+      "revId": "851475c777f2b9efe4f3770a581a595ec54418cc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7571c650_e19a08fc",
         "filename": "aosp-merger/aosp-merger.sh",
         "patchSetId": 7
