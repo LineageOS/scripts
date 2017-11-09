@@ -153,6 +153,24 @@
     },
     {
       "key": {
+        "uuid": "2538b4e6_ab27bb6e",
+        "filename": "aosp-merger/aosp-merger.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 3075
+      },
+      "writtenOn": "2017-11-09T23:26:47Z",
+      "side": 1,
+      "message": "We set sync-j\u003d4 in the default manifest so we should be good here already.",
+      "parentUuid": "313ccd2a_3fa914af",
+      "revId": "851475c777f2b9efe4f3770a581a595ec54418cc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "08844635_6f1a2cc1",
         "filename": "aosp-merger/aosp-merger.sh",
         "patchSetId": 7
