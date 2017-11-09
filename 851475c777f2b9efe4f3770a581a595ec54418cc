@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1743cc04_a8421dbb",
+        "filename": "README.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 3075
+      },
+      "writtenOn": "2017-11-09T17:42:36Z",
+      "side": 1,
+      "message": "Not with the detection itself, just with the process.  Once you\u0027ve updated your manifest with the new tag you can\u0027t go back and rerun this script.",
+      "parentUuid": "18858610_bdc7139e",
+      "revId": "851475c777f2b9efe4f3770a581a595ec54418cc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7571c650_e19a08fc",
         "filename": "aosp-merger/aosp-merger.sh",
         "patchSetId": 7
