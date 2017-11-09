@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "313ccd2a_3fa914af",
+        "filename": "aosp-merger/aosp-merger.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 3962
+      },
+      "writtenOn": "2017-11-09T11:08:55Z",
+      "side": 1,
+      "message": "Since we\u0027ve already sourced envsetup, just use reposync to get multithreading?",
+      "revId": "851475c777f2b9efe4f3770a581a595ec54418cc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "835f2ffe_493f6f15",
         "filename": "aosp-merger/aosp-merger.sh",
         "patchSetId": 7
