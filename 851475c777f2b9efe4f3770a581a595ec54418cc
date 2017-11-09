@@ -22,6 +22,30 @@
       "revId": "851475c777f2b9efe4f3770a581a595ec54418cc",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e9f3e1d5_6f24ae1e",
+        "filename": "aosp-merger/aosp-merger.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 3075
+      },
+      "writtenOn": "2017-11-09T08:50:17Z",
+      "side": 1,
+      "message": "ACK, will update.",
+      "parentUuid": "835f2ffe_493f6f15",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 4
+      },
+      "revId": "851475c777f2b9efe4f3770a581a595ec54418cc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
