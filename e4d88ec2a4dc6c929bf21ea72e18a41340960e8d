@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "daee0a94_5b9914b2",
+        "filename": "aosp-merger/aosp-merger.sh",
+        "patchSetId": 12
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 3075
+      },
+      "writtenOn": "2017-11-10T04:44:34Z",
+      "side": 1,
+      "message": "I think we should remove the --log (I added that to help with testing / validation of the script).\n\nUnless anyone thinks we should keep it ?",
+      "revId": "e4d88ec2a4dc6c929bf21ea72e18a41340960e8d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
