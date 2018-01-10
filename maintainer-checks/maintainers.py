@@ -16,7 +16,7 @@ args = parser.parse_args()
 
 # Paths to certain repos
 repo = {
-    "updater": "../../updater",
+    "updater": "../../jenkins/updater",
     "wiki": "../../wiki",
     "hudson": "../../jenkins",
     "cve": "../../cve"
