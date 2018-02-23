@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7fade0ae_7f76cde0",
+        "filename": "batch-gerrit/batch.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 16082
+      },
+      "writtenOn": "2018-02-23T22:59:14Z",
+      "side": 1,
+      "message": "No longer required",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 15
+      },
+      "revId": "9ba25e34e0ea96d4139f3f883277ae5f8611c4b8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9cfa615c_3e8f10d2",
+        "filename": "batch-gerrit/batch.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 16082
+      },
+      "writtenOn": "2018-02-23T22:59:14Z",
+      "side": 1,
+      "message": "Put in arguments?",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 31
+      },
+      "revId": "9ba25e34e0ea96d4139f3f883277ae5f8611c4b8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef80e3b8_f8f13118",
+        "filename": "batch-gerrit/batch.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 16082
+      },
+      "writtenOn": "2018-02-23T22:59:14Z",
+      "side": 1,
+      "message": "TODO: Find a better way to do this, or better yet, find out why this happens",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 66
+      },
+      "revId": "9ba25e34e0ea96d4139f3f883277ae5f8611c4b8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "61775d2c_d67aa665",
+        "filename": "batch-gerrit/batch.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 16082
+      },
+      "writtenOn": "2018-02-23T22:59:14Z",
+      "side": 1,
+      "message": "Find a library for processing ranges or clean this up",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 43
+      },
+      "revId": "9ba25e34e0ea96d4139f3f883277ae5f8611c4b8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e18218d3_507e446b",
+        "filename": "batch-gerrit/batch.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 16082
+      },
+      "writtenOn": "2018-02-23T22:59:14Z",
+      "side": 1,
+      "message": "TODO",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 37
+      },
+      "revId": "9ba25e34e0ea96d4139f3f883277ae5f8611c4b8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
