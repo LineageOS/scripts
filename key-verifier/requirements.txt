@@ -1,0 +1,8 @@
+asn1crypto==0.24.0
+cffi==1.11.5
+cryptography==2.1.4
+idna==2.6
+pkg-resources==0.0.0
+pycparser==2.18
+pyOpenSSL==17.5.0
+six==1.11.0
