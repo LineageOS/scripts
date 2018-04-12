@@ -10,6 +10,7 @@ usage() {
     echo "    -f Force push."
     echo "    -l <label> Assign label."
     echo "    -m Bypass review and merge."
+    echo "    -p Upload change as private."
     echo "    -r <ref> Push to specified ref ( will override draft )."
     echo "    -s Submit."
     echo "    -t <topic> Append topic to change."
@@ -21,7 +22,7 @@ usage() {
     exit 1
 }
 
-while getopts ":del:fmr:st:" opt; do
+while getopts ":del:fmpr:st:" opt; do
     case $opt in
         d) [ -z "$ref" ] && ref="refs/drafts/" ;;
         e) edit="%edit" ;;
@@ -38,6 +39,7 @@ while getopts ":del:fmr:st:" opt; do
            done
            ;;
         m) [ -z "$ref" ] && ref="" ;;
+        p) private="%private" ;;
         r) ref="refs/$OPTARG/" ;;
         s) submit="%submit" ;;
         t) topic="%topic=$OPTARG" ;;
@@ -66,4 +68,4 @@ fi
 repo_name=$(git remote -v | grep LineageOS | head -n1 | awk '{print $2}' | sed 's/.*\///' | sed 's/\.git//')
 username=$(git config review.review.lineageos.org.username)
 
-git push ${push_args} ssh://${username}@review.lineageos.org:29418/LineageOS/${repo_name} HEAD:${ref}$1${topic}${labels}${submit}${edit}
+git push ${push_args} ssh://${username}@review.lineageos.org:29418/LineageOS/${repo_name} HEAD:${ref}$1${topic}${labels}${private}${submit}${edit}
