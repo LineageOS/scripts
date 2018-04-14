@@ -71,7 +71,7 @@ def push(args):
     if args.message:
         command += '%m={}'.format(quote_plus(args.message))
 
-    sys.exit(subprocess.call(command, shell=True))
+    sys.exit(subprocess.call(command.split(' ')))
 
 
 def str2bool(v):
