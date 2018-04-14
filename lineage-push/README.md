@@ -1,8 +1,8 @@
 # LineageOS Push Script
 
 ```
-usage: lineage-push.py [-h] [-d] [-e] [-f] [-l LABEL] [-m] [-r REF] [-s]
-                       [-t TOPIC]
+usage: lineage-push.py [-h] [-d] [-e] [-f] [-l LABEL] [-m] [-p [PRIVATE]]
+                       [-r REF] [-s] [-t TOPIC]
                        branch
 
 Pushes a local git repository's changes to Gerrit for code review
@@ -18,6 +18,8 @@ optional arguments:
   -l LABEL, --label LABEL
                         assign label
   -m, --merge           bypass review and merge
+  -p [PRIVATE], --private [PRIVATE]
+                        upload change as private
   -r REF, --ref REF     push to specified ref
   -s, --submit          submit change
   -t TOPIC, --topic TOPIC
