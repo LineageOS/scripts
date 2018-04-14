@@ -2,7 +2,7 @@
 
 ```
 usage: lineage-push.py [-h] [-d] [-e] [-f] [-l LABEL] [-m] [-p [PRIVATE]]
-                       [-r REF] [-s] [-t TOPIC]
+                       [-r REF] [-s] [-t TOPIC] [-w [WIP]]
                        branch
 
 Pushes a local git repository's changes to Gerrit for code review
@@ -24,6 +24,8 @@ optional arguments:
   -s, --submit          submit change
   -t TOPIC, --topic TOPIC
                         append topic to change
+  -w [WIP], --wip [WIP]
+                        upload change as WIP
 ```
 ```
   Examples:
