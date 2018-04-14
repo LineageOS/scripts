@@ -51,6 +51,11 @@ def push(args):
     if args.submit:
         command += '%submit'
 
+    if args.private == True:
+        command += '%private'
+    elif args.private == False:
+        command += '%remove-private'
+
     sys.exit(subprocess.call(command, shell=True))
 
 
@@ -76,6 +81,8 @@ def parse_cmdline():
     parser.add_argument('-l', '--label', help='assign label')
     parser.add_argument('-m', '--merge', action='store_true',
                         help='bypass review and merge')
+    parser.add_argument('-p', '--private', type=str2bool, nargs='?',
+                        const=True, help='upload change as private')
     parser.add_argument(
         '-r', '--ref', help='push to specified ref', default="for")
     parser.add_argument(
