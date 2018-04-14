@@ -3,20 +3,30 @@
 Pushes a local git repository's changes to Gerrit for code review
 
 ```
-Usage:
-  ./lineage-push.sh [options] branch
+usage: lineage-push.py [-h] [-d] [-e] [-f] [-l LABEL] [-m] [-r REF] [-s]
+                       [-t TOPIC]
+                       branch
 
-  Options:
-    -d Upload change as draft.
-    -e Update change as edit.
-    -f Force push.
-    -l <label> Assign label.
-    -m Bypass review and merge.
-    -r <ref> Push to specified ref ( will override draft ).
-    -s Submit.
-    -t <topic> Append topic to change.
+Pushes a local git repository's changes to Gerrit for code review
 
-  Example:
+positional arguments:
+  branch                upload change to branch
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d, --draft           upload change as draft
+  -e, --edit            upload change as edit
+  -f, --force           force push
+  -l LABEL, --label LABEL
+                        assign label
+  -m, --merge           bypass review and merge
+  -r REF, --ref REF     push to specified ref
+  -s, --submit          submit change
+  -t TOPIC, --topic TOPIC
+                        append topic to change
+```
+```
+  Examples:
     lineage-push -d -t test cm-14.1
     lineage-push -s -l "Code-Review+2,Verified+1" cm-14.1
 ```
