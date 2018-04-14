@@ -1,7 +1,7 @@
 # LineageOS Push Script
 
 ```
-usage: lineage-push.py [-h] [-b] [-d] [-e] [-f] [-l LABEL] [-m [MESSAGE]]
+usage: lineage-push.py [-h] [-a] [-b] [-d] [-e] [-f] [-l LABEL] [-m [MESSAGE]]
                        [-p [PRIVATE]] [-r REF] [-s] [-t TOPIC] [-w [WIP]]
                        branch
 
@@ -12,6 +12,7 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
+  -a, --hashtag         add hashtag to change
   -b, --bypass          bypass review and merge
   -d, --draft           upload change as draft
   -e, --edit            upload change as edit
