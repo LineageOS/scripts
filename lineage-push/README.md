@@ -3,8 +3,8 @@
 Pushes a local git repository's changes to Gerrit for code review
 
 ```
-usage: lineage-push.py [-h] [-b] [-d] [-e] [-f] [-l LABEL] [-p [PRIVATE]]
-                       [-r REF] [-s] [-t TOPIC] [-w [WIP]]
+usage: lineage-push.py [-h] [-b] [-d] [-e] [-f] [-l LABEL] [-m [MESSAGE]]
+                       [-p [PRIVATE]] [-r REF] [-s] [-t TOPIC] [-w [WIP]]
                        branch
 
 Pushes a local git repository's changes to Gerrit for code review
@@ -20,6 +20,8 @@ optional arguments:
   -f, --force           force push
   -l LABEL, --label LABEL
                         assign label
+  -m [MESSAGE], --message [MESSAGE]
+                        add message to change
   -p [PRIVATE], --private [PRIVATE]
                         upload change as private
   -r REF, --ref REF     push to specified ref
