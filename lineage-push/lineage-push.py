@@ -7,6 +7,10 @@ import subprocess
 import sys
 from argparse import ArgumentParser, ArgumentTypeError
 
+try:
+    from urllib.parse import quote_plus
+except ImportError:
+    from urllib import quote_plus
 
 def push(args):
     command = 'git push'
@@ -61,6 +65,9 @@ def push(args):
     elif args.wip == False:
         command += '%ready'
 
+    if args.message:
+        command += '%m={}'.format(quote_plus(args.message))
+
     sys.exit(subprocess.call(command, shell=True))
 
 
@@ -86,6 +93,8 @@ def parse_cmdline():
     parser.add_argument('-l', '--label', help='assign label')
     parser.add_argument('-m', '--merge', action='store_true',
                         help='bypass review and merge')
+    parser.add_argument('--message', nargs='?',
+                        help='add message to change')
     parser.add_argument('-p', '--private', type=str2bool, nargs='?',
                         const=True, help='upload change as private')
     parser.add_argument(
