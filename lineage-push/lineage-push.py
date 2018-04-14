@@ -51,6 +51,11 @@ def push(args):
     if args.submit:
         command += '%submit'
 
+    if args.private == True:
+        command += '%private'
+    elif args.private == False:
+        command += '%remove-private'
+
     sys.exit(subprocess.call(command, shell=True))
 
 
@@ -81,6 +86,8 @@ def parse_cmdline():
     parser.add_argument(
         '-s', '--submit', action='store_true', help='submit change')
     parser.add_argument('-t', '--topic', help='append topic to change')
+    parser.add_argument('-p', '--private', type=str2bool, nargs='?',
+                        const=True, help='upload change as private')
     return parser.parse_args()
 
 
