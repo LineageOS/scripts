@@ -14,6 +14,7 @@ usage() {
     echo "    -r <ref> Push to specified ref ( will override draft )."
     echo "    -s Submit."
     echo "    -t <topic> Append topic to change."
+    echo "    -u Upload change and remove private."
     echo
     echo "  Example:"
     echo "    lineage-push -d -t test cm-14.1"
@@ -22,7 +23,7 @@ usage() {
     exit 1
 }
 
-while getopts ":del:fmpr:st:" opt; do
+while getopts ":del:fmpr:st:u" opt; do
     case $opt in
         d) [ -z "$ref" ] && ref="refs/drafts/" ;;
         e) edit="%edit" ;;
@@ -43,6 +44,7 @@ while getopts ":del:fmpr:st:" opt; do
         r) ref="refs/$OPTARG/" ;;
         s) submit="%submit" ;;
         t) topic="%topic=$OPTARG" ;;
+        u) private="%remove-private" ;;
         :)
           echo "Option -$OPTARG requires an argument"
           echo
