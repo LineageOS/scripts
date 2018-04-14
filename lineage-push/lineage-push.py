@@ -5,7 +5,7 @@ from __future__ import print_function
 import re
 import subprocess
 import sys
-from argparse import ArgumentParser
+from argparse import ArgumentParser, ArgumentTypeError
 
 
 def push(args):
@@ -52,6 +52,15 @@ def push(args):
         command += '%submit'
 
     sys.exit(subprocess.call(command, shell=True))
+
+
+def str2bool(v):
+    if v.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise ArgumentTypeError('Boolean value expected.')
 
 
 def parse_cmdline():
