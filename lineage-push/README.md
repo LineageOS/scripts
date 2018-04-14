@@ -1,7 +1,7 @@
 # LineageOS Push Script
 
 ```
-usage: lineage-push.py [-h] [-d] [-e] [-f] [-l LABEL] [-m] [-p [PRIVATE]]
+usage: lineage-push.py [-h] [-b] [-d] [-e] [-f] [-l LABEL] [-p [PRIVATE]]
                        [-r REF] [-s] [-t TOPIC] [-w [WIP]]
                        branch
 
@@ -12,12 +12,12 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
+  -b, --bypass          bypass review and merge
   -d, --draft           upload change as draft
   -e, --edit            upload change as edit
   -f, --force           force push
   -l LABEL, --label LABEL
                         assign label
-  -m, --merge           bypass review and merge
   -p [PRIVATE], --private [PRIVATE]
                         upload change as private
   -r REF, --ref REF     push to specified ref

@@ -25,7 +25,7 @@ def push(args):
 
     if args.ref != 'for':
         command += 'refs/{}/'.format(args.ref)
-    elif args.merge:
+    elif args.bypass:
         command += ''
     elif args.draft:
         command += 'refs/drafts/'
@@ -77,6 +77,8 @@ def parse_cmdline():
     parser = ArgumentParser(
         description='Pushes a local git repository\'s changes to Gerrit for code review')
     parser.add_argument('branch', help='upload change to branch')
+    parser.add_argument('-b', '--bypass', action='store_true',
+                        help='bypass review and merge')
     parser.add_argument('-d', '--draft', action='store_true',
                         help='upload change as draft')
     parser.add_argument('-e', '--edit', action='store_true',
@@ -84,8 +86,6 @@ def parse_cmdline():
     parser.add_argument(
         '-f', '--force', action='store_true', help='force push')
     parser.add_argument('-l', '--label', help='assign label')
-    parser.add_argument('-m', '--merge', action='store_true',
-                        help='bypass review and merge')
     parser.add_argument('-p', '--private', type=str2bool, nargs='?',
                         const=True, help='upload change as private')
     parser.add_argument(
