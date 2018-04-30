@@ -12,6 +12,7 @@ try:
 except ImportError:
     from urllib import quote_plus
 
+
 def push(args):
     command = 'git push'
     if args.force:
@@ -21,7 +22,11 @@ def push(args):
         ["git", "config", "review.review.lineageos.org.username"]).decode("utf-8").strip()
     remotes = subprocess.check_output(
         ["git", "remote", "-v"]).decode("utf-8").strip()
-    repo = re.search(r'LineageOS\S+', remotes).group(0)
+    if "github.com/LineageOS" in remotes:
+        repo = re.search(r'LineageOS\S+', remotes).group(0)
+    elif "android.googlesource.com" in remotes:
+        repo = re.search(r'platform\S+', remotes).group(0)
+        repo = repo.replace("/", "_").replace("platform", "LineageOS/android")
 
     command += ' ssh://{}@review.lineageos.org:29418/{}'.format(
         username, repo)
