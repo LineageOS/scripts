@@ -52,29 +52,56 @@ def push(args):
                 command += ','
 
     if args.edit:
-        command += '%edit'
+        if "%" in command:
+            command += ',edit'
+        else:
+            command += '%edit'
 
     if args.topic:
-        command += '%topic={}'.format(args.topic)
+        if "%" in command:
+            command += ',topic={}'.format(args.topic)
+        else:
+            command += '%topic={}'.format(args.topic)
 
     if args.hashtag:
-        command += '%hashtag={}'.format(args.hashtag)
+        if "%" in command:
+            command += ',hashtag={}'.format(args.hashtag)
+        else:
+            command += '%hashtag={}'.format(args.hashtag)
 
     if args.submit:
-        command += '%submit'
+        if "%" in command:
+            command += ',submit'
+        else:
+            command += '%submit'
 
     if args.private == True:
-        command += '%private'
+        if "%" in command:
+            command += ',private'
+        else:
+            command += '%private'
     elif args.private == False:
-        command += '%remove-private'
+        if "%" in command:
+            command += ',remove-private'
+        else:
+            command += '%remove-private'
 
     if args.wip == True:
-        command += '%wip'
+        if "%" in command:
+            command += ',wip'
+        else:
+            command += '%wip'
     elif args.wip == False:
-        command += '%ready'
+        if "%" in command:
+            command += ',ready'
+        else:
+            command += '%ready'
 
     if args.message:
-        command += '%m={}'.format(quote_plus(args.message))
+        if "%" in command:
+            command += ',m={}'.format(quote_plus(args.message))
+        else:
+            command += '%m={}'.format(quote_plus(args.message))
 
     sys.exit(subprocess.call(command.split(' ')))
 
