@@ -12,6 +12,11 @@ try:
 except ImportError:
     from urllib import quote_plus
 
+def add_command(commands, command):
+    if '%' in commands:
+        commands += ',{}'.format(command)
+    else:
+        commands += '%{}'.format(command)
 
 def push(args):
     command = 'git push'
@@ -45,36 +50,33 @@ def push(args):
 
     if args.label:
         labels = args.label.split(',')
-        command += '%'
-        for count, label in enumerate(labels):
-            command += 'l={}'.format(label)
-            if count != len(labels) - 1:
-                command += ','
+        for label in labels:
+            add_command(command, 'l={}'.format(label))
 
     if args.edit:
-        command += '%edit'
+        add_command(command, 'edit')
 
     if args.topic:
-        command += '%topic={}'.format(args.topic)
+        add_command(command, 'topic={}'.format(args.topic))
 
     if args.hashtag:
-        command += '%hashtag={}'.format(args.hashtag)
+        add_command(command, 'hashtag={}'.format(args.hashtag))
 
     if args.submit:
-        command += '%submit'
+        add_command(command, 'submit')
 
     if args.private == True:
-        command += '%private'
+        add_command(command, 'private')
     elif args.private == False:
-        command += '%remove-private'
+        add_command(command, 'remove-private')
 
     if args.wip == True:
-        command += '%wip'
+        add_command(command, 'wip')
     elif args.wip == False:
-        command += '%ready'
+        add_command(command, 'ready')
 
     if args.message:
-        command += '%m={}'.format(quote_plus(args.message))
+        add_command(command, 'm={}'.format(quote_plus(args.message)))
 
     sys.exit(subprocess.call(command.split(' ')))
 
