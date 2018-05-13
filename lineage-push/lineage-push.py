@@ -15,6 +15,8 @@ except ImportError:
 
 def push(args):
     command = 'git push'
+    parameters = []
+
     if args.force:
         command += ' -f'
 
@@ -44,37 +46,36 @@ def push(args):
     command += args.branch
 
     if args.label:
-        labels = args.label.split(',')
-        command += '%'
-        for count, label in enumerate(labels):
-            command += 'l={}'.format(label)
-            if count != len(labels) - 1:
-                command += ','
+        for label in args.label.split(','):
+            parameters.append('l={}'.format(label))
 
     if args.edit:
-        command += '%edit'
+        parameters.append('edit')
 
     if args.topic:
-        command += '%topic={}'.format(args.topic)
+        parameters.append('topic={}'.format(args.topic))
 
     if args.hashtag:
-        command += '%hashtag={}'.format(args.hashtag)
+        parameters.append('hashtag={}'.format(args.hashtag))
 
     if args.submit:
-        command += '%submit'
+        parameters.append('submit')
 
     if args.private == True:
-        command += '%private'
+        parameters.append('private')
     elif args.private == False:
-        command += '%remove-private'
+        parameters.append('remove-private')
 
     if args.wip == True:
-        command += '%wip'
+        parameters.append('wip')
     elif args.wip == False:
-        command += '%ready'
+        parameters.append('ready')
 
     if args.message:
-        command += '%m={}'.format(quote_plus(args.message))
+        parameters.append('m={}'.format(quote_plus(args.message)))
+
+    if len(parameters) > 0:
+        command += "%" + ','.join(parameters)
 
     sys.exit(subprocess.call(command.split(' ')))
 
