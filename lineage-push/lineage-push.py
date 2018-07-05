@@ -32,7 +32,10 @@ def push(args):
 
     command += ' ssh://{}@review.lineageos.org:29418/{}'.format(
         username, repo)
-    command += ' HEAD:'
+    if args.head:
+        command += ' {}:'.format(args.head)
+    else:
+        command += ' HEAD:'
 
     if args.ref != 'for':
         command += 'refs/{}/'.format(args.ref)
@@ -103,6 +106,7 @@ def parse_cmdline():
                         help='upload change as edit')
     parser.add_argument(
         '-f', '--force', action='store_true', help='force push')
+    parser.add_argument('--head', help='specify head to push')
     parser.add_argument('-l', '--label', help='assign label')
     parser.add_argument('-m', '--message', nargs='?',
                         help='add message to change')
