@@ -93,8 +93,7 @@ def parse_cmdline():
     parser = ArgumentParser(
         description='Pushes a local git repository\'s changes to Gerrit for code review')
     parser.add_argument('branch', help='upload change to branch')
-    parser.add_argument('-a', '--hashtag', action='store_true',
-                        help='add hashtag to change')
+    parser.add_argument('-H', '--hashtag', help='add hashtag to change')
     parser.add_argument('-b', '--bypass', action='store_true',
                         help='bypass review and merge')
     parser.add_argument('-d', '--draft', action='store_true',
