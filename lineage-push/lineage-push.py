@@ -24,7 +24,7 @@ def push(args):
         ["git", "config", "review.review.lineageos.org.username"]).decode("utf-8").strip()
     remotes = subprocess.check_output(
         ["git", "remote", "-v"]).decode("utf-8").strip()
-    if "github.com/LineageOS" in remotes:
+    if "github.com/LineageOS" in remotes or "git@github.com:LineageOS" in remotes:
         repo = re.search(r'LineageOS\S+', remotes).group(0)
     elif "android.googlesource.com" in remotes:
         repo = re.search(r'platform\S+', remotes).group(0)
