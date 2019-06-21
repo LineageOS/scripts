@@ -1,7 +1,7 @@
 #!/bin/bash
 
-chromium_version="74.0.3729.157"
-chromium_code="3729157"
+chromium_version="75.0.3770.101"
+chromium_code="3770101"
 clean=0
 gsync=0
 supported_archs=(arm arm64 x86 x64)
@@ -126,7 +126,7 @@ args+=' enable_remoting=true'
 args+=' is_component_build=false'
 args+=' symbol_level=0'
 args+=' enable_nacl=false'
-args+=' remove_webcore_debug_symbols=true'
+args+=' blink_symbol_level = 0'
 args+=' android_default_version_name="'$chromium_version'"'
 
 # Setup environment
