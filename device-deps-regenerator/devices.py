@@ -30,7 +30,7 @@ for repo in mapping:
         print("warning: dupe: %s"%codename)
     devices[codename] = sorted(list(set(simplify_reverse_deps({'repo': repo}, codename))))
 
-with open('devices.json', 'w') as f:
+with open('device_deps.json', 'w') as f:
     out = {'devices': devices, 'suffixes': suffixes}
     out = devices
     json.dump(out, f, indent=4, sort_keys=True)
