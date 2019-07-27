@@ -5,7 +5,7 @@ with open('out.json') as f:
 
 devices = {}
 suffixes = {}
-blacklist = ['sepolicy', 'devicesettings', 'common']
+blacklist = ['sepolicy', 'devicesettings', 'common', 'atv']
 
 def simplify_reverse_deps(repo, device):
     # repo['branch'] = cm-14.1 or cm-14.1-caf or cm-14.1-sony
