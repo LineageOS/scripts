@@ -1,7 +1,9 @@
 #!/bin/bash
 
-chromium_version="75.0.3770.101"
-chromium_code="3770101"
+set -e
+
+chromium_version="76.0.3809.89"
+chromium_code="3809089"
 clean=0
 gsync=0
 supported_archs=(arm arm64 x86 x64)
@@ -91,7 +93,7 @@ export PATH="$(pwd -P)/depot_tools:$PATH"
 
 if [ ! -d src ]; then
     fetch android
-    yes | gclient sync -R -r $chromium_version
+    yes | gclient sync -D -R -r $chromium_version
 fi
 
 if [ $gsync -eq 1 ]; then
