@@ -2,16 +2,16 @@
 
 1. Snapshot the names of your current working branches to `branches.list` file:
 
-       ./lineage/scripts/aosp-merge/branches_save.sh
+       ./lineage/scripts/aosp-merger/branches_save.sh
 
-2. Note current aosp tag in `.repo/manifests/default.xml`, update it to desired new tag and then create a local commit for the change (aosp-merge script checks for any uncommitted changes in the `.repo/manifests` git repo).
+2. Note current aosp tag in `.repo/manifests/default.xml`, update it to desired new tag and then create a local commit for the change (aosp-merger script checks for any uncommitted changes in the `.repo/manifests` git repo).
 3. Create a staging branch and merge in the new AOSP tag:
 
-       ./lineage/scripts/aosp-merge/aosp-merge.sh merge \<oldaosptag> \<newaosptag>
+       ./lineage/scripts/aosp-merger/aosp-merger.sh merge \<oldaosptag> \<newaosptag>
    (where oldaosptag is the original AOSP tag that was in `.repo/manifests/default.xml`)
    * Example invocation:
 
-         ./lineage/scripts/aosp-merge/aosp-merge.sh merge android-8.0.0_r3 android-8.0.0_r30
+         ./lineage/scripts/aosp-merger/aosp-merger.sh merge android-8.0.0_r3 android-8.0.0_r30
 
 4. Every project in your tree should now be one of:
    * \<newaosptag> if the project was tracking AOSP
@@ -19,10 +19,10 @@
    * the default repo lineage branch for `.repo/manifests/snippets.xml` projects
 5. Restore your local branches and merge in the staging branch:
 
-       ./lineage/scripts/aosp-merge/branches_rebase.sh \<nameofstagingbranch>
+       ./lineage/scripts/aosp-merger/branches_rebase.sh \<nameofstagingbranch>
    * Example invocation:
 
-         ./lineage/scripts/aosp-merge/branches_rebase.sh staging/lineage-15.0_merge-android-8.0.0_r30
+         ./lineage/scripts/aosp-merger/branches_rebase.sh staging/lineage-15.0_merge-android-8.0.0_r30
 6. Build, install, boot, verify, etc.
 
 # TODO
