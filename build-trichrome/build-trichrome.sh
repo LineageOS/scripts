@@ -90,6 +90,9 @@ args+=' is_official_build=true'
 args+=' proprietary_codecs=true'
 args+=' symbol_level=0'
 args+=' use_official_google_api_keys=false'
+args+=' default_android_keystore_path = "//my-keystore.keystore"'
+args+=' default_android_keystore_name = "my-key-alias"'
+args+=' default_android_keystore_password = "my-password"'
 
 # Setup environment
 [ $clean -eq 1 ] && rm -rf out
