@@ -38,7 +38,7 @@ def extract(payload_file_name, output_dir="output", partition_names=None):
             if partition_names and part.partition_name not in partition_names:
                 continue
             print("Extracting {}".format(part.partition_name))
-            output_file = os.path.join(output_dir, part.partition_name)
+            output_file = os.path.join(output_dir, part.partition_name + '.img')
             helper._ApplyToPartition(
                 part.operations, part.partition_name,
                 'install_operations', output_file,
