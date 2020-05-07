@@ -2,8 +2,8 @@
 
 set -e
 
-chromium_version="81.0.4044.117"
-chromium_code="4044117"
+chromium_version="83.0.4103.96"
+chromium_code="4103096"
 clean=0
 gsync=0
 supported_archs=(arm arm64 x86 x64)
