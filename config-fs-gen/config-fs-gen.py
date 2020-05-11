@@ -62,7 +62,7 @@ def get_fs_path_configs(fs_config_paths, system_groups, vendor_groups):
             while True:
                 bytes = file.read(struct.calcsize('<HHHHQ'))
 
-                if bytes is b'':
+                if bytes == b'':
                     break
 
                 length, mode, uid, gid, caps = struct.unpack('<HHHHQ', bytes)
