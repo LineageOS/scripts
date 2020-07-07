@@ -25,7 +25,7 @@ from update_payload.error import PayloadError
 #
 # Constants.
 #
-PSEUDO_EXTENT_MARKER = (1L << 64) - 1  # UINT64_MAX
+PSEUDO_EXTENT_MARKER = (1 << 64) - 1  # UINT64_MAX
 
 SIG_ASN1_HEADER = (
     '\x30\x31\x30\x0d\x06\x09\x60\x86'
@@ -57,10 +57,8 @@ class OpType(object):
   ZERO = _CLASS.ZERO
   DISCARD = _CLASS.DISCARD
   REPLACE_XZ = _CLASS.REPLACE_XZ
-  PUFFDIFF = _CLASS.PUFFDIFF
-  BROTLI_BSDIFF = _CLASS.BROTLI_BSDIFF
   ALL = (REPLACE, REPLACE_BZ, MOVE, BSDIFF, SOURCE_COPY, SOURCE_BSDIFF, ZERO,
-         DISCARD, REPLACE_XZ, PUFFDIFF, BROTLI_BSDIFF)
+         DISCARD, REPLACE_XZ)
   NAMES = {
       REPLACE: 'REPLACE',
       REPLACE_BZ: 'REPLACE_BZ',
@@ -71,8 +69,6 @@ class OpType(object):
       ZERO: 'ZERO',
       DISCARD: 'DISCARD',
       REPLACE_XZ: 'REPLACE_XZ',
-      PUFFDIFF: 'PUFFDIFF',
-      BROTLI_BSDIFF: 'BROTLI_BSDIFF',
   }
 
   def __init__(self):
@@ -141,7 +137,7 @@ def Read(file_obj, length, offset=None, hasher=None):
 
   try:
     data = file_obj.read(length)
-  except IOError, e:
+  except IOError as e:
     raise PayloadError('error reading from file (%s): %s' % (file_obj.name, e))
 
   if len(data) != length:
