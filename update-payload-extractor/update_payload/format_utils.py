@@ -16,6 +16,8 @@
 
 """Various formatting functions."""
 
+from __future__ import division
+
 
 def NumToPercent(num, total, min_precision=1, max_precision=5):
   """Returns the percentage (string) of |num| out of |total|.
@@ -50,7 +52,7 @@ def NumToPercent(num, total, min_precision=1, max_precision=5):
   precision = min(min_precision, max_precision)
   factor = 10 ** precision
   while precision <= max_precision:
-    percent = num * 100 * factor / total
+    percent = num * 100 * factor // total
     if percent:
       break
     factor *= 10
@@ -102,8 +104,8 @@ def BytesToHumanReadable(size, precision=1, decimal=False):
     magnitude = next_magnitude
 
   if exp != 0:
-    whole = size / magnitude
-    frac = (size % magnitude) * (10 ** precision) / magnitude
+    whole = size // magnitude
+    frac = (size % magnitude) * (10 ** precision) // magnitude
     while frac and not frac % 10:
       frac /= 10
     return '%d%s %s' % (whole, '.%d' % frac if frac else '', suffixes[exp - 1])

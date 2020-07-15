@@ -24,12 +24,12 @@ payload. The interface for invoking the applier is as follows:
 
 """
 
+from __future__ import absolute_import
 from __future__ import print_function
 
 import array
 import bz2
 import hashlib
-import itertools
 # Not everywhere we can have the lzma library so we ignore it if we didn't have
 # it because it is not going to be used. For example, 'cros flash' uses
 # devserver code which eventually loads this file, but the lzma library is not
@@ -45,14 +45,12 @@ except ImportError:
   except ImportError:
     pass
 import os
-import shutil
 import subprocess
 import sys
 import tempfile
 
 from update_payload import common
 from update_payload.error import PayloadError
-
 
 #
 # Helper functions.
@@ -72,7 +70,7 @@ def _VerifySha256(file_obj, expected_hash, name, length=-1):
   """
   hasher = hashlib.sha256()
   block_length = 1024 * 1024
-  max_length = length if length >= 0 else sys.maxint
+  max_length = length if length >= 0 else sys.maxsize
 
   while max_length > 0:
     read_length = min(max_length, block_length)
@@ -108,20 +106,16 @@ def _ReadExtents(file_obj, extents, block_size, max_length=-1):
   Returns:
     A character array containing the concatenated read data.
   """
-  data = array.array('c')
+  data = array.array('B')
   if max_length < 0:
-    max_length = sys.maxint
+    max_length = sys.maxsize
   for ex in extents:
     if max_length == 0:
       break
     read_length = min(max_length, ex.num_blocks * block_size)
 
-    # Fill with zeros or read from file, depending on the type of extent.
-    if ex.start_block == common.PSEUDO_EXTENT_MARKER:
-      data.extend(itertools.repeat('\0', read_length))
-    else:
-      file_obj.seek(ex.start_block * block_size)
-      data.fromfile(file_obj, read_length)
+    file_obj.seek(ex.start_block * block_size)
+    data.fromfile(file_obj, read_length)
 
     max_length -= read_length
 
@@ -149,12 +143,8 @@ def _WriteExtents(file_obj, data, extents, block_size, base_name):
     if not data_length:
       raise PayloadError('%s: more write extents than data' % ex_name)
     write_length = min(data_length, ex.num_blocks * block_size)
-
-    # Only do actual writing if this is not a pseudo-extent.
-    if ex.start_block != common.PSEUDO_EXTENT_MARKER:
-      file_obj.seek(ex.start_block * block_size)
-      data_view = buffer(data, data_offset, write_length)
-      file_obj.write(data_view)
+    file_obj.seek(ex.start_block * block_size)
+    file_obj.write(data[data_offset:(data_offset + write_length)])
 
     data_offset += write_length
     data_length -= write_length
@@ -184,20 +174,17 @@ def _ExtentsToBspatchArg(extents, block_size, base_name, data_length=-1):
   arg = ''
   pad_off = pad_len = 0
   if data_length < 0:
-    data_length = sys.maxint
+    data_length = sys.maxsize
   for ex, ex_name in common.ExtentIter(extents, base_name):
     if not data_length:
       raise PayloadError('%s: more extents than total data length' % ex_name)
 
-    is_pseudo = ex.start_block == common.PSEUDO_EXTENT_MARKER
-    start_byte = -1 if is_pseudo else ex.start_block * block_size
+    start_byte = ex.start_block * block_size
     num_bytes = ex.num_blocks * block_size
     if data_length < num_bytes:
       # We're only padding a real extent.
-      if not is_pseudo:
-        pad_off = start_byte + data_length
-        pad_len = num_bytes - data_length
-
+      pad_off = start_byte + data_length
+      pad_len = num_bytes - data_length
       num_bytes = data_length
 
     arg += '%s%d:%d' % (arg and ',', start_byte, num_bytes)
@@ -274,30 +261,28 @@ class PayloadApplier(object):
       num_blocks = ex.num_blocks
       count = num_blocks * block_size
 
-      # Make sure it's not a fake (signature) operation.
-      if start_block != common.PSEUDO_EXTENT_MARKER:
-        data_end = data_start + count
+      data_end = data_start + count
 
-        # Make sure we're not running past partition boundary.
-        if (start_block + num_blocks) * block_size > part_size:
-          raise PayloadError(
-              '%s: extent (%s) exceeds partition size (%d)' %
-              (ex_name, common.FormatExtent(ex, block_size),
-               part_size))
+      # Make sure we're not running past partition boundary.
+      if (start_block + num_blocks) * block_size > part_size:
+        raise PayloadError(
+            '%s: extent (%s) exceeds partition size (%d)' %
+            (ex_name, common.FormatExtent(ex, block_size),
+             part_size))
 
-        # Make sure that we have enough data to write.
-        if data_end >= data_length + block_size:
-          raise PayloadError(
-              '%s: more dst blocks than data (even with padding)')
+      # Make sure that we have enough data to write.
+      if data_end >= data_length + block_size:
+        raise PayloadError(
+            '%s: more dst blocks than data (even with padding)')
 
-        # Pad with zeros if necessary.
-        if data_end > data_length:
-          padding = data_end - data_length
-          out_data += '\0' * padding
+      # Pad with zeros if necessary.
+      if data_end > data_length:
+        padding = data_end - data_length
+        out_data += b'\0' * padding
 
-        self.payload.payload_file.seek(start_block * block_size)
-        part_file.seek(start_block * block_size)
-        part_file.write(out_data[data_start:data_end])
+      self.payload.payload_file.seek(start_block * block_size)
+      part_file.seek(start_block * block_size)
+      part_file.write(out_data[data_start:data_end])
 
       data_start += count
 
@@ -305,30 +290,6 @@ class PayloadApplier(object):
     if data_start < data_length:
       raise PayloadError('%s: wrote fewer bytes (%d) than expected (%d)' %
                          (op_name, data_start, data_length))
-
-  def _ApplyMoveOperation(self, op, op_name, part_file):
-    """Applies a MOVE operation.
-
-    Note that this operation must read the whole block data from the input and
-    only then dump it, due to our in-place update semantics; otherwise, it
-    might clobber data midway through.
-
-    Args:
-      op: the operation object
-      op_name: name string for error reporting
-      part_file: the partition file object
-
-    Raises:
-      PayloadError if something goes wrong.
-    """
-    block_size = self.block_size
-
-    # Gather input raw data from src extents.
-    in_data = _ReadExtents(part_file, op.src_extents, block_size)
-
-    # Dump extracted data to dst extents.
-    _WriteExtents(part_file, in_data, op.dst_extents, block_size,
-                  '%s.dst_extents' % op_name)
 
   def _ApplyZeroOperation(self, op, op_name, part_file):
     """Applies a ZERO operation.
@@ -347,10 +308,8 @@ class PayloadApplier(object):
     # Iterate over the extents and write zero.
     # pylint: disable=unused-variable
     for ex, ex_name in common.ExtentIter(op.dst_extents, base_name):
-      # Only do actual writing if this is not a pseudo-extent.
-      if ex.start_block != common.PSEUDO_EXTENT_MARKER:
-        part_file.seek(ex.start_block * block_size)
-        part_file.write('\0' * (ex.num_blocks * block_size))
+      part_file.seek(ex.start_block * block_size)
+      part_file.write(b'\0' * (ex.num_blocks * block_size))
 
   def _ApplySourceCopyOperation(self, op, op_name, old_part_file,
                                 new_part_file):
@@ -439,12 +398,19 @@ class PayloadApplier(object):
       # Diff from source partition.
       old_file_name = '/dev/fd/%d' % old_part_file.fileno()
 
-      if op.type in (common.OpType.BSDIFF, common.OpType.SOURCE_BSDIFF,
-                     common.OpType.BROTLI_BSDIFF):
+      # In python3, file descriptors(fd) are not passed to child processes by
+      # default. To pass the fds to the child processes, we need to set the flag
+      # 'inheritable' in the fds and make the subprocess calls with the argument
+      # close_fds set to False.
+      if sys.version_info.major >= 3:
+        os.set_inheritable(new_part_file.fileno(), True)
+        os.set_inheritable(old_part_file.fileno(), True)
+
+      if op.type in (common.OpType.SOURCE_BSDIFF, common.OpType.BROTLI_BSDIFF):
         # Invoke bspatch on partition file with extents args.
         bspatch_cmd = [self.bspatch_path, old_file_name, new_file_name,
                        patch_file_name, in_extents_arg, out_extents_arg]
-        subprocess.check_call(bspatch_cmd)
+        subprocess.check_call(bspatch_cmd, close_fds=False)
       elif op.type == common.OpType.PUFFDIFF:
         # Invoke puffpatch on partition file with extents args.
         puffpatch_cmd = [self.puffpatch_path,
@@ -454,14 +420,14 @@ class PayloadApplier(object):
                          "--patch_file=%s" % patch_file_name,
                          "--src_extents=%s" % in_extents_arg,
                          "--dst_extents=%s" % out_extents_arg]
-        subprocess.check_call(puffpatch_cmd)
+        subprocess.check_call(puffpatch_cmd, close_fds=False)
       else:
-        raise PayloadError("Unknown operation %s", op.type)
+        raise PayloadError("Unknown operation %s" % op.type)
 
       # Pad with zeros past the total output length.
       if pad_len:
         new_part_file.seek(pad_off)
-        new_part_file.write('\0' * pad_len)
+        new_part_file.write(b'\0' * pad_len)
     else:
       # Gather input raw data and write to a temp file.
       input_part_file = old_part_file if old_part_file else new_part_file
@@ -477,8 +443,7 @@ class PayloadApplier(object):
       with tempfile.NamedTemporaryFile(delete=False) as out_file:
         out_file_name = out_file.name
 
-      if op.type in (common.OpType.BSDIFF, common.OpType.SOURCE_BSDIFF,
-                     common.OpType.BROTLI_BSDIFF):
+      if op.type in (common.OpType.SOURCE_BSDIFF, common.OpType.BROTLI_BSDIFF):
         # Invoke bspatch.
         bspatch_cmd = [self.bspatch_path, in_file_name, out_file_name,
                        patch_file_name]
@@ -492,7 +457,7 @@ class PayloadApplier(object):
                          "--patch_file=%s" % patch_file_name]
         subprocess.check_call(puffpatch_cmd)
       else:
-        raise PayloadError("Unknown operation %s", op.type)
+        raise PayloadError("Unknown operation %s" % op.type)
 
       # Read output.
       with open(out_file_name, 'rb') as out_file:
@@ -505,7 +470,7 @@ class PayloadApplier(object):
       # Write output back to partition, with padding.
       unaligned_out_len = len(out_data) % block_size
       if unaligned_out_len:
-        out_data += '\0' * (block_size - unaligned_out_len)
+        out_data += b'\0' * (block_size - unaligned_out_len)
       _WriteExtents(new_part_file, out_data, op.dst_extents, block_size,
                     '%s.dst_extents' % op_name)
 
@@ -519,10 +484,6 @@ class PayloadApplier(object):
   def _ApplyOperations(self, operations, base_name, old_part_file,
                        new_part_file, part_size):
     """Applies a sequence of update operations to a partition.
-
-    This assumes an in-place update semantics for MOVE and BSDIFF, namely all
-    reads are performed first, then the data is processed and written back to
-    the same file.
 
     Args:
       operations: the sequence of operations
@@ -541,13 +502,8 @@ class PayloadApplier(object):
       if op.type in (common.OpType.REPLACE, common.OpType.REPLACE_BZ,
                      common.OpType.REPLACE_XZ):
         self._ApplyReplaceOperation(op, op_name, data, new_part_file, part_size)
-      elif op.type == common.OpType.MOVE:
-        self._ApplyMoveOperation(op, op_name, new_part_file)
       elif op.type == common.OpType.ZERO:
         self._ApplyZeroOperation(op, op_name, new_part_file)
-      elif op.type == common.OpType.BSDIFF:
-        self._ApplyDiffOperation(op, op_name, data, new_part_file,
-                                 new_part_file)
       elif op.type == common.OpType.SOURCE_COPY:
         self._ApplySourceCopyOperation(op, op_name, old_part_file,
                                        new_part_file)
@@ -583,18 +539,8 @@ class PayloadApplier(object):
         _VerifySha256(old_part_file, old_part_info.hash,
                       'old ' + part_name, length=old_part_info.size)
       new_part_file_mode = 'r+b'
-      if self.minor_version == common.INPLACE_MINOR_PAYLOAD_VERSION:
-        # Copy the src partition to the dst one; make sure we don't truncate it.
-        shutil.copyfile(old_part_file_name, new_part_file_name)
-      elif (self.minor_version == common.SOURCE_MINOR_PAYLOAD_VERSION or
-            self.minor_version == common.OPSRCHASH_MINOR_PAYLOAD_VERSION or
-            self.minor_version == common.BROTLI_BSDIFF_MINOR_PAYLOAD_VERSION or
-            self.minor_version == common.PUFFDIFF_MINOR_PAYLOAD_VERSION):
-        # In minor version >= 2, we don't want to copy the partitions, so
-        # instead just make the new partition file.
-        open(new_part_file_name, 'w').close()
-      else:
-        raise PayloadError("Unknown minor version: %d" % self.minor_version)
+      open(new_part_file_name, 'w').close()
+
     else:
       # We need to create/truncate the dst partition file.
       new_part_file_mode = 'w+b'
@@ -622,46 +568,54 @@ class PayloadApplier(object):
       _VerifySha256(new_part_file, new_part_info.hash,
                     'new ' + part_name, length=new_part_info.size)
 
-  def Run(self, new_kernel_part, new_rootfs_part, old_kernel_part=None,
-          old_rootfs_part=None):
+  def Run(self, new_parts, old_parts=None):
     """Applier entry point, invoking all update operations.
 
     Args:
-      new_kernel_part: name of dest kernel partition file
-      new_rootfs_part: name of dest rootfs partition file
-      old_kernel_part: name of source kernel partition file (optional)
-      old_rootfs_part: name of source rootfs partition file (optional)
+      new_parts: map of partition name to dest partition file
+      old_parts: map of partition name to source partition file (optional)
 
     Raises:
       PayloadError if payload application failed.
     """
+    if old_parts is None:
+      old_parts = {}
+
     self.payload.ResetFile()
 
-    # Make sure the arguments are sane and match the payload.
-    if not (new_kernel_part and new_rootfs_part):
-      raise PayloadError('missing dst {kernel,rootfs} partitions')
+    new_part_info = {}
+    old_part_info = {}
+    install_operations = []
 
-    if not (old_kernel_part or old_rootfs_part):
-      if not self.payload.IsFull():
-        raise PayloadError('trying to apply a non-full update without src '
-                           '{kernel,rootfs} partitions')
-    elif old_kernel_part and old_rootfs_part:
-      if not self.payload.IsDelta():
-        raise PayloadError('trying to apply a non-delta update onto src '
-                           '{kernel,rootfs} partitions')
+    manifest = self.payload.manifest
+    for part in manifest.partitions:
+      name = part.partition_name
+      new_part_info[name] = part.new_partition_info
+      old_part_info[name] = part.old_partition_info
+      install_operations.append((name, part.operations))
+
+    part_names = set(new_part_info.keys())  # Equivalently, old_part_info.keys()
+
+    # Make sure the arguments are sane and match the payload.
+    new_part_names = set(new_parts.keys())
+    if new_part_names != part_names:
+      raise PayloadError('missing dst partition(s) %s' %
+                         ', '.join(part_names - new_part_names))
+
+    old_part_names = set(old_parts.keys())
+    if part_names - old_part_names:
+      if self.payload.IsDelta():
+        raise PayloadError('trying to apply a delta update without src '
+                           'partition(s) %s' %
+                           ', '.join(part_names - old_part_names))
+    elif old_part_names == part_names:
+      if self.payload.IsFull():
+        raise PayloadError('trying to apply a full update onto src partitions')
     else:
       raise PayloadError('not all src partitions provided')
 
-    # Apply update to rootfs.
-    self._ApplyToPartition(
-        self.payload.manifest.install_operations, 'rootfs',
-        'install_operations', new_rootfs_part,
-        self.payload.manifest.new_rootfs_info, old_rootfs_part,
-        self.payload.manifest.old_rootfs_info)
-
-    # Apply update to kernel update.
-    self._ApplyToPartition(
-        self.payload.manifest.kernel_install_operations, 'kernel',
-        'kernel_install_operations', new_kernel_part,
-        self.payload.manifest.new_kernel_info, old_kernel_part,
-        self.payload.manifest.old_kernel_info)
+    for name, operations in install_operations:
+      # Apply update to partition.
+      self._ApplyToPartition(
+          operations, name, '%s_install_operations' % name, new_parts[name],
+          new_part_info[name], old_parts.get(name, None), old_part_info[name])
