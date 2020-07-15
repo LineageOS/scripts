@@ -16,6 +16,9 @@
 
 """Histogram generation tools."""
 
+from __future__ import absolute_import
+from __future__ import division
+
 from collections import defaultdict
 
 from update_payload import format_utils
@@ -110,7 +113,7 @@ class Histogram(object):
     hist_bar = '|'
     for key, count in self.data:
       if self.total:
-        bar_len = count * self.scale / self.total
+        bar_len = count * self.scale // self.total
         hist_bar = '|%s|' % ('#' * bar_len).ljust(self.scale)
 
       line = '%s %s %s' % (

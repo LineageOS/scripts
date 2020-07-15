@@ -16,6 +16,7 @@
 
 """Tools for reading, verifying and applying Chrome OS update payloads."""
 
+from __future__ import absolute_import
 from __future__ import print_function
 
 import hashlib
@@ -64,7 +65,7 @@ class Payload(object):
     """Update payload header struct."""
 
     # Header constants; sizes are in bytes.
-    _MAGIC = 'CrAU'
+    _MAGIC = b'CrAU'
     _VERSION_SIZE = 8
     _MANIFEST_LEN_SIZE = 8
     _METADATA_SIGNATURE_LEN_SIZE = 4
@@ -110,7 +111,6 @@ class Payload(object):
         self.metadata_signature_len = _ReadInt(
             payload_file, self._METADATA_SIGNATURE_LEN_SIZE, True,
             hasher=hasher)
-
 
   def __init__(self, payload_file, payload_file_offset=0):
     """Initialize the payload object.
@@ -263,9 +263,7 @@ class Payload(object):
   def IsDelta(self):
     """Returns True iff the payload appears to be a delta."""
     self._AssertInit()
-    return (self.manifest.HasField('old_kernel_info') or
-            self.manifest.HasField('old_rootfs_info') or
-            any(partition.HasField('old_partition_info')
+    return (any(partition.HasField('old_partition_info')
                 for partition in self.manifest.partitions))
 
   def IsFull(self):
@@ -273,19 +271,19 @@ class Payload(object):
     return not self.IsDelta()
 
   def Check(self, pubkey_file_name=None, metadata_sig_file=None,
-            report_out_file=None, assert_type=None, block_size=0,
-            rootfs_part_size=0, kernel_part_size=0, allow_unhashed=False,
+            metadata_size=0, report_out_file=None, assert_type=None,
+            block_size=0, part_sizes=None, allow_unhashed=False,
             disabled_tests=()):
     """Checks the payload integrity.
 
     Args:
       pubkey_file_name: public key used for signature verification
       metadata_sig_file: metadata signature, if verification is desired
+      metadata_size: metadata size, if verification is desired
       report_out_file: file object to dump the report to
       assert_type: assert that payload is either 'full' or 'delta'
       block_size: expected filesystem / payload block size
-      rootfs_part_size: the size of (physical) rootfs partitions in bytes
-      kernel_part_size: the size of (physical) kernel partitions in bytes
+      part_sizes: map of partition label to (physical) size in bytes
       allow_unhashed: allow unhashed operation blobs
       disabled_tests: list of tests to disable
 
@@ -300,20 +298,18 @@ class Payload(object):
         allow_unhashed=allow_unhashed, disabled_tests=disabled_tests)
     helper.Run(pubkey_file_name=pubkey_file_name,
                metadata_sig_file=metadata_sig_file,
-               rootfs_part_size=rootfs_part_size,
-               kernel_part_size=kernel_part_size,
+               metadata_size=metadata_size,
+               part_sizes=part_sizes,
                report_out_file=report_out_file)
 
-  def Apply(self, new_kernel_part, new_rootfs_part, old_kernel_part=None,
-            old_rootfs_part=None, bsdiff_in_place=True, bspatch_path=None,
-            puffpatch_path=None, truncate_to_expected_size=True):
+  def Apply(self, new_parts, old_parts=None, bsdiff_in_place=True,
+            bspatch_path=None, puffpatch_path=None,
+            truncate_to_expected_size=True):
     """Applies the update payload.
 
     Args:
-      new_kernel_part: name of dest kernel partition file
-      new_rootfs_part: name of dest rootfs partition file
-      old_kernel_part: name of source kernel partition file (optional)
-      old_rootfs_part: name of source rootfs partition file (optional)
+      new_parts: map of partition name to dest partition file
+      old_parts: map of partition name to partition file (optional)
       bsdiff_in_place: whether to perform BSDIFF operations in-place (optional)
       bspatch_path: path to the bspatch binary (optional)
       puffpatch_path: path to the puffpatch binary (optional)
@@ -331,6 +327,4 @@ class Payload(object):
         self, bsdiff_in_place=bsdiff_in_place, bspatch_path=bspatch_path,
         puffpatch_path=puffpatch_path,
         truncate_to_expected_size=truncate_to_expected_size)
-    helper.Run(new_kernel_part, new_rootfs_part,
-               old_kernel_part=old_kernel_part,
-               old_rootfs_part=old_rootfs_part)
+    helper.Run(new_parts, old_parts=old_parts)
