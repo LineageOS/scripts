@@ -2,8 +2,8 @@
 
 set -e
 
-chromium_version="83.0.4103.96"
-chromium_code="4103096"
+chromium_version="84.0.4147.89"
+chromium_code="4147089"
 clean=0
 gsync=0
 supported_archs=(arm arm64 x86 x64)
@@ -129,6 +129,7 @@ args+=' is_component_build=false'
 args+=' symbol_level=0'
 args+=' enable_nacl=false'
 args+=' blink_symbol_level = 0'
+args+=' webview_devui_show_icon=false'
 args+=' android_default_version_name="'$chromium_version'"'
 
 # Setup environment
