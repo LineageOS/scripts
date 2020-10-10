@@ -45,7 +45,7 @@ fi
 
 TOP="${ANDROID_BUILD_TOP}"
 MERGEDREPOS="${TOP}/merged_repos.txt"
-MANIFEST="${TOP}/.repo/manifest.xml"
+MANIFEST="${TOP}/.repo/manifests/default.xml"
 BRANCH=$(grep "default revision" "${MANIFEST}" \
         | sed 's/^ *//g;s/<default revision=\"refs\/heads\///g;s/\"//g')
 STAGINGBRANCH="staging/${BRANCH}_${OPERATION}-${NEWTAG}"
