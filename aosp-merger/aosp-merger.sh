@@ -46,8 +46,7 @@ fi
 TOP="${ANDROID_BUILD_TOP}"
 MERGEDREPOS="${TOP}/merged_repos.txt"
 MANIFEST="${TOP}/.repo/manifests/default.xml"
-BRANCH=$(grep "default revision" "${MANIFEST}" \
-        | sed 's/^ *//g;s/<default revision=\"refs\/heads\///g;s/\"//g')
+BRANCH=$(git -C ${TOP}/.repo/manifests.git config --get branch.default.merge | sed 's#refs/heads/##g')
 STAGINGBRANCH="staging/${BRANCH}_${OPERATION}-${NEWTAG}"
 
 # Build list of LineageOS forked repos
