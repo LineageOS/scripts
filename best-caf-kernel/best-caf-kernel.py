@@ -56,7 +56,7 @@ def worker_init(q):
 
 
 def background(q, e, s):
-    best = 9999999999999
+    best = None
     tag = ""
     while True:
         try:
@@ -67,7 +67,7 @@ def background(q, e, s):
         else:
             if not s:
                 print("{} has {} lines changed".format(tn, tc))
-            if best > tc:
+            if best > tc or best is None:
                 best = tc
                 tag = tn
                 if not s:
