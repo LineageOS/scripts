@@ -2,8 +2,8 @@
 
 set -e
 
-chromium_version="86.0.4240.198"
-chromium_code="4240198"
+chromium_version="87.0.4280.86"
+chromium_code="4280086"
 clean=0
 gsync=0
 supported_archs=(arm arm64 x86 x64)
@@ -104,11 +104,11 @@ cd src
 
 # Replace webview icon
 mkdir -p android_webview/nonembedded/java/res_icon/drawable-xxxhdpi
-cp chrome/android/java/res_chromium/mipmap-mdpi/app_icon.png android_webview/nonembedded/java/res_icon/drawable-mdpi/icon_webview.png
-cp chrome/android/java/res_chromium/mipmap-hdpi/app_icon.png android_webview/nonembedded/java/res_icon/drawable-hdpi/icon_webview.png
-cp chrome/android/java/res_chromium/mipmap-xhdpi/app_icon.png android_webview/nonembedded/java/res_icon/drawable-xhdpi/icon_webview.png
-cp chrome/android/java/res_chromium/mipmap-xxhdpi/app_icon.png android_webview/nonembedded/java/res_icon/drawable-xxhdpi/icon_webview.png
-cp chrome/android/java/res_chromium/mipmap-xxxhdpi/app_icon.png android_webview/nonembedded/java/res_icon/drawable-xxxhdpi/icon_webview.png
+cp chrome/android/java/res_chromium_base/mipmap-mdpi/app_icon.png android_webview/nonembedded/java/res_icon/drawable-mdpi/icon_webview.png
+cp chrome/android/java/res_chromium_base/mipmap-hdpi/app_icon.png android_webview/nonembedded/java/res_icon/drawable-hdpi/icon_webview.png
+cp chrome/android/java/res_chromium_base/mipmap-xhdpi/app_icon.png android_webview/nonembedded/java/res_icon/drawable-xhdpi/icon_webview.png
+cp chrome/android/java/res_chromium_base/mipmap-xxhdpi/app_icon.png android_webview/nonembedded/java/res_icon/drawable-xxhdpi/icon_webview.png
+cp chrome/android/java/res_chromium_base/mipmap-xxxhdpi/app_icon.png android_webview/nonembedded/java/res_icon/drawable-xxxhdpi/icon_webview.png
 
 # Apply our patches
 if [ $gsync -eq 1 ]; then
@@ -123,7 +123,7 @@ args+=' is_chrome_branded=false'
 args+=' use_official_google_api_keys=false'
 args+=' ffmpeg_branding="Chrome"'
 args+=' proprietary_codecs=true'
-args+=' enable_resource_whitelist_generation=false'
+args+=' enable_resource_allowlist_generation=false'
 args+=' enable_remoting=true'
 args+=' is_component_build=false'
 args+=' symbol_level=0'
