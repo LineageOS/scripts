@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "363b047c_97139f9f",
+        "filename": "best-caf-kernel/best-caf-kernel.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2020-11-19T12:35:53Z",
+      "side": 1,
+      "message": "Missed this?",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 64
+      },
+      "revId": "edee9cb1b63288f09de5829ef5783f93aefcfdc9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
