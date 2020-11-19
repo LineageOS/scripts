@@ -3,7 +3,6 @@
 from __future__ import print_function
 
 import sys
-import time
 from multiprocessing import Event, Pool, Process, Queue
 from subprocess import PIPE, Popen
 
