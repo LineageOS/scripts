@@ -19,10 +19,10 @@ def run_subprocess(cmd):
     exit_code = sp.returncode
     if exit_code != 0:
         print("There was an error running the subprocess.\n"
-              "cmd: %s\n"
-              "exit code: %d\n"
-              "stdout: %s\n"
-              "stderr: %s" % (cmd, exit_code, comm[0], comm[1]))
+              "cmd: {}\n"
+              "exit code: {}\n"
+              "stdout: {}\n"
+              "stderr: {}".format(cmd, exit_code, comm[0], comm[1]))
     return comm
 
 
@@ -66,15 +66,15 @@ def background(q, e, s):
                 break
         else:
             if not s:
-                print("%s has %d lines changed" % (tn, tc))
+                print("{} has {} lines changed".format(tn, tc))
             if best > tc:
                 best = tc
                 tag = tn
                 if not s:
-                    print("%s is the new best match with %d lines changed" % (tn, tc))
+                    print("{} is the new best match with {} lines changed".format(tn, tc))
     print("Best match")
-    print("TAG: %s" % tag)
-    print("Lines changed: %d" % best)
+    print("TAG: {}".format(tag))
+    print("Lines changed: {}".format(best))
 
 
 def main():
@@ -93,7 +93,7 @@ def main():
         print("No tags to check. bailing.")
         sys.exit(1)
     if not args.silent:
-        print("number of tags to check: %d" % len(tags))
+        print("number of tags to check: {}".format(len(tags)))
 
     queue = Queue()
     event = Event()
