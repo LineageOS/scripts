@@ -62,8 +62,8 @@ while getopts ":a:chr:s" opt; do
         c) clean=1 ;;
         h) usage ;;
         r) version=(${OPTARG//:/ })
-           chromium_version=$version[1]
-           chromium_code=$version[2]
+           chromium_version=${version[0]}
+           chromium_code=${version[1]}
            ;;
         s) gsync=1 ;;
         :)
