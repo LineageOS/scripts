@@ -51,9 +51,9 @@ build() {
 while getopts ":a:chr:s" opt; do
     case $opt in
         a) for arch in ${supported_archs[@]}; do
-               [ "$OPTARG" '==' "$arch" ] && build_arch="$OPTARG" || ((arch_try++))
+               [ "$OPTARG" '==' "$arch" ] && build_arch="$OPTARG"
            done
-           if [ $arch_try -eq ${#supported_archs[@]} ]; then
+           if [ -z "$build_arch" ]; then
                echo "Unsupported ARCH: $OPTARG"
                echo "Supported ARCHs: ${supported_archs[@]}"
                exit 1
