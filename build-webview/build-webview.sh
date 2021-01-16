@@ -6,7 +6,7 @@ chromium_version="87.0.4280.101"
 chromium_code="4280101"
 clean=0
 gsync=0
-supported_archs=(arm arm64 x86 x64)
+supported_archs=(arm arm64 x86 x64 mipsel)
 
 usage() {
     echo "Usage:"
@@ -37,6 +37,8 @@ build() {
         code+=10
     elif [ $1 '==' "x64" ]; then
         code+=60
+    elif [ $1 '==' "mipsel" ]; then
+        code+=20
     fi
     build_args+=' android_default_version_code="'$code'"'
 
