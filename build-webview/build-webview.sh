@@ -132,6 +132,12 @@ args+=' blink_symbol_level = 0'
 args+=' webview_devui_show_icon=false'
 args+=' android_default_version_name="'$chromium_version'"'
 
+if [ -n "$USE_CCACHE" -a "$USE_CCACHE" -eq 1 ]; then
+    export CCACHE_CPP2=yes
+    export CCACHE_SLOPPINESS=time_macros
+    args+=' cc_wrapper="ccache"'
+fi
+
 # Setup environment
 [ $clean -eq 1 ] && rm -rf out
 . build/android/envsetup.sh
