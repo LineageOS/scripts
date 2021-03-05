@@ -50,6 +50,16 @@ def main():
     apns_folder = args.apns
     vendor_folder = args.vendor
 
+    # Anything where the value is a package name
+    unwanted_configs = ["carrier_app_wake_signal_config",
+                        "carrier_settings_activity_component_name_string",
+                        "carrier_setup_app_string",
+                        "config_ims_package_override_string",
+                        "enable_apps_string_array",
+                        "gps.nfw_proxy_apps",
+                        "smart_forwarding_config_component_name_string",
+                        "wfc_emergency_address_carrier_app_string"]
+
     carrier_id_list = CarrierIdList()
     carrier_attribute_map = {}
     with open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'carrier_list.pb'), 'rb') as pb:
@@ -215,6 +225,8 @@ def main():
                         getattr(entry.carrierId, field),
                     )
             for config in setting.configs.config:
+                if config.key in unwanted_configs:
+                    continue
                 value_type = config.WhichOneof('value')
                 if value_type == 'textValue':
                     carrier_config_subelement = ET.SubElement(
