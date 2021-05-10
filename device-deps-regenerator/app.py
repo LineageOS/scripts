@@ -20,7 +20,7 @@ print(g.rate_limiting_resettime)
 org = g.get_organization('LineageOS')
 
 # supported branches, newest to oldest
-CUR_BRANCHES = ['lineage-18.1', 'lineage-17.1', 'lineage-16.0']
+CUR_BRANCHES = ['lineage-18.1', 'lineage-17.1']
 
 def get_cm_dependencies(repo):
     branch = None
