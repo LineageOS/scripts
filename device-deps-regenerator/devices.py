@@ -34,3 +34,4 @@ with open('device_deps.json', 'w') as f:
     out = {'devices': devices, 'suffixes': suffixes}
     out = devices
     json.dump(out, f, indent=4, sort_keys=True)
+    f.write('\n')
