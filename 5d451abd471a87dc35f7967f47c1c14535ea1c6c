@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4488bc16_c43db2ba",
+        "filename": "best-caf-kernel/best-caf-kernel.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2021-06-05T21:02:00Z",
+      "side": 1,
+      "message": "if not comm[0]:",
+      "parentUuid": "",
+      "revId": "5d451abd471a87dc35f7967f47c1c14535ea1c6c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
