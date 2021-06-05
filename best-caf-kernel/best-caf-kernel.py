@@ -30,8 +30,10 @@ def run_subprocess(cmd):
 def get_tags(tag_name):
     cmd = "git tag -l %s" % tag_name
     comm = run_subprocess(cmd)
-    return comm[0].strip("\n").split("\n")
+    if not comm[0].strip("\n").split("\n"):
+        return comm[0].strip("\n").split("\n")
 
+    return 0
 
 def get_total_changes(tag_name):
     cmd = "git diff %s --shortstat" % tag_name
