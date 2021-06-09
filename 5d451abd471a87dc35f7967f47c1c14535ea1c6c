@@ -17,6 +17,24 @@
       "revId": "5d451abd471a87dc35f7967f47c1c14535ea1c6c",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70425b6f_2c28c83f",
+        "filename": "best-caf-kernel/best-caf-kernel.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 21651
+      },
+      "writtenOn": "2021-06-09T19:48:08Z",
+      "side": 1,
+      "message": "This doesn\u0027t work. Perhaps those are bytes instead of a string.",
+      "parentUuid": "4488bc16_c43db2ba",
+      "revId": "5d451abd471a87dc35f7967f47c1c14535ea1c6c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
     }
   ]
 }
