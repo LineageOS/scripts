@@ -1,0 +1,5 @@
+service vendor.power-default /vendor/bin/hw/vendor.lineage.power-service
+    class hal
+    user nobody
+    group nobody
+    shutdown critical

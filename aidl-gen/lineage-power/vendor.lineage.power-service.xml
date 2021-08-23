@@ -1,0 +1,6 @@
+<manifest version="1.0" type="device">
+    <hal format="aidl">
+        <name>vendor.lineage.power</name>
+        <fqname>IPower/default</fqname>
+    </hal>
+</manifest>
