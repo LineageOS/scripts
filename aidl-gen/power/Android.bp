@@ -1,0 +1,21 @@
+//
+// Copyright (C) 2021 The LineageOS Project
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+
+cc_binary {
+    name: "android.hardware.power-service",
+    relative_install_path: "hw",
+    init_rc: ["android.hardware.power-service.rc"],
+    vintf_fragments: ["android.hardware.power-service.xml"],
+    srcs: [
+        "Power.cpp",
+        "service.cpp",
+    ],
+    shared_libs: [
+        "libbinder_ndk",
+        "android.hardware.power-ndk_platform",
+    ],
+    vendor: true,
+}
