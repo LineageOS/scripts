@@ -1,0 +1,22 @@
+//
+// Copyright (C) 2021 The LineageOS Project
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+
+cc_binary {
+    name: "vendor.lineage.power-service",
+    relative_install_path: "hw",
+    init_rc: ["vendor.lineage.power-service.rc"],
+    vintf_fragments: ["vendor.lineage.power-service.xml"],
+    srcs: [
+        "Power.cpp",
+        "service.cpp",
+    ],
+    shared_libs: [
+        "libbase",
+        "libbinder_ndk",
+        "vendor.lineage.power-ndk_platform",
+    ],
+    vendor: true,
+}
