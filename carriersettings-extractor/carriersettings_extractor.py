@@ -50,15 +50,21 @@ def main():
     apns_folder = args.apns
     vendor_folder = args.vendor
 
-    # Anything where the value is a package name
-    unwanted_configs = ["carrier_app_wake_signal_config",
+    unwanted_configs = [
+                        # Anything where the value is a package name
+                        "carrier_app_wake_signal_config",
                         "carrier_settings_activity_component_name_string",
                         "carrier_setup_app_string",
                         "config_ims_package_override_string",
                         "enable_apps_string_array",
                         "gps.nfw_proxy_apps",
                         "smart_forwarding_config_component_name_string",
-                        "wfc_emergency_address_carrier_app_string"]
+                        "wfc_emergency_address_carrier_app_string",
+                        # Always allow editing APNs
+                        "apn_expand_bool",
+                        "allow_adding_apns_bool",
+                        "read_only_apn_types_string_array",
+                        "read_only_apn_fields_string_array"]
 
     carrier_id_list = CarrierIdList()
     carrier_attribute_map = {}
