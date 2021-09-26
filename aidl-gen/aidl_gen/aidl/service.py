@@ -194,7 +194,7 @@ class AIDLService:
     def _format_methods_definitions(self):
         result = []
         for method in self.interface.methods:
-            args_formatted = ", ".join([f"{arg.arg_type} /*{arg.name}*/" for arg in method.args])
+            args_formatted = ", ".join([arg.format() for arg in method.args])
             result.append(f"ndk::ScopedAStatus {self.class_name}::{method.name}({args_formatted}) {{\n"
                           f"    return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);\n"
                           f"}}")
@@ -204,7 +204,7 @@ class AIDLService:
     def _format_methods_declarations(self):
         result = []
         for method in self.interface.methods:
-            args_formatted = ", ".join([f"{arg.arg_type} {arg.name}" for arg in method.args])
+            args_formatted = ", ".join([arg.format() for arg in method.args])
             result.append(f"    ndk::ScopedAStatus {method.name}({args_formatted}) override;")
 
         return "\n".join(result)

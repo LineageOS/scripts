@@ -47,7 +47,7 @@ class AIDLMethodArgument:
                 self.arg_type = f"const {self.arg_type}&"
 
         if self.aidl_return:
-            self.arg_type += "*"
+            self.arg_type += " *"
 
     def get_type(self):
         if self.arg_type.endswith("[]"):
@@ -62,6 +62,9 @@ class AIDLMethodArgument:
         return (self.arg_type.endswith("[]")
                 or self.arg_type.startswith("List<")
                 or self.arg_type.startswith("std::vector<"))
+
+    def format(self):
+        return f"{self.arg_type}{'' if self.aidl_return else ' '}/*{self.name}*/"
 
 class AIDLMethod:
     def __init__(self, method_str: str, imports: dict):
