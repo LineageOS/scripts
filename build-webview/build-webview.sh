@@ -128,7 +128,7 @@ args+=' enable_remoting=true'
 args+=' is_component_build=false'
 args+=' symbol_level=0'
 args+=' enable_nacl=false'
-args+=' blink_symbol_level = 0'
+args+=' blink_symbol_level=0'
 args+=' webview_devui_show_icon=false'
 args+=' android_default_version_name="'$chromium_version'"'
 
