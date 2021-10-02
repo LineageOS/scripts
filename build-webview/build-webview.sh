@@ -130,6 +130,9 @@ args+=' symbol_level=0'
 args+=' enable_nacl=false'
 args+=' blink_symbol_level=0'
 args+=' webview_devui_show_icon=false'
+args+=' dfmify_dev_ui=false'
+args+=' disable_autofill_assistant_dfm=true'
+args+=' disable_tab_ui_dfm=true'
 args+=' android_default_version_name="'$chromium_version'"'
 
 # Setup environment
