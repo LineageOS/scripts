@@ -133,6 +133,7 @@ args+=' webview_devui_show_icon=false'
 args+=' dfmify_dev_ui=false'
 args+=' disable_autofill_assistant_dfm=true'
 args+=' disable_tab_ui_dfm=true'
+args+=' enable_gvr_services=false'
 args+=' android_default_version_name="'$chromium_version'"'
 
 # Setup environment
