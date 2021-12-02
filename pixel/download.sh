@@ -67,7 +67,10 @@ help_message() {
 
 main() {
   download_factory_image
-  download_ota_zip
+  # Not all devices need OTA, most are supported in image_unpacker
+  if [[ -n ${needs_ota-} ]]; then
+    download_ota_zip
+  fi
 }
 
 ### RUN PROGRAM ###
