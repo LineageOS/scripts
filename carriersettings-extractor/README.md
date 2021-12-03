@@ -8,22 +8,12 @@ For a description of each APN and carrier setting, refer to the doc comments in 
 
 ## Dependencies
 
- * curl - required, for android-prepare-vendor
- * e2fsprogs (debugfs) - required, for android-prepare-vendor
- * git - required, for android-prepare-vendor
  * protobuf-compiler (protoc) - optional, see below
  * python3-protobuf - required
 
 ## Usage
 
-Download the [carrier ID database](https://source.android.com/devices/tech/config/carrierid) from AOSP.
-
-    ./download_carrier_list.sh
-
-Download a [Pixel factory image](https://developers.google.com/android/images) and extract the CarrierSettings protobuf files. This script will download android-prepare-vendor and copy the directory `CarrierSettings` containing the protobuf files.
-
-    DEVICE=crosshatch BUILD=QQ3A.200605.001 ./download_factory_img.sh
-
+Download a [Pixel factory image](https://developers.google.com/android/images) and extract the CarrierSettings protobuf files.
 Convert `CarrierSettings/*.pb` to `apns-full-conf.xml` and `vendor.xml`.
 
     ./carriersettings_extractor.py CarrierSettings
