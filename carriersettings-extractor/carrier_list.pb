@@ -1,0 +1,1 @@
+../../../packages/providers/TelephonyProvider/assets/latest_carrier_id/carrier_list.pb

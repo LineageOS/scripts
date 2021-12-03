@@ -10,7 +10,7 @@ from xml.sax.saxutils import escape, quoteattr
 
 from carriersettings_pb2 import CarrierList, CarrierSettings, \
     MultiCarrierSettings
-from vendor.carrierId_pb2 import CarrierList as CarrierIdList
+from carrierId_pb2 import CarrierList as CarrierIdList
 
 pb_path = sys.argv[1]
 

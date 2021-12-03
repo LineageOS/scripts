@@ -1,4 +1,4 @@
-TARGETS := carriersettings_pb2.py vendor/carrierId_pb2.py vendor/carrierId.proto
+TARGETS := carriersettings_pb2.py carrierId_pb2.py
 
 .PHONY: all clean
 all: $(TARGETS)
@@ -7,8 +7,3 @@ clean:
 
 %_pb2.py: %.proto
 	protoc --python_out=. $<
-
-vendor/carrierId.proto:
-	wget -qO- \
-	https://android.googlesource.com/platform/frameworks/opt/telephony/+/refs/heads/master/proto/src/carrierId.proto?format=TEXT | \
-	base64 --decode > $@
