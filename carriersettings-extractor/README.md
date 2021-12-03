@@ -16,7 +16,7 @@ For a description of each APN and carrier setting, refer to the doc comments in 
 Download a [Pixel factory image](https://developers.google.com/android/images) and extract the CarrierSettings protobuf files.
 Convert `CarrierSettings/*.pb` to `apns-full-conf.xml` and `vendor.xml`.
 
-    ./carriersettings_extractor.py CarrierSettings
+    ./carriersettings_extractor.py -i CarrierSettings -a apns-conf.xml -v vendor.xml
 
 ## Protobuf definitions
 
