@@ -70,12 +70,7 @@ echo "#### Verification complete - no uncommitted changes found ####"
 # Iterate over each forked project
 for PROJECTPATH in ${PROJECTPATHS}; do
     cd "${TOP}/${PROJECTPATH}"
-    git checkout ${STAGINGBRANCH}
-    git commit --amend
-    echo "#### Squashing ${PROJECTPATH} ####"
-    git checkout -b ${SQUASHBRANCH} ${STAGINGBRANCH}
-    git branch --set-upstream-to=m/${BRANCH}
-    git reset --soft HEAD~1
-    git add .
-    git commit -m "[SQUASH] Merge ${NEWTAG}" -m "$(git log ${STAGINGBRANCH} -1 --pretty=%s)" -m "$(git log ${STAGINGBRANCH} -1 --pretty=%b | grep Change-Id:)"
+    echo $PROJECTPATH
+    lineageremote
+    git push lineage HEAD:refs/for/"${BRANCH}"%topic="${NEWTAG}"
 done

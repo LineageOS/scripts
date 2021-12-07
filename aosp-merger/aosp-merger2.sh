@@ -44,18 +44,18 @@ fi
 . build/envsetup.sh
 
 TOP="${ANDROID_BUILD_TOP}"
-MERGEDREPOS="${TOP}/merged_repos.txt"
+MERGEDREPOS="${TOP}/merged_repos_aosp.txt"
 MANIFEST="${TOP}/.repo/manifests/default.xml"
 BRANCH=$(git -C ${TOP}/.repo/manifests.git config --get branch.default.merge | sed 's#refs/heads/##g')
-STAGINGBRANCH="staging/${BRANCH}_${OPERATION}-${NEWTAG}"
+STAGINGBRANCH="staging/aosp-${BRANCH}_${OPERATION}-${NEWTAG}"
 
-# Build list of LineageOS forked repos
-PROJECTPATHS=$(grep "name=\"LineageOS/" "${MANIFEST}" | grep -v DeskClock | grep -v "clone-depth=\"1" | sed -n 's/.*path="\([^"]\+\)".*/\1/p')
+# Build list of AOSP repos
+PROJECTPATHS=$(grep "remote=\"aosp" "${MANIFEST}" | grep -v "clone-depth=\"1" | sed -n 's/.*path="\([^"]\+\)".*/\1/p')
 
 echo "#### Old tag = ${OLDTAG} Branch = ${BRANCH} Staging branch = ${STAGINGBRANCH} ####"
 
 # Make sure manifest and forked repos are in a consistent state
-echo "#### Verifying there are no uncommitted changes on LineageOS forked AOSP projects ####"
+echo "#### Verifying there are no uncommitted changes on AOSP projects ####"
 for PROJECTPATH in ${PROJECTPATHS} .repo/manifests; do
     cd "${TOP}/${PROJECTPATH}"
     if [[ -n "$(git status --porcelain)" ]]; then
@@ -78,7 +78,6 @@ repo abandon "${STAGINGBRANCH}"
 for PROJECTPATH in ${PROJECTPATHS}; do
     cd "${TOP}/${PROJECTPATH}"
     repo start "${STAGINGBRANCH}" .
-    aospremote | grep -v "Remote 'aosp' created"
     git fetch -q --tags aosp "${NEWTAG}"
 
     PROJECTOPERATION="${OPERATION}"
@@ -92,11 +91,10 @@ for PROJECTPATH in ${PROJECTPATHS}; do
     #fi
 
     # Was there any change upstream? Skip if not.
-    if [[ -z "$(git diff ${OLDTAG} ${NEWTAG})" ]]; then
-        echo -e "nochange\t\t${PROJECTPATH}" | tee -a "${MERGEDREPOS}"
-        repo abandon "${STAGINGBRANCH}" .
-        continue
-    fi
+    #if [[ -z "$(git diff ${OLDTAG} ${NEWTAG})" ]]; then
+    #    echo -e "nochange\t\t${PROJECTPATH}" | tee -a "${MERGEDREPOS}"
+    #    continue
+    #fi
 
     # Determine whether OLDTAG is an ancestor of NEWTAG
     # ie is history consistent.
@@ -113,16 +111,19 @@ for PROJECTPATH in ${PROJECTPATHS}; do
         git merge --no-edit --log "${NEWTAG}"
     elif [[ "${PROJECTOPERATION}" == "rebase" ]]; then
         echo "#### Rebasing ${PROJECTPATH} onto ${NEWTAG} ####"
-        git rebase --onto "${NEWTAG}" "${OLDTAG}"
+        git rebase --no-edit --onto "${NEWTAG}" "${OLDTAG}"
+    fi
+
+    # Was there any change in new tag? Skip if not.
+    if [[ -z "$(git diff HEAD ${NEWTAG})" ]]; then
+        echo -e "nochange\t\t${PROJECTPATH}" | tee -a "${MERGEDREPOS}"
+        repo abandon "${STAGINGBRANCH}" .
+        continue
     fi
 
     CONFLICT=""
     if [[ -n "$(git status --porcelain)" ]]; then
         CONFLICT="conflict-"
-        #git reset --hard
-        #repo start "${STAGINGBRANCH}"-aosp .
-        #git reset --hard "${OLDTAG}"
-        #git merge --no-edit --log "${NEWTAG}"
     fi
     echo -e "${CONFLICT}${PROJECTOPERATION}\t\t${PROJECTPATH}" | tee -a "${MERGEDREPOS}"
 done
