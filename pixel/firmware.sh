@@ -50,11 +50,7 @@ readonly vendor_path="${top}/vendor/google/${device}"
 copy_factory_firmware() {
   cp "${factory_dir}"/bootloader-*.img "${vendor_path}/firmware/bootloader.img"
   cp "${factory_dir}"/radio-*.img "${vendor_path}/firmware/radio.img"
-  if [[ "${device}" != "oriole" || "${device}" != "raven" ]]; then
-    echo "TODO android-info.txt"
-  else
-    cp "${factory_dir}"/android-info.txt "${vendor_path}/android-info.txt"
-  fi
+  cp "${factory_dir}"/image/android-info.txt "${vendor_path}/android-info.txt"
 }
 
 # Unpack the seperate partitions needed for OTA
@@ -81,27 +77,32 @@ copy_ota_firmware() {
 }
 
 setup_makefiles() {
-  # I don't like this
-  sed -i /endif/d "${vendor_path}/Android.mk"
-
-  if [[ "${device}" != "oriole" || "${device}" != "raven" ]]; then
-    echo "TODO TARGET_BOARD_INFO_FILE"
-  else
-    echo >> ${vendor_path}/BoardConfigVendor.mk
-    echo "TARGET_BOARD_INFO_FILE := vendor/google/${device}/android-info.txt" >> ${vendor_path}/BoardConfigVendor.mk
+  local exists=$(grep firmware "${vendor_path}/BoardConfigVendor.mk")
+  if [[ -z "${exists}" ]]; then
+    echo >> "${vendor_path}/BoardConfigVendor.mk"
+    echo "# firmware">> "${vendor_path}/BoardConfigVendor.mk"
+    echo "TARGET_BOARD_INFO_FILE := vendor/google/${device}/android-info.txt" >> "${vendor_path}/BoardConfigVendor.mk"
+    echo >> "${vendor_path}/BoardConfigVendor.mk"
   fi
 
-  echo >> "${vendor_path}/Android.mk"
-  echo "\$(call add-radio-file,firmware/bootloader.img,version-bootloader)" >> "${vendor_path}/Android.mk"
-  echo "\$(call add-radio-file,firmware/radio.img,version-baseband)" >> "${vendor_path}/Android.mk"
+  local exists2=$(grep firmware "${vendor_path}/Android.mk")
+  if [[ -z "${exists2}" ]]; then
+    # I don't like this
+    sed -i /endif/d "${vendor_path}/Android.mk"
 
-  for fp in ${firmware_partitions[@]}; do
-    echo "\$(call add-radio-file,firmware/${fp}.img)" >> "${vendor_path}/Android.mk"
-  done
-  echo >> "${vendor_path}/Android.mk"
+    echo >> "${vendor_path}/Android.mk"
+    echo "# firmware" >> "${vendor_path}/Android.mk"
+    echo "\$(call add-radio-file,firmware/bootloader.img,version-bootloader)" >> "${vendor_path}/Android.mk"
+    echo "\$(call add-radio-file,firmware/radio.img,version-baseband)" >> "${vendor_path}/Android.mk"
 
-  # I still don't like this
-  echo endif >> "${vendor_path}/Android.mk"
+    for fp in ${firmware_partitions[@]}; do
+      echo "\$(call add-radio-file,firmware/${fp}.img)" >> "${vendor_path}/Android.mk"
+    done
+    echo >> "${vendor_path}/Android.mk"
+
+    # I still don't like this
+    echo endif >> "${vendor_path}/Android.mk"
+  fi
 }
 
 # error message
