@@ -48,8 +48,8 @@ readonly vendor_path="${top}/vendor/google/${device}"
 # Firmware included in our factory images,
 # typically bootloader and radio
 copy_factory_firmware() {
-  cp "${factory_dir}"/bootloader-*.img "${vendor_path}/firmware/bootloader.img"
-  cp "${factory_dir}"/radio-*.img "${vendor_path}/firmware/radio.img"
+  cp "${factory_dir}"/bootloader-*.img "${vendor_path}/firmware/"
+  cp "${factory_dir}"/radio-*.img "${vendor_path}/firmware/"
   cp "${factory_dir}"/image/android-info.txt "${vendor_path}/android-info.txt"
 }
 
@@ -90,10 +90,13 @@ setup_makefiles() {
     # I don't like this
     sed -i /endif/d "${vendor_path}/Android.mk"
 
+    local bootloader_version=$(cat "${vendor_path}/android-info.txt" | grep version-bootloader | cut -d = -f 2)
+    local radio_version=$(cat "${vendor_path}/android-info.txt" | grep version-baseband | cut -d = -f 2)
+
     echo >> "${vendor_path}/Android.mk"
     echo "# firmware" >> "${vendor_path}/Android.mk"
-    echo "\$(call add-radio-file,firmware/bootloader.img,version-bootloader)" >> "${vendor_path}/Android.mk"
-    echo "\$(call add-radio-file,firmware/radio.img,version-baseband)" >> "${vendor_path}/Android.mk"
+    echo "\$(call add-radio-file,firmware/bootloader-${device}-${bootloader_version,,}.img,version-bootloader)" >> "${vendor_path}/Android.mk"
+    echo "\$(call add-radio-file,firmware/radio-${device}-${radio_version,,}.img,version-baseband)" >> "${vendor_path}/Android.mk"
 
     for fp in ${firmware_partitions[@]}; do
       echo "\$(call add-radio-file,firmware/${fp}.img)" >> "${vendor_path}/Android.mk"
@@ -119,7 +122,9 @@ help_message() {
 }
 
 main() {
+  rm -rf "${ota_firmware_dir}"
   mkdir -p "${ota_firmware_dir}"
+  rm -rf "${vendor_path}/firmware"
   mkdir -p "${vendor_path}/firmware"
 
   copy_factory_firmware
