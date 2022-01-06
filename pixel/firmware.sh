@@ -80,8 +80,13 @@ setup_makefiles() {
   local exists=$(grep firmware "${vendor_path}/BoardConfigVendor.mk")
   if [[ -z "${exists}" ]]; then
     echo >> "${vendor_path}/BoardConfigVendor.mk"
-    echo "# firmware">> "${vendor_path}/BoardConfigVendor.mk"
+    echo "# firmware" >> "${vendor_path}/BoardConfigVendor.mk"
     echo "TARGET_BOARD_INFO_FILE := vendor/google/${device}/android-info.txt" >> "${vendor_path}/BoardConfigVendor.mk"
+    echo >> "${vendor_path}/BoardConfigVendor.mk"
+    echo "AB_OTA_PARTITIONS += \\" >> "${vendor_path}/BoardConfigVendor.mk"
+    for fp in ${firmware_partitions[@]}; do
+      echo "  ${fp} \\" >> "${vendor_path}/BoardConfigVendor.mk"
+    done
     echo >> "${vendor_path}/BoardConfigVendor.mk"
   fi
 
