@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "67c0fd27_d552ba85",
+        "filename": "aosp-merger/aosp-merger.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2022-01-09T22:14:52Z",
+      "side": 1,
+      "message": "I would move this part after the actual merge so we can check for empty merges and then remove the merge \u0026 abandon the staging branch",
+      "revId": "d19acd91031b29a20158102f3834c31ed70807aa",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "232ec25a_915b5ba2",
         "filename": "aosp-merger/aosp-merger.sh",
         "patchSetId": 1
@@ -69,6 +86,23 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d869ce2_251694dc",
+        "filename": "aosp-merger/aosp-merger2.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2022-01-09T22:14:52Z",
+      "side": 1,
+      "message": "I used this script to merge plain AOSP tags with different ancestor and compare the final result (eg. finding commits in qcom pixel tag that are not present in pixel 6 tag)",
+      "revId": "d19acd91031b29a20158102f3834c31ed70807aa",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "f0b72794_ded14ad7",
@@ -82,6 +116,40 @@
       "writtenOn": "2022-01-09T21:56:03Z",
       "side": 1,
       "message": "Oh man 😄",
+      "revId": "d19acd91031b29a20158102f3834c31ed70807aa",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fca37c3f_c705b64e",
+        "filename": "aosp-merger/squash.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2022-01-09T22:14:52Z",
+      "side": 1,
+      "message": "This just ensures we are in the correct branch",
+      "revId": "d19acd91031b29a20158102f3834c31ed70807aa",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36b82b08_81716d6b",
+        "filename": "aosp-merger/squash.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2022-01-09T22:14:52Z",
+      "side": 1,
+      "message": "This is a workaround for git merge not placing an empty line before Change-Id, it should be fixed in a different way and not here.",
       "revId": "d19acd91031b29a20158102f3834c31ed70807aa",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
