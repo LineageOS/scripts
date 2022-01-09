@@ -1,0 +1,14 @@
+#!/bin/sh
+
+case "$2,$3" in
+  merge,)
+    if grep -q "# It looks like you may be committing a merge." "$1"; then
+        sed -i -e '/# ------------------------ >8 ------------------------/,+3d' "$1"
+        /usr/bin/perl -i.bak -ne 's/^#// if /^# Conflicts/ .. /^#\R/; print' "$1"
+        sed -i '/ It looks like you may be committing a merge./i # ------------------------ >8 ------------------------' "$1"
+    fi
+    ;;
+
+  *)
+    ;;
+esac
