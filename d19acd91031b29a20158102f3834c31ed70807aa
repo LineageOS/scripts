@@ -139,6 +139,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7149a370_050dd16c",
+        "filename": "aosp-merger/squash.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2022-01-09T23:41:19Z",
+      "side": 1,
+      "message": "See below, and https://review.calyxos.org/c/CalyxOS/scripts/+/7880/3/aosp-merger/squash.sh (Repo abandon)",
+      "parentUuid": "fca37c3f_c705b64e",
+      "revId": "d19acd91031b29a20158102f3834c31ed70807aa",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "36b82b08_81716d6b",
         "filename": "aosp-merger/squash.sh",
         "patchSetId": 1
@@ -150,6 +168,23 @@
       "writtenOn": "2022-01-09T22:14:52Z",
       "side": 1,
       "message": "This is a workaround for git merge not placing an empty line before Change-Id, it should be fixed in a different way and not here.",
+      "revId": "d19acd91031b29a20158102f3834c31ed70807aa",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fd3cdba_25a0c1ba",
+        "filename": "aosp-merger/squash.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2022-01-09T23:41:19Z",
+      "side": 1,
+      "message": "This should ensure correct branch.",
       "revId": "d19acd91031b29a20158102f3834c31ed70807aa",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
