@@ -32,6 +32,8 @@ readonly vars_path="${script_path}/../vars"
 
 source "${vars_path}/common"
 
+readonly hook="${script_path}/prepare-commit-msg"
+
 TOP="${script_path}/../../.."
 BRANCH="${calyxos_branch}"
 STAGINGBRANCH="staging/${BRANCH}_${OPERATION}-${NEWTAG}"
@@ -39,6 +41,9 @@ STAGINGBRANCH="staging/${BRANCH}_${OPERATION}-${NEWTAG}"
 cd "${TOP}/${PROJECTPATH}"
 repo start "${STAGINGBRANCH}" .
 git fetch -q --tags aosp "${NEWTAG}"
+
+[[ ! -e .git/hooks/prepare-commit-msg ]] && cp "${hook}" .git/hooks/
+chmod +x .git/hooks/prepare-commit-msg
 
 PROJECTOPERATION="${OPERATION}"
 
@@ -67,7 +72,7 @@ fi
 
 if [[ "${PROJECTOPERATION}" == "merge" ]]; then
     echo "#### Merging ${NEWTAG} into ${PROJECTPATH} ####"
-    git merge --no-edit --log "${NEWTAG}"
+    git merge --no-commit --log "${NEWTAG}" && git commit --no-edit
 elif [[ "${PROJECTOPERATION}" == "rebase" ]]; then
     echo "#### Rebasing ${PROJECTPATH} onto ${NEWTAG} ####"
     git rebase --onto "${NEWTAG}" "${OLDTAG}"
