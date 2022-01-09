@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3233d6ed_665983c7",
+        "filename": "aosp-merger/aosp-merger.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2022-01-09T21:56:03Z",
+      "side": 1,
+      "message": "Move to snippets.",
+      "revId": "d19acd91031b29a20158102f3834c31ed70807aa",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "223e9ca9_fdbaeba7",
+        "filename": "aosp-merger/aosp-merger.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2022-01-09T21:56:03Z",
+      "side": 1,
+      "message": "ship it.",
+      "revId": "d19acd91031b29a20158102f3834c31ed70807aa",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "232ec25a_915b5ba2",
+        "filename": "aosp-merger/aosp-merger.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2022-01-09T21:56:03Z",
+      "side": 1,
+      "message": "good idea.",
+      "revId": "d19acd91031b29a20158102f3834c31ed70807aa",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ca49c60_a7aab4a0",
+        "filename": "aosp-merger/aosp-merger.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2022-01-09T21:56:03Z",
+      "side": 1,
+      "message": "Yeah let\u0027s get rid of this. No point of having both the option above to merge / rebase and then not respecting that.",
+      "revId": "d19acd91031b29a20158102f3834c31ed70807aa",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0b72794_ded14ad7",
+        "filename": "aosp-merger/squash.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2022-01-09T21:56:03Z",
+      "side": 1,
+      "message": "Oh man 😄",
+      "revId": "d19acd91031b29a20158102f3834c31ed70807aa",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
