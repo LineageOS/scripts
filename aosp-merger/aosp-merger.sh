@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-# SPDX-FileCopyrightText: 2017, 2020-2021 The LineageOS Project
-# SPDX-FileCopyrightText: 2021 The Calyx Institute
+# SPDX-FileCopyrightText: 2017, 2020-2022 The LineageOS Project
+# SPDX-FileCopyrightText: 2021-2022 The Calyx Institute
 #
 # SPDX-License-Identifier: Apache-2.0
 #
@@ -31,13 +31,19 @@ if [ ! -e "build/envsetup.sh" ]; then
     exit 1
 fi
 
+### CONSTANTS ###
+readonly script_path="$(cd "$(dirname "$0")";pwd -P)"
+readonly vars_path="${script_path}/../vars"
+
+source "${vars_path}/common"
+
 # Source build environment (needed for aospremote)
 . build/envsetup.sh
 
 TOP="${ANDROID_BUILD_TOP}"
 MERGEDREPOS="${TOP}/merged_repos.txt"
 MANIFEST="${TOP}/.repo/manifests/default.xml"
-BRANCH=$(git -C ${TOP}/.repo/manifests.git config --get branch.default.merge | sed 's#refs/heads/##g')
+BRANCH="${calyxos_branch}"
 STAGINGBRANCH="staging/${BRANCH}_${OPERATION}-${NEWTAG}"
 
 # Build list of LineageOS forked repos
@@ -49,6 +55,7 @@ echo "#### Old tag = ${OLDTAG} Branch = ${BRANCH} Staging branch = ${STAGINGBRAN
 echo "#### Verifying there are no uncommitted changes on LineageOS forked AOSP projects ####"
 for PROJECTPATH in ${PROJECTPATHS} .repo/manifests; do
     cd "${TOP}/${PROJECTPATH}"
+    aospremote | grep -v "Remote 'aosp' created"
     if [[ -n "$(git status --porcelain)" ]]; then
         echo "Path ${PROJECTPATH} has uncommitted changes. Please fix."
         exit 1
@@ -59,55 +66,10 @@ echo "#### Verification complete - no uncommitted changes found ####"
 # Remove any existing list of merged repos file
 rm -f "${MERGEDREPOS}"
 
-# Sync and detach from current branches
-repo sync -d
-
 # Ditch any existing staging branches (across all projects)
 repo abandon "${STAGINGBRANCH}"
 
 # Iterate over each forked project
 for PROJECTPATH in ${PROJECTPATHS}; do
-    cd "${TOP}/${PROJECTPATH}"
-    repo start "${STAGINGBRANCH}" .
-    aospremote | grep -v "Remote 'aosp' created"
-    git fetch -q --tags aosp "${NEWTAG}"
-
-    PROJECTOPERATION="${OPERATION}"
-
-    # Check if we've actually changed anything before attempting to merge
-    # If we haven't, just "git reset --hard" to the tag
-    if [[ -z "$(git diff HEAD ${OLDTAG})" ]]; then
-        git reset --hard "${NEWTAG}"
-        echo -e "reset\t\t${PROJECTPATH}" | tee -a "${MERGEDREPOS}"
-        continue
-    fi
-
-    # Was there any change upstream? Skip if not.
-    if [[ -z "$(git diff ${OLDTAG} ${NEWTAG})" ]]; then
-        echo -e "nochange\t\t${PROJECTPATH}" | tee -a "${MERGEDREPOS}"
-        continue
-    fi
-
-    # Determine whether OLDTAG is an ancestor of NEWTAG
-    # ie is history consistent.
-    git merge-base --is-ancestor "${OLDTAG}" "${NEWTAG}"
-    # If no, print a warning message.
-    if [[ "$?" -eq 1 ]]; then
-        echo -n "#### Warning: project ${PROJECTPATH} old tag ${OLDTAG} is not an ancestor "
-        echo    "of new tag ${NEWTAG} ####"
-    fi
-
-    if [[ "${PROJECTOPERATION}" == "merge" ]]; then
-        echo "#### Merging ${NEWTAG} into ${PROJECTPATH} ####"
-        git merge --no-edit --log "${NEWTAG}"
-    elif [[ "${PROJECTOPERATION}" == "rebase" ]]; then
-        echo "#### Rebasing ${PROJECTPATH} onto ${NEWTAG} ####"
-        git rebase --onto "${NEWTAG}" "${OLDTAG}"
-    fi
-
-    CONFLICT=""
-    if [[ -n "$(git status --porcelain)" ]]; then
-        CONFLICT="conflict-"
-    fi
-    echo -e "${CONFLICT}${PROJECTOPERATION}\t\t${PROJECTPATH}" | tee -a "${MERGEDREPOS}"
+    "${script_path}"/_merge_helper.sh "${PROJECTPATH}" "${@}" | tee -a "${MERGEDREPOS}"
 done
