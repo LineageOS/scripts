@@ -30,10 +30,16 @@ readonly vars_path="${script_path}/../vars"
 
 source "${vars_path}/common"
 
+TOP="${script_path}/../../.."
+
 ## HELP MESSAGE (USAGE INFO)
 # TODO
 
 ### FUNCTIONS ###
+
+merge_aosp() {
+  "${script_path}"/merge-aosp.sh merge "${aosp_tag}" "${prev_aosp_tag}"
+}
 
 merge_aosp_forks() {
   "${script_path}"/merge-aosp-forks.sh merge "${prev_aosp_tag}" "${aosp_tag}"
@@ -65,12 +71,30 @@ help_message() {
 }
 
 main() {
-  merge_aosp_forks
-  read -p "Waiting for conflict resolution before squashing. Press enter when done."
-  read -p "Once more, just to be safe"
-  squash_aosp_merge
-  upload_squash_to_review
-  echo "Don't forget to update the manifest!"
+  if [ "$#" -eq 0 ]; then
+    export MERGEDREPOS="${TOP}/merged_repos.txt"
+
+    merge_aosp_forks
+    read -p "Waiting for conflict resolution before squashing. Press enter when done."
+    read -p "Once more, just to be safe"
+    squash_aosp_merge
+    upload_squash_to_review
+    echo "Don't forget to update the manifest!"
+
+    unset MERGEDREPOS
+  elif [ "${1}" = "aosp" ]; then
+    export MERGEDREPOS="${TOP}/merged_repos_aosp.txt"
+
+    merge_aosp
+
+    unset MERGEDREPOS
+  elif [ "${1}" = "submit-platform" ]; then
+    export MERGEDREPOS="${TOP}/merged_repos.txt"
+
+    push_merge
+
+    unset MERGEDREPOS
+  fi
 }
 
 ### RUN PROGRAM ###
