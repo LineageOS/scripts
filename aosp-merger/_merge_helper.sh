@@ -48,7 +48,7 @@ PROJECTOPERATION="${OPERATION}"
 
 # Was there any change upstream? Skip if not.
 if [[ -z "$(git diff ${OLDTAG} ${NEWTAG})" ]]; then
-    echo -e "nochange\t\t${PROJECTPATH}"
+    echo -e "nochange\t\t${PROJECTPATH}" | tee -a "${MERGEDREPOS}"
     repo abandon "${STAGINGBRANCH}" .
     exit 0
 fi
@@ -69,7 +69,7 @@ if [[ "${PROJECTOPERATION}" == "merge" ]]; then
     # Check if we've actually changed anything after the merge
     # If we haven't, just abandon the branch
     if [[ -z "$(git diff HEAD HEAD~1)" ]]; then
-        echo -e "nochange\t\t${PROJECTPATH}"
+        echo -e "nochange\t\t${PROJECTPATH}" | tee -a "${MERGEDREPOS}"
         repo abandon "${STAGINGBRANCH}" .
         exit 0
     fi
@@ -82,4 +82,4 @@ CONFLICT=""
 if [[ -n "$(git status --porcelain)" ]]; then
     CONFLICT="conflict-"
 fi
-echo -e "${CONFLICT}${PROJECTOPERATION}\t\t${PROJECTPATH}"
+echo -e "${CONFLICT}${PROJECTOPERATION}\t\t${PROJECTPATH}" | tee -a "${MERGEDREPOS}"
