@@ -52,9 +52,6 @@ for PROJECTPATH in ${PROJECTPATHS} .repo/manifests; do
 done
 echo "#### Verification complete - no uncommitted changes found ####"
 
-# Remove any existing list of merged repos file
-rm -f "${MERGEDREPOS}"
-
 # Ditch any existing staging branches (across all projects)
 repo abandon "${STAGINGBRANCH}"
 
