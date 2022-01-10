@@ -77,6 +77,8 @@ help_message() {
 main() {
   if [ "$#" -eq 0 ]; then
     export MERGEDREPOS="${TOP}/merged_repos.txt"
+    # Remove any existing list of merged repos file
+    rm -f "${MERGEDREPOS}"
 
     merge_aosp_forks
     read -p "Waiting for conflict resolution before squashing. Press enter when done."
@@ -88,6 +90,8 @@ main() {
     unset MERGEDREPOS
   elif [ "${1}" = "aosp" ]; then
     export MERGEDREPOS="${TOP}/merged_repos_aosp.txt"
+    # Remove any existing list of merged repos file
+    rm -f "${MERGEDREPOS}"
 
     merge_aosp
 
