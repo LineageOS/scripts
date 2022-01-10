@@ -47,14 +47,6 @@ chmod +x .git/hooks/prepare-commit-msg
 
 PROJECTOPERATION="${OPERATION}"
 
-# Check if we've actually changed anything before attempting to merge
-# If we haven't, just "git reset --hard" to the tag
-if [[ -z "$(git diff HEAD ${OLDTAG})" ]]; then
-    git reset --hard "${NEWTAG}"
-    echo -e "reset\t\t${PROJECTPATH}"
-    continue
-fi
-
 # Was there any change upstream? Skip if not.
 if [[ -z "$(git diff ${OLDTAG} ${NEWTAG})" ]]; then
     echo -e "nochange\t\t${PROJECTPATH}"
