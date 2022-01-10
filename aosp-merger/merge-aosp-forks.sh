@@ -34,7 +34,6 @@ source "${vars_path}/common"
 TOP="${script_path}/../../.."
 MANIFEST="${TOP}/.repo/manifests/default.xml"
 BRANCH="${calyxos_branch}"
-export STAGINGBRANCH="staging/${BRANCH}_${OPERATION}-${NEWTAG}"
 
 # Source build environment (needed for aospremote)
 source "${TOP}/build/envsetup.sh"
