@@ -25,26 +25,20 @@ if [ "${OPERATION}" != "merge" -a "${OPERATION}" != "rebase" ]; then
     exit 1
 fi
 
-# Check to make sure this is being run from the top level repo dir
-if [ ! -e "build/envsetup.sh" ]; then
-    echo "Must be run from the top level repo dir"
-    exit 1
-fi
-
 ### CONSTANTS ###
 readonly script_path="$(cd "$(dirname "$0")";pwd -P)"
 readonly vars_path="${script_path}/../vars"
 
 source "${vars_path}/common"
 
-# Source build environment (needed for aospremote)
-. build/envsetup.sh
-
-TOP="${ANDROID_BUILD_TOP}"
+TOP="${script_path}/../../.."
 MERGEDREPOS="${TOP}/merged_repos.txt"
 MANIFEST="${TOP}/.repo/manifests/default.xml"
 BRANCH="${calyxos_branch}"
 export STAGINGBRANCH="staging/${BRANCH}_${OPERATION}-${NEWTAG}"
+
+# Source build environment (needed for aospremote)
+source "${TOP}/build/envsetup.sh"
 
 # Build list of LineageOS forked repos
 PROJECTPATHS=$(grep "name=\"LineageOS/" "${MANIFEST}" | sed -n 's/.*path="\([^"]\+\)".*/\1/p')
