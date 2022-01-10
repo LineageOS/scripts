@@ -43,6 +43,10 @@ squash_aosp_merge() {
   "${script_path}"/squash.sh merge "${prev_aosp_tag}" "${aosp_tag}"
 }
 
+upload_squash_to_review() {
+  "${script_path}"/upload-squash.sh merge "${prev_aosp_tag}" "${aosp_tag}"
+}
+
 # error message
 # ARG1: error message for STDERR
 # ARG2: error status
@@ -61,7 +65,7 @@ main() {
   read -p "Waiting for conflict resolution before squashing. Press enter when done."
   read -p "Once more, just to be safe"
   squash_aosp_merge
-  echo "TODO: Implement gerrit upload"
+  upload_squash_to_review
   echo "Don't forget to update the manifest!"
 }
 
