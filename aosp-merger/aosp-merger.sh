@@ -32,6 +32,10 @@ source "${vars_path}/common"
 
 TOP="${script_path}/../../.."
 
+# make sure we have consistent and readable commit messages
+export LC_MESSAGES=C
+export LC_TIME=C
+
 ## HELP MESSAGE (USAGE INFO)
 # TODO
 
