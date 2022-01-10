@@ -34,7 +34,6 @@ source "${vars_path}/common"
 
 TOP="${script_path}/../../.."
 MANIFEST="${TOP}/.repo/manifests/default.xml"
-export STAGINGBRANCH="staging/${OLDTAG}_${OPERATION}-${NEWTAG}"
 
 # Build list of AOSP repos
 PROJECTPATHS=$(grep -v "remote=\"gitlab" "${MANIFEST}" | grep -v "clone-depth=\"1" | sed -n 's/.*path="\([^"]\+\)".*/\1/p')
