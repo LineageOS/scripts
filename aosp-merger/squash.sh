@@ -52,13 +52,11 @@ for PROJECTPATH in ${PROJECTPATHS} .repo/manifests; do
 done
 echo "#### Verification complete - no uncommitted changes found ####"
 
-# Ditch any existing squash branches (across all projects)
-repo abandon "${SQUASHBRANCH}"
-
 # Iterate over each forked project
 for PROJECTPATH in ${PROJECTPATHS}; do
     cd "${TOP}/${PROJECTPATH}"
     echo "#### Squashing ${PROJECTPATH} ####"
+    repo abandon "${SQUASHBRANCH}" .
     git checkout -b "${SQUASHBRANCH}" "${STAGINGBRANCH}"
     git branch --set-upstream-to=m/"${BRANCH}"
     git reset --soft HEAD~1
