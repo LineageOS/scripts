@@ -47,6 +47,10 @@ upload_squash_to_review() {
   "${script_path}"/upload-squash.sh merge "${prev_aosp_tag}" "${aosp_tag}"
 }
 
+push_merge() {
+  "${script_path}"/push-merge.sh merge "${prev_aosp_tag}" "${aosp_tag}"
+}
+
 # error message
 # ARG1: error message for STDERR
 # ARG2: error status
