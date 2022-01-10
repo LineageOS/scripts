@@ -32,7 +32,6 @@ readonly vars_path="${script_path}/../vars"
 source "${vars_path}/common"
 
 TOP="${script_path}/../../.."
-MERGEDREPOS="${TOP}/merged_repos.txt"
 BRANCH="${calyxos_branch}"
 STAGINGBRANCH="staging/${BRANCH}_${OPERATION}-${NEWTAG}"
 
