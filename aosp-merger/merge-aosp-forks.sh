@@ -32,7 +32,6 @@ readonly vars_path="${script_path}/../vars"
 source "${vars_path}/common"
 
 TOP="${script_path}/../../.."
-MERGEDREPOS="${TOP}/merged_repos.txt"
 MANIFEST="${TOP}/.repo/manifests/default.xml"
 BRANCH="${calyxos_branch}"
 export STAGINGBRANCH="staging/${BRANCH}_${OPERATION}-${NEWTAG}"
@@ -65,7 +64,7 @@ repo abandon "${STAGINGBRANCH}"
 
 # Iterate over each forked project
 for PROJECTPATH in ${PROJECTPATHS}; do
-    "${script_path}"/_merge_helper.sh "${PROJECTPATH}" "${@}" | tee -a "${MERGEDREPOS}"
+    "${script_path}"/_merge_helper.sh "${PROJECTPATH}" "${@}"
 done
 
 unset STAGINGBRANCH
