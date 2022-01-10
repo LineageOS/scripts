@@ -58,6 +58,7 @@ fi
 # Was there any change upstream? Skip if not.
 if [[ -z "$(git diff ${OLDTAG} ${NEWTAG})" ]]; then
     echo -e "nochange\t\t${PROJECTPATH}"
+    repo abandon "${STAGINGBRANCH}" .
     exit 0
 fi
 
