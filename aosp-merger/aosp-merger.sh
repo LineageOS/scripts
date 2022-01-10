@@ -42,23 +42,25 @@ export LC_TIME=C
 ### FUNCTIONS ###
 
 merge_aosp() {
-  "${script_path}"/merge-aosp.sh merge "${aosp_tag}" "${prev_aosp_tag}"
+  export STAGINGBRANCH="staging/${common_aosp_tag}_merge-${prev_common_aosp_tag}"
+  "${script_path}"/merge-aosp.sh merge "${common_aosp_tag}" "${prev_common_aosp_tag}"
 }
 
 merge_aosp_forks() {
-  "${script_path}"/merge-aosp-forks.sh merge "${prev_aosp_tag}" "${aosp_tag}"
+  export STAGINGBRANCH="staging/${calyxos_branch}_merge-${common_aosp_tag}"
+  "${script_path}"/merge-aosp-forks.sh merge "${prev_common_aosp_tag}" "${common_aosp_tag}"
 }
 
 squash_aosp_merge() {
-  "${script_path}"/squash.sh merge "${prev_aosp_tag}" "${aosp_tag}"
+  "${script_path}"/squash.sh merge "${prev_common_aosp_tag}" "${common_aosp_tag}"
 }
 
-upload_squash_to_review() {
-  "${script_path}"/upload-squash.sh merge "${prev_aosp_tag}" "${aosp_tag}"
+upload_squash_aosp_to_review() {
+  "${script_path}"/upload-squash.sh merge "${prev_common_aosp_tag}" "${common_aosp_tag}"
 }
 
-push_merge() {
-  "${script_path}"/push-merge.sh merge "${prev_aosp_tag}" "${aosp_tag}"
+push_aosp_merge() {
+  "${script_path}"/push-merge.sh merge "${prev_common_aosp_tag}" "${common_aosp_tag}"
 }
 
 # error message
@@ -81,10 +83,12 @@ main() {
     rm -f "${MERGEDREPOS}"
 
     merge_aosp_forks
+    # Run this to print list of conflicting repos
+    cat "${MERGEDREPOS}" | grep -w conflict-merge || true
     read -p "Waiting for conflict resolution before squashing. Press enter when done."
     read -p "Once more, just to be safe"
     squash_aosp_merge
-    upload_squash_to_review
+    upload_squash_aosp_to_review
     echo "Don't forget to update the manifest!"
 
     unset MERGEDREPOS
@@ -99,7 +103,7 @@ main() {
   elif [ "${1}" = "submit-platform" ]; then
     export MERGEDREPOS="${TOP}/merged_repos.txt"
 
-    push_merge
+    push_aosp_merge
 
     unset MERGEDREPOS
   fi
