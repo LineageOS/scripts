@@ -56,5 +56,5 @@ for PROJECTPATH in ${PROJECTPATHS}; do
     cd "${TOP}/${PROJECTPATH}"
     echo "#### Pushing ${PROJECTPATH} squash to review ####"
     git checkout "${SQUASHBRANCH}"
-    repo upload -c -y -o topic="${NEWTAG}" .
+    repo upload -c -y -o topic="${topic}" .
 done
