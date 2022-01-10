@@ -1,0 +1,60 @@
+﻿/*
+ * Copyright (C) 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+syntax = "proto2";
+
+package com.google.carrier;
+
+// The carrier ID is matched against SIM data to determine carrier
+message CarrierId {
+  // Mobile Country Code (MCC) & Mobile Network Code (MNC)
+  optional string mcc_mnc = 1;
+
+  // Additional data to identify MVNO
+  oneof mvno_data {
+    // SPN (Service Provider Name)
+    string spn = 2;
+
+    // IMSI prefix pattern
+    string imsi = 3;
+
+    // Group identifier (level 1) prefix
+    string gid1 = 4;
+  }
+
+  reserved 5;
+}
+
+// Maps CarrierIds to an internal unique carrier name
+message CarrierMap {
+  // A unique canonical carrier name
+  // This name is the primary key to identify a carrier
+  // Typically a canonical_name looks like <carrier_name>_<iso_country_code>
+  optional string canonical_name = 1;
+
+  // A collection of network IDs owned by this carrier
+  repeated CarrierId carrier_id = 2;
+
+  reserved 3;
+}
+
+// Maps CarrierId to internal unique carrier name
+message CarrierList {
+  // A collection of carrier maps; one entry for one carrier
+  repeated CarrierMap entry = 1;
+
+  // The version number of this CarrierList file
+  optional int64 version = 2;
+}

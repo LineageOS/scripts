@@ -1,4 +1,4 @@
-TARGETS := carriersettings_pb2.py carrierId_pb2.py
+TARGETS := carrierId_pb2.py carrier_list_pb2.py  carrier_settings_pb2.py
 
 .PHONY: all clean
 all: $(TARGETS)

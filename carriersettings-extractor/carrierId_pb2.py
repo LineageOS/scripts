@@ -3,6 +3,7 @@
 # source: carrierId.proto
 """Generated protocol buffer code."""
 from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
@@ -13,204 +14,13 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor.FileDescriptor(
-  name='carrierId.proto',
-  package='carrierIdentification',
-  syntax='proto2',
-  serialized_options=b'\n\036com.android.internal.telephonyB\016CarrierIdProto',
-  create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0f\x63\x61rrierId.proto\x12\x15\x63\x61rrierIdentification\"T\n\x0b\x43\x61rrierList\x12\x34\n\ncarrier_id\x18\x01 \x03(\x0b\x32 .carrierIdentification.CarrierId\x12\x0f\n\x07version\x18\x02 \x01(\x05\"\x98\x01\n\tCarrierId\x12\x14\n\x0c\x63\x61nonical_id\x18\x01 \x01(\x05\x12\x14\n\x0c\x63\x61rrier_name\x18\x02 \x01(\t\x12\x42\n\x11\x63\x61rrier_attribute\x18\x03 \x03(\x0b\x32\'.carrierIdentification.CarrierAttribute\x12\x1b\n\x13parent_canonical_id\x18\x04 \x01(\x05\"\xc9\x01\n\x10\x43\x61rrierAttribute\x12\x14\n\x0cmccmnc_tuple\x18\x01 \x03(\t\x12\x1c\n\x14imsi_prefix_xpattern\x18\x02 \x03(\t\x12\x0b\n\x03spn\x18\x03 \x03(\t\x12\x0c\n\x04plmn\x18\x04 \x03(\t\x12\x0c\n\x04gid1\x18\x05 \x03(\t\x12\x0c\n\x04gid2\x18\x06 \x03(\t\x12\x15\n\rpreferred_apn\x18\x07 \x03(\t\x12\x14\n\x0ciccid_prefix\x18\x08 \x03(\t\x12\x1d\n\x15privilege_access_rule\x18\t \x03(\tB0\n\x1e\x63om.android.internal.telephonyB\x0e\x43\x61rrierIdProto'
-)
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0f\x63\x61rrierId.proto\x12\x15\x63\x61rrierIdentification\"T\n\x0b\x43\x61rrierList\x12\x34\n\ncarrier_id\x18\x01 \x03(\x0b\x32 .carrierIdentification.CarrierId\x12\x0f\n\x07version\x18\x02 \x01(\x05\"\x98\x01\n\tCarrierId\x12\x14\n\x0c\x63\x61nonical_id\x18\x01 \x01(\x05\x12\x14\n\x0c\x63\x61rrier_name\x18\x02 \x01(\t\x12\x42\n\x11\x63\x61rrier_attribute\x18\x03 \x03(\x0b\x32\'.carrierIdentification.CarrierAttribute\x12\x1b\n\x13parent_canonical_id\x18\x04 \x01(\x05\"\xc9\x01\n\x10\x43\x61rrierAttribute\x12\x14\n\x0cmccmnc_tuple\x18\x01 \x03(\t\x12\x1c\n\x14imsi_prefix_xpattern\x18\x02 \x03(\t\x12\x0b\n\x03spn\x18\x03 \x03(\t\x12\x0c\n\x04plmn\x18\x04 \x03(\t\x12\x0c\n\x04gid1\x18\x05 \x03(\t\x12\x0c\n\x04gid2\x18\x06 \x03(\t\x12\x15\n\rpreferred_apn\x18\x07 \x03(\t\x12\x14\n\x0ciccid_prefix\x18\x08 \x03(\t\x12\x1d\n\x15privilege_access_rule\x18\t \x03(\t')
 
 
 
-
-_CARRIERLIST = _descriptor.Descriptor(
-  name='CarrierList',
-  full_name='carrierIdentification.CarrierList',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='carrier_id', full_name='carrierIdentification.CarrierList.carrier_id', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='version', full_name='carrierIdentification.CarrierList.version', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=42,
-  serialized_end=126,
-)
-
-
-_CARRIERID = _descriptor.Descriptor(
-  name='CarrierId',
-  full_name='carrierIdentification.CarrierId',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='canonical_id', full_name='carrierIdentification.CarrierId.canonical_id', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='carrier_name', full_name='carrierIdentification.CarrierId.carrier_name', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='carrier_attribute', full_name='carrierIdentification.CarrierId.carrier_attribute', index=2,
-      number=3, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='parent_canonical_id', full_name='carrierIdentification.CarrierId.parent_canonical_id', index=3,
-      number=4, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=129,
-  serialized_end=281,
-)
-
-
-_CARRIERATTRIBUTE = _descriptor.Descriptor(
-  name='CarrierAttribute',
-  full_name='carrierIdentification.CarrierAttribute',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='mccmnc_tuple', full_name='carrierIdentification.CarrierAttribute.mccmnc_tuple', index=0,
-      number=1, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='imsi_prefix_xpattern', full_name='carrierIdentification.CarrierAttribute.imsi_prefix_xpattern', index=1,
-      number=2, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='spn', full_name='carrierIdentification.CarrierAttribute.spn', index=2,
-      number=3, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='plmn', full_name='carrierIdentification.CarrierAttribute.plmn', index=3,
-      number=4, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='gid1', full_name='carrierIdentification.CarrierAttribute.gid1', index=4,
-      number=5, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='gid2', full_name='carrierIdentification.CarrierAttribute.gid2', index=5,
-      number=6, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='preferred_apn', full_name='carrierIdentification.CarrierAttribute.preferred_apn', index=6,
-      number=7, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='iccid_prefix', full_name='carrierIdentification.CarrierAttribute.iccid_prefix', index=7,
-      number=8, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='privilege_access_rule', full_name='carrierIdentification.CarrierAttribute.privilege_access_rule', index=8,
-      number=9, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=284,
-  serialized_end=485,
-)
-
-_CARRIERLIST.fields_by_name['carrier_id'].message_type = _CARRIERID
-_CARRIERID.fields_by_name['carrier_attribute'].message_type = _CARRIERATTRIBUTE
-DESCRIPTOR.message_types_by_name['CarrierList'] = _CARRIERLIST
-DESCRIPTOR.message_types_by_name['CarrierId'] = _CARRIERID
-DESCRIPTOR.message_types_by_name['CarrierAttribute'] = _CARRIERATTRIBUTE
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
+_CARRIERLIST = DESCRIPTOR.message_types_by_name['CarrierList']
+_CARRIERID = DESCRIPTOR.message_types_by_name['CarrierId']
+_CARRIERATTRIBUTE = DESCRIPTOR.message_types_by_name['CarrierAttribute']
 CarrierList = _reflection.GeneratedProtocolMessageType('CarrierList', (_message.Message,), {
   'DESCRIPTOR' : _CARRIERLIST,
   '__module__' : 'carrierId_pb2'
@@ -232,6 +42,13 @@ CarrierAttribute = _reflection.GeneratedProtocolMessageType('CarrierAttribute', 
   })
 _sym_db.RegisterMessage(CarrierAttribute)
 
+if _descriptor._USE_C_DESCRIPTORS == False:
 
-DESCRIPTOR._options = None
+  DESCRIPTOR._options = None
+  _CARRIERLIST._serialized_start=42
+  _CARRIERLIST._serialized_end=126
+  _CARRIERID._serialized_start=129
+  _CARRIERID._serialized_end=281
+  _CARRIERATTRIBUTE._serialized_start=284
+  _CARRIERATTRIBUTE._serialized_end=485
 # @@protoc_insertion_point(module_scope)

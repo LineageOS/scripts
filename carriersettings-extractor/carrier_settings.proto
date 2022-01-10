@@ -1,0 +1,213 @@
+/*
+ * Copyright (C) 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+syntax = "proto2";
+
+package com.google.carrier;
+
+// Settings of one carrier, including apns and configs
+// This is the payload to be delivered from server
+message CarrierSettings {
+  // A unique canonical carrier name
+  optional string canonical_name = 1;
+
+  // Version number of current carrier’s settings
+  optional int64 version = 2;
+
+  // Carrier APNs
+  optional CarrierApns apns = 3;
+
+  // Carrier configs
+  optional CarrierConfig configs = 4;
+
+  reserved 5;
+
+  // Vendor carrier configs
+  optional VendorConfigs vendor_configs = 6;
+}
+
+// A collection of multiple carriers’ settings
+message MultiCarrierSettings {
+  // Version number
+  optional int64 version = 1;
+
+  // List of CarrierSettings
+  repeated CarrierSettings setting = 2;
+}
+
+// An access point name (aka. APN) entry
+message ApnItem {
+  // The name of APN, map to xml apn "carrier" attribute
+  // eg. Verizon Internet, may visible to user in Settings
+  optional string name = 1;
+  // The value of APN, eg. send to modem for data call. map to xml
+  // "apn" attribute, eg. vzwinternet
+  optional string value = 2;
+
+  // Next two fields type and bearer_bitmask affect how APN is selected by
+  // platform. eg. type means APN capability and bearer_bitmask specifies
+  // which RATs apply.
+  // Note mcc/mnc and mvno data doesn't belong to this proto because they
+  // define a carrier.
+  // APN types as defined in Android code PhoneConstants.java
+  enum ApnType {
+    ALL = 0;      // this APN can serve all kinds of data connections
+    DEFAULT = 1;  // internet data
+    MMS = 2;
+    SUPL = 3;
+    DUN = 4;
+    HIPRI = 5;
+    FOTA = 6;
+    IMS = 7;
+    CBS = 8;
+    IA = 9;  // Initial attach
+    EMERGENCY = 10;
+    XCAP = 11;
+    UT = 12;
+    RCS = 13;
+  }
+  repeated ApnType type = 3;
+
+  // Network types that this APN applies to, separated by "|". A network type
+  // is represented as an integer defined in TelephonyManager.NETWORK_TYPE_*.
+  // Default value "0" means all network types.
+  optional string bearer_bitmask = 4 [default = "0"];
+
+  // Below are all parameters for the APN
+  // APN server / auth parameters.
+  optional string server = 5;
+  optional string proxy = 6;
+  optional string port = 7;
+  optional string user = 8;
+  optional string password = 9;
+  optional int32 authtype = 10 [default = -1];
+
+  // MMS configuration.
+  optional string mmsc = 11;
+  optional string mmsc_proxy = 12;
+  optional string mmsc_proxy_port = 13;
+
+  // Protocols allowed to connect to the APN.
+  enum Protocol {
+    IP = 0;
+    IPV6 = 1;
+    IPV4V6 = 2;
+    PPP = 3;
+  }
+  optional Protocol protocol = 14 [default = IP];
+  optional Protocol roaming_protocol = 15 [default = IP];
+
+  // MTU for the connections.
+  optional int32 mtu = 16 [default = 0];
+  // An ID used to sync the APN in modem.
+  optional int32 profile_id = 17;
+  // Max connections.
+  optional int32 max_conns = 18 [default = 0];
+  // The wait time required between disconnecting and connecting, in seconds.
+  optional int32 wait_time = 19 [default = 0];
+  // The time to limit max connection, in seconds.
+  optional int32 max_conns_time = 20 [default = 0];
+  // VENDOR ADDED
+  optional bool carrier_enabled = 21;
+  // Whether to be persisted to modem.
+  optional bool modem_cognitive = 22 [default = false];
+  // Whether visible in APN settings.
+  optional bool user_visible = 23 [default = true];
+  // Whether editable in APN settings.
+  optional bool user_editable = 24 [default = true];
+
+  // If > 0: when an APN becomes a preferred APN on user/framework
+  // selection, other APNs with the same apn_set_id will also be preferred
+  // by framework when selecting APNs.
+  optional int32 apn_set_id = 25 [default = 0];
+
+  // The skip 464xlat flag. Flag works as follows.
+  // SKIP_464XLAT_DEFAULT: the APN will skip 464xlat only if the APN has type
+  //                       IMS and does not support INTERNET which has type
+  //                       DEFAULT or HIPRI.
+  // SKIP_464XLAT_DISABLE: the APN will NOT skip 464xlat
+  // SKIP_464XLAT_ENABLE: the APN will skip 464xlat
+  enum Xlat {
+    SKIP_464XLAT_DEFAULT = 0;
+    SKIP_464XLAT_DISABLE = 1;
+    SKIP_464XLAT_ENABLE = 2;
+  }
+  optional Xlat skip_464xlat = 26 [default = SKIP_464XLAT_DEFAULT];
+}
+
+// A collection of all APNs for a carrier
+message CarrierApns {
+  reserved 1;
+
+  // APNs belong to this carrier
+  repeated ApnItem apn = 2;
+}
+
+// An array of text
+message TextArray {
+  repeated string item = 1;
+}
+
+// An array of int
+message IntArray {
+  repeated int32 item = 1;
+}
+
+// Carrier configs
+message CarrierConfig {
+  reserved 1, 3;
+
+  // Key-Value pair as a config entry
+  message Config {
+    optional string key = 1;
+
+    oneof value {
+      string text_value = 2;
+      int32 int_value = 3;
+      int64 long_value = 4;
+      bool bool_value = 5;
+      TextArray text_array = 6;
+      IntArray int_array = 7;
+    }
+  }
+
+  // Key-value pairs, holding all config entries
+  repeated Config config = 2;
+}
+
+// The configs of one vendor client.
+message VendorConfigClient {
+  // Name of the client for which the configuration items need to
+  // be stored
+  required string name = 1;
+
+  // Binary blob containing the configuration. The format
+  // of the configuration depends on the specific client.
+  // For some clients, the proto representation of {@link VendorConfigData}
+  // defined in vendorconfigdata.proto is used.
+  optional bytes value = 2;
+
+  // Range of extensions. The extensions from 100 to 1000 are reserved for
+  // Google's internal usage.
+  extensions 100 to 5000;
+}
+
+// A collection of configs from vendor clients.
+message VendorConfigs {
+  reserved 1;
+
+  // Configuration
+  repeated VendorConfigClient client = 2;
+}
