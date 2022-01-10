@@ -66,6 +66,14 @@ fi
 if [[ "${PROJECTOPERATION}" == "merge" ]]; then
     echo "#### Merging ${NEWTAG} into ${PROJECTPATH} ####"
     git merge --no-commit --log "${NEWTAG}" && git commit --no-edit
+
+    # Check if we've actually changed anything after the merge
+    # If we haven't, just abandon the branch
+    if [[ -z "$(git diff HEAD HEAD~1)" ]]; then
+        echo -e "nochange\t\t${PROJECTPATH}"
+        repo abandon "${STAGINGBRANCH}" .
+        exit 0
+    fi
 elif [[ "${PROJECTOPERATION}" == "rebase" ]]; then
     echo "#### Rebasing ${PROJECTPATH} onto ${NEWTAG} ####"
     git rebase --onto "${NEWTAG}" "${OLDTAG}"
