@@ -28,5 +28,4 @@
 # TODO
 
 * Make it work for rebase (I'm sure it'll need fixups).
-* Abandon squashed gerrits and push each merge automatically.
-* DONE. Instead of merging the staging branch into your local branch (if you have one), create a new branch for the local+staging merge.
+* Instead of merging the staging branch into your local branch (if you have one), create a new branch for the local+staging merge.
