@@ -36,7 +36,6 @@ readonly hook="${script_path}/prepare-commit-msg"
 
 TOP="${script_path}/../../.."
 BRANCH="${calyxos_branch}"
-STAGINGBRANCH="staging/${BRANCH}_${OPERATION}-${NEWTAG}"
 
 cd "${TOP}/${PROJECTPATH}"
 repo start "${STAGINGBRANCH}" .
