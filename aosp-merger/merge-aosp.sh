@@ -26,19 +26,13 @@ if [ "${OPERATION}" != "merge" -a "${OPERATION}" != "rebase" ]; then
     exit 1
 fi
 
-# Check to make sure this is being run from the top level repo dir
-if [ ! -e "build/envsetup.sh" ]; then
-    echo "Must be run from the top level repo dir"
-    exit 1
-fi
-
 ### CONSTANTS ###
 readonly script_path="$(cd "$(dirname "$0")";pwd -P)"
 readonly vars_path="${script_path}/../vars"
 
 source "${vars_path}/common"
 
-TOP="${ANDROID_BUILD_TOP}"
+TOP="${script_path}/../../.."
 MERGEDREPOS="${TOP}/merged_repos_aosp.txt"
 MANIFEST="${TOP}/.repo/manifests/default.xml"
 export STAGINGBRANCH="staging/${OLDTAG}_${OPERATION}-${NEWTAG}"
