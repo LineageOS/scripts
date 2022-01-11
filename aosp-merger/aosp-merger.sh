@@ -30,6 +30,7 @@ readonly vars_path="${script_path}/../../../vendor/lineage/vars"
 
 source "${vars_path}/common"
 source "${vars_path}/pixels"
+source "${vars_path}/kernel_repos"
 
 TOP="${script_path}/../../.."
 
@@ -81,6 +82,25 @@ upload_squash_device_to_review() {
 
 push_device_merge() {
   "${script_path}"/push-merge.sh merge "${prev_aosp_tag}" "${aosp_tag}"
+}
+
+merge_pixel_kernel() {
+  export STAGINGBRANCH="staging/${lineageos_branch}_merge-${kernel_tag}"
+  for repo in ${device_kernel_repos}; do
+    "${script_path}"/_merge_helper.sh "${repo}" merge "${prev_kernel_tag}" "${kernel_tag}"
+  done
+}
+
+squash_pixel_kernel() {
+  "${script_path}"/squash.sh merge "${prev_kernel_tag}" "${kernel_tag}"
+}
+
+upload_squash_kernel_to_review() {
+  "${script_path}"/upload-squash.sh merge "${prev_kernel_tag}" "${kernel_tag}"
+}
+
+push_kernel_merge() {
+  "${script_path}"/push-merge.sh merge "${prev_kernel_tag}" "${kernel_tag}"
 }
 
 # error message
@@ -139,6 +159,30 @@ main() {
       unset MERGEDREPOS
       )
     done
+  elif [ "${1}" = "kernels" ]; then
+    for kernel in ${kernel_repos[@]}; do
+      (
+      source "${vars_path}/${kernel}"
+
+      readonly manifest="${TOP}"/.repo/manifests/snippets/${kernel}.xml
+      readonly device_kernel_repos=$(grep "name=\"LineageOS/" "${manifest}" \
+          | sed -n 's/.*path="\([^"]\+\)".*/\1/p')
+
+      export MERGEDREPOS="${TOP}/merged_repos_${kernel}.txt"
+      # Remove any existing list of merged repos file
+      rm -f "${MERGEDREPOS}"
+
+      merge_pixel_kernel
+      # Run this to print list of conflicting repos
+      cat "${MERGEDREPOS}" | grep -w conflict-merge || true
+      read -p "Waiting for conflict resolution before squashing. Press enter when done."
+      read -p "Once more, just to be safe"
+      squash_pixel_kernel
+      upload_squash_kernel_to_review
+
+      unset MERGEDREPOS
+      )
+    done
   elif [ "${1}" = "submit-platform" ]; then
     export MERGEDREPOS="${TOP}/merged_repos.txt"
 
@@ -152,6 +196,17 @@ main() {
       export MERGEDREPOS="${TOP}/merged_repos_${device}.txt"
 
       push_device_merge
+
+      unset MERGEDREPOS
+      )
+    done
+  elif [ "${1}" = "submit-kernels" ]; then
+    for kernel in ${kernel_repos[@]}; do
+      (
+      source "${vars_path}/${kernel}"
+      export MERGEDREPOS="${TOP}/merged_repos_${kernel}.txt"
+
+      push_kernel_merge
 
       unset MERGEDREPOS
       )
