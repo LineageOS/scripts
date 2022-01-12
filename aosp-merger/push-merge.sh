@@ -54,6 +54,7 @@ for PROJECTPATH in ${PROJECTPATHS} .repo/manifests; do
 done
 echo "#### Verification complete - no uncommitted changes found ####"
 
+echo "#### $(basename ${MERGEDREPOS}) ####"
 read -p "Pushing ${STAGINGBRANCH} to ${BRANCH}. Press enter to confirm."
 
 # Iterate over each forked project
