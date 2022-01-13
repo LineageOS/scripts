@@ -28,7 +28,7 @@ fi
 
 ### CONSTANTS ###
 readonly script_path="$(cd "$(dirname "$0")";pwd -P)"
-readonly vars_path="${script_path}/../vars"
+readonly vars_path="${script_path}/../../../vendor/lineage/vars"
 
 source "${vars_path}/common"
 
