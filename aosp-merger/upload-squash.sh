@@ -27,12 +27,12 @@ fi
 
 ### CONSTANTS ###
 readonly script_path="$(cd "$(dirname "$0")";pwd -P)"
-readonly vars_path="${script_path}/../vars"
+readonly vars_path="${script_path}/../../../vendor/lineage/vars"
 
 source "${vars_path}/common"
 
 TOP="${script_path}/../../.."
-BRANCH="${calyxos_branch}"
+BRANCH="${lineageos_branch}"
 SQUASHBRANCH="squash/${BRANCH}_${OPERATION}-${NEWTAG}"
 
 # List of merged repos
@@ -41,7 +41,7 @@ PROJECTPATHS=$(cat ${MERGEDREPOS} | grep -w merge | awk '{printf "%s\n", $2}')
 echo "#### Branch = ${BRANCH} Squash branch = ${SQUASHBRANCH} ####"
 
 # Make sure manifest and forked repos are in a consistent state
-echo "#### Verifying there are no uncommitted changes on CalyxOS forked AOSP projects ####"
+echo "#### Verifying there are no uncommitted changes on LineageOS forked AOSP projects ####"
 for PROJECTPATH in ${PROJECTPATHS} .repo/manifests; do
     cd "${TOP}/${PROJECTPATH}"
     if [[ -n "$(git status --porcelain)" ]]; then
