@@ -38,20 +38,12 @@ readonly factory_dir="${work_dir}/${device}/${build_id}/factory/${device}-${buil
 readonly ota_zip="${work_dir}/${device}/${build_id}/$(basename ${ota_url})"
 readonly ota_firmware_dir="${work_dir}/${device}/${build_id}/firmware"
 
-readonly vendor_path="${top}/vendor/google/${device}"
+readonly vendor_path="${top}/vendor/firmware/${device}"
 
 ## HELP MESSAGE (USAGE INFO)
 # TODO
 
 ### FUNCTIONS ###
-
-# Firmware included in our factory images,
-# typically bootloader and radio
-copy_factory_firmware() {
-  cp "${factory_dir}"/bootloader-*.img "${vendor_path}/firmware/"
-  cp "${factory_dir}"/radio-*.img "${vendor_path}/firmware/"
-  cp "${factory_dir}"/image/android-info.txt "${vendor_path}/android-info.txt"
-}
 
 # Unpack the seperate partitions needed for OTA
 # from the factory image's bootloader.img
@@ -72,45 +64,21 @@ extract_firmware() {
 # or directly from the OTA zip
 copy_ota_firmware() {
   for fp in ${firmware_partitions[@]}; do
-    cp "${ota_firmware_dir}/${fp}.img" "${vendor_path}/firmware/${fp}.img"
+    cp "${ota_firmware_dir}/${fp}.img" "${vendor_path}/radio/${fp}.img"
   done
 }
 
 setup_makefiles() {
-  local exists=$(grep firmware "${vendor_path}/BoardConfigVendor.mk")
-  if [[ -z "${exists}" ]]; then
-    echo >> "${vendor_path}/BoardConfigVendor.mk"
-    echo "# firmware" >> "${vendor_path}/BoardConfigVendor.mk"
-    echo "TARGET_BOARD_INFO_FILE := vendor/google/${device}/android-info.txt" >> "${vendor_path}/BoardConfigVendor.mk"
-    echo >> "${vendor_path}/BoardConfigVendor.mk"
-    echo "AB_OTA_PARTITIONS += \\" >> "${vendor_path}/BoardConfigVendor.mk"
-    for fp in ${firmware_partitions[@]}; do
-      echo "  ${fp} \\" >> "${vendor_path}/BoardConfigVendor.mk"
-    done
-    echo >> "${vendor_path}/BoardConfigVendor.mk"
-  fi
+  echo "AB_OTA_PARTITIONS += \\" > "${vendor_path}/config.mk"
+  for fp in ${firmware_partitions[@]}; do
+    echo "    ${fp} \\" >> "${vendor_path}/config.mk"
+  done
 
-  local exists2=$(grep firmware "${vendor_path}/Android.mk")
-  if [[ -z "${exists2}" ]]; then
-    # I don't like this
-    sed -i /endif/d "${vendor_path}/Android.mk"
-
-    local bootloader_version=$(cat "${vendor_path}/android-info.txt" | grep version-bootloader | cut -d = -f 2)
-    local radio_version=$(cat "${vendor_path}/android-info.txt" | grep version-baseband | cut -d = -f 2)
-
-    echo >> "${vendor_path}/Android.mk"
-    echo "# firmware" >> "${vendor_path}/Android.mk"
-    echo "\$(call add-radio-file,firmware/bootloader-${device}-${bootloader_version,,}.img,version-bootloader)" >> "${vendor_path}/Android.mk"
-    echo "\$(call add-radio-file,firmware/radio-${device}-${radio_version,,}.img,version-baseband)" >> "${vendor_path}/Android.mk"
-
-    for fp in ${firmware_partitions[@]}; do
-      echo "\$(call add-radio-file,firmware/${fp}.img)" >> "${vendor_path}/Android.mk"
-    done
-    echo >> "${vendor_path}/Android.mk"
-
-    # I still don't like this
-    echo endif >> "${vendor_path}/Android.mk"
-  fi
+  echo "ifeq (\$(TARGET_DEVICE),${device})" > "${vendor_path}/firmware.mk"
+  for fp in ${firmware_partitions[@]}; do
+    echo "\$(call add-radio-file,radio/${fp}.img)" >> "${vendor_path}/firmware.mk"
+  done
+  echo "endif" >> "${vendor_path}/firmware.mk"
 }
 
 # error message
@@ -129,10 +97,9 @@ help_message() {
 main() {
   rm -rf "${ota_firmware_dir}"
   mkdir -p "${ota_firmware_dir}"
-  rm -rf "${vendor_path}/firmware"
-  mkdir -p "${vendor_path}/firmware"
+  rm -rf "${vendor_path}/radio"
+  mkdir -p "${vendor_path}/radio"
 
-  copy_factory_firmware
   # Not all devices need OTA, most are supported in image_unpacker
   if [[ -n ${needs_ota-} ]]; then
     extract_firmware
