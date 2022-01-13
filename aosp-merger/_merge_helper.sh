@@ -39,7 +39,7 @@ BRANCH="${lineageos_branch}"
 
 cd "${TOP}/${PROJECTPATH}"
 repo start "${STAGINGBRANCH}" .
-git fetch -q --tags aosp "${NEWTAG}"
+git fetch -q --force --tags aosp "${NEWTAG}"
 
 [[ ! -e .git/hooks/prepare-commit-msg ]] && cp "${hook}" .git/hooks/
 chmod +x .git/hooks/prepare-commit-msg
