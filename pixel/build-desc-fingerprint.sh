@@ -22,8 +22,8 @@ trap 'error_m interrupted!' SIGINT
 
 ### CONSTANTS ###
 readonly script_path="$(cd "$(dirname "$0")";pwd -P)"
-readonly vars_path="${script_path}/../vars/"
-readonly top="${script_path}/../../../"
+readonly vars_path="${script_path}/../../../vendor/lineage/vars"
+readonly top="${script_path}/../../.."
 
 readonly tmp_dir="${TMPDIR:-/tmp}/pixel"
 
@@ -61,7 +61,7 @@ main() {
     (
       local dv="${vars_path}/${d}"
       source "${dv}"
-      local mk="$(ls ${top}/device/google/*/calyx_${d}.mk)"
+      local mk="$(ls ${top}/device/google/*/lineage_${d}.mk)"
       sed -i "s/${prev_build_id}/${build_id}/g" "${mk}"
       sed -i "s/${prev_build_number}/${build_number}/g" "${mk}"
     )
