@@ -68,7 +68,7 @@ if [[ "${PROJECTOPERATION}" == "merge" ]]; then
 
     # Check if we've actually changed anything after the merge
     # If we haven't, just abandon the branch
-    if [[ -z "$(git diff HEAD HEAD~1)" ]]; then
+    if [[ -z "$(git diff HEAD m/${lineageos_branch})" && -z "$(git status --porcelain)" ]]; then
         echo -e "nochange\t\t${PROJECTPATH}" | tee -a "${MERGEDREPOS}"
         repo abandon "${STAGINGBRANCH}" .
         exit 0
