@@ -31,7 +31,8 @@ def handle_image(html_id):
     flash_url = td[1].a['href']
     image_url = td[2].a['href']
     image_sha256 = td[3].contents[0]
-    print('new_flash_url="{0}"\nnew_image_url="{1}"\nnew_image_sha256="{2}"'.format(flash_url, image_url, image_sha256))
+    build_number = flash_url.split("/")[4].split("?")[0]
+    print('new_build_number="{0}"\nnew_flash_url="{1}"\nnew_image_url="{2}"\nnew_image_sha256="{3}"'.format(build_number, flash_url, image_url, image_sha256))
 
 def handle_ota(html_id):
     ota_html = urllib.request.urlopen(urllib.request.Request(OTA_URL, headers=COOKIE)).read()
