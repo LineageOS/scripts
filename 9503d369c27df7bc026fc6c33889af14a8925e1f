@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e30270d6_dec6270e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 25732
+      },
+      "writtenOn": "2022-02-10T22:33:20Z",
+      "side": 1,
+      "message": "Isn\u0027t LC_ALL\u003dC enough?",
+      "revId": "9503d369c27df7bc026fc6c33889af14a8925e1f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
