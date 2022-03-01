@@ -29,7 +29,7 @@ readonly extract_ota_py="${top}/tools/extract-utils/extract_ota.py"
 
 readonly work_dir="${WORK_DIR:-/tmp/pixel}"
 
-source "${vars_path}/devices"
+source "${vars_path}/pixels"
 
 readonly device="${1}"
 source "${vars_path}/${device}"
