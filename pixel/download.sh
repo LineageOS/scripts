@@ -26,7 +26,7 @@ readonly vars_path="${script_path}/../../../vendor/lineage/vars"
 
 readonly work_dir="${WORK_DIR:-/tmp/pixel}"
 
-source "${vars_path}/devices"
+source "${vars_path}/pixels"
 
 readonly device="${1}"
 source "${vars_path}/${device}"

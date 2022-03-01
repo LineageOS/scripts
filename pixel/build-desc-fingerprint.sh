@@ -27,7 +27,7 @@ readonly top="${script_path}/../../.."
 
 readonly tmp_dir="${TMPDIR:-/tmp}/pixel"
 
-source "${vars_path}/devices"
+source "${vars_path}/pixels"
 
 ## HELP MESSAGE (USAGE INFO)
 # TODO
