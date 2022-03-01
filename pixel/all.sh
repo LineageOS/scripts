@@ -26,7 +26,7 @@ readonly top="${script_path}/../../.."
 
 readonly work_dir="${WORK_DIR:-/tmp/pixel}"
 
-source "${vars_path}/devices"
+source "${vars_path}/pixels"
 
 ## HELP MESSAGE (USAGE INFO)
 # TODO
