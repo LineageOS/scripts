@@ -81,7 +81,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-b', '--build_id', help="Build ID", type=str, required=True)
     parser.add_argument('-d', '--device', help="Device codename", type=str, required=True)
-    parser.add_argument('-v', '--version', default="12.0", help='Android version', type=str)
+    parser.add_argument('-v', '--version', default="12.1", help='Android version', type=str)
     args = parser.parse_args()
     html_id = "{0}{1}".format(args.device, args.build_id.lower())
     handle_image(html_id)
