@@ -61,13 +61,21 @@ def get_aosp_tag_for_build_id(aosp_tags, wanted_build_id):
                 if found_build_id == wanted_build_id:
                     print('new_aosp_tag="{0}"'.format(aosp_tag))
                     return aosp_tag
+    print('new_aosp_tag="unknown"')
+    return 'unknown'
 
 def get_security_patch_for_aosp_tag(aosp_tag):
-    output = base64.decodebytes(urllib.request.urlopen(SECURITY_PATCH_URL.format(aosp_tag)).read()).decode()
+    try:
+        output = base64.decodebytes(urllib.request.urlopen(SECURITY_PATCH_URL.format(aosp_tag)).read()).decode()
+    except:
+        print('new_security_patch=unknown')
+        return
     for line in output.split('\n'):
         if SECURITY_PATCH_FILTER in line:
             security_patch = line.split(":=")[1].strip()
             print('new_security_patch="{0}"'.format(security_patch))
+            return
+    print('new_security_patch="unknown"')
 
 def main():
     parser = argparse.ArgumentParser()
