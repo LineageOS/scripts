@@ -25,6 +25,7 @@ readonly script_path="$(cd "$(dirname "$0")";pwd -P)"
 readonly vars_path="${script_path}/../../../vendor/lineage/vars"
 readonly top="${script_path}/../../.."
 
+readonly qc_image_unpacker="${top}/prebuilts/extract-tools/linux-x86/bin/qc_image_unpacker"
 readonly extract_ota_py="${top}/tools/extract-utils/extract_ota.py"
 
 readonly work_dir="${WORK_DIR:-/tmp/pixel}"
@@ -49,9 +50,9 @@ readonly vendor_path="${top}/vendor/firmware/${device}"
 # from the factory image's bootloader.img
 unpack_firmware() {
   # modem.img
-  qc_image_unpacker -i "${factory_dir}"/radio-*.img -o "${ota_firmware_dir}"
+  "${qc_image_unpacker}" -i "${factory_dir}"/radio-*.img -o "${ota_firmware_dir}"
   # All other ${firmware_partitions[@]}
-  qc_image_unpacker -i "${factory_dir}"/bootloader-*.img -o "${ota_firmware_dir}"
+  "${qc_image_unpacker}" -i "${factory_dir}"/bootloader-*.img -o "${ota_firmware_dir}"
 }
 
 extract_firmware() {
