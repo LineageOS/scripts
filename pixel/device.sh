@@ -42,6 +42,11 @@ device() {
   "${script_path}/extract-factory-image.sh" "${device}"
 
   pushd "${top}"
+  if [[ -f device/google/${device}/regen-vendor.sh ]]; then
+    device/google/${device}/regen-vendor.sh "${factory_dir}/image/vendor.img" device/google/${device}/proprietary-files-vendor.txt
+  else
+    device/google/*/${device}/regen-vendor.sh "${factory_dir}/image/vendor.img" device/google/*/${device}/proprietary-files-vendor.txt
+  fi
   device/google/${device}/extract-files.sh "${factory_dir}/image"
   popd
 
