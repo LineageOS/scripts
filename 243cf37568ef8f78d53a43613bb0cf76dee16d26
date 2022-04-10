@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d81b81e_3b1b1147",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2022-04-10T21:27:22Z",
+      "side": 1,
+      "message": "only current \"issue\" is it depends on being run from local path - I\u0027m fine with that tho, if someone else wants to work that out feel free.",
+      "revId": "243cf37568ef8f78d53a43613bb0cf76dee16d26",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
