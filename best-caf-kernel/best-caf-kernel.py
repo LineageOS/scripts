@@ -30,6 +30,9 @@ def run_subprocess(cmd):
 def get_tags(tag_name):
     cmd = "git tag -l %s" % tag_name
     comm = run_subprocess(cmd)
+    if not str(comm[0]):
+        return 0
+
     return comm[0].strip("\n").split("\n")
 
 
