@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21497270_e2b12388",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 11801
+      },
+      "writtenOn": "2022-04-14T15:09:33Z",
+      "side": 1,
+      "message": "Newline after this?",
+      "revId": "f02a3eae669f7fad69de29cdd01847ea68eff80b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5acece0a_00abfd67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 11801
+      },
+      "writtenOn": "2022-04-14T15:09:33Z",
+      "side": 1,
+      "message": "You could also put just the Change-ID as the reference, gerrit would link that automatically.",
+      "revId": "f02a3eae669f7fad69de29cdd01847ea68eff80b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
