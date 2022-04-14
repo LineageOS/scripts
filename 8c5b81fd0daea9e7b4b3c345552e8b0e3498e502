@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "46803e0a_e8e71c52",
         "filename": "best-caf-kernel/best-caf-kernel.py",
@@ -20,8 +21,31 @@
         "endChar": 46
       },
       "revId": "8c5b81fd0daea9e7b4b3c345552e8b0e3498e502",
-      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
-      "unresolved": true
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae2f968e_a904c45e",
+        "filename": "best-caf-kernel/best-caf-kernel.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 21651
+      },
+      "writtenOn": "2022-04-14T07:18:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "46803e0a_e8e71c52",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 46
+      },
+      "revId": "8c5b81fd0daea9e7b4b3c345552e8b0e3498e502",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
