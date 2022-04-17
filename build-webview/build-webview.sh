@@ -112,7 +112,7 @@ cp chrome/android/java/res_chromium_base/mipmap-xxxhdpi/app_icon.png android_web
 
 # Apply our patches
 if [ $gsync -eq 1 ]; then
-    git am ../android_external_chromium-webview/patches/*
+    git am ../android_external_chromium-webview/patches/*.patch
 fi
 
 # Build args
