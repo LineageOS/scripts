@@ -8,6 +8,10 @@ clean=0
 gsync=0
 supported_archs=(arm arm64 x86 x64)
 
+lineage_github=https://github.com/LineageOS
+lineage_gitlab=https://gitlab.com/LineageOS/android
+webview_proj_base=android_external_chromium-webview
+
 usage() {
     echo "Usage:"
     echo "  build_webview [ options ]"
@@ -23,6 +27,17 @@ usage() {
     echo "    build_webview -c -r $chromium_version:$chromium_code"
     echo
     exit 1
+}
+
+clone_proj() {
+    depth=""
+    if [ "$#" -eq 3 ]; then
+        depth="--depth $3"
+    fi
+
+    if [ ! -d "$2" ]; then
+        git clone $1 $2 $depth
+    fi
 }
 
 build() {
@@ -43,8 +58,21 @@ build() {
     gn gen "out/$1" --args="$build_args"
     ninja -C out/$1 system_webview_apk
     if [ "$?" -eq 0 ]; then
-        [ "$1" '==' "x64" ] && android_arch="x86_64" || android_arch=$1
-        cp out/$1/apks/SystemWebView.apk ../android_external_chromium-webview/prebuilt/$android_arch/webview.apk
+        case $1 in
+            x64)
+                android_arch="x86_64"
+                lineage_git=$lineage_gitlab
+                ;;
+            *)
+                android_arch=$1
+                lineage_git=$lineage_github
+                ;;
+        esac
+
+        clone_proj ${lineage_git}/${webview_proj_base}_prebuilt_${android_arch}.git \
+            ../${webview_proj_base}/prebuilt/${android_arch} 1
+
+        cp out/$1/apks/SystemWebView.apk ../$webview_proj_base/prebuilt/$android_arch/webview.apk
     fi
 }
 
@@ -80,10 +108,9 @@ while getopts ":a:chr:s" opt; do
 done
 shift $((OPTIND-1))
 
-# Download android_external_chromium-webview
-if [ ! -d android_external_chromium-webview ]; then
-    git clone https://github.com/LineageOS/android_external_chromium-webview.git --depth 1
-fi
+# Download webview patches
+clone_proj ${lineage_github}/${webview_proj_base}_patches.git \
+    ${webview_proj_base}/patches
 
 # Add depot_tools to PATH
 if [ ! -d depot_tools ]; then
