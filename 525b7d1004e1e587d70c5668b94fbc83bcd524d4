@@ -16,6 +16,23 @@
       "message": "(holding +2/ship until/unless manifest update starts tracking)",
       "revId": "525b7d1004e1e587d70c5668b94fbc83bcd524d4",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "063ada19_b02cea57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2022-04-24T17:05:52Z",
+      "side": 1,
+      "message": "Left CR on manifest.",
+      "revId": "525b7d1004e1e587d70c5668b94fbc83bcd524d4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
