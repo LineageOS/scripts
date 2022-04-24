@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0dcfba1_8bb19a34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15173
+      },
+      "writtenOn": "2022-04-24T14:13:37Z",
+      "side": 1,
+      "message": "(holding +2/ship until/unless manifest update starts tracking)",
+      "revId": "525b7d1004e1e587d70c5668b94fbc83bcd524d4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
