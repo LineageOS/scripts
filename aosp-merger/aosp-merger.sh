@@ -29,7 +29,7 @@ readonly script_path="$(cd "$(dirname "$0")";pwd -P)"
 readonly vars_path="${script_path}/../../../vendor/lineage/vars"
 
 source "${vars_path}/common"
-source "${vars_path}/devices"
+source "${vars_path}/pixels"
 
 TOP="${script_path}/../../.."
 
