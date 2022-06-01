@@ -37,6 +37,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cbd254f8_f68bea9d",
+        "filename": "wip-gitupstream.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2022-06-01T16:18:34Z",
+      "side": 1,
+      "message": "I prefer this option...",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 21
+      },
+      "revId": "75e2cb4c7999870c4eed23b931ad280bca25ee10",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f7f53aea_227c427d",
         "filename": "wip-gitupstream.sh",
         "patchSetId": 1
@@ -84,6 +107,29 @@
       "side": 1,
       "message": "Can just continue with squashes then, script makes those easy to handle anyway.",
       "parentUuid": "7de306f4_2a57da74",
+      "revId": "75e2cb4c7999870c4eed23b931ad280bca25ee10",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c73ce09_30c2cccd",
+        "filename": "wip-gitupstream.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2022-06-01T16:18:34Z",
+      "side": 1,
+      "message": "... since this option isn\u0027t possible, we have repos in qcom group that are custom made and other qcom repos that are no longer maintained. Option #1 also makes it simpler to detect groups imo.",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 23
+      },
       "revId": "75e2cb4c7999870c4eed23b931ad280bca25ee10",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
