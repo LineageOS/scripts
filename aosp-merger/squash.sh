@@ -7,11 +7,11 @@
 #
 
 usage() {
-    echo "Usage ${0} <merge|rebase> <oldaosptag> <newaosptag>"
+    echo "Usage ${0} <merge|rebase> <oldaosptag> <newaosptag> <pixel>"
 }
 
 # Verify argument count
-if [ "$#" -ne 3 ]; then
+if [ "$#" -ne 4 ]; then
     usage
     exit 1
 fi
@@ -19,6 +19,7 @@ fi
 OPERATION="${1}"
 OLDTAG="${2}"
 NEWTAG="${3}"
+PIXEL="${4}"
 
 if [ "${OPERATION}" != "merge" -a "${OPERATION}" != "rebase" ]; then
     usage
@@ -59,7 +60,11 @@ for PROJECTPATH in ${PROJECTPATHS}; do
     repo abandon "${SQUASHBRANCH}" .
     git checkout -b "${SQUASHBRANCH}" "${STAGINGBRANCH}"
     git branch --set-upstream-to=m/"${BRANCH}"
-    git reset --soft HEAD~1
+    git reset --soft m/"${BRANCH}"
     git add .
-    git commit -m "[SQUASH] $(git log ${STAGINGBRANCH} -1 --pretty=%s)" -m "$(git log ${STAGINGBRANCH} -1 --pretty=%b)"
+    if [[ -z "${PIXEL}" ]]; then
+        git commit -m "[SQUASH] $(git log ${STAGINGBRANCH} -1 --pretty=%s)" -m "$(git log ${STAGINGBRANCH} -1 --pretty=%b)"
+    else
+        git commit -m "[SQUASH] Merge tag '${NEWTAG}' into ${STAGINGBRANCH}"
+    fi
 done

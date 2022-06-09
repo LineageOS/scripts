@@ -7,11 +7,11 @@
 #
 
 usage() {
-    echo "Usage ${0} <merge|rebase> <oldaosptag> <newaosptag>"
+    echo "Usage ${0} <merge|rebase> <oldaosptag> <newaosptag> <pixel>"
 }
 
 # Verify argument count
-if [ "$#" -ne 3 ]; then
+if [ "$#" -ne 4 ]; then
     usage
     exit 1
 fi
@@ -19,6 +19,7 @@ fi
 OPERATION="${1}"
 OLDTAG="${2}"
 NEWTAG="${3}"
+PIXEL="${4}"
 
 if [ "${OPERATION}" != "merge" -a "${OPERATION}" != "rebase" ]; then
     usage
@@ -34,6 +35,9 @@ source "${vars_path}/common"
 TOP="${script_path}/../../.."
 BRANCH="${lineageos_branch}"
 SQUASHBRANCH="squash/${BRANCH}_${OPERATION}-${NEWTAG}"
+if [[ ! -z "${PIXEL}" ]]; then
+    topic="${topic}_pixel"
+fi
 
 # List of merged repos
 PROJECTPATHS=$(cat ${MERGEDREPOS} | grep -w merge | awk '{printf "%s\n", $2}')

@@ -68,16 +68,16 @@ push_aosp_merge() {
 merge_pixel_device() {
   export STAGINGBRANCH="staging/${lineageos_branch}_merge-${aosp_tag}"
   for repo in ${device_repos[@]}; do
-    "${script_path}"/_merge_helper.sh "${repo}" merge "${prev_aosp_tag}" "${aosp_tag}"
+    "${script_path}"/_subtree_merge_helper.sh "${repo}" "${prev_aosp_tag}" "${aosp_tag}"
   done
 }
 
 squash_pixel_device() {
-  "${script_path}"/squash.sh merge "${prev_aosp_tag}" "${aosp_tag}"
+  "${script_path}"/squash.sh merge "${prev_aosp_tag}" "${aosp_tag}" true
 }
 
 upload_squash_device_to_review() {
-  "${script_path}"/upload-squash.sh merge "${prev_aosp_tag}" "${aosp_tag}"
+  "${script_path}"/upload-squash.sh merge "${prev_aosp_tag}" "${aosp_tag}" true
 }
 
 push_device_merge() {
@@ -87,16 +87,16 @@ push_device_merge() {
 merge_pixel_kernel() {
   export STAGINGBRANCH="staging/${lineageos_branch}_merge-${kernel_tag}"
   for repo in ${device_kernel_repos}; do
-    "${script_path}"/_merge_helper.sh "${repo}" merge "${prev_kernel_tag}" "${kernel_tag}"
+    "${script_path}"/_subtree_merge_helper.sh "${repo}" "${prev_kernel_tag}" "${kernel_tag}"
   done
 }
 
 squash_pixel_kernel() {
-  "${script_path}"/squash.sh merge "${prev_kernel_tag}" "${kernel_tag}"
+  "${script_path}"/squash.sh merge "${prev_kernel_tag}" "${kernel_tag}" true
 }
 
 upload_squash_kernel_to_review() {
-  "${script_path}"/upload-squash.sh merge "${prev_kernel_tag}" "${kernel_tag}"
+  "${script_path}"/upload-squash.sh merge "${prev_kernel_tag}" "${kernel_tag}" true
 }
 
 push_kernel_merge() {
@@ -154,7 +154,7 @@ main() {
       read -p "Waiting for conflict resolution before squashing. Press enter when done."
       read -p "Once more, just to be safe"
       squash_pixel_device
-      upload_squash_device_to_review
+      #upload_squash_device_to_review
 
       unset MERGEDREPOS
       )
@@ -164,9 +164,7 @@ main() {
       (
       source "${vars_path}/${kernel}"
 
-      readonly manifest="${TOP}"/.repo/manifests/snippets/${kernel}.xml
-      readonly device_kernel_repos=$(grep "name=\"LineageOS/" "${manifest}" \
-          | sed -n 's/.*path="\([^"]\+\)".*/\1/p')
+      readonly device_kernel_repos="kernel/google/${kernel}"
 
       export MERGEDREPOS="${TOP}/merged_repos_${kernel}.txt"
       # Remove any existing list of merged repos file
@@ -178,7 +176,7 @@ main() {
       read -p "Waiting for conflict resolution before squashing. Press enter when done."
       read -p "Once more, just to be safe"
       squash_pixel_kernel
-      upload_squash_kernel_to_review
+      #upload_squash_kernel_to_review
 
       unset MERGEDREPOS
       )
