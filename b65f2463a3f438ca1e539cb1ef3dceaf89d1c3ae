@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b656ad11_9f7ae79d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2022-06-10T09:06:09Z",
+      "side": 1,
+      "message": "Easiest to just add `.changeid` to global gitignore on the machine doing the merges.\n\nThis way would be pretty fail proof I\u0027d say.",
+      "revId": "b65f2463a3f438ca1e539cb1ef3dceaf89d1c3ae",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b97769c_1a41634b",
+        "filename": "aosp-merger/_subtree_merge_helper.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2022-06-10T09:06:09Z",
+      "side": 1,
+      "message": "echo $(git log  -1 --pretty\u003d%b | tail -2) \u003e .changeid",
+      "revId": "b65f2463a3f438ca1e539cb1ef3dceaf89d1c3ae",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eccdca40_89ad575e",
+        "filename": "aosp-merger/_subtree_merge_helper.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2022-06-10T09:06:09Z",
+      "side": 1,
+      "message": "echo $(git log  -1 --pretty\u003d%b | tail -2) \u003e .changeid",
+      "revId": "b65f2463a3f438ca1e539cb1ef3dceaf89d1c3ae",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34cda6ab_b4647349",
+        "filename": "aosp-merger/squash.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2022-06-10T09:06:09Z",
+      "side": 1,
+      "message": "git commit -m \"[SQUASH] Merge tag \u0027${NEWTAG}\u0027 into ${STAGINGBRANCH}\" -m \"$(cat .changeid)\"",
+      "revId": "b65f2463a3f438ca1e539cb1ef3dceaf89d1c3ae",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
