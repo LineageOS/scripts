@@ -166,7 +166,7 @@ main() {
 
       readonly device_kernel_repos="kernel/google/${kernel}"
 
-      export MERGEDREPOS="${TOP}/merged_repos_${kernel}.txt"
+      export MERGEDREPOS="${TOP}/merged_repos_${kernel}_kernel.txt"
       # Remove any existing list of merged repos file
       rm -f "${MERGEDREPOS}"
 
