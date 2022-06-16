@@ -35,6 +35,24 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9511b254_ff5ded55",
+        "filename": "wip-gitupstream.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2022-06-16T12:53:02Z",
+      "side": 1,
+      "message": "Going URL only",
+      "parentUuid": "4175b0a8_e7947647",
+      "revId": "75e2cb4c7999870c4eed23b931ad280bca25ee10",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cbd254f8_f68bea9d",
