@@ -7,24 +7,32 @@
 #
 
 usage() {
-    echo "Usage ${0} <merge|rebase> <oldaosptag> <newaosptag> <pixel>"
+    echo "Usage ${0} -b <branch-suffix> --pixel"
 }
 
 # Verify argument count
-if [ "$#" -ne 4 ]; then
+if [ "${#}" -eq 0 ]; then
     usage
     exit 1
 fi
 
-OPERATION="${1}"
-OLDTAG="${2}"
-NEWTAG="${3}"
-PIXEL="${4}"
+PIXEL=false
 
-if [ "${OPERATION}" != "merge" -a "${OPERATION}" != "rebase" ]; then
-    usage
-    exit 1
-fi
+while [ "${#}" -gt 0 ]; do
+    case "${1}" in
+        -b | --branch-suffix )
+                BRANCHSUFFIX="${2}"; shift
+                ;;
+        -p | --pixel )
+                PIXEL=true; shift
+                ;;
+        * )
+                usage
+                exit 1
+                ;;
+    esac
+    shift
+done
 
 ### CONSTANTS ###
 readonly script_path="$(cd "$(dirname "$0")";pwd -P)"
@@ -34,7 +42,7 @@ source "${vars_path}/common"
 
 TOP="${script_path}/../../.."
 BRANCH="${lineageos_branch}"
-SQUASHBRANCH="squash/${BRANCH}_${OPERATION}-${NEWTAG}"
+SQUASHBRANCH="squash/${BRANCHSUFFIX}"
 if [ "${PIXEL}" = true ]; then
     TOPIC="${topic}_pixel"
 else
