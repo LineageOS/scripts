@@ -1,6 +1,7 @@
 #!/bin/bash
 #
 # SPDX-FileCopyrightText: 2022 The Calyx Institute
+# SPDX-FileCopyrightText: 2022 The LineageOS Project
 #
 # SPDX-License-Identifier: Apache-2.0
 #
@@ -44,63 +45,59 @@ export LC_TIME=C
 ### FUNCTIONS ###
 
 merge_aosp() {
-  export STAGINGBRANCH="staging/${common_aosp_tag}_merge-${prev_common_aosp_tag}"
-  "${script_path}"/merge-aosp.sh merge "${common_aosp_tag}" "${prev_common_aosp_tag}"
+  "${script_path}"/merge-aosp.sh --old-tag "${common_aosp_tag}" --new-tag "${prev_common_aosp_tag}" --branch-suffix "${common_aosp_tag}_merge-${prev_common_aosp_tag}"
 }
 
 merge_aosp_forks() {
-  export STAGINGBRANCH="staging/${lineageos_branch}_merge-${common_aosp_tag}"
-  "${script_path}"/merge-aosp-forks.sh merge "${prev_common_aosp_tag}" "${common_aosp_tag}"
+  "${script_path}"/merge-aosp-forks.sh --old-tag "${prev_common_aosp_tag}" --new-tag "${common_aosp_tag}" --branch-suffix "${lineageos_branch}_merge-${common_aosp_tag}"
 }
 
 squash_aosp_merge() {
-  "${script_path}"/squash.sh merge "${prev_common_aosp_tag}" "${common_aosp_tag}" false
+  "${script_path}"/squash.sh --branch-suffix "${lineageos_branch}_merge-${common_aosp_tag}"
 }
 
 upload_squash_aosp_to_review() {
-  "${script_path}"/upload-squash.sh merge "${prev_common_aosp_tag}" "${common_aosp_tag}" false
+  "${script_path}"/upload-squash.sh --branch-suffix "${lineageos_branch}_merge-${common_aosp_tag}"
 }
 
 push_aosp_merge() {
-  "${script_path}"/push-merge.sh merge "${prev_common_aosp_tag}" "${common_aosp_tag}"
+  "${script_path}"/push-merge.sh --branch-suffix "${lineageos_branch}_merge-${common_aosp_tag}"
 }
 
 merge_pixel_device() {
-  export STAGINGBRANCH="staging/${lineageos_branch}_merge-${aosp_tag}"
   for repo in ${device_repos[@]}; do
-    "${script_path}"/_subtree_merge_helper.sh "${repo}" "${prev_aosp_tag}" "${aosp_tag}"
+    "${script_path}"/_subtree_merge_helper.sh --project-path "${repo}" --old-tag "${prev_aosp_tag}" --new-tag "${aosp_tag}" --branch-suffix "${lineageos_branch}_merge-${aosp_tag}"
   done
 }
 
 squash_pixel_device() {
-  "${script_path}"/squash.sh merge "${prev_aosp_tag}" "${aosp_tag}" true
+  "${script_path}"/squash.sh --new-tag "${aosp_tag}" --branch-suffix "${lineageos_branch}_merge-${aosp_tag}" --pixel
 }
 
 upload_squash_device_to_review() {
-  "${script_path}"/upload-squash.sh merge "${prev_aosp_tag}" "${aosp_tag}" true
+  "${script_path}"/upload-squash.sh --branch-suffix "${lineageos_branch}_merge-${aosp_tag}" --pixel
 }
 
 push_device_merge() {
-  "${script_path}"/push-merge.sh merge "${prev_aosp_tag}" "${aosp_tag}"
+  "${script_path}"/push-merge.sh --branch-suffix "${lineageos_branch}_merge-${aosp_tag}"
 }
 
 merge_pixel_kernel() {
-  export STAGINGBRANCH="staging/${lineageos_branch}_merge-${kernel_tag}"
   for repo in ${device_kernel_repos}; do
-    "${script_path}"/_subtree_merge_helper.sh "${repo}" "${prev_kernel_tag}" "${kernel_tag}"
+    "${script_path}"/_subtree_merge_helper.sh --project-path "${repo}" --old-tag "${prev_kernel_tag}" --new-tag "${kernel_tag}" --branch-suffix "${lineageos_branch}_merge-${kernel_tag}"
   done
 }
 
 squash_pixel_kernel() {
-  "${script_path}"/squash.sh merge "${prev_kernel_tag}" "${kernel_tag}" true
+  "${script_path}"/squash.sh --new-tag "${kernel_tag}" --branch-suffix "${lineageos_branch}_merge-${kernel_tag}" --pixel
 }
 
 upload_squash_kernel_to_review() {
-  "${script_path}"/upload-squash.sh merge "${prev_kernel_tag}" "${kernel_tag}" true
+  "${script_path}"/upload-squash.sh --branch-suffix "${lineageos_branch}_merge-${kernel_tag}" --pixel
 }
 
 push_kernel_merge() {
-  "${script_path}"/push-merge.sh merge "${prev_kernel_tag}" "${kernel_tag}"
+  "${script_path}"/push-merge.sh --branch-suffix "${lineageos_branch}_merge-${kernel_tag}"
 }
 
 # error message
