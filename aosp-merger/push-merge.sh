@@ -7,23 +7,27 @@
 #
 
 usage() {
-    echo "Usage ${0} <merge|rebase> <oldaosptag> <newaosptag>"
+    echo "Usage ${0} -b <branch-suffix>"
 }
 
 # Verify argument count
-if [ "$#" -ne 3 ]; then
+if [ "${#}" -eq 0 ]; then
     usage
     exit 1
 fi
 
-OPERATION="${1}"
-OLDTAG="${2}"
-NEWTAG="${3}"
-
-if [ "${OPERATION}" != "merge" -a "${OPERATION}" != "rebase" ]; then
-    usage
-    exit 1
-fi
+while [ "${#}" -gt 0 ]; do
+    case "${1}" in
+        -b | --branch-suffix )
+                BRANCHSUFFIX="${2}"; shift
+                ;;
+        * )
+                usage
+                exit 1
+                ;;
+    esac
+    shift
+done
 
 ### CONSTANTS ###
 readonly script_path="$(cd "$(dirname "$0")";pwd -P)"
@@ -33,7 +37,7 @@ source "${vars_path}/common"
 
 TOP="${script_path}/../../.."
 BRANCH="${lineageos_branch}"
-STAGINGBRANCH="staging/${BRANCH}_${OPERATION}-${NEWTAG}"
+STAGINGBRANCH="staging/${BRANCHSUFFIX}"
 
 # Source build environment (needed for lineageremote)
 source "${TOP}/build/envsetup.sh"

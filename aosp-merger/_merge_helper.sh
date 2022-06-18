@@ -7,21 +7,43 @@
 #
 
 usage() {
-    echo "Usage ${0} <projectpath> <merge|rebase> <oldaosptag> <newaosptag>"
+    echo "Usage ${0} -p <projectpath> -o <merge|rebase> -c <old-tag> -n <new-tag> -b <branch-suffix>"
 }
 
 # Verify argument count
-if [ "$#" -ne 4 ]; then
+if [ "${#}" -eq 0 ]; then
     usage
     exit 1
 fi
 
-PROJECTPATH="${1}"
-OPERATION="${2}"
-OLDTAG="${3}"
-NEWTAG="${4}"
+while [ "${#}" -gt 0 ]; do
+    case "${1}" in
+        -p | --project-path )
+                PROJECTPATH="${2}"; shift
+                ;;
+        -o | --operation )
+                OPERATION="${2}"; shift
+                ;;
+        -c | --old-tag )
+                OLDTAG="${2}"; shift
+                ;;
+        -n | --new-tag )
+                NEWTAG="${2}"; shift
+                ;;
+        -b | --branch-suffix )
+                BRANCHSUFFIX="${2}"; shift
+                ;;
+        * )
+                usage
+                exit 1
+                ;;
+    esac
+    shift
+done
 
-if [ "${OPERATION}" != "merge" -a "${OPERATION}" != "rebase" ]; then
+if [ -z "${OPERATION}" ]; then
+    OPERATION="merge"
+elif [ "${OPERATION}" != "merge" -a "${OPERATION}" != "rebase" ]; then
     usage
     exit 1
 fi
@@ -36,6 +58,7 @@ readonly hook="${script_path}/prepare-commit-msg"
 
 TOP="${script_path}/../../.."
 BRANCH="${lineageos_branch}"
+STAGINGBRANCH="staging/${BRANCHSUFFIX}"
 
 cd "${TOP}/${PROJECTPATH}"
 repo start "${STAGINGBRANCH}" .
@@ -43,8 +66,6 @@ git fetch -q --force --tags aosp "${NEWTAG}"
 
 [[ ! -e .git/hooks/prepare-commit-msg ]] && cp "${hook}" .git/hooks/
 chmod +x .git/hooks/prepare-commit-msg
-
-PROJECTOPERATION="${OPERATION}"
 
 # Was there any change upstream? Skip if not.
 if [[ -z "$(git diff ${OLDTAG} ${NEWTAG})" ]]; then
@@ -62,7 +83,7 @@ if [[ "$?" -eq 1 ]]; then
     echo    "of new tag ${NEWTAG} ####"
 fi
 
-if [[ "${PROJECTOPERATION}" == "merge" ]]; then
+if [[ "${OPERATION}" == "merge" ]]; then
     echo "#### Merging ${NEWTAG} into ${PROJECTPATH} ####"
     git merge --no-commit --log "${NEWTAG}" && git commit --no-edit
 
@@ -73,7 +94,7 @@ if [[ "${PROJECTOPERATION}" == "merge" ]]; then
         repo abandon "${STAGINGBRANCH}" .
         exit 0
     fi
-elif [[ "${PROJECTOPERATION}" == "rebase" ]]; then
+elif [[ "${OPERATION}" == "rebase" ]]; then
     echo "#### Rebasing ${PROJECTPATH} onto ${NEWTAG} ####"
     git rebase --onto "${NEWTAG}" "${OLDTAG}"
 fi
@@ -82,4 +103,4 @@ CONFLICT=""
 if [[ -n "$(git status --porcelain)" ]]; then
     CONFLICT="conflict-"
 fi
-echo -e "${CONFLICT}${PROJECTOPERATION}\t\t${PROJECTPATH}" | tee -a "${MERGEDREPOS}"
+echo -e "${CONFLICT}${OPERATION}\t\t${PROJECTPATH}" | tee -a "${MERGEDREPOS}"
