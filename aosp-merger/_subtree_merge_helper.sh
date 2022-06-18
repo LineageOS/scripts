@@ -7,18 +7,46 @@
 #
 
 usage() {
-    echo "Usage ${0} <projectpath> <oldaosptag> <newaosptag>"
+    echo "Usage ${0} -p <projectpath> -o <merge|rebase> -c <old-tag> -n <new-tag> -b <branch-suffix>"
 }
 
 # Verify argument count
-if [ "$#" -ne 3 ]; then
+if [ "${#}" -eq 0 ]; then
     usage
     exit 1
 fi
 
-PROJECTPATH="${1}"
-OLDTAG="${2}"
-NEWTAG="${3}"
+while [ "${#}" -gt 0 ]; do
+    case "${1}" in
+        -p | --project-path )
+                PROJECTPATH="${2}"; shift
+                ;;
+        -o | --operation )
+                OPERATION="${2}"; shift
+                ;;
+        -c | --old-tag )
+                OLDTAG="${2}"; shift
+                ;;
+        -n | --new-tag )
+                NEWTAG="${2}"; shift
+                ;;
+        -b | --branch-suffix )
+                BRANCHSUFFIX="${2}"; shift
+                ;;
+        * )
+                usage
+                exit 1
+                ;;
+    esac
+    shift
+done
+
+if [ -z "${OPERATION}" ]; then
+    OPERATION="merge"
+elif [ "${OPERATION}" != "merge" -a "${OPERATION}" != "rebase" ]; then
+    usage
+    exit 1
+fi
 
 ### CONSTANTS ###
 readonly script_path="$(cd "$(dirname "$0")";pwd -P)"
@@ -30,6 +58,7 @@ readonly hook="${script_path}/prepare-commit-msg"
 
 TOP="${script_path}/../../.."
 BRANCH="${lineageos_branch}"
+STAGINGBRANCH="staging/${BRANCHSUFFIX}"
 
 cd "${TOP}/${PROJECTPATH}"
 # Ditch any existing staging branches
@@ -104,4 +133,4 @@ if [[ -z "$(git diff HEAD m/${lineageos_branch})" && -z "$(git status --porcelai
     exit 0
 fi
 
-echo -e "${CONFLICT}merge\t\t${PROJECTPATH}" | tee -a "${MERGEDREPOS}"
+echo -e "${CONFLICT}${OPERATION}\t\t${PROJECTPATH}" | tee -a "${MERGEDREPOS}"
