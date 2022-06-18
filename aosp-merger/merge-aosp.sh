@@ -7,21 +7,41 @@
 #
 
 usage() {
-    echo "Usage ${0} <merge|rebase> <aosp-tag> <different-ancestor-aosp-tag>"
+    echo "Usage ${0} -o <merge|rebase> -c <aosp-tag> -n <different-ancestor-aosp-tag> -b <branch-suffix>"
     echo "Example ${0} merge android-12.0.0_r26 android-12.0.0_r18"
 }
 
 # Verify argument count
-if [ "$#" -ne 3 ]; then
+if [ "${#}" -eq 0 ]; then
     usage
     exit 1
 fi
 
-OPERATION="${1}"
-OLDTAG="${2}"
-NEWTAG="${3}"
+while [ "${#}" -gt 0 ]; do
+    case "${1}" in
+        -o | --operation )
+                OPERATION="${2}"; shift
+                ;;
+        -c | --old-tag )
+                OLDTAG="${2}"; shift
+                ;;
+        -n | --new-tag )
+                NEWTAG="${2}"; shift
+                ;;
+        -b | --branch-suffix )
+                BRANCHSUFFIX="${2}"; shift
+                ;;
+        * )
+                usage
+                exit 1
+                ;;
+    esac
+    shift
+done
 
-if [ "${OPERATION}" != "merge" -a "${OPERATION}" != "rebase" ]; then
+if [ -z "${OPERATION}" ]; then
+    OPERATION="merge"
+elif [ "${OPERATION}" != "merge" -a "${OPERATION}" != "rebase" ]; then
     usage
     exit 1
 fi
@@ -34,6 +54,7 @@ source "${vars_path}/common"
 
 TOP="${script_path}/../../.."
 MANIFEST="${TOP}/.repo/manifests/default.xml"
+STAGINGBRANCH="staging/${BRANCHSUFFIX}"
 
 # Build list of AOSP repos
 PROJECTPATHS=$(grep -v "remote=\"gitlab" "${MANIFEST}" | grep -v "clone-depth=\"1" | sed -n 's/.*path="\([^"]\+\)".*/\1/p')
@@ -56,7 +77,5 @@ repo abandon "${STAGINGBRANCH}"
 
 # Iterate over each forked project
 for PROJECTPATH in ${PROJECTPATHS}; do
-    "${script_path}"/_merge_helper.sh "${PROJECTPATH}" "${@}"
+    "${script_path}"/_merge_helper.sh --project-path "${PROJECTPATH}" --operation "${OPERATION}" --old-tag "${OLDTAG}" --new-tag "${NEWTAG}" --branch-suffix "${BRANCHSUFFIX}"
 done
-
-unset STAGINGBRANCH
