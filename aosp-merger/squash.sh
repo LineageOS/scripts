@@ -1,30 +1,41 @@
 #!/bin/bash
 #
-# Copyright (C) 2017, 2020-2021 The LineageOS Project
-# Copyright (C) 2021-2022 The Calyx Institute
+# SPDX-FileCopyrightText: 2017, 2020-2022 The LineageOS Project
+# SPDX-FileCopyrightText: 2021-2022 The Calyx Institute
 #
 # SPDX-License-Identifier: Apache-2.0
 #
 
 usage() {
-    echo "Usage ${0} <merge|rebase> <oldaosptag> <newaosptag> <pixel>"
+    echo "Usage ${0} -n <new-tag> -b <branch-suffix> --pixel"
 }
 
 # Verify argument count
-if [ "$#" -ne 4 ]; then
+if [ "${#}" -eq 0 ]; then
     usage
     exit 1
 fi
 
-OPERATION="${1}"
-OLDTAG="${2}"
-NEWTAG="${3}"
-PIXEL="${4}"
+PIXEL=false
 
-if [ "${OPERATION}" != "merge" -a "${OPERATION}" != "rebase" ]; then
-    usage
-    exit 1
-fi
+while [ "${#}" -gt 0 ]; do
+    case "${1}" in
+        -n | --new-tag )
+                NEWTAG="${2}"; shift
+                ;;
+        -b | --branch-suffix )
+                BRANCHSUFFIX="${2}"; shift
+                ;;
+        -p | --pixel )
+                PIXEL=true; shift
+                ;;
+        * )
+                usage
+                exit 1
+                ;;
+    esac
+    shift
+done
 
 ### CONSTANTS ###
 readonly script_path="$(cd "$(dirname "$0")";pwd -P)"
@@ -34,8 +45,8 @@ source "${vars_path}/common"
 
 TOP="${script_path}/../../.."
 BRANCH="${lineageos_branch}"
-STAGINGBRANCH="staging/${BRANCH}_${OPERATION}-${NEWTAG}"
-SQUASHBRANCH="squash/${BRANCH}_${OPERATION}-${NEWTAG}"
+STAGINGBRANCH="staging/${BRANCHSUFFIX}"
+SQUASHBRANCH="squash/${BRANCHSUFFIX}"
 
 # List of merged repos
 PROJECTPATHS=$(cat ${MERGEDREPOS} | grep -w merge | awk '{printf "%s\n", $2}')

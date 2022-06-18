@@ -7,20 +7,40 @@
 #
 
 usage() {
-    echo "Usage ${0} <merge|rebase> <oldaosptag> <newaosptag>"
+    echo "Usage ${0} -o <merge|rebase> -c <old-aosp-tag> -n <new-aosp-tag> -b <branch-suffix>"
 }
 
 # Verify argument count
-if [ "$#" -ne 3 ]; then
+if [ "${#}" -eq 0 ]; then
     usage
     exit 1
 fi
 
-OPERATION="${1}"
-OLDTAG="${2}"
-NEWTAG="${3}"
+while [ "${#}" -gt 0 ]; do
+    case "${1}" in
+        -o | --operation )
+                OPERATION="${2}"; shift
+                ;;
+        -c | --old-tag )
+                OLDTAG="${2}"; shift
+                ;;
+        -n | --new-tag )
+                NEWTAG="${2}"; shift
+                ;;
+        -b | --branch-suffix )
+                BRANCHSUFFIX="${2}"; shift
+                ;;
+        * )
+                usage
+                exit 1
+                ;;
+    esac
+    shift
+done
 
-if [ "${OPERATION}" != "merge" -a "${OPERATION}" != "rebase" ]; then
+if [ -z "${OPERATION}" ]; then
+    OPERATION="merge"
+elif [ "${OPERATION}" != "merge" -a "${OPERATION}" != "rebase" ]; then
     usage
     exit 1
 fi
@@ -34,6 +54,7 @@ source "${vars_path}/common"
 TOP="${script_path}/../../.."
 MANIFEST="${TOP}/.repo/manifests/default.xml"
 BRANCH="${lineageos_branch}"
+STAGINGBRANCH="staging/${BRANCHSUFFIX}"
 
 # Source build environment (needed for aospremote)
 source "${TOP}/build/envsetup.sh"
@@ -60,7 +81,5 @@ repo abandon "${STAGINGBRANCH}"
 
 # Iterate over each forked project
 for PROJECTPATH in ${PROJECTPATHS}; do
-    "${script_path}"/_merge_helper.sh "${PROJECTPATH}" "${@}"
+    "${script_path}"/_merge_helper.sh --project-path "${PROJECTPATH}" --operation "${OPERATION}" --old-tag "${OLDTAG}" --new-tag "${NEWTAG}" --branch-suffix "${BRANCHSUFFIX}"
 done
-
-unset STAGINGBRANCH
