@@ -7,7 +7,7 @@
 #
 
 usage() {
-    echo "Usage ${0} -b <branch-suffix> --pixel"
+    echo "Usage ${0} -n <new-tag> -b <branch-suffix> --pixel"
 }
 
 # Verify argument count
@@ -20,6 +20,9 @@ PIXEL=false
 
 while [ "${#}" -gt 0 ]; do
     case "${1}" in
+        -n | --new-tag )
+                NEWTAG="${2}"; shift
+                ;;
         -b | --branch-suffix )
                 BRANCHSUFFIX="${2}"; shift
                 ;;
@@ -42,7 +45,9 @@ source "${vars_path}/common"
 
 TOP="${script_path}/../../.."
 SQUASHBRANCH="squash/${BRANCHSUFFIX}"
-if [ "${PIXEL}" = true ]; then
+if [ ! -z "${NEWTAG}" ]; then
+    TOPIC="${NEWTAG}"
+elif [ "${PIXEL}" = true ]; then
     TOPIC="${topic}_pixel"
 else
     TOPIC="${topic}"
