@@ -76,9 +76,6 @@ for PROJECTPATH in ${PROJECTPATHS} .repo/manifests; do
 done
 echo "#### Verification complete - no uncommitted changes found ####"
 
-# Ditch any existing staging branches (across all projects)
-repo abandon "${STAGINGBRANCH}"
-
 # Iterate over each forked project
 for PROJECTPATH in ${PROJECTPATHS}; do
     "${script_path}"/_merge_helper.sh --project-path "${PROJECTPATH}" --operation "${OPERATION}" --old-tag "${OLDTAG}" --new-tag "${NEWTAG}" --branch-suffix "${BRANCHSUFFIX}"
