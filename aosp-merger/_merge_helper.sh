@@ -73,20 +73,22 @@ fi
 [[ ! -e .git/hooks/prepare-commit-msg ]] && cp "${hook}" .git/hooks/
 chmod +x .git/hooks/prepare-commit-msg
 
-# Was there any change upstream? Skip if not.
-if [[ -z "$(git diff ${OLDTAG} ${NEWTAG})" ]]; then
-    echo -e "nochange\t\t${PROJECTPATH}" | tee -a "${MERGEDREPOS}"
-    repo abandon "${STAGINGBRANCH}" .
-    exit 0
-fi
+if [ ! -z "${OLDTAG}" ]; then
+    # Was there any change upstream? Skip if not.
+    if [[ -z "$(git diff ${OLDTAG} ${NEWTAG})" ]]; then
+        echo -e "nochange\t\t${PROJECTPATH}" | tee -a "${MERGEDREPOS}"
+        repo abandon "${STAGINGBRANCH}" .
+        exit 0
+    fi
 
-# Determine whether OLDTAG is an ancestor of NEWTAG
-# ie is history consistent.
-git merge-base --is-ancestor "${OLDTAG}" "${NEWTAG}"
-# If no, print a warning message.
-if [[ "$?" -eq 1 ]]; then
-    echo -n "#### Warning: project ${PROJECTPATH} old tag ${OLDTAG} is not an ancestor "
-    echo    "of new tag ${NEWTAG} ####"
+    # Determine whether OLDTAG is an ancestor of NEWTAG
+    # ie is history consistent.
+    git merge-base --is-ancestor "${OLDTAG}" "${NEWTAG}"
+    # If no, print a warning message.
+    if [[ "$?" -eq 1 ]]; then
+        echo -n "#### Warning: project ${PROJECTPATH} old tag ${OLDTAG} is not an ancestor "
+        echo    "of new tag ${NEWTAG} ####"
+    fi
 fi
 
 if [[ "${OPERATION}" == "merge" ]]; then
