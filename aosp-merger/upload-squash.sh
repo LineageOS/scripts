@@ -42,7 +42,9 @@ source "${vars_path}/common"
 
 TOP="${script_path}/../../.."
 SQUASHBRANCH="squash/${BRANCHSUFFIX}"
-if [ "${PIXEL}" = true ]; then
+if [ ! -z "${NEWTAG}" ]; then
+    TOPIC="${NEWTAG}"
+elif [ "${PIXEL}" = true ]; then
     TOPIC="${topic}_pixel"
 else
     TOPIC="${topic}"
