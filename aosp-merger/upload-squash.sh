@@ -41,7 +41,6 @@ readonly vars_path="${script_path}/../../../vendor/lineage/vars"
 source "${vars_path}/common"
 
 TOP="${script_path}/../../.."
-BRANCH="${lineageos_branch}"
 SQUASHBRANCH="squash/${BRANCHSUFFIX}"
 if [ "${PIXEL}" = true ]; then
     TOPIC="${topic}_pixel"
@@ -52,7 +51,7 @@ fi
 # List of merged repos
 PROJECTPATHS=$(cat ${MERGEDREPOS} | grep -w merge | awk '{printf "%s\n", $2}')
 
-echo "#### Branch = ${BRANCH} Squash branch = ${SQUASHBRANCH} ####"
+echo "#### Squash branch = ${SQUASHBRANCH} ####"
 
 # Make sure manifest and forked repos are in a consistent state
 echo "#### Verifying there are no uncommitted changes on LineageOS forked AOSP projects ####"
