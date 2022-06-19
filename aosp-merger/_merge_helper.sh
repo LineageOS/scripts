@@ -61,6 +61,8 @@ BRANCH="${lineageos_branch}"
 STAGINGBRANCH="staging/${BRANCHSUFFIX}"
 
 cd "${TOP}/${PROJECTPATH}"
+# Ditch any existing staging branches
+repo abandon "${STAGINGBRANCH}" .
 repo start "${STAGINGBRANCH}" .
 if [ -f ".gitupstream" ]; then
     git fetch -q --force --tags "$(cat .gitupstream)" "${NEWTAG}"
