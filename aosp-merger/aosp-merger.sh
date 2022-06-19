@@ -44,10 +44,12 @@ export LC_TIME=C
 
 ### FUNCTIONS ###
 
+# Reverse merge AOSP to AOSP (for testing only)
 merge_aosp() {
   "${script_path}"/merge-aosp.sh --old-tag "${common_aosp_tag}" --new-tag "${prev_common_aosp_tag}" --branch-suffix "${common_aosp_tag}_merge-${prev_common_aosp_tag}"
 }
 
+# Merge AOSP to forks
 merge_aosp_forks() {
   "${script_path}"/merge-aosp-forks.sh --old-tag "${prev_common_aosp_tag}" --new-tag "${common_aosp_tag}" --branch-suffix "${lineageos_branch}_merge-${common_aosp_tag}"
 }
@@ -64,6 +66,7 @@ push_aosp_merge() {
   "${script_path}"/push-merge.sh --branch-suffix "${lineageos_branch}_merge-${common_aosp_tag}"
 }
 
+# Merge AOSP to pixel device forks
 merge_pixel_device() {
   for repo in ${device_repos[@]}; do
     "${script_path}"/_subtree_merge_helper.sh --project-path "${repo}" --old-tag "${prev_aosp_tag}" --new-tag "${aosp_tag}" --branch-suffix "${lineageos_branch}_merge-${aosp_tag}"
@@ -82,6 +85,7 @@ push_device_merge() {
   "${script_path}"/push-merge.sh --branch-suffix "${lineageos_branch}_merge-${aosp_tag}"
 }
 
+# Merge AOSP to pixel kernel forks
 merge_pixel_kernel() {
   for repo in ${device_kernel_repos}; do
     "${script_path}"/_subtree_merge_helper.sh --project-path "${repo}" --old-tag "${prev_kernel_tag}" --new-tag "${kernel_tag}" --branch-suffix "${lineageos_branch}_merge-${kernel_tag}"
