@@ -36,8 +36,11 @@ readonly vars_path="${script_path}/../../../vendor/lineage/vars"
 source "${vars_path}/common"
 
 TOP="${script_path}/../../.."
-BRANCH="${lineageos_branch}"
 STAGINGBRANCH="staging/${BRANCHSUFFIX}"
+BRANCH=$(git config --get branch.${STAGINGBRANCH}.merge | sed 's|refs/heads/||')
+if [ -z "${BRANCH}" ]; then
+    BRANCH="${lineageos_branch}"
+fi
 
 # Source build environment (needed for lineageremote)
 source "${TOP}/build/envsetup.sh"
