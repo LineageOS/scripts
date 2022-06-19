@@ -64,7 +64,11 @@ cd "${TOP}/${PROJECTPATH}"
 # Ditch any existing staging branches
 repo abandon "${STAGINGBRANCH}" .
 repo start "${STAGINGBRANCH}" .
-git fetch -q --force --tags "$(cat .gitupstream)" "${NEWTAG}"
+if [ -f ".gitupstream" ]; then
+    git fetch -q --force --tags "$(cat .gitupstream)" "${NEWTAG}"
+else
+    git fetch -q --force --tags aosp "${NEWTAG}"
+fi
 
 [[ ! -e .git/hooks/prepare-commit-msg ]] && cp "${hook}" .git/hooks/
 chmod +x .git/hooks/prepare-commit-msg
