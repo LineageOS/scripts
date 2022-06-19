@@ -62,7 +62,7 @@ STAGINGBRANCH="staging/${BRANCHSUFFIX}"
 
 cd "${TOP}/${PROJECTPATH}"
 # Ditch any existing staging branches
-repo abandon "${STAGINGBRANCH}" .
+repo abandon "${STAGINGBRANCH}" . | grep -v "error: no project has local branch(es) : ${STAGINGBRANCH}"
 repo start "${STAGINGBRANCH}" .
 if [ -f ".gitupstream" ]; then
     git fetch -q --force --tags "$(cat .gitupstream)" "${NEWTAG}"
