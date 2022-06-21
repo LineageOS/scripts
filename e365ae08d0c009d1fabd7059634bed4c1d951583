@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6dadb92_4d2877ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2022-06-21T11:32:07Z",
+      "side": 1,
+      "message": "FWIW I had https://google.github.io/styleguide/shellguide.html open while writing the scripts, which uses getopts, but this is fine too.",
+      "revId": "e365ae08d0c009d1fabd7059634bed4c1d951583",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99fbb6c5_4f31cfa3",
+        "filename": "aosp-merger/_merge_helper.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2022-06-21T11:32:07Z",
+      "side": 1,
+      "message": "I was going to write \"why c for old tag\" but given that this is only meant to be called internally by other scripts, doesn\u0027t really matter that much.",
+      "revId": "e365ae08d0c009d1fabd7059634bed4c1d951583",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
