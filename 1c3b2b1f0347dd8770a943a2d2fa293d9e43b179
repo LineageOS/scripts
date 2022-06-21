@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81ef81c8_4cadf933",
+        "filename": "aosp-merger/aosp-merger.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2022-06-21T11:38:34Z",
+      "side": 1,
+      "message": "Do we want to merge all qcom groups at once?",
+      "revId": "1c3b2b1f0347dd8770a943a2d2fa293d9e43b179",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
