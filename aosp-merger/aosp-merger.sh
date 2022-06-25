@@ -107,21 +107,19 @@ push_kernel_merge() {
 
 # Merge CLO to forks
 merge_clo() {
-  for repo in $(repo list -p -g ${1}); do
-    "${script_path}"/_merge_helper.sh --project-path "${repo}" --new-tag "${qcom_group_revision[${1}]}" --branch-suffix "${lineageos_branch}_merge-${qcom_group_revision[${1}]}"
-  done
+  "${script_path}"/_merge_helper.sh --project-path "${repo}" --new-tag "${1}" --branch-suffix "${lineageos_branch}_merge-${1}"
 }
 
 squash_clo_merge() {
-  "${script_path}"/squash.sh --new-tag "${qcom_group_revision[${1}]}" --branch-suffix "${lineageos_branch}_merge-${qcom_group_revision[${1}]}"
+  "${script_path}"/squash.sh --new-tag "${1}" --branch-suffix "${lineageos_branch}_merge-${1}"
 }
 
 upload_squash_clo_to_review() {
-  "${script_path}"/upload-squash.sh --new-tag "${qcom_group_revision[${1}]}" --branch-suffix "${lineageos_branch}_merge-${qcom_group_revision[${1}]}"
+  "${script_path}"/upload-squash.sh --new-tag "${1}" --branch-suffix "${lineageos_branch}_merge-${1}"
 }
 
 push_clo_merge() {
-  "${script_path}"/push-merge.sh --branch-suffix "${lineageos_branch}_merge-${qcom_group_revision[${1}]}"
+  "${script_path}"/push-merge.sh --branch-suffix "${lineageos_branch}_merge-${1}"
 }
 
 # error message
@@ -203,19 +201,21 @@ main() {
       )
     done
   elif [ "${1}" = "clo" ]; then
-    for group in "${!qcom_group_revision[@]}"; do
+    for repo in $(repo list -p -g ${2}); do
       (
-      export MERGEDREPOS="${TOP}/merged_repos_clo_${group}.txt"
+      qcom_tag="${qcom_group_revision[${2}]}"
+
+      export MERGEDREPOS="${TOP}/merged_repos_clo_${2}.txt"
       # Remove any existing list of merged repos file
       rm -f "${MERGEDREPOS}"
 
-      merge_clo "${group}"
+      merge_clo "${qcom_tag}"
       # Run this to print list of conflicting repos
       cat "${MERGEDREPOS}" | grep -w conflict-merge || true
       read -p "Waiting for conflict resolution before squashing. Press enter when done."
       read -p "Once more, just to be safe"
-      squash_clo_merge "${group}"
-      upload_squash_clo_to_review "${group}"
+      squash_clo_merge "${qcom_tag}"
+      upload_squash_clo_to_review "${qcom_tag}"
 
       unset MERGEDREPOS
       )
@@ -249,11 +249,13 @@ main() {
       )
     done
   elif [ "${1}" = "submit-clo" ]; then
-    for group in "${!qcom_group_revision[@]}"; do
+    for repo in $(repo list -p -g ${2}); do
       (
+      qcom_tag="${qcom_group_revision[${2}]}"
+
       export MERGEDREPOS="${TOP}/merged_repos_clo_${group}.txt"
 
-      push_clo_merge "${group}"
+      push_clo_merge "${qcom_tag}"
 
       unset MERGEDREPOS
       )
