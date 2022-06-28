@@ -12,7 +12,7 @@
 
 # use bash strict mode
 set -euo pipefail
-set -x
+
 
 ### TRAPS ###
 
