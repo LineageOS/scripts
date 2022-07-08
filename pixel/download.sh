@@ -1,4 +1,9 @@
 #!/bin/bash
+
+# SPDX-FileCopyrightText: 2022 The Calyx Institute
+#
+# SPDX-License-Identifier: Apache-2.0
+
 #
 # download:
 #
