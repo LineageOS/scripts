@@ -48,7 +48,7 @@ STAGINGBRANCH="staging/${BRANCHSUFFIX}"
 SQUASHBRANCH="squash/${BRANCHSUFFIX}"
 BRANCH=$(git config --get branch.${STAGINGBRANCH}.merge | sed 's|refs/heads/||')
 if [ -z "${BRANCH}" ]; then
-    BRANCH="${lineageos_branch}"
+    BRANCH="${os_branch}"
 fi
 
 # List of merged repos
