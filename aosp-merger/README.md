@@ -15,7 +15,7 @@
 
 4. Every project in your tree should now be one of:
    * \<newaosptag> if the project was tracking AOSP
-   * a staging branch if the project was a LineageOS fork from AOSP (check `merged_repos.txt` for status and whether there are conflicts to resolve)
+   * a staging branch if the project was a fork from AOSP (check `merged_repos.txt` for status and whether there are conflicts to resolve)
    * the default repo lineage branch for `.repo/manifests/snippets.xml` projects
 5. Restore your local branches and merge in the staging branch:
 
