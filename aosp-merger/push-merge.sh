@@ -39,7 +39,7 @@ TOP="${script_path}/../../.."
 STAGINGBRANCH="staging/${BRANCHSUFFIX}"
 BRANCH=$(git config --get branch.${STAGINGBRANCH}.merge | sed 's|refs/heads/||')
 if [ -z "${BRANCH}" ]; then
-    BRANCH="${lineageos_branch}"
+    BRANCH="${os_branch}"
 fi
 
 # Source build environment (needed for lineageremote)

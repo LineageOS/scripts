@@ -57,7 +57,7 @@ source "${vars_path}/common"
 readonly hook="${script_path}/prepare-commit-msg"
 
 TOP="${script_path}/../../.."
-BRANCH="${lineageos_branch}"
+BRANCH="${os_branch}"
 STAGINGBRANCH="staging/${BRANCHSUFFIX}"
 
 cd "${TOP}/${PROJECTPATH}"
@@ -133,7 +133,7 @@ done
 
 # Check if we've actually changed anything after the merge
 # If we haven't, just abandon the branch
-if [[ -z "$(git diff HEAD m/${lineageos_branch})" && -z "$(git status --porcelain)" ]]; then
+if [[ -z "$(git diff HEAD m/${os_branch})" && -z "$(git status --porcelain)" ]]; then
     echo -e "nochange\t\t${PROJECTPATH}" | tee -a "${MERGEDREPOS}"
     repo abandon "${STAGINGBRANCH}" .
     exit 0
