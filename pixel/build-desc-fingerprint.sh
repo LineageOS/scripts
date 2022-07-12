@@ -64,6 +64,10 @@ main() {
       local mk="$(ls ${top}/device/google/*/lineage_${d}.mk)"
       sed -i "s/${prev_build_id}/${build_id}/g" "${mk}"
       sed -i "s/${prev_build_number}/${build_number}/g" "${mk}"
+      cd "${top}/device/google/${d}"
+      git add lineage_*.mk
+      git commit -m "Update fingerprint/build description from ${build_id}"
+      cd ../../..
     )
   done
 }
