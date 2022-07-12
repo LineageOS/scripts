@@ -53,7 +53,7 @@ source "${vars_path}/common"
 
 TOP="${script_path}/../../.."
 MANIFEST="${TOP}/.repo/manifests/default.xml"
-BRANCH="${lineageos_branch}"
+BRANCH="${os_branch}"
 STAGINGBRANCH="staging/${BRANCHSUFFIX}"
 
 # Source build environment (needed for aospremote)

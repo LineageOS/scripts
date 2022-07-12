@@ -52,74 +52,74 @@ merge_aosp() {
 
 # Merge AOSP to forks
 merge_aosp_forks() {
-  "${script_path}"/merge-aosp-forks.sh --old-tag "${prev_common_aosp_tag}" --new-tag "${common_aosp_tag}" --branch-suffix "${lineageos_branch}_merge-${common_aosp_tag}"
+  "${script_path}"/merge-aosp-forks.sh --old-tag "${prev_common_aosp_tag}" --new-tag "${common_aosp_tag}" --branch-suffix "${os_branch}_merge-${common_aosp_tag}"
 }
 
 squash_aosp_merge() {
-  "${script_path}"/squash.sh --branch-suffix "${lineageos_branch}_merge-${common_aosp_tag}"
+  "${script_path}"/squash.sh --branch-suffix "${os_branch}_merge-${common_aosp_tag}"
 }
 
 upload_squash_aosp_to_review() {
-  "${script_path}"/upload-squash.sh --branch-suffix "${lineageos_branch}_merge-${common_aosp_tag}"
+  "${script_path}"/upload-squash.sh --branch-suffix "${os_branch}_merge-${common_aosp_tag}"
 }
 
 push_aosp_merge() {
-  "${script_path}"/push-merge.sh --branch-suffix "${lineageos_branch}_merge-${common_aosp_tag}"
+  "${script_path}"/push-merge.sh --branch-suffix "${os_branch}_merge-${common_aosp_tag}"
 }
 
 # Merge AOSP to pixel device forks
 merge_pixel_device() {
   for repo in ${device_repos[@]}; do
-    "${script_path}"/_subtree_merge_helper.sh --project-path "${repo}" --old-tag "${prev_aosp_tag}" --new-tag "${aosp_tag}" --branch-suffix "${lineageos_branch}_merge-${aosp_tag}"
+    "${script_path}"/_subtree_merge_helper.sh --project-path "${repo}" --old-tag "${prev_aosp_tag}" --new-tag "${aosp_tag}" --branch-suffix "${os_branch}_merge-${aosp_tag}"
   done
 }
 
 squash_pixel_device() {
-  "${script_path}"/squash.sh --new-tag "${aosp_tag}" --branch-suffix "${lineageos_branch}_merge-${aosp_tag}" --pixel
+  "${script_path}"/squash.sh --new-tag "${aosp_tag}" --branch-suffix "${os_branch}_merge-${aosp_tag}" --pixel
 }
 
 upload_squash_device_to_review() {
-  "${script_path}"/upload-squash.sh --branch-suffix "${lineageos_branch}_merge-${aosp_tag}" --pixel
+  "${script_path}"/upload-squash.sh --branch-suffix "${os_branch}_merge-${aosp_tag}" --pixel
 }
 
 push_device_merge() {
-  "${script_path}"/push-merge.sh --branch-suffix "${lineageos_branch}_merge-${aosp_tag}"
+  "${script_path}"/push-merge.sh --branch-suffix "${os_branch}_merge-${aosp_tag}"
 }
 
 # Merge AOSP to pixel kernel forks
 merge_pixel_kernel() {
   for repo in ${device_kernel_repos}; do
-    "${script_path}"/_subtree_merge_helper.sh --project-path "${repo}" --old-tag "${prev_kernel_tag}" --new-tag "${kernel_tag}" --branch-suffix "${lineageos_branch}_merge-${kernel_tag}"
+    "${script_path}"/_subtree_merge_helper.sh --project-path "${repo}" --old-tag "${prev_kernel_tag}" --new-tag "${kernel_tag}" --branch-suffix "${os_branch}_merge-${kernel_tag}"
   done
 }
 
 squash_pixel_kernel() {
-  "${script_path}"/squash.sh --new-tag "${kernel_tag}" --branch-suffix "${lineageos_branch}_merge-${kernel_tag}" --pixel
+  "${script_path}"/squash.sh --new-tag "${kernel_tag}" --branch-suffix "${os_branch}_merge-${kernel_tag}" --pixel
 }
 
 upload_squash_kernel_to_review() {
-  "${script_path}"/upload-squash.sh --branch-suffix "${lineageos_branch}_merge-${kernel_tag}" --pixel
+  "${script_path}"/upload-squash.sh --branch-suffix "${os_branch}_merge-${kernel_tag}" --pixel
 }
 
 push_kernel_merge() {
-  "${script_path}"/push-merge.sh --branch-suffix "${lineageos_branch}_merge-${kernel_tag}"
+  "${script_path}"/push-merge.sh --branch-suffix "${os_branch}_merge-${kernel_tag}"
 }
 
 # Merge CLO to forks
 merge_clo() {
-  "${script_path}"/_merge_helper.sh --project-path "${repo}" --new-tag "${1}" --branch-suffix "${lineageos_branch}_merge-${1}"
+  "${script_path}"/_merge_helper.sh --project-path "${repo}" --new-tag "${1}" --branch-suffix "${os_branch}_merge-${1}"
 }
 
 squash_clo_merge() {
-  "${script_path}"/squash.sh --new-tag "${1}" --branch-suffix "${lineageos_branch}_merge-${1}"
+  "${script_path}"/squash.sh --new-tag "${1}" --branch-suffix "${os_branch}_merge-${1}"
 }
 
 upload_squash_clo_to_review() {
-  "${script_path}"/upload-squash.sh --new-tag "${1}" --branch-suffix "${lineageos_branch}_merge-${1}"
+  "${script_path}"/upload-squash.sh --new-tag "${1}" --branch-suffix "${os_branch}_merge-${1}"
 }
 
 push_clo_merge() {
-  "${script_path}"/push-merge.sh --branch-suffix "${lineageos_branch}_merge-${1}"
+  "${script_path}"/push-merge.sh --branch-suffix "${os_branch}_merge-${1}"
 }
 
 # error message
