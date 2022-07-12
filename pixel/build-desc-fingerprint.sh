@@ -22,15 +22,12 @@ set -euo pipefail
 ### TRAPS ###
 
 # trap signals for clean exit
-trap 'rm -rf ${tmp_dir} && exit $?' EXIT
 trap 'error_m interrupted!' SIGINT
 
 ### CONSTANTS ###
 readonly script_path="$(cd "$(dirname "$0")";pwd -P)"
 readonly vars_path="${script_path}/../../../vendor/lineage/vars"
 readonly top="${script_path}/../../.."
-
-readonly tmp_dir="${TMPDIR:-/tmp}/pixel"
 
 source "${vars_path}/pixels"
 
@@ -55,7 +52,6 @@ help_message() {
 }
 
 main() {
-  mkdir -p "${tmp_dir}"
   if [[ $# -ne 0 ]]; then
     local ds="${@}"
   else
