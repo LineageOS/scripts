@@ -59,13 +59,13 @@ STAGINGBRANCH="staging/${BRANCHSUFFIX}"
 # Source build environment (needed for aospremote)
 source "${TOP}/build/envsetup.sh"
 
-# Build list of LineageOS forked repos
+# Build list of forked repos
 PROJECTPATHS=$(grep "name=\"LineageOS/" "${MANIFEST}" | sed -n 's/.*path="\([^"]\+\)".*/\1/p')
 
 echo "#### Old tag = ${OLDTAG} Branch = ${BRANCH} Staging branch = ${STAGINGBRANCH} ####"
 
 # Make sure manifest and forked repos are in a consistent state
-echo "#### Verifying there are no uncommitted changes on LineageOS forked AOSP projects ####"
+echo "#### Verifying there are no uncommitted changes on forked AOSP projects ####"
 for PROJECTPATH in ${PROJECTPATHS} .repo/manifests; do
     cd "${TOP}/${PROJECTPATH}"
     aospremote | grep -v "Remote 'aosp' created"
