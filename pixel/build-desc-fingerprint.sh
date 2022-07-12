@@ -62,6 +62,7 @@ main() {
     local ds="${devices[@]}"
   fi
 
+  # Update the makefiles
   for d in ${ds}; do
     (
       local dv="${vars_path}/${d}"
@@ -69,6 +70,18 @@ main() {
       local mk="$(ls ${top}/device/google/*/lineage_${d}.mk)"
       sed -i "s/${prev_build_id}/${build_id}/g" "${mk}"
       sed -i "s/${prev_build_number}/${build_number}/g" "${mk}"
+    )
+  done
+
+  # Commit the changes
+  for d in ${ds}; do
+    (
+      local dv="${vars_path}/${d}"
+      source "${dv}"
+      cd "${top}/device/google/${d}"
+      if [[ -n "$(git status --porcelain)" ]]; then
+        git commit -a -m "Update fingerprint/build description from ${build_id}"
+      fi
     )
   done
 }
