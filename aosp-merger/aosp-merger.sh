@@ -201,25 +201,26 @@ main() {
       )
     done
   elif [ "${1}" = "clo" ]; then
+    qcom_tag="${qcom_group_revision[${2}]}"
+
+    export MERGEDREPOS="${TOP}/merged_repos_clo_${2}.txt"
+    # Remove any existing list of merged repos file
+    rm -f "${MERGEDREPOS}"
+
     for repo in $(repo list -p -g ${2}); do
       (
-      qcom_tag="${qcom_group_revision[${2}]}"
-
-      export MERGEDREPOS="${TOP}/merged_repos_clo_${2}.txt"
-      # Remove any existing list of merged repos file
-      rm -f "${MERGEDREPOS}"
-
       merge_clo "${qcom_tag}"
-      # Run this to print list of conflicting repos
-      cat "${MERGEDREPOS}" | grep -w conflict-merge || true
-      read -p "Waiting for conflict resolution before squashing. Press enter when done."
-      read -p "Once more, just to be safe"
-      squash_clo_merge "${qcom_tag}"
-      upload_squash_clo_to_review "${qcom_tag}"
-
-      unset MERGEDREPOS
       )
     done
+
+    # Run this to print list of conflicting repos
+    cat "${MERGEDREPOS}" | grep -w conflict-merge || true
+    read -p "Waiting for conflict resolution before squashing. Press enter when done."
+    read -p "Once more, just to be safe"
+    squash_clo_merge "${qcom_tag}"
+    upload_squash_clo_to_review "${qcom_tag}"
+
+    unset MERGEDREPOS
   elif [ "${1}" = "submit-platform" ]; then
     export MERGEDREPOS="${TOP}/merged_repos.txt"
 
@@ -249,17 +250,13 @@ main() {
       )
     done
   elif [ "${1}" = "submit-clo" ]; then
-    for repo in $(repo list -p -g ${2}); do
-      (
-      qcom_tag="${qcom_group_revision[${2}]}"
+    qcom_tag="${qcom_group_revision[${2}]}"
 
-      export MERGEDREPOS="${TOP}/merged_repos_clo_${group}.txt"
+    export MERGEDREPOS="${TOP}/merged_repos_clo_${2}.txt"
 
-      push_clo_merge "${qcom_tag}"
+    push_clo_merge "${qcom_tag}"
 
-      unset MERGEDREPOS
-      )
-    done
+    unset MERGEDREPOS
   fi
 }
 
