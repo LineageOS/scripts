@@ -57,6 +57,10 @@ source "${vars_path}/common"
 readonly hook="${script_path}/prepare-commit-msg"
 
 TOP="${script_path}/../../.."
+
+# Source build environment (needed for lineageremote)
+source "${TOP}/build/envsetup.sh"
+
 BRANCH="${os_branch}"
 STAGINGBRANCH="staging/${BRANCHSUFFIX}"
 
@@ -67,6 +71,7 @@ repo start "${STAGINGBRANCH}" .
 if [ -f ".gitupstream" ]; then
     git fetch -q --force --tags "$(cat .gitupstream)" "${NEWTAG}"
 else
+    aospremote | grep -v "Remote 'aosp' created"
     git fetch -q --force --tags aosp "${NEWTAG}"
 fi
 
