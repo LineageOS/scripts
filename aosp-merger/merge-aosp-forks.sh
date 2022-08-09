@@ -56,9 +56,6 @@ MANIFEST="${TOP}/.repo/manifests/default.xml"
 BRANCH="${os_branch}"
 STAGINGBRANCH="staging/${BRANCHSUFFIX}"
 
-# Source build environment (needed for aospremote)
-source "${TOP}/build/envsetup.sh"
-
 # Build list of forked repos
 PROJECTPATHS=$(grep "name=\"LineageOS/" "${MANIFEST}" | sed -n 's/.*path="\([^"]\+\)".*/\1/p')
 
@@ -68,7 +65,6 @@ echo "#### Old tag = ${OLDTAG} Branch = ${BRANCH} Staging branch = ${STAGINGBRAN
 echo "#### Verifying there are no uncommitted changes on forked AOSP projects ####"
 for PROJECTPATH in ${PROJECTPATHS} .repo/manifests; do
     cd "${TOP}/${PROJECTPATH}"
-    aospremote | grep -v "Remote 'aosp' created"
     if [[ -n "$(git status --porcelain)" ]]; then
         echo "Path ${PROJECTPATH} has uncommitted changes. Please fix."
         exit 1
