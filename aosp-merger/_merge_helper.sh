@@ -67,6 +67,7 @@ repo start "${STAGINGBRANCH}" .
 if [ -f ".gitupstream" ]; then
     git fetch -q --force --tags "$(cat .gitupstream)" "${NEWTAG}"
 else
+    aospremote | grep -v "Remote 'aosp' created"
     git fetch -q --force --tags aosp "${NEWTAG}"
 fi
 
