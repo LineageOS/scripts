@@ -133,6 +133,23 @@ def extract_elements(carrier_config_element, config):
                 'item',
             )
             carrier_config_item.set('value', str(value))
+    elif value_type == 'bundle':
+        carrier_config_subelement = ET.SubElement(
+            carrier_config_element,
+            'bundle',
+        )
+        for value in getattr(config, value_type).config:
+            extract_elements(carrier_config_subelement, value)
+    elif value_type == 'double_value':
+        carrier_config_subelement = ET.SubElement(
+            carrier_config_element,
+            'double',
+        )
+        carrier_config_subelement.set('name', config.key)
+        carrier_config_subelement.set(
+            'value',
+            str(getattr(config, value_type)),
+        )
     else:
         raise TypeError("Unknown value type: {}".format(value_type))
 

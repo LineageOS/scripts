@@ -180,6 +180,8 @@ message CarrierConfig {
       bool bool_value = 5;
       TextArray text_array = 6;
       IntArray int_array = 7;
+      CarrierConfig bundle = 8;
+      double double_value = 9;
     }
   }
 
