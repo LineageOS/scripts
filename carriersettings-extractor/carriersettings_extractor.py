@@ -43,28 +43,106 @@ def parse_args():
     return parser.parse_args()
 
 
+unwanted_configs = [
+                    # Anything where the value is a package name
+                    "carrier_app_wake_signal_config",
+                    "carrier_settings_activity_component_name_string",
+                    "carrier_setup_app_string",
+                    "config_ims_package_override_string",
+                    "enable_apps_string_array",
+                    "gps.nfw_proxy_apps",
+                    "smart_forwarding_config_component_name_string",
+                    "wfc_emergency_address_carrier_app_string",
+                    # Always allow editing APNs
+                    "apn_expand_bool",
+                    "allow_adding_apns_bool",
+                    "read_only_apn_types_string_array",
+                    "read_only_apn_fields_string_array"]
+
+
+def extract_elements(carrier_config_element, config):
+    if config.key in unwanted_configs:
+        return
+    value_type = config.WhichOneof('value')
+    if value_type == 'text_value':
+        carrier_config_subelement = ET.SubElement(
+            carrier_config_element,
+            'string',
+        )
+        carrier_config_subelement.set('name', config.key)
+        carrier_config_subelement.text = getattr(config, value_type)
+    elif value_type == 'int_value':
+        carrier_config_subelement = ET.SubElement(
+            carrier_config_element,
+            'int',
+        )
+        carrier_config_subelement.set('name', config.key)
+        carrier_config_subelement.set(
+            'value',
+            str(getattr(config, value_type)),
+        )
+    elif value_type == 'long_value':
+        carrier_config_subelement = ET.SubElement(
+            carrier_config_element,
+            'long',
+        )
+        carrier_config_subelement.set('name', config.key)
+        carrier_config_subelement.set(
+            'value',
+            str(getattr(config, value_type)),
+        )
+    elif value_type == "bool_value":
+        carrier_config_subelement = ET.SubElement(
+            carrier_config_element,
+            'boolean',
+        )
+        carrier_config_subelement.set('name', config.key)
+        carrier_config_subelement.set(
+            'value',
+            str(getattr(config, value_type)).lower(),
+        )
+    elif value_type == 'text_array':
+        carrier_config_subelement = ET.SubElement(
+            carrier_config_element,
+            'string-array',
+        )
+        carrier_config_subelement.set('name', config.key)
+        carrier_config_subelement.set(
+            'num',
+            str(len(getattr(config, value_type).item)),
+        )
+        for value in getattr(config, value_type).item:
+            carrier_config_item = ET.SubElement(
+                carrier_config_subelement,
+                'item',
+            )
+            carrier_config_item.set('value', value)
+    elif value_type == 'int_array':
+        carrier_config_subelement = ET.SubElement(
+            carrier_config_element,
+            'int-array',
+        )
+        carrier_config_subelement.set('name', config.key)
+        carrier_config_subelement.set(
+            'num',
+            str(len(getattr(config, value_type).item)),
+        )
+        for value in getattr(config, value_type).item:
+            carrier_config_item = ET.SubElement(
+                carrier_config_subelement,
+                'item',
+            )
+            carrier_config_item.set('value', str(value))
+    else:
+        raise TypeError("Unknown value type: {}".format(value_type))
+
+
 def main():
     args = parse_args()
 
     input_folder = args.input
     apns_folder = args.apns
     vendor_folder = args.vendor
-
-    unwanted_configs = [
-                        # Anything where the value is a package name
-                        "carrier_app_wake_signal_config",
-                        "carrier_settings_activity_component_name_string",
-                        "carrier_setup_app_string",
-                        "config_ims_package_override_string",
-                        "enable_apps_string_array",
-                        "gps.nfw_proxy_apps",
-                        "smart_forwarding_config_component_name_string",
-                        "wfc_emergency_address_carrier_app_string",
-                        # Always allow editing APNs
-                        "apn_expand_bool",
-                        "allow_adding_apns_bool",
-                        "read_only_apn_types_string_array",
-                        "read_only_apn_fields_string_array"]
 
     carrier_id_list = CarrierIdList()
     carrier_attribute_map = {}
@@ -237,80 +315,7 @@ def main():
                         getattr(entry.carrier_id[0], field),
                     )
             for config in setting.configs.config:
-                if config.key in unwanted_configs:
-                    continue
-                value_type = config.WhichOneof('value')
-                if value_type == 'text_value':
-                    carrier_config_subelement = ET.SubElement(
-                        carrier_config_element,
-                        'string',
-                    )
-                    carrier_config_subelement.set('name', config.key)
-                    carrier_config_subelement.text = getattr(config, value_type)
-                elif value_type == 'int_value':
-                    carrier_config_subelement = ET.SubElement(
-                        carrier_config_element,
-                        'int',
-                    )
-                    carrier_config_subelement.set('name', config.key)
-                    carrier_config_subelement.set(
-                        'value',
-                        str(getattr(config, value_type)),
-                    )
-                elif value_type == 'long_value':
-                    carrier_config_subelement = ET.SubElement(
-                        carrier_config_element,
-                        'long',
-                    )
-                    carrier_config_subelement.set('name', config.key)
-                    carrier_config_subelement.set(
-                        'value',
-                        str(getattr(config, value_type)),
-                    )
-                elif value_type == "bool_value":
-                    carrier_config_subelement = ET.SubElement(
-                        carrier_config_element,
-                        'boolean',
-                    )
-                    carrier_config_subelement.set('name', config.key)
-                    carrier_config_subelement.set(
-                        'value',
-                        str(getattr(config, value_type)).lower(),
-                    )
-                elif value_type == 'text_array':
-                    carrier_config_subelement = ET.SubElement(
-                        carrier_config_element,
-                        'string-array',
-                    )
-                    carrier_config_subelement.set('name', config.key)
-                    carrier_config_subelement.set(
-                        'num',
-                        str(len(getattr(config, value_type).item)),
-                    )
-                    for value in getattr(config, value_type).item:
-                        carrier_config_item = ET.SubElement(
-                            carrier_config_subelement,
-                            'item',
-                        )
-                        carrier_config_item.set('value', value)
-                elif value_type == 'int_array':
-                    carrier_config_subelement = ET.SubElement(
-                        carrier_config_element,
-                        'int-array',
-                    )
-                    carrier_config_subelement.set('name', config.key)
-                    carrier_config_subelement.set(
-                        'num',
-                        str(len(getattr(config, value_type).item)),
-                    )
-                    for value in getattr(config, value_type).item:
-                        carrier_config_item = ET.SubElement(
-                            carrier_config_subelement,
-                            'item',
-                        )
-                        carrier_config_item.set('value', str(value))
-                else:
-                    raise TypeError("Unknown value type: {}".format(value_type))
+                extract_elements(carrier_config_element, config)
 
         f.write('</apns>\n')
 
