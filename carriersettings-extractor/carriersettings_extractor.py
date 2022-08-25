@@ -233,7 +233,9 @@ def main():
                 if self.apn.HasField(field):
                     enum_type = self.apn.DESCRIPTOR.fields_by_name[field].enum_type
                     value = getattr(self.apn, field)
-                    if enum_type is None:
+                    if key == 'skip_464xlat':
+                        self.attributes[key] = str(value - 1)
+                    elif enum_type is None:
                         if isinstance(value, bool):
                             self.attributes[key] = str(value).lower()
                         else:
