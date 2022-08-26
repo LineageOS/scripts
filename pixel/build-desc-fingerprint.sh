@@ -74,7 +74,8 @@ main() {
     (
       local dv="${vars_path}/${d}"
       source "${dv}"
-      cd "${top}/device/google/${d}"
+      local dir="$(ls ${top}/device/google/*/lineage_${d}.mk | sed s#/lineage_${d}.mk##)"
+      cd "${dir}"
       if [[ -n "$(git status --porcelain)" ]]; then
         git commit -a -m "Update fingerprint/build description from ${build_id}"
       fi
