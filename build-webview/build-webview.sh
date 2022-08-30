@@ -2,8 +2,8 @@
 
 set -e
 
-chromium_version="104.0.5112.97"
-chromium_code="5112097"
+chromium_version="105.0.5195.68"
+chromium_code="5195068"
 clean=0
 gsync=0
 supported_archs=(arm arm64 x86 x64)
@@ -123,6 +123,13 @@ if [ ! -d src ]; then
     yes | gclient sync -D -R -r $chromium_version
 fi
 
+# Apply our patches
+if [ $gsync -eq 1 ]; then
+    ( cd src
+      git am ../android_external_chromium-webview/patches/*.patch
+    )
+fi
+
 if [ $gsync -eq 1 ]; then
     find src -name index.lock -delete
     yes | gclient sync -R -r $chromium_version
@@ -136,11 +143,6 @@ cp chrome/android/java/res_chromium_base/mipmap-hdpi/app_icon.png android_webvie
 cp chrome/android/java/res_chromium_base/mipmap-xhdpi/app_icon.png android_webview/nonembedded/java/res_icon/drawable-xhdpi/icon_webview.png
 cp chrome/android/java/res_chromium_base/mipmap-xxhdpi/app_icon.png android_webview/nonembedded/java/res_icon/drawable-xxhdpi/icon_webview.png
 cp chrome/android/java/res_chromium_base/mipmap-xxxhdpi/app_icon.png android_webview/nonembedded/java/res_icon/drawable-xxxhdpi/icon_webview.png
-
-# Apply our patches
-if [ $gsync -eq 1 ]; then
-    git am ../android_external_chromium-webview/patches/*.patch
-fi
 
 # Build args
 args='target_os="android"'
