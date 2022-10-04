@@ -181,11 +181,12 @@ main() {
   elif [ "${1}" = "kernels" ]; then
     for kernel in ${kernel_repos[@]}; do
       (
-      source "${vars_path}/${kernel}"
+      readonly kernel_short="$(echo ${kernel} | cut -d / -f 3)"
+      source "${vars_path}/${kernel_short}"
 
-      readonly device_kernel_repos="kernel/google/${kernel}"
+      readonly device_kernel_repos="${kernel}"
 
-      export MERGEDREPOS="${TOP}/merged_repos_${kernel}_kernel.txt"
+      export MERGEDREPOS="${TOP}/merged_repos_${kernel_short}_kernel.txt"
       # Remove any existing list of merged repos file
       rm -f "${MERGEDREPOS}"
 
