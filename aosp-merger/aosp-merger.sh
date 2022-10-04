@@ -88,9 +88,7 @@ push_device_merge() {
 
 # Merge AOSP to pixel kernel forks
 merge_pixel_kernel() {
-  for repo in ${device_kernel_repos}; do
-    "${script_path}"/_subtree_merge_helper.sh --project-path "${repo}" --old-tag "${prev_kernel_tag}" --new-tag "${kernel_tag}" --branch-suffix "${device_branch}_merge-${kernel_tag}"
-  done
+  "${script_path}"/_subtree_merge_helper.sh --project-path "${device_kernel_repo}" --old-tag "${prev_kernel_tag}" --new-tag "${kernel_tag}" --branch-suffix "${device_branch}_merge-${kernel_tag}"
 }
 
 squash_pixel_kernel() {
@@ -181,11 +179,12 @@ main() {
   elif [ "${1}" = "kernels" ]; then
     for kernel in ${kernel_repos[@]}; do
       (
-      source "${vars_path}/${kernel}"
+      readonly kernel_short="$(echo ${kernel} | cut -d / -f 3)"
+      source "${vars_path}/${kernel_short}"
 
-      readonly device_kernel_repos="kernel/google/${kernel}"
+      readonly device_kernel_repo="${kernel}"
 
-      export MERGEDREPOS="${TOP}/merged_repos_${kernel}_kernel.txt"
+      export MERGEDREPOS="${TOP}/merged_repos_${kernel_short}_kernel.txt"
       # Remove any existing list of merged repos file
       rm -f "${MERGEDREPOS}"
 
@@ -241,8 +240,9 @@ main() {
   elif [ "${1}" = "submit-kernels" ]; then
     for kernel in ${kernel_repos[@]}; do
       (
-      source "${vars_path}/${kernel}"
-      export MERGEDREPOS="${TOP}/merged_repos_${kernel}_kernel.txt"
+      readonly kernel_short="$(echo ${kernel} | cut -d / -f 3)"
+      source "${vars_path}/${kernel_short}"
+      export MERGEDREPOS="${TOP}/merged_repos_${kernel_short}_kernel.txt"
 
       push_kernel_merge
 
