@@ -142,8 +142,7 @@ main() {
     merge_aosp_forks
     # Run this to print list of conflicting repos
     cat "${MERGEDREPOS}" | grep -w conflict-merge || true
-    read -p "Waiting for conflict resolution before squashing. Press enter when done."
-    read -p "Once more, just to be safe"
+    read -p "Waiting for conflict resolution. Press enter when done."
     squash_aosp_merge
     upload_squash_aosp_to_review
     echo "Don't forget to update the manifest!"
@@ -168,8 +167,7 @@ main() {
       merge_pixel_device
       # Run this to print list of conflicting repos
       cat "${MERGEDREPOS}" | grep -w conflict-merge || true
-      read -p "Waiting for conflict resolution before squashing. Press enter when done."
-      read -p "Once more, just to be safe"
+      read -p "Waiting for conflict resolution. Press enter when done."
       squash_pixel_device
       upload_squash_device_to_review
 
@@ -191,8 +189,7 @@ main() {
       merge_pixel_kernel
       # Run this to print list of conflicting repos
       cat "${MERGEDREPOS}" | grep -w conflict-merge || true
-      read -p "Waiting for conflict resolution before squashing. Press enter when done."
-      read -p "Once more, just to be safe"
+      read -p "Waiting for conflict resolution. Press enter when done."
       squash_pixel_kernel
       upload_squash_kernel_to_review
 
@@ -214,8 +211,7 @@ main() {
 
     # Run this to print list of conflicting repos
     cat "${MERGEDREPOS}" | grep -w conflict-merge || true
-    read -p "Waiting for conflict resolution before squashing. Press enter when done."
-    read -p "Once more, just to be safe"
+    read -p "Waiting for conflict resolution. Press enter when done."
     squash_clo_merge "${qcom_tag}"
     upload_squash_clo_to_review "${qcom_tag}"
 
