@@ -55,11 +55,11 @@ merge_aosp_forks() {
   "${script_path}"/merge-aosp-forks.sh --old-tag "${prev_common_aosp_tag}" --new-tag "${common_aosp_tag}" --branch-suffix "${os_branch}_merge-${common_aosp_tag}"
 }
 
-squash_aosp_merge() {
+post_aosp_merge() {
   "${script_path}"/squash.sh --branch-suffix "${os_branch}_merge-${common_aosp_tag}"
 }
 
-upload_squash_aosp_to_review() {
+upload_aosp_merge_to_review() {
   "${script_path}"/upload-squash.sh --branch-suffix "${os_branch}_merge-${common_aosp_tag}"
 }
 
@@ -74,11 +74,11 @@ merge_pixel_device() {
   done
 }
 
-squash_pixel_device() {
+post_pixel_device_merge() {
   "${script_path}"/squash.sh --new-tag "${aosp_tag}" --branch-suffix "${device_branch}_merge-${aosp_tag}" --pixel
 }
 
-upload_squash_device_to_review() {
+upload_pixel_device_to_review() {
   "${script_path}"/upload-squash.sh --branch-suffix "${device_branch}_merge-${aosp_tag}" --pixel
 }
 
@@ -91,11 +91,11 @@ merge_pixel_kernel() {
   "${script_path}"/_subtree_merge_helper.sh --project-path "${device_kernel_repo}" --old-tag "${prev_kernel_tag}" --new-tag "${kernel_tag}" --branch-suffix "${device_branch}_merge-${kernel_tag}"
 }
 
-squash_pixel_kernel() {
+post_pixel_kernel_merge() {
   "${script_path}"/squash.sh --new-tag "${kernel_tag}" --branch-suffix "${device_branch}_merge-${kernel_tag}" --pixel
 }
 
-upload_squash_kernel_to_review() {
+upload_pixel_kernel_to_review() {
   "${script_path}"/upload-squash.sh --branch-suffix "${device_branch}_merge-${kernel_tag}" --pixel
 }
 
@@ -143,8 +143,8 @@ main() {
     # Run this to print list of conflicting repos
     cat "${MERGEDREPOS}" | grep -w conflict-merge || true
     read -p "Waiting for conflict resolution. Press enter when done."
-    squash_aosp_merge
-    upload_squash_aosp_to_review
+    post_aosp_merge
+    upload_aosp_merge_to_review
     echo "Don't forget to update the manifest!"
 
     unset MERGEDREPOS
@@ -168,8 +168,8 @@ main() {
       # Run this to print list of conflicting repos
       cat "${MERGEDREPOS}" | grep -w conflict-merge || true
       read -p "Waiting for conflict resolution. Press enter when done."
-      squash_pixel_device
-      upload_squash_device_to_review
+      post_pixel_device_merge
+      upload_pixel_device_to_review
 
       unset MERGEDREPOS
       )
@@ -190,8 +190,8 @@ main() {
       # Run this to print list of conflicting repos
       cat "${MERGEDREPOS}" | grep -w conflict-merge || true
       read -p "Waiting for conflict resolution. Press enter when done."
-      squash_pixel_kernel
-      upload_squash_kernel_to_review
+      post_pixel_kernel_merge
+      upload_pixel_kernel_to_review
 
       unset MERGEDREPOS
       )
