@@ -313,7 +313,11 @@ def main():
         f.write('<apns version="8">\n\n')
 
         for entry in carrier_list.entry:
-            setting = all_settings[entry.canonical_name]
+            try:
+                setting = all_settings[entry.canonical_name]
+            except KeyError:
+                print("Skipping " + entry.canonical_name, file=sys.stderr)
+                continue
             for apn in setting.apns.apn:
                 f.write('  <apn carrier={}\n'.format(quoteattr(apn.name)))
                 apn_element = ApnElement(apn, entry.carrier_id[0])
