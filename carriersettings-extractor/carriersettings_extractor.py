@@ -136,7 +136,7 @@ def extract_elements(carrier_config_element, config):
     elif value_type == 'bundle':
         carrier_config_subelement = ET.SubElement(
             carrier_config_element,
-            'bundle',
+            'pbundle_as_map',
         )
         for value in getattr(config, value_type).config:
             extract_elements(carrier_config_subelement, value)
