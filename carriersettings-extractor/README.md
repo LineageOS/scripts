@@ -20,11 +20,11 @@ Convert `CarrierSettings/*.pb` to `apns-full-conf.xml` and `vendor.xml`.
 
 ## Protobuf definitions
 
-The definitions in [`carriersettings.proto`](carriersettings.proto) are useful for inspecting the CarrierSettings protobuf files.
+The definitions in [`carrier_list.proto`](carrier_list.proto) and [`carrier_settings.proto`](carrier_settings.proto) are useful for inspecting the CarrierSettings protobuf files.
 
-    protoc --decode=CarrierList carriersettings.proto < CarrierSettings/carrier_list.pb
-    protoc --decode=CarrierSettings carriersettings.proto < CarrierSettings/verizon_us.pb
-    protoc --decode=MultiCarrierSettings carriersettings.proto < CarrierSettings/others.pb
+    protoc --decode=com.google.carrier.CarrierList carrier_list.proto < CarrierSettings/carrier_list.pb
+    protoc --decode=com.google.carrier.CarrierSettings carrier_settings.proto < CarrierSettings/verizon_us.pb
+    protoc --decode=com.google.carrier.MultiCarrierSettings carrier_settings.proto < CarrierSettings/others.pb
 
 To check schema or otherwise inspect the protobuf files without applying definitions, use the `--decode_raw` argument.
 
