@@ -138,6 +138,7 @@ def extract_elements(carrier_config_element, config):
             carrier_config_element,
             'pbundle_as_map',
         )
+        carrier_config_subelement.set('name', config.key)
         for value in getattr(config, value_type).config:
             extract_elements(carrier_config_subelement, value)
     elif value_type == 'double_value':
