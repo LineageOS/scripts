@@ -80,7 +80,7 @@ chmod +x .git/hooks/prepare-commit-msg
 
 if [ ! -z "${OLDTAG}" ]; then
     # Was there any change upstream? Skip if not.
-    if [[ -z "$(git diff ${OLDTAG} ${NEWTAG})" ]]; then
+    if [[ -z "$(git diff --no-ext-diff ${OLDTAG} ${NEWTAG})" ]]; then
         echo -e "nochange\t\t${PROJECTPATH}" | tee -a "${MERGEDREPOS}"
         repo abandon "${STAGINGBRANCH}" .
         exit 0
@@ -101,7 +101,7 @@ CONFLICT=""
 echo "#### Merging ${NEWTAG} into ${PROJECTPATH} ####"
 git merge --no-commit --log "${NEWTAG}"
 
-if [[ -z "$(git diff HEAD)" ]]; then
+if [[ -z "$(git diff --no-ext-diff HEAD)" ]]; then
     echo "#### Skipping empty merge ####"
     git reset --hard
 else
@@ -119,7 +119,7 @@ for subtree in `find -mindepth 2 -type f -name .gitupstream | cut -d / -f 2- | s
     git fetch -q --force --tags "$(cat ${gitupstream})" "${NEWTAG}"
     git merge -X subtree="$subtree" --no-commit --log "${NEWTAG}"
 
-    if [[ -z "$(git diff HEAD)" ]]; then
+    if [[ -z "$(git diff --no-ext-diff HEAD)" ]]; then
         echo "#### Skipping empty merge on ${subtree} ####"
         git reset --hard
         continue
@@ -138,7 +138,7 @@ done
 
 # Check if we've actually changed anything after the merge
 # If we haven't, just abandon the branch
-if [[ -z "$(git diff HEAD m/${os_branch})" && -z "$(git status --porcelain)" ]]; then
+if [[ -z "$(git diff --no-ext-diff HEAD m/${os_branch})" && -z "$(git status --porcelain)" ]]; then
     echo -e "nochange\t\t${PROJECTPATH}" | tee -a "${MERGEDREPOS}"
     repo abandon "${STAGINGBRANCH}" .
     exit 0
