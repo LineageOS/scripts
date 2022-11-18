@@ -66,6 +66,8 @@ def background(q, e, s):
             if e.is_set():
                 break
         else:
+            if tc is None:
+                tc = 0;
             if not s:
                 print("%s has %d lines changed" % (tn, tc))
             if best > tc:
