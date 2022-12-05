@@ -81,6 +81,7 @@ main() {
       sed -i "/ ota_sha256=/c\readonly ota_sha256=\"$new_ota_sha256\"" "${dv}"
       sed -i "/ security_patch=/c\readonly security_patch=\"$new_security_patch\"" "${dv}"
     )
+    sleep 10s
   done
 }
 
