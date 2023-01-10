@@ -15,7 +15,7 @@
 
 4. Every project in your tree should now be one of:
    * \<newaosptag> if the project was tracking AOSP
-   * a staging branch if the project was a LineageOS fork from AOSP (check `merged_repos.txt` for status and whether there are conflicts to resolve)
+   * a staging branch if the project was a fork from AOSP (check `merged_repos.txt` for status and whether there are conflicts to resolve)
    * the default repo lineage branch for `.repo/manifests/snippets.xml` projects
 5. Restore your local branches and merge in the staging branch:
 
@@ -28,6 +28,4 @@
 # TODO
 
 * Make it work for rebase (I'm sure it'll need fixups).
-* Create squashed gerrits for each merge.
-* Abandon squashed gerrits and push each merge automatically.
-* DONE. Instead of merging the staging branch into your local branch (if you have one), create a new branch for the local+staging merge.
+* Instead of merging the staging branch into your local branch (if you have one), create a new branch for the local+staging merge.
