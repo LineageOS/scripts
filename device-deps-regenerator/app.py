@@ -72,7 +72,7 @@ other_repos = set()
 
 with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as executor:
     for repo in g.get_organization('LineageOS').get_repos():
-        if '_device_' not in repo.name:
+        if '_device_' not in repo.name and '_hardware_' not in repo.name:
             continue
         print(n, repo.name)
         n += 1
