@@ -41,7 +41,7 @@ def get_cm_dependencies(repo):
         return None
     blob_sha = None
     for el in tree.tree:
-        if el.path == 'cm.dependencies' or el.path == 'lineage.dependencies':
+        if el.path == 'lineage.dependencies':
             blob_sha = el.sha
             break
 
