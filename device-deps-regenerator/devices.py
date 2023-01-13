@@ -5,7 +5,7 @@ with open('out.json') as f:
 
 devices = {}
 suffixes = {}
-blacklist = ['sepolicy', 'devicesettings', 'common', 'atv', 'redbull', 'raviole', 'gs101', 'pantah', 'gs201']
+ignorelist = ['sepolicy', 'devicesettings', 'common', 'atv', 'redbull', 'raviole', 'gs101', 'pantah', 'gs201']
 
 def simplify_reverse_deps(repo, device):
     # repo['branch'] = cm-14.1 or cm-14.1-caf or cm-14.1-sony
@@ -23,7 +23,7 @@ def simplify_reverse_deps(repo, device):
     return res
 
 for repo in mapping:
-    if 'device' not in repo or any(x in repo for x in blacklist):
+    if 'device' not in repo or any(x in repo for x in ignorelist):
         continue
     codename = repo.split('_', maxsplit=3)[-1]
     if codename in devices:
