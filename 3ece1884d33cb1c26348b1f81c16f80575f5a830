@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbf8b956_aed0a347",
+        "filename": "device-deps-regenerator/app.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2023-01-13T00:55:14Z",
+      "side": 0,
+      "message": "Not sure if this change makes any difference in this case.",
+      "range": {
+        "startLine": 15,
+        "startChar": 37,
+        "endLine": 15,
+        "endChar": 49
+      },
+      "revId": "3ece1884d33cb1c26348b1f81c16f80575f5a830",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
