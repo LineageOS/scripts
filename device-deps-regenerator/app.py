@@ -5,6 +5,7 @@ import json
 import traceback
 
 from github import Github
+from github import GithubRetry
 from base64 import b64decode
 
 parser = argparse.ArgumentParser()
@@ -12,7 +13,7 @@ parser.add_argument('-j', '--jobs', type=int, help='Max number of workers to use
 args = parser.parse_args()
 
 with open('token') as f:
-    g = Github(f.readline().strip(), per_page=200)
+    g = Github(f.readline().strip(), per_page=1, retry=GithubRetry())
 
 
 print(g.rate_limiting_resettime)
