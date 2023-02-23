@@ -25,8 +25,16 @@ class AIDLMethodArgument:
         self.argument = argument
         self.imports = imports
         self.aidl_return = aidl_return
+        self.nullable = False
 
-        self.arg_type, self.name = self.argument.split()
+        args = self.argument.split()
+        if len(args) > 2:
+            self.nullable = True
+            self.arg_type = args[1]
+            self.name = args[2]
+        else:
+            self.arg_type = args[0]
+            self.name = args[1]
 
         self.data_type = self.get_type()
         self.is_array = self.get_is_array()
@@ -44,6 +52,8 @@ class AIDLMethodArgument:
 
         if self.data_type in imports and not aidl_return:
             if imports[self.data_type].is_interface or imports[self.data_type].is_parcelable:
+                if self.nullable:
+                    self.arg_type = f"std::optional<{self.arg_type}>"
                 self.arg_type = f"const {self.arg_type}&"
 
         if self.aidl_return:
