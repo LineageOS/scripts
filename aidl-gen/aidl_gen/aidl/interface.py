@@ -15,6 +15,7 @@ class AIDLInterface:
 
         open_comment = False
         inside_structure = False
+        self.method = ""
 
         self.content = self.interface_file.read_text()
         for line in self.content.splitlines():
@@ -61,11 +62,15 @@ class AIDLInterface:
 
                 if self.is_interface:
                     # Skip non functions
-                    if not '(' in line:
+                    if not '(' in line and not line.startswith("in"):
                         continue
 
-                    # This should be a method
-                    self.methods.append(AIDLMethod(line, self.imports))
+                    # This should be a method (can span multiple lines)
+                    if line.endswith(","):
+                        self.method += line
+                    else:
+                        self.methods.append(AIDLMethod(self.method + line, self.imports))
+                        self.method = ""
                     continue
 
     def get_aidl_file(self, fqname: str):
