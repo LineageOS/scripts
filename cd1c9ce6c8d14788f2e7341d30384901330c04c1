@@ -88,6 +88,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "14895821_25ee8964",
+        "filename": "aosp-merger/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2023-03-10T15:18:34Z",
+      "side": 1,
+      "message": "Pixel scripts descriptions could go to pixel scripts folder since that is also lacking documentation. We can just link that here",
+      "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51aefe5e_ba55117a",
         "filename": "aosp-merger/README.md",
         "patchSetId": 4
@@ -156,6 +173,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2f7160df_bd5dafb7",
+        "filename": "aosp-merger/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2023-03-10T15:18:34Z",
+      "side": 1,
+      "message": "I do it this way so I can instantly build after the merge",
+      "parentUuid": "bc23862b_584c4e89",
+      "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a968eff4_e73055db",
         "filename": "aosp-merger/README.md",
         "patchSetId": 4
@@ -184,6 +219,24 @@
       "writtenOn": "2023-03-10T15:00:57Z",
       "side": 1,
       "message": "1. Can source vars to get all devices, OR\n2. Just run pixel/all.sh",
+      "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46d25d00_3327f01a",
+        "filename": "aosp-merger/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2023-03-10T15:18:34Z",
+      "side": 1,
+      "message": "I\u0027ve had bad luck with pixel/all.sh killing my pc/internet connection downloading everything at the same time",
+      "parentUuid": "0e3ffa41_c96fd897",
       "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
