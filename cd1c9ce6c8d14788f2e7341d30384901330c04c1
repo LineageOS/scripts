@@ -16,6 +16,227 @@
       "message": "also to state - if you find something no need to elongate with review, comment, let me change -- just go ahead and edit it yourselves. Trust your judgement.",
       "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19bbee7c_7e2e8559",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2023-03-10T15:00:57Z",
+      "side": 1,
+      "message": "Nolen, thanks for doing this!\n\nLeft some basic comments\n\nI don\u0027t mind making the minor changes myself. But there are also some comments on the workflow, and also some slightly bigger questions.\n\nKevin, any first thoughts? Would you like it to be more detailed?",
+      "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "707e3936_3f2c6832",
+        "filename": "aosp-merger/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2023-03-10T15:00:57Z",
+      "side": 1,
+      "message": "FYI, this is stored because it has the build number which we use to build the fingerprint.",
+      "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31f04d94_9f211834",
+        "filename": "aosp-merger/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2023-03-10T15:00:57Z",
+      "side": 1,
+      "message": "Actually, this includes all devices we support and build at Calyx. Identical to pixels here and can be dropped.",
+      "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52f1d07b_c33a4784",
+        "filename": "aosp-merger/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2023-03-10T15:00:57Z",
+      "side": 1,
+      "message": "Which in turn are Pixels which are still supported by Google.",
+      "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51aefe5e_ba55117a",
+        "filename": "aosp-merger/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2023-03-10T15:00:57Z",
+      "side": 1,
+      "message": "Maybe `pixel/all.sh`",
+      "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cb18dca_3d2b69fd",
+        "filename": "aosp-merger/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2023-03-10T15:00:57Z",
+      "side": 1,
+      "message": "This downloads OTA for some devices too\n\nTODO: Extract firmware from factory.",
+      "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dff2e3c_1e46c5b7",
+        "filename": "aosp-merger/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2023-03-10T15:00:57Z",
+      "side": 1,
+      "message": "Steps 3-5 could be automated. 3 is easy, but 4 and 5 have multiple tags.\n\nThis is why we store prev_* variables, so one can do s/$prev_something/$something",
+      "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc23862b_584c4e89",
+        "filename": "aosp-merger/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2023-03-10T15:00:57Z",
+      "side": 1,
+      "message": "Mike I know we differ on this, I usually do it the other way around. Manifest last, merger first.",
+      "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a968eff4_e73055db",
+        "filename": "aosp-merger/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2023-03-10T15:00:57Z",
+      "side": 1,
+      "message": "Change to all Google supported pixels",
+      "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e3ffa41_c96fd897",
+        "filename": "aosp-merger/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2023-03-10T15:00:57Z",
+      "side": 1,
+      "message": "1. Can source vars to get all devices, OR\n2. Just run pixel/all.sh",
+      "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a7b14dd_2cc6cf4e",
+        "filename": "aosp-merger/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2023-03-10T15:00:57Z",
+      "side": 1,
+      "message": "Is this right?",
+      "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4cde6a2_4c53a078",
+        "filename": "aosp-merger/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2023-03-10T15:00:57Z",
+      "side": 1,
+      "message": "Can source variables and call them in a loop instead of this hard to read long liner.",
+      "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66cc56ef_7c7f84dd",
+        "filename": "aosp-merger/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2023-03-10T15:00:57Z",
+      "side": 1,
+      "message": "Same as above.",
+      "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
