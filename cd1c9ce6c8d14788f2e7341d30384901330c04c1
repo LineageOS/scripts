@@ -52,6 +52,24 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "04e07689_b13c7298",
+        "filename": "aosp-merger/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2023-03-10T17:41:56Z",
+      "side": 1,
+      "message": "Added a note about it.",
+      "parentUuid": "707e3936_3f2c6832",
+      "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31f04d94_9f211834",
@@ -71,6 +89,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "93119471_ce29d30f",
+        "filename": "aosp-merger/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2023-03-10T17:41:56Z",
+      "side": 1,
+      "message": "Followup commit, if anything - but wording fixed.",
+      "parentUuid": "31f04d94_9f211834",
+      "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "52f1d07b_c33a4784",
         "filename": "aosp-merger/README.md",
         "patchSetId": 4
@@ -82,6 +118,24 @@
       "writtenOn": "2023-03-10T15:00:57Z",
       "side": 1,
       "message": "Which in turn are Pixels which are still supported by Google.",
+      "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d00ad94a_98248f76",
+        "filename": "aosp-merger/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2023-03-10T17:41:56Z",
+      "side": 1,
+      "message": "\u003e Which in turn are Pixels which are still supported by Google.",
+      "parentUuid": "52f1d07b_c33a4784",
       "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
@@ -122,6 +176,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "891b4174_928ae3aa",
+        "filename": "aosp-merger/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2023-03-10T17:41:56Z",
+      "side": 1,
+      "message": "Mike had issues with this.",
+      "parentUuid": "51aefe5e_ba55117a",
+      "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "8cb18dca_3d2b69fd",
         "filename": "aosp-merger/README.md",
         "patchSetId": 4
@@ -133,6 +205,24 @@
       "writtenOn": "2023-03-10T15:00:57Z",
       "side": 1,
       "message": "This downloads OTA for some devices too\n\nTODO: Extract firmware from factory.",
+      "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4292ce3_c3ec39b8",
+        "filename": "aosp-merger/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2023-03-10T17:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8cb18dca_3d2b69fd",
       "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
@@ -189,6 +279,24 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fc18037_8dd0d1c4",
+        "filename": "aosp-merger/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2023-03-10T17:41:56Z",
+      "side": 1,
+      "message": "I\u0027m personally partial to doing manifest first as well.",
+      "parentUuid": "2f7160df_bd5dafb7",
+      "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a968eff4_e73055db",
@@ -202,6 +310,24 @@
       "writtenOn": "2023-03-10T15:00:57Z",
       "side": 1,
       "message": "Change to all Google supported pixels",
+      "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0fca10d_6918ad23",
+        "filename": "aosp-merger/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2023-03-10T17:41:56Z",
+      "side": 1,
+      "message": "done.",
+      "parentUuid": "a968eff4_e73055db",
       "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
@@ -237,6 +363,24 @@
       "side": 1,
       "message": "I\u0027ve had bad luck with pixel/all.sh killing my pc/internet connection downloading everything at the same time",
       "parentUuid": "0e3ffa41_c96fd897",
+      "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf80adfe_ee80a58c",
+        "filename": "aosp-merger/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2023-03-10T17:41:56Z",
+      "side": 1,
+      "message": "left all.sh out, did for loop",
+      "parentUuid": "46d25d00_3327f01a",
       "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
@@ -277,6 +421,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "023075ca_0e2ffba9",
+        "filename": "aosp-merger/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2023-03-10T17:41:56Z",
+      "side": 1,
+      "message": "this gets weird, it\u0027s in a matrix not a direct variable - so if you wanna do that go ahead.",
+      "parentUuid": "b4cde6a2_4c53a078",
+      "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "66cc56ef_7c7f84dd",
         "filename": "aosp-merger/README.md",
         "patchSetId": 4
@@ -288,6 +450,24 @@
       "writtenOn": "2023-03-10T15:00:57Z",
       "side": 1,
       "message": "Same as above.",
+      "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fda7ce5c_c0836996",
+        "filename": "aosp-merger/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2023-03-10T17:41:56Z",
+      "side": 1,
+      "message": "made it a loop, didn\u0027t source vars bc of reason above.",
+      "parentUuid": "66cc56ef_7c7f84dd",
       "revId": "cd1c9ce6c8d14788f2e7341d30384901330c04c1",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
