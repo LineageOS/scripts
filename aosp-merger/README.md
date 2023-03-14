@@ -52,15 +52,15 @@ To merge a new AOSP tag platform-wide:
 
 8.  Edit `${TOP/vendor/lineage/vars/common` moving the currently tracked tag from `common_aosp_tag` to `prev_common_aosp_tag`, then updating `common_aosp_tag` to reflect the newly tracked tag, and then do the same for `prev_common_aosp_build_id` and `common_aosp_build_id` - lastly, update the `topic` variable to reflect the current month
 
-9. Run `aosp-merger/aosp-merger.sh`, this will take some time, and reads all the variables you set up above while merging the new tags to all relevant tracked repos. This will likely create conflicts on some forked repository, and will ask you to resolve them. It will then issue a final check to ask you if you'd like to upload the merge to gerrit, then after approval uploads a squash of each relevant merge to Gerrit for review.
+9. Run `aosp-merger/aosp-merger.sh`, this will take some time, and reads all the variables you set up above while merging the new tags to all relevant tracked repos. This will likely create conflicts on some forked repository, and will ask you to resolve them. It will then issue a final check to ask you if you'd like to upload the merge to gerrit, then after approval uploads the merge to Gerrit for review.
 
-10. Run `cd packages/apps/Trebuchet` and squash-merge the relevant AOSP tag by hand, and upload a squashed merge to Gerrit on the same topic as the platform merge
+10. Run `cd packages/apps/Trebuchet` and merge the relevant AOSP tag by hand, and upload it to Gerrit on the same topic as the platform merge
 
     TODO: Handle Trebuchet AOSP merges in `aosp-merger` scripts
 
-11. Once testing of the merge is completed, a global committer or higher can run `aosp-merger/aosp-merger.sh submit-platform` to push the un-squashed merge of the new tag to the HEAD of all relevant forked repositories
+11. Once testing of the merge is completed, a global committer or higher can run `aosp-merger/aosp-merger.sh submit-platform` to push the merge of the new tag to the HEAD of all relevant forked repositories
 
-12. Run `cd packages/apps/Trebuchet` and re-merge the relevant AOSP tag by hand, ensure that the Change-ID is the same as the squashed merge that is already on Gerrit, then push to `HEAD:refs/heads/$branchName` to merge
+12. Run `cd packages/apps/Trebuchet`, then push to `HEAD:refs/heads/$branchName` to merge
 
 13. Directly after `submit-platform` is run, a Project Director must merge the `LineageOS/android` change on Gerrit uploaded as part of step 6 above
 
@@ -74,9 +74,9 @@ To merge a new AOSP tag to all currently Google supported Pixel devices and thei
 
 3. Git commit the `vendor/lineage/vars` variable updates and upload to Gerrit
 
-4. Run `aosp-merger/aosp-merger.sh devices` to merge newly entered AOSP tags to all supported device's device-tree and dependencies, and upload the squashed merges to Gerrit
+4. Run `aosp-merger/aosp-merger.sh devices` to merge newly entered AOSP tags to all supported device's device-tree and dependencies, and upload the merges to Gerrit
 
-5. Run `aosp-merger/aosp-merger.sh kernels` to merge newly entered AOSP kernel tags to all supported device's kernel-tree and dependencies, and upload the squashed merges to Gerrit
+5. Run `aosp-merger/aosp-merger.sh kernels` to merge newly entered AOSP kernel tags to all supported device's kernel-tree and dependencies, and upload the merges to Gerrit
 
 6. Download pixel factory images, extract files and firmware - e.g. `source ${TOP}/vendor/lineage/vars/devices && for device in devices; do pixel/device.sh $device done`
 
@@ -100,6 +100,6 @@ To merge a new CAF/CLO tag to all forked repositories:
 
 2. Edit `vendor/lineage/vars/qcom`, `git commit` and upload the change to Gerrit
 
-3. Run the merger script on whatever platforms you have updated the tags to create squashed merges and upload them to Gerrit - e.g. To merge on all support platforms you'd run `for platform in qssi msm8953 sdm660 sdm845 msmnile kona lahaina waipio-vendor waipio-video; do aosp-merger/aosp-merger.sh clo $platform done`
+3. Run the merger script on whatever platforms you have updated the tags to create merges and upload them to Gerrit - e.g. To merge on all support platforms you'd run `for platform in qssi msm8953 sdm660 sdm845 msmnile kona lahaina waipio-vendor waipio-video; do aosp-merger/aosp-merger.sh clo $platform done`
 
-4. When testing is done, a global committer or higher can run the merger script to push the un-squashed merges to HEADs - e.g. To push afformentioned merges on all support platforms you'd run `for platform in qssi msm8953 sdm660 sdm845 msmnile kona lahaina waipio-vendor waipio-video; do aosp-merger/aosp-merger.sh submit-clo $platform done`
+4. When testing is done, a global committer or higher can run the merger script to push the merges to HEADs - e.g. To push afformentioned merges on all support platforms you'd run `for platform in qssi msm8953 sdm660 sdm845 msmnile kona lahaina waipio-vendor waipio-video; do aosp-merger/aosp-merger.sh submit-clo $platform done`

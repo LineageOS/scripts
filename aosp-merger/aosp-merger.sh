@@ -56,11 +56,19 @@ merge_aosp_forks() {
 }
 
 post_aosp_merge() {
-  "${script_path}"/squash.sh --branch-suffix "${os_branch}_merge-${common_aosp_tag}"
+  if [ "${merge_method}" = "merge" ]; then
+    return
+  else
+    "${script_path}"/squash.sh --branch-suffix "${os_branch}_merge-${common_aosp_tag}"
+  fi
 }
 
 upload_aosp_merge_to_review() {
-  "${script_path}"/upload-squash.sh --branch-suffix "${os_branch}_merge-${common_aosp_tag}"
+  if [ "${merge_method}" = "merge" ]; then
+    "${script_path}"/upload-merge.sh --branch-suffix "${os_branch}_merge-${common_aosp_tag}"
+  else
+    "${script_path}"/upload-squash.sh --branch-suffix "${os_branch}_merge-${common_aosp_tag}"
+  fi
 }
 
 push_aosp_merge() {
@@ -75,11 +83,19 @@ merge_pixel_device() {
 }
 
 post_pixel_device_merge() {
-  "${script_path}"/squash.sh --new-tag "${aosp_tag}" --branch-suffix "${device_branch}_merge-${aosp_tag}" --pixel
+  if [ "${merge_method}" = "merge" ]; then
+    return
+  else
+    "${script_path}"/squash.sh --new-tag "${aosp_tag}" --branch-suffix "${device_branch}_merge-${aosp_tag}" --pixel
+  fi
 }
 
 upload_pixel_device_to_review() {
-  "${script_path}"/upload-squash.sh --branch-suffix "${device_branch}_merge-${aosp_tag}" --pixel
+  if [ "${merge_method}" = "merge" ]; then
+    "${script_path}"/upload-merge.sh --branch-suffix "${device_branch}_merge-${aosp_tag}" --pixel
+  else
+    "${script_path}"/upload-squash.sh --branch-suffix "${device_branch}_merge-${aosp_tag}" --pixel
+  fi
 }
 
 push_device_merge() {
@@ -92,11 +108,19 @@ merge_pixel_kernel() {
 }
 
 post_pixel_kernel_merge() {
-  "${script_path}"/squash.sh --new-tag "${kernel_tag}" --branch-suffix "${device_branch}_merge-${kernel_tag}" --pixel
+  if [ "${merge_method}" = "merge" ]; then
+    return
+  else
+    "${script_path}"/squash.sh --new-tag "${kernel_tag}" --branch-suffix "${device_branch}_merge-${kernel_tag}" --pixel
+  fi
 }
 
 upload_pixel_kernel_to_review() {
-  "${script_path}"/upload-squash.sh --branch-suffix "${device_branch}_merge-${kernel_tag}" --pixel
+  if [ "${merge_method}" = "merge" ]; then
+    "${script_path}"/upload-merge.sh --branch-suffix "${device_branch}_merge-${kernel_tag}" --pixel
+  else
+    "${script_path}"/upload-squash.sh --branch-suffix "${device_branch}_merge-${kernel_tag}" --pixel
+  fi
 }
 
 push_kernel_merge() {
@@ -113,7 +137,11 @@ squash_clo_merge() {
 }
 
 upload_squash_clo_to_review() {
-  "${script_path}"/upload-squash.sh --new-tag "${1}" --branch-suffix "${os_branch}_merge-${1}"
+  if [ "${merge_method}" = "merge" ]; then
+    "${script_path}"/upload-merge.sh --new-tag "${1}" --branch-suffix "${os_branch}_merge-${1}"
+  else
+    "${script_path}"/upload-squash.sh --new-tag "${1}" --branch-suffix "${os_branch}_merge-${1}"
+  fi
 }
 
 push_clo_merge() {
