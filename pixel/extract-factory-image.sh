@@ -43,6 +43,10 @@ source "${vars_path}/${device}"
 
 extract_factory_image() {
   local factory_dir="${work_dir}/${device}/${build_id}/factory"
+  if [[ -d "${factory_dir}" ]]; then
+    echo "Skipping factory image extraction, ${factory_dir} already exists"
+    exit
+  fi
   mkdir -p "${factory_dir}"
   local factory_zip="${work_dir}/${device}/${build_id}/$(basename ${image_url})"
   echo "${image_sha256} ${factory_zip}" | sha256sum --check --status
