@@ -62,9 +62,9 @@ help_message() {
 
 main() {
   if [[ $# -ne 0 ]] ; then
-    parallel device ::: "${@}" ::: "${script_path}"
+    parallel --line-buffer --tag device ::: "${@}" ::: "${script_path}"
   else
-    parallel device ::: ${devices[@]} ::: "${script_path}"
+    parallel --line-buffer --tag device ::: ${devices[@]} ::: "${script_path}"
   fi
 }
 
