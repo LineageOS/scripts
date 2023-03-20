@@ -30,6 +30,7 @@ readonly vars_path="${script_path}/../../../vendor/lineage/vars"
 readonly top="${script_path}/../../.."
 
 source "${vars_path}/pixels"
+source "${vars_path}/common"
 
 ## HELP MESSAGE (USAGE INFO)
 # TODO
@@ -64,8 +65,10 @@ main() {
       local dv="${vars_path}/${d}"
       source "${dv}"
       local mk="$(ls ${top}/device/google/*/lineage_${d}.mk)"
-      sed -i "s/${prev_build_id}/${build_id}/g" "${mk}"
-      sed -i "s/${prev_build_number}/${build_number}/g" "${mk}"
+      desc="${d}-user ${android_version} ${build_id} ${build_number} release-keys"
+      fingerprint="google/${d}/${d}:${android_version}/${build_id}/${build_number}:user/release-keys"
+      sed -i "/PRIVATE_BUILD_DESC/c\    PRIVATE_BUILD_DESC=\"${desc}\"" "${mk}"
+      sed -i "/BUILD_FINGERPRINT/c\BUILD_FINGERPRINT\ :=\ ${fingerprint}" "${mk}"
     )
   done
 
