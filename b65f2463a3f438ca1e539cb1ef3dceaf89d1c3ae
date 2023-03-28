@@ -35,6 +35,24 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "102a4120_db0951d2",
+        "filename": "aosp-merger/_subtree_merge_helper.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2023-03-28T22:21:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b97769c_1a41634b",
+      "revId": "b65f2463a3f438ca1e539cb1ef3dceaf89d1c3ae",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eccdca40_89ad575e",
@@ -52,6 +70,24 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bc41229_4e171139",
+        "filename": "aosp-merger/_subtree_merge_helper.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2023-03-28T22:21:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eccdca40_89ad575e",
+      "revId": "b65f2463a3f438ca1e539cb1ef3dceaf89d1c3ae",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34cda6ab_b4647349",
@@ -65,6 +101,24 @@
       "writtenOn": "2022-06-10T09:06:09Z",
       "side": 1,
       "message": "git commit -m \"[SQUASH] Merge tag \u0027${NEWTAG}\u0027 into ${STAGINGBRANCH}\" -m \"$(cat .changeid)\"",
+      "revId": "b65f2463a3f438ca1e539cb1ef3dceaf89d1c3ae",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00aee5f2_17615a57",
+        "filename": "aosp-merger/squash.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2023-03-28T22:21:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34cda6ab_b4647349",
       "revId": "b65f2463a3f438ca1e539cb1ef3dceaf89d1c3ae",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
