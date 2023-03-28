@@ -54,15 +54,9 @@ To merge a new AOSP tag platform-wide:
 
 9. Run `aosp-merger/aosp-merger.sh`, this will take some time, and reads all the variables you set up above while merging the new tags to all relevant tracked repos. This will likely create conflicts on some forked repository, and will ask you to resolve them. It will then issue a final check to ask you if you'd like to upload the merge to gerrit, then after approval uploads the merge to Gerrit for review.
 
-10. Run `cd packages/apps/Trebuchet` and merge the relevant AOSP tag by hand, and upload it to Gerrit on the same topic as the platform merge
+10. Once testing of the merge is completed, a global committer or higher can run `aosp-merger/aosp-merger.sh submit-platform` to push the merge of the new tag to the HEAD of all relevant forked repositories
 
-    TODO: Handle Trebuchet AOSP merges in `aosp-merger` scripts
-
-11. Once testing of the merge is completed, a global committer or higher can run `aosp-merger/aosp-merger.sh submit-platform` to push the merge of the new tag to the HEAD of all relevant forked repositories
-
-12. Run `cd packages/apps/Trebuchet`, then push to `HEAD:refs/heads/$branchName` to merge
-
-13. Directly after `submit-platform` is run, a Project Director must merge the `LineageOS/android` change on Gerrit uploaded as part of step 6 above
+11. Directly after `submit-platform` is run, a Project Director must merge the `LineageOS/android` change on Gerrit uploaded as part of step 6 above
 
 To merge a new AOSP tag to all currently Google supported Pixel devices and their relevant dependency repositories:
 
