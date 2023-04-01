@@ -126,9 +126,6 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as executor:
 
 
 print(other_repos)
-# for name in other_repos:
-#    repo = org.get_repo(name)
-#    dependencies[name] = get_cm_dependencies(repo)
 
 with open("out.json", "w") as f:
     json.dump(dependencies, f, indent=4)
