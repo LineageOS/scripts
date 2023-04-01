@@ -91,7 +91,7 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as executor:
             other_repos.update(data[1])
             print(name, "=>", data[0])
         except Exception as e:
-            print("%r generated an exception: %s" % (name, e))
+            print(f"{name} generated an exception: {e}")
             traceback.print_exc()
             continue
     futures = {}
@@ -119,7 +119,7 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as executor:
                 other_repos.update(data[1])
             print(name, "=>", data[0])
         except Exception as e:
-            print("%r generated an exception: %s" % (name, e))
+            print(f"{name} generated an exception: {e}")
             traceback.print_exc()
             continue
     futures = {}
