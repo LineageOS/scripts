@@ -8,19 +8,22 @@ from github import Github
 from base64 import b64decode
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-j', '--jobs', type=int, help='Max number of workers to use. Default is none')
+parser.add_argument(
+    "-j", "--jobs", type=int, help="Max number of workers to use. Default is none"
+)
 args = parser.parse_args()
 
-with open('token') as f:
+with open("token") as f:
     g = Github(f.readline().strip(), per_page=200)
 
 
 print(g.rate_limiting_resettime)
 
-org = g.get_organization('LineageOS')
+org = g.get_organization("LineageOS")
 
 # supported branches, newest to oldest
-CUR_BRANCHES = ['lineage-20', 'lineage-20.0', 'lineage-19.1', 'lineage-18.1']
+CUR_BRANCHES = ["lineage-20", "lineage-20.0", "lineage-19.1", "lineage-18.1"]
+
 
 def get_cm_dependencies(repo):
     branch = None
@@ -41,7 +44,7 @@ def get_cm_dependencies(repo):
         return None
     blob_sha = None
     for el in tree.tree:
-        if el.path == 'lineage.dependencies':
+        if el.path == "lineage.dependencies":
             blob_sha = el.sha
             break
 
@@ -52,17 +55,18 @@ def get_cm_dependencies(repo):
 
     deps = b64decode(blob.content)
 
-    cmdeps = json.loads(deps.decode('utf-8'))
+    cmdeps = json.loads(deps.decode("utf-8"))
 
     mydeps = []
     non_device_repos = set()
     for el in cmdeps:
-        if '_device_' not in el['repository']:
-            non_device_repos.add(el['repository'])
-        depbranch = el.get('branch', branch.name)
-        mydeps.append({'repo': el['repository'], 'branch': depbranch})
+        if "_device_" not in el["repository"]:
+            non_device_repos.add(el["repository"])
+        depbranch = el.get("branch", branch.name)
+        mydeps.append({"repo": el["repository"], "branch": depbranch})
 
     return [mydeps, non_device_repos]
+
 
 futures = {}
 n = 1
@@ -71,8 +75,8 @@ dependencies = {}
 other_repos = set()
 
 with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as executor:
-    for repo in g.get_organization('LineageOS').get_repos():
-        if '_device_' not in repo.name and '_hardware_' not in repo.name:
+    for repo in g.get_organization("LineageOS").get_repos():
+        if "_device_" not in repo.name and "_hardware_" not in repo.name:
             continue
         print(n, repo.name)
         n += 1
@@ -87,7 +91,7 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as executor:
             other_repos.update(data[1])
             print(name, "=>", data[0])
         except Exception as e:
-            print('%r generated an exception: %s'%(name, e))
+            print("%r generated an exception: %s" % (name, e))
             traceback.print_exc()
             continue
     futures = {}
@@ -115,16 +119,16 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as executor:
                 other_repos.update(data[1])
             print(name, "=>", data[0])
         except Exception as e:
-            print('%r generated an exception: %s'%(name, e))
+            print("%r generated an exception: %s" % (name, e))
             traceback.print_exc()
             continue
     futures = {}
 
 
 print(other_repos)
-#for name in other_repos:
+# for name in other_repos:
 #    repo = org.get_repo(name)
 #    dependencies[name] = get_cm_dependencies(repo)
 
-with open('out.json', 'w') as f:
+with open("out.json", "w") as f:
     json.dump(dependencies, f, indent=4)
