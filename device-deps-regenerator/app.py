@@ -1,11 +1,11 @@
 import argparse
 import concurrent.futures
-import github
 import json
+import requests
+import subprocess
 import traceback
 
-from github import Github
-from base64 import b64decode
+from xml.etree import ElementTree
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -13,56 +13,39 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
-with open("token") as f:
-    g = Github(f.readline().strip(), per_page=200)
-
-
-print(g.rate_limiting_resettime)
-
-org = g.get_organization("LineageOS")
-
 # supported branches, newest to oldest
 CUR_BRANCHES = ["lineage-20", "lineage-20.0", "lineage-19.1", "lineage-18.1"]
 
 
-def get_cm_dependencies(repo):
-    branch = None
-    for b in CUR_BRANCHES:
-        try:
-            branch = repo.get_branch(b)
-            break
-        except github.GithubException:
-            continue
+def get_cm_dependencies(name):
+    try:
+        stdout = subprocess.run(
+            ["git", "ls-remote", "-h", f"https://:@github.com/LineageOS/{name}"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        ).stdout.decode()
+        branches = [x.split()[-1] for x in stdout.splitlines()]
+    except:
+        return None
+
+    branch = next((x for x in CUR_BRANCHES if f"refs/heads/{x}" in branches), None)
 
     if branch is None:
         return None
 
-    sha = branch.commit.sha
     try:
-        tree = repo.get_git_tree(sha)
-    except github.GithubException:
-        return None
-    blob_sha = None
-    for el in tree.tree:
-        if el.path == "lineage.dependencies":
-            blob_sha = el.sha
-            break
-
-    if blob_sha is None:
-        return [[], set()]
-
-    blob = repo.get_git_blob(blob_sha)
-
-    deps = b64decode(blob.content)
-
-    cmdeps = json.loads(deps.decode("utf-8"))
+        cmdeps = requests.get(
+            f"https://raw.githubusercontent.com/LineageOS/{name}/{branch}/lineage.dependencies"
+        ).json()
+    except:
+        cmdeps = []
 
     mydeps = []
     non_device_repos = set()
     for el in cmdeps:
         if "_device_" not in el["repository"]:
             non_device_repos.add(el["repository"])
-        depbranch = el.get("branch", branch.name)
+        depbranch = el.get("branch", branch)
         mydeps.append({"repo": el["repository"], "branch": depbranch})
 
     return [mydeps, non_device_repos]
@@ -75,12 +58,18 @@ dependencies = {}
 other_repos = set()
 
 with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as executor:
-    for repo in g.get_organization("LineageOS").get_repos():
-        if "_device_" not in repo.name and "_hardware_" not in repo.name:
+    elements = ElementTree.fromstring(
+        requests.get(
+            "https://raw.githubusercontent.com/LineageOS/mirror/master/default.xml"
+        ).text
+    )
+
+    for name in [x.attrib["name"][10:] for x in elements.findall(".//project")]:
+        if "_device_" not in name and "_hardware_" not in name:
             continue
-        print(n, repo.name)
+        print(n, name)
         n += 1
-        futures[executor.submit(get_cm_dependencies, repo)] = repo.name
+        futures[executor.submit(get_cm_dependencies, name)] = name
     for future in concurrent.futures.as_completed(futures):
         name = futures[future]
         try:
@@ -100,12 +89,11 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as executor:
     for name in other_repos:
         print(name)
         try:
-            repo = org.get_repo(name)
-            futures[executor.submit(get_cm_dependencies, repo)] = name
+            futures[executor.submit(get_cm_dependencies, name)] = name
         except Exception:
             continue
 
-    other_repos = {}
+    other_repos = set()
     for future in concurrent.futures.as_completed(futures):
         name = futures[future]
         try:
