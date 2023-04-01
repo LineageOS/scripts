@@ -39,7 +39,7 @@ for repo in mapping:
         continue
     codename = repo.split("_", maxsplit=3)[-1]
     if codename in devices:
-        print("warning: dupe: %s" % codename)
+        print(f"warning: dupe: {codename}")
     devices[codename] = sorted(
         list(set(simplify_reverse_deps({"repo": repo}, codename)))
     )
