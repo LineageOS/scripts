@@ -10,8 +10,8 @@ Standard Variables:
 
 * `firmware_partitions` - A matrix of the partition names of proprietary firmware images relevant to this device
 * `device_repos` - A matrix of the file-paths of relevant AOSP repositories this device depends on.
-* `{prev_,}build_id` - Previous/current device stock build ID tags
-* `{prev_,}build_number` - Previous/current device stock build number strings
+* `build_id` - Previous/current device stock build ID tags
+* `build_number` - Previous/current device stock build number strings
 * `image_url` - Direct link to device's latest factory image
 * `image_sha256` - SHA256 sum of device's latest factory image
 * `flash_url` - Stores a formatted link to Google's web-based [Flash tool](https://flash.android.com/welcome) which brings up the device's latest available image, additionally is used to fetch the data used to create build fingerprint changes
