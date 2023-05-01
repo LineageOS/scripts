@@ -8,10 +8,10 @@ Standard Variables:
 
 `commmon` - Stores the following data:
 
-* `{prev_,}os_branch` - Previous/current LineageOS version
-* `{prev_,}device_branch` - Previous/current branch name
+* `os_branch` - Previous/current LineageOS version
+* `device_branch` - Previous/current branch name
 * `{prev_,}common_aosp_tag` - Previous/current tracked AOSP tag
-* `{prev_,}common_aosp_build_id` - Previous/current build ID string
+* `common_aosp_build_id` - Previous/current build ID string
 * `topic` - The name of the topic to be used when pushing merges of newer tags to [Gerrit](https://review.lineageos.org) for review before merging
 
 Special Variables:
