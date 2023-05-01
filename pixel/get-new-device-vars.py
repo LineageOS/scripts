@@ -19,9 +19,9 @@ OTA_URL = "https://developers.google.com/android/ota"
 COOKIE = {'Cookie': 'devsite_wall_acks=nexus-image-tos,nexus-ota-tos'}
 
 PLATFORM_BUILD_URL = "https://android.googlesource.com/platform/build"
-BUILD_ID_URL = "https://android.googlesource.com/platform/build/+/refs/tags/{}/core/build_id.mk?format=TEXT"
+BUILD_ID_URL = "https://android.googlesource.com/platform/build/+/refs/{}/core/build_id.mk?format=TEXT"
 BUILD_ID_FILTER = "BUILD_ID="
-SECURITY_PATCH_URL = "https://android.googlesource.com/platform/build/+/refs/tags/{}/core/version_defaults.mk?format=TEXT"
+SECURITY_PATCH_URL = "https://android.googlesource.com/platform/build/+/refs/{}/core/version_defaults.mk?format=TEXT"
 SECURITY_PATCH_FILTER = "PLATFORM_SECURITY_PATCH :="
 
 def handle_image(html_id):
@@ -54,7 +54,7 @@ def get_all_aosp_tags(tag_filter):
 
 def get_aosp_tag_for_build_id(aosp_tags, wanted_build_id):
     for aosp_tag in aosp_tags:
-        output = base64.decodebytes(urllib.request.urlopen(BUILD_ID_URL.format(aosp_tag)).read()).decode()
+        output = base64.decodebytes(urllib.request.urlopen(BUILD_ID_URL.format("tags/" + aosp_tag)).read()).decode()
         for line in output.split('\n'):
             if BUILD_ID_FILTER in line:
                 found_build_id = line.split("=")[1]
@@ -66,7 +66,7 @@ def get_aosp_tag_for_build_id(aosp_tags, wanted_build_id):
 
 def get_security_patch_for_aosp_tag(aosp_tag):
     try:
-        output = base64.decodebytes(urllib.request.urlopen(SECURITY_PATCH_URL.format(aosp_tag)).read()).decode()
+        output = base64.decodebytes(urllib.request.urlopen(SECURITY_PATCH_URL.format("tags/" + aosp_tag)).read()).decode()
     except:
         print('new_security_patch=unknown')
         return
@@ -81,12 +81,12 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-b', '--build_id', help="Build ID", type=str, required=True)
     parser.add_argument('-d', '--device', help="Device codename", type=str, required=True)
-    parser.add_argument('-v', '--version', default="13.0", help='Android version', type=str)
+    parser.add_argument('-t', '--tags_match', default="android-13.0", help='Android version tag to match', type=str)
     args = parser.parse_args()
     html_id = "{0}{1}".format(args.device, args.build_id.lower())
     handle_image(html_id)
     handle_ota(html_id)
-    aosp_tag = get_aosp_tag_for_build_id(get_all_aosp_tags("android-{0}*".format(args.version)), args.build_id.upper())
+    aosp_tag = get_aosp_tag_for_build_id(get_all_aosp_tags("{0}*".format(args.tags_match)), args.build_id.upper())
     get_security_patch_for_aosp_tag(aosp_tag)
 
 if __name__ == "__main__":

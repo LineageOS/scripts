@@ -32,6 +32,7 @@ readonly vars_path="${script_path}/../../../vendor/lineage/vars"
 readonly tmp_dir="${TMPDIR:-/tmp}/pixel"
 
 source "${vars_path}/pixels"
+source "${vars_path}/common"
 
 ## HELP MESSAGE (USAGE INFO)
 # TODO
@@ -66,7 +67,7 @@ main() {
       local tmp=$(mktemp "${tmp_dir}/${d}.XXXXXXXXXX")
       local dv="${vars_path}/${d}"
       source "${dv}"
-      ${script_path}/get-new-device-vars.py -b "${build_id}" -d "${d}"> "${tmp}"
+      ${script_path}/get-new-device-vars.py -b "${build_id}" -d "${d}" -t ${aosp_tag_match}> "${tmp}"
       source "${tmp}"
       if [[ "${new_aosp_tag}" != "${aosp_tag}" ]]; then
         sed -i "/ prev_aosp_tag=/c\readonly prev_aosp_tag=\"$aosp_tag\"" "${dv}"
