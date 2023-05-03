@@ -330,8 +330,13 @@ def main():
                 carrier_config_root,
                 'carrier_config',
             )
-            carrier_config_element.set('mcc', entry.carrier_id[0].mcc_mnc[:3])
-            carrier_config_element.set('mnc', entry.carrier_id[0].mcc_mnc[3:])
+            mcc = entry.carrier_id[0].mcc_mnc[:3]
+            mnc = entry.carrier_id[0].mcc_mnc[3:]
+            if (mcc == '000' and mnc == '000'):
+                print("Not writing mcc=000 mnc=000")
+            else:
+                carrier_config_element.set('mcc', mcc)
+                carrier_config_element.set('mnc', mnc)
             for field in ['spn', 'imsi', 'gid1']:
                 if entry.carrier_id[0].HasField(field):
                     carrier_config_element.set(
