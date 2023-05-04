@@ -155,6 +155,12 @@ def extract_elements(carrier_config_element, config):
         raise TypeError("Unknown value type: {}".format(value_type))
 
 
+def extract_gps_elements(carrier_config_element, config):
+    if not config.key.startswith('gps.'):
+        return
+    extract_elements(carrier_config_element, config)
+
+
 def main():
     args = parse_args()
 
@@ -339,7 +345,7 @@ def main():
                     'carrier_config',
                 )
                 for config in setting.configs.config:
-                    extract_elements(carrier_config_no_sim_element, config)
+                    extract_gps_elements(carrier_config_no_sim_element, config)
             else:
                 carrier_config_element.set('mcc', mcc)
                 carrier_config_element.set('mnc', mnc)
