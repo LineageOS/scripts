@@ -205,6 +205,7 @@ def main():
                 all_settings[setting.canonical_name] = setting
 
     carrier_config_root = ET.Element('carrier_config_list')
+    carrier_config_no_sim_root = ET.Element('carrier_config_list')
 
     # Unfortunately, python processors like xml and lxml, as well as command-line
     # utilities like tidy, do not support the exact style used by AOSP for
@@ -333,7 +334,12 @@ def main():
             mcc = entry.carrier_id[0].mcc_mnc[:3]
             mnc = entry.carrier_id[0].mcc_mnc[3:]
             if (mcc == '000' and mnc == '000'):
-                print("Not writing mcc=000 mnc=000")
+                carrier_config_no_sim_element = ET.SubElement(
+                    carrier_config_no_sim_root,
+                    'carrier_config',
+                )
+                for config in setting.configs.config:
+                    extract_elements(carrier_config_no_sim_element, config)
             else:
                 carrier_config_element.set('mcc', mcc)
                 carrier_config_element.set('mnc', mnc)
@@ -355,9 +361,14 @@ def main():
     carrier_config_tree = ET.ElementTree(carrier_config_root)
     carrier_config_tree.write(os.path.join(vendor_folder, 'vendor.xml'),
                               encoding='utf-8', xml_declaration=True)
+    indent(carrier_config_no_sim_root)
+    carrier_config_no_sim_tree = ET.ElementTree(carrier_config_no_sim_root)
+    carrier_config_no_sim_tree.write(os.path.join(vendor_folder, 'vendor_no_sim.xml'),
+                              encoding='utf-8', xml_declaration=True)
 
     # Test XML parsing.
     ET.parse(os.path.join(vendor_folder, 'vendor.xml'))
+    ET.parse(os.path.join(vendor_folder, 'vendor_no_sim.xml'))
 
 if __name__ == '__main__':
     main()
