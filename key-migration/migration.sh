@@ -22,7 +22,13 @@ test_key='MIIBIDANBgkqhkiG9w0BAQEFAAOCAQ0AMIIBCAKCAQEA1pMZBN7GCySx7cdi4NnYJT4+zW
 
 
 PACKAGES=/data/system/packages.xml
+PACKAGES_INTERMEDIATE=/data/local/tmp/packages.xml.decoded
 PACKAGES_BACKUP=/data/system/packages-backup.xml
+MODIFICATION_TARGET=$PACKAGES
+
+ANDROID_VERSION=$(getprop ro.build.version.release)
+
+[ $ANDROID_VERSION -ge 12 ] && USE_ABX=1
 
 case "$1" in
     "official")
@@ -37,6 +43,11 @@ case "$1" in
         exit 1
         ;;
 esac
+
+if [ $USE_ABX ]; then
+    abx2xml $PACKAGES $PACKAGES_INTERMEDIATE
+    MODIFICATION_TARGET=$PACKAGES_INTERMEDIATE
+fi
 
 # If there's a "backup" copy, then the current packages.xml might
 # be corrupted, so overwrite it with the backup copy. This is what
@@ -57,23 +68,27 @@ echo "Saving backup as $PACKAGES.bak"
 cp $PACKAGES $PACKAGES.bak
 
 if [ "$to_official" = "true" ]; then
-    sed -i "s#$media_cert_test#$media_cert_release#g" $PACKAGES
-    sed -i "s#$platform_cert_test#$platform_cert_release#g" $PACKAGES
-    sed -i "s#$shared_cert_test#$shared_cert_release#g" $PACKAGES
-    sed -i "s#$test_cert#$release_cert#g" $PACKAGES
-    sed -i "s#$media_key_test#$media_key_release#g" $PACKAGES
-    sed -i "s#$platform_key_test#$platform_key_release#g" $PACKAGES
-    sed -i "s#$shared_key_test#$shared_key_release#g" $PACKAGES
-    sed -i "s#$test_key#$release_key#g" $PACKAGES
+    sed -i "s#$media_cert_test#$media_cert_release#g" $MODIFICATION_TARGET
+    sed -i "s#$platform_cert_test#$platform_cert_release#g" $MODIFICATION_TARGET
+    sed -i "s#$shared_cert_test#$shared_cert_release#g" $MODIFICATION_TARGET
+    sed -i "s#$test_cert#$release_cert#g" $MODIFICATION_TARGET
+    sed -i "s#$media_key_test#$media_key_release#g" $MODIFICATION_TARGET
+    sed -i "s#$platform_key_test#$platform_key_release#g" $MODIFICATION_TARGET
+    sed -i "s#$shared_key_test#$shared_key_release#g" $MODIFICATION_TARGET
+    sed -i "s#$test_key#$release_key#g" $MODIFICATION_TARGET
 else
-    sed -i "s#$media_cert_release#$media_cert_test#g" $PACKAGES
-    sed -i "s#$platform_cert_release#$platform_cert_test#g" $PACKAGES
-    sed -i "s#$shared_cert_release#$shared_cert_test#g" $PACKAGES
-    sed -i "s#$release_cert#$test_cert#g" $PACKAGES
-    sed -i "s#$media_key_release#$media_key_test#g" $PACKAGES
-    sed -i "s#$platform_key_release#$platform_key_test#g" $PACKAGES
-    sed -i "s#$shared_key_release#$shared_key_test#g" $PACKAGES
-    sed -i "s#$release_key#$test_key#g" $PACKAGES
+    sed -i "s#$media_cert_release#$media_cert_test#g" $MODIFICATION_TARGET
+    sed -i "s#$platform_cert_release#$platform_cert_test#g" $MODIFICATION_TARGET
+    sed -i "s#$shared_cert_release#$shared_cert_test#g" $MODIFICATION_TARGET
+    sed -i "s#$release_cert#$test_cert#g" $MODIFICATION_TARGET
+    sed -i "s#$media_key_release#$media_key_test#g" $MODIFICATION_TARGET
+    sed -i "s#$platform_key_release#$platform_key_test#g" $MODIFICATION_TARGET
+    sed -i "s#$shared_key_release#$shared_key_test#g" $MODIFICATION_TARGET
+    sed -i "s#$release_key#$test_key#g" $MODIFICATION_TARGET
+fi
+
+if [ $USE_ABX ]; then
+    xml2abx $MODIFICATION_TARGET $PACKAGES
 fi
 
 chmod 660 $PACKAGES
