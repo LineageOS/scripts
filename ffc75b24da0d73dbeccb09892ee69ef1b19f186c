@@ -52,6 +52,24 @@
       "parentUuid": "248bf7fe_d89c0bc1",
       "revId": "ffc75b24da0d73dbeccb09892ee69ef1b19f186c",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "764647c7_39ca3413",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15346
+      },
+      "writtenOn": "2023-05-19T15:48:20Z",
+      "side": 1,
+      "message": "If recovery lacks abx2xml, you can include a binary of it in your potential flashable zip, or push a version of abx2xml to recovery temporarily. Original patch is definitely plausible in recovery",
+      "parentUuid": "dd23d1e2_978aa35a",
+      "revId": "ffc75b24da0d73dbeccb09892ee69ef1b19f186c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
