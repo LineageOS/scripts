@@ -34,6 +34,24 @@
       "parentUuid": "2f06a0bb_998ca6b2",
       "revId": "ffc75b24da0d73dbeccb09892ee69ef1b19f186c",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd23d1e2_978aa35a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32683
+      },
+      "writtenOn": "2023-05-19T14:18:26Z",
+      "side": 1,
+      "message": "Maybe the wiki should also be updated as it might not be feasible to get this script working in recovery because of the lack of abx2xml/xml2abx in recovery.",
+      "parentUuid": "248bf7fe_d89c0bc1",
+      "revId": "ffc75b24da0d73dbeccb09892ee69ef1b19f186c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
