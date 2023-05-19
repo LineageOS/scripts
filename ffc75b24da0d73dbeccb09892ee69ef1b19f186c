@@ -16,6 +16,24 @@
       "message": "I misunderstood where this is run, it\u0027s run in recovery - yeah, you can undo that - the original patch was fine.",
       "revId": "ffc75b24da0d73dbeccb09892ee69ef1b19f186c",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "248bf7fe_d89c0bc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32683
+      },
+      "writtenOn": "2023-05-19T14:09:26Z",
+      "side": 1,
+      "message": "No, it can\u0027t run in the recovery because data is encrypted in the official recovery and abx2xml doesn\u0027t exist in recovery either. It should run in adb root shell on a running system according to the wiki:\n\nhttps://wiki.lineageos.org/signing_builds#test-keys-to-official-or-vice-versa",
+      "parentUuid": "2f06a0bb_998ca6b2",
+      "revId": "ffc75b24da0d73dbeccb09892ee69ef1b19f186c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
