@@ -70,6 +70,24 @@
       "parentUuid": "dd23d1e2_978aa35a",
       "revId": "ffc75b24da0d73dbeccb09892ee69ef1b19f186c",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "723ae821_a89d8417",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32683
+      },
+      "writtenOn": "2023-05-19T16:22:59Z",
+      "side": 1,
+      "message": "Yes, the original script might work in recovery. But it is not that simple to run abx2xml in recovery. abx2xml depends on /system/framework/abx.jar and /system/bin/app_process. I don\u0027t know how to get them working in recovery and whether recovery has a java runtime or not.",
+      "parentUuid": "764647c7_39ca3413",
+      "revId": "ffc75b24da0d73dbeccb09892ee69ef1b19f186c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
