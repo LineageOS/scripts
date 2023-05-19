@@ -33,6 +33,24 @@
       "message": "*xml2abx",
       "revId": "1df7ad430a244510c4aade993280ee276dc65a0e",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e50d5155_11d67a14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32683
+      },
+      "writtenOn": "2023-05-19T00:18:19Z",
+      "side": 1,
+      "message": "Hi, I don\u0027t know the internals of android. Can we assume the presence of xml2abx is equivalent to the fact that the packages.xml is in abx format so that we do not need to check the android version?",
+      "parentUuid": "16c056d8_32a42b5c",
+      "revId": "1df7ad430a244510c4aade993280ee276dc65a0e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
