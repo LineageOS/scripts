@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f06a0bb_998ca6b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2023-05-19T12:39:09Z",
+      "side": 1,
+      "message": "I misunderstood where this is run, it\u0027s run in recovery - yeah, you can undo that - the original patch was fine.",
+      "revId": "ffc75b24da0d73dbeccb09892ee69ef1b19f186c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
