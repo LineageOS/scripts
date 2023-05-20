@@ -33,6 +33,24 @@
       "message": "abx2xml seems to be just a script turned into a binary, as long as you mount /system properly (like we already do with gapps) it should be fine: https://android.googlesource.com/platform/frameworks/base/+/master/cmds/abx/xml2abx.sh",
       "revId": "76d2c7a54d48c27927e6bf623bfdd8a3307fc0fd",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "581379be_959117a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32683
+      },
+      "writtenOn": "2023-05-20T11:22:46Z",
+      "side": 1,
+      "message": "Should I update the code to detect recovery and mount /system in case of recovery? Now I don\u0027t have devices to test new changes because I am using my device as my primary phone with self-signed build. Is there some way to test this script in emulator in some way?",
+      "parentUuid": "f9e17b0e_1e7b3598",
+      "revId": "76d2c7a54d48c27927e6bf623bfdd8a3307fc0fd",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
