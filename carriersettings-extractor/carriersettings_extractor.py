@@ -37,7 +37,7 @@ def parse_args():
     parser.add_argument('-i', '--input', help='CarrierSettings folder',
                         required=True)
     parser.add_argument('-a', '--apns', help='apns-conf.xml Output folder',
-                        required=True)
+                        required=False)
     parser.add_argument('-v', '--vendor', help='vendor.xml Output folder',
                         required=True)
     return parser.parse_args()
@@ -316,52 +316,60 @@ def main():
             self.add_attribute('user_visible')
             self.add_attribute('user_editable')
 
-    with open(os.path.join(apns_folder, 'apns-conf.xml'), 'w', encoding='utf-8') as f:
-        f.write('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n\n')
-        f.write('<apns version="8">\n\n')
+    if apns_folder is not None:
+        with open(os.path.join(apns_folder, 'apns-conf.xml'), 'w', encoding='utf-8') as f:
+            f.write('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n\n')
+            f.write('<apns version="8">\n\n')
 
-        for entry in carrier_list.entry:
-            try:
-                setting = all_settings[entry.canonical_name]
-            except KeyError:
-                print("Skipping " + entry.canonical_name, file=sys.stderr)
-                continue
-            for apn in setting.apns.apn:
-                f.write('  <apn carrier={}\n'.format(quoteattr(apn.name)))
-                apn_element = ApnElement(apn, entry.carrier_id[0])
-                for (key, value) in apn_element.attributes.items():
-                    f.write('      {}={}\n'.format(escape(key), quoteattr(value)))
-                f.write('  />\n\n')
+            for entry in carrier_list.entry:
+                try:
+                    setting = all_settings[entry.canonical_name]
+                except KeyError:
+                    print("Skipping " + entry.canonical_name, file=sys.stderr)
+                    continue
+                for apn in setting.apns.apn:
+                    f.write('  <apn carrier={}\n'.format(quoteattr(apn.name)))
+                    apn_element = ApnElement(apn, entry.carrier_id[0])
+                    for (key, value) in apn_element.attributes.items():
+                        f.write('      {}={}\n'.format(escape(key), quoteattr(value)))
+                    f.write('  />\n\n')
 
-            carrier_config_element = ET.SubElement(
-                carrier_config_root,
+            f.write('</apns>\n')
+
+        # Test XML parsing.
+        ET.parse(os.path.join(apns_folder, 'apns-conf.xml'))
+
+    for entry in carrier_list.entry:
+        try:
+            setting = all_settings[entry.canonical_name]
+        except KeyError:
+            print("Skipping " + entry.canonical_name, file=sys.stderr)
+            continue
+
+        carrier_config_element = ET.SubElement(
+            carrier_config_root,
+            'carrier_config',
+        )
+        mcc = entry.carrier_id[0].mcc_mnc[:3]
+        mnc = entry.carrier_id[0].mcc_mnc[3:]
+        if (mcc == '000' and mnc == '000'):
+            carrier_config_no_sim_element = ET.SubElement(
+                carrier_config_no_sim_root,
                 'carrier_config',
             )
-            mcc = entry.carrier_id[0].mcc_mnc[:3]
-            mnc = entry.carrier_id[0].mcc_mnc[3:]
-            if (mcc == '000' and mnc == '000'):
-                carrier_config_no_sim_element = ET.SubElement(
-                    carrier_config_no_sim_root,
-                    'carrier_config',
-                )
-                for config in setting.configs.config:
-                    extract_gps_elements(carrier_config_no_sim_element, config)
-            else:
-                carrier_config_element.set('mcc', mcc)
-                carrier_config_element.set('mnc', mnc)
-            for field in ['spn', 'imsi', 'gid1']:
-                if entry.carrier_id[0].HasField(field):
-                    carrier_config_element.set(
-                        field,
-                        getattr(entry.carrier_id[0], field),
-                    )
             for config in setting.configs.config:
-                extract_elements(carrier_config_element, config)
-
-        f.write('</apns>\n')
-
-    # Test XML parsing.
-    ET.parse(os.path.join(apns_folder, 'apns-conf.xml'))
+                extract_gps_elements(carrier_config_no_sim_element, config)
+        else:
+            carrier_config_element.set('mcc', mcc)
+            carrier_config_element.set('mnc', mnc)
+        for field in ['spn', 'imsi', 'gid1']:
+            if entry.carrier_id[0].HasField(field):
+                carrier_config_element.set(
+                    field,
+                    getattr(entry.carrier_id[0], field),
+                )
+        for config in setting.configs.config:
+            extract_elements(carrier_config_element, config)
 
     indent(carrier_config_root)
     carrier_config_tree = ET.ElementTree(carrier_config_root)
