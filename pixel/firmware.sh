@@ -30,6 +30,7 @@ readonly script_path="$(cd "$(dirname "$0")";pwd -P)"
 readonly vars_path="${script_path}/../../../vendor/lineage/vars"
 readonly top="${script_path}/../../.."
 
+readonly fbpacktool="${top}/lineage/scripts/fbpacktool/fbpacktool.py"
 readonly qc_image_unpacker="${top}/prebuilts/extract-tools/linux-x86/bin/qc_image_unpacker"
 readonly extract_ota_py="${top}/tools/extract-utils/extract_ota.py"
 
@@ -54,10 +55,19 @@ readonly vendor_path="${top}/vendor/firmware/${device}"
 # Unpack the seperate partitions needed for OTA
 # from the factory image's bootloader.img
 unpack_firmware() {
+  local fbpk="${fbpk_version:-v1}"
+
   # modem.img
   "${qc_image_unpacker}" -i "${factory_dir}"/radio-*.img -o "${ota_firmware_dir}"
-  # All other ${firmware_partitions[@]}
-  "${qc_image_unpacker}" -i "${factory_dir}"/bootloader-*.img -o "${ota_firmware_dir}"
+  # Alternative: dd bs=4 skip=35
+
+  if [[ "$fbpk" == "v1" ]]; then
+    # All other ${firmware_partitions[@]}
+    "${qc_image_unpacker}" -i "${factory_dir}"/bootloader-*.img -o "${ota_firmware_dir}"
+  else
+    # All other ${firmware_partitions[@]}
+    python3 "${fbpacktool}" unpack -o "${ota_firmware_dir}" "${factory_dir}"/bootloader-*.img
+  fi
 }
 
 extract_firmware() {
