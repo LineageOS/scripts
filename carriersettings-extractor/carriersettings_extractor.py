@@ -63,6 +63,9 @@ unwanted_configs = [
 def extract_elements(carrier_config_element, config):
     if config.key in unwanted_configs:
         return
+    if config.key.startswith("moto_") or "_moto_" in config.key:
+        return
+
     value_type = config.WhichOneof('value')
     if value_type == 'text_value':
         carrier_config_subelement = ET.SubElement(
