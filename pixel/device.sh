@@ -47,15 +47,15 @@ device() {
   "${script_path}/extract-factory-image.sh" "${device}"
 
   pushd "${top}"
-  if [[ -f device/google/${device}/regen-carriersettings.sh ]]; then
-    device/google/${device}/regen-carriersettings.sh "${factory_dir}/image/product.img" device/google/${device}/proprietary-files-carriersettings.txt
-  elif [[ -f device/google/${device}/regen-carriersettings.sh ]]; then
-    device/google/*/${device}/regen-carriersettings.sh "${factory_dir}/image/product.img" device/google/*/${device}/proprietary-files-carriersettings.txt
-  fi
-
   if [[ -f device/google/${device}/regen-vendor.sh ]]; then
+    if [[ -z ${wifi_only-} ]]; then
+      device/google/${device}/regen-carriersettings.sh "${factory_dir}/image/product.img" device/google/${device}/proprietary-files-carriersettings.txt
+    fi
     device/google/${device}/regen-vendor.sh "${factory_dir}/image/vendor.img" device/google/${device}/proprietary-files-vendor.txt
   else
+    if [[ -z ${wifi_only-} ]]; then
+      device/google/*/${device}/regen-carriersettings.sh "${factory_dir}/image/product.img" device/google/*/${device}/proprietary-files-carriersettings.txt
+    fi
     device/google/*/${device}/regen-vendor.sh "${factory_dir}/image/vendor.img" device/google/*/${device}/proprietary-files-vendor.txt
   fi
   device/google/${device}/extract-files.sh "${factory_dir}/image"
