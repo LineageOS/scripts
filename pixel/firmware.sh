@@ -57,9 +57,11 @@ readonly vendor_path="${top}/vendor/firmware/${device}"
 unpack_firmware() {
   local fbpk="${fbpk_version:-v1}"
 
-  # modem.img
-  "${qc_image_unpacker}" -i "${factory_dir}"/radio-*.img -o "${ota_firmware_dir}"
-  # Alternative: dd bs=4 skip=35
+  if [[ -z ${wifi_only-} ]]; then
+    # modem.img
+    "${qc_image_unpacker}" -i "${factory_dir}"/radio-*.img -o "${ota_firmware_dir}"
+    # Alternative: dd bs=4 skip=35
+  fi
 
   if [[ "$fbpk" == "v1" ]]; then
     # All other ${firmware_partitions[@]}
