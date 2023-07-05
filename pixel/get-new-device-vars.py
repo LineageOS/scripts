@@ -44,25 +44,32 @@ def handle_ota(html_id):
 
 def get_all_aosp_tags(tag_filter):
     all_tags = []
-    for line in cmd.Git().ls_remote("--sort=v:refname", PLATFORM_BUILD_URL, tag_filter, tags=True, refs=True).split('\n'):
-        try:
-            (ref, tag) = line.split('\t')
-        except ValueError:
-            pass
-        all_tags.append(tag.replace("refs/tags/", ""))
-    return all_tags
+    try:
+        for line in cmd.Git().ls_remote("--sort=v:refname", PLATFORM_BUILD_URL, tag_filter, tags=True, refs=True).split('\n'):
+            try:
+                (ref, tag) = line.split('\t')
+            except ValueError:
+                pass
+            all_tags.append(tag.replace("refs/tags/", ""))
+        return all_tags
+    except Exception as e:
+        return all_tags
 
 def get_aosp_tag_for_build_id(aosp_tags, wanted_build_id):
-    for aosp_tag in aosp_tags:
-        output = base64.decodebytes(urllib.request.urlopen(BUILD_ID_URL.format("tags/" + aosp_tag)).read()).decode()
-        for line in output.split('\n'):
-            if BUILD_ID_FILTER in line:
-                found_build_id = line.split("=")[1]
-                if found_build_id == wanted_build_id:
-                    print('new_aosp_tag="{0}"'.format(aosp_tag))
-                    return aosp_tag
-    print('new_aosp_tag="unknown"')
-    return 'unknown'
+    try:
+        for aosp_tag in aosp_tags:
+            output = base64.decodebytes(urllib.request.urlopen(BUILD_ID_URL.format("tags/" + aosp_tag)).read()).decode()
+            for line in output.split('\n'):
+                if BUILD_ID_FILTER in line:
+                    found_build_id = line.split("=")[1]
+                    if found_build_id == wanted_build_id:
+                        print('new_aosp_tag="{0}"'.format(aosp_tag))
+                        return aosp_tag
+        print('new_aosp_tag="unknown"')
+        return 'unknown'
+    except Exception as e:
+        print('new_aosp_tag="unknown"')
+        return 'unknown'
 
 def get_security_patch_for_aosp_tag(aosp_tag):
     try:
