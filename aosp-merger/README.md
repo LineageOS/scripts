@@ -50,7 +50,7 @@ To merge a new AOSP tag platform-wide:
 
 7. Execute `repo sync` on the working tree
 
-8.  Edit `${TOP/vendor/lineage/vars/common` moving the currently tracked tag from `common_aosp_tag` to `prev_common_aosp_tag`, then updating `common_aosp_tag` to reflect the newly tracked tag, and then do the same for `prev_common_aosp_build_id` and `common_aosp_build_id` - lastly, update the `topic` variable to reflect the current month
+8.  Edit `${TOP}/vendor/lineage/vars/common` moving the currently tracked tag from `common_aosp_tag` to `prev_common_aosp_tag`, then updating `common_aosp_tag` to reflect the newly tracked tag, and then do the same for `prev_common_aosp_build_id` and `common_aosp_build_id` - lastly, update the `topic` variable to reflect the current month
 
 9. Run `aosp-merger/aosp-merger.sh`, this will take some time, and reads all the variables you set up above while merging the new tags to all relevant tracked repos. This will likely create conflicts on some forked repository, and will ask you to resolve them. It will then issue a final check to ask you if you'd like to upload the merge to gerrit, then after approval uploads the merge to Gerrit for review.
 
