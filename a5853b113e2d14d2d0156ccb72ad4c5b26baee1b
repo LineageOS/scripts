@@ -41,6 +41,30 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "688b832c_bd696137",
+        "filename": "aosp-merger/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2023-09-12T01:13:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b27e7e17_abc2779c",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 9,
+        "endChar": 8
+      },
+      "revId": "a5853b113e2d14d2d0156ccb72ad4c5b26baee1b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85fb6734_ab4bff6c",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-09-11T18:47:27Z",
       "side": 1,
       "message": "typo",
+      "range": {
+        "startLine": 19,
+        "startChar": 123,
+        "endLine": 19,
+        "endChar": 132
+      },
+      "revId": "a5853b113e2d14d2d0156ccb72ad4c5b26baee1b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a805ccf_73b35582",
+        "filename": "aosp-merger/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2023-09-12T01:13:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85fb6734_ab4bff6c",
       "range": {
         "startLine": 19,
         "startChar": 123,
@@ -87,6 +135,30 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a65a6976_44a5c3f7",
+        "filename": "aosp-merger/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2023-09-12T01:13:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0e3d6cc_e39f7db5",
+      "range": {
+        "startLine": 25,
+        "startChar": 121,
+        "endLine": 25,
+        "endChar": 132
+      },
+      "revId": "a5853b113e2d14d2d0156ccb72ad4c5b26baee1b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48a7eec0_e1de4117",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-09-11T18:47:27Z",
       "side": 1,
       "message": "typo",
+      "range": {
+        "startLine": 99,
+        "startChar": 123,
+        "endLine": 99,
+        "endChar": 138
+      },
+      "revId": "a5853b113e2d14d2d0156ccb72ad4c5b26baee1b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ebea77e_520e7e14",
+        "filename": "aosp-merger/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2023-09-12T01:13:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48a7eec0_e1de4117",
       "range": {
         "startLine": 99,
         "startChar": 123,
