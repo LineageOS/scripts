@@ -59,6 +59,12 @@ unwanted_configs = [
                     "read_only_apn_types_string_array",
                     "read_only_apn_fields_string_array"]
 
+threshold_configs = ["5g_nr_ssrsrp_thresholds_int_array",
+                     "5g_nr_sssinr_thresholds_int_array",
+                     "gsm_rssi_thresholds_int_array",
+                     "lte_rsrp_thresholds_int_array",
+                     "lte_rssnr_thresholds_int_array",
+                     "wcdma_rscp_thresholds_int_array"]
 
 def extract_elements(carrier_config_element, config):
     if config.key in unwanted_configs:
@@ -121,6 +127,8 @@ def extract_elements(carrier_config_element, config):
             )
             carrier_config_item.set('value', value)
     elif value_type == 'int_array':
+        if config.key in threshold_configs and len(getattr(config, value_type).item) > 4:
+            return
         carrier_config_subelement = ET.SubElement(
             carrier_config_element,
             'int-array',
