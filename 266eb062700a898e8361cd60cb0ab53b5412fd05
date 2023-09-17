@@ -16,6 +16,23 @@
       "message": "no () pls",
       "revId": "266eb062700a898e8361cd60cb0ab53b5412fd05",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3a2720f_811664be",
+        "filename": "carriersettings-extractor/carriersettings_extractor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2023-09-17T13:22:03Z",
+      "side": 1,
+      "message": "also couldn\u0027t that be here?",
+      "revId": "266eb062700a898e8361cd60cb0ab53b5412fd05",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
