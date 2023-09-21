@@ -33,8 +33,6 @@ See `../aosp-merger/README.md` for more
 
 `device.sh` - Downloads single device factory images/OTA images and extracts files/firmware for it. e.g. `device.sh raven`
 
-TODO: Extract firmware from factory images instead of OTA images to avoid needing payload extraction for this component.
-
 `download.sh` - Downloads single device factory images - e.g. `download.sh raven`
 
 `update-any-var.sh` - Update any var in `vendor/lineage/vars` - e.g. `update-any-var.sh build_id TQ1A.230105.001.A2 bluejay panther`
