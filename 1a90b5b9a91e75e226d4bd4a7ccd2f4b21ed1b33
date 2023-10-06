@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e53f2f0_5ef2fb8d",
+        "filename": "reuse/reuse.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 25732
+      },
+      "writtenOn": "2023-10-06T21:28:12Z",
+      "side": 1,
+      "message": "Move decl inside main()",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 18
+      },
+      "revId": "1a90b5b9a91e75e226d4bd4a7ccd2f4b21ed1b33",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abecc0b7_dab82fca",
+        "filename": "reuse/reuse.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 25732
+      },
+      "writtenOn": "2023-10-06T21:28:12Z",
+      "side": 1,
+      "message": "def main():",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 148,
+        "endChar": 26
+      },
+      "revId": "1a90b5b9a91e75e226d4bd4a7ccd2f4b21ed1b33",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "082b7f22_bd07e262",
+        "filename": "reuse/reuse.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 25732
+      },
+      "writtenOn": "2023-10-06T21:28:12Z",
+      "side": 1,
+      "message": "```\nif __name__ \u003d\u003d \"__main__\":\n    main()\n```",
+      "revId": "1a90b5b9a91e75e226d4bd4a7ccd2f4b21ed1b33",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
