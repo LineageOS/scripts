@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# SPDX-FileCopyrightText: 2023 The LineageOS Project
+# SPDX-License-Identifier: Apache-2.0
+
 case "$2,$3" in
   merge,)
     if grep -q "# It looks like you may be committing a merge." "$1"; then
