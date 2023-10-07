@@ -1,0 +1,56 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: scripts
+Upstream-Contact: The LineageOS Project
+Source: https://github.com/LineageOS/scripts
+
+Files: .idea/*
+Copyright: 2023 The LineageOS Project
+License: Apache-2.0
+
+Files: aidl-gen/*
+Copyright: 2021 The LineageOS Project
+License: Apache-2.0
+
+Files: aosp-merger/README.md*
+Copyright: 2021-2023 The LineageOS Project
+License: Apache-2.0
+
+Files: carriersettings-extractor/*.py
+Copyright: 2020 Google LLC
+License: BSD-3-Clause
+
+Files: carriersettings-extractor/*
+Copyright: 2023 The CalyxOS Institute
+License: BSD-3-Clause
+
+Files: config-fs-gen/README.md
+Copyright: 2019 The LineageOS Project
+License: Apache-2.0
+
+Files: config-fs-gen/requirements.txt
+Copyright: 2020 The LineageOS Project
+License: Apache-2.0
+
+Files: device-deps-regenerator/.gitignore device-deps-regenerator/README.md device-deps-regenerator/requirements.txt
+Copyright: 2017-2023 The LineageOS Project
+License: Apache-2.0
+
+Files: fbpacktool/.gitignore
+Copyright: 2021 The Android Open Source Project
+License: Apache-2.0
+
+Files: lineage-push/README.md
+Copyright: 2017-2018 The LineageOS Project
+License: Apache-2.0
+
+Files: pixel/README.md pixel/get-new-device-vars.py
+Copyright: 2022-2023 The CalyxOS Institute
+License: Apache-2.0
+
+Files: reuse_helper/__pycache__ reuse_helper/.idea reuse_helper/.gitignore reuse_helper/README.md
+Copyright: 2023 The LineageOS Project
+License: Apache-2.0
+
+Files: shipper/requirements.txt
+Copyright: 2024 The LineageOS Project
+License: Apache-2.0
