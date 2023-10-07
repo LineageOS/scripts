@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52d671f3_413b1efd",
+        "filename": "reuse/reuse.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 25732
+      },
+      "writtenOn": "2023-10-07T10:55:27Z",
+      "side": 1,
+      "message": "No global pls",
+      "revId": "2841c1ccf2e4ecd00d3c22344a22fd41ac81658a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
