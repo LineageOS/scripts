@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2017-2023 The LineageOS Project
+# SPDX-License-Identifier: Apache-2.0
+
 import json
 
 # Define device repos that have repos that depend on them,
