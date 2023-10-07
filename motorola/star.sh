@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# SPDX-FileCopyrightText: 2023 Hemanth Jabalpuri
 # SPDX-License-Identifier: CC0-1.0
 
 # This basic program is used for unpacking Motorola archives which are made using single image tar(star) utility

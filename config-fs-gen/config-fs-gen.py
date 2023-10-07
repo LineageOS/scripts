@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+# SPDX-FileCopyrightText: 2019-2020 The LineageOS Project
+# SPDX-License-Identifier: Apache-2.0
+
 from __future__ import print_function
 
 import argparse
