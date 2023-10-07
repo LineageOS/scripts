@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# SPDX-FileCopyrightText: 2017 The LineageOS Project
+# SPDX-License-Identifier: Apache-2.0
+
 if ! cd "$1"; then
     echo "USAGE: $0 PATH"
     exit 1
