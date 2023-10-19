@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b75969c_a2a953ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16023
+      },
+      "writtenOn": "2023-10-19T22:01:09Z",
+      "side": 1,
+      "message": "This could be useful to you:\nhttps://git.halogenos.org/halogenOS/android_external_xos/-/blob/XOS-14.0/xostools/scripts/merge_aosp.sh?ref_type\u003dheads\nhttps://git.halogenos.org/halogenOS/android_external_xos/-/blob/XOS-14.0/xostools/scripts/reticulate_our_splines.sh?ref_type\u003dheads",
+      "revId": "d67f387bc234e871bd18026e674be793ccf75740",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
