@@ -1,10 +1,10 @@
 # carriersettings-extractor
 
-Android Open Source Project (AOSP) [includes](https://source.android.com/devices/tech/config/update) APN settings ([`apns-full-conf.xml`](https://android.googlesource.com/device/sample/+/master/etc/apns-full-conf.xml)) and [carrier settings](https://source.android.com/devices/tech/config/carrier) ([`carrier_config_*.xml`](https://android.googlesource.com/platform/packages/apps/CarrierConfig/+/master/assets) + [`vendor.xml`](https://android.googlesource.com/platform/packages/apps/CarrierConfig/+/refs/heads/master/res/xml/vendor.xml)) in human-readable XML format. However, Google Pixel device images instead include APN and carrier settings as binary protobuf files for use by the CarrierSettings system app.
+Android Open Source Project (AOSP) [includes](https://source.android.com/devices/tech/config/update) APN settings ([`apns-full-conf.xml`](https://android.googlesource.com/device/sample/+/main/etc/apns-full-conf.xml)) and [carrier settings](https://source.android.com/devices/tech/config/carrier) ([`carrier_config_*.xml`](https://android.googlesource.com/platform/packages/apps/CarrierConfig/+/main/assets) + [`vendor.xml`](https://android.googlesource.com/platform/packages/apps/CarrierConfig/+/refs/heads/main/res/xml/vendor.xml)) in human-readable XML format. However, Google Pixel device images instead include APN and carrier settings as binary protobuf files for use by the CarrierSettings system app.
 
 This script converts the CarrierSettings protobuf files (e.g., `carrier_list.pb`, `others.pb`) to XML format compatible with AOSP. This may be helpful for Android-based systems that do not bundle CarrierSettings, but wish to support carriers that are not included in AOSP.
 
-For a description of each APN and carrier setting, refer to the doc comments in [`Telephony.java`](https://android.googlesource.com/platform/frameworks/base/+/refs/heads/master/core/java/android/provider/Telephony.java) and [`CarrierConfigManager.java`](https://android.googlesource.com/platform/frameworks/base/+/refs/heads/master/telephony/java/android/telephony/CarrierConfigManager.java), respectively.
+For a description of each APN and carrier setting, refer to the doc comments in [`Telephony.java`](https://android.googlesource.com/platform/frameworks/base/+/refs/heads/main/core/java/android/provider/Telephony.java) and [`CarrierConfigManager.java`](https://android.googlesource.com/platform/frameworks/base/+/refs/heads/main/telephony/java/android/telephony/CarrierConfigManager.java), respectively.
 
 ## Dependencies
 
