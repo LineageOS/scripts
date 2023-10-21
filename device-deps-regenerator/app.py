@@ -60,7 +60,7 @@ other_repos = set()
 with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as executor:
     elements = ElementTree.fromstring(
         requests.get(
-            "https://raw.githubusercontent.com/LineageOS/mirror/master/default.xml"
+            "https://raw.githubusercontent.com/LineageOS/mirror/main/default.xml"
         ).text
     )
 
