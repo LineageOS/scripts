@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # SPDX-FileCopyrightText: 2017, 2020-2022 The LineageOS Project
-# SPDX-FileCopyrightText: 2021-2022 The Calyx Institute
+# SPDX-FileCopyrightText: 2021-2023 The Calyx Institute
 #
 # SPDX-License-Identifier: Apache-2.0
 #
@@ -54,10 +54,10 @@ fi
 # List of merged repos
 PROJECTPATHS=$(cat ${MERGEDREPOS} | grep -w merge | awk '{printf "%s\n", $2}')
 
-echo "#### Branch = ${BRANCH} Squash branch = ${SQUASHBRANCH} ####"
+echo -e "\n#### Branch = ${BRANCH} Squash branch = ${SQUASHBRANCH} ####"
 
 # Make sure manifest and forked repos are in a consistent state
-echo "#### Verifying there are no uncommitted changes on forked AOSP projects ####"
+echo -e "\n#### Verifying there are no uncommitted changes on forked AOSP projects ####"
 for PROJECTPATH in ${PROJECTPATHS} .repo/manifests; do
     cd "${TOP}/${PROJECTPATH}"
     if [[ -n "$(git status --porcelain)" ]]; then
@@ -70,7 +70,7 @@ echo "#### Verification complete - no uncommitted changes found ####"
 # Iterate over each forked project
 for PROJECTPATH in ${PROJECTPATHS}; do
     cd "${TOP}/${PROJECTPATH}"
-    echo "#### Squashing ${PROJECTPATH} ####"
+    echo -e "\n#### Squashing ${PROJECTPATH} ####"
     repo abandon "${SQUASHBRANCH}" .
     git checkout -b "${SQUASHBRANCH}" "${STAGINGBRANCH}"
     git branch --set-upstream-to=m/"${BRANCH}"

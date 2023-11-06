@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # SPDX-FileCopyrightText: 2017, 2020-2022 The LineageOS Project
-# SPDX-FileCopyrightText: 2021-2022 The Calyx Institute
+# SPDX-FileCopyrightText: 2021-2023 The Calyx Institute
 #
 # SPDX-License-Identifier: Apache-2.0
 #
@@ -97,7 +97,7 @@ if [ ! -z "${OLDTAG}" ]; then
 fi
 
 if [[ "${OPERATION}" == "merge" ]]; then
-    echo "#### Merging ${NEWTAG} into ${PROJECTPATH} ####"
+    echo -e "\n#### Merging ${NEWTAG} into ${PROJECTPATH} ####"
     git merge --no-commit --log "${NEWTAG}" && git commit --no-edit
 
     # Check if we've actually changed anything after the merge
@@ -108,7 +108,7 @@ if [[ "${OPERATION}" == "merge" ]]; then
         exit 0
     fi
 elif [[ "${OPERATION}" == "rebase" ]]; then
-    echo "#### Rebasing ${PROJECTPATH} onto ${NEWTAG} ####"
+    echo -e "\n#### Rebasing ${PROJECTPATH} onto ${NEWTAG} ####"
     git rebase --onto "${NEWTAG}" "${OLDTAG}"
 fi
 

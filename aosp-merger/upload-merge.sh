@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # SPDX-FileCopyrightText: 2017, 2020-2022 The LineageOS Project
-# SPDX-FileCopyrightText: 2021-2022 The Calyx Institute
+# SPDX-FileCopyrightText: 2021-2023 The Calyx Institute
 #
 # SPDX-License-Identifier: Apache-2.0
 #
@@ -59,10 +59,10 @@ source "${TOP}/build/envsetup.sh"
 # List of merged repos
 PROJECTPATHS=$(cat ${MERGEDREPOS} | grep -w merge | awk '{printf "%s\n", $2}')
 
-echo "#### Staging branch = ${STAGINGBRANCH} ####"
+echo -e "\n#### Staging branch = ${STAGINGBRANCH} ####"
 
 # Make sure manifest and forked repos are in a consistent state
-echo "#### Verifying there are no uncommitted changes on forked AOSP projects ####"
+echo -e "\n#### Verifying there are no uncommitted changes on forked AOSP projects ####"
 for PROJECTPATH in ${PROJECTPATHS} .repo/manifests; do
     cd "${TOP}/${PROJECTPATH}"
     if [[ -n "$(git status --porcelain)" ]]; then
@@ -85,7 +85,7 @@ for PROJECTPATH in ${PROJECTPATHS}; do
         fi
     fi
 
-    echo "#### Pushing ${PROJECTPATH} merge to review ####"
+    echo -e "\n#### Pushing ${PROJECTPATH} merge to review ####"
     git checkout "${STAGINGBRANCH}"
     lineageremote | grep -v "Remote 'lineage' created"
     FIRST_SHA="$(git show -s --pretty=%P HEAD | cut -d ' ' -f 1)"
