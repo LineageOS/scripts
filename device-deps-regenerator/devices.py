@@ -16,6 +16,8 @@ ignorelist = [
     "pantah",
     "gs201",
     "contexthub",
+    "sm8450-devicetrees",
+    "sm8550-devicetrees",
 ]
 
 
