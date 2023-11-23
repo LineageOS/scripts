@@ -8,16 +8,12 @@ from typing import List, Optional
 
 from aidl_gen.aidl.annotation import Annotation
 from aidl_gen.aidl.custom_type import CustomType
-from aidl_gen.aidl.method import Method
 
-class Interface(CustomType):
-    """An AIDL interface, containing methods."""
+class Enum(CustomType):
+    """An AIDL enum definition."""
     def __init__(
         self,
         fqname: str,
-        methods: Optional[List[Method]] = None,
         annotations: Optional[List[Annotation]] = None,
-    ):
+    ) -> None:
         super().__init__(fqname, annotations)
-
-        self.methods = methods or []
