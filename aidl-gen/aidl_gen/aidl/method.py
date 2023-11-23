@@ -1,24 +1,70 @@
-# Source: https://source.android.com/devices/architecture/aidl/aidl-backends#types
-AIDL_TO_CPP_TYPE = {
-    "boolean": "bool",
-    "byte": "int8_t",
-    "char": "char16_t",
-    "int": "int32_t",
-    "long": "int64_t",
-    # "float": "float", # No intervention required
-    # "double": "double", # No intervention required
-    "String": "::android::String16",
-    "android.os.Parcelable": "::android::Parcelable",
-    "IBinder": "::android::IBinder",
-    # "T[]": "std::vector<T>", # Dealt with in AIDLMethodArgument
-    # "byte[]": "std::vector<uint8_t>", # "byte" match will handle this
-    # "List<T>": "std::vector<T>", # Dealt with in AIDLMethodArgument
-    "FileDescriptor": "::android::base::unique_fd",
-    "ParcelFileDescriptor": "::android::os::ParcelFileDescriptor",
-    # "interface type (T)": "::android::sp<T>", # Dealt with in AIDLMethodArgument
-    # "parcelable type (T)": "T", # No intervention required
-    # "union type (T)": "T", # No intervention required
-}
+#
+# Copyright (C) 2023 The LineageOS Project
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+from typing import List, Optional, Set
+from aidl_gen.aidl.annotation import Annotation
+from aidl_gen.aidl.argument import Argument
+from aidl_gen.aidl.data_type import DataType
+#from aidl_gen.formatter.cpp import AIDL_TO_CPP_TYPE
+
+class Method:
+    """An AIDL method, containing arguments."""
+    def __init__(
+        self,
+        name: str,
+        arguments: List[Argument],
+        return_type: DataType,
+        annotations: Optional[Set[Annotation]] = None,
+    ):
+        self.name = name
+        self.arguments = arguments
+        self.return_type = return_type
+        self.annotations = annotations or set()
+
+    @classmethod
+    def from_aidl(cls, method_str: str) -> "Method":
+        """Parses an AIDL method into a Method object."""
+        # example: void teleport(Location baz, float speed);
+
+        arguments: List[Argument] = []
+        return_type: Optional[DataType] = None
+        annotations = set()
+
+        qualifiers, arguments_str = method_str.split("(", 1)
+        arguments_str = arguments_str.removesuffix(")")
+
+        qualifiers, name = qualifiers.rsplit(maxsplit=1)
+
+        for qualifier in qualifiers.split():
+            annotation = Annotation.from_value(qualifier)
+            if annotation:
+                annotations.add(annotation)
+                continue
+
+            assert return_type is None, f"Multiple return types found: {qualifiers}"
+
+            return_type = DataType.from_aidl(qualifier)
+
+        assert return_type is not None, f"No return type found: {qualifiers}"
+
+        for arg in arguments_str.split(","):
+            arg = arg.strip()
+            if arg == "":
+                continue
+
+            arguments.append(Argument.from_aidl(arg))
+
+        return cls(
+            name,
+            arguments,
+            return_type,
+            annotations,
+        )
+
+"""
 
 class AIDLMethodArgument:
     def __init__(self, argument: str, imports: dict, aidl_return: bool = False):
@@ -97,3 +143,5 @@ class AIDLMethod:
         if self.return_type != "void":
             self.args.append(AIDLMethodArgument(f"{self.return_type}  _aidl_return",
                                                 imports, aidl_return=True))
+
+"""
