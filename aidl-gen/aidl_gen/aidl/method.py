@@ -1,99 +1,84 @@
-# Source: https://source.android.com/devices/architecture/aidl/aidl-backends#types
-AIDL_TO_CPP_TYPE = {
-    "boolean": "bool",
-    "byte": "int8_t",
-    "char": "char16_t",
-    "int": "int32_t",
-    "long": "int64_t",
-    # "float": "float", # No intervention required
-    # "double": "double", # No intervention required
-    "String": "::android::String16",
-    "android.os.Parcelable": "::android::Parcelable",
-    "IBinder": "::android::IBinder",
-    # "T[]": "std::vector<T>", # Dealt with in AIDLMethodArgument
-    # "byte[]": "std::vector<uint8_t>", # "byte" match will handle this
-    # "List<T>": "std::vector<T>", # Dealt with in AIDLMethodArgument
-    "FileDescriptor": "::android::base::unique_fd",
-    "ParcelFileDescriptor": "::android::os::ParcelFileDescriptor",
-    # "interface type (T)": "::android::sp<T>", # Dealt with in AIDLMethodArgument
-    # "parcelable type (T)": "T", # No intervention required
-    # "union type (T)": "T", # No intervention required
-}
+#
+# SPDX-FileCopyrightText: The LineageOS Project
+# SPDX-License-Identifier: Apache-2.0
+#
 
-class AIDLMethodArgument:
-    def __init__(self, argument: str, imports: dict, aidl_return: bool = False):
-        self.argument = argument
-        self.imports = imports
-        self.aidl_return = aidl_return
-        self.nullable = False
+from typing import Dict, List, Optional, Set
 
-        args = self.argument.split()
-        if len(args) > 2:
-            self.nullable = True
-            self.arg_type = args[1]
-            self.name = args[2]
-        else:
-            self.arg_type = args[0]
-            self.name = args[1]
+from aidl_gen.aidl.annotation import Annotation
+from aidl_gen.aidl.data_type import DataType
+from aidl_gen.aidl.method_argument import MethodArgument
 
-        self.data_type = self.get_type()
-        self.is_array = self.get_is_array()
+class Method:
+    """An AIDL method, containing arguments."""
+    def __init__(
+        self,
+        name: str,
+        arguments: List[MethodArgument],
+        return_type: DataType,
+        oneway: bool = False,
+        annotations: Optional[List[Annotation]] = None,
+    ):
+        self.name = name
+        self.arguments = arguments
+        self.return_type = return_type
+        self.oneway = oneway
+        self.annotations = annotations or []
 
-        if self.data_type in AIDL_TO_CPP_TYPE:
-            self.data_type = AIDL_TO_CPP_TYPE[self.data_type]
+    @classmethod
+    def from_aidl(
+        cls,
+        method: str,
+        is_oneway: bool = False,
+        imports: Optional[Dict[str, str]] = None,
+    ) -> "Method":
+        """Parses an AIDL method into a Method object."""
+        # example: void teleport(Location baz, float speed);
 
-        if self.is_array:
-            self.arg_type = f"std::vector<{self.data_type}>"
-        else:
-            self.arg_type = self.data_type
+        arguments: List[MethodArgument] = []
+        return_type: Optional[DataType] = None
+        oneway: bool = is_oneway
+        annotations: List[Annotation] = []
 
-        if self.data_type in imports and imports[self.data_type].is_interface:
-            self.arg_type = f"std::shared_ptr<{self.arg_type}>"
+        qualifiers, arguments_str = method.split("(", 1)
+        arguments_str = arguments_str.removesuffix(")")
 
-        if self.data_type in imports and not aidl_return:
-            if imports[self.data_type].is_interface or imports[self.data_type].is_parcelable:
-                if self.nullable:
-                    self.arg_type = f"std::optional<{self.arg_type}>"
-                self.arg_type = f"const {self.arg_type}&"
+        qualifiers, name = qualifiers.rsplit(maxsplit=1)
 
-        if self.aidl_return:
-            self.arg_type += "*"
+        for qualifier in qualifiers.split():
+            annotation: Optional[Annotation] = None
+            try:
+                annotation = Annotation.from_aidl(qualifier)
+            except Exception:
+                pass
 
-    def get_type(self):
-        if self.arg_type.endswith("[]"):
-            return self.arg_type.removesuffix("[]")
-        if self.arg_type.startswith("List<"):
-            return self.arg_type.removeprefix('List<').removesuffix('>')
-        if self.arg_type.startswith("std::vector<"):
-            return self.arg_type.removeprefix('std::vector<').removesuffix('>')
-        return self.arg_type
+            if annotation:
+                annotations.append(annotation)
+                continue
 
-    def get_is_array(self):
-        return (self.arg_type.endswith("[]")
-                or self.arg_type.startswith("List<")
-                or self.arg_type.startswith("std::vector<"))
+            if qualifier == "oneway":
+                assert not oneway or is_oneway, f"Multiple oneway qualifiers found: {qualifiers}"
 
-class AIDLMethod:
-    def __init__(self, method_str: str, imports: dict):
-        self.method_str = method_str
+                oneway = True
+                continue
 
-        self.args = []
+            assert return_type is None, f"Multiple return types found: {qualifiers}"
 
-        # We don't care about the method being oneway
-        self.method_str = self.method_str.removeprefix("oneway ")
+            return_type = DataType.from_aidl(qualifier, imports)
 
-        self.return_type, temp = self.method_str.split(maxsplit=1)
-        temp = temp.removesuffix(';')
-        self.name, self.args_str = temp.split('(', 1)
-        self.args_str = '(' + self.args_str
+        assert return_type is not None, f"No return type found: {qualifiers}"
 
-        self.args_str = self.args_str.removeprefix('(').removesuffix(')')
+        for arg in arguments_str.split(","):
+            arg = arg.strip()
+            if arg == "":
+                continue
 
-        if self.args_str != "":
-            for arg in self.args_str.split(','):
-                arg = arg.strip().removeprefix("in").strip()
-                self.args.append(AIDLMethodArgument(arg, imports))
+            arguments.append(MethodArgument.from_aidl(arg, imports))
 
-        if self.return_type != "void":
-            self.args.append(AIDLMethodArgument(f"{self.return_type}  _aidl_return",
-                                                imports, aidl_return=True))
+        return cls(
+            name,
+            arguments,
+            return_type,
+            oneway=oneway,
+            annotations=annotations,
+        )

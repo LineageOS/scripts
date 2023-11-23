@@ -1,0 +1,5 @@
+- Nested custom types
+- Rust and Java code generation
+- `@nullable(heap=true)` support
+- C++: `in` parameters are const
+- C++: Vectors are passed by reference
