@@ -66,9 +66,7 @@ STAGINGBRANCH="staging/${BRANCHSUFFIX}"
 
 cd "${TOP}/${PROJECTPATH}"
 # Ditch any existing staging branches
-if [[ "$(git show-ref --verify --quiet refs/heads/${STAGINGBRANCH})" ]]; then
-    repo abandon "${STAGINGBRANCH}" .
-fi
+repo abandon "${STAGINGBRANCH}" .
 repo start "${STAGINGBRANCH}" .
 if [ -f ".gitupstream" ]; then
     git fetch -q --force --tags "$(cat .gitupstream)" "${NEWTAG}"
