@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# SPDX-FileCopyrightText: 2022 The Calyx Institute
+# SPDX-FileCopyrightText: 2022-2023 The Calyx Institute
 #
 # SPDX-License-Identifier: Apache-2.0
 
 #
-# extract:
+# firmware:
 #
 #   Setup pixel firmware
 #
