@@ -5,9 +5,9 @@
 # SPDX-License-Identifier: Apache-2.0
 
 #
-# extract-factory-image:
+# prepare-firmware:
 #
-#   Extract Pixel factory images
+#   Pixel firmware preparation hook for extract-utils
 #
 #
 ##############################################################################
@@ -28,34 +28,37 @@ trap 'error_m interrupted!' SIGINT
 ### CONSTANTS ###
 readonly script_path="$(cd "$(dirname "$0")";pwd -P)"
 readonly vars_path="${script_path}/../../../vendor/lineage/vars"
+readonly top="${script_path}/../../.."
 
-readonly work_dir="${WORK_DIR:-/tmp/pixel}"
-
-source "${vars_path}/pixels"
+readonly fbpacktool="${top}/lineage/scripts/fbpacktool/fbpacktool.py"
+readonly qc_image_unpacker="${top}/prebuilts/extract-tools/linux-x86/bin/qc_image_unpacker"
 
 readonly device="${1}"
 source "${vars_path}/${device}"
+
+readonly _fbpk_version="${fbpk_version:-v1}"
+readonly _wifi_only="${wifi_only:-false}"
+
+readonly src_dir="${2}"
 
 ## HELP MESSAGE (USAGE INFO)
 # TODO
 
 ### FUNCTIONS ###
 
-extract_factory_image() {
-  local factory_dir="${work_dir}/${device}/${build_id}/factory"
-  if [[ -d "${factory_dir}" ]]; then
-    echo "Skipping factory image extraction, ${factory_dir} already exists"
-    exit
+# Unpack the seperate partitions needed for OTA
+# from the factory image's bootloader.img & radio.img
+unpack_firmware() {
+  if [[ "${_wifi_only}" != "true" ]]; then
+    "${qc_image_unpacker}" -i "${src_dir}"/radio-*.img -o "${src_dir}"
+    # Alternative: dd bs=4 skip=35
   fi
-  mkdir -p "${factory_dir}"
-  local factory_zip="${work_dir}/${device}/${build_id}/$(basename ${image_url})"
-  echo "${image_sha256} ${factory_zip}" | sha256sum --check --status
-  pushd "${factory_dir}"
-  unzip -o "${factory_zip}"
-  pushd ${device}-${build_id,,}
-  unzip -o "image-${device}-${build_id,,}.zip"
-  popd
-  popd
+
+  if [[ "$_fbpk_version" == "v1" ]]; then
+    "${qc_image_unpacker}" -i "${src_dir}"/bootloader-*.img -o "${src_dir}"
+  else
+    python3 "${fbpacktool}" unpack -o "${src_dir}" "${src_dir}"/bootloader-*.img
+  fi
 }
 
 # error message
@@ -72,7 +75,7 @@ help_message() {
 }
 
 main() {
-  extract_factory_image
+  unpack_firmware
 }
 
 ### RUN PROGRAM ###

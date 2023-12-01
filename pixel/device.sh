@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# SPDX-FileCopyrightText: 2022 The Calyx Institute
+# SPDX-FileCopyrightText: 2022-2023 The Calyx Institute
 #
 # SPDX-License-Identifier: Apache-2.0
 
@@ -32,6 +32,7 @@ readonly top="${script_path}/../../.."
 readonly work_dir="${WORK_DIR:-/tmp/pixel}"
 
 source "${vars_path}/pixels"
+source "${vars_path}/common"
 
 ## HELP MESSAGE (USAGE INFO)
 # TODO
@@ -49,19 +50,21 @@ device() {
   pushd "${top}"
   if [[ -f device/google/${device}/regen-vendor.sh ]]; then
     if [[ -z ${wifi_only-} ]]; then
-      device/google/${device}/regen-carriersettings.sh "${factory_dir}/image/product.img" device/google/${device}/proprietary-files-carriersettings.txt
+      device/google/${device}/regen-carriersettings.sh "${factory_dir}/product.img" device/google/${device}/proprietary-files-carriersettings.txt
     fi
-    device/google/${device}/regen-vendor.sh "${factory_dir}/image/vendor.img" device/google/${device}/proprietary-files-vendor.txt
+    device/google/${device}/regen-vendor.sh "${factory_dir}/vendor.img" device/google/${device}/proprietary-files-vendor.txt
   else
     if [[ -z ${wifi_only-} ]]; then
-      device/google/*/${device}/regen-carriersettings.sh "${factory_dir}/image/product.img" device/google/*/${device}/proprietary-files-carriersettings.txt
+      device/google/*/${device}/regen-carriersettings.sh "${factory_dir}/product.img" device/google/*/${device}/proprietary-files-carriersettings.txt
     fi
-    device/google/*/${device}/regen-vendor.sh "${factory_dir}/image/vendor.img" device/google/*/${device}/proprietary-files-vendor.txt
+    device/google/*/${device}/regen-vendor.sh "${factory_dir}/vendor.img" device/google/*/${device}/proprietary-files-vendor.txt
   fi
-  device/google/${device}/extract-files.sh "${factory_dir}/image"
+  device/google/${device}/extract-files.sh "${factory_dir}"
   popd
 
-  "${script_path}/firmware.sh" "${device}"
+  if [[ "$os_branch" == "lineage-19.1" || "$os_branch" == "lineage-20.0" ]]; then
+    "${script_path}/firmware.sh" "${device}"
+  fi
 }
 
 # error message
