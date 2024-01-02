@@ -48,6 +48,30 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68060b5c_26104153",
+        "filename": "reuse/reuse.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2024-01-02T01:00:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98a2363a_9d436fd0",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 18
+      },
+      "revId": "1a90b5b9a91e75e226d4bd4a7ccd2f4b21ed1b33",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "abecc0b7_dab82fca",
