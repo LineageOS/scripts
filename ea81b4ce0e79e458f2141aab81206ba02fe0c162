@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4a958d2_c1abeed2",
+        "filename": "device-deps-regenerator/app.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2024-02-07T21:59:20Z",
+      "side": 1,
+      "message": "Drop 19.1?",
+      "revId": "ea81b4ce0e79e458f2141aab81206ba02fe0c162",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
