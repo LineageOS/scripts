@@ -14,7 +14,7 @@ parser.add_argument(
 args = parser.parse_args()
 
 # supported branches, newest to oldest
-CUR_BRANCHES = ["lineage-20", "lineage-20.0", "lineage-19.1", "lineage-18.1"]
+CUR_BRANCHES = ["lineage-21", "lineage-21.0", "lineage-20", "lineage-20.0", "lineage-19.1", "lineage-18.1"]
 
 
 def get_cm_dependencies(name):
