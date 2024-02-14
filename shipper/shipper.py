@@ -49,9 +49,10 @@ def get_wiki_data(codename: str) -> WikiData:
     for path in sorted(glob.glob(f'{CROOT}/lineage/wiki/_data/devices/{codename}.yml') + glob.glob(
             f'{CROOT}/lineage/wiki/_data/devices/{codename}_variant*.yml')):
         doc = yaml.load(open(path, 'r').read(), Loader=yaml.SafeLoader)
-        device_names.append(f'{doc["vendor"]} {doc["name"]}')
-        maintainers = doc['maintainers']
-        versions = doc['versions']
+        if doc['maintainers']:
+            device_names.append(f'{doc["vendor"]} {doc["name"]}')
+            maintainers = doc['maintainers']
+            versions = doc['versions']
 
     return WikiData(codename, device_names, maintainers, versions)
 
