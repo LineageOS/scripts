@@ -43,6 +43,8 @@ def get_cm_dependencies(name):
     mydeps = []
     non_device_repos = set()
     for el in cmdeps:
+        if el.get("remote", "github") != "github":
+            continue
         if "_device_" not in el["repository"]:
             non_device_repos.add(el["repository"])
         depbranch = el.get("branch", branch)
