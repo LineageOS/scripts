@@ -2,8 +2,8 @@
 
 set -e
 
-chromium_version="121.0.6167.164"
-chromium_code="6167164"
+chromium_version="122.0.6261.64"
+chromium_code="6261064"
 clean=0
 gsync=0
 supported_archs=(arm arm64 x86 x64)
@@ -160,7 +160,6 @@ args+=' enable_nacl=false'
 args+=' blink_symbol_level=0'
 args+=' webview_devui_show_icon=false'
 args+=' dfmify_dev_ui=false'
-args+=' enable_gvr_services=false'
 args+=' disable_fieldtrial_testing_config=true'
 args+=' android_default_version_name="'$chromium_version'"'
 
