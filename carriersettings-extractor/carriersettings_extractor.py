@@ -64,7 +64,8 @@ threshold_configs = ["5g_nr_ssrsrp_thresholds_int_array",
                      "gsm_rssi_thresholds_int_array",
                      "lte_rsrp_thresholds_int_array",
                      "lte_rssnr_thresholds_int_array",
-                     "wcdma_rscp_thresholds_int_array"]
+                     "wcdma_rscp_thresholds_int_array",
+                     "wcdma_ecno_thresholds_int_array"]
 
 def extract_elements(carrier_config_element, config):
     if config.key in unwanted_configs:
