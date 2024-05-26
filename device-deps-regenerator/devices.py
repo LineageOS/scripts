@@ -23,6 +23,7 @@ ignorelist = [
     "zuma",
     "contexthub",
     "sm8450-devicetrees",
+    "sm8475-devicetrees",
     "sm8550-devicetrees",
 ]
 
