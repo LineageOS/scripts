@@ -22,7 +22,7 @@ cc_binary {{
     shared_libs: [
         "libbase",
         "libbinder_ndk",
-        "{aidl_name}-ndk_platform",
+        "{aidl_name}-ndk",
     ],
     vendor: true,
 }}
