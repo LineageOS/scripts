@@ -5,9 +5,17 @@ from collections import OrderedDict
 from glob import glob
 from itertools import product
 import os.path
+import subprocess
 import sys
 from xml.etree import ElementTree as ET
 from xml.sax.saxutils import escape, quoteattr
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
+
+for name in glob(f"{dir_path}/*.proto"):
+    subprocess.run(
+        ["protoc", "--proto_path=.", "--python_out=.", os.path.basename(name)],
+        cwd=dir_path)
 
 from carrier_settings_pb2 import CarrierSettings, MultiCarrierSettings
 from carrier_list_pb2 import CarrierList
