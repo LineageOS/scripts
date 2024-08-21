@@ -9,6 +9,22 @@ import sys
 from xml.etree import ElementTree as ET
 from xml.sax.saxutils import escape, quoteattr
 
+from subprocess import run
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
+
+def gen_pb2_py(name):
+    run(["protoc", "--proto_path=.", "--python_out=.", name], cwd=dir_path)
+
+proto_files = [
+    "carrierId.proto",
+    "carrier_list.proto",
+    "carrier_settings.proto"
+]
+
+for name in proto_files:
+    gen_pb2_py(name)
+
 from carrier_settings_pb2 import CarrierSettings, MultiCarrierSettings
 from carrier_list_pb2 import CarrierList
 from carrierId_pb2 import CarrierList as CarrierIdList
