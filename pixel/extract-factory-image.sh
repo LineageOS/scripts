@@ -52,8 +52,8 @@ extract_factory_image() {
   echo "${image_sha256} ${factory_zip}" | sha256sum --check --status
   pushd "${factory_dir}"
   unzip -o "${factory_zip}"
-  pushd ${device}-${build_id,,}
-  unzip -o "image-${device}-${build_id,,}.zip"
+  pushd ${device}_beta-${build_id,,}
+  unzip -o "image-${device}_beta-${build_id,,}.zip"
   popd
   popd
 }
