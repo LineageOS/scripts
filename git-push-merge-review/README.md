@@ -2,5 +2,5 @@
 
 ```
 $ ./git-push-merge-review
-Usage ./git-push-merge-review <remote> <merge_sha> <branch>
+Usage ./git-push-merge-review [-t topic] <remote> <merge_sha> <branch>
 ```
