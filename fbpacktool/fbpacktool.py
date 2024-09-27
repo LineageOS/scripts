@@ -133,21 +133,41 @@ def copyfileobj(src, dst, file_size):
 
 def cmd_unpack(args):
   with open(args.file, 'rb') as f:
-    pack = fbpack.PackHeader.from_bytes(f.read(len(fbpack.PackHeader())))
+    pack = fbpack.CommonPackHeader.from_bytes(f.read(len(fbpack.CommonPackHeader())))
 
-    if pack.version != fbpack.FBPACK_VERSION:
+    f.seek(0, os.SEEK_SET)
+
+    if pack.version == fbpack.FBPACK_VERSION:
+      pack = fbpack.PackHeader.from_bytes(f.read(len(fbpack.PackHeader())))
+    elif pack.version == fbpack.FBPACK_VERSION_V1:
+      pack = fbpack.PackHeaderV1.from_bytes(f.read(len(fbpack.PackHeaderV1())))
+    else:
       raise NotImplementedError('unsupported version {}'.format(pack.version))
 
     entries = []
+    next_offset = len(pack)
     # create list of entries we want to extact
     for _ in range(pack.total_entries):
-      entry = fbpack.PackEntry.from_bytes(f.read(len(fbpack.PackEntry())))
+      if pack.version == fbpack.FBPACK_VERSION:
+        entry = fbpack.PackEntry.from_bytes(f.read(len(fbpack.PackEntry())))
+        offset = entry.offset
+      else:
+        f.seek(next_offset, os.SEEK_SET)
+        entry = fbpack.PackEntryV1.from_bytes(f.read(len(fbpack.PackEntryV1())))
+        offset = f.tell()
+        next_offset = (entry.next_offset_h << 32) | entry.next_offset
+
+      if entry.type == 0:
+        # Ignore partition table entries, next_offset will tell us
+        # where to go next
+        continue
+
       name = bytes_to_str(entry.name)
       if not args.partitions or name in args.partitions:
         # if both product are valid then match product name too
         if not args.product or not entry.product or product_match(
             entry.product, args.product):
-          entries.append(entry)
+          entries.append((name, offset, entry.size))
 
     if not entries and not args.unpack_ver:
       raise RuntimeError('no images to unpack')
@@ -158,11 +178,10 @@ def cmd_unpack(args):
 
     out_files = {}
     # write file per entry
-    for entry in entries:
-      name = bytes_to_str(entry.name)
+    for name, offset, size in entries:
       logging.info('Unpacking {} (size: {}, offset: {})'.format(
-          name, entry.size, entry.offset))
-      f.seek(entry.offset)
+          name, size, offset))
+      f.seek(offset)
       entry_filename = os.path.join(args.out_dir, name + '.img')
       instance = out_files.get(entry_filename, 0) + 1
       out_files[entry_filename] = instance
@@ -170,7 +189,7 @@ def cmd_unpack(args):
         entry_filename = os.path.join(args.out_dir,
                                       name + '({}).img'.format(instance - 1))
       with open(entry_filename, 'wb') as entry_file:
-        copyfileobj(f, entry_file, entry.size)
+        copyfileobj(f, entry_file, size)
 
     if args.unpack_ver:
       ver_file_path = os.path.join(args.out_dir, 'version.txt')
