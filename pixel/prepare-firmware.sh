@@ -31,12 +31,10 @@ readonly vars_path="${script_path}/../../../vendor/lineage/vars"
 readonly top="${script_path}/../../.."
 
 readonly fbpacktool="${top}/lineage/scripts/fbpacktool/fbpacktool.py"
-readonly qc_image_unpacker="${top}/prebuilts/extract-tools/linux-x86/bin/qc_image_unpacker"
 
 readonly device="${1}"
 source "${vars_path}/${device}"
 
-readonly _fbpk_version="${fbpk_version:-v1}"
 readonly _wifi_only="${wifi_only:-false}"
 
 readonly src_dir="${2}"
@@ -50,15 +48,10 @@ readonly src_dir="${2}"
 # from the factory image's bootloader.img & radio.img
 unpack_firmware() {
   if [[ "${_wifi_only}" != "true" ]]; then
-    "${qc_image_unpacker}" -i "${src_dir}"/radio-*.img -o "${src_dir}"
-    # Alternative: dd bs=4 skip=35
+    python3 "${fbpacktool}" unpack -o "${src_dir}" "${src_dir}"/radio-*.img
   fi
 
-  if [[ "$_fbpk_version" == "v1" ]]; then
-    "${qc_image_unpacker}" -i "${src_dir}"/bootloader-*.img -o "${src_dir}"
-  else
-    python3 "${fbpacktool}" unpack -o "${src_dir}" "${src_dir}"/bootloader-*.img
-  fi
+  python3 "${fbpacktool}" unpack -o "${src_dir}" "${src_dir}"/bootloader-*.img
 }
 
 # error message
