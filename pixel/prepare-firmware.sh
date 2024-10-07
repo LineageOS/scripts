@@ -41,7 +41,7 @@ readonly src_dir="${2}"
 # Unpack the seperate partitions needed for OTA
 # from the factory image's bootloader.img & radio.img
 unpack_firmware() {
-  radio_img=$(compgen -G "${src_dir}/radio-*.img")
+  radio_img=$(compgen -G "${src_dir}/radio-*.img" || true)
   if [ -n "${radio_img}" ]; then
     python3 "${fbpacktool}" unpack -o "${src_dir}" "${radio_img}"
   fi
