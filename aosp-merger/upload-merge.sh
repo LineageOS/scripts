@@ -55,6 +55,8 @@ fi
 
 # Source build environment (needed for lineageremote)
 source "${TOP}/build/envsetup.sh"
+export ANDROID_BUILD_TOP=$(gettop)
+source "${TOP}/vendor/lineage/build/envsetup.sh"
 
 # List of merged repos
 PROJECTPATHS=$(cat ${MERGEDREPOS} | grep -w merge | awk '{printf "%s\n", $2}')

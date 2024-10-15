@@ -60,6 +60,8 @@ TOP="${script_path}/../../.."
 
 # Source build environment (needed for aospremote)
 source "${TOP}/build/envsetup.sh"
+export ANDROID_BUILD_TOP=$(gettop)
+source "${TOP}/vendor/lineage/build/envsetup.sh"
 
 BRANCH="${os_branch}"
 STAGINGBRANCH="staging/${BRANCHSUFFIX}"
