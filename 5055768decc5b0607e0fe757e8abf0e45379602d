@@ -34,6 +34,24 @@
       "parentUuid": "f05fa746_d7bf21c1",
       "revId": "5055768decc5b0607e0fe757e8abf0e45379602d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83f24c5d_3375cb21",
+        "filename": "lineage-priv-template/keys.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2024-10-18T16:58:55Z",
+      "side": 1,
+      "message": "I don\u0027t know. I don\u0027t see `authsecret` in any builds and we also don\u0027t have `face` unlock either.",
+      "parentUuid": "7aa0588f_1c093503",
+      "revId": "5055768decc5b0607e0fe757e8abf0e45379602d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ],
   "submitRequirementResults": []
