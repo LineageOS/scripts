@@ -52,6 +52,24 @@
       "parentUuid": "7aa0588f_1c093503",
       "revId": "5055768decc5b0607e0fe757e8abf0e45379602d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d76c1a3e_5ce6acfd",
+        "filename": "lineage-priv-template/keys.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2024-10-18T17:08:27Z",
+      "side": 1,
+      "message": "I generated the list of new keys after building x86_64 emu target fyi.",
+      "parentUuid": "83f24c5d_3375cb21",
+      "revId": "5055768decc5b0607e0fe757e8abf0e45379602d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ],
   "submitRequirementResults": []
