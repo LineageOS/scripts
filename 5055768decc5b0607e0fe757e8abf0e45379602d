@@ -16,6 +16,24 @@
       "message": "https://android.googlesource.com/platform/hardware/interfaces/+/android-15.0.0_r1/authsecret/aidl/default/Android.bp\n\nThis re-uses the com.android.hardware key.\n\nBut IIRC this conversation has happened once before already, I\u0027m getting dejavu.",
       "revId": "5055768decc5b0607e0fe757e8abf0e45379602d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7aa0588f_1c093503",
+        "filename": "lineage-priv-template/keys.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2024-10-18T15:14:43Z",
+      "side": 1,
+      "message": "yeah, perhaps, but does it really matter whether they share keys or not?",
+      "parentUuid": "f05fa746_d7bf21c1",
+      "revId": "5055768decc5b0607e0fe757e8abf0e45379602d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ],
   "submitRequirementResults": []
