@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73cc769a_8aa3dc3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2024-11-02T23:28:34Z",
+      "side": 1,
+      "message": "Used here https://review.lineageos.org/c/LineageOS/android_lineage-sdk/+/407623",
+      "revId": "6ca3c81c39fa9c3ab09d591091c02993b87ad3df",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
