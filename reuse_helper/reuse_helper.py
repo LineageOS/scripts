@@ -15,8 +15,10 @@ from utils import check_dependencies, run_subprocess
 
 def fix_files(project_path, extension, args):
     extension_map = {
+        "*.aidl": ["java"],
+        "*.flags": ["py"],
         "*.java": ["java"],
-        "*.bp": ["java", "c"],
+        "*.bp": ["go"],
         "*.proto": ["java", "c"],
         "*.xml": ["xml"],
         "*.py": ["py"],
@@ -44,6 +46,7 @@ def clean_file(file, comment_style, args):
 
     pattern_map = {
         "c": r"((//[^\n]*\n)*(//)?)",
+        "go": r"((//[^\n]*\n)*(//)?)",
         "java": r"(/\*.*?\*/)",
         "py": r"((#[^\n]*\n)*#?)",
         "xml": r"(<!--.*?-->)",
@@ -110,7 +113,9 @@ def should_ignore_file(file):
 
 
 def build_spdx_comment(comment_style, copyright_lines, license_type):
-    if comment_style == "java" or comment_style == "c":
+    if comment_style == "go":
+        return build_comment(copyright_lines, license_type, "//\n", "// ", "//\n")
+    elif comment_style == "java" or comment_style == "c":
         return build_comment(copyright_lines, license_type, "/*\n", " * ", " */")
     elif comment_style == "xml":
         return build_comment(copyright_lines, license_type, "<!--\n", "     ", "-->")
@@ -173,7 +178,7 @@ def main():
         sys.exit(-1)
 
     # Parse and change known file-/comment-types
-    extensions = ["java", "xml", "bp", "proto", "py"]
+    extensions = ["aidl", "flags", "java", "xml", "bp", "proto", "py"]
     for ext in extensions:
         fix_files(path, f"*.{ext}", args)
 
