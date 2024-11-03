@@ -42,17 +42,38 @@ source "${vars_path}/common"
 device() {
   local device="${1}"
   source "${vars_path}/${device}"
-  local factory_dir="${work_dir}/${device}/${build_id}/factory/${device}-${build_id,,}"
 
-  "${script_path}/download.sh" "${device}"
-  "${script_path}/extract-factory-image.sh" "${device}"
+  if [[ "$os_branch" == "lineage-19.1" || "$os_branch" == "lineage-20.0" || "$os_branch" == "lineage-21.0" ]]; then
+    local factory_dir="${work_dir}/${device}/${build_id}/factory/${device}-${build_id,,}"
 
-  pushd "${top}"
-  device/google/${device}/extract-files.sh "${factory_dir}"
-  popd
+    "${script_path}/download.sh" "${device}"
+    "${script_path}/extract-factory-image.sh" "${device}"
 
-  if [[ "$os_branch" == "lineage-19.1" || "$os_branch" == "lineage-20.0" ]]; then
-    "${script_path}/firmware.sh" "${device}"
+    pushd "${top}"
+    device/google/${device}/extract-files.sh "${factory_dir}"
+    popd
+
+    if [[ "$os_branch" == "lineage-19.1" || "$os_branch" == "lineage-20.0" ]]; then
+      "${script_path}/firmware.sh" "${device}"
+    fi
+  else
+    local factory_dir="${work_dir}/${device}/${build_id}/$(basename ${image_url} .zip)"
+    local factory_zip="${work_dir}/${device}/${build_id}/$(basename ${image_url})"
+    local extract_src="${factory_dir}"
+    local keep_dump=""
+
+    if [ ! -d "${factory_dir}" ]; then
+      "${script_path}/download.sh" "${device}"
+      extract_src="${factory_zip}"
+
+      if [ "$KEEP_DUMP" == "true" ] || [ "$KEEP_DUMP" == "1" ]; then
+        keep_dump=" --keep-dump"
+      fi
+    fi
+
+    pushd "${top}"
+    device/google/${device}/extract-files.py "${extract_src}""${keep_dump}"
+    popd
   fi
 }
 
