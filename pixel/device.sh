@@ -34,6 +34,8 @@ readonly work_dir="${WORK_DIR:-/tmp/pixel}"
 source "${vars_path}/pixels"
 source "${vars_path}/common"
 
+KEEP_DUMP=${KEEP_DUMP:-false}
+
 ## HELP MESSAGE (USAGE INFO)
 # TODO
 
@@ -66,7 +68,7 @@ device() {
       extract_args+=" --keep-dump"
     fi
 
-    extract_args+=" --regenerate"
+    extract_args+=" --extract-factory --regenerate"
 
     pushd "${top}"
     device/google/${device}/extract-files.py "${extract_args}"
