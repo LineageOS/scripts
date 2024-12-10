@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "19f6835e_2387e355",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 24418
+      },
+      "writtenOn": "2024-12-10T05:15:24Z",
+      "side": 1,
+      "message": "bump",
+      "revId": "ea96b5fbfbac1e457ea016c3fdb785d2f4dadb30",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "68cd86d3_875cc676",
         "filename": "carriersettings-extractor/carrier_list.pb",
         "patchSetId": 1
@@ -14,6 +31,24 @@
       "writtenOn": "2024-10-26T05:30:04Z",
       "side": 1,
       "message": "Notably, this includes additional imsi prefix patterns for Rogers MVNOs in Canada, and additional plmns (302630/302640 in addition to 302610 for Bell MVNOs in Canada.",
+      "revId": "ea96b5fbfbac1e457ea016c3fdb785d2f4dadb30",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9fe6fcc_0ee4614f",
+        "filename": "carriersettings-extractor/carrier_list.pb",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 24418
+      },
+      "writtenOn": "2024-12-10T05:15:24Z",
+      "side": 1,
+      "message": "Also note that this file used to be a symlink to the one in TelephonyProvider... not entirely sure why it got changed in Ied7c51623dc6d14352fbc30db4632311ba455a0e.",
+      "parentUuid": "68cd86d3_875cc676",
       "revId": "ea96b5fbfbac1e457ea016c3fdb785d2f4dadb30",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
