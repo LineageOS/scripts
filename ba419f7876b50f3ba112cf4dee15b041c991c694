@@ -16,6 +16,23 @@
       "message": "I made it a required argument, but if it breaks your workflow it can be made optional as last one",
       "revId": "ba419f7876b50f3ba112cf4dee15b041c991c694",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2c99082_8b8ad4ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2024-12-16T14:13:39Z",
+      "side": 1,
+      "message": "I am able to upload non-merge commits without this, just pretending MERGE_SHA is not only for merges",
+      "revId": "ba419f7876b50f3ba112cf4dee15b041c991c694",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
