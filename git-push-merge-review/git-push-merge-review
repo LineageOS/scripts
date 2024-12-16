@@ -6,7 +6,7 @@
 #
 
 usage() {
-    echo "Usage ${0} [-t topic] <remote> <merge_sha> <branch>"
+    echo "Usage ${0} [-t topic] <remote> <merge_sha> <head> <branch>"
 }
 
 # Parse CLI args
@@ -24,15 +24,16 @@ done
 shift $((OPTIND - 1))
 
 # Verify argument count
-if [ "${#}" -ne 3 ]; then
+if [ "${#}" -ne 4 ]; then
     usage
     exit 1
 fi
 
 REMOTE="${1}"
 MERGE_SHA="${2}"
-BRANCH="${3}"
+HEAD="${3}"
+BRANCH="${4}"
 FIRST_SHA="$(git show -s --pretty=%P ${MERGE_SHA} | cut -d ' ' -f 1)"
 SECOND_SHA="$(git show -s --pretty=%P ${MERGE_SHA} | cut -d ' ' -f 2)"
 
-git push "${REMOTE}" "${MERGE_SHA}":refs/for/"${BRANCH}"%base="${FIRST_SHA}",base="${SECOND_SHA}${EXTRA}"
+git push "${REMOTE}" "${HEAD}":refs/for/"${BRANCH}"%base="${FIRST_SHA}",base="${SECOND_SHA}${EXTRA}"
