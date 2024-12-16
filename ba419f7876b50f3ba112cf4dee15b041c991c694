@@ -33,6 +33,24 @@
       "message": "I am able to upload non-merge commits without this, just pretending MERGE_SHA is not only for merges",
       "revId": "ba419f7876b50f3ba112cf4dee15b041c991c694",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78216208_c754d5b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2024-12-16T14:15:16Z",
+      "side": 1,
+      "message": "Does it also work for MERGE commit, commit 1, commit..n?\nAssume MERGE commit is already on gerrit and I want to upload commit 1..n",
+      "parentUuid": "f2c99082_8b8ad4ba",
+      "revId": "ba419f7876b50f3ba112cf4dee15b041c991c694",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
