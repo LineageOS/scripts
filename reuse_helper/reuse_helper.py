@@ -18,6 +18,7 @@ def fix_files(project_path, extension, args):
         "*.aidl": ["java"],
         "*.flags": ["py"],
         "*.java": ["java"],
+        "*.kt": ["java"],
         "*.bp": ["go"],
         "*.proto": ["java", "c"],
         "*.xml": ["xml"],
@@ -178,7 +179,7 @@ def main():
         sys.exit(-1)
 
     # Parse and change known file-/comment-types
-    extensions = ["aidl", "flags", "java", "xml", "bp", "proto", "py"]
+    extensions = ["aidl", "flags", "java", "kt", "xml", "bp", "proto", "py"]
     for ext in extensions:
         fix_files(path, f"*.{ext}", args)
 
