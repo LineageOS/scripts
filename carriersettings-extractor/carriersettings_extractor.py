@@ -62,10 +62,12 @@ unwanted_configs = [
                     "smart_forwarding_config_component_name_string",
                     "wfc_emergency_address_carrier_app_string",
                     # Always allow editing APNs
-                    "apn_expand_bool",
                     "allow_adding_apns_bool",
+                    "apn_expand_bool",
+                    "hide_carrier_network_settings_bool",
+                    "read_only_apn_fields_string_array",
                     "read_only_apn_types_string_array",
-                    "read_only_apn_fields_string_array"]
+                    "show_apn_setting_cdma_bool"]
 
 threshold_configs = ["5g_nr_ssrsrp_thresholds_int_array",
                      "5g_nr_sssinr_thresholds_int_array",
@@ -312,7 +314,6 @@ def main():
             )
             self.add_attribute('protocol')
             self.add_attribute('roaming_protocol')
-            self.add_attribute('carrier_enabled')
             self.add_attribute('bearer_bitmask')
             self.add_attribute('profile_id')
             self.add_attribute('modem_cognitive')
@@ -333,8 +334,6 @@ def main():
             self.add_attribute('apn_set_id')
             # No source for integer carrier_id?
             self.add_attribute('skip_464xlat')
-            self.add_attribute('user_visible')
-            self.add_attribute('user_editable')
 
     if apns_folder is not None:
         with open(os.path.join(apns_folder, 'apns-conf.xml'), 'w', encoding='utf-8') as f:
