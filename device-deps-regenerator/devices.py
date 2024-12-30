@@ -19,6 +19,7 @@ ignorelist = [
     "gs101",
     "pantah",
     "gs201",
+    "caimito",
     "shusky",
     "zuma",
     "contexthub",
