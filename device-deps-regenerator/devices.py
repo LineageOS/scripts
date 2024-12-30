@@ -9,23 +9,23 @@ with open("out.json") as f:
 devices = {}
 suffixes = {}
 ignorelist = [
-    "sepolicy",
-    "devicesettings",
-    "common",
     "atv",
-    "redbull",
-    "gs-common",
-    "raviole",
-    "gs101",
-    "pantah",
-    "gs201",
     "caimito",
-    "shusky",
-    "zuma",
+    "common",
     "contexthub",
+    "devicesettings",
+    "gs-common",
+    "gs101",
+    "gs201",
+    "pantah",
+    "raviole",
+    "redbull",
+    "sepolicy",
+    "shusky",
     "sm8450-devicetrees",
     "sm8475-devicetrees",
     "sm8550-devicetrees",
+    "zuma",
 ]
 
 
