@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc265aaa_a0aab1bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2025-01-06T18:50:35Z",
+      "side": 1,
+      "message": "seems pointless? your production keys are never supposed to be in ~/lineage/scripts in the first place.",
+      "revId": "b5196e78d7956f8b4dcbbde420ec1a44caa5d649",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
