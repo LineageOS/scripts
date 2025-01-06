@@ -16,6 +16,24 @@
       "message": "seems pointless? your production keys are never supposed to be in ~/lineage/scripts in the first place.",
       "revId": "b5196e78d7956f8b4dcbbde420ec1a44caa5d649",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd39def6_8e2ea79e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20364
+      },
+      "writtenOn": "2025-01-06T19:14:26Z",
+      "side": 1,
+      "message": "Thanks for your input; I understand your perspective. Of course, production keys should never be stored in the scripts folder. In my understanding, this is a template to generate the keys and maintain them separately in a private folder (~/vendor/lineage-priv/keys). I thought ignoring the keys was an extra security step to avoid accidentally leaking them while working on the actual script files. I can abandon this change if it\u0027s not really needed.",
+      "parentUuid": "bc265aaa_a0aab1bf",
+      "revId": "b5196e78d7956f8b4dcbbde420ec1a44caa5d649",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
