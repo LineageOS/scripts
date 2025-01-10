@@ -57,17 +57,34 @@ help_message() {
 main() {
   mkdir -p "${tmp_dir}"
   if [[ $# -ne 0 ]]; then
-    local ds="${@}"
+    ds=("${@}")
   else
-    local ds="${devices[@]}"
+    ds=("${devices[@]}")
   fi
 
-  for d in ${ds}; do
-    (
-      local tmp=$(mktemp "${tmp_dir}/${d}.XXXXXXXXXX")
+  declare -a tmps
+  declare -a build_ids
+  for d in "${ds[@]}"; do
+    local tmp=$(mktemp "${tmp_dir}/${d}.XXXXXXXXXX")
+    tmps+=("$tmp")
+
+    # Variables are marked readonly, do this to avoid it
+    build_id=$(
       local dv="${vars_path}/${d}"
       source "${dv}"
-      ${script_path}/get-new-device-vars.py -b "${build_id}" -d "${d}" -t ${aosp_tag_match}> "${tmp}"
+      echo "${build_id}"
+    )
+    build_ids+=("${build_id}")
+  done
+
+  ${script_path}/get-new-device-vars.py --devices "${ds[@]}" --build-ids "${build_ids[@]}" --tmps "${tmps[@]}" -t ${aosp_tag_match}
+
+  for i in "${!ds[@]}"; do
+    d="${ds[$i]}"
+    tmp="${tmps[$i]}"
+    (
+      local dv="${vars_path}/${d}"
+      source "${dv}"
       source "${tmp}"
       if [[ "${new_aosp_tag}" != "${aosp_tag}" ]]; then
         sed -i "/ prev_aosp_tag=/c\readonly prev_aosp_tag=\"$aosp_tag\"" "${dv}"
@@ -81,7 +98,6 @@ main() {
       sed -i "/ ota_sha256=/c\readonly ota_sha256=\"$new_ota_sha256\"" "${dv}"
       sed -i "/ security_patch=/c\readonly security_patch=\"$new_security_patch\"" "${dv}"
     )
-    sleep 10s
   done
 }
 
