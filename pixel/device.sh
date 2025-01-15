@@ -70,8 +70,8 @@ device() {
 
     extract_args+=" --regenerate"
 
-    pushd "${top}"
-    device/google/${device}/extract-files.py "${extract_args}"
+    pushd "${top}/device/google/${device}"
+    ./extract-files.py ${extract_args}
     popd
   fi
 }
