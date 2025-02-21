@@ -38,6 +38,9 @@ TOP="${script_path}/../../.."
 export LC_MESSAGES=C
 export LC_TIME=C
 
+# export everything that parallel needs
+export TOP script_path vars_path merge_method common_aosp_tag prev_common_aosp_tag os_branch
+
 ## HELP MESSAGE (USAGE INFO)
 # TODO
 
@@ -47,11 +50,13 @@ export LC_TIME=C
 merge_aosp() {
   "${script_path}"/merge-aosp.sh --old-tag "${common_aosp_tag}" --new-tag "${prev_common_aosp_tag}" --branch-suffix "${common_aosp_tag}_merge-${prev_common_aosp_tag}"
 }
+export -f merge_aosp
 
 # Merge AOSP to forks
 merge_aosp_forks() {
   "${script_path}"/merge-aosp-forks.sh --old-tag "${prev_common_aosp_tag}" --new-tag "${common_aosp_tag}" --branch-suffix "${os_branch}_merge-${common_aosp_tag}"
 }
+export -f merge_aosp_forks
 
 post_aosp_merge() {
   if [ "${merge_method}" = "merge" ]; then
@@ -60,6 +65,7 @@ post_aosp_merge() {
     "${script_path}"/squash.sh --branch-suffix "${os_branch}_merge-${common_aosp_tag}"
   fi
 }
+export -f post_aosp_merge
 
 upload_aosp_merge_to_review() {
   if [ "${merge_method}" = "merge" ]; then
@@ -68,15 +74,18 @@ upload_aosp_merge_to_review() {
     "${script_path}"/upload-squash.sh --branch-suffix "${os_branch}_merge-${common_aosp_tag}"
   fi
 }
+export -f upload_aosp_merge_to_review
 
 push_aosp_merge() {
   "${script_path}"/push-merge.sh --branch-suffix "${os_branch}_merge-${common_aosp_tag}"
 }
+export -f push_aosp_merge
 
 # Merge CLO to forks
 merge_clo() {
-  "${script_path}"/_merge_helper.sh --project-path "${repo}" --new-tag "${1}" --branch-suffix "${os_branch}_merge-${1}"
+  "${script_path}"/_merge_helper.sh --project-path "${2}" --new-tag "${1}" --branch-suffix "${os_branch}_merge-${1}"
 }
+export -f merge_clo
 
 squash_clo_merge() {
   if [ "${merge_method}" = "merge" ]; then
@@ -85,6 +94,7 @@ squash_clo_merge() {
     "${script_path}"/squash.sh --new-tag "${1}" --branch-suffix "${os_branch}_merge-${1}"
   fi
 }
+export -f squash_clo_merge
 
 upload_squash_clo_to_review() {
   if [ "${merge_method}" = "merge" ]; then
@@ -93,10 +103,12 @@ upload_squash_clo_to_review() {
     "${script_path}"/upload-squash.sh --new-tag "${1}" --branch-suffix "${os_branch}_merge-${1}"
   fi
 }
+export -f upload_squash_clo_to_review
 
 push_clo_merge() {
   "${script_path}"/push-merge.sh --branch-suffix "${os_branch}_merge-${1}"
 }
+export -f push_clo_merge
 
 # error message
 # ARG1: error message for STDERR
@@ -141,11 +153,7 @@ main() {
     # Remove any existing list of merged repos file
     rm -f "${MERGEDREPOS}"
 
-    for repo in $(repo list -p -g ${2}); do
-      (
-      merge_clo "${qcom_tag}"
-      )
-    done
+    parallel -j8 --line-buffer --tag merge_clo "${qcom_tag}" ::: $(repo list -p -g ${2})
 
     # Run this to print list of conflicting repos
     cat "${MERGEDREPOS}" | grep -w conflict-merge || true
