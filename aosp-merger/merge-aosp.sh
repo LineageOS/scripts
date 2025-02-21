@@ -73,6 +73,4 @@ done
 echo "#### Verification complete - no uncommitted changes found ####"
 
 # Iterate over each forked project
-for PROJECTPATH in ${PROJECTPATHS}; do
-    "${script_path}"/_merge_helper.sh --project-path "${PROJECTPATH}" --operation "${OPERATION}" --old-tag "${OLDTAG}" --new-tag "${NEWTAG}" --branch-suffix "${BRANCHSUFFIX}"
-done
+parallel -j8 --line-buffer --tag "${script_path}"/_merge_helper.sh --project-path {} --operation "${OPERATION}" --old-tag "${OLDTAG}" --new-tag "${NEWTAG}" --branch-suffix "${BRANCHSUFFIX}" ::: "${PROJECTPATHS}"
