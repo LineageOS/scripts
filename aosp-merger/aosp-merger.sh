@@ -261,6 +261,35 @@ main() {
     upload_squash_clo_to_review "${qcom_tag}"
 
     unset MERGEDREPOS
+  elif [ "${1}" = "upload-platform" ]; then
+    export MERGEDREPOS="${TOP}/merged_repos.txt"
+
+    post_aosp_merge
+    upload_aosp_merge_to_review
+    echo "Don't forget to update the manifest!"
+
+    unset MERGEDREPOS
+  elif [ "${1}" = "upload-devices" ]; then
+    export MERGEDREPOS="${TOP}/merged_repos_devices.txt"
+
+    parallel -j8 --line-buffer --tag 'post_pixel_device_merge; upload_pixel_device_to_review' ::: ${devices[@]}
+
+    unset MERGEDREPOS
+  elif [ "${1}" = "upload-kernels" ]; then
+    export MERGEDREPOS="${TOP}/merged_repos_kernels.txt"
+
+    parallel -j8 --line-buffer --tag 'post_pixel_kernel_merge; upload_pixel_kernel_to_review' ::: ${kernel_repos[@]}
+
+    unset MERGEDREPOS
+  elif [ "${1}" = "upload-clo" ]; then
+    qcom_tag="${qcom_group_revision[${2}]}"
+
+    export MERGEDREPOS="${TOP}/merged_repos_clo_${2}.txt"
+
+    squash_clo_merge "${qcom_tag}"
+    upload_squash_clo_to_review "${qcom_tag}"
+
+    unset MERGEDREPOS
   elif [ "${1}" = "submit-platform" ]; then
     export MERGEDREPOS="${TOP}/merged_repos.txt"
 
