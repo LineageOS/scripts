@@ -65,11 +65,14 @@ BRANCH="${os_branch}"
 STAGINGBRANCH="staging/${BRANCHSUFFIX}"
 
 cd "${TOP}/${PROJECTPATH}"
+
+PREVIOUSBRANCH="$(git branch --show-current 2>/dev/null)"
+
 # Ditch any existing staging branches
 if git show-ref --verify --quiet refs/heads/"${STAGINGBRANCH}"; then
     repo abandon "${STAGINGBRANCH}" .
 fi
-repo start "${STAGINGBRANCH}" .
+repo start --head "${STAGINGBRANCH}" .
 if [ -f ".gitupstream" ]; then
     git fetch -q --force --tags "$(cat .gitupstream)" "${NEWTAG}"
 else
@@ -85,6 +88,9 @@ if [ ! -z "${OLDTAG}" ]; then
     if [[ -z "$(git diff --no-ext-diff ${OLDTAG} ${NEWTAG})" ]]; then
         echo -e "nochange\t\t${PROJECTPATH}" | tee -a "${MERGEDREPOS}"
         repo abandon "${STAGINGBRANCH}" .
+        if [ -n "$PREVIOUSBRANCH" ]; then
+            git checkout "$PREVIOUSBRANCH"
+        fi
         exit 0
     fi
 
@@ -107,6 +113,9 @@ if [[ "${OPERATION}" == "merge" ]]; then
     if [[ -z "$(git diff --no-ext-diff HEAD m/${os_branch})" && -z "$(git status --porcelain)" ]]; then
         echo -e "nochange\t\t${PROJECTPATH}" | tee -a "${MERGEDREPOS}"
         repo abandon "${STAGINGBRANCH}" .
+        if [ -n "$PREVIOUSBRANCH" ]; then
+            git checkout "$PREVIOUSBRANCH"
+        fi
         exit 0
     fi
 elif [[ "${OPERATION}" == "rebase" ]]; then
