@@ -7,7 +7,7 @@
 #
 
 usage() {
-    echo "Usage ${0} -b <branch-suffix> --pixel"
+    echo "Usage ${0} -p <projectpath> -b <branch-suffix> --pixel"
 }
 
 # Verify argument count
@@ -16,10 +16,14 @@ if [ "${#}" -eq 0 ]; then
     exit 1
 fi
 
+CUSTOMPROJECTPATH=
 PIXEL=false
 
 while [ "${#}" -gt 0 ]; do
     case "${1}" in
+        -p | --project-path )
+                CUSTOMPROJECTPATH="${2}"; shift
+                ;;
         -b | --branch-suffix )
                 BRANCHSUFFIX="${2}"; shift
                 ;;
@@ -47,7 +51,11 @@ STAGINGBRANCH="staging/${BRANCHSUFFIX}"
 source "${TOP}/build/envsetup.sh"
 
 # List of merged repos
-PROJECTPATHS=$(cat ${MERGEDREPOS} | grep -w merge | awk '{printf "%s\n", $2}')
+if [[ -n "${CUSTOMPROJECTPATH}" ]]; then
+    PROJECTPATHS="${CUSTOMPROJECTPATH}"
+else
+    PROJECTPATHS=$(cat ${MERGEDREPOS} | grep -w merge | awk '{printf "%s\n", $2}')
+fi
 
 # Make sure manifest and forked repos are in a consistent state
 for PROJECTPATH in ${PROJECTPATHS} .repo/manifests; do

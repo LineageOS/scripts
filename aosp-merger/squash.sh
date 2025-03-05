@@ -7,7 +7,7 @@
 #
 
 usage() {
-    echo "Usage ${0} -n <new-tag> -b <branch-suffix> --pixel"
+    echo "Usage ${0} -p <projectpath> -n <new-tag> -b <branch-suffix> --pixel"
 }
 
 # Verify argument count
@@ -16,10 +16,14 @@ if [ "${#}" -eq 0 ]; then
     exit 1
 fi
 
+CUSTOMPROJECTPATH=
 PIXEL=false
 
 while [ "${#}" -gt 0 ]; do
     case "${1}" in
+        -p | --project-path )
+                CUSTOMPROJECTPATH="${2}"; shift
+                ;;
         -n | --new-tag )
                 NEWTAG="${2}"; shift
                 ;;
@@ -52,7 +56,11 @@ if [ -z "${BRANCH}" ]; then
 fi
 
 # List of merged repos
-PROJECTPATHS=$(cat ${MERGEDREPOS} | grep -w merge | awk '{printf "%s\n", $2}')
+if [[ -n "${CUSTOMPROJECTPATH}" ]]; then
+    PROJECTPATHS="${CUSTOMPROJECTPATH}"
+else
+    PROJECTPATHS=$(cat ${MERGEDREPOS} | grep -w merge | awk '{printf "%s\n", $2}')
+fi
 
 echo -e "\n#### Branch = ${BRANCH} Squash branch = ${SQUASHBRANCH} ####"
 

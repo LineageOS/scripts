@@ -85,41 +85,56 @@ export -f push_aosp_merge
 
 # Merge AOSP to pixel device forks
 merge_pixel_device() {
+  (
   source "${vars_path}/${1}"
   for repo in ${device_repos[@]}; do
     "${script_path}"/_subtree_merge_helper.sh --project-path "${repo}" --old-tag "${prev_aosp_tag}" --new-tag "${aosp_tag}" --branch-suffix "${device_branch}_merge-${aosp_tag}"
   done
+  )
 }
 export -f merge_pixel_device
 
 post_pixel_device_merge() {
+  (
   source "${vars_path}/${1}"
-  if [ "${merge_method}" = "merge" ]; then
-    return
-  else
-    "${script_path}"/squash.sh --new-tag "${aosp_tag}" --branch-suffix "${device_branch}_merge-${aosp_tag}" --pixel
-  fi
+  for repo in ${device_repos[@]}; do
+    if [ "${merge_method}" = "merge" ]; then
+      return
+    else
+      "${script_path}"/squash.sh --project-path "${repo}" --new-tag "${aosp_tag}" --branch-suffix "${device_branch}_merge-${aosp_tag}" --pixel
+    fi
+  done
+  )
 }
 export -f post_pixel_device_merge
 
 upload_pixel_device_to_review() {
+  (
   source "${vars_path}/${1}"
-  if [ "${merge_method}" = "merge" ]; then
-    "${script_path}"/upload-merge.sh --branch-suffix "${device_branch}_merge-${aosp_tag}" --pixel
-  else
-    "${script_path}"/upload-squash.sh --branch-suffix "${device_branch}_merge-${aosp_tag}" --pixel
-  fi
+  for repo in ${device_repos[@]}; do
+    if [ "${merge_method}" = "merge" ]; then
+      "${script_path}"/upload-merge.sh --project-path "${repo}" --branch-suffix "${device_branch}_merge-${aosp_tag}" --pixel
+    else
+      "${script_path}"/upload-squash.sh --project-path "${repo}" --branch-suffix "${device_branch}_merge-${aosp_tag}" --pixel
+    fi
+  done
+  )
 }
 export -f upload_pixel_device_to_review
 
 push_device_merge() {
+  (
   source "${vars_path}/${1}"
-  "${script_path}"/push-merge.sh --branch-suffix "${device_branch}_merge-${aosp_tag}" --pixel
+  for repo in ${device_repos[@]}; do
+    "${script_path}"/push-merge.sh --project-path "${repo}" --branch-suffix "${device_branch}_merge-${aosp_tag}" --pixel
+  done
+  )
 }
 export -f push_device_merge
 
 # Merge AOSP to pixel kernel forks
 merge_pixel_kernel() {
+  (
   source "${vars_path}/${1}"
   readonly kernel_short="$(echo ${1} | cut -d / -f 3)"
   source "${vars_path}/${kernel_short}"
@@ -127,32 +142,45 @@ merge_pixel_kernel() {
   readonly device_kernel_repo="${1}"
 
   "${script_path}"/_subtree_merge_helper.sh --project-path "${device_kernel_repo}" --old-tag "${prev_kernel_tag}" --new-tag "${kernel_tag}" --branch-suffix "${device_branch}_merge-${kernel_tag}"
+  )
 }
 export -f merge_pixel_kernel
 
 post_pixel_kernel_merge() {
+  (
   source "${vars_path}/${1}"
-  if [ "${merge_method}" = "merge" ]; then
-    return
-  else
-    "${script_path}"/squash.sh --new-tag "${kernel_tag}" --branch-suffix "${device_branch}_merge-${kernel_tag}" --pixel
-  fi
+  for repo in ${device_kernel_repos}; do
+    if [ "${merge_method}" = "merge" ]; then
+      return
+    else
+      "${script_path}"/squash.sh --project-path "${repo}" --new-tag "${kernel_tag}" --branch-suffix "${device_branch}_merge-${kernel_tag}" --pixel
+    fi
+  done
+  )
 }
 export -f post_pixel_kernel_merge
 
 upload_pixel_kernel_to_review() {
+  (
   source "${vars_path}/${1}"
-  if [ "${merge_method}" = "merge" ]; then
-    "${script_path}"/upload-merge.sh --branch-suffix "${device_branch}_merge-${kernel_tag}" --pixel
-  else
-    "${script_path}"/upload-squash.sh --branch-suffix "${device_branch}_merge-${kernel_tag}" --pixel
-  fi
+  for repo in ${device_kernel_repos}; do
+    if [ "${merge_method}" = "merge" ]; then
+      "${script_path}"/upload-merge.sh --project-path "${repo}" --branch-suffix "${device_branch}_merge-${kernel_tag}" --pixel
+    else
+      "${script_path}"/upload-squash.sh --project-path "${repo}" --branch-suffix "${device_branch}_merge-${kernel_tag}" --pixel
+    fi
+  done
+  )
 }
 export -f upload_pixel_kernel_to_review
 
 push_kernel_merge() {
+  (
   source "${vars_path}/${1}"
-  "${script_path}"/push-merge.sh --branch-suffix "${device_branch}_merge-${kernel_tag}" --pixel
+  for repo in ${device_kernel_repos}; do
+    "${script_path}"/push-merge.sh --branch-suffix "${device_branch}_merge-${kernel_tag}" --pixel
+  done
+  )
 }
 export -f push_kernel_merge
 
@@ -228,7 +256,7 @@ main() {
     cat "${MERGEDREPOS}" | grep -w conflict-merge || true
     read -p "Waiting for conflict resolution. Press enter when done."
 
-    parallel -j8 --line-buffer --tag 'post_pixel_device_merge; upload_pixel_device_to_review' ::: ${devices[@]}
+    parallel -j8 --line-buffer --tag 'post_pixel_device_merge {}; upload_pixel_device_to_review {}' ::: ${devices[@]}
 
     unset MERGEDREPOS
   elif [ "${1}" = "kernels" ]; then
@@ -242,7 +270,7 @@ main() {
     cat "${MERGEDREPOS}" | grep -w conflict-merge || true
     read -p "Waiting for conflict resolution. Press enter when done."
 
-    parallel -j8 --line-buffer --tag 'post_pixel_kernel_merge; upload_pixel_kernel_to_review' ::: ${kernel_repos[@]}
+    parallel -j8 --line-buffer --tag 'post_pixel_kernel_merge {}; upload_pixel_kernel_to_review {}' ::: ${kernel_repos[@]}
 
     unset MERGEDREPOS
   elif [ "${1}" = "clo" ]; then
@@ -272,13 +300,13 @@ main() {
   elif [ "${1}" = "upload-devices" ]; then
     export MERGEDREPOS="${TOP}/merged_repos_devices.txt"
 
-    parallel -j8 --line-buffer --tag 'post_pixel_device_merge; upload_pixel_device_to_review' ::: ${devices[@]}
+    parallel -j8 --line-buffer --tag 'post_pixel_device_merge {}; upload_pixel_device_to_review {}' ::: ${devices[@]}
 
     unset MERGEDREPOS
   elif [ "${1}" = "upload-kernels" ]; then
     export MERGEDREPOS="${TOP}/merged_repos_kernels.txt"
 
-    parallel -j8 --line-buffer --tag 'post_pixel_kernel_merge; upload_pixel_kernel_to_review' ::: ${kernel_repos[@]}
+    parallel -j8 --line-buffer --tag 'post_pixel_kernel_merge {}; upload_pixel_kernel_to_review {}' ::: ${kernel_repos[@]}
 
     unset MERGEDREPOS
   elif [ "${1}" = "upload-clo" ]; then
