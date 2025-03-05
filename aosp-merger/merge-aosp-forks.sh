@@ -62,7 +62,6 @@ PROJECTPATHS=$(grep "name=\"LineageOS/" "${MANIFEST}" | sed -n 's/.*path="\([^"]
 echo -e "\n#### Old tag = ${OLDTAG} Branch = ${BRANCH} Staging branch = ${STAGINGBRANCH} ####"
 
 # Make sure manifest and forked repos are in a consistent state
-echo -e "\n#### Verifying there are no uncommitted changes on forked AOSP projects ####"
 for PROJECTPATH in ${PROJECTPATHS} .repo/manifests; do
     cd "${TOP}/${PROJECTPATH}"
     if [[ -n "$(git status --porcelain)" ]]; then
@@ -70,7 +69,6 @@ for PROJECTPATH in ${PROJECTPATHS} .repo/manifests; do
         exit 1
     fi
 done
-echo "#### Verification complete - no uncommitted changes found ####"
 
 # Iterate over each forked project
 parallel -j8 --line-buffer --tag "${script_path}"/_merge_helper.sh --project-path {} --operation "$OPERATION" --old-tag "$OLDTAG" --new-tag "$NEWTAG" --branch-suffix "$BRANCHSUFFIX" ::: "${PROJECTPATHS}"
