@@ -110,8 +110,8 @@ else
     git commit --no-edit
     if [[ -n "$(git status --porcelain)" ]]; then
         CONFLICT="conflict-"
+        read -p "Waiting for conflict resolution before continuing. Press enter when done."
     fi
-    read -p "Waiting for conflict resolution before continuing. Press enter when done."
 
     echo $(git log  -1 --pretty=%b | tail -2) > .git/CHANGE_ID
 fi
@@ -130,8 +130,8 @@ for subtree in `find -mindepth 2 -type f -name .gitupstream | cut -d / -f 2- | s
     git commit --no-edit
     if [[ -n "$(git status --porcelain)" && -z "${CONFLICT}" ]]; then
         CONFLICT="conflict-"
+        read -p "Waiting for conflict resolution before continuing. Press enter when done."
     fi
-    read -p "Waiting for conflict resolution before continuing. Press enter when done."
 
     if [[ ! -f ".git/CHANGE_ID" ]]; then
         echo $(git log  -1 --pretty=%b | tail -2) > .git/CHANGE_ID
