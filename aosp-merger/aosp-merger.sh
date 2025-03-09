@@ -250,7 +250,11 @@ main() {
     # Remove any existing list of merged repos file
     rm -f "${MERGEDREPOS}"
 
-    parallel -j8 --line-buffer --tag merge_pixel_device ::: ${devices[@]}
+    for device in ${devices[@]}; do
+      (
+      merge_pixel_device "${device}"
+      )
+    done
 
     # Run this to print list of conflicting repos
     cat "${MERGEDREPOS}" | grep -w conflict-merge || true
@@ -264,7 +268,11 @@ main() {
     # Remove any existing list of merged repos file
     rm -f "${MERGEDREPOS}"
 
-    parallel -j8 --line-buffer --tag merge_pixel_kernel ::: ${kernel_repos[@]}
+    for kernel in ${kernel_repos[@]}; do
+      (
+      merge_pixel_kernel "${kernel}"
+      )
+    done
 
     # Run this to print list of conflicting repos
     cat "${MERGEDREPOS}" | grep -w conflict-merge || true
