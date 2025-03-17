@@ -129,6 +129,8 @@ class PackHeaderV1(packedstruct.PackedStruct):
                total_entries=0,
                total_size=0):
     super().__init__(magic, version, img_version, total_entries, total_size)
+    self.pack_version = b''
+
 
 class PackEntryV1(packedstruct.PackedStruct):
   type: int
