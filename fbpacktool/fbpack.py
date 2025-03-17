@@ -14,6 +14,8 @@ FBPACK_PARTITION_TABLE = 0
 FBPACK_PARTITION_DATA = 1
 FBPACK_SIDELOAD_DATA = 2
 
+BOOTLDR_IMG_MAGIC1 = 0x544f4f42
+BOOTLDR_IMG_MAGIC2 = 0x2152444c
 
 class CommonPackHeader(packedstruct.PackedStruct):
   magic: int
@@ -161,3 +163,45 @@ class PackEntryV1(packedstruct.PackedStruct):
                next_offset=0,
                crc32=0):
     super().__init__(type_, name, size_h, size, next_offset_h, next_offset, crc32)
+
+
+class PackHeaderBootLDR(packedstruct.PackedStruct):
+  magic1: int
+  magic2: int
+  total_entries: int
+  start_offset: int
+  total_size: int
+  _FIELDS = collections.OrderedDict([
+      ('magic1', 'I'),
+      ('magic2', 'I'),
+      ('total_entries', 'I'),
+      ('start_offset', 'I'),
+      ('total_size', 'I'),
+  ])
+
+  def __init__(self,
+               magic1=BOOTLDR_IMG_MAGIC1,
+               magic2=BOOTLDR_IMG_MAGIC2,
+               total_entries=0,
+               start_offset=0,
+               total_size=0):
+    super().__init__(magic1, magic2, total_entries, start_offset, total_size)
+    self.pack_version = b''
+
+
+class PackEntryBootLDR(packedstruct.PackedStruct):
+  name: str
+  size: int
+  _FIELDS = collections.OrderedDict([
+      ('name', '64s'),
+      ('size', 'I'),
+  ])
+
+  # Provide defaults.
+  # pylint: disable=useless-super-delegation
+  def __init__(self,
+               name=b'',
+               size=0):
+    super().__init__(name, size)
+    self.type = FBPACK_PARTITION_DATA
+    self.product = None

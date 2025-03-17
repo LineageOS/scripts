@@ -141,11 +141,14 @@ def cmd_unpack(args):
       pack = fbpack.PackHeader.from_bytes(f.read(len(fbpack.PackHeader())))
     elif common_pack.version == fbpack.FBPACK_VERSION_V1:
       pack = fbpack.PackHeaderV1.from_bytes(f.read(len(fbpack.PackHeaderV1())))
+      next_offset = len(pack)
+    elif common_pack.version == fbpack.BOOTLDR_IMG_MAGIC2:
+      pack = fbpack.PackHeaderBootLDR.from_bytes(f.read(len(fbpack.PackHeaderBootLDR())))
+      next_offset = pack.start_offset
     else:
       raise NotImplementedError('unsupported version {}'.format(pack.version))
 
     entries = []
-    next_offset = len(pack)
     # create list of entries we want to extact
     for _ in range(pack.total_entries):
       if common_pack.version == fbpack.FBPACK_VERSION:
@@ -156,6 +159,11 @@ def cmd_unpack(args):
         entry = fbpack.PackEntryV1.from_bytes(f.read(len(fbpack.PackEntryV1())))
         offset = f.tell()
         next_offset = (entry.next_offset_h << 32) | entry.next_offset
+      elif common_pack.version == fbpack.BOOTLDR_IMG_MAGIC2:
+        f.seek(next_offset, os.SEEK_SET)
+        entry = fbpack.PackEntryBootLDR.from_bytes(f.read(len(fbpack.PackEntryBootLDR())))
+        offset = f.tell()
+        next_offset = offset + entry.size
       else:
         raise NotImplementedError('unsupported version {}'.format(common_pack.version))
 
