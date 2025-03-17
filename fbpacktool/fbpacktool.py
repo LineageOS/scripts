@@ -133,13 +133,13 @@ def copyfileobj(src, dst, file_size):
 
 def cmd_unpack(args):
   with open(args.file, 'rb') as f:
-    pack = fbpack.CommonPackHeader.from_bytes(f.read(len(fbpack.CommonPackHeader())))
+    common_pack = fbpack.CommonPackHeader.from_bytes(f.read(len(fbpack.CommonPackHeader())))
 
     f.seek(0, os.SEEK_SET)
 
-    if pack.version == fbpack.FBPACK_VERSION:
+    if common_pack.version == fbpack.FBPACK_VERSION:
       pack = fbpack.PackHeader.from_bytes(f.read(len(fbpack.PackHeader())))
-    elif pack.version == fbpack.FBPACK_VERSION_V1:
+    elif common_pack.version == fbpack.FBPACK_VERSION_V1:
       pack = fbpack.PackHeaderV1.from_bytes(f.read(len(fbpack.PackHeaderV1())))
     else:
       raise NotImplementedError('unsupported version {}'.format(pack.version))
