@@ -133,13 +133,13 @@ def copyfileobj(src, dst, file_size):
 
 def cmd_unpack(args):
   with open(args.file, 'rb') as f:
-    pack = fbpack.CommonPackHeader.from_bytes(f.read(len(fbpack.CommonPackHeader())))
+    common_pack = fbpack.CommonPackHeader.from_bytes(f.read(len(fbpack.CommonPackHeader())))
 
     f.seek(0, os.SEEK_SET)
 
-    if pack.version == fbpack.FBPACK_VERSION:
+    if common_pack.version == fbpack.FBPACK_VERSION:
       pack = fbpack.PackHeader.from_bytes(f.read(len(fbpack.PackHeader())))
-    elif pack.version == fbpack.FBPACK_VERSION_V1:
+    elif common_pack.version == fbpack.FBPACK_VERSION_V1:
       pack = fbpack.PackHeaderV1.from_bytes(f.read(len(fbpack.PackHeaderV1())))
     else:
       raise NotImplementedError('unsupported version {}'.format(pack.version))
@@ -148,14 +148,16 @@ def cmd_unpack(args):
     next_offset = len(pack)
     # create list of entries we want to extact
     for _ in range(pack.total_entries):
-      if pack.version == fbpack.FBPACK_VERSION:
+      if common_pack.version == fbpack.FBPACK_VERSION:
         entry = fbpack.PackEntry.from_bytes(f.read(len(fbpack.PackEntry())))
         offset = entry.offset
-      else:
+      elif common_pack.version == fbpack.FBPACK_VERSION_V1:
         f.seek(next_offset, os.SEEK_SET)
         entry = fbpack.PackEntryV1.from_bytes(f.read(len(fbpack.PackEntryV1())))
         offset = f.tell()
         next_offset = (entry.next_offset_h << 32) | entry.next_offset
+      else:
+        raise NotImplementedError('unsupported version {}'.format(common_pack.version))
 
       if entry.type == 0:
         # Ignore partition table entries, next_offset will tell us
