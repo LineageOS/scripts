@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41011cc9_7595a2f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 35051
+      },
+      "writtenOn": "2025-03-20T21:26:19Z",
+      "side": 1,
+      "message": "Reiniciar o sistema",
+      "revId": "e52acf505182d7b8fa97d63881b58f7fe20ae374",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
