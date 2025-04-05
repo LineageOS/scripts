@@ -25,6 +25,8 @@ ignorelist = [
     "sm8450-devicetrees",
     "sm8475-devicetrees",
     "sm8550-devicetrees",
+    "sm8650-devicetrees",
+    "sm8750-devicetrees",
     "zuma",
 ]
 
