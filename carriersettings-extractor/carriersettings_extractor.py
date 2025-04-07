@@ -67,7 +67,10 @@ unwanted_configs = [
                     "hide_carrier_network_settings_bool",
                     "read_only_apn_fields_string_array",
                     "read_only_apn_types_string_array",
-                    "show_apn_setting_cdma_bool"]
+                    "show_apn_setting_cdma_bool",
+                    # Enhanced 4G toggles
+                    "hide_enhanced_4g_lte_bool",
+                    "editable_enhanced_4g_lte_bool"]
 
 threshold_configs = ["5g_nr_ssrsrp_thresholds_int_array",
                      "5g_nr_sssinr_thresholds_int_array",
