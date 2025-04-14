@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# SPDX-FileCopyrightText: 2025 The LineageOS Project
+# SPDX-License-Identifier: Apache-2.0
+
+set -u
+
+ORG="$1"
+BRANCH="$2"
+
+REPOSITORIES=$(gh repo list ${ORG} -L 99999 --json name | jq ".[].name" --raw-output)
+
+for repo in $REPOSITORIES; do
+    gh repo edit "${ORG}/${repo}" --default-branch "${BRANCH}"
+done
