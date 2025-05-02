@@ -6,8 +6,10 @@
 set -u
 
 ORG="$1"
-BRANCH="$2"
+BRANCHES="${@:2}"
 
 for repo in $(gh repo list "${ORG}" -L 99999 --json name | jq ".[].name" --raw-output); do
-    gh repo edit "${ORG}/${repo}" --default-branch "${BRANCH}"
+    for branch in $BRANCHES; do
+        gh repo edit "${ORG}/${repo}" --default-branch "${branch}"
+    done
 done
