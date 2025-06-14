@@ -49,7 +49,7 @@ def main() -> None:
 
     manifest.append(project)
 
-    ElementTree.indent(manifest, space="    ")
+    ElementTree.indent(manifest, space="  ")
 
     with open(args.file, "w") as f:
         f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
