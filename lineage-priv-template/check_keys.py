@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# SPDX-FileCopyrightText: 2024 The LineageOS Project
+# SPDX-FileCopyrightText: 2024-2025 The LineageOS Project
 # SPDX-License-Identifier: Apache-2.0
 
 import glob
+import os
 import subprocess
 import sys
 from multiprocessing import Pool
@@ -18,6 +19,9 @@ KNOWN_KEYS = [
 
 
 def check_public_key(path: str) -> None:
+    if not os.path.isfile(path):
+        return
+
     certs = []
     stdout = subprocess.run(
         [
