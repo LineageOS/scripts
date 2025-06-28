@@ -19,6 +19,23 @@ def parse_cmdline() -> argparse.Namespace:
     return parser.parse_args()
 
 
+# in-place prettyprint formatter
+def indent(elem, level=0):
+    i = "\n" + level * "  "
+    if len(elem):
+        if not elem.text or not elem.text.strip():
+            elem.text = i + "  "
+        if not elem.tail or not elem.tail.strip():
+            elem.tail = i
+        for elem in elem:
+            indent(elem, level + 1)
+        if not elem.tail or not elem.tail.strip():
+            elem.tail = i
+    else:
+        if level and (not elem.tail or not elem.tail.strip()):
+            elem.tail = i
+
+
 def main() -> None:
     args = parse_cmdline()
 
@@ -49,12 +66,11 @@ def main() -> None:
 
     manifest.append(project)
 
-    ElementTree.indent(manifest, space="  ")
+    indent(manifest)
 
     with open(args.file, "w") as f:
         f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
         f.write(ElementTree.tostring(manifest).decode())
-        f.write("\n")
 
 
 if __name__ == "__main__":
