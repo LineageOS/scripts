@@ -9,13 +9,26 @@ from xml.etree import ElementTree
 
 
 def parse_cmdline() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Add repo to manifest")
-    parser.add_argument("--file", help="Path to output manifest XML", required=True)
-    parser.add_argument("--project-name", help="Project name", required=True)
-    parser.add_argument("--project-path", help="Project path", required=True)
-    parser.add_argument("--project-remote", help="Project remote", required=True)
-    parser.add_argument("--project-revision", help="Project revision")
-    parser.add_argument("--project-clone-depth", help="Project clone depth")
+    parser = argparse.ArgumentParser(description="Edit / create manifest")
+
+    parser_common = argparse.ArgumentParser(add_help=False)
+    parser_common.add_argument(
+        "--file", help="Path to output manifest XML", required=True
+    )
+
+    subparsers = parser.add_subparsers(dest="command", required=True)
+
+    subparser = subparsers.add_parser("add-project", parents=[parser_common])
+    subparser.add_argument("--name", help="Project name", required=True)
+    subparser.add_argument("--path", help="Project path", required=True)
+    subparser.add_argument("--remote", help="Project remote", required=True)
+    subparser.add_argument("--revision", help="Project revision")
+    subparser.add_argument("--clone-depth", help="Project clone depth")
+
+    subparser = subparsers.add_parser("add-remote", parents=[parser_common])
+    subparser.add_argument("--name", help="Remote name", required=True)
+    subparser.add_argument("--fetch", help="Remote path", required=True)
+
     return parser.parse_args()
 
 
@@ -45,26 +58,35 @@ def main() -> None:
     except:
         manifest = ElementTree.Element("manifest")
 
-    project = ElementTree.Element(
-        "project",
-        attrib={
-            "name": args.project_name,
-            "path": args.project_path,
-            "remote": args.project_remote,
-        },
-    )
+    if args.command == "add-project":
+        element = ElementTree.Element(
+            "project",
+            attrib={
+                "name": args.name,
+                "path": args.path,
+                "remote": args.remote,
+            },
+        )
 
-    if args.project_revision:
-        project.attrib["revision"] = args.project_revision
+        if args.revision:
+            element.attrib["revision"] = args.revision
 
-    if args.project_clone_depth:
-        project.attrib["clone-depth"] = args.project_clone_depth
+        if args.clone_depth:
+            element.attrib["clone-depth"] = args.clone_depth
+    elif args.command == "add-remote":
+        element = ElementTree.Element(
+            "remote",
+            attrib={
+                "name": args.name,
+                "fetch": args.fetch,
+            },
+        )
 
-    for child in manifest.findall("project"):
-        if project.attrib == child.attrib:
-            sys.exit("Project with the same attributes already exists")
+    for child in manifest.findall(element.tag):
+        if element.attrib == child.attrib:
+            sys.exit("Element with the same attributes already exists")
 
-    manifest.append(project)
+    manifest.append(element)
 
     indent(manifest)
 
