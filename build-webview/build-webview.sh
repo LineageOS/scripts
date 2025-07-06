@@ -5,8 +5,8 @@
 
 set -e
 
-chromium_version="137.0.7151.72"
-chromium_code="7151072"
+chromium_version="138.0.7204.63"
+chromium_code="7204063"
 clean=0
 gsync=0
 supported_archs=(arm arm64 x86 x64)
