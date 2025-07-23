@@ -1,0 +1,29 @@
+[tool.pylint.'messages control']
+disable = [
+    # Defaults
+    'raw-checker-failed',
+    'bad-inline-option',
+    'locally-disabled',
+    'file-ignored',
+    'suppressed-message',
+    'useless-suppression',
+    'deprecated-pragma',
+    'use-symbolic-message-instead',
+    'use-implicit-booleaness-not-comparison-to-string',
+    'use-implicit-booleaness-not-comparison-to-zero',
+
+    'invalid-name',
+    'missing-class-docstring',
+    'missing-function-docstring',
+    'missing-module-docstring',
+    'too-few-public-methods',
+    'too-many-arguments',
+    'too-many-boolean-expressions',
+    'too-many-instance-attributes',
+    'too-many-lines',
+    'too-many-locals',
+    'too-many-positional-arguments',
+    'too-many-public-methods',
+    'too-many-return-statements',
+    'unused-argument',
+]
