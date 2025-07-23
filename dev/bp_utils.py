@@ -1,0 +1,66 @@
+# SPDX-FileCopyrightText: 2025 The LineageOS Project
+# SPDX-License-Identifier: Apache-2.0
+
+from __future__ import annotations
+
+from typing import Dict, Optional
+
+ANDROID_BP_NAME = 'Android.bp'
+
+
+def merge_bp_module_defaults(base: Dict, override: Dict) -> Dict:
+    result = base.copy()
+
+    for key, value in override.items():
+        if (
+            key in result
+            and isinstance(result[key], list)
+            and isinstance(value, list)
+        ):
+            result[key] = result[key] + value
+        else:
+            result[key] = value
+
+    return result
+
+
+def get_partition_specific(partition: Optional[str]):
+    if partition == 'product' or partition == 'system_ext':
+        return f'{partition}_specific'
+    elif partition == 'odm':
+        return 'device_specific'
+    elif partition == 'vendor':
+        return partition
+
+    return None
+
+
+def write_android_bp(apk_path: str, android_bp_path: str, package: str):
+    apk_path_parts = apk_path.split('/')
+
+    partition = None
+    try:
+        overlay_index = apk_path_parts.index('overlay')
+        partition = apk_path_parts[overlay_index - 1]
+    except (ValueError, IndexError):
+        pass
+
+    specific = get_partition_specific(partition)
+    if specific is None:
+        specific = ''
+    else:
+        specific = f'\n    {specific}: true,'
+
+    with open(android_bp_path, 'w') as o:
+        o.write(
+            f'''
+//
+// SPDX-FileCopyrightText: The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+runtime_resource_overlay {{
+    name: "{package}",{specific}
+}}
+'''
+        )
