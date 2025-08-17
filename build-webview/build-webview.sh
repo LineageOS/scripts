@@ -86,7 +86,7 @@ while getopts ":a:chr:s" opt; do
            done
            if [ -z "$build_arch" ]; then
                echo "Unsupported ARCH: $OPTARG"
-               echo "Supported ARCHs: ${supported_archs[@]}"
+               echo "Supported ARCHs: ${supported_archs[*]}"
                exit 1
            fi
            ;;
