@@ -64,28 +64,28 @@ unpack_firmware() {
 
 extract_firmware() {
   echo "${ota_sha256} ${ota_zip}" | sha256sum --check --status
-  python3 ${extract_ota_py} ${ota_zip} -o "${ota_firmware_dir}" -p ${firmware_partitions[@]}
+  python3 ${extract_ota_py} ${ota_zip} -o "${ota_firmware_dir}" -p "${firmware_partitions[@]}"
 }
 
 # Firmware included in OTAs, separate partitions
 # Can be extracted from bootloader.img inside the factory image,
 # or directly from the OTA zip
 copy_ota_firmware() {
-  for fp in ${firmware_partitions[@]}; do
+  for fp in "${firmware_partitions[@]}"; do
     cp "${ota_firmware_dir}/${fp}.img" "${vendor_path}/radio/${fp}.img"
   done
 }
 
 setup_makefiles() {
   echo "AB_OTA_PARTITIONS += \\" > "${vendor_path}/config.mk"
-  for fp in ${firmware_partitions[@]}; do
+  for fp in "${firmware_partitions[@]}"; do
     echo "    ${fp} \\" >> "${vendor_path}/config.mk"
   done
 
   echo "LOCAL_PATH := \$(call my-dir)" > "${vendor_path}/firmware.mk"
   echo >> "${vendor_path}/firmware.mk"
   echo "ifeq (\$(TARGET_DEVICE),${device})" >> "${vendor_path}/firmware.mk"
-  for fp in ${firmware_partitions[@]}; do
+  for fp in "${firmware_partitions[@]}"; do
     echo "\$(call add-radio-file,radio/${fp}.img)" >> "${vendor_path}/firmware.mk"
   done
   echo "endif" >> "${vendor_path}/firmware.mk"

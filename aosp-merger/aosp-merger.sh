@@ -77,7 +77,7 @@ push_aosp_merge() {
 
 # Merge AOSP to pixel device forks
 merge_pixel_device() {
-  for repo in ${device_repos[@]}; do
+  for repo in "${device_repos[@]}"; do
     "${script_path}"/_subtree_merge_helper.sh --project-path "${repo}" --old-tag "${prev_aosp_tag}" --new-tag "${aosp_tag}" --branch-suffix "${device_branch}_merge-${aosp_tag}"
   done
 }
@@ -185,7 +185,7 @@ main() {
 
     unset MERGEDREPOS
   elif [ "${1}" = "devices" ]; then
-    for device in ${devices[@]}; do
+    for device in "${devices[@]}"; do
       (
       source "${vars_path}/${device}"
       export MERGEDREPOS="${TOP}/merged_repos_${device}.txt"
@@ -203,7 +203,7 @@ main() {
       )
     done
   elif [ "${1}" = "kernels" ]; then
-    for kernel in ${kernel_repos[@]}; do
+    for kernel in "${kernel_repos[@]}"; do
       (
       readonly kernel_short="$(echo ${kernel} | cut -d / -f 3)"
       source "${vars_path}/${kernel_short}"
@@ -251,7 +251,7 @@ main() {
 
     unset MERGEDREPOS
   elif [ "${1}" = "submit-devices" ]; then
-    for device in ${devices[@]}; do
+    for device in "${devices[@]}"; do
       (
       source "${vars_path}/${device}"
       export MERGEDREPOS="${TOP}/merged_repos_${device}.txt"
@@ -262,7 +262,7 @@ main() {
       )
     done
   elif [ "${1}" = "submit-kernels" ]; then
-    for kernel in ${kernel_repos[@]}; do
+    for kernel in "${kernel_repos[@]}"; do
       (
       readonly kernel_short="$(echo ${kernel} | cut -d / -f 3)"
       source "${vars_path}/${kernel_short}"
