@@ -81,7 +81,7 @@ build() {
 
 while getopts ":a:chr:s" opt; do
     case $opt in
-        a) for arch in ${supported_archs[@]}; do
+        a) for arch in "${supported_archs[@]}"; do
                [ "$OPTARG" '==' "$arch" ] && build_arch="$OPTARG"
            done
            if [ -z "$build_arch" ]; then
