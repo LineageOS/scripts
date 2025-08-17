@@ -43,7 +43,7 @@ done
 
 if [ -z "${OPERATION}" ]; then
     OPERATION="merge"
-elif [ "${OPERATION}" != "merge" -a "${OPERATION}" != "rebase" ]; then
+elif [ "${OPERATION}" != "merge" ] && [ "${OPERATION}" != "rebase" ]; then
     usage
     exit 1
 fi
