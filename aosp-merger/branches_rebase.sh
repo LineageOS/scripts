@@ -34,7 +34,7 @@ cat "${BRANCHLIST}" | while read l; do
     cd "${TOP}/${PROJECTPATH}"
 
     # Sanity check
-    [[ -n "$(git status --porcelain)" ]]; then
+    if [[ -n "$(git status --porcelain)" ]]; then
         echo -n "!!!! Project ${PROJECTPATH} has uncommitted files, "
         echo    "not switching to branch ${BRANCH} (skipping) !!!!"
         continue
