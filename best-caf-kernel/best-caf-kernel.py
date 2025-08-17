@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # SPDX-FileCopyrightText: 2018-2022 The LineageOS Project
 # SPDX-License-Identifier: Apache-2.0
