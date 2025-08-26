@@ -133,7 +133,11 @@ merge_clo() {
 }
 
 squash_clo_merge() {
-  "${script_path}"/squash.sh --new-tag "${1}" --branch-suffix "${os_branch}_merge-${1}"
+  if [ "${merge_method}" = "merge" ]; then
+    return
+  else
+    "${script_path}"/squash.sh --new-tag "${1}" --branch-suffix "${os_branch}_merge-${1}"
+  fi
 }
 
 upload_squash_clo_to_review() {
