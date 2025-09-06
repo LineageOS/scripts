@@ -518,9 +518,6 @@ def remove_rros_shadowed_resources(
             )
 
     for resources in resource_map.values():
-        if len(resources) < 2:
-            continue
-
         resources.sort(key=resource_sort_key)
 
         preferred_resource_overlay = resources[0]
