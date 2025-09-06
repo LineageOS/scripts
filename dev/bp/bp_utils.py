@@ -6,6 +6,12 @@ from __future__ import annotations
 from typing import Dict, List, Optional
 
 ANDROID_BP_NAME = 'Android.bp'
+ANDROID_BP_COPYRIGHT = """
+//
+// SPDX-FileCopyrightText: The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+""".lstrip()
 
 
 def merge_bp_module_defaults(base: Dict, override: Dict) -> Dict:
@@ -49,7 +55,6 @@ def bp_extend_defaults(
     return merge_bp_module_defaults(base, module), missing_defaults
 
 
-
 def get_partition_specific(partition: Optional[str]):
     if partition == 'product' or partition == 'system_ext':
         return f'{partition}_specific'
@@ -79,12 +84,7 @@ def write_android_bp(apk_path: str, android_bp_path: str, package: str):
 
     with open(android_bp_path, 'w') as o:
         o.write(
-            f'''
-//
-// SPDX-FileCopyrightText: The LineageOS Project
-// SPDX-License-Identifier: Apache-2.0
-//
-
+            f'''{ANDROID_BP_COPYRIGHT}
 runtime_resource_overlay {{
     name: "{package}",{specific}
 }}
