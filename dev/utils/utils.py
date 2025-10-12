@@ -4,10 +4,11 @@
 from __future__ import annotations
 
 import os
+from contextlib import contextmanager
 from enum import Enum
 from os import path
 from subprocess import PIPE, run
-from typing import List, Optional, Set
+from typing import Generator, List, Optional, Set
 
 script_dir = path.dirname(path.realpath(__file__))
 android_root = path.realpath(path.join(script_dir, '..', '..', '..', '..'))
@@ -40,11 +41,18 @@ def get_dirs_with_file(dir_path: str, name: str):
         yield path.dirname(file_path)
 
 
-def run_cmd(cmd: List[str]):
+def run_cmd(cmd: List[str], capture: bool=True):
+    if capture:
+        stdout = PIPE
+        stderr = PIPE
+    else:
+        stdout = None
+        stderr = None
+
     proc = run(
         cmd,
-        stdout=PIPE,
-        stderr=PIPE,
+        stdout=stdout,
+        stderr=stderr,
         text=True,
         check=False,
     )
@@ -87,3 +95,15 @@ def split_normalize_text(text: str):
     lines = list(map(remove_comments, lines))
     lines = list(filter(lambda line: not is_empty_line(line), lines))
     return lines
+
+
+@contextmanager
+def WorkingDirectory(dir_path: str) -> Generator[None, None, None]:
+    cwd = os.getcwd()
+
+    os.chdir(dir_path)
+
+    try:
+        yield
+    finally:
+        os.chdir(cwd)
