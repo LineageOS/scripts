@@ -16,6 +16,23 @@
       "message": "If this has been processed with ruff, lgtm",
       "revId": "51528408533b49598bc8ad1af27f24d6c447d8e3",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6131b149_fa16888f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 25732
+      },
+      "writtenOn": "2025-11-03T19:46:50Z",
+      "side": 1,
+      "message": "(note: I don\u0027t have merge perms)",
+      "revId": "51528408533b49598bc8ad1af27f24d6c447d8e3",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
