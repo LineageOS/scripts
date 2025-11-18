@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c83e148_71be0d5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8980
+      },
+      "writtenOn": "2025-11-18T00:27:59Z",
+      "side": 1,
+      "message": "Much appreciated. Finally got all the aconfigs extracted.",
+      "revId": "1bc6d46b4f7ca8ca35bf8115846a664c9f14afb2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
