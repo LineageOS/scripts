@@ -19,6 +19,7 @@ def fix_files(project_path, extension, args):
         "*.flags": ["py"],
         "*.java": ["java"],
         "*.kt": ["java"],
+        "*.mk": ["mk"],
         "*.bp": ["go"],
         "*.proto": ["java", "c"],
         "*.xml": ["xml"],
@@ -49,6 +50,7 @@ def clean_file(file, comment_style, args):
         "c": r"((//[^\n]*\n)*(//)?)",
         "go": r"((//[^\n]*\n)*(//)?)",
         "java": r"(/\*.*?\*/)",
+        "mk": r"((#[^\n]*\n)*#?)",
         "py": r"((#[^\n]*\n)*#?)",
         "xml": r"(<!--.*?-->)",
     }
@@ -118,6 +120,8 @@ def build_spdx_comment(comment_style, copyright_lines, license_type):
         return build_comment(copyright_lines, license_type, "//\n", "// ", "//\n")
     elif comment_style == "java" or comment_style == "c":
         return build_comment(copyright_lines, license_type, "/*\n", " * ", " */")
+    elif comment_style == "mk":
+        return build_comment(copyright_lines, license_type, "#\n", "# ", "#\n")
     elif comment_style == "xml":
         return build_comment(copyright_lines, license_type, "<!--\n", "     ", "-->")
     elif comment_style == "py":
@@ -179,7 +183,7 @@ def main():
         sys.exit(-1)
 
     # Parse and change known file-/comment-types
-    extensions = ["aidl", "flags", "java", "kt", "xml", "bp", "proto", "py"]
+    extensions = ["aidl", "flags", "java", "kt", "mk", "xml", "bp", "proto", "py"]
     for ext in extensions:
         fix_files(path, f"*.{ext}", args)
 
