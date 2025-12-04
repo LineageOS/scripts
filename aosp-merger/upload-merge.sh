@@ -7,7 +7,7 @@
 #
 
 usage() {
-    echo "Usage ${0} -n <new-tag> -b <branch-suffix> --pixel"
+    echo "Usage ${0} -n <new-tag> -b <branch-suffix>"
 }
 
 # Verify argument count
@@ -16,8 +16,6 @@ if [ "${#}" -eq 0 ]; then
     exit 1
 fi
 
-PIXEL=false
-
 while [ "${#}" -gt 0 ]; do
     case "${1}" in
         -n | --new-tag )
@@ -25,9 +23,6 @@ while [ "${#}" -gt 0 ]; do
                 ;;
         -b | --branch-suffix )
                 BRANCHSUFFIX="${2}"; shift
-                ;;
-        -p | --pixel )
-                PIXEL=true; shift
                 ;;
         * )
                 usage
@@ -47,8 +42,6 @@ TOP="${script_path}/../../.."
 STAGINGBRANCH="staging/${BRANCHSUFFIX}"
 if [ ! -z "${NEWTAG}" ]; then
     TOPIC="${NEWTAG}"
-elif [ "${PIXEL}" = true ]; then
-    TOPIC="${topic}_pixel"
 else
     TOPIC="${topic}"
 fi
@@ -76,13 +69,9 @@ echo "#### Verification complete - no uncommitted changes found ####"
 for PROJECTPATH in ${PROJECTPATHS}; do
     cd "${TOP}/${PROJECTPATH}"
 
-    if [ "${PIXEL}" = true ]; then
-        BRANCH="${device_branch}"
-    else
-        BRANCH=$(git config --get branch.${STAGINGBRANCH}.merge | sed 's|refs/heads/||')
-        if [ -z "${BRANCH}" ]; then
-            BRANCH="${os_branch}"
-        fi
+    BRANCH=$(git config --get branch.${STAGINGBRANCH}.merge | sed 's|refs/heads/||')
+    if [ -z "${BRANCH}" ]; then
+        BRANCH="${os_branch}"
     fi
 
     echo -e "\n#### Pushing ${PROJECTPATH} merge to review ####"
