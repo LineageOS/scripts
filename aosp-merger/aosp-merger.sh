@@ -39,7 +39,7 @@ export LC_MESSAGES=C
 export LC_TIME=C
 
 # export everything that parallel needs
-export TOP script_path vars_path merge_method common_aosp_tag prev_common_aosp_tag os_branch
+export TOP script_path vars_path common_aosp_tag prev_common_aosp_tag os_branch
 
 ## HELP MESSAGE (USAGE INFO)
 # TODO
@@ -58,21 +58,8 @@ merge_aosp_forks() {
 }
 export -f merge_aosp_forks
 
-post_aosp_merge() {
-  if [ "${merge_method}" = "merge" ]; then
-    return
-  else
-    "${script_path}"/squash.sh --branch-suffix "${os_branch}_merge-${common_aosp_tag}"
-  fi
-}
-export -f post_aosp_merge
-
 upload_aosp_merge_to_review() {
-  if [ "${merge_method}" = "merge" ]; then
-    "${script_path}"/upload-merge.sh --branch-suffix "${os_branch}_merge-${common_aosp_tag}"
-  else
-    "${script_path}"/upload-squash.sh --branch-suffix "${os_branch}_merge-${common_aosp_tag}"
-  fi
+  "${script_path}"/upload-merge.sh --branch-suffix "${os_branch}_merge-${common_aosp_tag}"
 }
 export -f upload_aosp_merge_to_review
 
@@ -87,23 +74,10 @@ merge_clo() {
 }
 export -f merge_clo
 
-squash_clo_merge() {
-  if [ "${merge_method}" = "merge" ]; then
-    return
-  else
-    "${script_path}"/squash.sh --new-tag "${1}" --branch-suffix "${os_branch}_merge-${1}"
-  fi
+upload_clo_merge_to_review() {
+  "${script_path}"/upload-merge.sh --new-tag "${1}" --branch-suffix "${os_branch}_merge-${1}"
 }
-export -f squash_clo_merge
-
-upload_squash_clo_to_review() {
-  if [ "${merge_method}" = "merge" ]; then
-    "${script_path}"/upload-merge.sh --new-tag "${1}" --branch-suffix "${os_branch}_merge-${1}"
-  else
-    "${script_path}"/upload-squash.sh --new-tag "${1}" --branch-suffix "${os_branch}_merge-${1}"
-  fi
-}
-export -f upload_squash_clo_to_review
+export -f upload_clo_merge_to_review
 
 push_clo_merge() {
   "${script_path}"/push-merge.sh --branch-suffix "${os_branch}_merge-${1}"
@@ -133,7 +107,6 @@ main() {
     # Run this to print list of conflicting repos
     cat "${MERGEDREPOS}" | grep -w conflict-merge || true
     read -p "Waiting for conflict resolution. Press enter when done."
-    post_aosp_merge
     upload_aosp_merge_to_review
     echo "Don't forget to update the manifest!"
 
@@ -158,14 +131,12 @@ main() {
     # Run this to print list of conflicting repos
     cat "${MERGEDREPOS}" | grep -w conflict-merge || true
     read -p "Waiting for conflict resolution. Press enter when done."
-    squash_clo_merge "${qcom_tag}"
-    upload_squash_clo_to_review "${qcom_tag}"
+    upload_clo_merge_to_review "${qcom_tag}"
 
     unset MERGEDREPOS
   elif [ "${1}" = "upload-platform" ]; then
     export MERGEDREPOS="${TOP}/merged_repos.txt"
 
-    post_aosp_merge
     upload_aosp_merge_to_review
     echo "Don't forget to update the manifest!"
 
@@ -175,8 +146,7 @@ main() {
 
     export MERGEDREPOS="${TOP}/merged_repos_clo_${2}.txt"
 
-    squash_clo_merge "${qcom_tag}"
-    upload_squash_clo_to_review "${qcom_tag}"
+    upload_clo_merge_to_review "${qcom_tag}"
 
     unset MERGEDREPOS
   elif [ "${1}" = "submit-platform" ]; then
