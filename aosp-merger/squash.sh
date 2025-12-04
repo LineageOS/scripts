@@ -16,8 +16,6 @@ if [ "${#}" -eq 0 ]; then
     exit 1
 fi
 
-PIXEL=false
-
 while [ "${#}" -gt 0 ]; do
     case "${1}" in
         -n | --new-tag )
@@ -25,9 +23,6 @@ while [ "${#}" -gt 0 ]; do
                 ;;
         -b | --branch-suffix )
                 BRANCHSUFFIX="${2}"; shift
-                ;;
-        -p | --pixel )
-                PIXEL=true; shift
                 ;;
         * )
                 usage
@@ -76,10 +71,5 @@ for PROJECTPATH in ${PROJECTPATHS}; do
     git branch --set-upstream-to=m/"${BRANCH}"
     git reset --soft m/"${BRANCH}"
     git add .
-    if [ "${PIXEL}" = true ]; then
-        git commit -m "[SQUASH] Merge tag '${NEWTAG}' into ${STAGINGBRANCH}" -m "$(cat .git/CHANGE_ID)"
-        rm .git/CHANGE_ID
-    else
-        git commit -m "[SQUASH] $(git log ${STAGINGBRANCH} -1 --pretty=%s)" -m "$(git log ${STAGINGBRANCH} -1 --pretty=%b)"
-    fi
+    git commit -m "[SQUASH] $(git log ${STAGINGBRANCH} -1 --pretty=%s)" -m "$(git log ${STAGINGBRANCH} -1 --pretty=%b)"
 done
