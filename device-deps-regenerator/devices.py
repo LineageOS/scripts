@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2017-2023 The LineageOS Project
+# SPDX-FileCopyrightText: 2017-2025 The LineageOS Project
 # SPDX-License-Identifier: Apache-2.0
 
 import json
@@ -14,20 +14,19 @@ ignorelist = [
     "common",
     "contexthub",
     "devicesettings",
+    "devicetrees",
     "gs-common",
     "gs101",
     "gs201",
+    "kernels",
     "pantah",
     "raviole",
     "redbull",
     "sepolicy",
+    "sepolicy_vndr",
     "shusky",
-    "sm8450-devicetrees",
-    "sm8475-devicetrees",
-    "sm8550-devicetrees",
-    "sm8650-devicetrees",
-    "sm8750-devicetrees",
     "zuma",
+    "zumapro",
 ]
 
 
@@ -48,7 +47,7 @@ def simplify_reverse_deps(repo, device):
 
 
 for repo in mapping:
-    if "device" not in repo or any(x in repo for x in ignorelist):
+    if "device" not in repo or any(repo.endswith(x) for x in ignorelist):
         continue
     codename = repo.split("_", maxsplit=3)[-1]
     if codename in devices:
