@@ -70,5 +70,9 @@ for PROJECTPATH in ${PROJECTPATHS} .repo/manifests; do
     fi
 done
 
+# Merge build/make first, to allow resolving conflicts in envsetup which would break all subsequent merges
+"${script_path}"/_merge_helper.sh --project-path build/make --operation "${OPERATION}" --old-tag "${OLDTAG}" --new-tag "${NEWTAG}" --branch-suffix "${BRANCHSUFFIX}"
+read -p "Waiting for conflict resolution. Press enter when done."
+
 # Iterate over each forked project
 parallel -j8 --line-buffer --tag "${script_path}"/_merge_helper.sh --project-path {} --operation "$OPERATION" --old-tag "$OLDTAG" --new-tag "$NEWTAG" --branch-suffix "$BRANCHSUFFIX" ::: "${PROJECTPATHS}"
