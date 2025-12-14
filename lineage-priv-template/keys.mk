@@ -57,6 +57,7 @@ PRODUCT_CERTIFICATE_OVERRIDES := \
     com.android.scheduling:com.android.scheduling.certificate.override \
     com.android.sdkext:com.android.sdkext.certificate.override \
     com.android.support.apexer:com.android.support.apexer.certificate.override \
+    com.android.telephonycore:com.android.telephonycore.certificate.override \
     com.android.telephony:com.android.telephony.certificate.override \
     com.android.telephonymodules:com.android.telephonymodules.certificate.override \
     com.android.tethering:com.android.tethering.certificate.override \
