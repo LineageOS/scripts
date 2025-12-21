@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31fff65f_07bc25f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 80
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2025-12-21T20:57:53Z",
+      "side": 1,
+      "message": "@demonsingur@gmail.com\n\nSee https://review.lineageos.org/c/LineageOS/android_device_razer_nicole/+/466046/comment/f92297c6_16140c5d/\n\nRRO\u0027s may have a copyright that _isn\u0027t_ lineage or _isn\u0027t_ apache 2.0 - handling for this would be nice.",
+      "revId": "4ecb776ee58538af3c05e9efdec9a2c5f3f325ac",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
