@@ -30,15 +30,16 @@ def write_rro_android_bp(
     android_bp_path: str,
     package: str,
     aapt_raw: bool,
+    partition: Optional[str],
 ):
     apk_path_parts = apk_path.split('/')
 
-    partition = None
-    try:
-        overlay_index = apk_path_parts.index('overlay')
-        partition = apk_path_parts[overlay_index - 1]
-    except (ValueError, IndexError):
-        pass
+    if partition is None:
+        try:
+            overlay_index = apk_path_parts.index('overlay')
+            partition = apk_path_parts[overlay_index - 1]
+        except (ValueError, IndexError):
+            pass
 
     extra = ''
 
