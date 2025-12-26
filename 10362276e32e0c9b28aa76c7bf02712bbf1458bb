@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "473a7e5e_25c5d8f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19979
+      },
+      "writtenOn": "2025-12-26T22:04:50Z",
+      "side": 1,
+      "message": "For https://github.com/elginsk8r/android_packages_apps_EuiccPolicy",
+      "revId": "10362276e32e0c9b28aa76c7bf02712bbf1458bb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
