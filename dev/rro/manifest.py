@@ -21,6 +21,7 @@ OVERLAY_ATTRS = [
     'priority',
     'requiredSystemPropertyName',
     'requiredSystemPropertyValue',
+    'targetName',
 ]
 
 
