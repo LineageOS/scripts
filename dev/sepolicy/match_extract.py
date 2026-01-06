@@ -182,6 +182,7 @@ def rule_extract_part_set_str(mrp: List[str], rp: List[str]):
     elif num_arg_values == 1:
         return arg_values_list[0]
 
+
 def rule_extract_part_cond(mrp: IConditionalType, rp: rule_part):
     if not isinstance(rp, IConditionalType):
         return None

@@ -18,7 +18,7 @@ tokens = (
     'IDENT',
     'NUMBER',
     'PLUS',
-    'EQUALS'
+    'EQUALS',
 )
 
 t_LPAREN = r'\('

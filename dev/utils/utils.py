@@ -42,7 +42,7 @@ def get_dirs_with_file(dir_path: str, name: str):
         yield path.dirname(file_path)
 
 
-def run_cmd(cmd: List[str], capture: bool=True):
+def run_cmd(cmd: List[str], capture: bool = True):
     if capture:
         stdout = PIPE
         stderr = PIPE

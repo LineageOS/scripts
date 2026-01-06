@@ -716,7 +716,9 @@ def decompile_cil():
     if split_public_private:
         public_output_dir = Path(output_dir, 'public')
         public_output_dir.mkdir(parents=True, exist_ok=True)
-        output_grouped_rules(public_grouped_rules, rule_matches, public_output_dir)
+        output_grouped_rules(
+            public_grouped_rules, rule_matches, public_output_dir
+        )
 
 
 if __name__ == '__main__':

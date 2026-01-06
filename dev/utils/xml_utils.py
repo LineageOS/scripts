@@ -21,6 +21,7 @@ XML_COMMENT = f"""
 <!--{XML_COMMENT_TEXT}-->
 """
 
+
 def xml_attrib_matches(xml_data: bytes, match_fn: Callable[[str, str], bool]):
     tree = etree.fromstring(xml_data)
     for element in tree.iter():
