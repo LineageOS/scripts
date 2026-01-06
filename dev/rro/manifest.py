@@ -17,6 +17,7 @@ OVERLAY_TAG = 'overlay'
 TARGET_PACKAGE_KEY = 'targetPackage'
 
 OVERLAY_ATTRS = [
+    'targetName',
     'isStatic',
     'priority',
     'requiredSystemPropertyName',
