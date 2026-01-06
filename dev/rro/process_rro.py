@@ -12,6 +12,7 @@ from rro.manifest import (
     write_manifest,
 )
 from rro.resources import (
+    RESOURCES_DIR,
     find_target_package_resources,
     group_overlay_resources_rel_path,
     parse_overlay_resources,
@@ -64,14 +65,21 @@ runtime_resource_overlay {{
         )
 
 
-def process_rro(overlay_path: str, output_path: str):
-    manifest_path = path.join(overlay_path, ANDROID_MANIFEST_NAME)
+def process_rro(
+    overlay_path: str,
+    output_path: str,
+    android_manifest_name: str = ANDROID_MANIFEST_NAME,
+    resources_dir: str = RESOURCES_DIR,
+):
+    manifest_path = path.join(overlay_path, android_manifest_name)
 
     package, target_package, overlay_attrs = parse_overlay_manifest(
         manifest_path,
     )
 
-    overlay_resources, overlay_xmls = parse_overlay_resources(overlay_path)
+    overlay_resources, overlay_xmls = parse_overlay_resources(
+        overlay_path, resources_dir
+    )
     if not overlay_resources and not overlay_xmls:
         raise ValueError(f'{package}: No resources in overlay')
 
@@ -145,7 +153,7 @@ def process_rro(overlay_path: str, output_path: str):
     write_grouped_resources(grouped_resources, output_path)
     write_overlay_xmls(xmls, output_path)
 
-    rro_manifest_path = path.join(output_path, ANDROID_MANIFEST_NAME)
+    rro_manifest_path = path.join(output_path, android_manifest_name)
     write_manifest(rro_manifest_path, package, target_package, overlay_attrs)
 
     return package, aapt_raw
