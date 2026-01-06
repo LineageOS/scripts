@@ -12,6 +12,7 @@ from tempfile import TemporaryDirectory
 
 from bp.bp_utils import ANDROID_BP_NAME
 from rro.process_rro import process_rro, write_rro_android_bp
+from rro.target_package import append_extra_locations
 from utils.utils import Color, color_print, run_cmd
 
 
@@ -64,6 +65,7 @@ if __name__ == '__main__':
     )
 
     parser.add_argument('apk_path')
+    parser.add_argument('extra_package_locations', nargs='*')
     parser.add_argument(
         '-n',
         '--name',
@@ -77,6 +79,8 @@ if __name__ == '__main__':
     )
 
     args = parser.parse_args()
+
+    append_extra_locations(args.extra_package_locations)
 
     overlays_path: str = args.overlays
     rro_names = []

@@ -11,6 +11,7 @@ from bp.bp_parser import bp_parser
 from bp.bp_utils import ANDROID_BP_NAME
 from rro.manifest import ANDROID_MANIFEST_NAME
 from rro.process_rro import process_rro
+from rro.target_package import append_extra_locations
 from utils.utils import get_dirs_with_file
 
 if __name__ == '__main__':
@@ -20,8 +21,11 @@ if __name__ == '__main__':
     )
 
     parser.add_argument('overlay_path')
+    parser.add_argument('extra_package_locations', nargs='*')
 
     args = parser.parse_args()
+
+    append_extra_locations(args.extra_package_locations)
 
     for dir_path in get_dirs_with_file(args.overlay_path, ANDROID_BP_NAME):
         android_bp_path = path.join(dir_path, ANDROID_BP_NAME)

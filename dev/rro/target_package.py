@@ -26,6 +26,10 @@ PACKAGE_LOCATIONS = [
 ]
 
 
+def append_extra_locations(package_locations: List[str]):
+    PACKAGE_LOCATIONS.extend(package_locations)
+
+
 def get_existing_paths_rel(root_path: str, rel_paths: List[str]):
     full_paths = map(lambda m: path.join(root_path, m), rel_paths)
     filtered_paths = filter(lambda m: path.exists(m), full_paths)
