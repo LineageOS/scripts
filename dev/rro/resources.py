@@ -189,11 +189,13 @@ def parse_package_resources_dir(
             )
 
 
-def parse_overlay_resources(overlay_dir: str):
+def parse_overlay_resources(
+    overlay_dir: str, resources_dir: str = RESOURCES_DIR
+):
     resources: resources_dict = {}
     xmls: Dict[str, str] = {}
 
-    res_dir = path.join(overlay_dir, RESOURCES_DIR)
+    res_dir = path.join(overlay_dir, resources_dir)
     if not path.exists(res_dir):
         return resources, xmls
 
