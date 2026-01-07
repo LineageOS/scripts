@@ -32,7 +32,7 @@ if __name__ == '__main__':
 
         with open(android_bp_path, 'r') as android_bp:
             for statement in bp_parser.parse(android_bp.read()):
-                if statement['module'] != 'runtime_resource_overlay':
+                if statement.get('module') != 'runtime_resource_overlay':
                     continue
 
                 manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
