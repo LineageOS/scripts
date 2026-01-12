@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7899443_2073c381",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19979
+      },
+      "writtenOn": "2026-01-12T01:50:23Z",
+      "side": 1,
+      "message": "Added the ability to replace a defined lottie resource, and ignore strings from extraction.",
+      "revId": "c2c38710b3880dc93b6b17497a3177a7b8a9b566",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
