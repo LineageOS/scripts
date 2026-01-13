@@ -208,11 +208,23 @@ target_package_map = {
 }
 
 target_package_name_map = {
-    'com.google.android.wifi.resources': 'com.android.wifi.resources',
+    'com.google.android.apps.nexuslauncher': 'com.android.launcher3',
+    'com.google.android.avatarpicker': 'com.android.avatarpicker',
+    'com.google.android.captiveportallogin': 'com.android.captiveportallogin',
+    'com.google.android.cellbroadcastreceiver': 'com.android.cellbroadcastreceiver',
+    'com.google.android.cellbroadcastservice': 'com.android.cellbroadcastservice',
     'com.google.android.connectivity.resources': 'com.android.connectivity.resources',
+    'com.google.android.devicelockcontroller': 'com.android.devicelockcontroller',
+    'com.google.android.documentsui': 'com.android.documentsui',
+    'com.google.android.healthconnect.controller': 'com.android.healthconnect.controller',
     'com.google.android.networkstack': 'com.android.networkstack',
     'com.google.android.networkstack.tethering': 'com.android.networkstack.tethering',
+    'com.google.android.nfc': 'com.android.nfc',
     'com.google.android.permissioncontroller': 'com.android.permissioncontroller',
+    'com.google.android.providers.media.module': 'com.android.providers.media.module',
+    'com.google.android.storagemanager': 'com.android.storagemanager',
+    'com.google.android.uwb.resources': 'com.android.uwb.resources',
+    'com.google.android.wifi.resources': 'com.android.wifi.resources',
 }
 
 
