@@ -149,6 +149,9 @@ def parse_package_resources_dir(
         if not dir_file.is_dir():
             continue
 
+        if dir_file.name.startswith(('values-en-rXA', 'values-ar-rXB')):
+            continue
+
         is_xml_dir = dir_file.name == 'xml'
         is_default_values = dir_file.name == 'values'
         if parse_all_values:
