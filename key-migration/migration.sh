@@ -1,6 +1,6 @@
 #!/system/bin/sh
 
-# SPDX-FileCopyrightText: 2017-2021 The LineageOS Project
+# SPDX-FileCopyrightText: 2017-2026 The LineageOS Project
 # SPDX-License-Identifier: Apache-2.0
 
 # Release keys
@@ -48,7 +48,9 @@ case "$1" in
 esac
 
 if [ $USE_ABX ]; then
-    abx2xml $PACKAGES $PACKAGES_INTERMEDIATE
+    cp $PACKAGES /data/local/tmp/packages.xml.temp
+    abx2xml /data/local/tmp/packages.xml.temp $PACKAGES_INTERMEDIATE
+    rm /data/local/tmp/packages.xml.temp
     MODIFICATION_TARGET=$PACKAGES_INTERMEDIATE
 fi
 
@@ -91,10 +93,12 @@ else
 fi
 
 if [ $USE_ABX ]; then
-    xml2abx $MODIFICATION_TARGET $PACKAGES
+    xml2abx $MODIFICATION_TARGET /data/local/tmp/packages.xml.abx
+    mv /data/local/tmp/packages.xml.abx $PACKAGES
 fi
 
 chmod 660 $PACKAGES
 chown system:system $PACKAGES
+restorecon $PACKAGES
 
 echo "Done"
