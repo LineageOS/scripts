@@ -16,6 +16,24 @@
       "message": "```\n\n//\n// SPDX-FileCopyrightText: The LineageOS Project\n// SPDX-License-Identifier: Apache-2.0\n//\n\nruntime_resource_overlay {\n    name: \"com.android.carrierconfig.overlay.common\",\n    aaptflags: [\"--keep-raw-values\"],\n}\n\n```",
       "revId": "a760b15f246db15fba6cd1529da260179b50516b",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c70f2c7b_90e8fca5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 36466
+      },
+      "writtenOn": "2026-01-17T20:26:41Z",
+      "side": 1,
+      "message": "Before",
+      "parentUuid": "4461f50b_8ab08a0b",
+      "revId": "a760b15f246db15fba6cd1529da260179b50516b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
