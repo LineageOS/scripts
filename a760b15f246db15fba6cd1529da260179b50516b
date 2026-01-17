@@ -34,6 +34,23 @@
       "parentUuid": "4461f50b_8ab08a0b",
       "revId": "a760b15f246db15fba6cd1529da260179b50516b",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "646dba44_e4ef4b9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 36466
+      },
+      "writtenOn": "2026-01-17T20:27:03Z",
+      "side": 1,
+      "message": "```//\n// SPDX-FileCopyrightText: The LineageOS Project\n// SPDX-License-Identifier: Apache-2.0\n//\n\nruntime_resource_overlay {\n    name: \"com.android.carrierconfig.overlay.common\",\n    aaptflags: [\"--keep-raw-values\"],\n}\n```\nAfter",
+      "revId": "a760b15f246db15fba6cd1529da260179b50516b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
