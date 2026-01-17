@@ -37,12 +37,12 @@ def generate_rro(apk_path: str, output_path: str):
 
     with TemporaryDirectory() as tmp_dir:
         extract_apk(apk_path, tmp_dir)
-        package, aapt_raw = process_rro(tmp_dir, output_path)
+        aapt_raw = process_rro(tmp_dir, output_path)
         android_bp_path = path.join(output_path, ANDROID_BP_NAME)
         write_rro_android_bp(
             apk_path,
             android_bp_path,
-            package,
+            path.basename(output_path),
             aapt_raw,
         )
 
