@@ -61,7 +61,7 @@ def write_rro_android_bp(
 runtime_resource_overlay {{
     name: "{package}",{extra}
 }}
-'''
+'''.lstrip()
         )
 
 
