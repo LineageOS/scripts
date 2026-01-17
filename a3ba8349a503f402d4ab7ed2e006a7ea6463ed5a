@@ -33,6 +33,23 @@
       "message": "```\n//\n// SPDX-FileCopyrightText: The LineageOS Project\n// SPDX-License-Identifier: Apache-2.0\n//\n\nruntime_resource_overlay {\n    name: \"CarrierConfigResCommon_Sys\",\n    aaptflags: [\"--keep-raw-values\"],\n}\n```\nAfter",
       "revId": "a3ba8349a503f402d4ab7ed2e006a7ea6463ed5a",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "492ebe3b_c0a059a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 36466
+      },
+      "writtenOn": "2026-01-17T20:43:23Z",
+      "side": 1,
+      "message": "Also thinking to add add partition name depending on the apk\u0027s name/suffix. Would that be apt?",
+      "revId": "a3ba8349a503f402d4ab7ed2e006a7ea6463ed5a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
