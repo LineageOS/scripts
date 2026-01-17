@@ -52,8 +52,7 @@ def write_rro_android_bp(
 
     with open(android_bp_path, 'w') as o:
         o.write(
-            f'''
-//
+            f'''//
 // SPDX-FileCopyrightText: The LineageOS Project
 // SPDX-License-Identifier: Apache-2.0
 //
