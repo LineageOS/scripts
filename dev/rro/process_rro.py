@@ -156,4 +156,4 @@ def process_rro(
     rro_manifest_path = path.join(output_path, android_manifest_name)
     write_manifest(rro_manifest_path, package, target_package, overlay_attrs)
 
-    return package, aapt_raw
+    return path.basename(output_path), aapt_raw
