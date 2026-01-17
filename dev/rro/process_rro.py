@@ -34,6 +34,8 @@ def write_rro_android_bp(
 ):
     apk_path_parts = apk_path.split('/')
 
+    apk_name = path.splitext(path.basename(apk_path))[0]
+
     partition = None
     try:
         overlay_index = apk_path_parts.index('overlay')
@@ -58,7 +60,7 @@ def write_rro_android_bp(
 //
 
 runtime_resource_overlay {{
-    name: "{package}",{extra}
+    name: "{apk_name}",{extra}
 }}
 '''
         )
