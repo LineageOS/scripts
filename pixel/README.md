@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: The Calyx Institute
+SPDX-FileCopyrightText: The LineageOS Project
+SPDX-License-Identifier: Apache-2.0
+-->
+
 ## Pixel Scripts
 
 ### Variables
