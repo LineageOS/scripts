@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# SPDX-FileCopyrightText: 2017, 2020-2022 The LineageOS Project
+# SPDX-FileCopyrightText: The LineageOS Project
 # SPDX-FileCopyrightText: 2021-2023 The Calyx Institute
 #
 # SPDX-License-Identifier: Apache-2.0
