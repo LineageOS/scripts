@@ -2,11 +2,11 @@ from aidl_gen.aidl.interface import AIDLInterface
 from datetime import datetime
 from pathlib import Path
 
+# REUSE-IgnoreStart
 ANDROID_BP_TEMPLATE = \
 """\
 //
-// Copyright (C) {year} The LineageOS Project
-//
+// SPDX-FileCopyrightText: The LineageOS Project
 // SPDX-License-Identifier: Apache-2.0
 //
 
@@ -50,8 +50,7 @@ VINTF_FRAGMENT_TEMPLATE = \
 MAIN_CPP_TEMPLATE = \
 """\
 /*
- * Copyright (C) {year} The LineageOS Project
- *
+ * SPDX-FileCopyrightText: The LineageOS Project
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -69,8 +68,7 @@ namespace aidl {{
 MAIN_H_TEMPLATE = \
 """\
 /*
- * Copyright (C) {year} The LineageOS Project
- *
+ * SPDX-FileCopyrightText: The LineageOS Project
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -95,8 +93,7 @@ public:
 SERVICE_CPP_TEMPLATE = \
 """\
 /*
- * Copyright (C) {year} The LineageOS Project
- *
+ * SPDX-FileCopyrightText: The LineageOS Project
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -120,6 +117,7 @@ int main() {{
     return EXIT_FAILURE; // should not reach
 }}
 """
+# REUSE-IgnoreEnd
 
 class AIDLService:
     def __init__(self, fqname: str, includes: list[Path]):
@@ -136,7 +134,6 @@ class AIDLService:
                                               for namespace in self.aidl_name.split('.')])
         self.aidl_namespace_close = "\n".join([f"}} // namespace {namespace}"
                                                for namespace in self.aidl_name.split('.')[::-1]])
-        self.year = datetime.now().year
 
         self.interface = AIDLInterface(self.fqname, self.includes)
 
@@ -150,8 +147,7 @@ class AIDLService:
         open(dir / "service.cpp", 'w').write(self.get_service_cpp())
 
     def get_android_bp(self):
-        return ANDROID_BP_TEMPLATE.format(year=self.year,
-                                          aidl_name=self.aidl_name,
+        return ANDROID_BP_TEMPLATE.format(aidl_name=self.aidl_name,
                                           class_name=self.class_name)
 
     def get_init_rc(self):
@@ -163,15 +159,13 @@ class AIDLService:
                                               interface_name=self.interface_name)
 
     def get_main_cpp(self):
-        return MAIN_CPP_TEMPLATE.format(year=self.year,
-                                        class_name=self.class_name,
+        return MAIN_CPP_TEMPLATE.format(class_name=self.class_name,
                                         aidl_namespace_open=self.aidl_namespace_open,
                                         methods_definitions=self._format_methods_definitions(),
                                         aidl_namespace_close=self.aidl_namespace_close)
 
     def get_main_h(self):
-        return MAIN_H_TEMPLATE.format(year=self.year,
-                                      aidl_path=self.aidl_path,
+        return MAIN_H_TEMPLATE.format(aidl_path=self.aidl_path,
                                       class_name=self.class_name,
                                       aidl_namespace_open=self.aidl_namespace_open,
                                       using_namespaces=self._format_using_namespaces(),
@@ -179,8 +173,7 @@ class AIDLService:
                                       aidl_namespace_close=self.aidl_namespace_close)
 
     def get_service_cpp(self):
-        return SERVICE_CPP_TEMPLATE.format(year=self.year,
-                                           class_name=self.class_name,
+        return SERVICE_CPP_TEMPLATE.format(class_name=self.class_name,
                                            aidl_namespace=self.aidl_namespace,
                                            class_name_lower=self.class_name_lower)
 
