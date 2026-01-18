@@ -1,0 +1,41 @@
+# SPDX-FileCopyrightText: The LineageOS Project
+# SPDX-License-Identifier: Apache-2.0
+
+version = 1
+SPDX-PackageName = "scripts"
+SPDX-PackageSupplier = "The LineageOS Project"
+SPDX-PackageDownloadLocation = "https://github.com/LineageOS/scripts"
+
+[[annotations]]
+path = [
+    "aidl-gen/.gitignore",
+    "config-fs-gen/requirements.txt",
+    "dev/.gitignore",
+    "dev/pylintrc.toml",
+    "dev/ruff.toml",
+    "device-deps-regenerator/.gitignore",
+    "device-deps-regenerator/requirements.txt",
+    "lineage-priv-template/requirements.txt",
+    "reuse_helper/.gitignore",
+    "shipper/requirements.txt",
+]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "The LineageOS Project"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = ["carriersettings-extractor/**"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = [
+    "2020 Dara Adib",
+    "2020 Google LLC",
+    "The Calyx Institute",
+    "The LineageOS Project",
+]
+SPDX-License-Identifier = "BSD-3-Clause"
+
+[[annotations]]
+path = ["fbpacktool/.gitignore"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = ["2021 The Android Open Source Project"]
+SPDX-License-Identifier = "Apache-2.0"

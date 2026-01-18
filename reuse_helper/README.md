@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: The LineageOS Project
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # REUSE compliance converter
 
 This script will try to parse and replace existing comments to the proper SPDX ones.

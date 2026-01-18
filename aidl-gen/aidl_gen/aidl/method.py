@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: The LineageOS Project
+# SPDX-License-Identifier: Apache-2.0
+
 # Source: https://source.android.com/devices/architecture/aidl/aidl-backends#types
 AIDL_TO_CPP_TYPE = {
     "boolean": "bool",

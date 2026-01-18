@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: The LineageOS Project
+# SPDX-License-Identifier: Apache-2.0
+
 from collections.abc import Iterator, Mapping
 from typing import Generic, TypeVar, cast
 

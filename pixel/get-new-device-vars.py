@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-#
+
+# SPDX-FileCopyrightText: The Calyx Institute
+# SPDX-FileCopyrightText: The LineageOS Project
+# SPDX-License-Identifier: Apache-2.0
+
 # Tries to get device-specific info from various Google sites
 # Best effort
 # We require manual input of build id here to keep things easier
