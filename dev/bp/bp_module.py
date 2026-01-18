@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: The LineageOS Project
+# SPDX-License-Identifier: Apache-2.0
+
 from pathlib import Path
 from typing import List, NotRequired, TypedDict, cast
 

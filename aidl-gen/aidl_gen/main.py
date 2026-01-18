@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: The LineageOS Project
+# SPDX-License-Identifier: Apache-2.0
+
 from aidl_gen.aidl.interface import AIDLInterface
 from aidl_gen.aidl.service import AIDLService
 from argparse import ArgumentParser

@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: The LineageOS Project
+SPDX-License-Identifier: Apache-2.0
+-->
+
 1. Use Python 3.7 or higher
 2. Run `pip3 install -r requirements.txt`
 3. run `python3 app.py` to generate the full lineage.dependencies mapping
