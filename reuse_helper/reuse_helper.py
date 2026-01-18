@@ -104,8 +104,8 @@ def clean_file(file, comment_style, args):
 
 
 def should_ignore_file(file):
-    if not "/res/values-" in file:
-       return False
+    if "/res/values-" not in file:
+        return False
     else:
         # We want to ignore translations
         can_modify_values = ["land", "large", "night", "television", "v2", "v3"]
