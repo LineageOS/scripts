@@ -7,7 +7,7 @@ import functools
 import os
 import shutil
 from os import path
-from typing import Dict, List, Set, Tuple
+from typing import Dict, List, Optional, Set, Tuple
 
 from lxml import etree
 
@@ -370,15 +370,21 @@ def group_overlay_resources_rel_path(
     )
 
 
-def write_xml_resources(xml_path: str, resources: List[Resource]):
+def write_xml_resources(
+    xml_path: str,
+    resources: List[Resource],
+    maintain_copyrights: bool = False,
+    preserved_prefix: Optional[bytes] = None,
+):
     xml_dir_path = path.dirname(xml_path)
     os.makedirs(xml_dir_path, exist_ok=True)
 
     root = etree.Element(RESOURCES_TAG)
     tree = etree.ElementTree(root)
 
-    copyright_comment = etree.Comment(XML_COMMENT_TEXT)
-    root.addprevious(copyright_comment)
+    # Only add default header when we're NOT preserving an existing prefix
+    if not (maintain_copyrights and preserved_prefix is not None):
+        root.addprevious(etree.Comment(XML_COMMENT_TEXT))
 
     next_line_spacing = '\n' + ' ' * 4
     root.text = next_line_spacing
@@ -407,26 +413,38 @@ def write_xml_resources(xml_path: str, resources: List[Resource]):
     if last_element is not None:
         last_element.tail = '\n'
 
-    text = etree.tostring(
+    xml_body = etree.tostring(
         tree,
         pretty_print=True,
-        # xml_declaration=True,
         encoding='utf-8',
     )
+
     with open(xml_path, 'wb') as o:
-        # XML declaration uses single quotes in lxml
-        # hardcode it
-        o.write(b'<?xml version="1.0" encoding="utf-8"?>\n')
-        o.write(text)
+        if maintain_copyrights and preserved_prefix is not None:
+            o.write(preserved_prefix)
+        else:
+            o.write(b'<?xml version="1.0" encoding="utf-8"?>\n')
+        o.write(xml_body)
 
 
 def write_grouped_resources(
     grouped_resources: resources_grouped_dict,
     output_path: str,
+    maintain_copyrights: bool = False,
+    preserved_prefixes: Optional[Dict[str, Optional[bytes]]] = None,
 ):
     for rel_path, resources in grouped_resources.items():
         xml_path = path.join(output_path, rel_path)
-        write_xml_resources(xml_path, resources)
+        preserved = None
+        if maintain_copyrights and preserved_prefixes is not None:
+            preserved = preserved_prefixes.get(xml_path)
+
+        write_xml_resources(
+            xml_path,
+            resources,
+            maintain_copyrights=maintain_copyrights,
+            preserved_prefix=preserved,
+        )
 
 
 def read_overlay_xmls(
