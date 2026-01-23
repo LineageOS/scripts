@@ -256,7 +256,8 @@ def find_target_package_resources(
                     matching_resources += 1
 
         if matching_resources >= max_matching_resources:
-            best_resources = resources
+            max_matching_resources = matching_resources
+            best_resources = (package_dir, resource_dirs, package_resources, package_xmls)
 
     return best_resources
 
@@ -475,3 +476,92 @@ def write_overlay_xmls(xmls: Dict[str, str], output_path: str):
         os.makedirs(xml_dir_path, exist_ok=True)
         with open(xml_path, 'wb') as xml:
             xml.write(xml_data)
+
+
+def _list_overlay_pngs(overlay_dir: str, resources_dir: str):
+    res_dir = path.join(overlay_dir, resources_dir)
+    if not path.isdir(res_dir):
+        return []
+
+    pngs: List[str] = []
+    for root, _, files in os.walk(res_dir):
+        for f in files:
+            if not f.endswith('.png'):
+                continue
+            abs_path = path.join(root, f)
+            pngs.append(path.relpath(abs_path, overlay_dir))
+
+    return pngs
+
+
+@functools.cache
+def _build_target_png_index(package_dir: str, res_dirs: Tuple[str]):
+    existing: Set[str] = set()
+
+    for res_dir in res_dirs:
+        if not path.isdir(res_dir):
+            continue
+
+        for dir_entry in os.scandir(res_dir):
+            if not dir_entry.is_dir():
+                continue
+
+            base_type = dir_entry.name.split('-', 1)[0]
+            if base_type not in ('drawable', 'mipmap'):
+                continue
+
+            for file_entry in os.scandir(dir_entry.path):
+                if not file_entry.is_file():
+                    continue
+                if not file_entry.name.endswith('.png'):
+                    continue
+
+                rel = path.join(base_type, file_entry.name)
+                existing.add(rel)
+
+    return existing
+
+
+def preserve_overlay_pngs_if_target_has_them(
+    overlay_dir: str,
+    resources_dir: str,
+    target_res_dirs: Tuple[str],
+):
+    preserved: Dict[str, bytes] = {}
+
+    overlay_pngs = _list_overlay_pngs(overlay_dir, resources_dir)
+    if not overlay_pngs:
+        return preserved
+
+    target_pngs = _build_target_png_index(overlay_dir, target_res_dirs)
+
+    for rel_path in overlay_pngs:
+        parts = rel_path.split('/')
+        if len(parts) < 3:
+            continue
+
+        base_type = parts[-2].split('-', 1)[0]
+        if base_type not in ('drawable', 'mipmap'):
+            continue
+
+        key = path.join(base_type, path.basename(rel_path))
+        if key not in target_pngs:
+            continue
+
+        abs_path = path.join(overlay_dir, rel_path)
+        try:
+            with open(abs_path, 'rb') as f:
+                preserved[rel_path] = f.read()
+        except Exception:
+            continue
+
+    return preserved
+
+
+def write_preserved_files(output_dir: str, preserved_files: Dict[str, bytes]):
+    for rel_path, data in preserved_files.items():
+        out_path = path.join(output_dir, rel_path)
+        out_dir = path.dirname(out_path)
+        os.makedirs(out_dir, exist_ok=True)
+        with open(out_path, 'wb') as o:
+            o.write(data)
