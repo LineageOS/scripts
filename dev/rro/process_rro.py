@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import shutil
 import subprocess
 from os import path
 
@@ -72,7 +73,7 @@ def _remove_overlay_package(overlay_path: str, output_path: str, package: str, m
     for p in (output_path, overlay_path):
         if not p or not path.isdir(p):
             continue
-        subprocess.run(['rm', '-rf', '--', p], check=False)
+        shutil.rmtree(p, ignore_errors=True)
         if overlay_path == output_path:
             break
 
