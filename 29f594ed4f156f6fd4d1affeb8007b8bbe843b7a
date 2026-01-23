@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28251a2b_dcf50fcc",
+        "filename": "dev/rro/process_rro.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2026-01-23T18:14:58Z",
+      "side": 1,
+      "message": "use proper API.",
+      "revId": "29f594ed4f156f6fd4d1affeb8007b8bbe843b7a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
