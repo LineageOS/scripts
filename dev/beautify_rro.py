@@ -27,10 +27,22 @@ if __name__ == '__main__':
         action='store_true',
         help='Preserve existing copyright headers',
     )
+    parser.add_argument(
+        '--ignore-packages',
+        default='',
+        help='Comma-separated list of overlay folder names or Android.bp module names to ignore',
+    )
 
     args = parser.parse_args()
 
     append_extra_locations(args.extra_package_locations)
+
+    ignore_packages = set(
+        filter(
+            None,
+            map(lambda s: s.strip(), args.ignore_packages.split(',')),
+        )
+    )
 
     for dir_path in get_dirs_with_file(args.overlay_path, ANDROID_BP_NAME):
         android_bp_path = path.join(dir_path, ANDROID_BP_NAME)
@@ -38,6 +50,15 @@ if __name__ == '__main__':
         with open(android_bp_path, 'r') as android_bp:
             for statement in bp_parser.parse(android_bp.read()):
                 if statement.get('module') != 'runtime_resource_overlay':
+                    continue
+
+                module_name = statement.get('name', '')
+                dir_name = path.basename(dir_path)
+
+                if ignore_packages and (
+                    (module_name and module_name in ignore_packages)
+                    or (dir_name and dir_name in ignore_packages)
+                ):
                     continue
 
                 manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
