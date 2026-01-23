@@ -7,7 +7,7 @@ import functools
 import os
 import shutil
 from os import path
-from typing import Dict, List, Set, Tuple
+from typing import Dict, List, Optional, Set, Tuple
 
 from lxml import etree
 
@@ -77,8 +77,6 @@ def parse_xml_resource(
     index = 0
     for node in root:
         if isinstance(node, etree._Comment):
-            # Last element was not a comment, don't stack them
-            # Or it was a comment, but they were not stacked
             last_node = node.getprevious()
             if not isinstance(
                 last_node, etree._Comment
@@ -103,7 +101,6 @@ def parse_xml_resource(
             raise ValueError('Node has no name')
 
         product = node.attrib.get('product', '')
-        # TODO: find out if this is really correct
         if product == 'default':
             product = ''
 
@@ -126,8 +123,6 @@ def parse_xml_resource(
         )
         index += 1
 
-        # Assign the same comment to entries following each other without a
-        # newline
         if node_has_space_after(node):
             comments = []
 
@@ -172,9 +167,6 @@ def parse_package_resources_dir(
             if xml_file.name == 'symbols.xml':
                 continue
 
-            # Some apps don't place their res directory directly under
-            # the package directory
-            # Only keep the resource directory name
             xml_resources_dir_name = path.basename(res_dir)
             xml_file_path = path.relpath(xml_file.path, res_dir)
             xml_rel_path = path.join(xml_resources_dir_name, xml_file_path)
@@ -338,8 +330,6 @@ def group_overlay_resources_rel_path(
             missing_resources.add(resource.name)
             continue
 
-        # Overlays don't have translatable=false, remove it to fix
-        # equality check
         if TRANSLATABLE_KEY in package_resource.element.attrib:
             del package_resource.element.attrib[TRANSLATABLE_KEY]
 
@@ -349,13 +339,9 @@ def group_overlay_resources_rel_path(
             identical_resources.add(resource.name)
             continue
 
-        # TODO: find out if this is needed
-        # resource.element.attrib[TRANSLATABLE_KEY] = 'false'
         resource.index = package_resource.index
         resource.comments = package_resource.comments
 
-        # Keep the directory of the original resource, but place it in the
-        # correct XML
         rel_path = path.join(resource.rel_dir_path, package_resource.xml_name)
         grouped_resources.setdefault(rel_path, []).append(resource)
 
@@ -370,32 +356,34 @@ def group_overlay_resources_rel_path(
     )
 
 
-def write_xml_resources(xml_path: str, resources: List[Resource]):
+def write_xml_resources(
+    xml_path: str,
+    resources: List[Resource],
+    maintain_copyrights: bool = False,
+    preserved_prefix: Optional[bytes] = None,
+):
     xml_dir_path = path.dirname(xml_path)
     os.makedirs(xml_dir_path, exist_ok=True)
 
     root = etree.Element(RESOURCES_TAG)
     tree = etree.ElementTree(root)
 
-    copyright_comment = etree.Comment(XML_COMMENT_TEXT)
-    root.addprevious(copyright_comment)
+    # Only add default header comment if we're NOT preserving an existing prefix.
+    if not (maintain_copyrights and preserved_prefix is not None):
+        root.addprevious(etree.Comment(XML_COMMENT_TEXT))
 
     next_line_spacing = '\n' + ' ' * 4
     root.text = next_line_spacing
     last_element = None
 
     for resource in resources:
-        # Add a newline and indent between this element and the last element
         if last_element is not None:
             last_element.tail = '\n' + next_line_spacing
 
         for comment in resource.comments:
-            # Only add comment if its parent is not root
-            # If parent is root then comment was added for past entries
             if comment.getparent() != root:
                 root.append(comment)
                 last_element = comment
-
             last_element.tail = next_line_spacing
 
         root.append(resource.element)
@@ -407,26 +395,40 @@ def write_xml_resources(xml_path: str, resources: List[Resource]):
     if last_element is not None:
         last_element.tail = '\n'
 
-    text = etree.tostring(
+    xml_body = etree.tostring(
         tree,
         pretty_print=True,
-        # xml_declaration=True,
         encoding='utf-8',
     )
+
     with open(xml_path, 'wb') as o:
-        # XML declaration uses single quotes in lxml
-        # hardcode it
-        o.write(b'<?xml version="1.0" encoding="utf-8"?>\n')
-        o.write(text)
+        if maintain_copyrights and preserved_prefix is not None:
+            # Prefix already includes the original XML declaration/comments/spacing verbatim.
+            o.write(preserved_prefix)
+        else:
+            o.write(b'<?xml version="1.0" encoding="utf-8"?>\n')
+
+        o.write(xml_body)
 
 
 def write_grouped_resources(
     grouped_resources: resources_grouped_dict,
     output_path: str,
+    maintain_copyrights: bool = False,
+    preserved_prefixes: Optional[Dict[str, Optional[bytes]]] = None,
 ):
     for rel_path, resources in grouped_resources.items():
         xml_path = path.join(output_path, rel_path)
-        write_xml_resources(xml_path, resources)
+        preserved = None
+        if maintain_copyrights and preserved_prefixes is not None:
+            preserved = preserved_prefixes.get(xml_path)
+
+        write_xml_resources(
+            xml_path,
+            resources,
+            maintain_copyrights=maintain_copyrights,
+            preserved_prefix=preserved,
+        )
 
 
 def read_overlay_xmls(
