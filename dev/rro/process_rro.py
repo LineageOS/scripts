@@ -70,6 +70,7 @@ def process_rro(
     output_path: str,
     android_manifest_name: str = ANDROID_MANIFEST_NAME,
     resources_dir: str = RESOURCES_DIR,
+    maintain_copyrights: bool = False,
 ):
     manifest_path = path.join(overlay_path, android_manifest_name)
 
@@ -149,11 +150,39 @@ def process_rro(
     if not grouped_resources and not xmls:
         raise ValueError(f'{package}: No resources left in overlay')
 
+    # Preserve existing res/values/*.xml headers BEFORE we delete res/
+    preserved_prefixes = None
+    if maintain_copyrights:
+        preserved_prefixes = {}
+        for rel_xml_path in grouped_resources.keys():
+            existing_xml_path = path.join(output_path, rel_xml_path)
+            preserved = None
+            try:
+                with open(existing_xml_path, 'rb') as f:
+                    data = f.read()
+                idx = data.find(b'<resources')
+                if idx != -1:
+                    preserved = data[:idx]
+            except Exception:
+                preserved = None
+            preserved_prefixes[existing_xml_path] = preserved
+
     remove_overlay_resources(overlay_path)
-    write_grouped_resources(grouped_resources, output_path)
+    write_grouped_resources(
+        grouped_resources,
+        output_path,
+        maintain_copyrights=maintain_copyrights,
+        preserved_prefixes=preserved_prefixes,
+    )
     write_overlay_xmls(xmls, output_path)
 
     rro_manifest_path = path.join(output_path, android_manifest_name)
-    write_manifest(rro_manifest_path, package, target_package, overlay_attrs)
+    write_manifest(
+        rro_manifest_path,
+        package,
+        target_package,
+        overlay_attrs,
+        maintain_copyrights=maintain_copyrights,
+    )
 
     return aapt_raw

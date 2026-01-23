@@ -3,7 +3,8 @@
 
 from __future__ import annotations
 
-from typing import Dict
+from os import path
+from typing import Dict, Optional
 
 from lxml import etree
 
@@ -60,26 +61,55 @@ def parse_overlay_manifest(manifest_path: str):
     return package, target_package, overlay_attrs
 
 
+def _read_prefix_before_tag(xml_path: str, tag: str) -> Optional[bytes]:
+    if not path.exists(xml_path):
+        return None
+
+    try:
+        with open(xml_path, 'rb') as f:
+            data = f.read()
+    except Exception:
+        return None
+
+    needle = b'<' + tag.encode('utf-8')
+    idx = data.find(needle)
+    if idx == -1:
+        return None
+
+    return data[:idx]
+
+
 def write_manifest(
     output_path: str,
     package: str,
     target_package: str,
     overlay_attrs: Dict[str, str],
+    maintain_copyrights: bool = False,
 ):
-    with open(output_path, 'w') as o:
-        o.write('<?xml version="1.0" encoding="utf-8"?>')
-        o.write(XML_COMMENT)
+    prefix = None
+    if maintain_copyrights:
+        prefix = _read_prefix_before_tag(output_path, 'manifest')
 
-        o.write(f'<manifest xmlns:{NAMESPACE_NAME}="{NAMESPACE}"\n')
-        o.write(f'          package="{package}">\n')
-        o.write(
-            f'    <overlay {NAMESPACE_NAME}:{TARGET_PACKAGE_KEY}="{target_package}"'
-        )
-        space = ''
+    body_lines: list[str] = []
+    body_lines.append(f'<manifest xmlns:{NAMESPACE_NAME}="{NAMESPACE}"\n')
+    body_lines.append(f'          package="{package}">\n')
+    body_lines.append(
+        f'    <overlay {NAMESPACE_NAME}:{TARGET_PACKAGE_KEY}="{target_package}"'
+    )
+    space = ''
 
-        for attr, value in overlay_attrs.items():
-            o.write(space)
-            o.write(f'\n             {NAMESPACE_NAME}:{attr}="{value}"')
+    for attr, value in overlay_attrs.items():
+        body_lines.append(space)
+        body_lines.append(f'\n             {NAMESPACE_NAME}:{attr}="{value}"')
 
-        o.write(' />\n')
-        o.write('</manifest>\n')
+    body_lines.append(' />\n')
+    body_lines.append('</manifest>\n')
+    body = ''.join(body_lines).encode('utf-8')
+
+    with open(output_path, 'wb') as o:
+        if prefix is not None:
+            o.write(prefix)
+        else:
+            o.write(b'<?xml version="1.0" encoding="utf-8"?>')
+            o.write(XML_COMMENT.encode('utf-8'))
+        o.write(body)

@@ -22,6 +22,11 @@ if __name__ == '__main__':
 
     parser.add_argument('overlay_path')
     parser.add_argument('extra_package_locations', nargs='*')
+    parser.add_argument(
+        '--maintain-copyrights',
+        action='store_true',
+        help='Preserve existing copyright headers',
+    )
 
     args = parser.parse_args()
 
@@ -38,4 +43,10 @@ if __name__ == '__main__':
                 manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
                 resources_dir = statement.get('resource_dirs', ['res'])[0]
 
-                process_rro(dir_path, dir_path, manifest, resources_dir)
+                process_rro(
+                    dir_path,
+                    dir_path,
+                    manifest,
+                    resources_dir,
+                    maintain_copyrights=args.maintain_copyrights,
+                )
