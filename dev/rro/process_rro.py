@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import subprocess
 from os import path
 
 from bp.bp_utils import get_partition_specific
@@ -65,6 +66,17 @@ runtime_resource_overlay {{
         )
 
 
+def _remove_overlay_package(overlay_path: str, output_path: str, package: str, msg: str):
+    color_print(f'{package}: {msg}, removing overlay package', color=Color.YELLOW)
+
+    for p in (output_path, overlay_path):
+        if not p or not path.isdir(p):
+            continue
+        subprocess.run(['rm', '-rf', '--', p], check=False)
+        if overlay_path == output_path:
+            break
+
+
 def process_rro(
     overlay_path: str,
     output_path: str,
@@ -82,7 +94,8 @@ def process_rro(
         overlay_path, resources_dir
     )
     if not overlay_resources and not overlay_xmls:
-        raise ValueError(f'{package}: No resources in overlay')
+        _remove_overlay_package(overlay_path, output_path, package, 'No resources in overlay')
+        return False
 
     target_packages, target_package = get_target_packages(target_package)
     package_resources, package_xmls = find_target_package_resources(
@@ -148,7 +161,8 @@ def process_rro(
         break
 
     if not grouped_resources and not xmls:
-        raise ValueError(f'{package}: No resources left in overlay')
+        _remove_overlay_package(overlay_path, output_path, package, 'No resources left in overlay')
+        return False
 
     # Preserve existing res/values/*.xml headers BEFORE we delete res/
     preserved_prefixes = None
