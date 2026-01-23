@@ -18,10 +18,12 @@ from rro.resources import (
     find_target_package_resources,
     group_overlay_resources_rel_path,
     parse_overlay_resources,
+    preserve_overlay_pngs_if_target_has_them,
     read_overlay_xmls,
     remove_overlay_resources,
     write_grouped_resources,
     write_overlay_xmls,
+    write_preserved_files,
 )
 from rro.target_package import get_target_packages
 from utils.utils import Color, color_print
@@ -98,10 +100,18 @@ def process_rro(
         return False
 
     target_packages, target_package = get_target_packages(target_package)
-    package_resources, package_xmls = find_target_package_resources(
+    best = find_target_package_resources(
         target_packages,
         overlay_resources,
         overlay_xmls,
+    )
+    assert best is not None
+    _, target_res_dirs, package_resources, package_xmls = best
+
+    preserved_pngs = preserve_overlay_pngs_if_target_has_them(
+        overlay_path,
+        resources_dir,
+        target_res_dirs,
     )
 
     (
@@ -160,7 +170,7 @@ def process_rro(
         )
         break
 
-    if not grouped_resources and not xmls:
+    if not grouped_resources and not xmls and not preserved_pngs:
         _remove_overlay_package(overlay_path, output_path, package, 'No resources left in overlay')
         return False
 
@@ -189,6 +199,9 @@ def process_rro(
         preserved_prefixes=preserved_prefixes,
     )
     write_overlay_xmls(xmls, output_path)
+
+    if preserved_pngs:
+        write_preserved_files(output_path, preserved_pngs)
 
     rro_manifest_path = path.join(output_path, android_manifest_name)
     write_manifest(
