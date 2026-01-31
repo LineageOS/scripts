@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# SPDX-FileCopyrightText: 2019-2020 The LineageOS Project
+# SPDX-FileCopyrightText: 2019-2026 The LineageOS Project
 # SPDX-License-Identifier: Apache-2.0
 
 from __future__ import print_function
@@ -52,7 +52,7 @@ def get_groups(android_filesystem_config_header_path, vendor_group_path):
     with open(vendor_group_path, 'r') as file:
         for line in file:
             name, _, uid, _ = line.split(':', 3)
-            vendor_groups[uid] = 'AID_' + name.upper()
+            vendor_groups[int(uid)] = 'AID_' + name.upper()
 
     return system_groups, vendor_groups
 
