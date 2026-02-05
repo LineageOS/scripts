@@ -4,6 +4,7 @@
 
 from __future__ import annotations
 
+import shutil
 from argparse import ArgumentParser
 from os import path
 
@@ -12,7 +13,7 @@ from bp.bp_utils import ANDROID_BP_NAME
 from rro.manifest import ANDROID_MANIFEST_NAME
 from rro.process_rro import process_rro
 from rro.target_package import append_extra_locations
-from utils.utils import get_dirs_with_file
+from utils.utils import Color, color_print, get_dirs_with_file
 
 if __name__ == '__main__':
     parser = ArgumentParser(
@@ -64,10 +65,14 @@ if __name__ == '__main__':
                 manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
                 resources_dir = statement.get('resource_dirs', ['res'])[0]
 
-                process_rro(
-                    dir_path,
-                    dir_path,
-                    manifest,
-                    resources_dir,
-                    maintain_copyrights=args.maintain_copyrights,
-                )
+                try:
+                    process_rro(
+                        dir_path,
+                        dir_path,
+                        manifest,
+                        resources_dir,
+                        maintain_copyrights=args.maintain_copyrights,
+                    )
+                except ValueError as e:
+                    shutil.rmtree(dir_path, ignore_errors=True)
+                    color_print(e, color=Color.RED)
