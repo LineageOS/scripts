@@ -11,7 +11,7 @@ from os import path
 from tempfile import TemporaryDirectory
 
 from bp.bp_utils import ANDROID_BP_NAME
-from rro.process_rro import process_rro, write_rro_android_bp
+from rro.process_rro import process_rro, simplify_rro_name, write_rro_android_bp
 from rro.target_package import append_extra_locations
 from utils.utils import Color, color_print, run_cmd
 
@@ -101,6 +101,7 @@ if __name__ == '__main__':
             rro_names.append(rro_name)
 
     for apk_path, rro_name in zip(apk_paths, rro_names):
+        rro_name = simplify_rro_name(rro_name)
         output_path = path.join(overlays_path, rro_name)
         try:
             generate_rro(apk_path, output_path)

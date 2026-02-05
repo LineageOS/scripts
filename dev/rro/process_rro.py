@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import re
 from os import path
 
 from bp.bp_utils import get_partition_specific
@@ -77,6 +78,7 @@ def process_rro(
     package, target_package, overlay_attrs = parse_overlay_manifest(
         manifest_path,
     )
+    package = simplify_rro_package(package)
 
     overlay_resources, overlay_xmls = parse_overlay_resources(
         overlay_path, resources_dir
@@ -186,3 +188,26 @@ def process_rro(
     )
 
     return aapt_raw
+
+
+RRO_NAME_SIMPLIFY_REGEX = re.compile(
+    r'__[^_]+__auto_generated_rro_(vendor|product)$'
+)
+RRO_PACKAGE_SIMPLIFY_REGEX = re.compile(
+    r'\.auto_generated_rro_(vendor|product)__$'
+)
+
+
+def simplify_rro_name(rro_name: str):
+    # TODO: use dashes if package has dashes?
+    return RRO_NAME_SIMPLIFY_REGEX.sub(
+        lambda m: f'Overlay{m.group(1).capitalize()}',
+        rro_name,
+    )
+
+
+def simplify_rro_package(rro_package: str):
+    return RRO_PACKAGE_SIMPLIFY_REGEX.sub(
+        r'.overlay.\1',
+        rro_package,
+    )
