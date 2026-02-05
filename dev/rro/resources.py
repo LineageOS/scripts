@@ -217,7 +217,7 @@ def remove_overlay_resources(overlay_dir: str):
 
 
 @functools.cache
-def get_target_package_resources(package_dir: str, res_dirs: Tuple[str]):
+def get_target_package_resources(res_dirs: Tuple[str]):
     resources: resources_dict = {}
     xmls: Dict[str, str] = {}
 
@@ -239,8 +239,8 @@ def find_target_package_resources(
     max_matching_resources = 0
     best_resources = None
 
-    for package_dir, resource_dirs in target_packages:
-        resources = get_target_package_resources(package_dir, resource_dirs)
+    for _, resource_dirs in target_packages:
+        resources = get_target_package_resources(resource_dirs)
         package_resources, package_xmls = resources
 
         matching_resources = 0
