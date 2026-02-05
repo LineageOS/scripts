@@ -139,7 +139,6 @@ def parse_xml_resource(
 
 
 def parse_package_resources_dir(
-    package_dir: str,
     res_dir: str,
     resources: resources_dict,
     xmls: Dict[str, str],
@@ -203,7 +202,6 @@ def parse_overlay_resources(
         return resources, xmls
 
     parse_package_resources_dir(
-        overlay_dir,
         res_dir,
         resources,
         xmls,
@@ -225,7 +223,6 @@ def get_target_package_resources(package_dir: str, res_dirs: Tuple[str]):
 
     for res_dir in res_dirs:
         parse_package_resources_dir(
-            package_dir,
             res_dir,
             resources,
             xmls,
