@@ -82,7 +82,7 @@ def get_app_package_name(
 ):
     manifests = get_app_manifests(app_module)
     resolved_manifests = resolve_manifest_filegroups(manifests, filegroups_map)
-    for manifest_path in get_existing_paths_rel(android_bp_dir_path, manifests):
+    for manifest_path in get_existing_paths_rel(android_bp_dir_path, resolved_manifests):
         package_name = parse_package_manifest(manifest_path)
         if package_name is not None:
             return package_name
