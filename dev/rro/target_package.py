@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import functools
 from os import path
-from typing import Dict, List, Tuple
+from typing import Dict, List, Set, Tuple
 
 from bp.bp_parser import bp_parser
 from bp.bp_utils import ANDROID_BP_NAME, bp_extend_defaults
@@ -70,9 +70,46 @@ def get_app_manifests(app_module: Dict):
     return manifests
 
 
-def get_app_resources(android_bp_dir_path: str, app_module: Dict):
-    resource_dirs = app_module.get('resource_dirs', ['res'])
-    return get_existing_paths_rel(android_bp_dir_path, resource_dirs)
+def get_app_resources(
+    android_apps_map: Dict[str, Tuple[str, Dict]],
+    android_bp_dir_path: str,
+    app_module: Dict,
+    missing_libs: Set[str],
+    resource_dirs: List[str],
+):
+    if 'static_libs' in app_module:
+        for lib_name in app_module['static_libs']:
+            if lib_name not in android_apps_map:
+                if lib_name in missing_libs:
+                    continue
+
+                missing_libs.add(lib_name)
+
+                # color_print(
+                #     f'Failed to find static lib {lib_name} '
+                #     f'for app {app_module['name']}',
+                #     color=Color.YELLOW,
+                # )
+                continue
+
+            lib_android_bp_dir_path = android_apps_map[lib_name][0]
+            lib_module = android_apps_map[lib_name][1]
+            get_app_resources(
+                android_apps_map,
+                lib_android_bp_dir_path,
+                lib_module,
+                missing_libs,
+                resource_dirs,
+            )
+
+    local_resource_dirs = app_module.get('resource_dirs', ['res'])
+    local_resource_dirs = get_existing_paths_rel(
+        android_bp_dir_path,
+        local_resource_dirs,
+    )
+    for resource_dir in local_resource_dirs:
+        if resource_dir not in resource_dirs:
+            resource_dirs.append(resource_dir)
 
 
 def get_app_package_name(
@@ -82,7 +119,9 @@ def get_app_package_name(
 ):
     manifests = get_app_manifests(app_module)
     resolved_manifests = resolve_manifest_filegroups(manifests, filegroups_map)
-    for manifest_path in get_existing_paths_rel(android_bp_dir_path, resolved_manifests):
+    for manifest_path in get_existing_paths_rel(
+        android_bp_dir_path, resolved_manifests
+    ):
         package_name = parse_package_manifest(manifest_path)
         if package_name is not None:
             return package_name
@@ -96,6 +135,7 @@ def map_packages():
     defaults_map = {}
     android_apps_map = {}
     filegroups_map = {}
+    missing_libs = set()
 
     for parent_path in PACKAGE_LOCATIONS:
         packages_path = path.join(android_root, parent_path)
@@ -165,9 +205,13 @@ def map_packages():
             filegroups_map,
         )
 
-        resource_dirs = get_app_resources(
+        resource_dirs = []
+        get_app_resources(
+            android_apps_map,
             android_bp_dir_path,
             app_module,
+            missing_libs,
+            resource_dirs,
         )
 
         if missing_defaults:
