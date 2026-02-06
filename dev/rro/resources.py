@@ -253,6 +253,7 @@ def find_target_package_resources(
                     matching_resources += 1
 
         if matching_resources >= max_matching_resources:
+            max_matching_resources = matching_resources
             best_resources = resources
 
     return best_resources
