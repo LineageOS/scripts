@@ -141,7 +141,7 @@ def parse_xml_resource(
 def parse_package_resources_dir(
     res_dir: str,
     resources: resources_dict,
-    xmls: Dict[str, str],
+    raw_resources: Dict[str, str],
     parse_all_values: bool = False,
 ):
     for dir_file in os.scandir(res_dir):
@@ -151,65 +151,62 @@ def parse_package_resources_dir(
         if dir_file.name.startswith(('values-en-rXA', 'values-ar-rXB')):
             continue
 
-        is_xml_dir = dir_file.name == 'xml'
         is_default_values = dir_file.name == 'values'
         if parse_all_values:
             is_values = dir_file.name.startswith('values')
         else:
             is_values = is_default_values
 
-        if not is_values and not is_xml_dir:
-            continue
-
-        for xml_file in os.scandir(dir_file.path):
-            if not xml_file.is_file():
+        for resource_file in os.scandir(dir_file.path):
+            if not resource_file.is_file():
                 continue
 
-            if xml_file.name.startswith('public-'):
+            if resource_file.name.startswith('public-'):
                 continue
 
-            if xml_file.name == 'symbols.xml':
+            if resource_file.name == 'symbols.xml':
                 continue
 
             # Some apps don't place their res directory directly under
             # the package directory
             # Only keep the resource directory name
-            xml_resources_dir_name = path.basename(res_dir)
-            xml_file_path = path.relpath(xml_file.path, res_dir)
-            xml_rel_path = path.join(xml_resources_dir_name, xml_file_path)
+            resources_dir_name = path.basename(res_dir)
+            file_path = path.relpath(resource_file.path, res_dir)
+            rel_path = path.join(resources_dir_name, file_path)
 
-            if is_xml_dir:
-                # Inherited resources can be overwritten, do not assert
-                # assert xml_file.name not in xmls, xml_rel_path
-                xmls[xml_file.name] = xml_rel_path
+            if is_values:
+                parse_xml_resource(
+                    rel_path,
+                    resource_file.path,
+                    resources,
+                    is_default_values,
+                )
                 continue
 
-            parse_xml_resource(
-                xml_rel_path,
-                xml_file.path,
-                resources,
-                is_default_values,
-            )
+            # Inherited resources can be overwritten, do not assert
+            # assert resource_file.name not in raw_resources, rel_path
+            raw_resources[resource_file.name] = rel_path
+            continue
 
 
 def parse_overlay_resources(
     overlay_dir: str, resources_dir: str = RESOURCES_DIR
 ):
     resources: resources_dict = {}
-    xmls: Dict[str, str] = {}
+    raw_resources: Dict[str, str] = {}
 
     res_dir = path.join(overlay_dir, resources_dir)
     if not path.exists(res_dir):
-        return resources, xmls
+        return resources, raw_resources
 
     parse_package_resources_dir(
         res_dir,
         resources,
-        xmls,
+        raw_resources,
         parse_all_values=True,
     )
 
-    return resources, xmls
+    return resources, raw_resources
 
 
 def remove_overlay_resources(overlay_dir: str):
@@ -220,37 +217,37 @@ def remove_overlay_resources(overlay_dir: str):
 @functools.cache
 def get_target_package_resources(res_dirs: Tuple[str]):
     resources: resources_dict = {}
-    xmls: Dict[str, str] = {}
+    raw_resources: Dict[str, str] = {}
 
     for res_dir in res_dirs:
         parse_package_resources_dir(
             res_dir,
             resources,
-            xmls,
+            raw_resources,
         )
 
-    return resources, xmls
+    return resources, raw_resources
 
 
 def find_target_package_resources(
     target_packages: List[Tuple[str, Tuple[str]]],
     overlay_resources: resources_dict,
-    overlay_xmls: Dict[str, str],
+    overlay_raw_resources: Dict[str, str],
 ):
     max_matching_resources = 0
     best_resources = None
 
     for _, resource_dirs in target_packages:
         resources = get_target_package_resources(resource_dirs)
-        package_resources, package_xmls = resources
+        package_resources, package_raw_resources = resources
 
         matching_resources = 0
         if len(target_packages) != 1:
             for keys in overlay_resources.keys():
                 if keys in package_resources:
                     matching_resources += 1
-            for xml_name in overlay_xmls:
-                if xml_name in package_xmls:
+            for raw_resource_name in overlay_raw_resources:
+                if raw_resource_name in package_raw_resources:
                     matching_resources += 1
 
         if matching_resources >= max_matching_resources:
@@ -446,31 +443,36 @@ def write_grouped_resources(
         )
 
 
-def read_overlay_xmls(
+def read_raw_resources(
     overlay_path: str,
-    overlay_xmls: Dict[str, str],
-    package_xmls: Dict[str, str],
+    overlay_raw_resources: Dict[str, str],
+    package_raw_resources: Dict[str, str],
 ):
-    missing_xmls: List[str] = []
-    xmls: Dict[str, str] = {}
+    # TODO: handle identical resources
 
-    for xml_name, overlay_xml_rel_path in overlay_xmls.items():
-        if xml_name not in package_xmls:
-            missing_xmls.append(xml_name)
+    missing_raw_resources: List[str] = []
+    raw_resources: Dict[str, str] = {}
+
+    for raw_name, overlay_raw_rel_path in overlay_raw_resources.items():
+        if raw_name not in package_raw_resources:
+            missing_raw_resources.append(raw_name)
             continue
 
-        package_xml_rel_path = package_xmls[xml_name]
-        xml_path = path.join(overlay_path, overlay_xml_rel_path)
-        with open(xml_path, 'rb') as xml:
-            xmls[package_xml_rel_path] = xml.read()
+        package_raw_rel_path = package_raw_resources[raw_name]
+        raw_path = path.join(overlay_path, overlay_raw_rel_path)
+        with open(raw_path, 'rb') as raw:
+            raw_resources[package_raw_rel_path] = raw.read()
 
-    return xmls, missing_xmls
+    return raw_resources, missing_raw_resources
 
 
-def write_overlay_xmls(xmls: Dict[str, str], output_path: str):
-    for xml_rel_path, xml_data in xmls.items():
-        xml_path = path.join(output_path, xml_rel_path)
-        xml_dir_path = path.dirname(xml_path)
-        os.makedirs(xml_dir_path, exist_ok=True)
-        with open(xml_path, 'wb') as xml:
-            xml.write(xml_data)
+def write_overlay_raw_resources(
+    raw_resources: Dict[str, str],
+    output_path: str,
+):
+    for raw_rel_path, raw_data in raw_resources.items():
+        raw_path = path.join(output_path, raw_rel_path)
+        raw_dir_path = path.dirname(raw_path)
+        os.makedirs(raw_dir_path, exist_ok=True)
+        with open(raw_path, 'wb') as raw:
+            raw.write(raw_data)
