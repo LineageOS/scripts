@@ -132,7 +132,7 @@ def parse_xml_resource(
             comments = []
 
         if keys in resources:
-            color_print(f'{xml_path}: {keys} already found', color=Color.YELLOW)
+            # color_print(f'{xml_path}: {keys} already found', color=Color.YELLOW)
             continue
 
         resources[keys] = resource
