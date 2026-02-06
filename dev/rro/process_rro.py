@@ -17,10 +17,10 @@ from rro.resources import (
     find_target_package_resources,
     group_overlay_resources_rel_path,
     parse_overlay_resources,
-    read_overlay_xmls,
+    read_raw_resources,
     remove_overlay_resources,
     write_grouped_resources,
-    write_overlay_xmls,
+    write_overlay_raw_resources,
 )
 from rro.target_package import get_target_packages
 from utils.utils import Color, color_print
@@ -80,17 +80,17 @@ def process_rro(
     )
     package = simplify_rro_package(package)
 
-    overlay_resources, overlay_xmls = parse_overlay_resources(
+    overlay_resources, overlay_raw_resources = parse_overlay_resources(
         overlay_path, resources_dir
     )
-    if not overlay_resources and not overlay_xmls:
+    if not overlay_resources and not overlay_raw_resources:
         raise ValueError(f'{package}: No resources in overlay')
 
     target_packages, target_package = get_target_packages(target_package)
-    package_resources, package_xmls = find_target_package_resources(
+    package_resources, package_raw_resources = find_target_package_resources(
         target_packages,
         overlay_resources,
-        overlay_xmls,
+        overlay_raw_resources,
     )
 
     (
@@ -122,15 +122,15 @@ def process_rro(
             color=Color.YELLOW,
         )
 
-    xmls, missing_xmls = read_overlay_xmls(
+    raw_resources, missing_raw_resources = read_raw_resources(
         overlay_path,
-        overlay_xmls,
-        package_xmls,
+        overlay_raw_resources,
+        package_raw_resources,
     )
 
-    for xml in missing_xmls:
+    for raw_resource in missing_raw_resources:
         color_print(
-            f'{package}: XML {xml} not found in {target_package}',
+            f'{package}: Raw resource {raw_resource} not found in {target_package}',
             color=Color.RED,
         )
 
@@ -138,18 +138,21 @@ def process_rro(
         return attrib_value.startswith('0') and len(attrib_value) > 1
 
     aapt_raw = False
-    for xml_name, xml_data in xmls.items():
-        aapt_raw = xml_attrib_matches(xml_data, attrib_needs_aapt_raw)
+    for raw_resource_name, raw_resource_data in raw_resources.items():
+        if not raw_resource_name.endswith('.xml'):
+            continue
+
+        aapt_raw = xml_attrib_matches(raw_resource_data, attrib_needs_aapt_raw)
         if not aapt_raw:
             continue
 
         color_print(
-            f'{package}: XML {xml_name} needs raw aapt flag',
+            f'{package}: Raw resource {raw_resource_name} needs raw aapt flag',
             color=Color.YELLOW,
         )
         break
 
-    if not grouped_resources and not xmls:
+    if not grouped_resources and not raw_resources:
         raise ValueError(f'{package}: No resources left in overlay')
 
     # Preserve existing res/values/*.xml headers BEFORE we delete res/
@@ -176,7 +179,7 @@ def process_rro(
         maintain_copyrights=maintain_copyrights,
         preserved_prefixes=preserved_prefixes,
     )
-    write_overlay_xmls(xmls, output_path)
+    write_overlay_raw_resources(raw_resources, output_path)
 
     rro_manifest_path = path.join(output_path, android_manifest_name)
     write_manifest(
