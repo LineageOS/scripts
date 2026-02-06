@@ -179,7 +179,8 @@ def parse_package_resources_dir(
             xml_rel_path = path.join(xml_resources_dir_name, xml_file_path)
 
             if is_xml_dir:
-                assert xml_file.name not in xmls
+                # Inherited resources can be overwritten, do not assert
+                # assert xml_file.name not in xmls, xml_rel_path
                 xmls[xml_file.name] = xml_rel_path
                 continue
 
