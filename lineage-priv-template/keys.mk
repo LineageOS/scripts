@@ -20,10 +20,10 @@ PRODUCT_CERTIFICATE_OVERRIDES := \
     com.android.devicelock:com.android.devicelock.certificate.override \
     com.android.extservices:com.android.extservices.certificate.override \
     com.android.hardware.authsecret:com.android.hardware.authsecret.certificate.override \
-    com.android.hardware.biometrics.face.virtual:com.android.hardware.biometrics.face.virtual.override \
-    com.android.hardware.biometrics.fingerprint.virtual:com.android.hardware.biometrics.fingerprint.virtual.override \
+    com.android.hardware.biometrics.face.virtual:com.android.hardware.biometrics.face.virtual.certificate.override \
+    com.android.hardware.biometrics.fingerprint.virtual:com.android.hardware.biometrics.fingerprint.virtual.certificate.override \
     com.android.hardware.boot:com.android.hardware.boot.certificate.override \
-    com.android.hardware.cas:com.android.hardware.cas.override \
+    com.android.hardware.cas:com.android.hardware.cas.certificate.override \
     com.android.hardware.contexthub:com.android.hardware.contexthub.certificate.override \
     com.android.hardware.dumpstate:com.android.hardware.dumpstate.certificate.override \
     com.android.hardware.gatekeeper.nonsecure:com.android.hardware.gatekeeper.nonsecure.certificate.override \
@@ -31,7 +31,7 @@ PRODUCT_CERTIFICATE_OVERRIDES := \
     com.android.hardware.power:com.android.hardware.power.certificate.override \
     com.android.hardware.rebootescrow:com.android.hardware.rebootescrow.certificate.override \
     com.android.hardware.thermal:com.android.hardware.thermal.certificate.override \
-    com.android.hardware.threadnetwork:com.android.hardware.threadnetwork.override \
+    com.android.hardware.threadnetwork:com.android.hardware.threadnetwork.certificate.override \
     com.android.hardware.uwb:com.android.hardware.uwb.certificate.override \
     com.android.hardware.vibrator:com.android.hardware.vibrator.certificate.override \
     com.android.hardware.wifi:com.android.hardware.wifi.certificate.override \
