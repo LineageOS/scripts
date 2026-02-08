@@ -345,14 +345,18 @@ def fixup_incorrect_resources_type(
     wrong_type_resources: Set[Tuple[str, str, str]] = set()
 
     for keys, resource in overlay_resources.items():
-        package_resource = get_package_resource(package_resources, keys)
-        if package_resource is not None:
-            continue
+        if 'type' in resource.element.attrib:
+            correct_resource_type = resource.element.attrib['type']
+            del resource.element.attrib['type']
+        else:
+            package_resource = get_package_resource(package_resources, keys)
+            if package_resource is not None:
+                continue
 
-        correct_resource_type = get_correct_resource_type(
-            resource,
-            package_resources,
-        )
+            correct_resource_type = get_correct_resource_type(
+                resource,
+                package_resources,
+            )
 
         if correct_resource_type is None:
             continue
