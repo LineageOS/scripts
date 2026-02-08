@@ -15,6 +15,7 @@ from rro.manifest import (
 from rro.resources import (
     RESOURCES_DIR,
     find_target_package_resources,
+    fixup_incorrect_resources_type,
     group_overlay_resources_rel_path,
     parse_overlay_resources,
     read_raw_resources,
@@ -93,9 +94,13 @@ def process_rro(
         overlay_raw_resources,
     )
 
+    wrong_type_resources = fixup_incorrect_resources_type(
+        overlay_resources,
+        package_resources,
+    )
+
     (
         grouped_resources,
-        wrong_type_resources,
         missing_resources,
         identical_resources,
     ) = group_overlay_resources_rel_path(
@@ -118,7 +123,7 @@ def process_rro(
     for resource_name, wrong_type, correct_type in sorted(wrong_type_resources):
         color_print(
             f'{package}: Resource {resource_name} has wrong type {wrong_type}, '
-            f'expected {correct_type}',
+            f'expected {correct_type}, corrected automatically',
             color=Color.YELLOW,
         )
 

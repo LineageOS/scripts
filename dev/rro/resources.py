@@ -320,28 +320,58 @@ def get_package_resource(
     return package_resource
 
 
+def fixup_incorrect_resources_type(
+    overlay_resources: resources_dict,
+    package_resources: resources_dict,
+):
+    removed_keys: Set[Tuple[str, ...]] = set()
+    fixed_overlay_resources: resources_dict = {}
+    wrong_type_resources: Set[Tuple[str, str, str]] = set()
+
+    for keys, resource in overlay_resources.items():
+        package_resource = get_package_resource(package_resources, keys)
+        if package_resource is not None:
+            continue
+
+        correct_resource_type = get_correct_resource_type(
+            resource,
+            package_resources,
+        )
+
+        if correct_resource_type is None:
+            continue
+
+        wrong_type_resources.add(
+            (resource.name, resource.tag, correct_resource_type)
+        )
+
+        new_keys = (keys[0], correct_resource_type, *keys[2:])
+        resource.keys = new_keys
+        resource.tag = correct_resource_type
+        resource.element.tag = correct_resource_type
+
+        removed_keys.add(keys)
+        fixed_overlay_resources[new_keys] = resource
+
+    for keys in removed_keys:
+        del overlay_resources[keys]
+
+    overlay_resources.update(fixed_overlay_resources)
+
+    return wrong_type_resources
+
+
 def group_overlay_resources_rel_path(
     overlay_resources: resources_dict,
     package_resources: resources_dict,
 ):
     grouped_resources: resources_grouped_dict = {}
     missing_resources: Set[str] = set()
-    wrong_type_resources: Set[Tuple[str, str, str]] = set()
     identical_resources: Set[str] = set()
 
     for keys, resource in overlay_resources.items():
         package_resource = get_package_resource(package_resources, keys)
         if package_resource is None:
-            correct_resource_type = get_correct_resource_type(
-                resource,
-                package_resources,
-            )
-            if correct_resource_type is not None:
-                wrong_type_resources.add(
-                    (resource.name, resource.tag, correct_resource_type)
-                )
-                continue
-
             referencing_resource = get_referencing_resource(
                 resource,
                 overlay_resources,
@@ -379,7 +409,6 @@ def group_overlay_resources_rel_path(
 
     return (
         grouped_resources,
-        wrong_type_resources,
         missing_resources,
         identical_resources,
     )
