@@ -20,6 +20,7 @@ from utils.xml_utils import XML_COMMENT_TEXT, xml_element_canonical_str
 
 TRANSLATABLE_KEY = 'translatable'
 FEATURE_FLAG_KEY = 'featureFlag'
+MSGID_KEY = 'msgid'
 RESOURCES_TAG = 'resources'
 RESOURCES_DIR = 'res'
 
@@ -154,6 +155,9 @@ def parse_xml_resource(
 
             if tag == 'dimen':
                 node.text = normalize_node_text_dimens_units(node.text)
+
+        if MSGID_KEY in node.attrib:
+            del node.attrib[MSGID_KEY]
 
         resource = Resource(
             index,
