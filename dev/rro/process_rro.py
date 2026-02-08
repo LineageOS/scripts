@@ -106,6 +106,7 @@ def process_rro(
     ) = group_overlay_resources_rel_path(
         overlay_resources,
         package_resources,
+        manifest_path,
     )
 
     for resource_name in sorted(missing_resources):
