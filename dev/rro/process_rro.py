@@ -178,7 +178,7 @@ def process_rro(
                 preserved = None
             preserved_prefixes[existing_xml_path] = preserved
 
-    remove_overlay_resources(overlay_path)
+    remove_overlay_resources(output_path)
     write_grouped_resources(
         grouped_resources,
         output_path,
