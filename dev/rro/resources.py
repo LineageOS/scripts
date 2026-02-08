@@ -52,6 +52,22 @@ resources_dict = Dict[Tuple[str, ...], Resource]
 resources_grouped_dict = Dict[str, List[Resource]]
 
 
+def resource_needs_quotes(s: str) -> bool:
+    if not s:
+        return False
+
+    if s != s.strip():
+        return True
+
+    if any(c in s for c in '\n\t'):
+        return True
+
+    if ' '.join(s.split()) != s:
+        return True
+
+    return False
+
+
 def node_has_space_after(node: etree.Element):
     return node.tail is not None and node.tail.count('\n') > 1
 
@@ -88,6 +104,16 @@ def normalize_node_text_dimens_units(text: str):
         break
 
     return left + core + right
+
+
+def normalize_node_text_string(text: str):
+    if len(text) >= 2 and text[0] == '"' and text[-1] == '"':
+        if resource_needs_quotes(text):
+            return text
+
+        return text[1:-1]
+
+    return ' '.join(text.split())
 
 
 def parse_xml_resource(
@@ -154,6 +180,9 @@ def parse_xml_resource(
 
             if tag == 'dimen':
                 node.text = normalize_node_text_dimens_units(node.text)
+
+            if tag == 'string':
+                node.text = normalize_node_text_string(node.text)
 
         if 'msgid' in node.attrib:
             del node.attrib['msgid']
