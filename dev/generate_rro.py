@@ -31,7 +31,7 @@ def extract_apk(apk_path: str, tmp_dir: str):
     )
 
 
-def generate_rro(apk_path: str, output_path: str):
+def generate_rro(apk_path: str, output_path: str, rro_name: str):
     shutil.rmtree(output_path, ignore_errors=True)
     os.makedirs(output_path, exist_ok=True)
 
@@ -42,7 +42,7 @@ def generate_rro(apk_path: str, output_path: str):
         write_rro_android_bp(
             apk_path,
             android_bp_path,
-            path.basename(output_path),
+            rro_name,
             aapt_raw,
         )
 
@@ -104,7 +104,7 @@ if __name__ == '__main__':
         rro_name = simplify_rro_name(rro_name)
         output_path = path.join(overlays_path, rro_name)
         try:
-            generate_rro(apk_path, output_path)
+            generate_rro(apk_path, output_path, rro_name)
         except ValueError as e:
             shutil.rmtree(output_path, ignore_errors=True)
             color_print(e, color=Color.RED)
