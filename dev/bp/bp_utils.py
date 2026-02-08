@@ -60,6 +60,7 @@ SPECIFIC_PARTITIONS = {
     'device_specific': 'odm',
     'product_specific': 'product',
     'system_ext_specific': 'system_ext',
+    'oem_specific': 'oem',
 }
 
 
