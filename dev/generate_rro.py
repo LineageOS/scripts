@@ -11,8 +11,16 @@ from os import path
 from tempfile import TemporaryDirectory
 
 from bp.bp_utils import ANDROID_BP_NAME
-from rro.process_rro import process_rro, simplify_rro_name, write_rro_android_bp
-from rro.target_package import append_extra_locations
+from rro.process_rro import (
+    is_rro_equal_with_aosp,
+    process_rro,
+    simplify_rro_name,
+    write_rro_android_bp,
+)
+from rro.target_package import (
+    append_extra_locations,
+    find_overlay_android_bp_path_by_name,
+)
 from utils.utils import Color, color_print, run_cmd
 
 
@@ -37,7 +45,18 @@ def generate_rro(apk_path: str, output_path: str, rro_name: str):
 
     with TemporaryDirectory() as tmp_dir:
         extract_apk(apk_path, tmp_dir)
+
         aapt_raw = process_rro(tmp_dir, output_path)
+
+        aosp_rro_android_bp_path = find_overlay_android_bp_path_by_name(
+            rro_name,
+        )
+        if aosp_rro_android_bp_path is not None and is_rro_equal_with_aosp(
+            output_path,
+            aosp_rro_android_bp_path,
+        ):
+            raise ValueError(f'Overlay {rro_name} identical to AOSP')
+
         android_bp_path = path.join(output_path, ANDROID_BP_NAME)
         write_rro_android_bp(
             apk_path,
@@ -76,6 +95,11 @@ if __name__ == '__main__':
         '--overlays',
         help='Path to overlays directory',
         default='./overlays',
+    )
+    parser.add_argument(
+        '-e',
+        '--exclude-resource-name',
+        help='Exclude a specific resource name (eg: config_defaultAssistant)',
     )
 
     args = parser.parse_args()
