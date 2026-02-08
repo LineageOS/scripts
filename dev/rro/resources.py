@@ -90,6 +90,13 @@ def normalize_node_text_dimens_units(text: str):
     return left + core + right
 
 
+def normalize_node_text_string(text: str):
+    if len(text) >= 2 and text[0] == '"' and text[-1] == '"':
+        return text
+
+    return ' '.join(text.split())
+
+
 def parse_xml_resource(
     xml_rel_path: str,
     xml_path: str,
@@ -154,6 +161,9 @@ def parse_xml_resource(
 
             if tag == 'dimen':
                 node.text = normalize_node_text_dimens_units(node.text)
+
+            if tag == 'string':
+                node.text = normalize_node_text_string(node.text)
 
         if 'msgid' in node.attrib:
             del node.attrib['msgid']
