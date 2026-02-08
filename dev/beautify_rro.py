@@ -7,11 +7,17 @@ from __future__ import annotations
 import shutil
 from argparse import ArgumentParser
 from os import path
+from typing import Dict, List, Tuple
 
 from bp.bp_parser import bp_parser
-from bp.bp_utils import ANDROID_BP_NAME
-from rro.manifest import ANDROID_MANIFEST_NAME
+from bp.bp_utils import (
+    ANDROID_BP_NAME,
+    get_module_partition,
+    partition_to_priority,
+)
+from rro.manifest import ANDROID_MANIFEST_NAME, parse_overlay_manifest
 from rro.process_rro import process_rro
+from rro.resources import resources_dict
 from rro.target_package import append_extra_locations
 from utils.utils import Color, color_print, get_dirs_with_file
 
@@ -45,6 +51,8 @@ if __name__ == '__main__':
         )
     )
 
+    rros: List[Tuple[int, int, str, dict]] = []
+
     for dir_path in get_dirs_with_file(args.overlay_path, ANDROID_BP_NAME):
         android_bp_path = path.join(dir_path, ANDROID_BP_NAME)
 
@@ -63,16 +71,52 @@ if __name__ == '__main__':
                     continue
 
                 manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
-                resources_dir = statement.get('resource_dirs', ['res'])[0]
+                manifest_path = path.join(dir_path, manifest)
+                package, target_package, overlay_attrs = parse_overlay_manifest(
+                    manifest_path,
+                )
+                module_partition = get_module_partition(statement)
+                partition_priority = partition_to_priority(module_partition)
+                module_priority = int(overlay_attrs.get('priority', 0))
 
-                try:
-                    process_rro(
+                rros.append(
+                    (
+                        partition_priority,
+                        module_priority,
                         dir_path,
-                        dir_path,
-                        manifest,
-                        resources_dir,
-                        maintain_copyrights=args.maintain_copyrights,
+                        statement,
                     )
-                except ValueError as e:
-                    shutil.rmtree(dir_path, ignore_errors=True)
-                    color_print(e, color=Color.RED)
+                )
+
+    # Sort RROs in reverse order of priority so we can keep track of what
+    # resources have been found, and remove duplicates
+    sorted_rros = [
+        (d, s)
+        for *_, d, s in sorted(
+            rros,
+            key=lambda v: v[:3],
+            reverse=True,
+        )
+    ]
+
+    all_packages_resources_map: Dict[str, resources_dict] = {}
+    for dir_path, statement in sorted_rros:
+        manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
+        resources_dir = statement.get('resource_dirs', ['res'])[0]
+
+        try:
+            process_rro(
+                dir_path,
+                dir_path,
+                manifest,
+                resources_dir,
+                all_packages_resources_map=all_packages_resources_map,
+                maintain_copyrights=args.maintain_copyrights,
+                # Identical to AOSP resources cannot be removed without doing
+                # priority ordering, so it can only be done while beautifying
+                # all possible RROs at the same time
+                remove_identical=True,
+            )
+        except ValueError as e:
+            shutil.rmtree(dir_path, ignore_errors=True)
+            color_print(e, color=Color.RED)
