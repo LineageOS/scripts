@@ -301,6 +301,21 @@ def get_referencing_resource(
     return None
 
 
+def get_package_resource(
+    package_resources: resources_dict,
+    keys: Tuple[str, ...],
+):
+    package_resource = package_resources.get(keys)
+
+    # Look for resources in the original package in the default values
+    # directory if the specific values directory did not find it
+    if package_resource is None:
+        default_location_keys = ('', *keys[1:])
+        package_resource = package_resources.get(default_location_keys)
+
+    return package_resource
+
+
 def group_overlay_resources_rel_path(
     overlay_resources: resources_dict,
     package_resources: resources_dict,
@@ -311,11 +326,7 @@ def group_overlay_resources_rel_path(
     identical_resources: Set[str] = set()
 
     for keys, resource in overlay_resources.items():
-        package_resource = package_resources.get(keys)
-        if package_resource is None:
-            default_location_keys = ('', *keys[1:])
-            package_resource = package_resources.get(default_location_keys)
-
+        package_resource = get_package_resource(package_resources, keys)
         if package_resource is None:
             correct_resource_type = get_correct_resource_type(
                 resource,
