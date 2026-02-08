@@ -135,6 +135,7 @@ def map_packages():
     defaults_map = {}
     android_apps_map = {}
     filegroups_map = {}
+    rro_overlays_map = {}
     missing_libs = set()
 
     for parent_path in PACKAGE_LOCATIONS:
@@ -184,6 +185,12 @@ def map_packages():
                 ):
                     assert name not in android_apps_map
                     android_apps_map[name] = (
+                        android_bp_dir_path,
+                        statement,
+                    )
+
+                if statement['module'] == 'runtime_resource_overlay':
+                    rro_overlays_map[name] = (
                         android_bp_dir_path,
                         statement,
                     )
@@ -244,7 +251,7 @@ def map_packages():
             )
         )
 
-    return package_path_map
+    return package_path_map, rro_overlays_map
 
 
 target_package_map = {
@@ -273,7 +280,7 @@ target_package_name_map = {
 
 
 def get_target_packages(target_package: str):
-    package_path_map = map_packages()
+    package_path_map, _ = map_packages()
     new_target_package = target_package
 
     # Multiple apps match the com.android.systemui package name
@@ -294,3 +301,12 @@ def get_target_packages(target_package: str):
         raise ValueError(f'Unknown package name: {target_package}')
 
     return package_path_map[target_package], new_target_package
+
+
+def find_overlay_android_bp_path_by_name(name: str):
+    _, rro_overlays_map = map_packages()
+
+    if name in rro_overlays_map:
+        return rro_overlays_map[name][0]
+
+    return None
