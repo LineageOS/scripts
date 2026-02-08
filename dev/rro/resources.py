@@ -282,11 +282,15 @@ def is_referenced_resource_element(
     return False
 
 
+def get_reference_name(resource: Resource):
+    return f'@{resource.tag}/{resource.name}'
+
+
 def get_referencing_resource(
     resource: Resource,
     overlay_resources: resources_dict,
 ):
-    reference_name = f'@{resource.tag}/{resource.name}'
+    reference_name = get_reference_name(resource)
     for overlay_resource in overlay_resources.values():
         if is_referenced_resource_element(
             reference_name,
