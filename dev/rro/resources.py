@@ -275,6 +275,10 @@ def is_referenced_resource_element(
     if element.text is not None and element.text.strip() == reference_name:
         return True
 
+    for attrib in element.attrib.values():
+        if attrib == reference_name:
+            return True
+
     for child_element in element:
         if is_referenced_resource_element(reference_name, child_element):
             return True
