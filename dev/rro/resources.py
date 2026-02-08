@@ -221,7 +221,10 @@ def parse_package_resources_dir(
             if not resource_file.is_file():
                 continue
 
-            if resource_file.name.startswith('public-'):
+            if (
+                resource_file.name.startswith('public-')
+                or resource_file.name == 'public.xml'
+            ):
                 continue
 
             if resource_file.name == 'symbols.xml':
