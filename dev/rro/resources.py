@@ -299,10 +299,12 @@ def find_target_package_resources(
 ):
     max_matching_resources = 0
     best_resources = None
+    best_raw_resources = None
 
     for _, resource_dirs in target_packages:
-        resources = get_target_package_resources(resource_dirs)
-        package_resources, package_raw_resources = resources
+        package_resources, package_raw_resources = get_target_package_resources(
+            resource_dirs,
+        )
 
         matching_resources = 0
         if len(target_packages) != 1:
@@ -315,9 +317,10 @@ def find_target_package_resources(
 
         if matching_resources >= max_matching_resources:
             max_matching_resources = matching_resources
-            best_resources = resources
+            best_resources = package_resources
+            best_raw_resources = package_raw_resources
 
-    return best_resources
+    return best_resources, best_raw_resources
 
 
 def get_correct_resource_type(
