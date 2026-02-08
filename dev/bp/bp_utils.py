@@ -63,6 +63,15 @@ SPECIFIC_PARTITIONS = {
     'oem_specific': 'oem',
 }
 
+PRIORITY_PARTITIONS = [
+    'system',
+    'vendor',
+    'odm',
+    'oem',
+    'product',
+    'system_ext',
+]
+
 
 def get_partition_specific(partition: Optional[str]):
     for s, p in SPECIFIC_PARTITIONS.items():
@@ -70,6 +79,18 @@ def get_partition_specific(partition: Optional[str]):
             return s
 
     return None
+
+
+def get_module_partition(module: Dict):
+    for s, p in SPECIFIC_PARTITIONS.items():
+        if s in module:
+            return p
+
+    return 'system'
+
+
+def partition_to_priority(partition: str):
+    return PRIORITY_PARTITIONS.index(partition)
 
 
 def write_android_bp(apk_path: str, android_bp_path: str, package: str):

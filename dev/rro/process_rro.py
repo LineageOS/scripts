@@ -6,6 +6,7 @@ from __future__ import annotations
 import re
 from os import path
 from tempfile import TemporaryDirectory
+from typing import Dict, Optional
 
 from bp.bp_utils import get_partition_specific
 from rro.manifest import (
@@ -22,6 +23,7 @@ from rro.resources import (
     parse_overlay_resources,
     read_raw_resources,
     remove_overlay_resources,
+    resources_dict,
     write_grouped_resources,
     write_overlay_raw_resources,
 )
@@ -125,8 +127,13 @@ def process_rro(
     output_path: str,
     android_manifest_name: str = ANDROID_MANIFEST_NAME,
     resources_dir: str = RESOURCES_DIR,
+    all_packages_resources_map: Optional[Dict[str, resources_dict]] = None,
+    remove_identical: bool = False,
     maintain_copyrights: bool = False,
 ):
+    if all_packages_resources_map is None:
+        all_packages_resources_map = {}
+
     manifest_path = path.join(overlay_path, android_manifest_name)
 
     package, target_package, overlay_attrs = parse_overlay_manifest(
@@ -152,14 +159,22 @@ def process_rro(
         package_resources,
     )
 
+    package_resources_map = all_packages_resources_map.setdefault(
+        target_package,
+        {},
+    )
+
     (
         grouped_resources,
         missing_resources,
         identical_resources,
+        shadowed_resources,
     ) = group_overlay_resources_rel_path(
         overlay_resources,
         package_resources,
         manifest_path,
+        package_resources_map,
+        remove_identical,
     )
 
     for resource_name in sorted(missing_resources):
@@ -171,6 +186,12 @@ def process_rro(
     for resource_name in sorted(identical_resources):
         color_print(
             f'{package}: Resource {resource_name} identical in {target_package}',
+            color=Color.YELLOW,
+        )
+
+    for resource_name in sorted(shadowed_resources):
+        color_print(
+            f'{package}: Resource {resource_name} shadowed in {target_package}',
             color=Color.YELLOW,
         )
 
