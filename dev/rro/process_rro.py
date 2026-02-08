@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import re
 from os import path
+from tempfile import TemporaryDirectory
 
 from bp.bp_utils import get_partition_specific
 from rro.manifest import (
@@ -14,6 +15,7 @@ from rro.manifest import (
 )
 from rro.resources import (
     RESOURCES_DIR,
+    TRANSLATABLE_KEY,
     find_target_package_resources,
     fixup_incorrect_resources_type,
     group_overlay_resources_rel_path,
@@ -25,7 +27,7 @@ from rro.resources import (
 )
 from rro.target_package import get_target_packages
 from utils.utils import Color, color_print
-from utils.xml_utils import xml_attrib_matches
+from utils.xml_utils import xml_attrib_matches, xml_element_canonical_str
 
 
 def write_rro_android_bp(
@@ -65,6 +67,57 @@ runtime_resource_overlay {{
 }}
 '''.lstrip()
         )
+
+
+def is_rro_equal(overlay_path: str, aosp_overlay_path: str):
+    overlay_resources, overlay_raw_resources = parse_overlay_resources(
+        overlay_path,
+        RESOURCES_DIR,
+    )
+
+    aosp_overlay_resources, aosp_overlay_raw_resources = (
+        parse_overlay_resources(
+            aosp_overlay_path,
+            RESOURCES_DIR,
+        )
+    )
+
+    if overlay_resources.keys() != aosp_overlay_resources.keys():
+        return False
+
+    if overlay_raw_resources.keys() != aosp_overlay_raw_resources.keys():
+        return False
+
+    for k in overlay_resources.keys():
+        first_element = overlay_resources[k].element
+        second_element = aosp_overlay_resources[k].element
+
+        # Overlays don't have translatable=false, remove it to fix
+        # equality check
+        if TRANSLATABLE_KEY in first_element.attrib:
+            del first_element.attrib[TRANSLATABLE_KEY]
+
+        if TRANSLATABLE_KEY in second_element.attrib:
+            del second_element.attrib[TRANSLATABLE_KEY]
+
+        first_resource = xml_element_canonical_str(first_element)
+        second_resource = xml_element_canonical_str(second_element)
+
+        if first_resource != second_resource:
+            return False
+
+    for k in overlay_raw_resources.keys():
+        if overlay_raw_resources[k] != aosp_overlay_raw_resources[k]:
+            return False
+
+    return True
+
+
+def is_rro_equal_with_aosp(overlay_path: str, aosp_overlay_path: str):
+    with TemporaryDirectory() as tmp_dir:
+        process_rro(aosp_overlay_path, tmp_dir)
+
+        return is_rro_equal(overlay_path, tmp_dir)
 
 
 def process_rro(
