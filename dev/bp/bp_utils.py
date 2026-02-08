@@ -55,13 +55,18 @@ def bp_extend_defaults(
     return merge_bp_module_defaults(base, module), missing_defaults
 
 
+SPECIFIC_PARTITIONS = {
+    'vendor': 'vendor',
+    'device_specific': 'odm',
+    'product_specific': 'product',
+    'system_ext_specific': 'system_ext',
+}
+
+
 def get_partition_specific(partition: Optional[str]):
-    if partition == 'product' or partition == 'system_ext':
-        return f'{partition}_specific'
-    elif partition == 'odm':
-        return 'device_specific'
-    elif partition == 'vendor':
-        return partition
+    for s, p in SPECIFIC_PARTITIONS.items():
+        if partition == p:
+            return s
 
     return None
 
