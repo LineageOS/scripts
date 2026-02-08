@@ -155,6 +155,9 @@ def parse_xml_resource(
             if tag == 'dimen':
                 node.text = normalize_node_text_dimens_units(node.text)
 
+        if 'msgid' in node.attrib:
+            del node.attrib['msgid']
+
         resource = Resource(
             index,
             xml_name,
