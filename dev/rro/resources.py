@@ -305,6 +305,18 @@ def get_referencing_resource(
     return None
 
 
+def is_manifest_referencing_resource(
+    resource: Resource,
+    manifest_path: str,
+):
+    tree = etree.parse(manifest_path)
+    root = tree.getroot()
+
+    reference_name = get_reference_name(resource)
+
+    return is_referenced_resource_element(reference_name, root)
+
+
 def get_package_resource(
     package_resources: resources_dict,
     keys: Tuple[str, ...],
@@ -364,12 +376,21 @@ def fixup_incorrect_resources_type(
 def group_overlay_resources_rel_path(
     overlay_resources: resources_dict,
     package_resources: resources_dict,
+    manifest_path: str,
 ):
     grouped_resources: resources_grouped_dict = {}
     missing_resources: Set[str] = set()
     identical_resources: Set[str] = set()
 
     for keys, resource in overlay_resources.items():
+        # Let the logic below place it at the end if a package resource is not
+        # found
+        resource.index = -1
+
+        # Keep the XML of the original resource as we couldn't find a
+        # package resource for it
+        rel_path = path.join(resource.rel_dir_path, resource.xml_name)
+
         package_resource = get_package_resource(package_resources, keys)
         if package_resource is None:
             referencing_resource = get_referencing_resource(
@@ -380,32 +401,46 @@ def group_overlay_resources_rel_path(
                 referencing_resource.references.append(resource)
                 continue
 
-            missing_resources.add(resource.name)
-            continue
+            if not is_manifest_referencing_resource(resource, manifest_path):
+                missing_resources.add(resource.name)
+                continue
 
-        # Overlays don't have translatable=false, remove it to fix
-        # equality check
-        if TRANSLATABLE_KEY in package_resource.element.attrib:
-            del package_resource.element.attrib[TRANSLATABLE_KEY]
+        if package_resource is not None:
+            # Overlays don't have translatable=false, remove it to fix
+            # equality check
+            if TRANSLATABLE_KEY in package_resource.element.attrib:
+                del package_resource.element.attrib[TRANSLATABLE_KEY]
 
-        if xml_element_canonical_str(
-            package_resource.element
-        ) == xml_element_canonical_str(resource.element):
-            identical_resources.add(resource.name)
-            continue
+            if xml_element_canonical_str(
+                package_resource.element
+            ) == xml_element_canonical_str(resource.element):
+                identical_resources.add(resource.name)
+                continue
 
-        # TODO: find out if this is needed
-        # resource.element.attrib[TRANSLATABLE_KEY] = 'false'
-        resource.index = package_resource.index
-        resource.comments = package_resource.comments
+            # TODO: find out if this is needed
+            # resource.element.attrib[TRANSLATABLE_KEY] = 'false'
+            resource.index = package_resource.index
+            resource.comments = package_resource.comments
 
-        # Keep the directory of the original resource, but place it in the
-        # correct XML
-        rel_path = path.join(resource.rel_dir_path, package_resource.xml_name)
+            # Keep the directory of the original resource, but place it in the
+            # correct XML
+            rel_path = path.join(
+                resource.rel_dir_path, package_resource.xml_name
+            )
+
+
         grouped_resources.setdefault(rel_path, []).append(resource)
 
     for _, resources in grouped_resources.items():
-        resources.sort(key=lambda r: r.index)
+        max_resources = len(resources)
+
+        def resources_sort_key(r: Resource):
+            if r.index == -1:
+                return (r.name, max_resources)
+            else:
+                return (r.name, r.index)
+
+        resources.sort(key=resources_sort_key)
 
     return (
         grouped_resources,
