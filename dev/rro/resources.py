@@ -473,10 +473,26 @@ def group_overlay_resources_rel_path(
     overlay_resources: resources_dict,
     package_resources: resources_dict,
     manifest_path: str,
+    package_resources_map: resources_dict,
+    remove_identical: bool,
 ):
     grouped_resources: resources_grouped_dict = {}
     missing_resources: Set[str] = set()
     identical_resources: Set[str] = set()
+    shadowed_resources: Set[str] = set()
+
+    def add_resource_to_package_resources_map(
+        keys: Tuple[str, ...],
+        rel_path: str,
+        resource: Resource,
+    ):
+        updated_keys = (rel_path, *keys[1:])
+        if updated_keys in package_resources_map:
+            return False
+
+        package_resources_map[updated_keys] = resource
+
+        return True
 
     for keys, resource in overlay_resources.items():
         # Let the logic below place it at the end if a package resource is not
@@ -495,6 +511,8 @@ def group_overlay_resources_rel_path(
             )
             if referencing_resource is not None:
                 referencing_resource.references.append(resource)
+                # TODO: figure out if we should deal with shadowed resources
+                # here
                 continue
 
             if not is_manifest_referencing_resource(resource, manifest_path):
@@ -507,10 +525,26 @@ def group_overlay_resources_rel_path(
             if TRANSLATABLE_KEY in package_resource.element.attrib:
                 del package_resource.element.attrib[TRANSLATABLE_KEY]
 
-            if xml_element_canonical_str(
+            # Keep the directory of the original resource, but place it in the
+            # correct XML
+            rel_path = path.join(
+                resource.rel_dir_path, package_resource.xml_name
+            )
+
+            if remove_identical and xml_element_canonical_str(
                 package_resource.element
             ) == xml_element_canonical_str(resource.element):
-                identical_resources.add(resource.name)
+                # Even if a resource is identical to the AOSP value it should
+                # overwrite following entries in other overlays
+                if add_resource_to_package_resources_map(
+                    keys,
+                    rel_path,
+                    resource,
+                ):
+                    identical_resources.add(resource.name)
+                else:
+                    shadowed_resources.add(resource.name)
+
                 continue
 
             # TODO: find out if this is needed
@@ -518,14 +552,14 @@ def group_overlay_resources_rel_path(
             resource.index = package_resource.index
             resource.comments = package_resource.comments
 
-            # Keep the directory of the original resource, but place it in the
-            # correct XML
-            rel_path = path.join(
-                resource.rel_dir_path, package_resource.xml_name
-            )
-
-
-        grouped_resources.setdefault(rel_path, []).append(resource)
+        if add_resource_to_package_resources_map(
+            keys,
+            rel_path,
+            resource,
+        ):
+            grouped_resources.setdefault(rel_path, []).append(resource)
+        else:
+            shadowed_resources.add(resource.name)
 
     for _, resources in grouped_resources.items():
         max_resources = len(resources)
@@ -542,6 +576,7 @@ def group_overlay_resources_rel_path(
         grouped_resources,
         missing_resources,
         identical_resources,
+        shadowed_resources,
     )
 
 
