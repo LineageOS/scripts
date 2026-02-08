@@ -56,6 +56,40 @@ def node_has_space_after(node: etree.Element):
     return node.tail is not None and node.tail.count('\n') > 1
 
 
+UNITS = (
+    'dip',
+    'dp',
+    'sp',
+    'px',
+    'pt',
+    'in',
+    'mm',
+)
+
+
+def normalize_node_text_dimens_units(text: str):
+    left = text[: len(text) - len(text.lstrip())]
+    right = text[len(text.rstrip()) :]
+    core = text[len(left) : len(text) - len(right)]
+
+    for u in UNITS:
+        if not core.endswith(u):
+            continue
+
+        num = core[: -len(u)]
+
+        if u == 'dip':
+            u = 'dp'
+
+        if num.endswith('.0'):
+            num = num[:-2]
+
+        core = num + u
+        break
+
+    return left + core + right
+
+
 def parse_xml_resource(
     xml_rel_path: str,
     xml_path: str,
@@ -117,6 +151,9 @@ def parse_xml_resource(
         if node.text is not None:
             # TODO: this is just a hack for wrong @*
             node.text = node.text.replace('@*', '@')
+
+            if tag == 'dimen':
+                node.text = normalize_node_text_dimens_units(node.text)
 
         resource = Resource(
             index,
