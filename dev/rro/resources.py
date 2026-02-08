@@ -114,6 +114,10 @@ def parse_xml_resource(
         else:
             keys = (xml_rel_path, tag, name, product, feature_flag)
 
+        if node.text is not None:
+            # TODO: this is just a hack for wrong @*
+            node.text = node.text.replace('@*', '@')
+
         resource = Resource(
             index,
             xml_name,
