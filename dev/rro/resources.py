@@ -316,7 +316,7 @@ def find_target_package_resources(
     overlay_resources: resources_dict,
     overlay_raw_resources: Dict[str, str],
 ):
-    max_matching_resources = 0
+    best_matching_resources = 0
     best_resources = None
     best_raw_resources = None
 
@@ -334,8 +334,8 @@ def find_target_package_resources(
                 if raw_resource_name in package_raw_resources:
                     matching_resources += 1
 
-        if matching_resources >= max_matching_resources:
-            max_matching_resources = matching_resources
+        if matching_resources >= best_matching_resources:
+            best_matching_resources = matching_resources
             best_resources = package_resources
             best_raw_resources = package_raw_resources
 
