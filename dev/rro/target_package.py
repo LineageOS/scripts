@@ -5,9 +5,15 @@ from __future__ import annotations
 
 import functools
 from os import path
-from typing import Dict, List, Set, Tuple
+from typing import Dict, List, Set, Tuple, cast
 
-from bp.bp_parser import bp_parser
+from bp.bp_module import (
+    AppModule,
+    BpModule,
+    FilegroupModule,
+    SoongConfigModuleTypeModule,
+)
+from bp.bp_parser import bp_parser  # type: ignore
 from bp.bp_utils import ANDROID_BP_NAME, bp_extend_defaults
 from rro.manifest import parse_package_manifest
 from utils.utils import (
@@ -36,8 +42,11 @@ def get_existing_paths_rel(root_path: str, rel_paths: List[str]):
     return list(filtered_paths)
 
 
-def resolve_manifest_filegroups(manifests: List, filegroups_map: Dict):
-    resolved_manifests = []
+def resolve_manifest_filegroups(
+    manifests: List[str],
+    filegroups_map: Dict[str, FilegroupModule],
+):
+    resolved_manifests: List[str] = []
 
     for manifest in manifests:
         if not manifest.startswith(':'):
@@ -58,8 +67,8 @@ def resolve_manifest_filegroups(manifests: List, filegroups_map: Dict):
     return resolved_manifests
 
 
-def get_app_manifests(app_module: Dict):
-    manifests = []
+def get_app_manifests(app_module: AppModule):
+    manifests: List[str] = []
 
     manifest = app_module.get('manifest', 'AndroidManifest.xml')
     manifests.append(manifest)
@@ -71,9 +80,9 @@ def get_app_manifests(app_module: Dict):
 
 
 def get_app_resources(
-    android_apps_map: Dict[str, Tuple[str, Dict]],
+    android_apps_map: Dict[str, Tuple[str, AppModule]],
     android_bp_dir_path: str,
-    app_module: Dict,
+    app_module: AppModule,
     missing_libs: Set[str],
     resource_dirs: List[str],
 ):
@@ -114,8 +123,8 @@ def get_app_resources(
 
 def get_app_package_name(
     android_bp_dir_path: str,
-    app_module: Dict,
-    filegroups_map: Dict,
+    app_module: AppModule,
+    filegroups_map: Dict[str, FilegroupModule],
 ):
     manifests = get_app_manifests(app_module)
     resolved_manifests = resolve_manifest_filegroups(manifests, filegroups_map)
@@ -132,11 +141,11 @@ def get_app_package_name(
 @functools.cache
 def map_packages():
     soong_config_module_types = set(['java_defaults'])
-    defaults_map = {}
-    android_apps_map = {}
-    filegroups_map = {}
-    rro_overlays_map = {}
-    missing_libs = set()
+    defaults_map: Dict[str, BpModule] = {}
+    android_apps_map: Dict[str, Tuple[str, AppModule]] = {}
+    filegroups_map: Dict[str, FilegroupModule] = {}
+    rro_overlays_map: Dict[str, Tuple[str, BpModule]] = {}
+    missing_libs: Set[str] = set()
 
     for parent_path in PACKAGE_LOCATIONS:
         packages_path = path.join(android_root, parent_path)
@@ -151,7 +160,7 @@ def map_packages():
             with open(android_bp_path, 'r') as android_bp:
                 text = android_bp.read()
                 try:
-                    result = bp_parser.parse(text)
+                    result = cast(List[BpModule], bp_parser.parse(text))  # type: ignore
                 except SyntaxError:
                     color_print(
                         f'Failed to parse blueprint {android_bp_path}',
@@ -166,7 +175,7 @@ def map_packages():
                 if 'name' not in statement:
                     continue
 
-                name = cast(str, statement['name'])
+                name = statement['name']
                 assert isinstance(name, str)
 
                 if statement['module'] in soong_config_module_types:
@@ -176,9 +185,11 @@ def map_packages():
 
                 if statement['module'] == 'filegroup':
                     assert name not in filegroups_map
+                    statement = cast(FilegroupModule, statement)
                     filegroups_map[name] = statement
 
                 if statement['module'] == 'soong_config_module_type':
+                    statement = cast(SoongConfigModuleTypeModule, statement)
                     if statement['module_type'] == 'java_defaults':
                         soong_config_module_types.add(name)
 
@@ -187,6 +198,7 @@ def map_packages():
                     or statement['module'] == 'android_library'
                 ):
                     assert name not in android_apps_map
+                    statement = cast(AppModule, statement)
                     android_apps_map[name] = (
                         android_bp_dir_path,
                         statement,
@@ -198,14 +210,16 @@ def map_packages():
                         statement,
                     )
 
-    package_path_map: Dict[str, List[Tuple[str, Tuple[str]]]] = {}
+    package_path_map: Dict[str, List[Tuple[str, Tuple[str, ...]]]] = {}
     for android_bp_dir_path, app_module in android_apps_map.values():
         defaults = app_module.get('defaults', [])
+
         app_module, missing_defaults = bp_extend_defaults(
             app_module,
             defaults,
             defaults_map,
         )
+        app_module = cast(AppModule, app_module)
 
         name = app_module['name']
 
@@ -215,7 +229,7 @@ def map_packages():
             filegroups_map,
         )
 
-        resource_dirs = []
+        resource_dirs: List[str] = []
         get_app_resources(
             android_apps_map,
             android_bp_dir_path,
