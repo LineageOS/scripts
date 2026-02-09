@@ -45,7 +45,6 @@ class Resource:
         self.name = name
         self.element = element
         self.comments = comments
-        self.references: List[Resource] = []
 
 
 resources_dict = Dict[Tuple[str, ...], Resource]
@@ -508,13 +507,14 @@ def group_overlay_resources_rel_path(
                 resource,
                 overlay_resources,
             )
-            if referencing_resource is not None:
-                referencing_resource.references.append(resource)
+            is_manifest_referencing = is_manifest_referencing_resource(
+                resource,
+                manifest_path,
+            )
+
+            if referencing_resource is None and not is_manifest_referencing:
                 # TODO: figure out if we should deal with shadowed resources
                 # here
-                continue
-
-            if not is_manifest_referencing_resource(resource, manifest_path):
                 missing_resources.add(resource.name)
                 continue
 
@@ -615,9 +615,6 @@ def write_xml_resources(
 
         root.append(resource.element)
         last_element = resource.element
-
-        for reference_resource in resource.references:
-            root.append(reference_resource.element)
 
     if last_element is not None:
         last_element.tail = '\n'
