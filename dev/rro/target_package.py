@@ -163,8 +163,11 @@ def map_packages():
                 if 'module' not in statement:
                     continue
 
-                if 'name' in statement:
-                    name = statement['name']
+                if 'name' not in statement:
+                    continue
+
+                name = cast(str, statement['name'])
+                assert isinstance(name, str)
 
                 if statement['module'] in soong_config_module_types:
                     # TODO: some defaults extend java_defaults via soong_config_module_type
