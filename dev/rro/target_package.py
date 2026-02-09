@@ -29,6 +29,7 @@ PACKAGE_LOCATIONS = [
     'frameworks/base/libs',
     'lineage-sdk',
     'packages',
+    'vendor/lineage',
 ]
 
 
