@@ -214,8 +214,19 @@ def process_rro(
             color=Color.RED,
         )
 
-    def attrib_needs_aapt_raw(_attrib_key: str, attrib_value: str):
-        return attrib_value.startswith('0') and len(attrib_value) > 1
+    def attrib_needs_aapt_raw(
+        _attrib_key: str | bytes,
+        attrib_value: str | bytes,
+    ):
+        if not len(attrib_value) > 1:
+            return False
+
+        if isinstance(attrib_value, bytes):
+            return attrib_value.startswith(b'0')
+        elif isinstance(attrib_value, str):
+            return attrib_value.startswith('0')
+        else:
+            assert False
 
     aapt_raw = False
     for raw_resource_name, raw_resource_data in raw_resources.items():
