@@ -40,9 +40,17 @@ if __name__ == '__main__':
         default='',
         help='Comma-separated list of overlay folder names or Android.bp module names to ignore',
     )
+    parser.add_argument(
+        '-r',
+        '--remove-resource',
+        help='Remove a resource by name (eg: config_defaultAssistant)',
+        default=[],
+        action='append',
+    )
 
     args = parser.parse_args()
     ignore_packages = cast(str, args.ignore_packages)
+    remove_resources = set(cast(List[str], args.remove_resource))
 
     append_extra_locations(args.extra_package_locations)
 
@@ -120,6 +128,7 @@ if __name__ == '__main__':
                 # priority ordering, so it can only be done while beautifying
                 # all possible RROs at the same time
                 remove_identical=True,
+                remove_resources=remove_resources,
             )
         except ValueError as e:
             shutil.rmtree(dir_path, ignore_errors=True)
