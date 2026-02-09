@@ -660,7 +660,7 @@ def read_raw_resources(
     # TODO: handle identical resources
 
     missing_raw_resources: List[str] = []
-    raw_resources: Dict[str, str] = {}
+    raw_resources: Dict[str, bytes] = {}
 
     for raw_name, overlay_raw_rel_path in overlay_raw_resources.items():
         if raw_name not in package_raw_resources:
@@ -676,7 +676,7 @@ def read_raw_resources(
 
 
 def write_overlay_raw_resources(
-    raw_resources: Dict[str, str],
+    raw_resources: Dict[str, bytes],
     output_path: str,
 ):
     for raw_rel_path, raw_data in raw_resources.items():
