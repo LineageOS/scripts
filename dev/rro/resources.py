@@ -245,8 +245,9 @@ def parse_package_resources_dir(
             continue
 
         is_default_values = dir_file.name == 'values'
+        is_any_values = dir_file.name.startswith('values')
         if parse_all_values:
-            is_values = dir_file.name.startswith('values')
+            is_values = is_any_values
         else:
             is_values = is_default_values
 
@@ -285,7 +286,9 @@ def parse_package_resources_dir(
 
             # Inherited resources can be overwritten, do not assert
             # assert resource_file.name not in raw_resources, rel_path
-            raw_resources[resource_file.name] = rel_path
+            if not is_any_values:
+                raw_resources[resource_file.name] = rel_path
+
             continue
 
 
