@@ -136,17 +136,21 @@ def process_rro(
     remove_identical: bool = False,
     maintain_copyrights: bool = False,
     remove_resources: Optional[Set[str]] = None,
+    keep_packages: Optional[Set[str]] = None,
 ):
     if all_packages_resources_map is None:
         all_packages_resources_map = {}
     if remove_resources is None:
         remove_resources = set()
+    if keep_packages is None:
+        keep_packages = set()
 
     manifest_path = path.join(overlay_path, android_manifest_name)
 
     package, target_package, overlay_attrs = parse_overlay_manifest(
         manifest_path,
     )
+    is_kept_target_package = target_package in keep_packages
     package = simplify_rro_package(package)
 
     overlay_resources, overlay_raw_resources = parse_overlay_resources(
@@ -157,12 +161,17 @@ def process_rro(
     if not overlay_resources and not overlay_raw_resources:
         raise ValueError(f'{package}: No resources in overlay')
 
-    target_packages, target_package = get_target_packages(target_package)
-    package_resources, package_raw_resources = find_target_package_resources(
-        target_packages,
-        overlay_resources,
-        overlay_raw_resources,
-    )
+    package_resources = {}
+    package_raw_resources = {}
+    if not is_kept_target_package:
+        target_packages, target_package = get_target_packages(target_package)
+        package_resources, package_raw_resources = (
+            find_target_package_resources(
+                target_packages,
+                overlay_resources,
+                overlay_raw_resources,
+            )
+        )
 
     wrong_type_resources = fixup_incorrect_resources_type(
         overlay_resources,
@@ -185,6 +194,7 @@ def process_rro(
         manifest_path,
         package_resources_map,
         remove_identical,
+        is_kept_target_package,
     )
 
     for resource_name in sorted(missing_resources):
