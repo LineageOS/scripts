@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from typing import Callable
+from typing import Callable, TypeVar
 
 from lxml import etree
 
@@ -21,11 +21,18 @@ XML_COMMENT = f"""
 <!--{XML_COMMENT_TEXT}-->
 """
 
+T = TypeVar('T', str, bytes)
 
-def xml_attrib_matches(xml_data: bytes, match_fn: Callable[[str, str], bool]):
+
+def xml_attrib_matches(
+    xml_data: T,
+    match_fn: Callable[[T, T], bool],
+):
     tree = etree.fromstring(xml_data)
     for element in tree.iter():
         for attr_name, attr_value in element.attrib.items():
+            assert isinstance(attr_name, type(xml_data))
+            assert isinstance(attr_value, type(xml_data))
             if match_fn(attr_name, attr_value):
                 return True
     return False
