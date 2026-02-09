@@ -49,6 +49,7 @@ def parse_overlay_manifest(manifest_path: str):
 
     namespaced_attr = namespace_attr(TARGET_PACKAGE_KEY)
     target_package = overlay_elem.attrib.get(namespaced_attr)
+    assert isinstance(target_package, str)
 
     overlay_attrs: Dict[str, str] = {}
 
