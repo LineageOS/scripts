@@ -6,7 +6,7 @@ from __future__ import annotations
 import re
 from os import path
 from tempfile import TemporaryDirectory
-from typing import Dict, Optional
+from typing import Dict, Optional, Set
 
 from bp.bp_utils import get_partition_specific
 from rro.manifest import (
@@ -135,9 +135,12 @@ def process_rro(
     all_packages_resources_map: Optional[Dict[str, resources_dict]] = None,
     remove_identical: bool = False,
     maintain_copyrights: bool = False,
+    remove_resources: Optional[Set[str]] = None,
 ):
     if all_packages_resources_map is None:
         all_packages_resources_map = {}
+    if remove_resources is None:
+        remove_resources = set()
 
     manifest_path = path.join(overlay_path, android_manifest_name)
 
@@ -147,7 +150,9 @@ def process_rro(
     package = simplify_rro_package(package)
 
     overlay_resources, overlay_raw_resources = parse_overlay_resources(
-        overlay_path, resources_dir
+        overlay_path,
+        resources_dir,
+        remove_resources,
     )
     if not overlay_resources and not overlay_raw_resources:
         raise ValueError(f'{package}: No resources in overlay')
