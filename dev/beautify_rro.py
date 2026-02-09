@@ -47,10 +47,18 @@ if __name__ == '__main__':
         default=[],
         action='append',
     )
+    parser.add_argument(
+        '-k',
+        '--keep-package',
+        help='Keep overlays targeting a package even if it is not found',
+        default=[],
+        action='append',
+    )
 
     args = parser.parse_args()
     ignore_packages = cast(str, args.ignore_packages)
     remove_resources = set(cast(List[str], args.remove_resource))
+    keep_packages = set(cast(List[str], args.keep_package))
 
     append_extra_locations(args.extra_package_locations)
 
@@ -131,6 +139,7 @@ if __name__ == '__main__':
                 # all possible RROs at the same time
                 remove_identical=True,
                 remove_resources=remove_resources,
+                keep_packages=keep_packages,
             )
         except ValueError as e:
             shutil.rmtree(dir_path, ignore_errors=True)
