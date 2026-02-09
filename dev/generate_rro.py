@@ -9,6 +9,7 @@ import shutil
 from argparse import ArgumentParser
 from os import path
 from tempfile import TemporaryDirectory
+from typing import List, Optional, Set, cast
 
 from bp.bp_utils import ANDROID_BP_NAME
 from rro.process_rro import (
@@ -39,14 +40,23 @@ def extract_apk(apk_path: str, tmp_dir: str):
     )
 
 
-def generate_rro(apk_path: str, output_path: str, rro_name: str):
+def generate_rro(
+    apk_path: str,
+    output_path: str,
+    rro_name: str,
+    keep_packages: Optional[Set[str]] = None,
+):
     shutil.rmtree(output_path, ignore_errors=True)
     os.makedirs(output_path, exist_ok=True)
 
     with TemporaryDirectory() as tmp_dir:
         extract_apk(apk_path, tmp_dir)
 
-        aapt_raw = process_rro(tmp_dir, output_path)
+        aapt_raw = process_rro(
+            tmp_dir,
+            output_path,
+            keep_packages=keep_packages,
+        )
 
         aosp_rro_android_bp_path = find_overlay_android_bp_path_by_name(
             rro_name,
@@ -105,8 +115,16 @@ if __name__ == '__main__':
         help='Path to overlays directory',
         default='./overlays',
     )
+    parser.add_argument(
+        '-k',
+        '--keep-package',
+        help='Keep overlays targeting a package even if it is not found',
+        default=[],
+        action='append',
+    )
 
     args = parser.parse_args()
+    keep_packages = set(cast(List[str], args.keep_package))
 
     append_extra_locations(args.extra_package_locations)
 
@@ -132,7 +150,12 @@ if __name__ == '__main__':
         rro_name = simplify_rro_name(rro_name)
         output_path = path.join(overlays_path, rro_name)
         try:
-            generate_rro(apk_path, output_path, rro_name)
+            generate_rro(
+                apk_path,
+                output_path,
+                rro_name,
+                keep_packages=keep_packages,
+            )
         except ValueError as e:
             shutil.rmtree(output_path, ignore_errors=True)
             color_print(e, color=Color.RED)
