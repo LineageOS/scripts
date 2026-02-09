@@ -225,6 +225,7 @@ def process_rro(
     raw_resources, missing_raw_resources, identical_raw_resources = (
         group_overlay_raw_resources(
             overlay_raw_resources,
+            overlay_resources,
             package_raw_resources,
         )
     )
