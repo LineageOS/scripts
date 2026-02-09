@@ -7,8 +7,10 @@ from typing import Callable
 
 from lxml import etree
 
+Element = etree._Element # type: ignore
 
-def xml_element_canonical_str(element: etree.Element):
+
+def xml_element_canonical_str(element: Element):
     return etree.tostring(element, method='c14n', exclusive=True)
 
 
