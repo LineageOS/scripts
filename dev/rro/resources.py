@@ -129,6 +129,7 @@ def parse_xml_resource(
     xml_rel_path: str,
     xml_path: str,
     resources: Dict[Tuple[str, ...], Resource],
+    remove_resources: Set[str],
     is_default_values: bool,
 ):
     xml_rel_dir_path = path.dirname(xml_rel_path)
@@ -217,6 +218,9 @@ def parse_xml_resource(
             # color_print(f'{xml_path}: {keys} already found', color=Color.YELLOW)
             continue
 
+        if resource.name in remove_resources:
+            continue
+
         resources[keys] = resource
 
 
@@ -224,6 +228,7 @@ def parse_package_resources_dir(
     res_dir: str,
     resources: resources_dict,
     raw_resources: Dict[str, str],
+    remove_resources: Set[str],
     parse_all_values: bool = False,
 ):
     for dir_file in os.scandir(res_dir):
@@ -270,6 +275,7 @@ def parse_package_resources_dir(
                     rel_path,
                     resource_file.path,
                     resources,
+                    remove_resources,
                     is_default_values,
                 )
                 continue
@@ -281,10 +287,15 @@ def parse_package_resources_dir(
 
 
 def parse_overlay_resources(
-    overlay_dir: str, resources_dir: str = RESOURCES_DIR
+    overlay_dir: str,
+    resources_dir: str = RESOURCES_DIR,
+    remove_resources: Optional[Set[str]] = None,
 ):
     resources: resources_dict = {}
     raw_resources: Dict[str, str] = {}
+
+    if remove_resources is None:
+        remove_resources = set()
 
     res_dir = path.join(overlay_dir, resources_dir)
     if not path.exists(res_dir):
@@ -294,6 +305,7 @@ def parse_overlay_resources(
         res_dir,
         resources,
         raw_resources,
+        remove_resources,
         parse_all_values=True,
     )
 
@@ -315,6 +327,7 @@ def get_target_package_resources(res_dirs: Tuple[str]):
             res_dir,
             resources,
             raw_resources,
+            set(),
         )
 
     return resources, raw_resources
