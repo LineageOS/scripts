@@ -252,9 +252,8 @@ def process_rro(
         raise ValueError(f'{package}: No resources left in overlay')
 
     # Preserve existing res/values/*.xml headers BEFORE we delete res/
-    preserved_prefixes = None
+    preserved_prefixes: Dict[str, bytes] = {}
     if maintain_copyrights:
-        preserved_prefixes = {}
         for rel_xml_path in grouped_resources.keys():
             existing_xml_path = path.join(output_path, rel_xml_path)
             preserved = None
@@ -265,14 +264,17 @@ def process_rro(
                 if idx != -1:
                     preserved = data[:idx]
             except Exception:
-                preserved = None
+                pass
+
+            if preserved is None:
+                continue
+
             preserved_prefixes[existing_xml_path] = preserved
 
     remove_overlay_resources(output_path)
     write_grouped_resources(
         grouped_resources,
         output_path,
-        maintain_copyrights=maintain_copyrights,
         preserved_prefixes=preserved_prefixes,
     )
     write_overlay_raw_resources(raw_resources, output_path)
