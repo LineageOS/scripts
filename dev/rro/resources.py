@@ -7,6 +7,7 @@ import functools
 import os
 import shutil
 from os import path
+from pathlib import Path
 from typing import Dict, List, Optional, Set, Tuple
 
 from lxml import etree
@@ -226,9 +227,10 @@ def parse_xml_resource(
 def parse_package_resources_dir(
     res_dir: str,
     resources: resources_dict,
-    raw_resources: Dict[str, str],
+    raw_resources: Dict[str, bytes],
     remove_resources: Set[str],
     parse_all_values: bool = False,
+    keep_raw_resources_by_filename: bool = False,
 ):
     for dir_file in os.scandir(res_dir):
         if not dir_file.is_dir():
@@ -286,7 +288,20 @@ def parse_package_resources_dir(
             # Inherited resources can be overwritten, do not assert
             # assert resource_file.name not in raw_resources, rel_path
             if not is_any_values:
-                raw_resources[resource_file.name] = rel_path
+                raw_resource_data = Path(resource_file).read_bytes()
+                raw_resources[rel_path] = raw_resource_data
+
+                if keep_raw_resources_by_filename:
+                    # If there's no dash in the name of the directory of the
+                    # resource, assume these are the base resources
+                    # Implementing whole resource overlaying logic would be too
+                    # complicated
+                    # Keep track of them so overlays can check against them
+                    rel_path_name = path.basename(rel_path)
+                    rel_path_dir = path.dirname(rel_path)
+                    rel_path_dir_name = path.basename(rel_path_dir)
+                    if '-' not in rel_path_dir_name:
+                        raw_resources[rel_path_name] = raw_resource_data
 
             continue
 
@@ -297,7 +312,7 @@ def parse_overlay_resources(
     remove_resources: Optional[Set[str]] = None,
 ):
     resources: resources_dict = {}
-    raw_resources: Dict[str, str] = {}
+    raw_resources: Dict[str, bytes] = {}
 
     if remove_resources is None:
         remove_resources = set()
@@ -325,7 +340,7 @@ def remove_overlay_resources(overlay_dir: str):
 @functools.cache
 def get_target_package_resources(res_dirs: Tuple[str]):
     resources: resources_dict = {}
-    raw_resources: Dict[str, str] = {}
+    raw_resources: Dict[str, bytes] = {}
 
     for res_dir in res_dirs:
         parse_package_resources_dir(
@@ -333,6 +348,7 @@ def get_target_package_resources(res_dirs: Tuple[str]):
             resources,
             raw_resources,
             set(),
+            keep_raw_resources_by_filename=True,
         )
 
     return resources, raw_resources
@@ -341,7 +357,7 @@ def get_target_package_resources(res_dirs: Tuple[str]):
 def find_target_package_resources(
     target_packages: List[Tuple[str, Tuple[str, ...]]],
     overlay_resources: resources_dict,
-    overlay_raw_resources: Dict[str, str],
+    overlay_raw_resources: Dict[str, bytes],
 ):
     best_matching_resources = 0
     best_resources = None
@@ -676,27 +692,33 @@ def write_grouped_resources(
         )
 
 
-def read_raw_resources(
-    overlay_path: str,
-    overlay_raw_resources: Dict[str, str],
-    package_raw_resources: Dict[str, str],
+def group_overlay_raw_resources(
+    overlay_raw_resources: Dict[str, bytes],
+    package_raw_resources: Dict[str, bytes],
 ):
-    # TODO: handle identical resources
-
+    identical_raw_resources: List[str] = []
     missing_raw_resources: List[str] = []
     raw_resources: Dict[str, bytes] = {}
 
-    for raw_name, overlay_raw_rel_path in overlay_raw_resources.items():
-        if raw_name not in package_raw_resources:
+    for raw_rel_path, raw_resource_data in overlay_raw_resources.items():
+        raw_name = path.basename(raw_rel_path)
+
+        package_raw_name = raw_rel_path
+
+        if package_raw_name not in package_raw_resources:
+            package_raw_name = raw_name
+
+        if package_raw_name not in package_raw_resources:
             missing_raw_resources.append(raw_name)
             continue
 
-        package_raw_rel_path = package_raw_resources[raw_name]
-        raw_path = path.join(overlay_path, overlay_raw_rel_path)
-        with open(raw_path, 'rb') as raw:
-            raw_resources[package_raw_rel_path] = raw.read()
+        if raw_resource_data == package_raw_resources[package_raw_name]:
+            identical_raw_resources.append(raw_rel_path)
+            continue
 
-    return raw_resources, missing_raw_resources
+        raw_resources[raw_rel_path] = raw_resource_data
+
+    return raw_resources, missing_raw_resources, identical_raw_resources
 
 
 def write_overlay_raw_resources(
