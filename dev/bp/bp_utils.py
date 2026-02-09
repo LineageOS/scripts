@@ -5,6 +5,8 @@ from __future__ import annotations
 
 from typing import Dict, List, Optional
 
+from bp.bp_module import BpModule
+
 ANDROID_BP_NAME = 'Android.bp'
 ANDROID_BP_COPYRIGHT = """
 //
@@ -14,7 +16,7 @@ ANDROID_BP_COPYRIGHT = """
 """.lstrip()
 
 
-def merge_bp_module_defaults(base: Dict, override: Dict) -> Dict:
+def merge_bp_module_defaults(base: BpModule, override: BpModule):
     result = base.copy()
 
     for key, value in override.items():
@@ -31,10 +33,12 @@ def merge_bp_module_defaults(base: Dict, override: Dict) -> Dict:
 
 
 def bp_extend_defaults(
-    module: Dict, defaults: List[str], defaults_map: Dict[str, Dict]
+    module: BpModule,
+    defaults: List[str],
+    defaults_map: Dict[str, BpModule],
 ):
     base = None
-    missing_defaults = []
+    missing_defaults: List[str] = []
 
     for default_name in defaults:
         if default_name not in defaults_map:
@@ -81,7 +85,7 @@ def get_partition_specific(partition: Optional[str]):
     return None
 
 
-def get_module_partition(module: Dict):
+def get_module_partition(module: BpModule):
     for s, p in SPECIFIC_PARTITIONS.items():
         if s in module:
             return p
