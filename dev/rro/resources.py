@@ -348,6 +348,9 @@ def find_target_package_resources(
             best_resources = package_resources
             best_raw_resources = package_raw_resources
 
+    assert best_resources is not None
+    assert best_raw_resources is not None
+
     return best_resources, best_raw_resources
 
 
