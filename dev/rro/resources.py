@@ -422,11 +422,22 @@ def get_reference_name(resource: Resource):
     return f'@{resource.tag}/{resource.name}'
 
 
+def get_raw_resource_reference_name(rel_path: str):
+    rel_path_name = path.basename(rel_path)
+    rel_path_dir = path.dirname(rel_path)
+    rel_path_dir_name = path.basename(rel_path_dir)
+    rel_path_dir_name_parts = rel_path_dir_name.split('-')
+
+    resource_name = path.splitext(rel_path_name)[0]
+    resource_type_name = rel_path_dir_name_parts[0]
+
+    return f'@{resource_type_name}/{resource_name}'
+
+
 def get_referencing_resource(
-    resource: Resource,
+    reference_name: str,
     overlay_resources: resources_dict,
 ):
-    reference_name = get_reference_name(resource)
     for overlay_resource in overlay_resources.values():
         if is_referenced_resource_element(
             reference_name,
@@ -547,8 +558,9 @@ def group_overlay_resources_rel_path(
 
         package_resource = get_package_resource(package_resources, keys)
         if package_resource is None and not is_kept_target_package:
+            reference_name = get_reference_name(resource)
             referencing_resource = get_referencing_resource(
-                resource,
+                reference_name,
                 overlay_resources,
             )
             is_manifest_referencing = is_manifest_referencing_resource(
@@ -695,6 +707,7 @@ def write_grouped_resources(
 
 def group_overlay_raw_resources(
     overlay_raw_resources: Dict[str, bytes],
+    overlay_resources: resources_dict,
     package_raw_resources: Dict[str, bytes],
 ):
     identical_raw_resources: List[str] = []
@@ -709,11 +722,22 @@ def group_overlay_raw_resources(
         if package_raw_name not in package_raw_resources:
             package_raw_name = raw_name
 
+        # If there's no raw resource with the same name in the package, try
+        # finding if this raw resource is referenced by other non-raw resources
+        # in the overlay
+        referencing_resource = None
         if package_raw_name not in package_raw_resources:
+            reference_name = get_raw_resource_reference_name(raw_rel_path)
+            referencing_resource = get_referencing_resource(
+                reference_name, overlay_resources
+            )
+
+        package_raw_resource_data = package_raw_resources.get(package_raw_name)
+        if package_raw_resource_data is None and referencing_resource is None:
             missing_raw_resources.append(raw_name)
             continue
 
-        if raw_resource_data == package_raw_resources[package_raw_name]:
+        if raw_resource_data == package_raw_resource_data:
             identical_raw_resources.append(raw_rel_path)
             continue
 
