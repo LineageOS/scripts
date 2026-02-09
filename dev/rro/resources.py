@@ -279,6 +279,9 @@ def parse_package_resources_dir(
                 )
                 continue
 
+            if resource_file.name in remove_resources:
+                continue
+
             # Inherited resources can be overwritten, do not assert
             # assert resource_file.name not in raw_resources, rel_path
             raw_resources[resource_file.name] = rel_path
