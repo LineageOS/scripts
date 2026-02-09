@@ -18,6 +18,9 @@ from utils.utils import (
 )
 from utils.xml_utils import XML_COMMENT_TEXT, xml_element_canonical_str
 
+Element = etree._Element  # type: ignore
+Comment = etree._Comment  # type: ignore
+
 TRANSLATABLE_KEY = 'translatable'
 FEATURE_FLAG_KEY = 'featureFlag'
 RESOURCES_TAG = 'resources'
@@ -33,8 +36,8 @@ class Resource:
         keys: Tuple[str, ...],
         tag: str,
         name: str,
-        element: etree.Element,
-        comments: List[etree._Comment],
+        element: Element,
+        comments: List[Comment],
     ):
         self.index = index
         self.rel_path = None
@@ -67,7 +70,7 @@ def resource_needs_quotes(s: str) -> bool:
     return False
 
 
-def node_has_space_after(node: etree.Element):
+def node_has_space_after(node: Element):
     return node.tail is not None and node.tail.count('\n') > 1
 
 
@@ -138,16 +141,16 @@ def parse_xml_resource(
 
     etree.cleanup_namespaces(root)
 
-    comments = []
+    comments: List[Comment] = []
     index = 0
     for node in root:
-        if isinstance(node, etree._Comment):
+        if isinstance(node, Comment):
             # Last element was not a comment, don't stack them
             # Or it was a comment, but they were not stacked
             last_node = node.getprevious()
-            if not isinstance(
-                last_node, etree._Comment
-            ) or node_has_space_after(last_node):
+            if not isinstance(last_node, Comment) or node_has_space_after(
+                last_node
+            ):
                 comments = []
 
             comments.append(node)
@@ -360,7 +363,7 @@ def get_correct_resource_type(
 
 def is_referenced_resource_element(
     reference_name: str,
-    element: etree.Element,
+    element: Element,
 ):
     if element.text is not None and element.text.strip() == reference_name:
         return True
@@ -433,6 +436,7 @@ def fixup_incorrect_resources_type(
     for keys, resource in overlay_resources.items():
         if 'type' in resource.element.attrib:
             correct_resource_type = resource.element.attrib['type']
+            assert isinstance(correct_resource_type, str)
             del resource.element.attrib['type']
         else:
             package_resource = get_package_resource(package_resources, keys)
@@ -611,6 +615,7 @@ def write_xml_resources(
                 root.append(comment)
                 last_element = comment
 
+            assert last_element is not None
             last_element.tail = next_line_spacing
 
         root.append(resource.element)
