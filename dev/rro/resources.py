@@ -286,6 +286,8 @@ def parse_package_resources_dir(
                 continue
 
             if not is_any_values:
+                assert len(Path(rel_path).parts) == 3, rel_path
+
                 raw_resource_data = Path(resource_file).read_bytes()
                 raw_resources[rel_path] = raw_resource_data
 
