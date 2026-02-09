@@ -295,7 +295,7 @@ def get_target_package_resources(res_dirs: Tuple[str]):
 
 
 def find_target_package_resources(
-    target_packages: List[Tuple[str, Tuple[str]]],
+    target_packages: List[Tuple[str, Tuple[str, ...]]],
     overlay_resources: resources_dict,
     overlay_raw_resources: Dict[str, str],
 ):
