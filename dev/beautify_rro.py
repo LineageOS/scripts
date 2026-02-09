@@ -7,9 +7,10 @@ from __future__ import annotations
 import shutil
 from argparse import ArgumentParser
 from os import path
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, cast
 
-from bp.bp_parser import bp_parser
+from bp.bp_module import RROModule
+from bp.bp_parser import bp_parser  # type: ignore
 from bp.bp_utils import (
     ANDROID_BP_NAME,
     get_module_partition,
@@ -41,23 +42,26 @@ if __name__ == '__main__':
     )
 
     args = parser.parse_args()
+    ignore_packages = cast(str, args.ignore_packages)
 
     append_extra_locations(args.extra_package_locations)
 
     ignore_packages = set(
         filter(
-            None,
-            map(lambda s: s.strip(), args.ignore_packages.split(',')),
+            lambda s: s,
+            map(lambda s: s.strip(), ignore_packages.split(',')),
         )
     )
 
-    rros: List[Tuple[int, int, str, dict]] = []
+    rros: List[Tuple[int, int, str, RROModule]] = []
 
     for dir_path in get_dirs_with_file(args.overlay_path, ANDROID_BP_NAME):
         android_bp_path = path.join(dir_path, ANDROID_BP_NAME)
 
         with open(android_bp_path, 'r') as android_bp:
-            for statement in bp_parser.parse(android_bp.read()):
+            for statement in bp_parser.parse(android_bp.read()):  # type: ignore
+                statement = cast(RROModule, statement)
+
                 if statement.get('module') != 'runtime_resource_overlay':
                     continue
 
