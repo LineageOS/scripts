@@ -493,6 +493,7 @@ def group_overlay_resources_rel_path(
     manifest_path: str,
     package_resources_map: resources_dict,
     remove_identical: bool,
+    is_kept_target_package: bool,
 ):
     grouped_resources: resources_grouped_dict = {}
     missing_resources: Set[str] = set()
@@ -522,7 +523,7 @@ def group_overlay_resources_rel_path(
         rel_path = path.join(resource.rel_dir_path, resource.xml_name)
 
         package_resource = get_package_resource(package_resources, keys)
-        if package_resource is None:
+        if package_resource is None and not is_kept_target_package:
             referencing_resource = get_referencing_resource(
                 resource,
                 overlay_resources,
