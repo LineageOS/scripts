@@ -589,7 +589,6 @@ def group_overlay_resources_rel_path(
 def write_xml_resources(
     xml_path: str,
     resources: List[Resource],
-    maintain_copyrights: bool = False,
     preserved_prefix: Optional[bytes] = None,
 ):
     xml_dir_path = path.dirname(xml_path)
@@ -599,7 +598,7 @@ def write_xml_resources(
     tree = etree.ElementTree(root)
 
     # Only add default header when we're NOT preserving an existing prefix
-    if not (maintain_copyrights and preserved_prefix is not None):
+    if preserved_prefix is None:
         root.addprevious(etree.Comment(XML_COMMENT_TEXT))
 
     next_line_spacing = '\n' + ' ' * 4
@@ -634,7 +633,7 @@ def write_xml_resources(
     )
 
     with open(xml_path, 'wb') as o:
-        if maintain_copyrights and preserved_prefix is not None:
+        if preserved_prefix is not None:
             o.write(preserved_prefix)
         else:
             o.write(b'<?xml version="1.0" encoding="utf-8"?>\n')
@@ -644,19 +643,15 @@ def write_xml_resources(
 def write_grouped_resources(
     grouped_resources: resources_grouped_dict,
     output_path: str,
-    maintain_copyrights: bool = False,
-    preserved_prefixes: Optional[Dict[str, Optional[bytes]]] = None,
+    preserved_prefixes: Dict[str, bytes],
 ):
     for rel_path, resources in grouped_resources.items():
         xml_path = path.join(output_path, rel_path)
-        preserved = None
-        if maintain_copyrights and preserved_prefixes is not None:
-            preserved = preserved_prefixes.get(xml_path)
+        preserved = preserved_prefixes.get(xml_path)
 
         write_xml_resources(
             xml_path,
             resources,
-            maintain_copyrights=maintain_copyrights,
             preserved_prefix=preserved,
         )
 
