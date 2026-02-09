@@ -19,9 +19,9 @@ from rro.resources import (
     TRANSLATABLE_KEY,
     find_target_package_resources,
     fixup_incorrect_resources_type,
+    group_overlay_raw_resources,
     group_overlay_resources_rel_path,
     parse_overlay_resources,
-    read_raw_resources,
     remove_overlay_resources,
     resources_dict,
     write_grouped_resources,
@@ -222,16 +222,23 @@ def process_rro(
             color=Color.YELLOW,
         )
 
-    raw_resources, missing_raw_resources = read_raw_resources(
-        overlay_path,
-        overlay_raw_resources,
-        package_raw_resources,
+    raw_resources, missing_raw_resources, identical_raw_resources = (
+        group_overlay_raw_resources(
+            overlay_raw_resources,
+            package_raw_resources,
+        )
     )
 
     for raw_resource in missing_raw_resources:
         color_print(
             f'{package}: Raw resource {raw_resource} not found in {target_package}',
             color=Color.RED,
+        )
+
+    for raw_resource in identical_raw_resources:
+        color_print(
+            f'{package}: Raw resource {raw_resource} identical in {target_package}',
+            color=Color.YELLOW,
         )
 
     def attrib_needs_aapt_raw(
