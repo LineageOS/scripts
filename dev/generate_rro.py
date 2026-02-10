@@ -45,6 +45,8 @@ def generate_rro(
     output_path: str,
     rro_name: str,
     keep_packages: Optional[Set[str]] = None,
+    exclude_overlays: Optional[Set[str]] = None,
+    exclude_packages: Optional[Set[str]] = None,
 ):
     shutil.rmtree(output_path, ignore_errors=True)
     os.makedirs(output_path, exist_ok=True)
@@ -56,6 +58,8 @@ def generate_rro(
             tmp_dir,
             output_path,
             keep_packages=keep_packages,
+            exclude_overlays=exclude_overlays,
+            exclude_packages=exclude_packages,
         )
 
         aosp_rro_android_bp_path = find_overlay_android_bp_path_by_name(
@@ -122,9 +126,25 @@ if __name__ == '__main__':
         default=[],
         action='append',
     )
+    parser.add_argument(
+        '-e',
+        '--exclude-overlay',
+        help='Prevent overlay generation for an overlay package name',
+        default=[],
+        action='append',
+    )
+    parser.add_argument(
+        '-p',
+        '--exclude-package',
+        help='Prevent overlay generation for a target package',
+        default=[],
+        action='append',
+    )
 
     args = parser.parse_args()
     keep_packages = set(cast(List[str], args.keep_package))
+    exclude_overlays = set(cast(List[str], args.exclude_overlay))
+    exclude_packages = set(cast(List[str], args.exclude_package))
 
     append_extra_locations(args.extra_package_locations)
 
@@ -155,6 +175,8 @@ if __name__ == '__main__':
                 output_path,
                 rro_name,
                 keep_packages=keep_packages,
+                exclude_overlays=exclude_overlays,
+                exclude_packages=exclude_packages,
             )
         except ValueError as e:
             shutil.rmtree(output_path, ignore_errors=True)
