@@ -126,11 +126,48 @@ def normalize_node_text_string(text: str):
     return ' '.join(text.split())
 
 
+def is_resource_removed(
+    remove_resources: Set[Tuple[str | None, str]],
+    resource: Resource,
+    target_package: str,
+):
+    possible_entries: List[Tuple[str | None, str]] = [
+        (None, resource.name),
+        (target_package, resource.name),
+    ]
+
+    for entry in possible_entries:
+        if entry in remove_resources:
+            return True
+
+    return False
+
+
+def is_raw_resource_removed(
+    remove_resources: Set[Tuple[str | None, str]],
+    raw_rel_path: str,
+    target_package: str,
+):
+    raw_name = path.basename(raw_rel_path)
+
+    possible_entries: List[Tuple[str | None, str]] = [
+        (None, raw_name),
+        (None, raw_rel_path),
+        (target_package, raw_name),
+        (target_package, raw_rel_path),
+    ]
+
+    for entry in possible_entries:
+        if entry in remove_resources:
+            return True
+
+    return False
+
+
 def parse_xml_resource(
     xml_rel_path: str,
     xml_path: str,
     resources: Dict[Tuple[str, ...], Resource],
-    remove_resources: Set[str],
     is_default_values: bool,
 ):
     xml_rel_dir_path = path.dirname(xml_rel_path)
@@ -219,9 +256,6 @@ def parse_xml_resource(
             # color_print(f'{xml_path}: {keys} already found', color=Color.YELLOW)
             continue
 
-        if resource.name in remove_resources:
-            continue
-
         resources[keys] = resource
 
 
@@ -229,7 +263,6 @@ def parse_package_resources_dir(
     res_dir: str,
     resources: resources_dict,
     raw_resources: Dict[str, bytes],
-    remove_resources: Set[str],
     parse_all_values: bool = False,
     keep_raw_resources_by_filename: bool = False,
 ):
@@ -278,12 +311,8 @@ def parse_package_resources_dir(
                     rel_path,
                     resource_file.path,
                     resources,
-                    remove_resources,
                     is_default_values,
                 )
-                continue
-
-            if resource_file.name in remove_resources:
                 continue
 
             if not is_any_values:
@@ -326,7 +355,6 @@ def parse_overlay_resources(
         res_dir,
         resources,
         raw_resources,
-        remove_resources,
         parse_all_values=True,
     )
 
@@ -348,7 +376,6 @@ def get_target_package_resources(res_dirs: Tuple[str]):
             res_dir,
             resources,
             raw_resources,
-            set(),
             keep_raw_resources_by_filename=True,
         )
 
@@ -528,11 +555,14 @@ def group_overlay_resources_rel_path(
     package_resources_map: resources_dict,
     remove_identical: bool,
     is_kept_target_package: bool,
+    remove_resources: Set[Tuple[str | None, str]],
+    target_package: str,
 ):
     grouped_resources: resources_grouped_dict = {}
     missing_resources: Set[str] = set()
     identical_resources: Set[str] = set()
     shadowed_resources: Set[str] = set()
+    removed_resources: Set[str] = set()
 
     def add_resource_to_package_resources_map(
         keys: Tuple[str, ...],
@@ -548,6 +578,10 @@ def group_overlay_resources_rel_path(
         return True
 
     for keys, resource in overlay_resources.items():
+        if is_resource_removed(remove_resources, resource, target_package):
+            removed_resources.add(resource.name)
+            continue
+
         # Let the logic below place it at the end if a package resource is not
         # found
         resource.index = -1
@@ -632,6 +666,7 @@ def group_overlay_resources_rel_path(
         missing_resources,
         identical_resources,
         shadowed_resources,
+        removed_resources,
     )
 
 
@@ -709,12 +744,23 @@ def group_overlay_raw_resources(
     overlay_raw_resources: Dict[str, bytes],
     overlay_resources: resources_dict,
     package_raw_resources: Dict[str, bytes],
+    remove_resources: Set[Tuple[str | None, str]],
+    target_package: str,
 ):
     identical_raw_resources: List[str] = []
     missing_raw_resources: List[str] = []
+    removed_raw_resources: List[str] = []
     raw_resources: Dict[str, bytes] = {}
 
     for raw_rel_path, raw_resource_data in overlay_raw_resources.items():
+        if is_raw_resource_removed(
+            remove_resources,
+            raw_rel_path,
+            target_package,
+        ):
+            removed_raw_resources.append(raw_rel_path)
+            continue
+
         raw_name = path.basename(raw_rel_path)
 
         package_raw_name = raw_rel_path
@@ -743,7 +789,12 @@ def group_overlay_raw_resources(
 
         raw_resources[raw_rel_path] = raw_resource_data
 
-    return raw_resources, missing_raw_resources, identical_raw_resources
+    return (
+        raw_resources,
+        missing_raw_resources,
+        identical_raw_resources,
+        removed_raw_resources,
+    )
 
 
 def write_overlay_raw_resources(

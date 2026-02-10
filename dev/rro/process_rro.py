@@ -6,7 +6,7 @@ from __future__ import annotations
 import re
 from os import path
 from tempfile import TemporaryDirectory
-from typing import Dict, Optional, Set
+from typing import Dict, Optional, Set, Tuple
 
 from bp.bp_utils import get_partition_specific
 from rro.manifest import (
@@ -130,7 +130,7 @@ def process_rro(
     all_packages_resources_map: Optional[Dict[str, resources_dict]] = None,
     remove_identical: bool = False,
     maintain_copyrights: bool = False,
-    remove_resources: Optional[Set[str]] = None,
+    remove_resources: Optional[Set[Tuple[str | None, str]]] = None,
     keep_packages: Optional[Set[str]] = None,
     exclude_overlays: Optional[Set[str]] = None,
     exclude_packages: Optional[Set[str]] = None,
@@ -165,7 +165,6 @@ def process_rro(
     overlay_resources, overlay_raw_resources = parse_overlay_resources(
         overlay_path,
         resources_dir,
-        remove_resources,
     )
     if not overlay_resources and not overlay_raw_resources:
         raise ValueError(f'{package}: No resources in overlay')
@@ -200,6 +199,7 @@ def process_rro(
         missing_resources,
         identical_resources,
         shadowed_resources,
+        removed_resources,
     ) = group_overlay_resources_rel_path(
         overlay_resources,
         package_resources,
@@ -207,6 +207,8 @@ def process_rro(
         package_resources_map,
         remove_identical,
         is_kept_target_package,
+        remove_resources,
+        target_package,
     )
 
     for resource_name in sorted(missing_resources):
@@ -227,6 +229,12 @@ def process_rro(
             color=Color.YELLOW,
         )
 
+    for resource_name in sorted(removed_resources):
+        color_print(
+            f'{package}: Resource {resource_name} removed in {target_package}',
+            color=Color.YELLOW,
+        )
+
     for resource_name, wrong_type, correct_type in sorted(wrong_type_resources):
         color_print(
             f'{package}: Resource {resource_name} has wrong type {wrong_type}, '
@@ -234,12 +242,17 @@ def process_rro(
             color=Color.YELLOW,
         )
 
-    raw_resources, missing_raw_resources, identical_raw_resources = (
-        group_overlay_raw_resources(
-            overlay_raw_resources,
-            overlay_resources,
-            package_raw_resources,
-        )
+    (
+        raw_resources,
+        missing_raw_resources,
+        identical_raw_resources,
+        removed_raw_resources,
+    ) = group_overlay_raw_resources(
+        overlay_raw_resources,
+        overlay_resources,
+        package_raw_resources,
+        remove_resources,
+        target_package,
     )
 
     for raw_resource in missing_raw_resources:
@@ -251,6 +264,12 @@ def process_rro(
     for raw_resource in identical_raw_resources:
         color_print(
             f'{package}: Raw resource {raw_resource} identical in {target_package}',
+            color=Color.YELLOW,
+        )
+
+    for raw_resource in removed_raw_resources:
+        color_print(
+            f'{package}: Raw resource {raw_resource} removed in {target_package}',
             color=Color.YELLOW,
         )
 
