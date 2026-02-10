@@ -7,7 +7,7 @@ from __future__ import annotations
 import shutil
 from argparse import ArgumentParser
 from os import path
-from typing import Dict, List, Tuple, cast
+from typing import Dict, List, Set, Tuple, cast
 
 from bp.bp_module import BpModule, RROModule
 from bp.bp_parser import bp_parser  # type: ignore
@@ -43,7 +43,8 @@ if __name__ == '__main__':
     parser.add_argument(
         '-r',
         '--remove-resource',
-        help='Remove a resource by name (eg: config_defaultAssistant)',
+        help='Remove a resource by name '
+        '(eg: config_defaultAssistant, or android:config_defaultAssistant)',
         default=[],
         action='append',
     )
@@ -57,8 +58,19 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
     ignore_packages = cast(str, args.ignore_packages)
-    remove_resources = set(cast(List[str], args.remove_resource))
+    remove_resources_raw = set(cast(List[str], args.remove_resource))
     keep_packages = set(cast(List[str], args.keep_package))
+
+    remove_resources: Set[Tuple[None | str, str]] = set()
+    for remove_resource in remove_resources_raw:
+        remove_resource_parts = remove_resource.split(':')
+        assert len(remove_resource_parts) <= 2, remove_resource
+
+        if len(remove_resource_parts) == 1:
+            remove_resources.add((None, remove_resource))
+        elif len(remove_resource_parts) == 2:
+            target_package, remove_resource = remove_resource.split(':')
+            remove_resources.add((target_package, remove_resource))
 
     append_extra_locations(args.extra_package_locations)
 
