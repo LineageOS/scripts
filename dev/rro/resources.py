@@ -780,7 +780,7 @@ def group_overlay_raw_resources(
 
         package_raw_resource_data = package_raw_resources.get(package_raw_name)
         if package_raw_resource_data is None and referencing_resource is None:
-            missing_raw_resources.append(raw_name)
+            missing_raw_resources.append(raw_rel_path)
             continue
 
         if raw_resource_data == package_raw_resource_data:
