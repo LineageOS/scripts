@@ -132,6 +132,8 @@ def process_rro(
     maintain_copyrights: bool = False,
     remove_resources: Optional[Set[str]] = None,
     keep_packages: Optional[Set[str]] = None,
+    exclude_overlays: Optional[Set[str]] = None,
+    exclude_packages: Optional[Set[str]] = None,
 ):
     if all_packages_resources_map is None:
         all_packages_resources_map = {}
@@ -139,14 +141,26 @@ def process_rro(
         remove_resources = set()
     if keep_packages is None:
         keep_packages = set()
+    if exclude_overlays is None:
+        exclude_overlays = set()
+    if exclude_packages is None:
+        exclude_packages = set()
 
     manifest_path = path.join(overlay_path, android_manifest_name)
 
     package, target_package, overlay_attrs = parse_overlay_manifest(
         manifest_path,
     )
+    if target_package in exclude_packages:
+        raise ValueError(f'{package}: Excluded by {target_package}')
+
     is_kept_target_package = target_package in keep_packages
+
+    if package in exclude_overlays:
+        raise ValueError(f'{package}: Excluded')
     package = simplify_rro_package(package)
+    if package in exclude_overlays:
+        raise ValueError(f'{package}: Excluded')
 
     overlay_resources, overlay_raw_resources = parse_overlay_resources(
         overlay_path,
@@ -160,6 +174,9 @@ def process_rro(
     package_raw_resources = {}
     if not is_kept_target_package:
         target_packages, target_package = get_target_packages(target_package)
+        if target_package in exclude_packages:
+            raise ValueError(f'{package}: Excluded by {target_package}')
+
         package_resources, package_raw_resources = (
             find_target_package_resources(
                 target_packages,
