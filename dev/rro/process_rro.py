@@ -260,19 +260,19 @@ def process_rro(
         target_package,
     )
 
-    for raw_resource in missing_raw_resources:
+    for raw_resource in sorted(missing_raw_resources):
         color_print(
             f'{package}: Raw resource {raw_resource} not found in {target_package}',
             color=Color.RED,
         )
 
-    for raw_resource in identical_raw_resources:
+    for raw_resource in sorted(identical_raw_resources):
         color_print(
             f'{package}: Raw resource {raw_resource} identical in {target_package}',
             color=Color.YELLOW,
         )
 
-    for raw_resource in removed_raw_resources:
+    for raw_resource in sorted(removed_raw_resources):
         color_print(
             f'{package}: Raw resource {raw_resource} removed in {target_package}',
             color=Color.YELLOW,
