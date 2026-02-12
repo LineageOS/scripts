@@ -50,6 +50,13 @@ class Resource:
         self.element = element
         self.comments = comments
 
+    def __repr__(self):
+        s = '\n'
+        s += f'{self.rel_dir_path}/{self.xml_name}:\n'
+        s += f'{self.keys}\n'
+        s += f'{xml_element_canonical_str(self.element)}\n'
+        return s
+
     def __eq__(self, other: object):
         if not isinstance(other, Resource):
             return NotImplemented
