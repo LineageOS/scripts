@@ -23,6 +23,7 @@ from rro.resources import (
     group_overlay_raw_resources,
     group_overlay_resources_rel_path,
     parse_overlay_resources,
+    read_xml_resources_prefix,
     remove_overlay_resources,
     resources_dict,
     write_grouped_resources,
@@ -357,28 +358,16 @@ def process_rro(
     # Preserve existing res/values/*.xml headers BEFORE we delete res/
     preserved_prefixes: Dict[str, bytes] = {}
     if maintain_copyrights:
-        for rel_xml_path in grouped_resources.keys():
-            existing_xml_path = path.join(output_path, rel_xml_path)
-            preserved = None
-            try:
-                with open(existing_xml_path, 'rb') as f:
-                    data = f.read()
-                idx = data.find(b'<resources')
-                if idx != -1:
-                    preserved = data[:idx]
-            except Exception:
-                pass
-
-            if preserved is None:
-                continue
-
-            preserved_prefixes[existing_xml_path] = preserved
+        preserved_prefixes = read_xml_resources_prefix(
+            grouped_resources,
+            output_path,
+        )
 
     remove_overlay_resources(output_path)
     write_grouped_resources(
         grouped_resources,
         output_path,
-        preserved_prefixes=preserved_prefixes,
+        preserved_prefixes,
     )
     write_overlay_raw_resources(raw_resources, output_path)
 
