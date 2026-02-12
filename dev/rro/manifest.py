@@ -8,7 +8,7 @@ from typing import Dict, Optional
 
 from lxml import etree
 
-from utils.xml_utils import XML_COMMENT
+from utils.xml_utils import XML_COMMENT, xml_read_prefix_before_tag
 
 NAMESPACE_NAME = 'android'
 NAMESPACE = 'http://schemas.android.com/apk/res/android'
@@ -62,24 +62,6 @@ def parse_overlay_manifest(manifest_path: str):
     return package, target_package, overlay_attrs
 
 
-def _read_prefix_before_tag(xml_path: str, tag: str) -> Optional[bytes]:
-    if not path.exists(xml_path):
-        return None
-
-    try:
-        with open(xml_path, 'rb') as f:
-            data = f.read()
-    except Exception:
-        return None
-
-    needle = b'<' + tag.encode('utf-8')
-    idx = data.find(needle)
-    if idx == -1:
-        return None
-
-    return data[:idx]
-
-
 def write_manifest(
     output_path: str,
     package: str,
@@ -89,7 +71,7 @@ def write_manifest(
 ):
     prefix = None
     if maintain_copyrights:
-        prefix = _read_prefix_before_tag(output_path, 'manifest')
+        prefix = xml_read_prefix_before_tag(output_path, 'manifest')
 
     body_lines: list[str] = []
     body_lines.append(f'<manifest xmlns:{NAMESPACE_NAME}="{NAMESPACE}"\n')
