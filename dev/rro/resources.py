@@ -232,6 +232,11 @@ def parse_xml_resource(
             if tag == 'string':
                 node.text = normalize_node_text_string(node.text)
 
+        # Overlays don't have translatable=false, remove it to fix
+        # equality check
+        if TRANSLATABLE_KEY in node.attrib:
+            del node.attrib[TRANSLATABLE_KEY]
+
         if MSGID_KEY in node.attrib:
             del node.attrib[MSGID_KEY]
 
@@ -606,11 +611,6 @@ def group_overlay_resources_rel_path(
                 continue
 
         if package_resource is not None:
-            # Overlays don't have translatable=false, remove it to fix
-            # equality check
-            if TRANSLATABLE_KEY in package_resource.element.attrib:
-                del package_resource.element.attrib[TRANSLATABLE_KEY]
-
             # Keep the directory of the original resource, but place it in the
             # correct XML
             rel_path = path.join(
