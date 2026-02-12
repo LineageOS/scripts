@@ -835,3 +835,19 @@ def write_overlay_raw_resources(
         os.makedirs(raw_dir_path, exist_ok=True)
         with open(raw_path, 'wb') as raw:
             raw.write(raw_data)
+
+
+def read_xml_resources_prefix(
+    grouped_resources: resources_grouped_dict,
+    output_path: str,
+):
+    preserved_prefixes: Dict[str, bytes] = {}
+    for rel_xml_path in grouped_resources.keys():
+        existing_xml_path = path.join(output_path, rel_xml_path)
+        preserved = xml_read_prefix_before_tag(existing_xml_path, 'resources')
+        if not preserved:
+            continue
+
+        preserved_prefixes[existing_xml_path] = preserved
+
+    return preserved_prefixes
