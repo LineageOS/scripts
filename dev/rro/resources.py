@@ -585,7 +585,7 @@ def group_overlay_resources_rel_path(
     package_resources: resources_dict,
     manifest_path: str,
     package_resources_map: resources_dict,
-    remove_identical: bool,
+    track_shadowed_resources: bool,
     is_kept_target_package: bool,
     remove_resources: Set[Tuple[str | None, str]],
     target_package: str,
@@ -647,7 +647,7 @@ def group_overlay_resources_rel_path(
                 resource.rel_dir_path, package_resource.xml_name
             )
 
-            if remove_identical and xml_element_canonical_str(
+            if track_shadowed_resources and xml_element_canonical_str(
                 package_resource.element
             ) == xml_element_canonical_str(resource.element):
                 # Even if a resource is identical to the AOSP value it should
@@ -668,10 +668,13 @@ def group_overlay_resources_rel_path(
             resource.index = package_resource.index
             resource.comments = package_resource.comments
 
-        if add_resource_to_package_resources_map(
-            keys,
-            rel_path,
-            resource,
+        if (
+            not track_shadowed_resources
+            or add_resource_to_package_resources_map(
+                keys,
+                rel_path,
+                resource,
+            )
         ):
             grouped_resources.setdefault(rel_path, []).append(resource)
         else:
