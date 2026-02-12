@@ -28,7 +28,7 @@ from rro.resources import (
 )
 from rro.target_package import get_target_packages
 from utils.utils import Color, color_print
-from utils.xml_utils import xml_attrib_matches, xml_element_canonical_str
+from utils.xml_utils import xml_attrib_matches
 
 
 def write_rro_android_bp(
@@ -83,27 +83,16 @@ def is_rro_equal(overlay_path: str, aosp_overlay_path: str):
         )
     )
 
-    if overlay_resources.keys() != aosp_overlay_resources.keys():
-        return False
-
     if overlay_raw_resources.keys() != aosp_overlay_raw_resources.keys():
         return False
-
-    for k in overlay_resources.keys():
-        first_element = overlay_resources[k].element
-        second_element = aosp_overlay_resources[k].element
-
-        first_resource = xml_element_canonical_str(first_element)
-        second_resource = xml_element_canonical_str(second_element)
-
-        if first_resource != second_resource:
-            return False
 
     for k in overlay_raw_resources.keys():
         if overlay_raw_resources[k] != aosp_overlay_raw_resources[k]:
             return False
 
-    return True
+    overlay_resources_set = set(overlay_resources.values())
+    aosp_overlay_resources_set = set(aosp_overlay_resources.values())
+    return overlay_resources_set == aosp_overlay_resources_set
 
 
 def is_rro_equal_with_aosp(overlay_path: str, aosp_overlay_path: str):
