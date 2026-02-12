@@ -50,6 +50,30 @@ class Resource:
         self.element = element
         self.comments = comments
 
+    def __eq__(self, other: object):
+        if not isinstance(other, Resource):
+            return NotImplemented
+
+        return (
+            self.rel_dir_path == other.rel_dir_path
+            and self.keys == other.keys
+            and self.tag == other.tag
+            and self.name == other.name
+            and xml_element_canonical_str(self.element)
+            == xml_element_canonical_str(other.element)
+        )
+
+    def __hash__(self) -> int:
+        return hash(
+            (
+                self.rel_dir_path,
+                self.keys,
+                self.tag,
+                self.name,
+                xml_element_canonical_str(self.element),
+            )
+        )
+
 
 resources_dict = Dict[Tuple[str, ...], Resource]
 resources_grouped_dict = Dict[str, List[Resource]]
