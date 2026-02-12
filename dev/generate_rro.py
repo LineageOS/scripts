@@ -8,85 +8,16 @@ import os
 import shutil
 from argparse import ArgumentParser
 from os import path
-from tempfile import TemporaryDirectory
-from typing import List, Optional, Set, cast
+from typing import List, cast
 
-from bp.bp_utils import ANDROID_BP_NAME
 from rro.process_rro import (
-    is_rro_equal_with_aosp,
-    process_rro,
+    generate_rro,
     simplify_rro_name,
-    write_rro_android_bp,
 )
 from rro.target_package import (
     append_extra_locations,
-    find_overlay_android_bp_path_by_name,
 )
-from utils.utils import Color, color_print, run_cmd
-
-
-def extract_apk(apk_path: str, tmp_dir: str):
-    run_cmd(
-        [
-            'apktool',
-            'd',
-            apk_path,
-            '-f',
-            '--no-src',
-            '--keep-broken-res',
-            '-o',
-            tmp_dir,
-        ]
-    )
-
-
-def generate_rro(
-    apk_path: str,
-    output_path: str,
-    rro_name: str,
-    keep_packages: Optional[Set[str]] = None,
-    exclude_overlays: Optional[Set[str]] = None,
-    exclude_packages: Optional[Set[str]] = None,
-):
-    shutil.rmtree(output_path, ignore_errors=True)
-    os.makedirs(output_path, exist_ok=True)
-
-    with TemporaryDirectory() as tmp_dir:
-        extract_apk(apk_path, tmp_dir)
-
-        aapt_raw = process_rro(
-            tmp_dir,
-            output_path,
-            keep_packages=keep_packages,
-            exclude_overlays=exclude_overlays,
-            exclude_packages=exclude_packages,
-        )
-
-        aosp_rro_android_bp_path = find_overlay_android_bp_path_by_name(
-            rro_name,
-        )
-        is_equal = False
-        if aosp_rro_android_bp_path is not None:
-            is_equal = is_rro_equal_with_aosp(
-                output_path,
-                aosp_rro_android_bp_path,
-            )
-        if aosp_rro_android_bp_path is not None and not is_equal:
-            color_print(
-                f'Overlay {rro_name} already exists in AOSP but is not '
-                f'identical at {aosp_rro_android_bp_path}',
-                color=Color.YELLOW,
-            )
-        if aosp_rro_android_bp_path is not None and is_equal:
-            raise ValueError(f'Overlay {rro_name} identical to AOSP')
-
-        android_bp_path = path.join(output_path, ANDROID_BP_NAME)
-        write_rro_android_bp(
-            apk_path,
-            android_bp_path,
-            rro_name,
-            aapt_raw,
-        )
+from utils.utils import Color, color_print
 
 
 def get_apks(overlays_path: str):
