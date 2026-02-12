@@ -146,10 +146,7 @@ if __name__ == '__main__':
                 resources_dir,
                 all_packages_resources_map=all_packages_resources_map,
                 maintain_copyrights=args.maintain_copyrights,
-                # Identical to AOSP resources cannot be removed without doing
-                # priority ordering, so it can only be done while beautifying
-                # all possible RROs at the same time
-                remove_identical=True,
+                track_shadowed_resources=True,
                 remove_resources=remove_resources,
                 keep_packages=keep_packages,
             )
