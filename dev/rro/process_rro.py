@@ -16,7 +16,6 @@ from rro.manifest import (
 )
 from rro.resources import (
     RESOURCES_DIR,
-    TRANSLATABLE_KEY,
     find_target_package_resources,
     fixup_incorrect_resources_type,
     group_overlay_raw_resources,
@@ -93,14 +92,6 @@ def is_rro_equal(overlay_path: str, aosp_overlay_path: str):
     for k in overlay_resources.keys():
         first_element = overlay_resources[k].element
         second_element = aosp_overlay_resources[k].element
-
-        # Overlays don't have translatable=false, remove it to fix
-        # equality check
-        if TRANSLATABLE_KEY in first_element.attrib:
-            del first_element.attrib[TRANSLATABLE_KEY]
-
-        if TRANSLATABLE_KEY in second_element.attrib:
-            del second_element.attrib[TRANSLATABLE_KEY]
 
         first_resource = xml_element_canonical_str(first_element)
         second_resource = xml_element_canonical_str(second_element)
