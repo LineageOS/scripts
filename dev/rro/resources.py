@@ -42,7 +42,6 @@ class Resource:
         comments: List[Comment],
     ):
         self.index = index
-        self.rel_path = None
         self.xml_name = xml_name
         self.rel_dir_path = rel_dir_path
         self.keys = keys
