@@ -365,8 +365,6 @@ def parse_package_resources_dir(
                     if '-' not in rel_path_dir_name:
                         raw_resources[rel_path_name] = raw_resource_data
 
-            continue
-
 
 def parse_overlay_resources(
     overlay_dir: str,
