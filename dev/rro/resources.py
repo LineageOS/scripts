@@ -941,15 +941,7 @@ def overlay_resources_group_by_rel_path(
         grouped_resources.setdefault(resource.rel_path, []).append(resource)
 
     for _, resources in grouped_resources.items():
-        max_resources = len(resources)
-
-        def resources_sort_key(r: XMLResource):
-            if r.index == -1:
-                return (max_resources, r.name)
-            else:
-                return (r.index, r.name)
-
-        resources.sort(key=resources_sort_key)
+        resources.sort(key=lambda r: (r.index == -1, r.index, r.name))
 
     return grouped_resources
 
