@@ -529,6 +529,13 @@ def find_target_package_resources(
     target_packages: List[Tuple[str, str, Tuple[str, ...]]],
     overlay_resources: Set[Resource],
 ):
+    if len(target_packages) == 1:
+        _, module_name, resource_dirs = target_packages[0]
+        package_resources = get_target_package_resources(
+            resource_dirs,
+        )
+        return package_resources, module_name
+
     best_matching_resources = 0
     best_module_name = None
     best_resources = None
@@ -539,23 +546,22 @@ def find_target_package_resources(
         )
 
         matching_resources = 0
-        if len(target_packages) != 1:
-            for resource in overlay_resources:
-                package_resource = get_package_resource(
-                    package_resources,
-                    resource,
-                )
-                if package_resource is not None:
-                    matching_resources += 1
-                    continue
+        for resource in overlay_resources:
+            package_resource = get_package_resource(
+                package_resources,
+                resource,
+            )
+            if package_resource is not None:
+                matching_resources += 1
+                continue
 
-                unqualified_resource = get_unqualified_package_resource(
-                    package_resources,
-                    resource,
-                )
-                if unqualified_resource is not None:
-                    matching_resources += 1
-                    continue
+            unqualified_resource = get_unqualified_package_resource(
+                package_resources,
+                resource,
+            )
+            if unqualified_resource is not None:
+                matching_resources += 1
+                continue
 
         if matching_resources > best_matching_resources:
             best_matching_resources = matching_resources
