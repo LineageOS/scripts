@@ -211,7 +211,7 @@ def map_packages():
                         statement,
                     )
 
-    package_path_map: Dict[str, List[Tuple[str, Tuple[str, ...]]]] = {}
+    package_path_map: Dict[str, List[Tuple[str, str, Tuple[str, ...]]]] = {}
     for android_bp_dir_path, app_module in android_apps_map.values():
         defaults = app_module.get('defaults', [])
 
@@ -265,6 +265,7 @@ def map_packages():
         package_path_map.setdefault(package_name, []).append(
             (
                 android_bp_dir_path,
+                name,
                 tuple(resource_dirs),
             )
         )
@@ -315,10 +316,7 @@ def get_target_packages(target_package: str):
         target_package = target_package_name_map[target_package]
         new_target_package = target_package
 
-    if target_package not in package_path_map:
-        raise ValueError(f'Unknown package name: {target_package}')
-
-    return package_path_map[target_package], new_target_package
+    return package_path_map.get(target_package, []), new_target_package
 
 
 def find_overlay_android_bp_path_by_name(name: str):
