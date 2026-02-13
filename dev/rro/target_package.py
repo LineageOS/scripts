@@ -210,6 +210,7 @@ def map_packages():
                         statement,
                     )
 
+    package_path_set: Set[Tuple[str, str, Tuple[str, ...]]] = set()
     package_path_map: Dict[str, List[Tuple[str, str, Tuple[str, ...]]]] = {}
     for android_bp_dir_path, app_module in android_apps_map.values():
         defaults = app_module.get('defaults', [])
@@ -260,6 +261,16 @@ def map_packages():
             #     color=Color.YELLOW,
             # )
             continue
+
+        package_path_set_entry = (
+            android_bp_dir_path,
+            package_name,
+            tuple(resource_dirs),
+        )
+        if package_path_set_entry in package_path_set:
+            continue
+
+        package_path_set.add(package_path_set_entry)
 
         package_path_map.setdefault(package_name, []).append(
             (
