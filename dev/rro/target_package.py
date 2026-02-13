@@ -143,6 +143,7 @@ def map_packages():
     soong_config_module_types = set(['java_defaults'])
     defaults_map: Dict[str, BpModule] = {}
     android_apps_map: Dict[str, Tuple[str, AppModule]] = {}
+    android_libraries_map: Dict[str, Tuple[str, AppModule]] = {}
     filegroups_map: Dict[str, FilegroupModule] = {}
     rro_overlays_map: Dict[str, Tuple[str, BpModule]] = {}
     missing_libs: Set[str] = set()
@@ -193,13 +194,17 @@ def map_packages():
                     if statement['module_type'] == 'java_defaults':
                         soong_config_module_types.add(name)
 
-                if (
-                    statement['module'] == 'android_app'
-                    or statement['module'] == 'android_library'
-                ):
+                if statement['module'] == 'android_app':
                     assert name not in android_apps_map
                     statement = cast(AppModule, statement)
                     android_apps_map[name] = (
+                        android_bp_dir_path,
+                        statement,
+                    )
+                elif statement['module'] == 'android_library':
+                    assert name not in android_libraries_map
+                    statement = cast(AppModule, statement)
+                    android_libraries_map[name] = (
                         android_bp_dir_path,
                         statement,
                     )
@@ -232,7 +237,7 @@ def map_packages():
 
         resource_dirs: List[str] = []
         get_app_resources(
-            android_apps_map,
+            android_libraries_map,
             android_bp_dir_path,
             app_module,
             missing_libs,
