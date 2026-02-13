@@ -7,7 +7,7 @@ from __future__ import annotations
 import shutil
 from argparse import ArgumentParser
 from os import path
-from typing import Dict, List, Set, Tuple, cast
+from typing import List, Set, Tuple, cast
 
 from bp.bp_module import BpModule, RROModule
 from bp.bp_parser import bp_parser  # type: ignore
@@ -18,7 +18,6 @@ from bp.bp_utils import (
 )
 from rro.manifest import ANDROID_MANIFEST_NAME, parse_overlay_manifest
 from rro.process_rro import process_rro
-from rro.resources import resources_dict
 from rro.target_package import append_extra_locations
 from utils.utils import Color, color_print, get_dirs_with_file
 
@@ -133,22 +132,26 @@ if __name__ == '__main__':
         )
     ]
 
-    all_packages_resources_map: Dict[str, resources_dict] = {}
     for dir_path, statement in sorted_rros:
+        module_name = statement['name']
         manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
         resources_dir = statement.get('resource_dirs', ['res'])[0]
+        partition = get_module_partition(statement)
 
         try:
             process_rro(
                 dir_path,
                 dir_path,
+                module_name,
                 manifest,
                 resources_dir,
-                all_packages_resources_map=all_packages_resources_map,
+                all_packages_resources_map={},
                 maintain_copyrights=args.maintain_copyrights,
-                track_shadowed_resources=True,
+                remove_shadowed_resources=True,
+                remove_missing_resources=True,
                 remove_resources=remove_resources,
                 keep_packages=keep_packages,
+                partition=partition,
             )
         except ValueError as e:
             shutil.rmtree(dir_path, ignore_errors=True)
