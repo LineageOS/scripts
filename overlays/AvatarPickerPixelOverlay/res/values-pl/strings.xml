@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Selektor awatarów Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">Zabawna ilustracja przedstawiająca dwa ciemnozielone półokręgi na jasnozielonym tle</string>
+
+    <string name="desc_ProfileIcons10">Zabawna ilustracja przedstawiająca pomarańczowego motyla na żółtym tle</string>
+
+    <string name="desc_ProfileIcons11">Czarny kształt nosa z zaokrąglonymi krawędziami na ciemnoszarym tle</string>
+
+    <string name="desc_ProfileIcons12">Czarny kształt koniczyny z zaokrąglonymi krawędziami na jasnoszarym tle</string>
+
+    <string name="desc_ProfileIcons13">Jasnofioletowy, falisty okrąg na ciemnofioletowym tle</string>
+
+    <string name="desc_ProfileIcons14">Jasnoniebieski kształt koniczyny z zaokrąglonymi krawędziami na pomarańczowym tle</string>
+
+    <string name="desc_ProfileIcons15">Jasnozielony sześciokąt z zaokrąglonymi krawędziami na ciemnozielonym tle</string>
+
+    <string name="desc_ProfileIcons16">Czarny kształt rombu z zaokrąglonymi krawędziami na jasnoszarym tle</string>
+
+    <string name="desc_ProfileIcons17">Zabawna ilustracja przedstawiająca pomarańczowy liść na żółtym tle</string>
+
+    <string name="desc_ProfileIcons18">Zabawna ilustracja przedstawiająca planetę Saturn na brzoskwiniowym tle</string>
+
+    <string name="desc_ProfileIcons19">Zabawna ilustracja przedstawiająca biało-pomarańczowe gwiazdy i okręgi, układające się we wzór nieba na czarnym tle</string>
+
+    <string name="desc_ProfileIcons2">Abstrakcyjna ilustracja przedstawiająca czarno-białe, przecinające się walce</string>
+
+    <string name="desc_ProfileIcons20">Zabawna ilustracja przedstawiająca psa z niebieskimi uszami i białym pyskiem na żółtym tle</string>
+
+    <string name="desc_ProfileIcons21">Zabawna ilustracja przedstawiająca białego gołębia z gałązką oliwną na fioletowym tle</string>
+
+    <string name="desc_ProfileIcons22">Zabawna ilustracja przedstawiająca psa z czarnymi uszami i białym pyskiem na niebieskim tle</string>
+
+    <string name="desc_ProfileIcons23">Zabawna ilustracja przedstawiająca różowy kwiat z zielonymi liśćmi na kremowym tle</string>
+
+    <string name="desc_ProfileIcons24">Abstrakcyjna ilustracja przedstawiająca 6 niebieskich walców na czerwonym tle</string>
+
+    <string name="desc_ProfileIcons3">Abstrakcyjna ilustracja przedstawiająca jasnoniebieski kształt koniczyny na ciemnoniebieskim tle</string>
+
+    <string name="desc_ProfileIcons4">Abstrakcyjna ilustracja przedstawiająca 2 różowe, trójwymiarowe trójkąty</string>
+
+    <string name="desc_ProfileIcons5">Abstrakcyjna ilustracja przedstawiająca zielononiebieskie warstwy na żółtym tle</string>
+
+    <string name="desc_ProfileIcons6">Abstrakcyjna ilustracja przedstawiająca fioletowe skały na zielonym tle</string>
+
+    <string name="desc_ProfileIcons7">Zabawna ilustracja przedstawiająca 5 białych, geometrycznych kwiatów na pomarańczowym tle</string>
+
+    <string name="desc_ProfileIcons8">Zabawna ilustracja przedstawiająca 3 borówki na różowym tle</string>
+
+    <string name="desc_ProfileIcons9">Zabawna ilustracja przedstawiająca cytrynę z czarnym liściem na zielonym tle</string>
+</resources>

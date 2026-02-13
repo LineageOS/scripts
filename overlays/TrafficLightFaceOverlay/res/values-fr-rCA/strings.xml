@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Utilisez votre visage pour déverrouiller votre téléphone</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Utilisez votre visage pour déverrouiller votre téléphone.
+
+Gardez à l'esprit :
+Un seul visage peut être configuré à la fois. Pour ajouter un autre visage, supprimez le visage actuel.
+
+Le fait de regarder le téléphone pourrait le déverrouiller même si vous ne cherchiez pas à le faire.
+
+Une autre personne pourrait déverrouiller votre téléphone en le tenant devant votre visage.
+
+Votre téléphone pourrait être déverrouillé par une personne qui vous ressemble beaucoup, comme un jumeau identique."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Utilisez votre visage pour déverrouiller votre téléphone.
+
+Gardez à l'esprit :
+Un seul visage peut être configuré à la fois. Pour ajouter un autre visage, supprimez le visage actuel.
+
+Le fait de regarder le téléphone pourrait le déverrouiller même si vous ne cherchiez pas à le faire.
+
+Une autre personne pourrait déverrouiller votre téléphone en le tenant devant votre visage, même si vos yeux sont fermés.
+
+Votre téléphone pourrait être déverrouillé par une personne qui vous ressemble beaucoup, comme un jumeau identique."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Configurer le Déverrouillage par reconn. faciale</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">Sur l'écran suivant, tenez votre téléphone à la hauteur des yeux.</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Si vous portez habituellement des lunettes, vous pouvez les porter lors de la configuration</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Supprimez votre modèle facial actuel pour reconfigurer le déverrouillage facial.
+
+Votre modèle facial sera supprimé de façon permanente et sécurisée.
+
+Pour déverrouiller votre téléphone, vous aurez besoin de ce qui suit : NIP, schéma ou mot de passe."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Supprimez votre modèle facial actuel pour reconfigurer le déverrouillage facial.
+
+Votre modèle facial sera supprimé de façon permanente et sécurisée.
+
+Pour déverrouiller votre téléphone, vous aurez besoin de ce qui suit : empreinte digitale, NIP, schéma ou mot de passe."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">Pour déverrouiller le téléphone, vous devez avoir les yeux ouverts. Pour de meilleurs résultats, enlevez vos lunettes de soleil lorsque vous déverrouillez le téléphone.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Vous pouvez maintenant déverrouiller votre téléphone à l'aide de votre visage</string>
+</resources>

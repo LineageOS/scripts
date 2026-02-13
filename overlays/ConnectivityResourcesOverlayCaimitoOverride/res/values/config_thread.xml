@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Sets to {@code true} to enable Thread on the device by default. Note this is the default
+    value, the actual Thread enabled state can be changed by the {@link
+    ThreadNetworkController#setEnabled} API.
+    -->
+    <bool name="config_thread_default_enabled">false</bool>
+</resources>

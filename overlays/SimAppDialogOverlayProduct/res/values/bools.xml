@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!--
+         Whether to show an illustration on the screen asking the user to download the carrier app.
+         May be set to true in a resource overlay as long as a drawable asset with ID
+         illo_sim_app_dialog is provided, along with a content description for accessibility with
+         string ID install_carrier_app_image_content_description.
+    -->
+    <bool name="show_sim_app_dialog_illo">true</bool>
+</resources>

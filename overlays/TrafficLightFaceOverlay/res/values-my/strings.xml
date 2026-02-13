@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">သင်၏ဖုန်းကိုဖွင့်ရန် သင့်မျက်နှာကို သုံးပါ</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"သင်၏ဖုန်းကိုဖွင့်ရန် သင့်မျက်နှာကို သုံးပါ။
+
+သတိပြုရန်-
+တစ်ကြိမ်လျှင် မျက်နှာတစ်ခုသာ ထည့်သွင်းနိုင်သည်။ မျက်နှာနောက်တစ်ခု ထည့်ရန် လက်ရှိမျက်နှာကို ဖျက်ပါ။
+
+သင့်ဖုန်းကို မတော်တဆကြည့်မိရုံဖြင့် ဖုန်းပွင့်သွားနိုင်သည်။
+
+တစ်စုံတစ်ယောက်က သင်၏မျက်နှာအနီးတွင် သင့်ဖုန်းကိုကိုင်ထားခြင်းဖြင့် လော့ခ်ဖွင့်နိုင်သည်။
+
+အမြွှာကဲ့သို့ သင်နှင့်အလွန်တူသူက သင့်ဖုန်းကို ဖွင့်နိုင်သည်။"</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"သင်၏ဖုန်းကိုဖွင့်ရန် သင့်မျက်နှာကို သုံးပါ။
+
+သတိပြုရန်-
+တစ်ကြိမ်လျှင် မျက်နှာတစ်ခုသာ ထည့်သွင်းနိုင်သည်။ မျက်နှာနောက်တစ်ခု ထည့်ရန် လက်ရှိမျက်နှာကို ဖျက်ပါ။
+
+သင့်ဖုန်းကို မတော်တဆကြည့်မိရုံဖြင့် ဖုန်းပွင့်သွားနိုင်သည်။
+
+မျက်လုံးများပိတ်ထားသော်လည်း တစ်စုံတစ်ယောက်က သင်၏မျက်နှာအနီးတွင် သင့်ဖုန်းကိုကိုင်ထားခြင်းဖြင့် လော့ခ်ဖွင့်နိုင်သည်။
+
+အမြွှာကဲ့သို့ သင်နှင့်အလွန်တူသူက သင့်ဖုန်းကို ဖွင့်နိုင်သည်။"</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">မျက်နှာပြ လော့ခ်ဖွင့်ခြင်းကို ထည့်သွင်းနည်း</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">နောက်ဖန်သားပြင်တွင် သင့်ဖုန်းကို မျက်လုံးနှင့် တစ်တန်းတည်းထား၍ ကိုင်ပါ</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">သင်သည် မျက်မှန်တပ်လေ့ရှိသူဖြစ်လျှင် စနစ်ထည့်သွင်းစဉ်တွင် မျက်မှန်တပ်ထားနိုင်သည်</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"‘မျက်နှာပြ လော့ခ်ဖွင့်ခြင်း’ ကို ထပ်မံထည့်သွင်းရန် သင်၏ လက်ရှိမျက်နှာနမူနာကို ဖျက်ပါ။
+
+သင်၏မျက်နှာနမူနာကို လုံခြုံစွာ အပြီးဖျက်လိုက်ပါမည်။
+
+ဖျက်ပြီးသည့်အခါ သင်၏ဖုန်းကိုဖွင့်ရန် ပင်နံပါတ်၊ ပုံစံ (သို့) စကားဝှက် လိုအပ်ပါမည်။"</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"‘မျက်နှာပြ လော့ခ်ဖွင့်ခြင်း’ ကို ထပ်မံထည့်သွင်းရန် သင်၏ လက်ရှိမျက်နှာနမူနာကို ဖျက်ပါ။
+
+သင်၏မျက်နှာနမူနာကို လုံခြုံစွာ အပြီးဖျက်လိုက်ပါမည်။
+
+ဖျက်ပြီးသည့်အခါ သင်၏ဖုန်းကိုဖွင့်ရန် လက်ဗွေ၊ ပင်နံပါတ်၊ ပုံစံ (သို့) စကားဝှက် လိုအပ်ပါမည်။"</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">ဖုန်းဖွင့်ရန် မျက်စိပွင့်နေရမည်။ အကောင်းဆုံးရလဒ်ရရှိရန် ဖုန်းဖွင့်သောအခါ နေကာမျက်မှန်ချွတ်ပါ။</string>
+
+    <string name="security_settings_face_enroll_finish_description">ယခု သင့်ဖုန်းကို ကောက်ယူပြီး လော့ခ်ဖွင့်ရန် သင့်မျက်နှာကို သုံးနိုင်ပါပြီ</string>
+</resources>

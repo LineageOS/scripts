@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <color name="primary">#ff1a73e8</color>
+
+    <!-- 38% Grey800 -->
+    <color name="list_item_selected_background_color">@color/dynamic_color_surface_2_light</color>
+</resources>

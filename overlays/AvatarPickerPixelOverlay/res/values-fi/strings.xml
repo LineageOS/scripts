@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixelin avatarvalitsin</string>
+
+    <string name="desc_ProfileIcons1">Leikkisä kuvitus: kaksi tummanvihreää puoliympyrää vaaleanvihreällä taustalla</string>
+
+    <string name="desc_ProfileIcons10">Leikkisä kuvitus: oranssi perhonen keltaisella taustalla</string>
+
+    <string name="desc_ProfileIcons11">Musta nenän muoto pyöristetyillä reunoilla tummanharmaalla taustalla</string>
+
+    <string name="desc_ProfileIcons12">Musta apilan muoto pyöristetyillä reunoilla vaaleanharmaalla taustalla</string>
+
+    <string name="desc_ProfileIcons13">Vaaleanvioletti kiemurainen ympyrä tummanvioletilla taustalla</string>
+
+    <string name="desc_ProfileIcons14">Vaaleansininen apilan muoto pyöristetyillä reunoilla oranssilla taustalla</string>
+
+    <string name="desc_ProfileIcons15">Vaaleanvihreä kuusikulmio pyöristetyillä reunoilla tummanvihreällä taustalla</string>
+
+    <string name="desc_ProfileIcons16">Musta timantin muoto pyöristetyillä reunoilla vaaleanharmaalla taustalla</string>
+
+    <string name="desc_ProfileIcons17">Leikkisä kuvitus: oranssi lehti keltaisella taustalla</string>
+
+    <string name="desc_ProfileIcons18">Leikkisä kuvitus: Saturnus-planeetta persikanvärisellä taustalla</string>
+
+    <string name="desc_ProfileIcons19">Leikkisä kuvitus: valkoisia ja oransseja tähtiä ja ympyröitä tähtikuviossa mustalla taustalla</string>
+
+    <string name="desc_ProfileIcons2">Abstrakti kuvitus: mustia ja valkoisia päällekkäisiä lieriöitä</string>
+
+    <string name="desc_ProfileIcons20">Leikkisä kuvitus: sinikorvainen ja valkokasvoinen koira keltaisella taustalla</string>
+
+    <string name="desc_ProfileIcons21">Leikkisä kuvitus: valkoinen kyyhky lentää oliivipuun oksan kanssa violetilla taustalla</string>
+
+    <string name="desc_ProfileIcons22">Leikkisä kuvitus: mustakorvainen ja valkokasvoinen koira sinisellä taustalla</string>
+
+    <string name="desc_ProfileIcons23">Leikkisä kuvitus: vaaleanpunainen kukka ja vihreitä lehtiä kermanvärisellä taustalla</string>
+
+    <string name="desc_ProfileIcons24">Abstrakti kuvitus: kuusi sinistä lieriötä punaisella taustalla</string>
+
+    <string name="desc_ProfileIcons3">Abstrakti kuvitus: vaaleansininen apilan muoto tummansinisellä taustalla</string>
+
+    <string name="desc_ProfileIcons4">Abstrakti kuvitus: kaksi vaaleanpunaista, kolmiulotteista kolmiota</string>
+
+    <string name="desc_ProfileIcons5">Abstrakti kuvitus: sinivihreitä kerroksia keltaisella taustalla</string>
+
+    <string name="desc_ProfileIcons6">Abstrakti kuvitus: violetteja kiviä vihreällä taustalla</string>
+
+    <string name="desc_ProfileIcons7">Leikkisä kuvitus: viisi valkoista, geometristä kukkaa oranssilla taustalla</string>
+
+    <string name="desc_ProfileIcons8">Leikkisä kuvitus: kolme mustikkaa vaaleanpunaisella taustalla</string>
+
+    <string name="desc_ProfileIcons9">Leikkisä kuvitus: sitruuna ja musta lehti vihreällä taustalla</string>
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Template for showing mobile network operator name while WFC is active -->
+    <string-array name="wfcSpnFormats">
+        <item>%s</item>
+        <item>WLAN Call</item>
+    </string-array>
+
+    <!-- WFC, summary for Wi-Fi Preferred -->
+    <string name="wfc_mode_wifi_preferred_summary">WLAN preferred</string>
+</resources>

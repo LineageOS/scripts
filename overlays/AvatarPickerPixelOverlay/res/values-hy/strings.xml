@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel-ի ավատարի ընտրիչ</string>
+
+    <string name="desc_ProfileIcons1">Բաց կանաչ ֆոնի վրա երկու մուգ կանաչ կիսաշրջանների զվարճալի պատկերազարդում</string>
+
+    <string name="desc_ProfileIcons10">Դեղին ֆոնի վրա նարնջագույն թիթեռի զվարճալի պատկերազարդում</string>
+
+    <string name="desc_ProfileIcons11">Մոխրագույն ֆոնի վրա քթի տեսքով սև օբյեկտ՝ կլորացված եզրերով</string>
+
+    <string name="desc_ProfileIcons12">Մոխրագույն ֆոնի վրա երեքնուկի տեսքով սև օբյեկտ՝ կլորացված եզրերով</string>
+
+    <string name="desc_ProfileIcons13">Մուգ մանուշակագույն ֆոնի վրա բաց մանուշակագույն շողշողացող շրջան</string>
+
+    <string name="desc_ProfileIcons14">Նարնջագույն ֆոնի վրա երեքնուկի տեսքով բաց կապույտ օբյեկտ՝ կլորացված եզրերով</string>
+
+    <string name="desc_ProfileIcons15">Մուգ կանաչ ֆոնի վրա կլորացված եզրերով բաց կանաչ վեցանկյուն</string>
+
+    <string name="desc_ProfileIcons16">Մոխրագույն ֆոնի վրա ադամանդի տեսքով սև օբյեկտ՝ կլորացված եզրերով</string>
+
+    <string name="desc_ProfileIcons17">Դեղին ֆոնի վրա նարնջագույն տերևի զվարճալի պատկերազարդում</string>
+
+    <string name="desc_ProfileIcons18">Դեղձի ֆոնի վրա Սատուրն մոլորակի զվարճալի պատկերազարդում</string>
+
+    <string name="desc_ProfileIcons19">Սև ֆոնի վրա երկնային նախշով սպիտակ և նարնջագույն աստղերի և շրջանակների զվարճալի պատկերազարդում</string>
+
+    <string name="desc_ProfileIcons2">Սև ու սպիտակ հատվող գլանների աբստրակտ պատկերազարդում</string>
+
+    <string name="desc_ProfileIcons20">Դեղին ֆոնի վրա կապույտ ականջներով և սպիտակ մռութով շան զվարճալի պատկերազարդում</string>
+
+    <string name="desc_ProfileIcons21">Մանուշակագույն ֆոնի վրա ձիթապտղի ճյուղով թռչող սպիտակ աղավնու զվարճալի պատկերազարդում</string>
+
+    <string name="desc_ProfileIcons22">Կապույտ ֆոնի վրա սև ականջներով և սպիտակ մռութով շան զվարճալի պատկերազարդում</string>
+
+    <string name="desc_ProfileIcons23">Կրեմագույն ֆոնի վրա կանաչ տերևներով վարդագույն ծաղկի զվարճալի պատկերազարդում</string>
+
+    <string name="desc_ProfileIcons24">Կարմիր ֆոնի վրա վեց կապույտ գլանների աբստրակտ պատկերազարդում</string>
+
+    <string name="desc_ProfileIcons3">Մուգ կապույտ ֆոնի վրա երեքնուկի տեսքով բաց կապույտ օբյեկտի պատկերազարդում</string>
+
+    <string name="desc_ProfileIcons4">Երկու վարդագույն եռաչափ եռանկյունների աբստրակտ պատկերազարդում</string>
+
+    <string name="desc_ProfileIcons5">Դեղին ֆոնի վրա փիրուզագույն շերտերի աբստրակտ պատկերազարդում</string>
+
+    <string name="desc_ProfileIcons6">Կանաչ ֆոնի վրա մանուշակագույն ժայռերի աբստրակտ պատկերազարդում</string>
+
+    <string name="desc_ProfileIcons7">Նարնջագույն ֆոնի վրա հինգ սպիտակ երկրաչափական ծաղիկների զվարճալի պատկերազարդում</string>
+
+    <string name="desc_ProfileIcons8">Վարդագույն ֆոնի վրա երեք հապալասների զվարճալի պատկերազարդում</string>
+
+    <string name="desc_ProfileIcons9">Կանաչ ֆոնի վրա սև տերևով կիտրոնի զվարճալի պատկերազարդում</string>
+</resources>

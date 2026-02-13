@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Sélecteur d'avatars Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">Illustration ludique de deux demi-cercles vert foncé sur fond vert clair</string>
+
+    <string name="desc_ProfileIcons10">Illustration ludique d'un papillon orange sur fond jaune</string>
+
+    <string name="desc_ProfileIcons11">Forme de nez noir aux bords arrondis sur fond gris foncé</string>
+
+    <string name="desc_ProfileIcons12">Forme de trèfle noir aux bords arrondis sur fond gris clair</string>
+
+    <string name="desc_ProfileIcons13">Cercle ondulé violet clair sur fond violet foncé</string>
+
+    <string name="desc_ProfileIcons14">Forme de trèfle bleu clair aux bords arrondis sur fond orange</string>
+
+    <string name="desc_ProfileIcons15">Hexagone vert clair aux bords arrondis sur fond vert foncé</string>
+
+    <string name="desc_ProfileIcons16">Forme de diamant noir aux bords arrondis sur fond gris clair</string>
+
+    <string name="desc_ProfileIcons17">Illustration ludique d'une feuille orange sur fond jaune</string>
+
+    <string name="desc_ProfileIcons18">Illustration ludique de Saturne sur fond pêche</string>
+
+    <string name="desc_ProfileIcons19">Illustration ludique d'étoiles et de cercles blancs et orange dans un motif céleste sur fond noir</string>
+
+    <string name="desc_ProfileIcons2">Illustration abstraite de cylindres noir et blanc qui se croisent</string>
+
+    <string name="desc_ProfileIcons20">Illustration ludique d'un chien aux oreilles bleues et à la tête blanche sur fond jaune</string>
+
+    <string name="desc_ProfileIcons21">Illustration ludique d'une colombe blanche en vol avec une branche d'olivier sur fond violet</string>
+
+    <string name="desc_ProfileIcons22">Illustration ludique d'un chien aux oreilles noires et à la tête blanche sur fond bleu</string>
+
+    <string name="desc_ProfileIcons23">Illustration ludique d'une fleur rose aux feuilles vertes sur fond crème</string>
+
+    <string name="desc_ProfileIcons24">Illustration abstraite de six cylindres bleus sur fond rouge</string>
+
+    <string name="desc_ProfileIcons3">Illustration abstraite d'une forme de trèfle bleu clair sur fond bleu foncé</string>
+
+    <string name="desc_ProfileIcons4">Illustration abstraite de deux triangles roses en trois dimensions</string>
+
+    <string name="desc_ProfileIcons5">Illustration abstraite de couches turquoise sur fond jaune</string>
+
+    <string name="desc_ProfileIcons6">Illustration abstraite de roches violettes sur fond vert</string>
+
+    <string name="desc_ProfileIcons7">Illustration ludique de cinq fleurs blanches géométriques sur fond orange</string>
+
+    <string name="desc_ProfileIcons8">Illustration ludique de trois myrtilles sur fond rose</string>
+
+    <string name="desc_ProfileIcons9">Illustration ludique d'un citron avec une feuille noire sur fond vert</string>
+</resources>

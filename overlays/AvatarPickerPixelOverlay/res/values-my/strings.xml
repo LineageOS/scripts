@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel အယ်ဗတာရွေးစနစ်</string>
+
+    <string name="desc_ProfileIcons1">နောက်ခံအစိမ်းဖျော့ပေါ်တွင် အစိမ်းရင့် စက်ဝိုင်းခြမ်း နှစ်ခု၏ ပျော်စရာပုံ</string>
+
+    <string name="desc_ProfileIcons10">နောက်ခံအဝါပေါ်တွင် လိမ္မော်ရောင် လိပ်ပြာ၏ ပျော်စရာပုံ</string>
+
+    <string name="desc_ProfileIcons11">နောက်ခံမီးခိုးရင့်ပေါ်တွင် အနားလုံးများနှင့် အနက်ရောင် နှာခေါင်းပုံစံ</string>
+
+    <string name="desc_ProfileIcons12">နောက်ခံမီးခိုးဖျော့ပေါ်တွင် အနားလုံးများနှင့် အနက်ရောင် လေးရွက်ဆိုင်ပဲရိုင်းပင်ပုံစံ</string>
+
+    <string name="desc_ProfileIcons13">နောက်ခံခရမ်းရင့်ပေါ်တွင် ခရမ်းဖျော့ရောင် စက်ဝိုင်းတွန့်</string>
+
+    <string name="desc_ProfileIcons14">နောက်ခံလိမ္မော်ပေါ်တွင် အနားလုံးများနှင့် အပြာဖျော့ လေးရွက်ဆိုင်ပဲရိုင်းပင်ပုံစံ</string>
+
+    <string name="desc_ProfileIcons15">နောက်ခံအစိမ်းရင့်ပေါ်တွင် အနားလုံးများနှင့် အစိမ်းဖျော့ ဆဋ္ဌဂံ</string>
+
+    <string name="desc_ProfileIcons16">နောက်ခံမီးခိုးဖျော့ပေါ်တွင် အနားလုံးများနှင့် အနက်ရောင် စိန်တံဆိပ်ပုံ</string>
+
+    <string name="desc_ProfileIcons17">နောက်ခံအဝါပေါ်တွင် လိမ္မော်ရောင် သစ်ရွက်၏ ပျော်စရာပုံ</string>
+
+    <string name="desc_ProfileIcons18">နောက်ခံမက်မွန်ရောင်ပေါ်တွင် စနေဂြိုဟ်၏ ပျော်စရာပုံ</string>
+
+    <string name="desc_ProfileIcons19">နောက်ခံအနက်ပေါ်တွင် အာကာသဆိုင်ရာ ပုံစံဖြင့် အဖြူရောင်နှင့် လိမ္မော်ရောင် ကြယ်ပွင့်များနှင့် စက်ဝိုင်းများ၏ ပျော်စရာပုံ</string>
+
+    <string name="desc_ProfileIcons2">အနက်ရောင်နှင့် အဖြူရောင် ထိဆုံနေသည့် ဆလင်ဒါများ၏ စိတ္တဇပုံ</string>
+
+    <string name="desc_ProfileIcons20">နောက်ခံအဝါပေါ်တွင် အပြာရောင် နားရွက်များနှင့် အဖြူရောင် မျက်နှာရှိသော ခွေး၏ ပျော်စရာပုံ</string>
+
+    <string name="desc_ProfileIcons21">နောက်ခံခရမ်းပေါ်တွင် သံလွင်ခက်နှင့် ပျံနေသော ချိုးဖြူ၏ ပျော်စရာပုံ</string>
+
+    <string name="desc_ProfileIcons22">နောက်ခံအပြာပေါ်တွင် အနက်ရောင် နားရွက်များနှင့် အဖြူရောင် မျက်နှာရှိသော ခွေး၏ ပျော်စရာပုံ</string>
+
+    <string name="desc_ProfileIcons23">နောက်ခံခရင်မ်ရောင်ပေါ်တွင် အစိမ်းရောင် သစ်ရွက်များနှင့် ပန်းရောင်ပန်း၏ ပျော်စရာပုံ</string>
+
+    <string name="desc_ProfileIcons24">နောက်ခံအနီပေါ်တွင် အပြာရောင် ဆလင်ဒါ ခြောက်ခု၏ စိတ္တဇပုံ</string>
+
+    <string name="desc_ProfileIcons3">နောက်ခံအပြာရင့်ပေါ်တွင် အပြာဖျော့ လေးရွက်ဆိုင်ပဲရိုင်းပင်ပုံစံ၏ စိတ္တဇပုံ</string>
+
+    <string name="desc_ProfileIcons4">ပန်းရောင် သုံးဖက်မြင်တြိဂံ နှစ်ခု၏ စိတ္တဇပုံ</string>
+
+    <string name="desc_ProfileIcons5">နောက်ခံအဝါပေါ်တွင် စိမ်းပြာရောင် အလွှာများ၏ စိတ္တဇပုံ</string>
+
+    <string name="desc_ProfileIcons6">နောက်ခံအစိမ်းပေါ်တွင် ခရမ်းရောင် ကျောက်တုံးများ၏ စိတ္တဇပုံ</string>
+
+    <string name="desc_ProfileIcons7">နောက်ခံလိမ္မော်ပေါ်တွင် အဖြူရောင် ဂျီဩမေတြီပန်း ငါးပွင့်၏ ပျော်စရာပုံ</string>
+
+    <string name="desc_ProfileIcons8">နောက်ခံပန်းရောင်ပေါ်တွင် ဘလူးဘယ်ရီသီး သုံးလုံး၏ ပျော်စရာပုံ</string>
+
+    <string name="desc_ProfileIcons9">နောက်ခံအစိမ်းပေါ်တွင် အနက်ရောင် သစ်ရွက်နှင့် သံပရိုသီး၏ ပျော်စရာပုံ</string>
+</resources>

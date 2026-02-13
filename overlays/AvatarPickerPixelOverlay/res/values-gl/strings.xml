@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Selector de avatar de Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">Ilustración divertida de dous semicírculos de cor verde escura sobre un fondo verde claro</string>
+
+    <string name="desc_ProfileIcons10">Ilustración divertida dunha bolboreta laranxa sobre un fondo amarelo</string>
+
+    <string name="desc_ProfileIcons11">Forma dun nariz negro cos bordos redondeados sobre un fondo gris escuro</string>
+
+    <string name="desc_ProfileIcons12">Forma dun trevo negro cos bordos redondeados sobre un fondo gris claro</string>
+
+    <string name="desc_ProfileIcons13">Círculo púrpura claro cos bordos ondulados sobre un fondo púrpura escuro</string>
+
+    <string name="desc_ProfileIcons14">Forma dun trevo azul claro cos bordos redondeados sobre un fondo laranxa</string>
+
+    <string name="desc_ProfileIcons15">Hexágono verde claro cos bordos redondeados sobre un fondo verde escuro</string>
+
+    <string name="desc_ProfileIcons16">Forma dun diamante negro cos bordos redondeados sobre un fondo gris claro</string>
+
+    <string name="desc_ProfileIcons17">Ilustración divertida dunha folla laranxa sobre un fondo amarelo</string>
+
+    <string name="desc_ProfileIcons18">Ilustración divertida do planeta Saturno sobre un fondo de cor pexego</string>
+
+    <string name="desc_ProfileIcons19">Ilustración divertida de estrelas e círculos brancos e laranxas nunha estampa celestial sobre un fondo negro</string>
+
+    <string name="desc_ProfileIcons2">Ilustración abstracta de cilindros brancos e negros cruzados</string>
+
+    <string name="desc_ProfileIcons20">Ilustración divertida dun can coas orellas azuis e a cara branca sobre un fondo amarelo</string>
+
+    <string name="desc_ProfileIcons21">Ilustración divertida dunha pomba branca que voa cunha póla de oliveira sobre un fondo púrpura</string>
+
+    <string name="desc_ProfileIcons22">Ilustración divertida dun can coas orellas negras e a cara branca sobre un fondo azul</string>
+
+    <string name="desc_ProfileIcons23">Ilustración divertida dunha flor rosa con follas verdes sobre un fondo de cor crema</string>
+
+    <string name="desc_ProfileIcons24">Ilustración abstracta de seis cilindros azuis sobre un fondo vermello</string>
+
+    <string name="desc_ProfileIcons3">Ilustración abstracta da forma dun trevo azul claro sobre un fondo azul escuro</string>
+
+    <string name="desc_ProfileIcons4">Ilustración abstracta de dous triángulos rosas tridimensionais</string>
+
+    <string name="desc_ProfileIcons5">Ilustración abstracta de varias capas de cor verde azulada sobre un fondo amarelo</string>
+
+    <string name="desc_ProfileIcons6">Ilustración abstracta de rochas púrpura sobre un fondo verde</string>
+
+    <string name="desc_ProfileIcons7">Ilustración divertida de cinco flores brancas debuxadas con formas xeométricas sobre un fondo laranxa</string>
+
+    <string name="desc_ProfileIcons8">Ilustración divertida de tres arandos sobre un fondo rosa</string>
+
+    <string name="desc_ProfileIcons9">Ilustración divertida dun limón cunha folla negra sobre un fondo verde</string>
+</resources>

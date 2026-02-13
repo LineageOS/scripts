@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">ଆପଣ ଫିଙ୍ଗରପ୍ରିଣ୍ଟ ଅନଲକ ବ୍ୟବହାର କରିବା ସମୟରେ, ଆପଣଙ୍କ ଟିପଚିହ୍ନ ମଡେଲକୁ ଅପଡେଟ କରିବା ପାଇଁ ଇମେଜଗୁଡ଼ିକୁ ବ୍ୟବହାର କରାଯାଏ। ଆପଣଙ୍କ ଟିପଚିହ୍ନର ଇମେଜ ଓ ମଡେଲକୁ ଆପଣଙ୍କ ଫୋନରେ ସୁରକ୍ଷିତ ଭାବେ ଷ୍ଟୋର କରାଯାଏ ଏବଂ କେବେ ବି ଫୋନରୁ କାଢ଼ି ଦିଆଯାଏ ନାହିଁ। ସମସ୍ତ ପ୍ରକ୍ରିୟାକରଣ ସୁରକ୍ଷିତ ଭାବେ ଆପଣଙ୍କ ଫୋନରେ କରାଯାଏ।</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">ସେ ଫିଙ୍ଗରପ୍ରିଣ୍ଟ ଅନଲକ୍ ବ୍ୟବହାର କରିବା ସମୟରେ, ତା’ର ଟିପଚିହ୍ନ ମଡେଲକୁ ଅପଡେଟ୍ କରିବା ପାଇଁ ଛବିଗୁଡ଼ିକୁ ବ୍ୟବହାର କରାଯାଏ। ଆପଣଙ୍କ ପିଲାର ଟିପଚିହ୍ନର ଛବି ଓ ମଡେଲକୁ ଫୋନରେ ସୁରକ୍ଷିତ ଭାବେ ଷ୍ଟୋର୍ କରାଯାଇଥାଏ ଏବଂ କେବେ ବି ଡିଭାଇସରୁ କାଢ଼ି ଦିଆଯାଏ ନାହିଁ। ସମସ୍ତ ପ୍ରକ୍ରିୟାକରଣ ସୁରକ୍ଷିତ ଭାବେ ଫୋନରେ କରାଯାଇଥାଏ।</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">ଆପଣ ଆପଣଙ୍କ ଟିପଚିହ୍ନର ଇମେଜ ଓ ମଡେଲଗୁଡ଼ିକୁ ଡିଲିଟ କରିପାରିବେ କିମ୍ବା ଯେ କୌଣସି ସମୟରେ ସେଟିଂସରେ ଫିଙ୍ଗରପ୍ରିଣ୍ଟ ଅନଲକକୁ ବନ୍ଦ କରିପାରିବେ। ଟିପଚିହ୍ନର ଇମେଜ ଓ ମଡେଲଗୁଡ଼ିକୁ ଆପଣ ଡିଲିଟ ନକରିବା ପର୍ଯ୍ୟନ୍ତ ସେଗୁଡ଼ିକ ଫୋନରେ ଷ୍ଟୋର ହୋଇ ରହିଥାଏ।</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">ଟିପଚିହ୍ନର ଛବି ଓ ମଡେଲକୁ ଆପଣ ଏବଂ ଆପଣଙ୍କ ପିଲା ଡିଲିଟ କରିପାରିବେ କିମ୍ବା ଯେ କୌଣସି ସମୟରେ ସେଟିଂସରେ ଫିଙ୍ଗରପ୍ରିଣ୍ଟ ଅନଲକ ବନ୍ଦ କରିପାରିବେ। ଟିପଚିହ୍ନ ଛବି ଏବଂ ମଡେଲଗୁଡ଼ିକୁ ଡିଲିଟ ନକରିବା ପର୍ଯ୍ୟନ୍ତ ସେଗୁଡ଼ିକ ଫୋନରେ ଷ୍ଟୋର ହୋଇ ରହିଥାଏ।</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">ଫିଙ୍ଗରପ୍ରିଣ୍ଟ ଅନଲକ ସହ, ଆପଣ ଆପଣଙ୍କ ଟିପଚିହ୍ନ ବ୍ୟବହାର କରି ଆପଣଙ୍କର ଫୋନ ଅନଲକ କରିପାରିବେ। ସୁରକ୍ଷା ପାଇଁ, ଏହି ବିକଳ୍ପ ଏକ ବ୍ୟାକଅପ ସ୍କ୍ରିନ ଲକ ଆବଶ୍ୟକ କରେ।</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">ଫିଙ୍ଗରପ୍ରିଣ୍ଟ ଅନଲକ</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">ୱାର୍କ ପାଇଁ ଫିଙ୍ଗରପ୍ରିଣ୍ଟ ଅନଲକ</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">ଫିଙ୍ଗରପ୍ରିଣ୍ଟ ଅନଲକ ସେଟ ଅପ କରନ୍ତୁ</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">ଫିଙ୍ଗରପ୍ରିଣ୍ଟ ଅନଲକକୁ ଅନୁମତି ଦିଅନ୍ତୁ</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">ଏହା ଆପଣ ଅଟନ୍ତି ବୋଲି ଯାଞ୍ଚ କରିବାକୁ ଫିଙ୍ଗରପ୍ରିଣ୍ଟ ଅନଲକ ଆପଣଙ୍କ ଟିପଚିହ୍ନର ଏକ ସ୍ୱତନ୍ତ୍ର ମଡେଲ ତିଆରି କରେ। ସେଟଅପ ସମୟରେ ଏହି ଟିପଚିହ୍ନ ମଡେଲ ତିଆରି କରିବାକୁ, ଆପଣ ବିଭିନ୍ନ ପୋଜିସନରୁ ଆପଣଙ୍କ ଟିପଚିହ୍ନର ଇମେଜ ନେବେ।</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">ଏହା ଆପଣଙ୍କ ପିଲା ଅଟେ ବୋଲି ଯାଞ୍ଚ କରିବା ପାଇଁ ଫିଙ୍ଗରପ୍ରିଣ୍ଟ ଅନଲକ୍ ତା'ର ଟିପଚିହ୍ନର ଏକ ସ୍ୱତନ୍ତ୍ର ମଡେଲ୍ ତିଆରି କରିଥାଏ। ସେଟଅପ୍ ସମୟରେ ଏହି ଟିପଚିହ୍ନ ମଡେଲ୍ ତିଆରି କରିବାକୁ, ସେ ବିଭିନ୍ନ ଅବସ୍ଥିତିରୁ ତା'ର ଟିପଚିହ୍ନର ଛବି ନେବ।</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">ଏକ ମରାମତି କେନ୍ଦ୍ର କିମ୍ବା g.co/pixel/fingerprintunlockକୁ ଭିଜିଟ କରନ୍ତୁ।</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">ଫିଙ୍ଗରପ୍ରିଣ୍ଟ ଅନଲକ ବ୍ୟବହାର କରନ୍ତୁ</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">ପାଟର୍ନ • ଟିପଚିହ୍ନ</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">PIN • ଟିପଚିହ୍ନ</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">ପାସୱାର୍ଡ • ଟିପଚିହ୍ନ</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">ଫିଙ୍ଗରପ୍ରିଣ୍ଟ ଅନଲକ ବିନା ଜାରି ରଖନ୍ତୁ</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"ଯଦି ଆପଣଙ୍କ ଫୋନ୍ ହଜିଯାଏ କିମ୍ବା ଚୋରି ହୋଇଯାଏ, ତେବେ ଏକ ପାଟର୍ନ ଏହାକୁ ସୁରକ୍ଷିତ ରଖେ।
+
+ଏହା ଆପଣଙ୍କ ଡିଭାଇସରେ ଷ୍ଟୋର୍ କରାଯାଇଥିବା ଟିପଚିହ୍ନ ଛବି ଏବଂ ମଡେଲକୁ ମଧ୍ୟ ଡିଲିଟ୍ କରିଥାଏ। ଆପଗୁଡ଼ିକରେ ପ୍ରମାଣୀକରଣ ପାଇଁ ଆପଣଙ୍କ ଟିପଚିହ୍ନ ବ୍ୟବହାର କରିବାକୁ ଆପଣ ସକ୍ଷମ ହେବେ ନାହିଁ।"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"ଯଦି ଆପଣଙ୍କ ଫୋନ୍ ହଜିଯାଏ କିମ୍ବା ଚୋରି ହୋଇଯାଏ, ତେବେ ଏକ ପାଟର୍ନ ଏହାକୁ ସୁରକ୍ଷିତ ରଖେ।
+
+ଏହା ଆପଣଙ୍କ ଡିଭାଇସରେ ଷ୍ଟୋର୍ କରାଯାଇଥିବା ଟିପଚିହ୍ନ ଛବି ଏବଂ ମଡେଲକୁ ଡିଲିଟ୍ କରିଥାଏ। ଆପଣଙ୍କ ଫେସ୍ ମଡେଲକୁ ମଧ୍ୟ ସ୍ଥାୟୀ ଏବଂ ସୁରକ୍ଷିତ ଭାବରେ ଡିଲିଟ୍ କରାଯିବ। ଆପଗୁଡ଼ିକରେ ପ୍ରମାଣୀକରଣ ପାଇଁ ଆପଣଙ୍କ ଚେହେରା ଏବଂ ଟିପଚିହ୍ନ ବ୍ୟବହାର କରିବାକୁ ଆପଣ ସକ୍ଷମ ହେବେ ନାହିଁ।"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"ଯଦି ଆପଣଙ୍କ ଫୋନ୍ ହଜିଯାଏ କିମ୍ବା ଚୋରି ହୋଇଯାଏ, ତେବେ ଏକ PIN ଏହାକୁ ସୁରକ୍ଷିତ ରଖେ।
+
+ଏହା ଆପଣଙ୍କ ଡିଭାଇସରେ ଷ୍ଟୋର୍ କରାଯାଇଥିବା ଟିପଚିହ୍ନ ଛବି ଏବଂ ମଡେଲକୁ ମଧ୍ୟ ଡିଲିଟ୍ କରିଥାଏ। ଆପଗୁଡ଼ିକରେ ପ୍ରମାଣୀକରଣ ପାଇଁ ଆପଣଙ୍କ ଟିପଚିହ୍ନ ବ୍ୟବହାର କରିବାକୁ ଆପଣ ସକ୍ଷମ ହେବେ ନାହିଁ।"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"ଯଦି ଆପଣଙ୍କ ଫୋନ୍ ହଜିଯାଏ କିମ୍ବା ଚୋରି ହୋଇଯାଏ, ତେବେ ଏକ PIN ଏହାକୁ ସୁରକ୍ଷିତ ରଖେ।
+
+ଏହା ଆପଣଙ୍କ ଡିଭାଇସରେ ଷ୍ଟୋର୍ କରାଯାଇଥିବା ଟିପଚିହ୍ନ ଛବି ଏବଂ ମଡେଲକୁ ଡିଲିଟ୍ କରିଥାଏ। ଆପଣଙ୍କ ଫେସ୍ ମଡେଲକୁ ମଧ୍ୟ ସ୍ଥାୟୀ ଏବଂ ସୁରକ୍ଷିତ ଭାବରେ ଡିଲିଟ୍ କରାଯିବ। ଆପଗୁଡ଼ିକରେ ପ୍ରମାଣୀକରଣ ପାଇଁ ଆପଣଙ୍କ ଚେହେରା ଏବଂ ଟିପଚିହ୍ନ ବ୍ୟବହାର କରିବାକୁ ଆପଣ ସକ୍ଷମ ହେବେ ନାହିଁ।"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"ଯଦି ଆପଣଙ୍କ ଫୋନ୍ ହଜିଯାଏ କିମ୍ବା ଚୋରି ହୋଇଯାଏ, ତେବେ ଏକ ପାସୱାର୍ଡ ଏହାକୁ ସୁରକ୍ଷିତ ରଖେ।
+
+ଏହା ଆପଣଙ୍କ ଡିଭାଇସରେ ଷ୍ଟୋର୍ କରାଯାଇଥିବା ଟିପଚିହ୍ନ ଛବି ଏବଂ ମଡେଲକୁ ମଧ୍ୟ ଡିଲିଟ୍ କରିଥାଏ। ଆପଗୁଡ଼ିକରେ ପ୍ରମାଣୀକରଣ ପାଇଁ ଆପଣଙ୍କ ଟିପଚିହ୍ନ ବ୍ୟବହାର କରିବାକୁ ଆପଣ ସକ୍ଷମ ହେବେ ନାହିଁ।"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"ଯଦି ଆପଣଙ୍କ ଫୋନ୍ ହଜିଯାଏ କିମ୍ବା ଚୋରି ହୋଇଯାଏ, ତେବେ ଏକ ପାସୱାର୍ଡ ଏହାକୁ ସୁରକ୍ଷିତ ରଖେ।
+
+ଏହା ଆପଣଙ୍କ ଡିଭାଇସରେ ଷ୍ଟୋର୍ କରାଯାଇଥିବା ଟିପଚିହ୍ନ ଛବି ଏବଂ ମଡେଲକୁ ଡିଲିଟ୍ କରିଥାଏ। ଆପଣଙ୍କ ଫେସ୍ ମଡେଲକୁ ମଧ୍ୟ ସ୍ଥାୟୀ ଏବଂ ସୁରକ୍ଷିତ ଭାବରେ ଡିଲିଟ୍ କରାଯିବ। ଆପଗୁଡ଼ିକରେ ପ୍ରମାଣୀକରଣ ପାଇଁ ଆପଣଙ୍କ ଚେହେରା ଏବଂ ଟିପଚିହ୍ନ ବ୍ୟବହାର କରିବାକୁ ଆପଣ ସକ୍ଷମ ହେବେ ନାହିଁ।"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"ଆପଣଙ୍କ ସ୍କ୍ରିନ୍ ଲକ୍ ବିନା ଡିଭାଇସ୍ ସୁରକ୍ଷା ଫିଚରଗୁଡ଼ିକ କାମ କରିବ ନାହିଁ।
+
+ଏହା ଆପଣଙ୍କ ଡିଭାଇସରେ ଷ୍ଟୋର୍ କରାଯାଇଥିବା ଟିପଚିହ୍ନ ଛବି ଏବଂ ମଡେଲକୁ ମଧ୍ୟ ଡିଲିଟ୍ କରିଥାଏ। ଆପଗୁଡ଼ିକରେ ପ୍ରମାଣୀକରଣ ପାଇଁ ଆପଣଙ୍କ ଟିପଚିହ୍ନ ବ୍ୟବହାର କରିବାକୁ ଆପଣ ସକ୍ଷମ ହେବେ ନାହିଁ।"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"ଆପଣଙ୍କ ସ୍କ୍ରିନ୍ ଲକ୍ ବିନା ଡିଭାଇସ୍ ସୁରକ୍ଷା ଫିଚରଗୁଡ଼ିକ କାମ କରିବ ନାହିଁ।
+
+ଏହା ଆପଣଙ୍କ ଡିଭାଇସରେ ଷ୍ଟୋର୍ କରାଯାଇଥିବା ଟିପଚିହ୍ନ ଛବି ଏବଂ ମଡେଲକୁ ଡିଲିଟ୍ କରିଥାଏ। ଆପଣଙ୍କ ଫେସ୍ ମଡେଲକୁ ମଧ୍ୟ ସ୍ଥାୟୀ ଏବଂ ସୁରକ୍ଷିତ ଭାବରେ ଡିଲିଟ୍ କରାଯିବ। ଆପଗୁଡ଼ିକରେ ପ୍ରମାଣୀକରଣ ପାଇଁ ଆପଣଙ୍କ ଚେହେରା ଏବଂ ଟିପଚିହ୍ନ ବ୍ୟବହାର କରିବାକୁ ଆପଣ ସକ୍ଷମ ହେବେ ନାହିଁ।"</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">ଆପଣଙ୍କ ଫୋନ ଅନଲକ କରିବାକୁ କିମ୍ବା ଏହା ଆପଣ ଅଟନ୍ତି ବୋଲି ଆପ୍ସରେ ଯାଞ୍ଚ କରିବା ପାଇଁ ଫିଙ୍ଗରପ୍ରିଣ୍ଟ ଅନଲକକୁ ଆପଣ ଯେତେ ଅଧିକ ବ୍ୟବହାର କରିବେ ଏହା ସେତେ ଉନ୍ନତ ହେବ</string>
+</resources>

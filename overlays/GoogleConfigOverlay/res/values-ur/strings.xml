@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Name for an app setting that lets the user authenticate for that app using biometrics (e.g. fingerprint or face). [CHAR LIMIT=30] -->
+    <string name="biometric_app_setting_name">چہرہ یا فنگر پرنٹ استعمال کریں</string>
+
+    <!-- Name for an app setting that lets the user authenticate for that app using biometrics (e.g. fingerprint or face) or their screen lock credential (i.e. PIN, pattern, or password). [CHAR LIMIT=70] -->
+    <string name="biometric_or_screen_lock_app_setting_name">چہرہ، فنگر پرنٹ یا اسکرین لاک استعمال کریں</string>
+
+    <!-- Subtitle shown on the system-provided biometric dialog, asking the user to authenticate with a biometric (e.g. fingerprint or face). [CHAR LIMIT=70] -->
+    <string name="biometric_dialog_default_subtitle">جاری رکھنے کیلئے اپنا چہرہ یا فنگر پرنٹ استعمال کریں</string>
+
+    <!-- Subtitle shown on the system-provided biometric dialog, asking the user to authenticate with a biometric (e.g. fingerprint or face) or their screen lock credential (i.e. PIN, pattern, or password). [CHAR LIMIT=90] -->
+    <string name="biometric_or_screen_lock_dialog_default_subtitle">جاری رکھنے کے لیے اپنے چہرے، فنگر پرنٹ یا اسکرین لاک کا استعمال کریں</string>
+
+    <!-- Notification name shown when the system requires the user to re-enroll their face. [CHAR LIMIT=NONE] -->
+    <string name="face_recalibrate_notification_name">فیس اَنلاک</string>
+
+    <!-- Notification title shown when the system requires the user to re-enroll their face. [CHAR LIMIT=NONE] -->
+    <string name="face_recalibrate_notification_title">براہ کرم اپنے چہرے کا دوبارہ اندراج کریں</string>
+
+    <!-- Notification content shown when the system requires the user to re-enroll their face. [CHAR LIMIT=NONE] -->
+    <string name="face_recalibrate_notification_content">ہو سکتا ہے کہ فیس اَنلاک آپ کے دوبارہ اندراج کرنے تک کام نہ کرے</string>
+
+    <!-- Array containing custom messages shown during face acquisition from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="face_acquired_vendor"/>
+
+    <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="face_error_vendor">
+        <item>سرٹیفیکیٹ کی میعاد ختم ہو گئی</item>
+        <item>سینسر عارضی طور غیر فعال ہے</item>
+        <item>کیلیبریشن کی خرابی</item>
+        <item>فیس اَنلاک غیر دستیاب ہے۔ فون بہت گرم ہے۔</item>
+        <item>فیس اَنلاک کو دوبارہ سیٹ اپ کرنے کی ضرورت ہے</item>
+    </string-array>
+
+    <!-- Title for the harmful app warning dialog. [CHAR LIMIT=40] -->
+    <string name="harmful_app_warning_title">‏Play Protect کی وارننگ</string>
+</resources>

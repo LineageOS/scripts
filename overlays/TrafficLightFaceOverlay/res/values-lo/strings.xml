@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">ໃຊ້ໃບໜ້າຂອງທ່ານເພື່ອປົດລັອກໂທລະສັບທ່ານ</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"ໃຊ້ໜ້າຂອງທ່ານເພື່ອປົດລັອກໂທລະສັບທ່ານ.
+
+ກະລຸນາຮັບຊາບ:
+ທ່ານສາມາດຕັ້ງຄ່າໜ້າໄດ້ເທື່ອລະໜ້າເທົ່ານັ້ນ. ເພື່ອເພີ່ມໜ້າອື່ນ, ໃຫ້ລຶບໜ້າປັດຈຸບັນອອກກ່ອນ.
+
+ການເບິ່ງໂທລະສັບສາມາດປົດລັອກມັນໄດ້ໂດຍທີ່ທ່ານບໍ່ໄດ້ຕັ້ງໃຈ.
+
+ໂທລະສັບຂອງທ່ານສາມາດຖືກປົດລັອກໄດ້ໂດຍຄົນອື່ນຫາກມັນຖືກນຳໄປຍື່ນໃສ່ໜ້າທ່ານ.
+
+ໂທລະສັບຂອງທ່ານສາມາດຖືກປົດລັອກໄດ້ໂດຍຄົນທີ່ໜ້າຄ້າຍທ່ານຫຼາຍ ເຊັ່ນ: ອ້າຍນ້ອງ ຫຼື ເອື້ອຍນ້ອງຝາແຝດຂອງທ່ານ."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"ໃຊ້ໜ້າຂອງທ່ານເພື່ອປົດລັອກໂທລະສັບທ່ານ.
+
+ກະລຸນາຮັບຊາບ:
+ທ່ານສາມາດຕັ້ງຄ່າໜ້າໄດ້ເທື່ອລະໜ້າເທົ່ານັ້ນ. ເພື່ອເພີ່ມໜ້າອື່ນ, ໃຫ້ລຶບໜ້າປັດຈຸບັນອອກກ່ອນ.
+
+ການເບິ່ງໂທລະສັບສາມາດປົດລັອກມັນໄດ້ໂດຍທີ່ທ່ານບໍ່ໄດ້ຕັ້ງໃຈ.
+
+ໂທລະສັບຂອງທ່ານສາມາດຖືກປົດລັອກໄດ້ໂດຍຄົນອື່ນຫາກມັນຖືກນຳໄປຍື່ນໃສ່ໜ້າທ່ານ, ເຖິງແມ່ນວ່າທ່ານຈະຫຼັບຕາຢູ່ກໍຕາມ.
+
+ໂທລະສັບຂອງທ່ານສາມາດຖືກປົດລັອກໄດ້ໂດຍຄົນທີ່ໜ້າຄ້າຍທ່ານຫຼາຍ ເຊັ່ນ: ອ້າຍນ້ອງ ຫຼື ເອື້ອຍນ້ອງຝາແຝດຂອງທ່ານ."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">ວິທີຕັ້ງການປົດລັອກດ້ວຍໜ້າ</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">ຢູ່ໜ້າຈໍຕໍ່ໄປ, ໃຫ້ຖືໂທລະສັບຂອງທ່ານໄວ້ໃນລະດັບສາຍຕາ</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">ຫາກທ່ານໃສ່ແວ່ນຕາເປັນປົກກະຕິ, ທ່ານສາມາດໃສ່ໄວ້ໃນລະຫວ່າງການຕັ້ງຄ່າໄດ້</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"ລຶບຮູບແບບໃບໜ້າປັດຈຸບັນຂອງທ່ານເພື່ອຕັ້ງຄ່າການປົດລັອກດ້ວຍໜ້າຄືນໃໝ່.
+
+ຮູບແບບໃບໜ້າຂອງທ່ານຈະຖືກລຶບອອກຢ່າງຖາວອນ ແລະ ປອດໄພ.
+
+ຫຼັງຈາກການລຶບ, ທ່ານຈະຕ້ອງໃຊ້ PIN, ຮູບແບບ ຫຼື ລະຫັດຜ່ານຂອງທ່ານເພື່ອປົດລັອກໂທລະສັບທ່ານ."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"ລຶບຮູບແບບໃບໜ້າປັດຈຸບັນຂອງທ່ານເພື່ອຕັ້ງຄ່າການປົດລັອກດ້ວຍໜ້າຄືນໃໝ່.
+
+ຮູບແບບໃບໜ້າຂອງທ່ານຈະຖືກລຶບອອກຢ່າງຖາວອນ ແລະ ປອດໄພ.
+
+ຫຼັງຈາກການລຶບ, ທ່ານຈະຕ້ອງໃຊ້ລາຍນິ້ວມື, PIN, ຮູບແບບ ຫຼື ລະຫັດຜ່ານຂອງທ່ານເພື່ອປົດລັອກໂທລະສັບທ່ານ."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">ເພື່ອປົດລັອກໂທລະສັບ, ທ່ານຈະຕ້ອງມືນຕາຂອງທ່ານກ່ອນ. ເພື່ອຜົນໄດ້ຮັບທີ່ດີທີ່ສຸດ, ໃຫ້ຖອດແວ່ນຕາກັນແດດອອກໃນເວລາປົດລັອກໂທລະສັບ.</string>
+
+    <string name="security_settings_face_enroll_finish_description">ຕອນນີ້ທ່ານສາມາດຍົກໂທລະສັບຂອງທ່ານຂຶ້ນມາແລ້ວໃຊ້ໃບໜ້າຂອງທ່ານເພື່ອປົດລັອກມັນໄດ້</string>
+</resources>

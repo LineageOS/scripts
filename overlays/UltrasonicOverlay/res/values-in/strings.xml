@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"Jika Anda ingin menggunakan pelindung layar pada ponsel, pasang terlebih dahulu pelindung layar Anda sebelum menyiapkan sidik jari untuk memastikan kelancaran fungsi.
+
+Sebaiknya gunakan pelindung layar yang bersertifikasi Made for Google. Dengan pelindung layar lain, sidik jari Anda mungkin tidak akan terbaca."</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">Miringkan jari dan sentuh menggunakan ujung jari</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">Putar jari dan sentuh menggunakan tepi kiri</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">Putar lagi dan sentuh menggunakan tepi kanan</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">Bersihkan layar di dekat sensor</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">Bersihkan layar dari goresan, noda, atau kotoran. Tindakan ini membantu merekam gambar sidik jari dengan lebih jelas.</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">Bersihkan layar sebelum melanjutkan</string>
+</resources>

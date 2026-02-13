@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Display settings screen, summary fragment for screen saver options, activated when asleep and charging [CHAR LIMIT=40] -->
+    <string name="screensaver_settings_summary_sleep">Durante o carregamento</string>
+
+    <!-- Summary for when screensaver is enabled, only while stationary and upright and charging [CHAR LIMIT=40] -->
+    <string name="screensaver_settings_summary_postured_and_charging">Durante o carregamento/na vertical</string>
+
+    <!-- Summary for when to automatically show hub mode (widgets on lockscreen): never  [CHAR LIMIT=100] -->
+    <string name="when_to_show_hubmode_never">Nunca</string>
+
+    <!-- Summary for when to automatically show hub mode (widgets on lockscreen): charging  [CHAR LIMIT=100] -->
+    <string name="when_to_show_hubmode_charging">Durante o carregamento</string>
+
+    <!-- Summary for when to automatically show hub mode (widgets on lockscreen): upright and charging  [CHAR LIMIT=100] -->
+    <string name="when_to_show_hubmode_charging_and_upright">Durante o carregamento e na vertical</string>
+
+    <!-- Summary for when to automatically show hub mode (widgets on lockscreen): docked and charging [CHAR LIMIT=100] -->
+    <string name="when_to_show_hubmode_docked">Durante o carregamento e na estação</string>
+</resources>

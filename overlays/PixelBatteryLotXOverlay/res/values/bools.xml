@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <bool name="config_charge_limit_discovery_enabled">true</bool>
+
+    <bool name="config_wireless_charging_warning_enabled">true</bool>
+</resources>

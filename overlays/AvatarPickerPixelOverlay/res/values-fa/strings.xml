@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">‏انتخاب‌گر چهرک Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">تصویری سرگرم‌کننده از دو نیم‌دایره سبز تیره در پس‌زمینه سبز روشن</string>
+
+    <string name="desc_ProfileIcons10">تصویری سرگرم‌کننده از پروانه‌ای نارنجی‌رنگ در پس‌زمینه زرد</string>
+
+    <string name="desc_ProfileIcons11">دماغه سیاه‌رنگ با لبه‌های گرد در پس‌زمینه خاکستری تیره</string>
+
+    <string name="desc_ProfileIcons12">شبدر سیاه‌رنگ با لبه‌های گرد در پس‌زمینه خاکستری روشن</string>
+
+    <string name="desc_ProfileIcons13">دایره جنبان بنفش روشن در پس‌زمینه بنفش تیره</string>
+
+    <string name="desc_ProfileIcons14">شبدر آبی روشن با لبه‌های گرد در پس‌زمینه نارنجی</string>
+
+    <string name="desc_ProfileIcons15">شش‌ضلعی سبز روشن با لبه‌های گرد در پس‌زمینه سبز تیره</string>
+
+    <string name="desc_ProfileIcons16">الماس سیاه‌رنگ با لبه‌های گرد در پس‌زمینه خاکستری روشن</string>
+
+    <string name="desc_ProfileIcons17">تصویری سرگرم‌کننده از برگی نارنجی در پس‌زمینه زرد</string>
+
+    <string name="desc_ProfileIcons18">تصویری سرگرم‌کننده از سیاره زحل در پس‌زمینه هلویی‌رنگ</string>
+
+    <string name="desc_ProfileIcons19">تصویری سرگرم‌کننده از ستاره‌ها و دایره‌های سفید و نارنجی در الگویی فلکی در پس‌زمینه سیاه</string>
+
+    <string name="desc_ProfileIcons2">تصویری انتزاعی از استوانه‌های متقاطع سیاه و سفید</string>
+
+    <string name="desc_ProfileIcons20">تصویری سرگرم‌کننده از سگی با گوش‌های آبی و صورت سفید در پس‌زمینه زرد</string>
+
+    <string name="desc_ProfileIcons21">تصویری سرگرم‌کننده از کبوتری سفید درحال پرواز با یک شاخه زیتون در پس‌زمینه بنفش</string>
+
+    <string name="desc_ProfileIcons22">تصویری سرگرم‌کننده از سگی با گوش‌های سیاه و صورت سفید در پس‌زمینه آبی</string>
+
+    <string name="desc_ProfileIcons23">تصویری سرگرم‌کننده از گلی صورتی با برگ‌های سبز در پس‌زمینه کرمی</string>
+
+    <string name="desc_ProfileIcons24">تصویری انتزاعی از شش استوانه آبی در پس‌زمینه قرمز</string>
+
+    <string name="desc_ProfileIcons3">تصویری انتزاعی از شبدر آبی روشن در پس‌زمینه آبی تیره</string>
+
+    <string name="desc_ProfileIcons4">تصویری انتزاعی از دو مثلث صورتی سه‌بعدی</string>
+
+    <string name="desc_ProfileIcons5">تصویری انتزاعی از لایه‌های سبزآبی در پس‌زمینه زرد</string>
+
+    <string name="desc_ProfileIcons6">تصویری انتزاعی از سنگ‌های بنفش در پس‌زمینه سبز</string>
+
+    <string name="desc_ProfileIcons7">تصویری سرگرم‌کننده از پنج گل هندسی سفید در پس‌زمینه نارنجی</string>
+
+    <string name="desc_ProfileIcons8">تصویری سرگرم‌کننده از سه تمشک آبی در پس‌زمینه صورتی</string>
+
+    <string name="desc_ProfileIcons9">تصویری سرگرم‌کننده از یک لیمو با برگ سیاه در پس‌زمینه سبز</string>
+</resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"Nếu bạn có miếng bảo vệ màn hình, hãy dán miếng đó trước khi thiết lập dấu vân tay của bạn để mang lại hiệu quả tốt nhất.
+
+Để có kết quả tốt nhất, hãy sử dụng miếng bảo vệ màn hình được chứng nhận Made for Google. Với các miếng bảo vệ màn hình khác, có thể thiết bị sẽ không nhận dạng được dấu vân tay của bạn."</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">Nghiêng ngón tay của bạn và chạm bằng đầu ngón tay</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">Xoay ngón tay rồi chạm bằng mép bên trái</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">Xoay ngón tay lần nữa rồi chạm bằng mép bên phải</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">Hãy làm sạch phần màn hình ở gần cảm biến</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">Lau màn hình để làm sạch mọi vết ố bẩn. Thao tác này giúp chụp được hình ảnh dấu vân tay rõ ràng hơn.</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">Làm sạch màn hình trước khi tiếp tục</string>
+</resources>

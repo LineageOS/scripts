@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">جب آپ فنگر پرنٹ اَن لاک کا استعمال کرتے ہیں تو تصاویر آپ کے فنگر پرنٹ ماڈل کو اپ ڈیٹ کرنے کے لیے استعمال کی جاتی ہیں۔ آپ کے فنگر پرنٹ کی تصاویر اور ماڈل کو محفوظ طریقے سے آپ کے فون پر اسٹور کیا جاتا ہے اور یہ کبھی بھی فون سے باہر نہیں جاتے ہیں۔ آپ کے فون پر سبھی کارروائیاں محفوظ طریقے سے ہوتی ہیں۔</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">جب وہ فنگر پرنٹ اَن لاک کا استعمال کرتا ہے تو تصاویر اس کے فنگر پرنٹ ماڈل کو اپ ڈیٹ کرنے کے لیے استعمال کی جاتی ہیں۔ آپ کے بچے کے فنگر پرنٹ کی تصاویر اور ماڈل کو محفوظ طریقے سے فون پر اسٹور کیا جاتا ہے اور یہ کبھی بھی فون سے باہر نہیں جاتے ہیں۔ فون پر سبھی کارروائیاں محفوظ طریقے سے ہوتی ہیں۔</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">آپ اپنے فنگر پرنٹ کی تصاویر اور ماڈل کو حذف کر سکتے ہیں یا ترتیبات میں کسی بھی وقت فنگر پرنٹ اَن لاک کی خصوصیت کو آف کر سکتے ہیں۔ فون پر فنگر پرنٹ کی تصاویر اور ماڈلز تب تک اسٹور ہوتے ہیں جب تک آپ انہیں حذف نہیں کرتے ہیں۔</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">آپ اور آپ کا بچہ اپنے فنگر پرنٹ کی تصاویر اور ماڈل کو حذف کر سکتے ہیں یا ترتیبات میں کسی بھی وقت فنگر پرنٹ اَن لاک کو آف کر سکتے ہیں۔ فون پر فنگر پرنٹ کی تصاویر اور ماڈلز تب تک اسٹور ہوتے ہیں جب تک انہیں حذف نہیں کیا جاتا ہے۔</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">فنگر پرنٹ اَن لاک کے ساتھ آپ اپنا فنگر پرنٹ استعمال کر کے اپنا فون غیر مقفل کر سکتے ہیں۔ سیکیورٹی کیلئے، اس اختیار کو ایک بیک اپ اسکرین لاک درکار ہے۔</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">فنگر پرنٹ اَن لاک</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">کام کیلئے فنگر پرنٹ اَن لاک</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">فنگر پرنٹ اَن لاک کی خصوصیت سیٹ اپ کریں</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">فنگر پرنٹ اَن لاک کی اجازت دیں</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">فنگر پرنٹ اَن لاک کی خصوصیت آپ کے فنگر پرنٹ کا ایک منفرد ماڈل تخلیق کرتی ہے تاکہ یہ توثیق کی جا سکے کہ یہ آپ ہی ہیں۔ سیٹ اپ کے دوران اس فنگر پرنٹ کا ماڈل تخلیق کرنے کے لیے آپ اپنے فنگر پرنٹ کی تصاویر مختلف پوزیشنز سے لیں گے۔</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">فنگر پرنٹ اَن لاک کی خصوصیت آپ کے بچے کے فنگر پرنٹ کا ایک منفرد ماڈل تخلیق کرتی ہے تاکہ یہ توثیق کی جا سکے کہ یہ وہی بچہ ہے۔ سیٹ اپ کے دوران اس فنگر پرنٹ کا ماڈل تخلیق کرنے کے لیے وہ اپنے فنگر پرنٹ کی تصاویر مختلف پوزیشنز سے لے گا۔</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">‏ایک مرمت فراہم کنندہ یا g.co/pixel/fingerprintunlock کو ملاحظہ کریں۔</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">فنگر پرنٹ اَن لاک کا استعمال کریں</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">پیٹرن • فنگر پرنٹ</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">‏PIN • فنگر پرنٹ</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">پاس ورڈ • فنگر پرنٹ</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">فنگر پرنٹ اَن لاک کے بغیر جاری رکھیں</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"اگر آپ کا فون گم یا چوری ہو جاتا ہے تو پیٹرن اس کی حفاظت کرتا ہے۔
+
+اس سے آپ کے آلے پر اسٹور کردہ فنگر پرنٹ کی تصاویر اور ماڈل بھی حذف ہو جاتے ہیں۔ آپ ایپس میں تصدیق کے لیے اپنے فنگر پرنٹ کا استعمال نہیں کر سکیں گے۔"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"اگر آپ کا فون گم یا چوری ہو جاتا ہے تو پیٹرن اس کی حفاظت کرتا ہے۔
+
+اس سے آپ کے آلے پر اسٹور کردہ فنگر پرنٹ کی تصاویر اور ماڈل حذف ہو جاتے ہیں۔ آپ کے چہرے کے ماڈل کو بھی مستقل اور محفوظ طریقے سے حذف کر دیا جائے گا۔ آپ ایپس میں تصدیق کے لیے اپنے چہرے یا فنگر پرنٹ کا استعمال نہیں کر سکیں گے۔"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"‏اگر آپ کا فون گم یا چوری ہو جاتا ہے تو PIN اس کی حفاظت کرتا ہے۔
+
+اس سے آپ کے آلے پر اسٹور کردہ فنگر پرنٹ کی تصاویر اور ماڈل بھی حذف ہو جاتے ہیں۔ آپ ایپس میں تصدیق کے لیے اپنے فنگر پرنٹ کا استعمال نہیں کر سکیں گے۔"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"‏اگر آپ کا فون گم یا چوری ہو جاتا ہے تو PIN اس کی حفاظت کرتا ہے۔
+
+اس سے آپ کے آلے پر اسٹور کردہ فنگر پرنٹ کی تصاویر اور ماڈل حذف ہو جاتے ہیں۔ آپ کے چہرے کے ماڈل کو بھی مستقل اور محفوظ طریقے سے حذف کر دیا جائے گا۔ آپ ایپس میں تصدیق کے لیے اپنے چہرے یا فنگر پرنٹ کا استعمال نہیں کر سکیں گے۔"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"اگر آپ کا فون گم یا چوری ہو جاتا ہے تو پاس ورڈ اس کی حفاظت کرتا ہے۔
+
+اس سے آپ کے آلے پر اسٹور کردہ فنگر پرنٹ کی تصاویر اور ماڈل بھی حذف ہو جاتے ہیں۔ آپ ایپس میں تصدیق کے لیے اپنے فنگر پرنٹ کا استعمال نہیں کر سکیں گے۔"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"اگر آپ کا فون گم یا چوری ہو جاتا ہے تو پاس ورڈ اس کی حفاظت کرتا ہے۔
+
+اس سے آپ کے آلے پر اسٹور کردہ فنگر پرنٹ کی تصاویر اور ماڈل حذف ہو جاتے ہیں۔ آپ کے چہرے کے ماڈل کو بھی مستقل اور محفوظ طریقے سے حذف کر دیا جائے گا۔ آپ ایپس میں تصدیق کے لیے اپنے چہرے یا فنگر پرنٹ کا استعمال نہیں کر سکیں گے۔"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"آلے کے تحفظ کی خصوصیات آپ کے اسکرین لاک کے بغیر کام نہیں کریں گی۔
+
+اس سے آپ کے آلے پر اسٹور کردہ فنگر پرنٹ کی تصاویر اور ماڈل بھی حذف ہو جاتے ہیں۔ آپ ایپس میں تصدیق کے لیے اپنے فنگر پرنٹ کا استعمال نہیں کر سکیں گے۔"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"آلے کے تحفظ کی خصوصیات آپ کے اسکرین لاک کے بغیر کام نہیں کریں گی۔
+
+اس سے آپ کے آلے پر اسٹور کردہ فنگر پرنٹ کی تصاویر اور ماڈل حذف ہو جاتے ہیں۔ آپ کے چہرے کے ماڈل کو بھی مستقل اور محفوظ طریقے سے حذف کر دیا جائے گا۔ آپ ایپس میں تصدیق کے لیے اپنے چہرے یا فنگر پرنٹ کا استعمال نہیں کر سکیں گے۔"</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">فنگر پرنٹ لاک آپ کے فون کو غیر مقفل کرنے یا ایپس میں توثیق کرنے کے لیے جتنا زیادہ استعمال کرتے ہیں اسے بہتر بناتا ہے کہ یہ آپ ہی ہیں</string>
+</resources>

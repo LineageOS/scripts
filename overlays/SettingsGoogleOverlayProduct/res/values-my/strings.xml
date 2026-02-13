@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">Pixel Imprint ဖြင့် သင်၏ လက်ဗွေကို အသုံးပြုပြီး သင့်ဖုန်းကို ဖွင့်နိုင်သည်။ လုံခြုံရေးအရ ဤနည်းလမ်းအတွက် ဖုန်းမျက်နှာပြင်လော့ခ်အရန်စနစ်တစ်ခု လိုအပ်သည်။</string>
+
+    <!-- Summary for suggested actions for settings up a fingerprint lock (phone) [CHAR LIMIT=55] -->
+    <string name="suggested_fingerprint_lock_settings_summary">သင့်ဖုန်းကို ဖွင့်ရန် Pixel Imprint ကို သုံးပါ</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Pixel Imprint</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Pixel Imprint စနစ်ထည့်သွင်းခြင်း</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">Pixel Imprint ကို ခွင့်ပြုရန်</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature, when fingerprint unlock is disabled by device admin [CHAR LIMIT=40] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled">Pixel Imprint</string>
+
+    <!-- Introduction detail message shown in fingerprint enrollment dialog, when fingerprint unlock is disabled by device admin [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled">"Pixel Imprint ဖြင့် သင့်လက်ဗွေကို အသုံးပြုပြီး ဝယ်ယူမှုများကို ခွင့်ပြုပေးခြင်း သို့မဟုတ် အက်ပ်များသို့ လက်မှတ်ထိုးဝင်ခြင်းတို့ ပြုလုပ်နိုင်သည်။
+
+မည်သူ၏ လက်ဗွေအား ထည့်သွင်းမည်ကို သေချာစဉ်းစားပါ။ ထည့်သွင်းထားသည့် လက်ဗွေပိုင်ရှင်တိုင်းသည် ဤအရာများကို သုံးနိုင်ပါမည်။
+
+မှတ်ချက်- ဤစက်ပစ္စည်းကို ဖွင့်ရန် သင်၏လက်ဗွေကို သုံး၍မရပါ။ နောက်ထပ်အချက်အလက်များအတွက် သင့်အဖွဲ့အစည်း၏ စီမံခန့်ခွဲသူထံ ဆက်သွယ်ပါ။"</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">Pixel Imprint + ပုံစံ</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">Pixel Imprint + ပင်နံပါတ်</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">Pixel Imprint + စကားဝှက်</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">Pixel Imprint မသုံးဘဲ ရှေ့ဆက်ရန်</string>
+
+    <!-- Display settings screen, display white balance settings title [CHAR LIMIT=30] -->
+    <string name="display_white_balance_title">အလိုက်သင့်အရောင်</string>
+
+    <!-- Display settings screen, display white balance settings summary [CHAR LIMIT=NONE] -->
+    <string name="display_white_balance_summary">ဝန်းကျင်အလင်းပေါ် အခြေခံ၍ ပြကွက်ကို ပိုနွေးသော (သို့) ပိုအေးသော အရောင်များသို့ အလိုက်သင့် ပြောင်းနိုင်သည်</string>
+</resources>

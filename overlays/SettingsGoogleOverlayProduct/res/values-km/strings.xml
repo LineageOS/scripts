@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">ជាមួយ Pixel Imprint អ្នក​អាច​ដោះសោ​ទូរសព្ទ​​ដោយ​ប្រើ​ស្នាមម្រាម​ដៃ​របស់​អ្នក។ ដើម្បី​សុវត្ថិភាព ជម្រើស​នេះ​តម្រូវឱ្យមាន​ការ​ចាក់សោ​អេក្រង់​បម្រុងទុក។</string>
+
+    <!-- Summary for suggested actions for settings up a fingerprint lock (phone) [CHAR LIMIT=55] -->
+    <string name="suggested_fingerprint_lock_settings_summary">ប្រើ​ Pixel Imprint ដើម្បី​ដោះសោ​ទូរសព្ទ​របស់អ្នក</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Pixel Imprint</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">រៀបចំ Pixel Imprint</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">អនុញ្ញាត Pixel Imprint</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature, when fingerprint unlock is disabled by device admin [CHAR LIMIT=40] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled">Pixel Imprint</string>
+
+    <!-- Introduction detail message shown in fingerprint enrollment dialog, when fingerprint unlock is disabled by device admin [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled">"ជាមួយ Pixel Imprint អ្នក​អាចប្រើ​ស្នាម​ម្រាមដៃ​របស់អ្នក ​ដើម្បីផ្តល់សិទ្ធិក្នុងការ​ទិញ ឬ​ចូល​កម្មវិធី។
+
+សូមប្រុង​ប្រយ័ត្ន​ចំពោះ​ស្នាមម្រាមដៃ​ដែល​អ្នកបញ្ចូល។ ​រាល់ស្នាម​ម្រាមដៃ​ដែល​បានបញ្ចូល​នឹងអាចធ្វើ​សកម្មភាព​ទាំងនេះបាន។
+
+ចំណាំ៖ អ្នកមិនអាចប្រើស្នាមម្រាមដៃរបស់អ្នក ដើម្បីដោះសោឧបករណ៍នេះបាន​ទេ។ សម្រាប់ព័ត៌មានបន្ថែម សូមទាក់ទងអ្នកគ្រប់គ្រង​របស់​ស្ថាប័នអ្នក។"</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">Pixel Imprint + លំនាំ</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">Pixel Imprint + កូដ PIN</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">Pixel Imprint + ពាក្យសម្ងាត់</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">បន្តដោយគ្មាន Pixel Imprint</string>
+
+    <!-- Display settings screen, display white balance settings title [CHAR LIMIT=30] -->
+    <string name="display_white_balance_title">ពណ៌បត់បែន</string>
+
+    <!-- Display settings screen, display white balance settings summary [CHAR LIMIT=NONE] -->
+    <string name="display_white_balance_summary">សម្រប​ផ្ទាំងអេក្រង់​ទៅ​ជា​ពណ៌កាន់តែ​ក្ដៅ ឬកាន់តែត្រជាក់​ដោយបត់បែនទៅតាម​ពន្លឺជុំវិញ</string>
+</resources>

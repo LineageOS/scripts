@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Name for an app setting that lets the user authenticate for that app using biometrics (e.g. fingerprint or face). [CHAR LIMIT=30] -->
+    <string name="biometric_app_setting_name">Utiliser visage ou empreinte</string>
+
+    <!-- Name for an app setting that lets the user authenticate for that app using biometrics (e.g. fingerprint or face) or their screen lock credential (i.e. PIN, pattern, or password). [CHAR LIMIT=70] -->
+    <string name="biometric_or_screen_lock_app_setting_name">Utiliser votre visage, empreinte digitale ou verrouillage de l'écran</string>
+
+    <!-- Subtitle shown on the system-provided biometric dialog, asking the user to authenticate with a biometric (e.g. fingerprint or face). [CHAR LIMIT=70] -->
+    <string name="biometric_dialog_default_subtitle">Utilisez votre visage ou votre empreinte digitale pour continuer</string>
+
+    <!-- Subtitle shown on the system-provided biometric dialog, asking the user to authenticate with a biometric (e.g. fingerprint or face) or their screen lock credential (i.e. PIN, pattern, or password). [CHAR LIMIT=90] -->
+    <string name="biometric_or_screen_lock_dialog_default_subtitle">Utilisez votre visage, empreinte digitale ou le verrouillage de l'écran pour continuer</string>
+
+    <!-- Notification name shown when the system requires the user to re-enroll their face. [CHAR LIMIT=NONE] -->
+    <string name="face_recalibrate_notification_name">Déverrouillage par reconnaissance faciale</string>
+
+    <!-- Notification title shown when the system requires the user to re-enroll their face. [CHAR LIMIT=NONE] -->
+    <string name="face_recalibrate_notification_title">Veuillez réenregistrer votre visage</string>
+
+    <!-- Notification content shown when the system requires the user to re-enroll their face. [CHAR LIMIT=NONE] -->
+    <string name="face_recalibrate_notification_content">Il se peut que le déverrouillage par reconnaissance faciale ne fonctionne pas tant que vous n'aurez pas réenregistré votre visage</string>
+
+    <!-- Array containing custom messages shown during face acquisition from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="face_acquired_vendor"/>
+
+    <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="face_error_vendor">
+        <item>Certificat expiré</item>
+        <item>Capteur temporairement désactivé</item>
+        <item>Erreur de calibrage</item>
+        <item>"Le déverrouillage par reconnaissance faciale n'est pas disponible. Le téléphone est trop chaud."</item>
+        <item>Vous devez reconfigurer le déverrouillage par reconnaissance faciale</item>
+    </string-array>
+
+    <!-- Title for the harmful app warning dialog. [CHAR LIMIT=40] -->
+    <string name="harmful_app_warning_title">Avertissement Play Protect</string>
+</resources>

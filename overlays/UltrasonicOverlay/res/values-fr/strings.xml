@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"Si vous disposez d'une protection d'écran, installez-la avant de configurer votre empreinte digitale afin d'obtenir de meilleures performances.
+
+Vous obtiendrez de meilleurs résultats avec une protection d'écran certifiée Made for Google. Il se peut que votre empreinte digitale ne soit pas reconnue si vous utilisez un autre type de protection d'écran."</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">Inclinez votre doigt et touchez avec la pointe</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">Tournez le doigt et touchez avec le côté gauche</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">Tournez à nouveau et touchez avec le côté droit</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">Nettoyez votre écran près du capteur</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">Nettoyez votre écran afin de retirer les taches, résidus ou traces. Cela permettra d'effectuer une meilleure capture de votre empreinte digitale.</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">Nettoyez votre écran avant de continuer</string>
+</resources>

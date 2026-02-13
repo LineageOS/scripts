@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Display settings screen, summary fragment for screen saver options, activated when asleep and charging [CHAR LIMIT=40] -->
+    <string name="screensaver_settings_summary_sleep">ਚਾਰਜ ਕਰਨ ਵੇਲੇ</string>
+
+    <!-- Summary for when screensaver is enabled, only while stationary and upright and charging [CHAR LIMIT=40] -->
+    <string name="screensaver_settings_summary_postured_and_charging">ਸਿੱਧਾ ਰੱਖਣ ਅਤੇ ਚਾਰਜ ਕਰਨ ਵੇਲੇ</string>
+
+    <!-- Summary for when to automatically show hub mode (widgets on lockscreen): never  [CHAR LIMIT=100] -->
+    <string name="when_to_show_hubmode_never">ਕਦੇ ਵੀ ਨਹੀਂ</string>
+
+    <!-- Summary for when to automatically show hub mode (widgets on lockscreen): charging  [CHAR LIMIT=100] -->
+    <string name="when_to_show_hubmode_charging">ਚਾਰਜ ਕਰਨ ਵੇਲੇ</string>
+
+    <!-- Summary for when to automatically show hub mode (widgets on lockscreen): upright and charging  [CHAR LIMIT=100] -->
+    <string name="when_to_show_hubmode_charging_and_upright">ਸਿੱਧਾ ਰੱਖਣ ਅਤੇ ਚਾਰਜ ਕਰਨ ਵੇਲੇ</string>
+
+    <!-- Summary for when to automatically show hub mode (widgets on lockscreen): docked and charging [CHAR LIMIT=100] -->
+    <string name="when_to_show_hubmode_docked">ਡੌਕ ਕੀਤੇ ਹੋਣ ਅਤੇ ਚਾਰਜ ਕਰਨ ਵੇਲੇ</string>
+</resources>

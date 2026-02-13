@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- [CHAR_LIMIT=NONE] [BACKUP_MESSAGE_ID: 5444908404021316250] Battery saver: Feature description, with a "learn more" link. -->
+    <string name="battery_saver_description_with_learn_more">"ဘက်ထရီသက်တမ်း ပိုရှည်စေရန် 'ဘက်ထရီအားထိန်း' က အောက်ပါတို့ကို လုပ်ဆောင်သည်-
+
+• 'မှောင်သည့် အပြင်အဆင်' ကို ဖွင့်သည်
+• နောက်ခံလုပ်ဆောင်ချက်၊ ပြသမှုဆိုင်ရာ အထူးပြုလုပ်ချက်အချို့နှင့် “Ok Google” ကဲ့သို့ အခြား ဝန်ဆောင်မှုများကို ပိတ်သည် သို့မဟုတ် ကန့်သတ်သည်
+• သင်၏ကွန်ရက်ချိတ်ဆက်မှုများကို ကောင်းအောင်လုပ်သည်
+
+"<annotation id="url">ပိုမိုလေ့လာရန်</annotation></string>
+</resources>

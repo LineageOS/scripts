@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Kiedy używasz funkcji odblokowywania odciskiem palca, obrazy są wykorzystywane do aktualizowania modelu odcisku palca. Obrazy i model Twojego odcisku palca są bezpiecznie przechowywane na telefonie i nie są nigdzie przesyłane. Przetwarzanie danych odbywa się bezpiecznie i w całości na telefonie.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Kiedy Twoje dziecko używa funkcji odblokowywania odciskiem palca, obrazy są wykorzystywane do aktualizowania modelu odcisku palca. Obrazy i model odcisku palca Twojego dziecka są bezpiecznie przechowywane na telefonie i nigdy go nie opuszczają. Przetwarzanie danych odbywa się w całości na telefonie w bezpieczny sposób.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">W dowolnej chwili możesz usunąć obrazy oraz model odcisku palca i wyłączyć funkcję odblokowywania odciskiem palca w Ustawieniach. Obrazy i modele odcisku palca będą przechowywane na telefonie, dopóki ich nie usuniesz.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Ty i Twoje dziecko w dowolnej chwili możecie usunąć obrazy oraz model odcisku palca i wyłączyć odblokowywanie odciskiem palca w Ustawieniach. Obrazy i modele odcisku palca są przechowywane na telefonie, dopóki nie zostaną usunięte.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">Odblokowywanie odciskiem palca pozwala odblokować telefon odciskiem palca. Ze względów bezpieczeństwa ta opcja wymaga dodatkowej blokady ekranu.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Odblokowywanie odciskiem palca</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">Odblokowywanie odciskiem palca w profilu służbowym</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Skonfiguruj odblokowy­wanie odciskiem palca</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">Zezwól na odblokowywanie odciskiem palca</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">Funkcja odblokowywania odciskiem palca tworzy unikalny model odcisku, który pozwala zweryfikować Twoją tożsamość. Aby taki model mógł powstać, musisz zapisać kilka obrazów odcisku palca w różnej pozycji.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">Odblokowywanie odciskiem palca tworzy unikalny model odcisku palca, który pozwala zweryfikować tożsamość Twojego dziecka. Aby utworzyć taki model odcisku palca podczas konfiguracji, trzeba odcisnąć palec kilka razy pod różnymi kątami.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">Odwiedź serwis lub otwórz stronę g.co/pixel/fingerprintunlock.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">Używaj odblokowywania odciskiem palca</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">Wzór • Odcisk palca</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">Kod PIN • Odcisk palca</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">Hasło • Odcisk palca</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">Kontynuuj bez odblokowywania odciskiem palca</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"Wzór ochroni Twój telefon, jeśli zostanie zgubiony lub skradziony.
+
+Obrazy i model odcisku palca zapisane na telefonie również zostaną usunięte. Uwierzytelnianie się w aplikacjach odciskiem palca nie będzie możliwe."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"Wzór ochroni Twój telefon, jeśli zostanie zgubiony lub skradziony.
+
+Obrazy i model odcisku palca zapisane na telefonie zostaną usunięte. Twój model twarzy również zostanie trwale i bezpiecznie usunięty. Uwierzytelnianie się w aplikacjach skanem twarzy i odciskiem palca nie będzie możliwe."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"Jeśli telefon zostanie zgubiony lub skradziony, ochroni go kod PIN.
+
+Obrazy i model odcisku palca zapisane na telefonie również zostaną usunięte. Uwierzytelnianie się w aplikacjach odciskiem palca nie będzie możliwe."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"Jeśli telefon zostanie zgubiony lub skradziony, ochroni go kod PIN.
+
+Obrazy i model odcisku palca zapisane na telefonie zostaną usunięte. Twój model twarzy również zostanie trwale i bezpiecznie usunięty. Uwierzytelnianie się w aplikacjach skanem twarzy i odciskiem palca nie będzie możliwe."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"Hasło ochroni Twój telefon, jeśli zostanie zgubiony lub skradziony.
+
+Obrazy i model odcisku palca zapisane na telefonie również zostaną usunięte. Uwierzytelnianie się w aplikacjach odciskiem palca nie będzie możliwe."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"Hasło ochroni Twój telefon, jeśli zostanie zgubiony lub skradziony.
+
+Obrazy i model odcisku palca zapisane na telefonie zostaną usunięte. Twój model twarzy również zostanie trwale i bezpiecznie usunięty. Uwierzytelnianie się w aplikacjach skanem twarzy i odciskiem palca nie będzie możliwe."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"Bez blokady ekranu nie będą działać funkcje ochrony urządzenia.
+
+Obrazy i model odcisku palca zapisane na telefonie również zostaną usunięte. Uwierzytelnianie się w aplikacjach odciskiem palca nie będzie możliwe."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"Bez blokady ekranu nie będą działać funkcje ochrony urządzenia.
+
+Obrazy i model odcisku palca zapisane na telefonie zostaną usunięte. Twój model twarzy również zostanie trwale i bezpiecznie usunięty. Uwierzytelnianie się w aplikacjach skanem twarzy i odciskiem palca nie będzie możliwe."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">Odblokowywanie odciskiem palca działa coraz lepiej, gdy używasz tej funkcji do odblokowywania telefonu i potwierdzania swojej tożsamości w aplikacjach</string>
+</resources>

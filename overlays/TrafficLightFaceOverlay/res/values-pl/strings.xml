@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Używaj rozpoznawania twarzy do odblokowywania telefonu</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Używaj rozpoznawania twarzy do odblokowywania telefonu.
+
+Pamiętaj:
+Nie można mieć kilku skonfigurowanych modeli twarzy jednocześnie. Jeśli chcesz dodać inny model twarzy, usuń bieżący.
+
+Patrząc na telefon, możesz go przypadkowo odblokować.
+
+Inna osoba może odblokować Twój telefon, zbliżając go do Twojej twarzy.
+
+Istnieje możliwość, że ktoś bardzo podobny do Ciebie (np. rodzeństwo) odblokuje Twój telefon."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Używaj rozpoznawania twarzy do odblokowywania telefonu.
+
+Pamiętaj:
+Nie można mieć kilku skonfigurowanych modeli twarzy jednocześnie. Jeśli chcesz dodać inny model twarzy, usuń bieżący.
+
+Patrząc na telefon, możesz go przypadkowo odblokować.
+
+Inna osoba może odblokować Twój telefon, zbliżając go do Twojej twarzy (nawet przy zamkniętych oczach).
+
+Istnieje możliwość, że ktoś bardzo podobny do Ciebie (np. rodzeństwo) odblokuje Twój telefon."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Konfigurowanie rozpoznawania twarzy</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">Na następnym ekranie przytrzymaj telefon na wysokości oczu</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Jeśli nosisz okulary, możesz mieć je założone podczas konfiguracji.</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Usuń bieżący model twarzy, aby ponownie skonfigurować rozpoznawanie twarzy.
+
+Model twarzy zostanie trwale i bezpiecznie usunięty.
+
+Gdy tak się stanie, do odblokowywania telefonu trzeba będzie używać kodu PIN, wzoru lub hasła."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Usuń bieżący model twarzy, aby ponownie skonfigurować rozpoznawanie twarzy.
+
+Model twarzy zostanie trwale i bezpiecznie usunięty.
+
+Gdy tak się stanie, do odblokowywania telefonu trzeba będzie używać odcisku palca, kodu PIN, wzoru lub hasła."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">Aby odblokować telefon, musisz mieć otwarte oczy. Jeśli masz na sobie okulary przeciwsłoneczne, najlepiej je zdejmij.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Teraz możesz odblokowywać swój telefon za pomocą twarzy</string>
+</resources>

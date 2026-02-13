@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"Калі ў вас ёсць ахоўная плёнка, для большай эфектыўнасці нанясіце яе да таго, як наладзіце сканер адбіткаў пальцаў.
+
+Каб забяспечыць найбольшую эфектыўнасць, выкарыстоўвайце ахоўную плёнку, якая мае сертыфікат Made for Google. Калі выкарыстоўваць іншыя ахоўныя плёнкі, сканер адбіткаў пальцаў можа не працаваць."</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">Нахіліце палец і дакраніцеся яго кончыкам да датчыка</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">Павярніце палец і дакраніцеся яго левым краем да датчыка</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">Павярніце палец зноў і дакраніцеся яго правым краем</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">Ачысціце экран вакол датчыка</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">Пратрыце экран, каб ачысціць яго ад плям і бруду. Гэта неабходна для атрымання больш выразных відарысаў адбітка пальца.</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">Перад тым як працягнуць, ачысціце экран</string>
+</resources>

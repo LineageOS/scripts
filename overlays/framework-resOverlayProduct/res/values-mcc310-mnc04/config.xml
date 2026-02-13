@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Whether the device should automatically switch away from Wi-Fi networks that lose
+         Internet access. Actual device behaviour is controlled by
+         Settings.Global.NETWORK_AVOID_BAD_WIFI. This is the default value of that setting. -->
+    <integer name="config_networkAvoidBadWifi">0</integer>
+
+    <!-- This setting is deprecated, please use
+         com.android.networkstack.tethering.R.array.config_mobile_hotspot_provision_app instead. -->
+    <string-array name="config_mobile_hotspot_provision_app">
+        <item>com.google.android.tetheringentitlement</item>
+        <item>com.google.android.tetheringentitlement.CarrierEntitlementActivity</item>
+    </string-array>
+
+    <!-- This setting is deprecated, please use
+         com.android.networkstack.tethering.R.string.config_mobile_hotspot_provision_app_no_ui
+         instead. -->
+    <string name="config_mobile_hotspot_provision_app_no_ui">com.google.android.carrierentitlement.SILENT_ENTITLEMENT_CHECK</string>
+
+    <!-- This setting is deprecated, please use
+         com.android.networkstack.tethering.R.string.config_mobile_hotspot_provision_response
+         instead. -->
+    <string name="config_mobile_hotspot_provision_response">com.google.android.carrierentitlement.SILENT_ENTITLEMENT_CHECK_RESULT</string>
+
+    <!-- Default network policy warning threshold, in megabytes. -->
+    <integer name="config_networkPolicyDefaultWarning">-1</integer>
+
+    <!-- Use ERI text for network name on CDMA LTE -->
+    <bool name="config_LTE_eri_for_network_name">false</bool>
+
+    <!-- The apps that need to be hidden when they are disabled -->
+    <string-array name="config_hideWhenDisabled_packageNames">
+        <item>com.google.android.talk</item>
+    </string-array>
+</resources>

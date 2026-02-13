@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.android.phone.overlay.product">
+    <overlay android:targetPackage="com.android.phone"
+             android:isStatic="true"
+             android:priority="1" />
+</manifest>

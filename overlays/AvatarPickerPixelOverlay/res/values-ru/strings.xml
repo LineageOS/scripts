@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Инструмент выбора аватара в Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">Рисунок, на котором изображены два темно-зеленых полукруга на светло-зеленом фоне</string>
+
+    <string name="desc_ProfileIcons10">Рисунок, на котором изображена оранжевая бабочка на желтом фоне</string>
+
+    <string name="desc_ProfileIcons11">Черный объект в форме носа с закругленными краями на темно-сером фоне</string>
+
+    <string name="desc_ProfileIcons12">Черный объект в форме клевера с закругленными краями на светло-сером фоне</string>
+
+    <string name="desc_ProfileIcons13">Светло-фиолетовый волнистый круг на темно-фиолетовом фоне</string>
+
+    <string name="desc_ProfileIcons14">Светло-синий объект в форме клевера с закругленными краями на оранжевом фоне</string>
+
+    <string name="desc_ProfileIcons15">Светло-зеленый шестиугольник с закругленными краями на темно-зеленом фоне</string>
+
+    <string name="desc_ProfileIcons16">Черный объект в форме ромба с закругленными краями на светло-сером фоне</string>
+
+    <string name="desc_ProfileIcons17">Рисунок, на котором изображен оранжевый лист на желтом фоне</string>
+
+    <string name="desc_ProfileIcons18">Рисунок, на котором изображена планета Сатурн на персиковом фоне</string>
+
+    <string name="desc_ProfileIcons19">Рисунок, на котором изображены белые и оранжевые звезды и круги с небесным узором на черном фоне</string>
+
+    <string name="desc_ProfileIcons2">Абстрактный рисунок, на котором изображены черно-белые пересекающиеся цилиндры</string>
+
+    <string name="desc_ProfileIcons20">Рисунок, на котором изображена собака с голубыми ушами и белой мордой на желтом фоне</string>
+
+    <string name="desc_ProfileIcons21">Рисунок, на котором изображен белый голубь, летящий с оливковой ветвью, на фиолетовом фоне</string>
+
+    <string name="desc_ProfileIcons22">Рисунок, на котором изображена собака с черными ушами и белой мордой на синем фоне</string>
+
+    <string name="desc_ProfileIcons23">Рисунок, на котором изображен розовый цветок с зелеными листьями на кремовом фоне</string>
+
+    <string name="desc_ProfileIcons24">Абстрактный рисунок, на котором изображены шесть синих цилиндров на красном фоне</string>
+
+    <string name="desc_ProfileIcons3">Абстрактный рисунок, на котором изображен объект в форме клевера голубого цвета на темно-синем фоне</string>
+
+    <string name="desc_ProfileIcons4">Абстрактный рисунок, на котором изображены два розовых трехмерных треугольника</string>
+
+    <string name="desc_ProfileIcons5">Абстрактный рисунок, на котором изображены бирюзовые слои на желтом фоне</string>
+
+    <string name="desc_ProfileIcons6">Абстрактный рисунок, на котором изображены фиолетовые камни на зеленом фоне</string>
+
+    <string name="desc_ProfileIcons7">Абстрактный рисунок, на котором изображены пять белых цветов, состоящих из геометрических фигур, на оранжевом фоне</string>
+
+    <string name="desc_ProfileIcons8">Абстрактный рисунок, на котором изображены три ягоды черники на розовом фоне</string>
+
+    <string name="desc_ProfileIcons9">Рисунок, на котором изображен лимон с черным листом на зеленом фоне</string>
+</resources>

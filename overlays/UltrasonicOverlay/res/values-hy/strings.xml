@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"Եթե էկրանի պաշտպանիչ ունեք, փակցրեք այն նախքան ձեր մատնահետքը կարգավորելը։
+
+Խորհուրդ ենք տալիս օգտագործել Made for Google հավաստագրմամբ էկրանի պաշտպանիչ։ Այլ պաշտպանիչներով սարքերը կարող են չճանաչել ձեր մատնահետքը։"</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">Հպեք մատի ծայրով</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">Հպեք մատի ձախ եզրով</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">Այժմ հպեք մատի աջ եզրով</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">Մատնահետքի հատվածում մաքրեք էկրանը</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">Սրբեք էկրանը՝ բոլոր հետքերը և բծերը մաքրելու համար։ Սա կօգնի գրանցել մատնահետքի պարզ պատկերներ։</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">Շարունակելուց առաջ մաքրեք ձեր էկրանը</string>
+</resources>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">استخدام وجهك لفتح قفل الهاتف</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"يمكنك استخدام وجهك لفتح قفل الهاتف
+
+ملاحظة:
+لا يمكنك إعداد أكثر من وجه واحد في كل مرة. لإضافة وجه آخر، عليك حذف الوجه الحالي.
+
+قد تفتح قفل الهاتف بدون قصد بمجرّد النظر إليه.
+
+ويمكن لشخص آخر فتح قفل هاتفك عند تقريبه من وجهك.
+
+وكذلك، يمكن لشخص يشبهك كثيرًا، مثل شقيقك التوأم، فتح قفل هاتفك."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"يمكنك استخدام وجهك لفتح قفل الهاتف
+
+ملاحظة:
+لا يمكنك إعداد أكثر من وجه واحد في كل مرة. لإضافة وجه آخر، عليك حذف الوجه الحالي.
+
+قد تفتح قفل الهاتف بدون قصد بمجرّد النظر إليه.
+
+ويمكن لشخص آخر فتح قفل هاتفك عند تقريبه من وجهك، حتى وأنت مغلق العينين.
+
+وكذلك، يمكن لشخص يشبهك كثيرًا، مثل شقيقك التوأم، فتح قفل هاتفك."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">كيفية إعداد ميزة \"فتح الجهاز ببصمة الوجه\"</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">في الشاشة التالية، يُرجى رفع هاتفك إلى مستوى العينين</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">يمكنك ارتداء النظارات أثناء عملية الإعداد في حال اعتيادك على ارتدائها</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"يمكنك حذف نموذج الوجه الحالي لإعادة إعداد ميزة \"فتح الجهاز ببصمة الوجه\".
+
+سيتم حذف نموذج الوجه نهائيًا وبأمان.
+
+بعد حذفه، ستحتاج إلى رقم التعريف الشخصي أو النقش أو كلمة المرور لفتح قفل الهاتف."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"يمكنك حذف نموذج الوجه الحالي لإعادة إعداد ميزة \"فتح الجهاز ببصمة الوجه\".
+
+سيتم حذف نموذج الوجه نهائيًا وبأمان.
+
+بعد حذفه، ستحتاج إلى بصمة الإصبع أو رقم التعريف الشخصي أو النقش أو كلمة المرور لفتح قفل الهاتف."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">لفتح قفل الهاتف، يجب النظر إليه بعينين مفتوحتين. وللحصول على أفضل النتائج، يُرجى خلع النظارات الشمسية.</string>
+
+    <string name="security_settings_face_enroll_finish_description">يمكنك الآن اختيار هاتفك واستخدام وجهك لفتح قفله.</string>
+</resources>

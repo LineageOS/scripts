@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="setup_compat_footer_button_font_family">google-sans-medium</string>
+
+    <string name="setup_design_account_name_font_family">google-sans-flex</string>
+
+    <string name="setup_design_content_font_family">google-sans-flex</string>
+
+    <string name="setup_design_content_info_font_family">google-sans-flex</string>
+
+    <string name="setup_design_description_font_family">google-sans-flex</string>
+
+    <string name="setup_design_description_link_font_family">google-sans-flex</string>
+
+    <string name="setup_design_header_font_family">google-sans-flex</string>
+
+    <string name="setup_design_header_font_variation_settings">'CRSV' 0.0, 'FILL' 0.0, 'GRAD' 0.0, 'HEXP' 0.0, 'ROND' 100.0, 'opsz' 16.0, 'slnt' 0.0, 'wdth' 100.0, 'wght' 500.0</string>
+
+    <string name="setup_design_items_summary_font_family">google-sans-flex</string>
+
+    <string name="setup_design_items_title_font_family">google-sans-flex</string>
+
+    <string name="setup_design_items_title_font_variation_settings">'CRSV' 0.0, 'FILL' 0.0, 'GRAD' 0.0, 'HEXP' 0.0, 'ROND' 100.0, 'opsz' 16.0, 'slnt' 0.0, 'wdth' 100.0, 'wght' 500.0</string>
+</resources>

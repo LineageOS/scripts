@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Name for an app setting that lets the user authenticate for that app using biometrics (e.g. fingerprint or face). [CHAR LIMIT=30] -->
+    <string name="biometric_app_setting_name">মুখাৱয়ব বা ফিংগাৰপ্ৰিণ্ট ব্যৱহাৰ কৰক</string>
+
+    <!-- Name for an app setting that lets the user authenticate for that app using biometrics (e.g. fingerprint or face) or their screen lock credential (i.e. PIN, pattern, or password). [CHAR LIMIT=70] -->
+    <string name="biometric_or_screen_lock_app_setting_name">মুখাৱয়ব, ফিংগাৰপ্ৰিণ্ট অথবা স্ক্ৰীন লক ব্যৱহাৰ কৰক</string>
+
+    <!-- Subtitle shown on the system-provided biometric dialog, asking the user to authenticate with a biometric (e.g. fingerprint or face). [CHAR LIMIT=70] -->
+    <string name="biometric_dialog_default_subtitle">অব্যাহত ৰাখিবলৈ আপোনাৰ মুখাৱয়ব অথবা ফিংগাৰপ্ৰিণ্ট ব্যৱহাৰ কৰক</string>
+
+    <!-- Subtitle shown on the system-provided biometric dialog, asking the user to authenticate with a biometric (e.g. fingerprint or face) or their screen lock credential (i.e. PIN, pattern, or password). [CHAR LIMIT=90] -->
+    <string name="biometric_or_screen_lock_dialog_default_subtitle">অব্যাহত ৰাখিবলৈ আপোনাৰ মুখাৱয়ব, ফিংগাৰপ্ৰিণ্ট অথবা স্ক্ৰীন লক ব্যৱহাৰ কৰক</string>
+
+    <!-- Notification name shown when the system requires the user to re-enroll their face. [CHAR LIMIT=NONE] -->
+    <string name="face_recalibrate_notification_name">ফে’চ আনলক</string>
+
+    <!-- Notification title shown when the system requires the user to re-enroll their face. [CHAR LIMIT=NONE] -->
+    <string name="face_recalibrate_notification_title">অনুগ্ৰহ কৰি আপোনাৰ মুখাৱয়ব পুনৰ পঞ্জীয়ন কৰক</string>
+
+    <!-- Notification content shown when the system requires the user to re-enroll their face. [CHAR LIMIT=NONE] -->
+    <string name="face_recalibrate_notification_content">ফেচ আনলক সুবিধাটোৱে আপুনি পুনৰ পঞ্জীয়ন নকৰালৈকে কাম নকৰিব পাৰে</string>
+
+    <!-- Array containing custom messages shown during face acquisition from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="face_acquired_vendor"/>
+
+    <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="face_error_vendor">
+        <item>প্ৰমাণপত্ৰৰ ম্যাদ উকলিছে</item>
+        <item>ছেন্সৰটো সাময়িকভাৱে অক্ষম হৈ আছে</item>
+        <item>কেলিব্ৰেশ্বন সম্পৰ্কীয় আসোঁৱাহ</item>
+        <item>ফেচ আনলক সুবিধাটো উপলব্ধ নহয়। ফ’নটো বহুত গৰম হৈছে।</item>
+        <item>ফেচ আনলক সুবিধাটো পুনৰ ছেট আপ কৰিব লাগিব</item>
+    </string-array>
+
+    <!-- Title for the harmful app warning dialog. [CHAR LIMIT=40] -->
+    <string name="harmful_app_warning_title">Play Protectৰ সকীয়নি</string>
+</resources>

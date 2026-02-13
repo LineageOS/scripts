@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- String defining utterance for the assistant button for screen readers -->
+    <string name="assistant_utterance">Google Жардамчы</string>
+</resources>

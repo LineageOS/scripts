@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- boolean indicating whether the WiFi chipset has 5GHz band support.
+         Note: This config is replacing the config_wifi_dual_band_support
+         since more bands may now be supported (such as 6GHz), the naming dual_band
+         is no longer indicative, and a separate config now exists for each band -->
+    <bool name="config_wifi5ghzSupport">true</bool>
+
+    <!-- boolean indicating whether the WiFi chipset has 6GHz band support -->
+    <bool name="config_wifi6ghzSupport">true</bool>
+
+    <!-- Indicates that 11ax mode is supported on this device
+           Note that if this flag is set to true, then 11ax is assumed to be supported.
+           However, if it is left to the default value of false, the 11ax support will
+           be checked via NL80211 interface -->
+    <bool name="config_wifi11axSupportOverride">true</bool>
+
+    <!-- Boolean indicating whether 802.11r Fast BSS Transition is enabled on this platform -->
+    <bool name="config_wifi_fast_bss_transition_enabled">true</bool>
+
+    <!-- Boolean indicating whether the wifi chipset supports background scanning mechanism.
+         This mechanism allows the host to remain in suspend state and the dongle to actively
+         scan and wake the host when a configured SSID is detected by the dongle. This chipset
+         capability can provide power savings when wifi needs to be always kept on. -->
+    <bool name="config_wifi_background_scan_support">true</bool>
+
+    <!-- Boolean indicating whether or not to revert to default country code when cellular
+         radio is unable to find any MCC information to infer wifi country code from -->
+    <bool name="config_wifi_revert_country_code_on_cellular_loss">false</bool>
+
+    <!-- Array indicating wifi fatal firmware alert error code list from driver -->
+    <integer-array name="config_wifi_fatal_firmware_alert_error_code_list">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>8</item>
+    </integer-array>
+
+    <!-- Boolean indicating whether or not wifi should turn off when emergency call is made -->
+    <bool name="config_wifi_turn_off_during_emergency_call">true</bool>
+
+    <!-- Integer parameters of the wifi to cellular handover feature
+         wifi should not stick to bad networks -->
+    <!-- Integer threshold for low network score, should be somewhat less than the entry threshhold -->
+    <integer name="config_wifi_framework_wifi_score_bad_rssi_threshold_5GHz">-80</integer>
+
+    <!-- Integer threshold, do not connect to APs with RSSI lower than the entry threshold -->
+    <integer name="config_wifi_framework_wifi_score_entry_rssi_threshold_5GHz">-77</integer>
+    <integer name="config_wifi_framework_wifi_score_bad_rssi_threshold_24GHz">-83</integer>
+    <integer name="config_wifi_framework_wifi_score_entry_rssi_threshold_24GHz">-80</integer>
+
+    <!-- boolean indicating whether or not to disable shutdown idle instance timer in the bridged mode when connected to a power source -->
+    <bool name="config_wifiFrameworkSoftApDisableBridgedModeShutdownIdleInstanceWhenCharging">true</bool>
+
+    <!-- Integer indicating maximum hardware supported client number of soft ap -->
+    <integer name="config_wifiHardwareSoftapMaxClientCount">32</integer>
+
+    <!-- Integer delay in milliseconds before set wlan interface up during watchdog recovery -->
+    <integer name="config_wifi_framework_recovery_timeout_delay">3000</integer>
+
+    <!-- Boolean indicating performing a partial initial scan is enabled -->
+    <bool name="config_wifiEnablePartialInitialScan">true</bool>
+
+    <!-- Configure the max number of new channels to add into the initial partial scan list per network.
+         If equals to 0, it means there's no limit on the max number of channels to include per network.-->
+    <integer name="config_wifiInitialPartialScanMaxNewChannelsPerNetwork">3</integer>
+
+    <!-- Wifi driver supports Automatic channel selection (ACS) for softap -->
+    <bool name="config_wifi_softap_acs_supported">true</bool>
+
+    <!-- Wifi driver supports WPA3 Simultaneous Authentication of Equals (WPA3-SAE) for softap -->
+    <bool name="config_wifi_softap_sae_supported">true</bool>
+
+    <!-- Wifi driver supports IEEE80211AC for softap -->
+    <bool name="config_wifi_softap_ieee80211ac_supported">true</bool>
+
+    <!-- Wifi driver supports IEEE80211AX for softap -->
+    <bool name="config_wifiSoftapIeee80211axSupported">true</bool>
+
+    <!-- Wifi driver supports 6GHz band for softap when chip support 6GHz -->
+    <bool name="config_wifiSoftap6ghzSupported">true</bool>
+
+    <!-- Indicates that connected MAC randomization is supported on this device -->
+    <bool name="config_wifi_connected_mac_randomization_supported">true</bool>
+
+    <!-- Indicates that non-persistent MAC randomization is allowed on open networks that do not
+     use captive portals -->
+    <bool name="config_wifiAllowNonPersistentMacRandomizationOnOpenSsids">true</bool>
+
+    <!-- Indicates that p2p MAC randomization is supported on this device -->
+    <bool name="config_wifi_p2p_mac_randomization_supported">true</bool>
+
+    <!-- Indicates that AP mode MAC randomization is supported on this device -->
+    <bool name="config_wifi_ap_mac_randomization_supported">true</bool>
+
+    <!-- Indicates that bridged AP mode is supported on this device provided that
+     the device interface combination allows for it -->
+    <bool name="config_wifiBridgedSoftApSupported">true</bool>
+
+    <!-- Indicates that STA + bridged AP concurrency mode is supported on this device provided
+     that the device interface combination allows for it-->
+    <bool name="config_wifiStaWithBridgedSoftApConcurrencySupported">true</bool>
+
+    <!-- Indicates that wifi link probing is supported on this device -->
+    <bool name="config_wifi_link_probing_supported">true</bool>
+
+    <!-- Configure wifi tcp buffersizes in the form:
+         rmem_min,rmem_def,rmem_max,wmem_min,wmem_def,wmem_max -->
+    <string name="config_wifi_tcp_buffers">524288,2097152,8388608,262144,524288,4194304</string>
+
+    <!-- Do not translate. Default access point SSID used for tethering -->
+    <string name="wifi_tether_configure_ssid_default">Pixel</string>
+
+    <!-- Indicates that a full bugreport should be triggered when wifi diagnostics detects an error on non-user (i.e debug) builds -->
+    <bool name="config_wifi_diagnostics_bugreport_enabled">true</bool>
+
+    <!--
+    Controls the mapping between RSSI and RSSI levels.
+
+    RSSI                                    RSSI Level
+    (-infinity, thresholds[0])                       0
+    [threshold[0], threshold[1])                     1
+    [threshold[1], threshold[2])                     2
+    ...                                            ...
+    [threshold[len-2], threshold[len-1])         len-1
+    [threshold[len-1], +infinity)                  len
+
+    where:
+        [a, b) is the range of integers `n` such that a <= n < b
+        `threshold[i]` represents the i'th element of the config_wifiRssiLevelThresholds array
+        and `len` is the length of the config_wifiRssiLevelThresholds array.
+    -->
+    <integer-array name="config_wifiRssiLevelThresholds">
+        <item>-99</item>
+        <item>-88</item>
+        <item>-77</item>
+        <item>-66</item>
+    </integer-array>
+
+    <!-- Enable the feature of adjusting link layer stats polling interval based on
+    device mobility state and client mode RSSI monitoring. -->
+    <bool name="config_wifiAdjustPollRssiIntervalEnabled">true</bool>
+
+    <!-- Override channel utilization estimation with fixed value -->
+    <bool name="config_wifiChannelUtilizationOverrideEnabled">false</bool>
+
+    <!-- Enable WPA2 to WPA3 auto-upgrade -->
+    <bool name="config_wifiSaeUpgradeEnabled">true</bool>
+
+    <!-- Enable WPA2 to WPA3 auto-upgrade offload to capable Driver/Firmware -->
+    <bool name="config_wifiSaeUpgradeOffloadEnabled">true</bool>
+
+    <!-- Number of self recoveries to be attempted per hour. Any fatal errors beyond this will
+         cause the wifi stack to turn wifi off and wait for user input.
+         Set to 0 to turn off recovery attempts and always turn off wifi on failures -->
+    <integer name="config_wifiMaxNativeFailureSelfRecoveryPerHour">10</integer>
+
+    <!-- Enable adding minimum confirmation duration when sending network score to connectivity service. -->
+    <bool name="config_wifiMinConfirmationDurationSendNetworkScoreEnabled">true</bool>
+
+    <!-- Enable Make-Before-Break Wifi network switching.
+         Note: this is conditional on the device supporting dual concurrent STAs. -->
+    <bool name="config_wifiMultiStaNetworkSwitchingMakeBeforeBreakEnabled">true</bool>
+
+    <!-- Enable concurrent peer to peer + internet connectivity
+         Note: this is conditional on the device supporting dual concurrent STAs. -->
+    <bool name="config_wifiMultiStaLocalOnlyConcurrencyEnabled">true</bool>
+
+    <!-- Enable the default coex channel avoidance algorithm and disable the functionality of
+         WifiManager#setCoexUnsafeChannels. -->
+    <bool name="config_wifiDefaultCoexAlgorithmEnabled">true</bool>
+
+    <!-- Whether to use the explicit vendor HAL API: IWifiStaIface.setRoamingState for disabling fw roaming (only needed if
+         setting the bssid on the connection alone does not disable fw roaming on this chip) -->
+    <bool name="config_wifiUseHalApiToDisableFwRoaming">true</bool>
+
+    <!-- Indicates that SAE Hash-to-Element is supported on this device -->
+    <bool name="config_wifiSaeH2eSupported">true</bool>
+
+    <!-- Enable aggregation of Wifi link layer radio stats from all radios.
+         Defaults to false will fetch radio stats only from Radio 0. This is to avoid
+         incorrect behavior due to driver/firmware returning bogus radio stats from other radios.
+         Note: Full DBS capable devices interested in radio stats from all the radios can enable this
+         configuration. -->
+    <bool name="config_wifiLinkLayerAllRadiosStatsAggregationEnabled">true</bool>
+
+    <!-- Indicates whether or not the WLAN driver supports the NL80211_CMD_REG_CHANGE or
+         NL80211_CMD_WIPHY_REG_CHANGE events which indicate the current country code which is
+         being used by the WLAN driver. If the driver doesn't support these events
+         (configuration is `false`) then the driver must handle the setCountryCode request from
+         HAL as a blocking call. In such a case the country code will be applied
+         immediately after the country code is sent to the driver (if the method returns a
+         success). -->
+    <bool name="config_wifiDriverSupportedNl80211RegChangedEvent">true</bool>
+
+    <!-- Indicate whether the verbose logging is always on -->
+    <!-- 0: verbose logging controlled by user
+         1: verbose logging on by default for userdebug/eng
+         2: verbose logging on by default for all builds -->
+    <integer name="config_wifiVerboseLoggingAlwaysOnLevel">1</integer>
+
+    <!-- boolean indicating whether the caller thread needs to wait for destroyed listeners -->
+    <bool name="config_wifiWaitForDestroyedListeners">true</bool>
+
+    <!-- Boolean indicating whether we should enable the STA current connected indoor channel
+     for SAP, WFD GO, Wi-Fi Aware -->
+    <bool name="config_wifiEnableStaIndoorChannelForPeerNetwork">false</bool>
+
+    <!-- Boolean indicating whether we should enable the STA current connected DFS channel
+         for SAP, WFD GO, Wi-Fi Aware -->
+    <bool name="config_wifiEnableStaDfsChannelForPeerNetwork">true</bool>
+
+    <!-- Boolean indicating whether DTIM multiplier configuration is enabled. DTIM multiplier value
+        is when the system is in the suspended mode. Enabling this feature with the low multiplier
+        in IPv6 mode and the high multiplier in IPv4 only mode ensures the IPv6 address
+        doesn't expire due to missing RA while reducing the power consumption in IPv4 only mode.
+        -->
+    <bool name="config_wifiDtimMultiplierConfigEnabled">true</bool>
+
+    <!-- Boolean indicating whether to disable firmware roaming when the device goes into idle mode.
+         true: firmware roaming will be disabled when the device goes into idle mode and screen
+               is off, and then re-activated when the device exits idle mode or screen is on.
+         false: firmware roaming will not be affected. -->
+    <bool name="config_wifiDisableFirmwareRoamingInIdleMode">true</bool>
+
+    <!-- Boolean indicating whether the framework updates country from scan results when there is
+         no telephony country code. This is applied to all generic cases and might require the
+         regulatory approval (for example, FCC pre-approval is required according to "594280 D01
+         Software Configuration Control v02r01").-->
+    <bool name="config_wifiUpdateCountryCodeFromScanResultGeneric">true</bool>
+
+    <!-- Boolean indicating whether to trigger bugreport for WiFi subsystem restart issue -->
+    <bool name="config_wifi_subsystem_restart_bugreport_enabled">false</bool>
+
+    <!-- Boolean indicating whether the mainline supplicant service should be enabled -->
+    <bool name="config_wifiMainlineSupplicantEnabled">true</bool>
+</resources>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">얼굴로 휴대전화 잠금을 해제하세요.</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"얼굴로 휴대전화 잠금을 해제하세요.
+
+주의사항:
+한 번에 하나의 얼굴만 설정해 둘 수 있습니다. 다른 얼굴을 추가하려면 기존 얼굴을 삭제하세요.
+
+휴대전화를 바라보면 의도치 않게 잠금이 해제될 수 있습니다.
+
+다른 사람이 내 얼굴에 휴대전화를 가져다 대도 잠금이 해제될 수 있습니다.
+
+일란성 쌍둥이와 같이 나와 많이 닮은 사람이 휴대전화의 잠금을 해제할 수도 있습니다."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"얼굴로 휴대전화 잠금을 해제하세요.
+
+주의사항:
+한 번에 하나의 얼굴만 설정해 둘 수 있습니다. 다른 얼굴을 추가하려면 기존 얼굴을 삭제하세요.
+
+휴대전화를 바라보면 의도치 않게 잠금이 해제될 수 있습니다.
+
+다른 사람이 내 얼굴에 휴대전화를 가져다 대면 내가 눈을 감고 있어도 잠금이 해제될 수 있습니다.
+
+일란성 쌍둥이와 같이 나와 많이 닮은 사람이 휴대전화의 잠금을 해제할 수도 있습니다."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">얼굴 인식 잠금 해제 설정 방법</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">다음 화면에서 눈높이에 맞춰 휴대전화를 들어 주세요.</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">평소 안경을 쓰는 경우 설정할 때 안경을 착용해도 됩니다</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"현재 얼굴 모델을 삭제하고 얼굴 인식 잠금 해제를 다시 설정하세요.
+
+얼굴 모델이 영구적으로 안전하게 삭제됩니다.
+
+데이터가 삭제된 후 휴대전화를 잠금 해제하려면 PIN, 패턴 또는 비밀번호가 필요합니다."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"현재 얼굴 모델을 삭제하고 얼굴 인식 잠금 해제를 다시 설정하세요.
+
+얼굴 모델이 영구적으로 안전하게 삭제됩니다.
+
+데이터가 삭제된 후 휴대전화를 잠금 해제하려면 지문, PIN, 패턴 또는 비밀번호가 필요합니다."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">휴대전화를 잠금 해제하려면 눈을 뜨고 있어야 합니다. 제대로 인식할 수 있도록 휴대전화를 잠금 해제할 때는 선글라스를 벗어 주세요.</string>
+
+    <string name="security_settings_face_enroll_finish_description">이제 휴대전화를 보면서 얼굴 인식으로 잠금 해제할 수 있습니다.</string>
+</resources>

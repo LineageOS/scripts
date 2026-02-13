@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">Pixel Imprint से आप फ़िंगरप्रिंट का इस्तेमाल करके अपना फ़ोन अनलॉक कर सकते हैं. डिवाइस को सुरक्षित रखने के लिए, यह ज़रूरी है कि फ़िंगरप्रिंट के अलावा अनलॉक करने का दूसरा विकल्प भी सेट किया जाए.</string>
+
+    <!-- Summary for suggested actions for settings up a fingerprint lock (phone) [CHAR LIMIT=55] -->
+    <string name="suggested_fingerprint_lock_settings_summary">फ़ोन अनलॉक करने के लिए Pixel Imprint का इस्तेमाल करें</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Pixel Imprint</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Pixel Imprint की सुविधा सेट अप करें</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">Pixel Imprint को अनुमति दें</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature, when fingerprint unlock is disabled by device admin [CHAR LIMIT=40] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled">Pixel Imprint</string>
+
+    <!-- Introduction detail message shown in fingerprint enrollment dialog, when fingerprint unlock is disabled by device admin [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled">"Pixel Imprint से अपने फ़िंगरप्रिंट का इस्तेमाल कर, आप खरीदारियों की अनुमति दे सकते हैं या ऐप्लिकेशन में साइन इन कर सकते हैं.
+
+किसी दूसरे व्यक्ति के फ़िंगरप्रिंट जोड़ते समय सावधानी बरतें. जोड़े गए किसी भी फ़िंगरप्रिंट से ये काम किए जा सकेंगे.
+
+ध्यान दें: आप इस डिवाइस को अनलॉक करने के लिए, अपने फ़िंगरप्रिंट का इस्तेमाल नहीं कर सकते. ज़्यादा जानकारी के लिए, अपने संगठन के एडमिन से संपर्क करें."</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">Pixel Imprint + पैटर्न</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">Pixel Imprint + पिन</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">Pixel Imprint + पासवर्ड</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">Pixel Imprint के बिना जारी रखें</string>
+
+    <!-- Display settings screen, display white balance settings title [CHAR LIMIT=30] -->
+    <string name="display_white_balance_title">अडैप्टिव टोन</string>
+
+    <!-- Display settings screen, display white balance settings summary [CHAR LIMIT=NONE] -->
+    <string name="display_white_balance_summary">डिसप्ले आस-पास की लाइट के हिसाब से, अपने-आप वॉर्म या कूल टोन में बदल जाता है</string>
+</resources>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Als je Ontgrendelen met vingerafdruk gebruikt, worden de afbeeldingen gebruikt om je vingerafdrukmodel te updaten. De afbeeldingen en het model van je vingerafdruk worden beveiligd opgeslagen op je telefoon en verlaten deze nooit. Alle verwerking vindt beveiligd plaats op je telefoon.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Als je kind ontgrendelen met vingerafdruk gebruikt, worden foto's gebruikt om het vingerafdrukmodel van je kind te updaten. De vingerafdrukfoto's en het vingerafdrukmodel van je kind worden beveiligd opgeslagen op de telefoon en verlaten deze nooit. Alle verwerking vindt beveiligd plaats op de telefoon.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Je kunt altijd de afbeeldingen en het model van je vingerafdruk verwijderen of Ontgrendelen met vingerafdruk uitzetten in Instellingen. Afbeeldingen en modellen van vingerafdrukken worden opgeslagen op de telefoon totdat je ze verwijdert.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Jij en je kind kunnen op elk moment de vingerafdrukfoto's en het vingerafdrukmodel van het kind verwijderen of ontgrendelen met vingerafdruk uitzetten in Instellingen. Vingerafdrukfoto's en -modellen worden opgeslagen op de telefoon totdat ze worden verwijderd.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">Met Ontgrendelen met vingerafdruk kun je je telefoon ontgrendelen met je vingerafdruk. Uit beveiligingsoverwegingen is voor deze optie een extra schermvergrendeling vereist.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Ontgrendelen met vingerafdruk</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">Ontgrendelen met vingerafdruk voor werk</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Ontgrendelen met vingerafdruk instellen</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">Ontgrendelen met vingerafdruk toestaan</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">Ontgrendelen met vingerafdruk maakt een uniek model van je vingerafdruk om te verifiëren dat jij het bent. Tijdens het instelproces maak je afbeeldingen van je vingerafdruk in verschillende posities om een vingerafdrukmodel te maken.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">Ontgrendelen met vingerafdruk maakt een uniek model van de vingerafdruk van je kind om je kind te herkennen tijdens verificatie. Tijdens het instelproces maakt je kind foto's van de vingerafdruk in verschillende posities om een vingerafdrukmodel te maken.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">Ga naar een reparateur of naar g.co/pixel/fingerprintunlock.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">Ontgrendelen met vingerafdruk gebruiken</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">Patroon • Vingerafdruk</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">Pincode • Vingerafdruk</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">Wachtwoord • Vingerafdruk</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">Doorgaan zonder Ontgrendelen met vingerafdruk</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"Een patroon beschermt je telefoon bij verlies of diefstal.
+
+Met deze actie verwijder je ook de afbeeldingen en het model van vingerafdrukken op je apparaat. Je kunt je vingerafdruk niet gebruiken voor verificatie in apps."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"Een patroon beschermt je telefoon bij verlies of diefstal.
+
+Met deze actie verwijder je de afbeeldingen en het model van vingerafdrukken op je apparaat. Je gezichtsmodel wordt ook definitief en op een beveiligde manier verwijderd. Je kunt je gezicht of vingerafdruk niet gebruiken voor verificatie in apps."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"Een pincode beschermt je telefoon bij verlies of diefstal.
+
+Met deze actie verwijder je ook de afbeeldingen en het model van vingerafdrukken op je apparaat. Je kunt je vingerafdruk dan niet meer gebruiken voor verificatie in apps."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"Een pincode beschermt je telefoon bij verlies of diefstal.
+
+Met deze actie verwijder je de afbeeldingen en het model van vingerafdrukken op je apparaat. Je gezichtsmodel wordt ook definitief en op een beveiligde manier verwijderd. Je kunt je gezicht of vingerafdruk niet gebruiken voor verificatie in apps."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"Een wachtwoord beschermt je telefoon bij verlies of diefstal.
+
+Met deze actie verwijder je ook de afbeeldingen en het model van vingerafdrukken op je apparaat. Je kunt je vingerafdruk niet gebruiken voor verificatie in apps."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"Een wachtwoord beschermt je telefoon bij verlies of diefstal.
+
+Met deze actie verwijder je de afbeeldingen en het model van vingerafdrukken op je apparaat. Je gezichtsmodel wordt ook definitief en op een beveiligde manier verwijderd. Je kunt je gezicht of vingerafdruk niet gebruiken voor verificatie in apps."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"Functies voor apparaatbeveiliging werken niet zonder je schermvergrendeling.
+
+Met deze actie verwijder je ook de afbeeldingen en het model van vingerafdrukken op je apparaat. Je kunt je vingerafdruk niet gebruiken voor verificatie in apps."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"Functies voor apparaatbeveiliging werken niet zonder je schermvergrendeling.
+
+Met deze actie verwijder je de afbeeldingen en het model van vingerafdrukken op je apparaat. Je gezichtsmodel wordt ook definitief en op een beveiligde manier verwijderd. Je kunt je gezicht of vingerafdruk niet gebruiken voor verificatie in apps."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">Ontgrendelen met vingerafdruk wordt steeds beter naarmate je de functie vaker gebruikt om je telefoon te ontgrendelen of in apps te bevestigen dat jij het bent</string>
+</resources>

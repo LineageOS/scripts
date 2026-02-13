@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Use o seu rosto para desbloquear o telemóvel</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Use o seu rosto para desbloquear o telemóvel.
+
+Não se esqueça:
+Só pode ter um rosto configurado de cada vez. Para adicionar outro rosto, elimine o atual.
+
+Pode desbloquear o telemóvel involuntariamente ao olhar para o mesmo.
+
+Alguém pode desbloquear o telemóvel se o segurar junto ao seu rosto.
+
+Alguém muito parecido consigo, como um irmão com traços semelhantes, pode desbloquear o telemóvel."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Use o seu rosto para desbloquear o telemóvel.
+
+Não se esqueça:
+Só pode ter um rosto configurado de cada vez. Para adicionar outro rosto, elimine o atual.
+
+Pode desbloquear o telemóvel involuntariamente ao olhar para o mesmo.
+
+Alguém pode desbloquear o telemóvel se o segurar junto ao seu rosto, mesmo com os olhos fechados.
+
+Alguém muito parecido consigo, como um irmão com traços semelhantes, pode desbloquear o telemóvel."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Como configurar o Desbloqueio facial</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">No ecrã seguinte, mantenha o telemóvel ao nível dos olhos</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Se costuma usar óculos, pode usá-los durante a configuração</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Elimine o seu modelo de rosto atual para configurar o Desbloqueio facial novamente.
+
+O seu modelo de rosto será eliminado permanentemente e em segurança.
+
+Após a eliminação, precisará do seu PIN, padrão ou palavra-passe para desbloquear o telemóvel."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Elimine o seu modelo de rosto atual para configurar o Desbloqueio facial novamente.
+
+O seu modelo de rosto será eliminado permanentemente e em segurança.
+
+Após a eliminação, precisará da sua impressão digital, PIN, padrão ou palavra-passe para desbloquear o telemóvel."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">Para desbloquear o telemóvel, os olhos têm de estar abertos. Para obter os melhores resultados, tire os óculos de sol ao desbloquear o telemóvel</string>
+
+    <string name="security_settings_face_enroll_finish_description">Agora, pode pegar no seu telemóvel e usar o seu rosto para o desbloquear</string>
+</resources>

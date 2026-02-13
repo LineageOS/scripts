@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <integer-array name="face_enroll_primary_buckets">
+        <item>2</item>
+        <item>7</item>
+        <item>12</item>
+        <item>17</item>
+    </integer-array>
+</resources>

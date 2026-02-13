@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Options for screensaver "When to start" for devices that do not support screensavers
+         while on battery -->
+    <string-array name="when_to_start_screensaver_entries_no_battery">
+        <item>@string/screensaver_settings_summary_sleep</item>
+        <item>@string/screensaver_settings_summary_postured_and_charging</item>
+    </string-array>
+
+    <!-- Values for screensaver "When to start" for devices that do not support screensavers
+         while on battery -->
+    <string-array name="when_to_start_screensaver_values_no_battery">
+        <item>while_charging_only</item>
+        <item>while_postured_only</item>
+    </string-array>
+
+    <string-array name="when_to_start_hubmode_entries">
+        <item>@string/when_to_show_hubmode_never</item>
+        <item>@string/when_to_show_hubmode_charging</item>
+        <item>@string/when_to_show_hubmode_charging_and_upright</item>
+    </string-array>
+
+    <string-array name="when_to_start_hubmode_values">
+        <item>never</item>
+        <item>while_charging</item>
+        <item>while_charging_and_upright</item>
+    </string-array>
+</resources>

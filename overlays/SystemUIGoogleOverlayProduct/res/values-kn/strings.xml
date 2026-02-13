@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="branded_monitoring_description_app_personal">Google ತನ್ನ ಸರ್ವರ್‌ಗಳ ಮೂಲಕ ಡೇಟಾವನ್ನು ಕಳುಹಿಸುವ ಮೂಲಕ ಈ ಕನೆಕ್ಷನ್ ಅನ್ನು ಸಂರಕ್ಷಿಸುತ್ತಿದೆ</string>
+
+    <string name="branded_vpn_footer">Google ನಿಂದ ಕನೆಕ್ಷನ್ ಅನ್ನು ಸಂರಕ್ಷಿಸಲಾಗಿದೆ</string>
+</resources>

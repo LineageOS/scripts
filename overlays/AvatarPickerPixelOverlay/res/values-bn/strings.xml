@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel অবতার বাছাইকারী</string>
+
+    <string name="desc_ProfileIcons1">হালকা সবুজ ব্যাকগ্রাউন্ডে দুটি গাঢ়-সবুজ অর্ধ-বৃত্তাকার মজাদার ইলাস্ট্রেশন</string>
+
+    <string name="desc_ProfileIcons10">হলুদ ব্যাকগ্রাউন্ডে কমলা রঙের প্রজাপতির মজাদার ইলাস্ট্রেশন</string>
+
+    <string name="desc_ProfileIcons11">গাঢ় ধূসর ব্যাকগ্রাউন্ডে গোলাকার প্রান্ত সহ কালো নাকের শেপ</string>
+
+    <string name="desc_ProfileIcons12">হালকা ধূসর ব্যাকগ্রাউন্ডে গোলাকার প্রান্ত সহ কালো ক্লোভার শেপ</string>
+
+    <string name="desc_ProfileIcons13">গাঢ় বেগুনি ব্যাকগ্রাউন্ডে হালকা বেগুনি রঙের উইগলি সার্কেল</string>
+
+    <string name="desc_ProfileIcons14">কমলা ব্যাকগ্রাউন্ডে গোলাকার প্রান্ত সহ হালকা নীল রঙের ক্লোভার শেপ</string>
+
+    <string name="desc_ProfileIcons15">গাঢ় সবুজ ব্যাকগ্রাউন্ডে গোলাকার প্রান্ত সহ হালকা সবুজ রঙের ষড়ভুজ</string>
+
+    <string name="desc_ProfileIcons16">হালকা ধূসর ব্যাকগ্রাউন্ডে গোলাকার প্রান্ত সহ কালো ডায়মন্ড শেপ</string>
+
+    <string name="desc_ProfileIcons17">হলুদ ব্যাকগ্রাউন্ডে কমলা রঙের পাতার মজাদার ইলাস্ট্রেশন</string>
+
+    <string name="desc_ProfileIcons18">পীচ ব্যাকগ্রাউন্ডে শনি গ্রহের মজাদার ইলাস্ট্রেশন</string>
+
+    <string name="desc_ProfileIcons19">কালো ব্যাকগ্রাউন্ডে মহাকাশ প্যাটার্নের সাদা ও কমলা রঙের তারা এবং বৃত্তের মজাদার ইলাস্ট্রেশন</string>
+
+    <string name="desc_ProfileIcons2">কালো এবং সাদা রঙের ইন্টারসেক্ট করছে এমন সিলিন্ডারের অ্যাবস্ট্রাক্ট ইলাস্ট্রেশন</string>
+
+    <string name="desc_ProfileIcons20">হলুদ ব্যাকগ্রাউন্ডে নীল রঙের কান ও সাদা মুখের একটি কুকুরের মজাদার ইলাস্ট্রেশন</string>
+
+    <string name="desc_ProfileIcons21">বেগুনি ব্যাকগ্রাউন্ডে অলিভ ব্রাঞ্চ নিয়ে উড়ন্ত সাদা ঘুঘুর মজাদার ইলাস্ট্রেশন</string>
+
+    <string name="desc_ProfileIcons22">নীল ব্যাকগ্রাউন্ডে কালো রঙের কান ও সাদা মুখের একটি কুকুরের মজাদার ইলাস্ট্রেশন</string>
+
+    <string name="desc_ProfileIcons23">ক্রিম ব্যাকগ্রাউন্ডে সবুজ পাতা সহ একটি গোলাপী ফুলের মজাদার ইলাস্ট্রেশন</string>
+
+    <string name="desc_ProfileIcons24">লাল ব্যাকগ্রাউন্ডে ছ'টি নীল সিলিন্ডারের অ্যাবস্ট্রাক্ট ইলাস্ট্রেশন</string>
+
+    <string name="desc_ProfileIcons3">গাঢ় নীল ব্যাকগ্রাউন্ডে হালকা নীল রঙের ক্লোভার শেপের অ্যাবস্ট্রাক্ট ইলাস্ট্রেশন</string>
+
+    <string name="desc_ProfileIcons4">দুটি গোলাপী, ত্রিমাত্রিক ত্রিভুজের অ্যাবস্ট্রাক্ট ইলাস্ট্রেশন</string>
+
+    <string name="desc_ProfileIcons5">হলুদ ব্যাকগ্রাউন্ডে টিল লেয়ারের অ্যাবস্ট্রাক্ট ইলাস্ট্রেশন</string>
+
+    <string name="desc_ProfileIcons6">সবুজ ব্যাকগ্রাউন্ডে বেগুনি পাথরের অ্যাবস্ট্রাক্ট ইলাস্ট্রেশন</string>
+
+    <string name="desc_ProfileIcons7">কমলা ব্যাকগ্রাউন্ডে পাঁচটি সাদা, জিওমেট্রিক ফুলের মজাদার ইলাস্ট্রেশন</string>
+
+    <string name="desc_ProfileIcons8">গোলাপী ব্যাকগ্রাউন্ডে তিনটি ব্লুবেরির মজাদার ইলাস্ট্রেশন</string>
+
+    <string name="desc_ProfileIcons9">সবুজ ব্যাকগ্রাউন্ডে কালো পাতা সহ একটি লেবুর মজাদার ইলাস্ট্রেশন</string>
+</resources>

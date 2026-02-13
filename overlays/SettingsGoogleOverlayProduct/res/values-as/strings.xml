@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">আপুনি Pixel Imprintৰ জৰিয়তে আপোনাৰ ফিংগাৰপ্ৰিণ্ট ব্যৱহাৰ কৰি আপোনাৰ ফ’নটো আনলক কৰিব পাৰে৷ সুৰক্ষাৰ বাবে এই বিকল্পটোক এটা বেক আপ স্ক্ৰীন লকৰ প্ৰয়োজন।</string>
+
+    <!-- Summary for suggested actions for settings up a fingerprint lock (phone) [CHAR LIMIT=55] -->
+    <string name="suggested_fingerprint_lock_settings_summary">আপোনাৰ ফ’নটো আনলক কৰিবলৈ Pixel Imprint ব্যৱহাৰ কৰক</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Pixel Imprint</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Pixel Imprint ছেট আপ কৰক</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">Pixel Imprintৰ অনুমতি দিয়ক</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature, when fingerprint unlock is disabled by device admin [CHAR LIMIT=40] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled">Pixel Imprint</string>
+
+    <!-- Introduction detail message shown in fingerprint enrollment dialog, when fingerprint unlock is disabled by device admin [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled">"আপুনি Pixel Imprintৰ জৰিয়তে আপুনি ফিংগাৰপ্ৰিণ্টেৰে ক্ৰয়ৰ অনুমোদন জনাব বা এপত ছাইন ইন কৰিব পাৰে।
+
+আপুনি কাৰ ফিংগাৰপ্ৰিণ্ট যোগ কৰে তাকলৈ সাৱধান হওক। যোগ কৰা যিকোনো ফিংগাৰপ্ৰিণ্টে এই কামবোৰ কৰিব পাৰিব।
+
+টোকা: আপুনি এই ডিভাইচটো আনলক কৰিবলৈ আপোনাৰ ফিংগাৰপ্ৰিণ্ট ব্যৱহাৰ কৰিব নোৱাৰিব। অধিক তথ্যৰ বাবে আপোনাৰ প্ৰতিষ্ঠানৰ প্ৰশাসকৰ সৈতে যোগাযোগ কৰক।"</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">Pixel Imprint + আৰ্হি</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">Pixel Imprint + পিন</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">Pixel Imprint + পাছৱৰ্ড</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">Pixel Imprint অবিহনে অব্যাহত ৰাখক</string>
+
+    <!-- Display settings screen, display white balance settings title [CHAR LIMIT=30] -->
+    <string name="display_white_balance_title">এডাপ্টিভ ট'ন</string>
+
+    <!-- Display settings screen, display white balance settings summary [CHAR LIMIT=NONE] -->
+    <string name="display_white_balance_summary">এডাপ্টিভ ট'নৰ ভিত্তিত ডিছপ্লে’ গৰম অথবা শীতল ৰঙৰ সৈতে পৰিৱৰ্তনশীলভাৱে খাপ খায়</string>
+</resources>

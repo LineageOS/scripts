@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Zgjedhësi i simbolit të Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">Ilustrim gazmor i dy gjysmërrathëve ngjyrë të gjelbër të errët në një sfond të gjelbër të çelur</string>
+
+    <string name="desc_ProfileIcons10">Ilustrim gazmor i një fluture ngjyrë portokalli në një sfond të verdhë</string>
+
+    <string name="desc_ProfileIcons11">Formë hunde në ngjyrë të zezë me anë të rrumbullakosura në një sfond gri të errët</string>
+
+    <string name="desc_ProfileIcons12">Formë tërfili në ngjyrë të zezë me anë të rrumbullakosura në një sfond gri të çelur</string>
+
+    <string name="desc_ProfileIcons13">Rreth i valëzuar ngjyrë vjollcë e çelur në një sfond vjollcë të errët</string>
+
+    <string name="desc_ProfileIcons14">Formë tërfili në ngjyrë blu të çelur me anë të rrumbullakosura në një sfond portokalli</string>
+
+    <string name="desc_ProfileIcons15">Gjashtëkëndësh në ngjyrë të gjelbër të çelur me anë të rrumbullakosura në një sfond të gjelbër të errët</string>
+
+    <string name="desc_ProfileIcons16">Formë diamanti në ngjyrë të zezë me anë të rrumbullakosura në një sfond gri të çelur</string>
+
+    <string name="desc_ProfileIcons17">Ilustrim gazmor i një gjetheje ngjyrë portokalli në një sfond të verdhë</string>
+
+    <string name="desc_ProfileIcons18">Ilustrim gazmor i planetit Saturn në një sfond ngjyrë pjeshke</string>
+
+    <string name="desc_ProfileIcons19">Ilustrim gazmor yjesh dhe rrathësh të bardhë dhe portokalli në një motiv qiellor në një sfond të zi</string>
+
+    <string name="desc_ProfileIcons2">Ilustrim abstrakt cilindrash të zinj dhe të bardhë të kryqëzuar</string>
+
+    <string name="desc_ProfileIcons20">Ilustrim gazmor i një qeni me veshë blu dhe fytyrë të bardhë në një sfond të verdhë</string>
+
+    <string name="desc_ProfileIcons21">Ilustrim gazmor i një pëllumbi të bardhë duke fluturuar me një degë ulliri në një sfond vjollcë</string>
+
+    <string name="desc_ProfileIcons22">Ilustrim gazmor i një qeni me veshë të zinj dhe fytyrë të bardhë në një sfond blu</string>
+
+    <string name="desc_ProfileIcons23">Ilustrim gazmor i një luleje rozë me gjethe të gjelbra në një sfond ngjyrë kremi</string>
+
+    <string name="desc_ProfileIcons24">Ilustrim abstrakt i gjashtë cilindrave blu në një sfond të kuq</string>
+
+    <string name="desc_ProfileIcons3">Ilustrim abstrakt i një forme tërfili në ngjyrë blu të çelur në një sfond blu të errët</string>
+
+    <string name="desc_ProfileIcons4">Ilustrim abstrakt i dy trekëndëshave tredimensionalë ngjyrë rozë</string>
+
+    <string name="desc_ProfileIcons5">Ilustrim abstrakt shtresash gurkali në një sfond të verdhë</string>
+
+    <string name="desc_ProfileIcons6">Ilustrim abstrakt gurësh vjollcë në një sfond të gjelbër</string>
+
+    <string name="desc_ProfileIcons7">Ilustrim gazmor i pesë luleve gjeometrike të bardha në një sfond portokalli</string>
+
+    <string name="desc_ProfileIcons8">Ilustrim gazmor i tri boronicave në një sfond rozë</string>
+
+    <string name="desc_ProfileIcons9">Ilustrim gazmor i një limoni me një gjethe të zezë në një sfond të gjelbër</string>
+</resources>

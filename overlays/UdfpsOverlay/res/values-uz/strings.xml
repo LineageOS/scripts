@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Qulf barmoq izi bilan ochilganda barmoq izi modeli rasmlar yordamida yaratiladi. Barmoq izingiz rasmlari va modeli telefoningizda xavfsiz saqlanadi va hech qachon tashqariga yuklanmaydi. Barcha ishlar telefoningizda xavfsiz amalga oshiriladi.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Barmoq izi bilan ochish ishlatilganda barmoq izi modeli rasmlar yordamida yaratiladi. Farzandingizning barmoq izi rasmlari va modeli telefonda xavfsiz saqlanadi va hech qachon tashqariga yuklanmaydi. Barcha ishlar telefonda xavfsiz amalga oshiriladi.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Istalgan vaqt Sozlamalar orqali barmoq izi rasmlari va modelini oʻchirib tashlashingiz yoki barmoq izi bilan ochishni faolsizlantirishingiz mumkin. Barmoq izi rasmlari va modellari telefonda oʻchirilmaguncha saqlanadi.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Siz va farzandingiz istalgan vaqt Sozlamalar orqali barmoq izi modelini oʻchirib tashlashingiz yoki barmoq izi bilan ochishni faolsizlantirishingiz mumkin. Barmoq izi rasmlari va modellari telefonda oʻchirilmaguncha saqlanadi.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">Barmoq izi bilan ochish funksiyasi yordamida telefonni barmoq izi orqali qulfdan chiqarish mumkin. Xavfsizlik maqsadida bu parametr qoʻshimcha ekran qulfi bilan ishlaydi.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Barmoq izi bilan ochish</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">Ish uchun barmoq izi bilan ochish</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Barmoq izi bilan ochishni sozlang</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">Qulfni barmoq izi bilan ochish</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">Barmoq izi bilan ochish autentifikatsiya paytida sizni tanish uchun yuzingizning unikal modelini yaratadi. Sozlash davomida barmoq izi modelini yaratish uchun barmoq izingiz turli joylashuvlardan rasmga olinadi.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">Barmoq izi bilan ochish autentifikatsiya paytida shaxsni tanish uchun farzandingiz barmoq izi unikal modelini yaratadi. Sozlash davomida barmoq izi modelini yaratish uchun barmoq izi turli joylashuvlardan rasmga olinadi.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">Taʼmirlash xizmatiga yoki g.co/pixel/fingerprintunlock sahifasiga tashrif buyuring.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">Barmoq izi bilan ochish</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">Grafik kalit • Barmoq izi</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">PIN • Barmoq izi</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">Parol • Barmoq izi</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">Barmoq izi bilan ochmasdan davom etish</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"Telefoningiz yoʻqolib qolsa yoki oʻgʻirlansa, grafik kalit undagi maʼlumotlarni himoyalaydi.
+
+Bunda, qurilmangizda saqlangan barmoq izi rasmlari va modeli ham oʻchirib tashlanadi. Endi barmoq izingizdan ilovalar ichida autentifikatsiya uchun foydalana olmaysiz."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"Telefoningiz yoʻqolib qolsa yoki oʻgʻirlansa, grafik kalit undagi maʼlumotlarni himoyalaydi.
+
+Bunda, qurilmangizda saqlangan barmoq izi rasmlari va modeli oʻchirib tashlanadi. Yuz modelingiz ham butunlay va xavfsiz oʻchirib tashlanadi. Endi yuzingiz yoki barmoq izingizdan ilovalar ichida autentifikatsiya uchun foydalana olmaysiz."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"Telefoningiz yoʻqolib qolsa yoki oʻgʻirlansa, PIN kod undagi maʼlumotlarni himoyalaydi.
+
+Bunda, qurilmangizda saqlangan barmoq izi rasmlari va modeli ham oʻchirib tashlanadi. Endi barmoq izingizdan ilovalar ichida autentifikatsiya uchun foydalana olmaysiz."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"Telefoningiz yoʻqolib qolsa yoki oʻgʻirlansa, PIN kod undagi maʼlumotlarni himoyalaydi.
+
+Bunda, qurilmangizda saqlangan barmoq izi rasmlari va modeli oʻchirib tashlanadi. Yuz modelingiz ham butunlay va xavfsiz oʻchirib tashlanadi. Endi yuzingiz yoki barmoq izingizdan ilovalar ichida autentifikatsiya uchun foydalana olmaysiz."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"Telefoningiz yoʻqolib qolsa yoki oʻgʻirlansa, parol undagi maʼlumotlarni himoyalaydi.
+
+Bunda, qurilmangizda saqlangan barmoq izi rasmlari va modeli ham oʻchirib tashlanadi. Endi barmoq izingizdan ilovalar ichida autentifikatsiya uchun foydalana olmaysiz."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"Telefoningiz yoʻqolib qolsa yoki oʻgʻirlansa, parol undagi maʼlumotlarni himoyalaydi.
+
+Bunda, qurilmangizda saqlangan barmoq izi rasmlari va modeli oʻchirib tashlanadi. Yuz modelingiz ham butunlay va xavfsiz oʻchirib tashlanadi. Endi yuzingiz yoki barmoq izingizdan ilovalar ichida autentifikatsiya uchun foydalana olmaysiz."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"Qurilmani himoyalash funksiyalari ekran qulfisiz ishlamaydi.
+
+Bunda, qurilmangizda saqlangan barmoq izi rasmlari va modeli ham oʻchirib tashlanadi. Endi barmoq izingizdan ilovalar ichida autentifikatsiya uchun foydalana olmaysiz."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"Qurilmani himoyalash funksiyalari ekran qulfisiz ishlamaydi.
+
+Bunda, qurilmangizda saqlangan barmoq izi rasmlari va modeli oʻchirib tashlanadi. Yuz modelingiz ham butunlay va xavfsiz oʻchirib tashlanadi. Endi yuzingiz yoki barmoq izingizdan ilovalar ichida autentifikatsiya uchun foydalana olmaysiz."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">Telefoningizda barmoq izi bilan qulfdan chiqarishdan qanchalik tez-tez foydalansangiz, u shunchalik yaxshi ishlaydi.</string>
+</resources>

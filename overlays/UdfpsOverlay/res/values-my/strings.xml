@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ သုံးသောအခါ သင့်လက်ဗွေနမူနာကို အပ်ဒိတ်လုပ်ရန် ပုံများကို သုံးသည်။ သင့်လက်ဗွေပုံများနှင့် နမူနာကို သင့်ဖုန်းတွင် လုံခြုံစွာသိမ်းပြီး ဖုန်းအတွင်း၌သာ ထားပါသည်။ လုပ်ဆောင်ချက်အားလုံး သင့်ဖုန်းတွင် လုံခြုံစွာ ဖြစ်ပေါ်သည်။</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">သူက ‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ သုံးသောအခါ သူ၏လက်ဗွေနမူနာကို အပ်ဒိတ်လုပ်ရန် ပုံများကို သုံးသည်။ သင့်ကလေး၏ လက်ဗွေပုံများနှင့် နမူနာကို ဖုန်းတွင် လုံခြုံစွာသိမ်းပြီး ဖုန်းအတွင်း၌သာ ထားပါသည်။ လုပ်ဆောင်ချက်အားလုံး ဖုန်းတွင် လုံခြုံစွာ ဖြစ်ပေါ်သည်။</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">‘ဆက်တင်များ’ တွင် သင့်လက်ဗွေပုံများနှင့် နမူနာကို ဖျက်ခြင်း (သို့) ‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ကို ပိတ်ခြင်းတို့ အချိန်မရွေး လုပ်နိုင်သည်။ လက်ဗွေပုံနှင့် နမူနာများကို သင်မဖျက်မချင်း ဖုန်းတွင်သိမ်းထားသည်။</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">သင်နှင့် သင့်ကလေးက ဆက်တင်များတွင် လက်ဗွေပုံများနှင့် နမူနာကို ဖျက်ခြင်း (သို့) ‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ကို ပိတ်ခြင်းတို့ အချိန်မရွေး လုပ်နိုင်သည်။ လက်ဗွေပုံနှင့် နမူနာများကို မဖျက်မချင်း ဖုန်းတွင် သိမ်းထားသည်။</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ဖြင့် သင့်လက်ဗွေသုံးပြီး ဖုန်းကိုဖွင့်နိုင်သည်။ လုံခြုံရေးအရ ဤနည်းလမ်းသည် အရန်ဖန်သားပြင်လော့ခ် လိုအပ်သည်။</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">အလုပ်အတွက် လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">‘လက်ဗွေသုံးလော့ခ်ဖွင့်ခြင်း’ ထည့်ရန်</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ကို ခွင့်ပြုရန်</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ က သင်ဖြစ်ကြောင်း အတည်ပြုရန်အတွက် သင့်လက်ဗွေ၏ သီးခြားနမူနာတစ်ခုကို ပြုလုပ်သည်။ စနစ်ထည့်သွင်းနေစဉ် ဤလက်ဗွေနမူနာကို ပြုလုပ်ရန်အတွက် သင့်လက်ဗွေကို ရှုထောင့်အမျိုးမျိုးမှ ပုံများရိုက်ကူးရပါမည်။</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ က သင့်ကလေးကို သူဖြစ်ကြောင်း အတည်ပြုရန်အတွက် သူ့လက်ဗွေ၏ သီးခြားနမူနာတစ်ခုကို ပြုလုပ်သည်။ စနစ်ထည့်သွင်းနေစဉ် ဤလက်ဗွေနမူနာကို ပြုလုပ်ရန်အတွက် သူ့လက်ဗွေကို ရှုထောင့်အမျိုးမျိုးမှ ပုံများရိုက်ကူးရပါမည်။</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">ပြုပြင်ရေး ဝန်ဆောင်မှုပေးသူ (သို့) g.co/pixel/fingerprintunlock သို့ သွားပါ။</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ သုံးပါ</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">ပုံဖော်ခြင်း • လက်ဗွေ</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">ပင်နံပါတ် • လက်ဗွေ</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">စကားဝှက် • လက်ဗွေ</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ မသုံးဘဲ ရှေ့ဆက်ရန်</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပုံစံက ကာကွယ်ပေးသည်။
+
+၎င်းက သင့်စက်တွင်သိမ်းထားသော လက်ဗွေပုံများနှင့် နမူနာကိုလည်း ဖျက်ပါသည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်လက်ဗွေကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပုံစံက ကာကွယ်ပေးသည်။
+
+၎င်းက သင့်စက်တွင်သိမ်းထားသော လက်ဗွေပုံများနှင့် နမူနာကို ဖျက်ပါသည်။ သင်၏မျက်နှာနမူနာကိုလည်း လုံခြုံစွာ အပြီးဖျက်လိုက်ပါမည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်မျက်နှာ (သို့) လက်ဗွေကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပင်နံပါတ်က ကာကွယ်ပေးသည်။
+
+၎င်းက သင့်စက်တွင်သိမ်းထားသော လက်ဗွေပုံများနှင့် နမူနာကိုလည်း ဖျက်ပါသည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်လက်ဗွေကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပင်နံပါတ်က ကာကွယ်ပေးသည်။
+
+၎င်းက သင့်စက်တွင်သိမ်းထားသော လက်ဗွေပုံများနှင့် နမူနာကို ဖျက်ပါသည်။ သင်၏မျက်နှာနမူနာကိုလည်း လုံခြုံစွာ အပြီးဖျက်လိုက်ပါမည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်မျက်နှာ (သို့) လက်ဗွေကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို စကားဝှက်က ကာကွယ်ပေးသည်။
+
+၎င်းက သင့်စက်တွင်သိမ်းထားသော လက်ဗွေပုံများနှင့် နမူနာကိုလည်း ဖျက်ပါသည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်လက်ဗွေကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို စကားဝှက်က ကာကွယ်ပေးသည်။
+
+၎င်းက သင့်စက်တွင်သိမ်းထားသော လက်ဗွေပုံများနှင့် နမူနာကို ဖျက်ပါသည်။ သင်၏မျက်နှာနမူနာကိုလည်း လုံခြုံစွာ အပြီးဖျက်လိုက်ပါမည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်မျက်နှာ (သို့) လက်ဗွေကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"စက်ကို အကာအကွယ်ပေးသော ဝန်ဆောင်မှုများသည် ဖန်သားပြင် လော့ခ်မပါဘဲ အလုပ်မလုပ်နိုင်ပါ။
+
+၎င်းက သင့်စက်တွင်သိမ်းထားသော လက်ဗွေပုံများနှင့် နမူနာကိုလည်း ဖျက်ပါသည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်လက်ဗွေကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"စက်ကို အကာအကွယ်ပေးသော ဝန်ဆောင်မှုများသည် ဖန်သားပြင် လော့ခ်မပါဘဲ အလုပ်မလုပ်နိုင်ပါ။
+
+၎င်းက သင့်စက်တွင်သိမ်းထားသော လက်ဗွေပုံများနှင့် နမူနာကို ဖျက်ပါသည်။ သင်၏မျက်နှာနမူနာကိုလည်း လုံခြုံစွာ အပြီးဖျက်လိုက်ပါမည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်မျက်နှာ (သို့) လက်ဗွေကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">သင့်ဖုန်းဖွင့်ရာတွင် (သို့) အက်ပ်များ၌ သင်ဖြစ်ကြောင်းအတည်ပြုရာတွင် ‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ပိုသုံးပါက ၎င်းပိုမိုတိုးတက်လာသည်</string>
+</resources>

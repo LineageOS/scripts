@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Lapho usebenzisa Ukuvula ngesigxivizo somunwe, izithombe zisetshenziselwa ukuvuselela imodeli yakho yeminwe. Izithombe zakho zesigxivizo seminwe nemodeli zigcinwa ngokuphephile kufoni yakho futhi azilokothi zishiye ifoni. Konke ukucubungula kwenzeka ngokuphepha kwifoni yakho.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Lapho isebenzisa Ukuvula ngesigxivizo somunwe, izithombe zisetshenziselwa ukuvuselela imodeli yayo yeminwe. Izithombe zeminwe yengane yakho kanye nemodeli kugcinwa ngokuphephile efonini futhi akulokothi kushiye ifoni. Konke ukucubungula kwenzeka ngokuphepha kwifoni.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Ungasula izithombe zezigxivizo zeminwe nemodeli, noma uvale Ukuvula Izigxivizo zeminwe noma nini Kumasethingi. Izithombe zezigxivizo zeminwe namamodeli kugcinwa kwifoni kuze kube yilapho uzisula.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Wena nengane yakho ningasula izithombe zeminwe yayo nemodeli, noma uvale Ukuvula ngesigxivizo somunwe noma kunini Kumasethingi. Izithombe namamodeli esigxivizo seminwe agcinwa efonini aze asulwe.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">Ngokuvula Ngesigxivizo Somunwe, ungavula ifoni yakho usebenzisa isigxivizo sakho somunwe. Ngokuphepha, le nketho idinga ukukhiya kwesikrini okuyisipele.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Ukuvula Ngesigxivizo Somunwe</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">Ukuvula kwesingxivizo somunwe komsebenzi</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Setha Ukuvula Ngezigxivizo Zeminwe</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">Vumela Ukuvula ngesigxivizo somunwe</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">Ukuvula Ngesigxivizo Seminwe kudala imodeli ehlukile yesigxivizo sakho seminwe ukuqinisekisa ukuthi nguwe. Ukuze kudalwe le modeli yesigxivizo seminwe ngesikhathi sokusethwa, uzothatha izithombe zesigxivizo sakho seminwe kusukela kuzimo ezihlukile.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">Ukuvula ngesigxivizo somunwe kudala imodeli ehlukile yesigxivizo seminwe sengane yakho ukuqinisekisa ukuthi iyona. Ukudala le modeli yesigxivizo seminwe ngesikhathi sokusetha, bazothatha izithombe zesigxivizo sabo seminwe kusukela kuzimo ezihlukile.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">Vakashela umhlinzeki wokulungisa noma ku-g.co/pixel/fingerprintunlock.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">Sebenzisa Ukuvula Ngesigxivizo Somunwe</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">Iphethini • Isigxivizo somunwe</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">Iphinikhodi • Isigxivizo somunwe</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">Iphasiwedi • Isigxivizo somunwe</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">Qhubeka ngaphandle Kokuvula Ngesigxivizo Somunwe</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"Iphethini ivikela ifoni yakho uma ilahlekile noma intshontshiwe.
+
+Lokhu kusula nezithombe zezigxivizo zeminwe nemodeli egcinwe kudivayisi yakho. Ngeke ukwazi ukusebenzisa izigxivizo zakho zeminwe ekufakazeleni ubuqiniso kuma-app."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"Iphethini ivikela ifoni yakho uma ilahlekile noma intshontshiwe.
+
+Lokhu kusula izithombe zezigxivizo zeminwe nemodeli egcinwe kudivayisi yakho. Imodeli yakho yobuso nayo izosulwa ingunaphakade futhi ngokuphephile. Ngeke uze ukwazi ukusebenzisa ubuso bakho noma izigxivizo zeminwe ukufakazela ubuqiniso kuma-app."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"Iphinikhodi ivikela ifoni yakho uma ilahlekile noma intshontshiwe.
+
+Lokhu kusula nezithombe zezigxivizo zeminwe nemodeli egcinwe kudivayisi yakho. Ngeke ukwazi ukusebenzisa izigxivizo zakho zeminwe ekufakazeleni ubuqiniso kuma-app."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"Iphinikhodi ivikela ifoni yakho uma ilahlekile noma intshontshiwe.
+
+Lokhu kusula izithombe zezigxivizo zeminwe nemodeli egcinwe kudivayisi yakho. Imodeli yakho yobuso nayo izosulwa ingunaphakade futhi ngokuphephile. Ngeke uze ukwazi ukusebenzisa ubuso bakho noma izigxivizo zeminwe ukufakazela ubuqiniso kuma-app."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"Iphasiwedi ivikela ifoni yakho uma ilahlekile noma intshontshiwe.
+
+Lokhu kuphinda kusule izithombe zezigxivizo zeminwe nemodeli egcinwe kudivayisi yakho. Ngeke ukwazi ukusebenzisa izigxivizo zakho zeminwe ekufakazeleni ubuqiniso kuma-app."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"Iphasiwedi ivikela ifoni yakho uma ilahlekile noma intshontshiwe.
+
+Lokhu kusula izithombe zezigxivizo zeminwe nemodeli egcinwe kudivayisi yakho. Imodeli yakho yobuso nayo izosulwa ingunaphakade futhi ngokuphephile. Ngeke uze ukwazi ukusebenzisa ubuso bakho noma izigxivizo zeminwe ukufakazela ubuqiniso kuma-app."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"Izici zokuvikela idivayisi ngeke zisebenze ngaphandle kokukhiya kwakho isikrini.
+
+Lokhu kusula izithombe zezigxivizo zeminwe nemodeli egcinwe kudivayisi yakho. Ngeke ukwazi ukusebenzisa izigxivizo zakho zeminwe ekufakazeleni ubuqiniso kuma-app."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"Izici zokuvikela idivayisi ngeke zisebenze ngaphandle kokukhiya kwakho isikrini.
+
+Lokhu kusula izithombe zezigxivizo zeminwe nemodeli egcinwe kudivayisi yakho. Imodeli yakho yobuso nayo izosulwa ingunaphakade futhi ngokuphephile. Ngeke uze ukwazi ukusebenzisa ubuso bakho noma izigxivizo zeminwe ukufakazela ubuqiniso kuma-app."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">Ukuvula ngesigxivizo somunwe kuyathuthuka lapho ukusebenzisa kakhulu ukuze uvule ifoni yakho noma uqinisekise ukuthi uwena kuma-app</string>
+</resources>

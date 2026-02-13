@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Телефон құлпын ашу үшін бет үлгісін пайдаланыңыз.</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Телефон құлпын ашу үшін бет үлгісін пайдаланыңыз.
+
+Есте сақтаңыз:
+Бір уақытта тек бір бет үлгісін орната аласыз. Басқа бет үлгісін қосу үшін бұрынғысын жойыңыз.
+
+Әдейі істемесеңіз де, телефонға қараған кезде, оның құлпы ашылуы мүмкін.
+
+Басқа біреу телефоныңызды бетіңізге жақындатып ұстап тұрып та оның құлпын аша алады.
+
+Телефон құлпын өзіңізге ұқсайтын біреу, мысалы, егіз бауырыңыз ашып алуы мүмкін."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Телефон құлпын ашу үшін бет үлгісін пайдаланыңыз.
+
+Есте сақтаңыз:
+Бір уақытта тек бір бет үлгісін орната аласыз. Басқа бет үлгісін қосу үшін бұрынғысын жойыңыз.
+
+Әдейі істемесеңіз де, телефонға қараған кезде, оның құлпы ашылуы мүмкін.
+
+Басқа біреу телефоныңызды бетіңізге жақындатып ұстап тұрып та (көзіңізді жұмып тұрсаңыз да), оның құлпын аша алады.
+
+Телефон құлпын өзіңізге ұқсайтын біреу, мысалы, егіз бауырыңыз ашып алуы мүмкін."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Бет тану функциясын реттеу жолы</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">Келесі экранда телефонды көз деңгейінде ұстаңыз.</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Егер әдетте көзілдірік тағып жүрсеңіз, реттеу барысында оны шешпесеңіз де болады.</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Бет тану функциясын қайта орнату үшін сақталған бет үлгісін жойыңыз.
+
+Бет үлгіңіз біржола әрі қауіпсіз жойылады.
+
+Оны жойған соң, телефон құлпын ашу үшін PIN кодын, өрнекті немесе құпия сөзді пайдалану керек болады."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Бет тану функциясын қайта орнату үшін сақталған бет үлгісін жойыңыз.
+
+Бет үлгіңіз біржола әрі қауіпсіз жойылады.
+
+Оны жойған соң, телефон құлпын ашу үшін саусақ ізін, PIN кодын, өрнекті немесе құпия сөзді пайдалану керек болады."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">Телефон құлпын ашу үшін көзді ашып тұру керек. Күннен қорғайтын көзілдірікті шешкен дұрыс.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Енді телефонды алып, бетіңізге қарату арқылы оның құлпын ашуға болады.</string>
+</resources>

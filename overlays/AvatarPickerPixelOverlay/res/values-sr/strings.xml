@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Бирач аватара за Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">Разиграна илустрација два тамнозелена полукруга на светлозеленој позадини</string>
+
+    <string name="desc_ProfileIcons10">Разиграна илустрација наранџастог лептира на жутој позадини</string>
+
+    <string name="desc_ProfileIcons11">Црни облик носа са заобљеним ивицама на тамносивој позадини</string>
+
+    <string name="desc_ProfileIcons12">Црни облик детелине са заобљеним ивицама на светлосивој позадини</string>
+
+    <string name="desc_ProfileIcons13">Светлољубичасти вијугави круг на тамнољубичастој позадини</string>
+
+    <string name="desc_ProfileIcons14">Светлоплави облик детелине са заобљеним ивицама на наранџастој позадини</string>
+
+    <string name="desc_ProfileIcons15">Светлозелени шестоугао са заобљеним ивицама на тамнозеленој позадини</string>
+
+    <string name="desc_ProfileIcons16">Црни облик дијаманта са заобљеним ивицама на светлосивој позадини</string>
+
+    <string name="desc_ProfileIcons17">Разиграна илустрација наранџастог листа на жутој позадини</string>
+
+    <string name="desc_ProfileIcons18">Разиграна илустрација планете Сатурн на бледонаранџастој позадини</string>
+
+    <string name="desc_ProfileIcons19">Разиграна илустрација белих и наранџастих звезда и кругова у планетарној шари на црној позадини</string>
+
+    <string name="desc_ProfileIcons2">Апстрактна илустрација црних и белих ваљака који се преклапају</string>
+
+    <string name="desc_ProfileIcons20">Разиграна илустрација пса са плавим ушима и белим лицем на жутој позадини</string>
+
+    <string name="desc_ProfileIcons21">Разиграна илустрација беле голубице која лети са маслиновом гранчицом на љубичастој позадини</string>
+
+    <string name="desc_ProfileIcons22">Разиграна илустрација пса са црним ушима и белим лицем на плавој позадини</string>
+
+    <string name="desc_ProfileIcons23">Разиграна илустрација розе цвета са зеленим лишћем на крем позадини</string>
+
+    <string name="desc_ProfileIcons24">Апстрактна илустрација шест плавих ваљака на црвеној позадини</string>
+
+    <string name="desc_ProfileIcons3">Апстрактна илустрација светлоплавог облика детелине на тамноплавој позадини</string>
+
+    <string name="desc_ProfileIcons4">Апстрактна илустрација два розе, тродимензионална троугла</string>
+
+    <string name="desc_ProfileIcons5">Апстрактна илустрација тиркизних слојева на жутој позадини</string>
+
+    <string name="desc_ProfileIcons6">Апстрактна илустрација љубичастог камења на зеленој позадини</string>
+
+    <string name="desc_ProfileIcons7">Разиграна илустрација пет белих, геометријских цветова на наранџастој позадини</string>
+
+    <string name="desc_ProfileIcons8">Разиграна илустрација три боровнице на розе позадини</string>
+
+    <string name="desc_ProfileIcons9">Разиграна илустрација лимуна са црним листом на зеленој позадини</string>
+</resources>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">ប្រើមុខ​របស់អ្នក ដើម្បី​ដោះសោ​ទូរសព្ទរបស់អ្នក</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"ប្រើមុខ​របស់អ្នក ដើម្បីដោះសោ​ទូរសព្ទរបស់អ្នក។
+
+សូមចំណាំថា៖
+អ្នកអាចរៀបចំ​មុខបានតែមួយប៉ុណ្ណោះ​ក្នុងមួយលើក។ ដើម្បីបញ្ចូល​មុខផ្សេងទៀត សូមលុប​មុខបច្ចុប្បន្ន​ចេញ។
+
+ការមើល​ទៅ​ទូរសព្ទ​អាច​ដោះសោ​ទូរសព្ទបាន ទោះបីជា​អ្នក​មិនចង់​ដោះសោ​ក៏ដោយ។
+
+អ្នកផ្សេងអាច​ដោះសោទូរសព្ទ​របស់អ្នក ប្រសិនបើ​វា​ស្ថិតនៅ​ចំពី​មុខរបស់អ្នក។
+
+អ្នកដែល​មាន​មុខមាត់​ស្រដៀង​អ្នកខ្លាំង ដូចជា​បងប្អូន​បង្កើត​ដែលមានមុខមាត់​ដូចអ្នក​អាច​ដោះសោ​ទូរសព្ទ​របស់អ្នក​បាន។"</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"ប្រើមុខ​របស់អ្នក ដើម្បីដោះសោ​ទូរសព្ទរបស់អ្នក។
+
+សូមចំណាំថា៖
+អ្នកអាចរៀបចំ​មុខបានតែមួយប៉ុណ្ណោះ​ក្នុងមួយលើក។ ដើម្បីបញ្ចូល​មុខផ្សេងទៀត សូមលុប​មុខបច្ចុប្បន្ន​ចេញ។
+
+ការមើល​ទៅ​ទូរសព្ទ​អាច​ដោះសោ​ទូរសព្ទបាន ទោះបីជា​អ្នក​មិនចង់​ដោះសោ​ក៏ដោយ។
+
+អ្នកផ្សេងអាច​ដោះសោទូរសព្ទ​របស់អ្នក ប្រសិនបើ​វា​ស្ថិតនៅ​ចំពី​មុខរបស់អ្នក ទោះបីជា​អ្នកបិទភ្នែក​ក៏ដោយ។
+
+អ្នកដែល​មាន​មុខមាត់​ស្រដៀង​អ្នកខ្លាំង ដូចជា​បងប្អូន​បង្កើត​ដែលមានមុខមាត់​ដូចអ្នក​អាច​ដោះសោ​ទូរសព្ទ​របស់អ្នក​បាន។"</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">របៀបរៀបចំ​ការដោះ​សោ​ដោយស្កេន​មុខ</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">នៅលើ​អេក្រង់​បន្ទាប់ សូមកាន់ទូរសព្ទ​របស់អ្នក​ដាក់ត្រឹមភ្នែក</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">ប្រសិនបើ​ជាធម្មតា​អ្នកពាក់​វ៉ែនតា អ្នកអាច​ពាក់វា​ក្នុងអំឡុងពេល​រៀបចំបាន</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"លុប​គំរូមុខ​បច្ចុប្បន្ន​របស់អ្នក​ ដើម្បីរៀបចំ​ការដោះសោ​តាមទម្រង់មុខ​ម្ដងទៀត។
+
+គំរូមុខ​របស់អ្នក​នឹងត្រូវលុប​ដោយសុវត្ថិភាព​ជាអចិន្ត្រៃយ៍។
+
+បន្ទាប់ពី​លុបហើយ អ្នកនឹង​ត្រូវការ​កូដ PIN, លំនាំ ឬពាក្យសម្ងាត់​របស់អ្នក ដើម្បីដោះសោ​ទូរសព្ទ​របស់អ្នក។"</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"លុប​គំរូមុខ​បច្ចុប្បន្ន​របស់អ្នក ​ដើម្បីរៀបចំ​ការដោះសោ​តាមទម្រង់មុខ​ម្ដងទៀត។
+
+គំរូមុខ​របស់អ្នក​នឹងត្រូវលុប​ដោយសុវត្ថិភាព​ជាអចិន្ត្រៃយ៍។
+
+បន្ទាប់ពី​លុបហើយ អ្នកនឹង​ត្រូវការស្នាមម្រាមដៃ, កូដ PIN, លំនាំ ឬពាក្យសម្ងាត់​របស់អ្នក ដើម្បីដោះសោ​ទូរសព្ទ​របស់អ្នក។"</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">ដើម្បី​ដោះសោ​ទូរសព្ទ អ្នកត្រូវតែ​បើកភ្នែក។ ដើម្បី​ទទួលបាន​លទ្ធផល​ល្អបំផុត សូមដោះ​វ៉ែនតា​ការពារ​ពន្លឺថ្ងៃ​ចេញ នៅពេល​ដោះសោ​ទូរសព្ទ។</string>
+
+    <string name="security_settings_face_enroll_finish_description">ឥឡូវនេះ អ្នកអាចលើកទូរសព្ទរបស់អ្នកឡើង ហើយប្រើមុខរបស់អ្នកដើម្បីដោះសោវាបាន</string>
+</resources>

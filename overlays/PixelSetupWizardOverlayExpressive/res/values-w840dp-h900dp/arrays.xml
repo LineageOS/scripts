@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string-array name="loading_dark_theme_customization_account">
+        <item>.primary:@sud_system_primary_dark</item>
+        <item>.secondaryContainer:@sud_system_secondary_container_dark</item>
+        <item>.onSecondaryContainer:@sud_system_on_secondary_container_dark</item>
+    </string-array>
+
+    <string-array name="loading_dark_theme_customization_connection">
+        <item>.primary:@sud_system_primary_dark</item>
+        <item>.secondaryContainer:@sud_system_secondary_container_dark</item>
+        <item>.onSecondaryContainer:@sud_system_on_secondary_container_dark</item>
+    </string-array>
+
+    <string-array name="loading_dark_theme_customization_default">
+        <item>.primary:@sud_system_primary_dark</item>
+        <item>.secondaryContainer:@sud_system_secondary_container_dark</item>
+        <item>.onSecondaryContainer:@sud_system_on_secondary_container_dark</item>
+    </string-array>
+
+    <string-array name="loading_dark_theme_customization_final_hold">
+        <item>.primary:@sud_system_primary_dark</item>
+        <item>.secondaryContainer:@sud_system_secondary_container_dark</item>
+        <item>.onSecondaryContainer:@sud_system_on_secondary_container_dark</item>
+    </string-array>
+
+    <string-array name="loading_dark_theme_customization_update">
+        <item>.primary:@sud_system_primary_dark</item>
+        <item>.secondaryContainer:@sud_system_secondary_container_dark</item>
+        <item>.onSecondaryContainer:@sud_system_on_secondary_container_dark</item>
+    </string-array>
+
+    <string-array name="loading_light_theme_customization_account">
+        <item>.primary:@sud_system_primary_light</item>
+        <item>.secondaryContainer:@sud_system_secondary_container_light</item>
+        <item>.onSecondaryContainer:@sud_system_on_secondary_container_light</item>
+    </string-array>
+
+    <string-array name="loading_light_theme_customization_connection">
+        <item>.primary:@sud_system_primary_light</item>
+        <item>.secondaryContainer:@sud_system_secondary_container_light</item>
+        <item>.onSecondaryContainer:@sud_system_on_secondary_container_light</item>
+    </string-array>
+
+    <string-array name="loading_light_theme_customization_default">
+        <item>.primary:@sud_system_primary_light</item>
+        <item>.secondaryContainer:@sud_system_secondary_container_light</item>
+        <item>.onSecondaryContainer:@sud_system_on_secondary_container_light</item>
+    </string-array>
+
+    <string-array name="loading_light_theme_customization_final_hold">
+        <item>.primary:@sud_system_primary_light</item>
+        <item>.secondaryContainer:@sud_system_secondary_container_light</item>
+        <item>.onSecondaryContainer:@sud_system_on_secondary_container_light</item>
+    </string-array>
+
+    <string-array name="loading_light_theme_customization_update">
+        <item>.primary:@sud_system_primary_light</item>
+        <item>.secondaryContainer:@sud_system_secondary_container_light</item>
+        <item>.onSecondaryContainer:@sud_system_on_secondary_container_light</item>
+    </string-array>
+</resources>

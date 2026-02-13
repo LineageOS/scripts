@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Configure certain GsmUmtsOptions to be available or not. The
+         default values are in Phone/res/values/config.xml and maybe overridden
+         in operator specific resource directories or device specific overlays. -->
+    <!-- DEPRECATED: Use CarrierConfigManager#KEY_APN_EXPAND_BOOL -->
+    <bool name="config_apn_expand">false</bool>
+
+    <!-- Show cdma auto network mode in (glabal) roaming -->
+    <!-- DEPRECATED: Use CarrierConfigManager#KEY_SHOW_CDMA_CHOICES_BOOL -->
+    <bool name="config_show_cdma">true</bool>
+
+    <!-- CDMA activation goes through HFA -->
+    <!-- DEPRECATED: Use CarrierConfigManager#KEY_USE_HFA_FOR_PROVISIONING_BOOL -->
+    <bool name="config_use_hfa_for_provisioning">true</bool>
+
+    <!-- Display carrier settings menu if true -->
+    <!-- DEPRECATED: Use CarrierConfigManager#KEY_CARRIER_SETTINGS_ENABLE_BOOL -->
+    <bool name="config_carrier_settings_enable">true</bool>
+
+    <!-- carrier settings menu -->
+    <string name="carrier_settings">com.android.sdm.plugins.sprintdm</string>
+    <string name="carrier_settings_menu">com.android.sdm.plugins.sprintdm.SprintCarrierSettingsActivity</string>
+
+    <!-- After a CDMA conference call is merged, the swap button should be displayed. -->
+    <bool name="support_swap_after_merge">false</bool>
+</resources>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel නියුරු තෝරකය</string>
+
+    <string name="desc_ProfileIcons1">ලා කොළ පසුබිමක තද කොළ අර්ධ කව දෙකක සෙල්ලක්කාර නිදර්ශනය</string>
+
+    <string name="desc_ProfileIcons10">කහ පසුබිමක තැඹිලි සමනලයෙකුගේ සෙල්ලක්කාර නිදර්ශනය</string>
+
+    <string name="desc_ProfileIcons11">තද අළු පසුබිමක වටකුරු දාර සහිත කළු නාසයේ හැඩය</string>
+
+    <string name="desc_ProfileIcons12">ලා අළු පසුබිමක වටකුරු දාර සහිත කළු ත්‍රිපත්‍ර හැඩය</string>
+
+    <string name="desc_ProfileIcons13">තද දම් පැහැති පසුබිමක ලා දම් පැහැති විග්ලි රවුම</string>
+
+    <string name="desc_ProfileIcons14">තැඹිලි පසුබිමක වටකුරු දාර සහිත ලා නිල් ත්‍රිපත්‍ර හැඩය</string>
+
+    <string name="desc_ProfileIcons15">තද කොළ පසුබිමක වටකුරු දාර සහිත ලා කොළ ෂඩාස්‍රය</string>
+
+    <string name="desc_ProfileIcons16">ලා අළු පසුබිමක වටකුරු දාර සහිත කළු දියමන්ති හැඩය</string>
+
+    <string name="desc_ProfileIcons17">කහ පසුබිමක තැඹිලි කොළයක සෙල්ලක්කාර නිදර්ශනය</string>
+
+    <string name="desc_ProfileIcons18">පීච් පසුබිමක සෙනසුරු ග්‍රහලෝකයේ සෙල්ලක්කාර නිදර්ශනය</string>
+
+    <string name="desc_ProfileIcons19">කළු පසුබිමක ආකාශ රටාවක සුදු සහ තැඹිලි පැහැති තරු සහ කවවල සෙල්ලක්කාර නිදර්ශනය</string>
+
+    <string name="desc_ProfileIcons2">කළු සහ සුදු ඡේදනය වන සිලින්ඩරවල වියුක්ත නිදර්ශනය</string>
+
+    <string name="desc_ProfileIcons20">කහ පසුබිමක නිල් කන් සහ සුදු මුහුණක් ඇති බල්ලෙකුගේ සෙල්ලක්කාර නිදර්ශනය</string>
+
+    <string name="desc_ProfileIcons21">දම් පැහැති පසුබිමක ඔලිව් අත්තක් සමග සුදු පරෙවියෙකු පියාසර කරන සෙල්ලක්කාර නිදර්ශනය</string>
+
+    <string name="desc_ProfileIcons22">නිල් පසුබිමක කළු කන් සහ සුදු මුහුණක් ඇති බල්ලෙකුගේ සෙල්ලක්කාර නිදර්ශනය</string>
+
+    <string name="desc_ProfileIcons23">ක්‍රීම් පසුබිමක කොළ පැහැති කොළ සහිත රෝස මලක සෙල්ලක්කාර නිදර්ශනය</string>
+
+    <string name="desc_ProfileIcons24">රතු පසුබිමක නිල් සිලින්ඩර හයක වියුක්ත නිදර්ශනය</string>
+
+    <string name="desc_ProfileIcons3">තද නිල් පසුබිමක ලා නිල් ත්‍රිපත්‍ර හැඩයේ වියුක්ත නිදර්ශනය</string>
+
+    <string name="desc_ProfileIcons4">රෝස, ත්‍රිමාන ත්‍රිකෝණ දෙකක වියුක්ත නිදර්ශනය</string>
+
+    <string name="desc_ProfileIcons5">කහ පසුබිමක් මත ටීල් ස්ථරවල වියුක්ත නිදර්ශනය</string>
+
+    <string name="desc_ProfileIcons6">කොළ පසුබිමක දම් පාට පාෂාණවල වියුක්ත නිදර්ශනය</string>
+
+    <string name="desc_ProfileIcons7">තැඹිලි පසුබිමක සුදු, ජ්‍යාමිතික මල් පහක සෙල්ලක්කාර නිදර්ශනය</string>
+
+    <string name="desc_ProfileIcons8">රෝස පසුබිමක බ්ලූබෙරීස් තුනක සෙල්ලක්කාර නිදර්ශනය</string>
+
+    <string name="desc_ProfileIcons9">කොළ පසුබිමක කළු කොළයක් සහිත ලෙමන් ගෙඩියක සෙල්ලක්කාර නිදර්ශනය</string>
+</resources>

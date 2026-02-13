@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Orodje za izbiro avatarja za Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">Igriva ilustracija dveh temno zelenih polkrogov na svetlo zelenem ozadju</string>
+
+    <string name="desc_ProfileIcons10">Igriva ilustracija oranžnega metulja na rumenem ozadju</string>
+
+    <string name="desc_ProfileIcons11">Črna oblika nosu z zaobljenimi robovi na temno sivem ozadju</string>
+
+    <string name="desc_ProfileIcons12">Črna oblika deteljice z zaobljenimi robovi na svetlo sivem ozadju</string>
+
+    <string name="desc_ProfileIcons13">Svetlo vijoličen migotajoč krog na temno vijoličnem ozadju</string>
+
+    <string name="desc_ProfileIcons14">Svetlo modra oblika deteljice z zaobljenimi robovi na oranžnem ozadju</string>
+
+    <string name="desc_ProfileIcons15">Svetlo zelen šestkotnik z zaobljenimi robovi na temno zelenem ozadju</string>
+
+    <string name="desc_ProfileIcons16">Črna oblika diamanta z zaobljenimi robovi na svetlo sivem ozadju</string>
+
+    <string name="desc_ProfileIcons17">Igriva ilustracija oranžnega lista na rumenem ozadju</string>
+
+    <string name="desc_ProfileIcons18">Igriva ilustracija Saturna na ozadju breskove barve</string>
+
+    <string name="desc_ProfileIcons19">Igriva ilustracija belih in oranžnih zvezd ter krogov v nebesnem vzorcu na črnem ozadju</string>
+
+    <string name="desc_ProfileIcons2">Abstraktna ilustracija črnih in belih sekajočih se valjev, ki se prekrivata</string>
+
+    <string name="desc_ProfileIcons20">Igriva ilustracija psa z modrimi ušesi in belim obrazom na rumenem ozadju</string>
+
+    <string name="desc_ProfileIcons21">Igriva ilustracija bele grlice z oljčno vejico na vijoličnem ozadju</string>
+
+    <string name="desc_ProfileIcons22">Igriva ilustracija psa s črnimi ušesi in belim obrazom na modrem ozadju</string>
+
+    <string name="desc_ProfileIcons23">Igriva ilustracija rožnate rože z zelenimi listi na kremnem ozadju</string>
+
+    <string name="desc_ProfileIcons24">Abstraktna ilustracija šestih modrih valjev na črnem ozadju</string>
+
+    <string name="desc_ProfileIcons3">Abstraktna ilustracija svetlo modre oblika deteljice na temno modrem ozadju</string>
+
+    <string name="desc_ProfileIcons4">Abstraktna ilustracija dveh rožnatih tridimenzionalnih trikotnikov</string>
+
+    <string name="desc_ProfileIcons5">Abstraktna ilustracija zelenomodrih slojev na rumenem ozadju</string>
+
+    <string name="desc_ProfileIcons6">Abstraktna ilustracija vijoličnih kamnov na zelenem ozadju</string>
+
+    <string name="desc_ProfileIcons7">Igriva ilustracija petih belih geometričnih rož na oranžnem ozadju</string>
+
+    <string name="desc_ProfileIcons8">Igriva ilustracija treh borovnic na rožnatem ozadju</string>
+
+    <string name="desc_ProfileIcons9">Igriva ilustracija limone s črnim listom na zelenem ozadju</string>
+</resources>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">ನಿಮ್ಮ ಫೋನ್ ಅನ್‌ಲಾಕ್ ಮಾಡಲು ನಿಮ್ಮ ಮುಖವನ್ನು ಬಳಸಿ</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"ನಿಮ್ಮ ಫೋನ್ ಅನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಲು ನಿಮ್ಮ ಮುಖವನ್ನು ಬಳಸಿ.
+
+ನೆನಪಿನಲ್ಲಿಡಿ:
+ನೀವು ಒಂದು ಸಮಯದಲ್ಲಿ ಒಂದೇ ಮುಖವನ್ನು ಮಾತ್ರ ಸೆಟಪ್‌ ಮಾಡಬಹುದು. ಮತ್ತೊಂದು ಮುಖವನ್ನು ಸೇರಿಸಲು, ಈಗಾಗಲೇ ಇರುವ ಮುಖವನ್ನು ಅಳಿಸಿ.
+
+ಫೋನ್ ಕಡೆ ನೋಡಿದರೆ, ನಿಮಗೆ ಬೇಡದಿದ್ದಾಗಲೂ ಫೋನ್ ಅನ್‌ಲಾಕ್ ಆಗಬಹುದು.
+
+ಫೋನ್ ಅನ್ನು ನಿಮ್ಮ ಮುಖದ ಎದುರು ಹಿಡಿಯುವ ಮೂಲಕ, ಬೇರೆ ಯಾರಾದರೂ ಕೂಡ ನಿಮ್ಮ ಫೋನ್ ಅನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಬಹುದು.
+
+ನಿಮ್ಮನ್ನು ತುಂಬಾ ಹೋಲುವ ವ್ಯಕ್ತಿ, ಉದಾಹರಣೆಗೆ ತದ್ರೂಪಿ ಸಹೋದರ/ಸಹೋದರಿಯೂ ಕೂಡಾ ನಿಮ್ಮ ಫೋನ್ ಅನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಬಹುದು."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"ನಿಮ್ಮ ಫೋನ್ ಅನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಲು ನಿಮ್ಮ ಮುಖವನ್ನು ಬಳಸಿ.
+
+ನೆನಪಿನಲ್ಲಿಡಿ:
+ನೀವು ಒಂದು ಸಮಯದಲ್ಲಿ ಒಂದೇ ಮುಖವನ್ನು ಮಾತ್ರ ಸೆಟಪ್‌ ಮಾಡಬಹುದು. ಮತ್ತೊಂದು ಮುಖವನ್ನು ಸೇರಿಸಲು, ಈಗಾಗಲೇ ಇರುವ ಮುಖವನ್ನು ಅಳಿಸಿ.
+
+ಫೋನ್ ಕಡೆ ನೋಡಿದರೆ, ನಿಮಗೆ ಬೇಡದಿದ್ದಾಗಲೂ ಫೋನ್ ಅನ್‌ಲಾಕ್ ಆಗಬಹುದು.
+
+ನಿಮ್ಮ ಕಣ್ಣು ಮುಚ್ಚಿದ್ದರೂ ಸಹ ಫೋನ್ ಅನ್ನು ನಿಮ್ಮ ಮುಖದ ಎದುರು ಹಿಡಿಯುವ ಮೂಲಕ, ಬೇರೆ ಯಾರಾದರೂ ಕೂಡ ನಿಮ್ಮ ಫೋನ್ ಅನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಬಹುದು.
+
+ನಿಮ್ಮನ್ನು ತುಂಬಾ ಹೋಲುವ ವ್ಯಕ್ತಿ, ಉದಾಹರಣೆಗೆ ತದ್ರೂಪಿ ಸಹೋದರ/ಸಹೋದರಿಯೂ ಕೂಡಾ ನಿಮ್ಮ ಫೋನ್ ಅನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಬಹುದು."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">ಫೇಸ್ ಅನ್‌ಲಾಕ್ ಅನ್ನು ಸೆಟಪ್ ಮಾಡುವುದು ಹೇಗೆ</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">ಮುಂದಿನ ಸ್ಕ್ರೀನ್‌ನಲ್ಲಿ, ನಿಮ್ಮ ಫೋನ್ ಅನ್ನು ಕಣ್ಣಿನ ನೇರಕ್ಕೆ ಹಿಡಿದುಕೊಳ್ಳಿ</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">ನೀವು ಸಾಮಾನ್ಯವಾಗಿ ಕನ್ನಡಕವನ್ನು ಧರಿಸುತ್ತಿದ್ದರೆ, ಸೆಟಪ್ ಮಾಡುವ ಸಮಯದಲ್ಲೂ ಅದನ್ನು ಧರಿಸಬಹುದು</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"ಫೇಸ್ ಅನ್‌ಲಾಕ್ ಅನ್ನು ಪುನಃ ಹೊಂದಿಸಲು ನಿಮ್ಮ ಪ್ರಸ್ತುತ ಫೇಸ್ ಮಾಡೆಲ್ ಅನ್ನು ಅಳಿಸಿ.
+
+ನಿಮ್ಮ ಫೇಸ್ ಮಾಡೆಲ್ ಅನ್ನು ಶಾಶ್ವತವಾಗಿ ಮತ್ತು ಸುರಕ್ಷಿತವಾಗಿ ಅಳಿಸಲಾಗುತ್ತದೆ.
+
+ಅಳಿಸಿದ ನಂತರ, ನಿಮ್ಮ ಫೋನ್ ಅನ್‌ಲಾಕ್ ಮಾಡಲು ನಿಮ್ಮ ಪಿನ್, ಪ್ಯಾಟರ್ನ್ ಅಥವಾ ಪಾಸ್‌ವರ್ಡ್ ಅಗತ್ಯವಿದೆ."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"ಫೇಸ್ ಅನ್‌ಲಾಕ್ ಅನ್ನು ಪುನಃ ಹೊಂದಿಸಲು ನಿಮ್ಮ ಪ್ರಸ್ತುತ ಫೇಸ್ ಮಾಡೆಲ್ ಅನ್ನು ಅಳಿಸಿ.
+
+ನಿಮ್ಮ ಫೇಸ್ ಮಾಡೆಲ್ ಅನ್ನು ಶಾಶ್ವತವಾಗಿ ಮತ್ತು ಸುರಕ್ಷಿತವಾಗಿ ಅಳಿಸಲಾಗುತ್ತದೆ.
+
+ಅಳಿಸಿದ ನಂತರ, ನಿಮ್ಮ ಫೋನ್ ಅನ್‌ಲಾಕ್ ಮಾಡಲು ನಿಮ್ಮ ಫಿಂಗರ್‌ಪ್ರಿಂಟ್, ಪಿನ್, ಪ್ಯಾಟರ್ನ್ ಅಥವಾ ಪಾಸ್‌ವರ್ಡ್ ಅಗತ್ಯವಿದೆ."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">ನಿಮ್ಮ ಫೋನ್ ಅನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಲು, ನಿಮ್ಮ ಕಣ್ಣುಗಳು ತೆರೆದಿರಬೇಕು. ಅತ್ಯುತ್ತಮ ಫಲಿತಾಂಶಗಳಿಗಾಗಿ, ಫೋನ್ ಅನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡುವಾಗ ಸನ್‌ಗ್ಲಾಸ್ ತೆಗೆಯಿರಿ.</string>
+
+    <string name="security_settings_face_enroll_finish_description">ನಿಮ್ಮ ಫೋನ್ ಅನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಲು ನೀವು ಈಗ ನಿಮ್ಮ ಮುಖವನ್ನು ಬಳಸಬಹುದು</string>
+</resources>

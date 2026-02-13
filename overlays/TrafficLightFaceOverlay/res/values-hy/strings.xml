@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Օգտագործեք ձեր դեմքը՝ հեռախոսն ապակողպելու համար</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Օգտագործեք ձեր դեմքը՝ հեռախոսն ապակողպելու համար։
+
+Ուշադրություն․
+դուք միաժամանակ կարող եք միայն մեկ դեմքի նմուշ ավելացնել։ Եվս մեկ դեմքի նմուշ ավելացնելու համար ջնջեք ընթացիկ նմուշը։
+
+Հեռախոսին նայելու դեպքում դուք կարող եք ապակողպել էկրանը, նույնիսկ եթե մտադրված չեք դա անել։
+
+Ձեր հեռախոսը կարող է ապակողպել այլ անձ, եթե էկրանը ձեր դեմքին է ուղղված։
+
+Հնարավոր է, որ հեռախոսը կարողանա ապակողպել ձեզ շատ նման մեկ ուրիշը, օրինակ՝ ձեր հարազատ եղբայրը կամ քույրը։"</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Օգտագործեք ձեր դեմքը՝ հեռախոսն ապակողպելու համար։
+
+Ուշադրություն․
+դուք միաժամանակ կարող եք միայն մեկ դեմքի նմուշ ավելացնել։ Եվս մեկ դեմքի նմուշ ավելացնելու համար ջնջեք ընթացիկ նմուշը։
+
+Հեռախոսին նայելու դեպքում դուք կարող եք ապակողպել էկրանը, նույնիսկ եթե մտադրված չեք դա անել։
+
+Ձեր հեռախոսը կարող է ապակողպել այլ անձ, եթե էկրանը ձեր դեմքին է ուղղված, նույնիսկ եթե ձեր աչքերը փակ են։
+
+Հնարավոր է, որ հեռախոսը կարողանա ապակողպել ձեզ շատ նման մեկ ուրիշը, օրինակ՝ ձեր հարազատ եղբայրը կամ քույրը։"</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Ինչպես կարգավորել դեմքով ապակողպումը</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">Հաջորդ էկրանին հեռախոսը պահեք աչքերի մակարդակում</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Եթե սովորաբար ակնոց եք կրում, կարող եք կարգավորել՝ առանց ակնոցը հանելու</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Դեմքով ապակողպումը նորից կարգավորելու համար ջնջեք դեմքի ընթացիկ նմուշը։
+
+Ձեր դեմքի նմուշն ընդմիշտ կջնջվի և ոչ մի տեղ չի պահվի։
+
+Ջնջելուց հետո հեռախոսը ապակողպելու համար անհրաժեշտ կլինի ձեր PIN կոդը, նախշը կամ գաղտնաբառը։"</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Դեմքով ապակողպումը նորից կարգավորելու համար ջնջեք դեմքի ընթացիկ նմուշը։
+
+Ձեր դեմքի նմուշն ընդմիշտ կջնջվի և ոչ մի տեղ չի պահվի։
+
+Ջնջելուց հետո հեռախոսը ապակողպելու համար անհրաժեշտ կլինի ձեր մատնահետքը, PIN կոդը, նախշը կամ գաղտնաբառը։"</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">Հեռախոսն ապակողպելու համար աչքերը պետք է բաց լինեն։ Հեռախոսն ապակողպելիս խորհուրդ ենք տալիս հանել արևային ակնոցը։</string>
+
+    <string name="security_settings_face_enroll_finish_description">Այժմ դուք կարող եք վերցնել հեռախոսը ձեր ձեռքը և ապակողպել այն դեմքի միջոցով</string>
+</resources>

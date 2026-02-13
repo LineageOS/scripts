@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- [CHAR_LIMIT=NONE] [BACKUP_MESSAGE_ID: 5444908404021316250] Battery saver: Feature description, with a "learn more" link. -->
+    <string name="battery_saver_description_with_learn_more">"Untuk melanjutkan hayat bateri, Penjimat Bateri:
+
+• Menghidupkan Tema gelap
+• Mematikan atau mengehadkan aktiviti latar, sesetengah kesan visual dan ciri lain seperti “Ok Google”
+• Mengoptimumkan sambungan rangkaian anda
+
+"<annotation id="url">Ketahui lebih lanjut</annotation></string>
+</resources>

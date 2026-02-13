@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">你使用「指紋解鎖」時產生的圖像會用來更新你的指紋模型。指紋圖像和模型均安全地儲存在手機上，而且絕不對外傳送。整個處理過程都會安全地在手機進行。</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">使用「指紋解鎖」時，系統會使用圖片來更新其指紋模型。系統會將你子女的指紋圖片和模型安全存放在手機上，且絕不會外洩。整個處理過程都會安全地在手機上進行。</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">你隨時可以到「設定」刪除指紋圖像和模型，或停用「指紋解鎖」。指紋圖像和模型會儲存在手機上，但你可隨時刪除。</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">你和子女可隨時前往「設定」刪除指紋圖片和模型或停用「指紋解鎖」功能。指紋圖片和模型會儲存在手機上，直至其刪除為止。</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">你可以透過「指紋解鎖」使用指紋解鎖手機。為安全起見，此選項需要設定後備螢幕鎖定方式。</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">指紋解鎖</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">工作設定檔的「指紋解鎖」</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">設定指紋解鎖</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">允許使用「指紋解鎖」</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">「指紋解鎖」功能會為你建立獨一無二的指紋模型，以便系統驗證你的身分。在設定期間，你必須拍攝指紋的各個部位，才能建立這個指紋模型。</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">「指紋解鎖」功能會為你的子女建立獨一無二的指紋模型，以便系統驗證其身分。在設定期間，他們必須拍攝指紋的各個部位，才能建立這個指紋模型。</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">請諮詢維修服務供應商或瀏覽 g.co/pixel/fingerprintunlock。</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">使用「指紋解鎖」</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">圖案 • 指紋</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">PIN • 指紋</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">密碼 • 指紋</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">繼續但不設定「指紋解鎖」</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"手機遺失或被盜時，圖案可保護手機中的資料。
+
+這麼做亦會刪除裝置上儲存的指紋圖像和模型。你之後將無法使用指紋在應用程式中驗證身分。"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"手機遺失或被盜時，圖案可保護手機中的資料。
+
+這麼做會刪除裝置上儲存的指紋圖像和模型。系統亦會妥善地將你的面部模型永久刪除。你之後將無法使用面孔或指紋在應用程式中驗證身分。"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"手機遺失或被盜時，PIN 可保護手機中的資料。
+
+這麼做亦會刪除裝置上儲存的指紋圖像和模型。你之後將無法使用指紋在應用程式中驗證身分。"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"手機遺失或被盜時，PIN 可保護手機中的資料。
+
+這麼做會刪除裝置上儲存的指紋圖像和模型。系統亦會妥善地將你的面部模型永久刪除。你之後將無法使用面孔或指紋在應用程式中驗證身分。"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"手機遺失或被盜時，密碼可保護手機中的資料。
+
+這麼做亦會刪除裝置上儲存的指紋圖像和模型。你之後將無法使用指紋在應用程式中驗證身分。"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"手機遺失或被盜時，密碼可保護手機中的資料。
+
+這麼做會刪除裝置上儲存的指紋圖像和模型。系統亦會妥善地將你的面部模型永久刪除。你之後將無法使用面孔或指紋在應用程式中驗證身分。"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"如果你移除螢幕鎖定，裝置保護功能將無法運作。
+
+這麼做亦會刪除裝置上儲存的指紋圖像和模型。你之後將無法使用指紋在應用程式中驗證身分。"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"如果你移除螢幕鎖定，裝置保護功能將無法運作。
+
+這麼做會刪除裝置上儲存的指紋圖像和模型。系統亦會妥善地將你的面部模型永久刪除。你之後將無法使用面孔或指紋在應用程式中驗證身分。"</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">如果指紋解鎖功能越常用於解鎖手機或在應用程式中驗證身分，準確度就會越高</string>
+</resources>

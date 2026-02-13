@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string-array name="config_state_busy_intent_list">
+        <item>intent:#Intent;action=com.google.android.gms.dck.action.SE_STATE_CHANGED;i.com.google.android.gms.dck.extra.SE_STATE=1;end</item>
+        <item>intent:#Intent;action=com.qorvo.uwb.action.SE_STATE_CHANGED;i.com.qorvo.uwb.extra.SE_STATE=1;end</item>
+    </string-array>
+
+    <string-array name="config_state_ready_intent_list">
+        <item>intent:#Intent;action=com.google.android.gms.dck.action.SE_STATE_CHANGED;i.com.google.android.gms.dck.extra.SE_STATE=0;end</item>
+        <item>intent:#Intent;action=com.qorvo.uwb.action.SE_STATE_CHANGED;i.com.qorvo.uwb.extra.SE_STATE=0;end</item>
+    </string-array>
+
+    <string-array name="config_state_request_intent_list">
+        <item>intent:#Intent;action=com.google.android.gms.dck.action.SE_STATE_REQUEST;end</item>
+        <item>intent:#Intent;action=com.qorvo.uwb.action.SE_STATE_REQUEST;end</item>
+    </string-array>
+
+    <string-array name="config_state_request_permission_list">
+        <item>com.google.android.gms.dck.permission.DIGITAL_KEY_PRIVILEGED</item>
+        <item>com.qorvo.uwb.permission.SE_STATE_REQUEST</item>
+    </string-array>
+</resources>

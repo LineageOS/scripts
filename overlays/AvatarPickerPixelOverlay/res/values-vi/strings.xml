@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Bộ chọn ảnh đại diện của Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">Hình minh hoạ vui tươi với hai hình bán nguyệt màu xanh lục đậm trên nền xanh lục nhạt</string>
+
+    <string name="desc_ProfileIcons10">Hình minh hoạ vui tươi với một con bướm màu cam trên nền vàng</string>
+
+    <string name="desc_ProfileIcons11">Hình mũi màu đen với góc bo tròn trên nền xám đậm</string>
+
+    <string name="desc_ProfileIcons12">Hình cỏ ba màu lá đen với góc bo tròn trên nền xám nhạt</string>
+
+    <string name="desc_ProfileIcons13">Hình tròn tím nhạt uốn lượn trên nền tím đậm</string>
+
+    <string name="desc_ProfileIcons14">Hình cỏ ba lá màu xanh dương nhạt với góc bo tròn trên nền màu cam</string>
+
+    <string name="desc_ProfileIcons15">Hình lục giác xanh lục nhạt với góc bo tròn trên nền xanh lục đậm</string>
+
+    <string name="desc_ProfileIcons16">Hình kim cương màu đen với góc bo tròn trên nền xám nhạt</string>
+
+    <string name="desc_ProfileIcons17">Hình minh hoạ vui tươi với một chiếc lá màu cam trên nền màu vàng</string>
+
+    <string name="desc_ProfileIcons18">Hình minh hoạ vui tươi có hình sao Thổ trên nền màu hồng đào</string>
+
+    <string name="desc_ProfileIcons19">Hình minh hoạ vui tươi với những ngôi sao và hình tròn màu trắng và cam cùng hoạ tiết thiên văn trên nền đen</string>
+
+    <string name="desc_ProfileIcons2">Hình minh hoạ trừu tượng với các hình trụ đen và trắng giao nhau</string>
+
+    <string name="desc_ProfileIcons20">Hình minh hoạ vui tươi với một chú chó có mặt trắng tai xanh dương trên nền vàng</string>
+
+    <string name="desc_ProfileIcons21">Hình minh hoạ vui tươi với một chú chim bồ câu trắng mang theo cành ô liu bay trên nền tím</string>
+
+    <string name="desc_ProfileIcons22">Hình minh hoạ vui tươi với một chú chó có mặt trắng tai đen trên nền xanh dương</string>
+
+    <string name="desc_ProfileIcons23">Hình minh hoạ với một bông hoa màu hồng cùng lá xanh trên nền màu kem</string>
+
+    <string name="desc_ProfileIcons24">Hình minh hoạ trừu tượng gồm sáu hình trụ màu xanh dương trên nền đỏ</string>
+
+    <string name="desc_ProfileIcons3">Hình minh hoạ trừu tượng có hình cỏ ba lá màu xanh dương nhạt trên nền xanh dương đậm</string>
+
+    <string name="desc_ProfileIcons4">Hình minh hoạ trừu tượng gồm hai hình tam giác ba chiều màu hồng</string>
+
+    <string name="desc_ProfileIcons5">Hình minh hoạ trừu tượng gồm các lớp màu xanh mòng két trên nền vàng</string>
+
+    <string name="desc_ProfileIcons6">Hình minh hoạ trừu tượng với những hòn đá màu tím trên nền xanh lục</string>
+
+    <string name="desc_ProfileIcons7">Hình minh hoạ vui tươi với năm bông hoa màu trắng dạng hình khối trên nền cam</string>
+
+    <string name="desc_ProfileIcons8">Hình minh hoạ vui tươi với ba trái việt quất trên nền hồng</string>
+
+    <string name="desc_ProfileIcons9">Hình minh hoạ vui tươi với một quả chanh có một chiếc lá đen trên nền xanh lục</string>
+</resources>

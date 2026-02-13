@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">وقتی از «قفل‌گشایی با اثر انگشت» استفاده می‌کنید، مدل اثر انگشتتان به‌کمک تصاویر به‌روزرسانی می‌شود. مدل و تصاویر اثر انگشت به‌طور ایمن در تلفنتان ذخیره می‌شوند و هرگز از آن خارج نمی‌شوند. همه پردازش‌ها به‌طور ایمن در تلفنتان انجام می‌شود.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">وقتی فرزندتان از «قفل‌گشایی با اثر انگشت» استفاده می‌کند، مدل اثر انگشت او به‌کمک تصاویر به‌روزرسانی می‌شود. مدل و تصاویر اثر انگشت فرزندتان به‌طور ایمن در تلفن ذخیره می‌شوند و هرگز از آن خارج نمی‌شوند. همه پردازش‌ها به‌طور ایمن در تلفن انجام می‌شود.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">می‌توانید مدل و تصاویر اثر انگشتتان را حذف کنید یا هرزمان خواستید «قفل‌گشایی با اثر انگشت» را در «تنظیمات» خاموش کنید. تا زمانی‌که مدل‌ها و تصاویر اثر انگشت را حذف نکنید، در تلفن ذخیره می‌مانند.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">شما و فرزندتان هر زمان‌که بخواهید می‌توانید مدل و تصاویر اثر انگشت را حذف کنید، یا «قفل‌گشایی با اثر انگشت» را در «تنظیمات» خاموش کنید. تا زمانی‌که مدل‌ها و تصاویر اثر انگشت را حذف نکنید، در تلفن ذخیره می‌مانند.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">با «قفل‌گشایی با اثر انگشت»، می‌توانید قفل تلفنتان را بااستفاده از اثر انگشت باز کنید. برای حفظ امنیت، افزودن روش پشتیبان قفل صفحه برای این گزینه الزامی است.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">قفل‌گشایی با اثر انگشت</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">«قفل‌گشایی با اثر انگشت» برای نمایه کاری</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">راه‌اندازی «قفل‌گشایی با اثر انگشت»</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">مجاز کردن «قفل‌گشایی با اثر انگشت»</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">«قفل‌گشایی با اثر انگشت» مدلی بی‌همتا از اثر انگشتتان ایجاد می‌کند که برای تأیید هویتتان استفاده می‌شود. برای ایجاد این مدل اثر انگشت درحین راه‌اندازی، چند تصویر از اثر انگشتتان در موقعیت‌های مختلف می‌گیرید.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">«قفل‌گشایی با اثر انگشت» مدلی بی‌همتا از اثرانگشت فرزندتان ایجاد می‌کند که برای تأیید هویت او استفاده می‌شود. برای ایجاد این مدل اثر انگشت درحین راه‌اندازی، فرزندتان چند تصویر از اثر انگشتش در موقعیت‌های مختلف می‌گیرد.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">‏به یکی از ارائه‌دهندگان خدمات تعمیر یا g.co/pixel/fingerprintunlock مراجعه کنید.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">استفاده از «قفل‌گشایی با اثر انگشت»</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">الگو • اثر انگشت</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">پین • اثر انگشت</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">گذرواژه • اثر انگشت</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">ادامه بدون «قفل‌گشایی با اثر انگشت»</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"درصورت گم شدن یا سرقت شدن تلفن، الگو از آن محافظت می‌کند.
+
+با این کار، مدل و تصاویر اثر انگشت ذخیره‌شده در دستگاهتان هم حذف می‌شود. نمی‌توانید از اثر انگشتتان برای اصالت‌سنجی در برنامه‌ها استفاده کنید."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"درصورت گم شدن یا سرقت شدن تلفن، الگو از آن محافظت می‌کند.
+
+با این کار، مدل و تصاویر اثر انگشت ذخیره‌شده در دستگاهتان حذف می‌شود. مدل چهره‌تان به‌صورت دائم و ایمن حذف خواهد شد. نمی‌توانید از چهره یا اثر انگشتتان برای اصالت‌سنجی در برنامه‌ها استفاده کنید."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"درصورت گم شدن یا سرقت شدن تلفن، پین از آن محافظت می‌کند.
+
+با این کار، مدل و تصاویر اثر انگشت ذخیره‌شده در دستگاهتان هم حذف می‌شود. نمی‌توانید از اثر انگشتتان برای اصالت‌سنجی در برنامه‌ها استفاده کنید."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"درصورت گم شدن یا سرقت شدن تلفن، پین از آن محافظت می‌کند.
+
+با این کار، مدل و تصاویر اثر انگشت ذخیره‌شده در دستگاهتان حذف می‌شود. مدل چهره‌تان به‌صورت دائم و ایمن حذف خواهد شد. نمی‌توانید از چهره یا اثر انگشتتان برای اصالت‌سنجی در برنامه‌ها استفاده کنید."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"درصورت گم شدن یا سرقت شدن تلفن، گذرواژه از آن محافظت می‌کند.
+
+با این کار، مدل و تصاویر اثر انگشت ذخیره‌شده در دستگاهتان هم حذف می‌شود. نمی‌توانید از اثر انگشتتان برای اصالت‌سنجی در برنامه‌ها استفاده کنید."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"درصورت گم شدن یا سرقت شدن تلفن، گذرواژه از آن محافظت می‌کند.
+
+با این کار، مدل و تصاویر اثر انگشت ذخیره‌شده در دستگاهتان حذف می‌شود. مدل چهره‌تان به‌صورت دائم و ایمن حذف خواهد شد. نمی‌توانید از چهره یا اثر انگشتتان برای اصالت‌سنجی در برنامه‌ها استفاده کنید."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"ویژگی‌های محافظت از دستگاه بدون قفل صفحه کار نخواهد کرد.
+
+با این کار، مدل و تصاویر اثر انگشت ذخیره‌شده در دستگاهتان هم حذف می‌شود. نمی‌توانید از اثر انگشتتان برای اصالت‌سنجی در برنامه‌ها استفاده کنید."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"ویژگی‌های محافظت از دستگاه بدون قفل صفحه کار نخواهد کرد.
+
+با این کار، مدل و تصاویر اثر انگشت ذخیره‌شده در دستگاهتان حذف می‌شود. مدل چهره‌تان به‌صورت دائم و ایمن حذف خواهد شد. نمی‌توانید از چهره یا اثر انگشتتان برای اصالت‌سنجی در برنامه‌ها استفاده کنید."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">هر چه بیشتر از «قفل‌گشایی با اثر انگشت» برای باز کردن قفل تلفن یا تأیید هویتتان در برنامه‌ها استفاده کنید، بهبود بیشتری می‌یابد</string>
+</resources>

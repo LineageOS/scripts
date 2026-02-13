@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel ಅವತಾರ್ ಪಿಕರ್</string>
+
+    <string name="desc_ProfileIcons1">ತಿಳಿ ಹಸಿರು ಹಿನ್ನೆಲೆಯ ಮೇಲೆ ಇರುವ ಎರಡು ಗಾಢ ಹಸಿರು ಬಣ್ಣದ ಅರ್ಧ ವೃತ್ತಗಳ ಆಹ್ಲಾದಕರ ಚಿತ್ರ</string>
+
+    <string name="desc_ProfileIcons10">ಹಳದಿ ಹಿನ್ನೆಲೆಯ ಮೇಲೆ ಇರುವ ಕಿತ್ತಳೆ ಬಣ್ಣದ ಚಿಟ್ಟೆಯ ಆಹ್ಲಾದಕರ ಚಿತ್ರ</string>
+
+    <string name="desc_ProfileIcons11">ಗಾಢ ಬೂದು ಹಿನ್ನೆಲೆಯ ಮೇಲಿನ ದುಂಡಾದ ಅಂಚುಗಳಿರುವ ಕಪ್ಪು ಮೂಗಿನ ಆಕಾರ</string>
+
+    <string name="desc_ProfileIcons12">ತಿಳಿ ಬೂದು ಹಿನ್ನೆಲೆಯ ಮೇಲಿನ ದುಂಡಾದ ಅಂಚುಗಳಿರುವ ಕಪ್ಪು ಚತುರ್ದಳ ಆಕಾರ</string>
+
+    <string name="desc_ProfileIcons13">ಗಾಢ ನೇರಳೆ ಹಿನ್ನೆಲೆಯ ಮೇಲಿನ ತಿಳಿ ನೇರಳೆ ಬಣ್ಣದ ವಿಗ್ಲಿ ವೃತ್ತ</string>
+
+    <string name="desc_ProfileIcons14">ಕಿತ್ತಳೆ ಹಿನ್ನೆಲೆಯ ಮೇಲಿನ ದುಂಡಾದ ಅಂಚುಗಳಿರುವ ತಿಳಿ ನೀಲಿ ಚತುರ್ದಳ ಆಕಾರ</string>
+
+    <string name="desc_ProfileIcons15">ಗಾಢ ಹಸಿರು ಹಿನ್ನೆಲೆಯ ಮೇಲಿನ ದುಂಡಾದ ಅಂಚುಗಳಿರುವ ತಿಳಿ ಹಸಿರು ಷಡ್ಭುಜಾಕೃತಿ</string>
+
+    <string name="desc_ProfileIcons16">ತಿಳಿ ಬೂದು ಹಿನ್ನೆಲೆಯ ಮೇಲಿನ ದುಂಡಾದ ಅಂಚುಗಳಿರುವ ಕಪ್ಪು ವಜ್ರದ ಆಕಾರ</string>
+
+    <string name="desc_ProfileIcons17">ಹಳದಿ ಹಿನ್ನೆಲೆಯ ಮೇಲಿನ ಕಿತ್ತಳೆ ಎಲೆಯ ಆಹ್ಲಾದಕರ ಚಿತ್ರ</string>
+
+    <string name="desc_ProfileIcons18">ಪೀಚ್ ಬಣ್ಣದ ಹಿನ್ನೆಲೆಯ ಮೇಲಿನ ಶನಿ ಗ್ರಹದ ಆಹ್ಲಾದಕರ ಚಿತ್ರ</string>
+
+    <string name="desc_ProfileIcons19">ಕಪ್ಪು ಹಿನ್ನೆಲೆಯ ಮೇಲಿನ ನಭೋ ಮಂಡಲದ ಪ್ಯಾಟರ್ನ್‌ನಲ್ಲಿನ ಬಿಳಿ ಮತ್ತು ಕಿತ್ತಳೆ ನಕ್ಷತ್ರಗಳ ಹಾಗೂ ವೃತ್ತಗಳ ಆಹ್ಲಾದಕರ ಚಿತ್ರ</string>
+
+    <string name="desc_ProfileIcons2">ಕಪ್ಪು ಮತ್ತು ಬಿಳಿ ಬಣ್ಣದ ಪರಸ್ಪರ ಛೇದಿಸಿರುವ ಸಿಲಿಂಡರ್‌ಗಳ ಅಮೂರ್ತ ಚಿತ್ರ</string>
+
+    <string name="desc_ProfileIcons20">ಹಳದಿ ಹಿನ್ನೆಲೆಯ ಮೇಲಿನ ನೀಲಿ ಕಿವಿಗಳು ಮತ್ತು ಬಿಳಿ ಮುಖವನ್ನು ಹೊಂದಿರುವ ನಾಯಿಯ ಆಹ್ಲಾದಕರ ಚಿತ್ರ</string>
+
+    <string name="desc_ProfileIcons21">ನೇರಳೆ ಹಿನ್ನೆಲೆಯ ಮೇಲಿನ ಆಲಿವ್ ಎಲೆಯ ಕೊಂಬೆಯನ್ನು ಹಿಡಿದು ಹಾರುತ್ತಿರುವ ಬಿಳಿ ಪಾರಿವಾಳದ ಆಹ್ಲಾದಕರ ಚಿತ್ರ</string>
+
+    <string name="desc_ProfileIcons22">ನೀಲಿ ಹಿನ್ನೆಲೆಯ ಮೇಲಿನ ಕಪ್ಪು ಕಿವಿಗಳು ಮತ್ತು ಬಿಳಿ ಮುಖವನ್ನು ಹೊಂದಿರುವ ನಾಯಿಯ ಆಹ್ಲಾದಕರ ಚಿತ್ರ</string>
+
+    <string name="desc_ProfileIcons23">ಕೆನೆ ಬಣ್ಣದ ಹಿನ್ನೆಲೆಯ ಮೇಲಿನ ಹಸಿರು ಎಲೆಗಳನ್ನು ಹೊಂದಿರುವ ಗುಲಾಬಿ ಹೂವಿನ ಆಹ್ಲಾದಕರ ಚಿತ್ರ</string>
+
+    <string name="desc_ProfileIcons24">ಕೆಂಪು ಹಿನ್ನೆಲೆಯ ಮೇಲಿನ ಆರು ನೀಲಿ ಸಿಲಿಂಡರ್‌ಗಳ ಅಮೂರ್ತ ಚಿತ್ರ</string>
+
+    <string name="desc_ProfileIcons3">ಗಾಢ ನೀಲಿ ಹಿನ್ನೆಲೆಯ ಮೇಲಿನ ತಿಳಿ ನೀಲಿ ಚತುರ್ದಳ ಆಕಾರದ ಅಮೂರ್ತ ಚಿತ್ರ</string>
+
+    <string name="desc_ProfileIcons4">ಎರಡು ಗುಲಾಬಿ ಬಣ್ಣದ, ತ್ರಿ ಡೈಮೆನ್ಶನಲ್ ತ್ರಿಭುಜಗಳ ಅಮೂರ್ತ ಚಿತ್ರ</string>
+
+    <string name="desc_ProfileIcons5">ಹಳದಿ ಹಿನ್ನೆಲೆಯ ಮೇಲಿನ ಟೀಲ್ ಪದರಗಳ ಅಮೂರ್ತ ಚಿತ್ರ</string>
+
+    <string name="desc_ProfileIcons6">ಹಸಿರು ಹಿನ್ನೆಲೆಯ ಮೇಲಿನ ನೇರಳೆ ಬಂಡೆಗಳ ಅಮೂರ್ತ ಚಿತ್ರ</string>
+
+    <string name="desc_ProfileIcons7">ಕಿತ್ತಳೆ ಹಿನ್ನೆಲೆಯ ಮೇಲಿನ ಐದು ಬಿಳಿ ಹೂವುಗಳ ಆಹ್ಲಾದಕರ ರೇಖಾ ಚಿತ್ರ</string>
+
+    <string name="desc_ProfileIcons8">ಗುಲಾಬಿ ಬಣ್ಣದ ಹಿನ್ನೆಲೆಯ ಮೇಲಿನ ಮೂರು ಬೆರಿಹಣ್ಣುಗಳ ಆಹ್ಲಾದಕರ ಚಿತ್ರ</string>
+
+    <string name="desc_ProfileIcons9">ಹಸಿರು ಹಿನ್ನೆಲೆಯ ಮೇಲಿನ ಕಪ್ಪು ಎಲೆಯಿರುವ ನಿಂಬೆಹಣ್ಣಿನ ಆಹ್ಲಾದಕರ ಚಿತ್ರ</string>
+</resources>

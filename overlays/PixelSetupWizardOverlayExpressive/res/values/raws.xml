@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <raw name="loading_animation_custom_account">@raw/loading_screen_illustration_expressive</raw>
+
+    <raw name="loading_animation_custom_connection">@raw/loading_screen_illustration_expressive</raw>
+
+    <raw name="loading_animation_custom_default">@raw/loading_screen_illustration_expressive</raw>
+
+    <raw name="loading_animation_custom_final_hold">@raw/loading_screen_illustration_expressive</raw>
+
+    <raw name="loading_animation_custom_update">@raw/loading_screen_illustration_expressive</raw>
+</resources>

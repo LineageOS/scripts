@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">เครื่องมือเลือกรูปโปรไฟล์ Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">ภาพครึ่งวงกลมสีเขียวเข้ม 2 วงบนพื้นหลังสีเขียวอ่อน</string>
+
+    <string name="desc_ProfileIcons10">ภาพผีเสื้อสีส้มบนพื้นหลังสีเหลือง</string>
+
+    <string name="desc_ProfileIcons11">รูปจมูกขอบมนสีดำบนพื้นหลังสีเทาเข้ม</string>
+
+    <string name="desc_ProfileIcons12">รูปใบโคลเวอร์ขอบมนสีดำบนพื้นหลังสีเทาอ่อน</string>
+
+    <string name="desc_ProfileIcons13">วงกลมขอบหยักสีม่วงอ่อนบนพื้นหลังสีม่วงเข้ม</string>
+
+    <string name="desc_ProfileIcons14">รูปใบโคลเวอร์ขอบมนสีฟ้าอ่อนบนพื้นหลังสีส้ม</string>
+
+    <string name="desc_ProfileIcons15">รูปหกเหลี่ยมขอบมนสีเขียวอ่อนบนพื้นหลังสีเขียวเข้ม</string>
+
+    <string name="desc_ProfileIcons16">รูปเพชรขอบมนสีดำบนพื้นหลังสีเทาอ่อน</string>
+
+    <string name="desc_ProfileIcons17">ภาพใบไม้สีส้มบนพื้นหลังสีเหลือง</string>
+
+    <string name="desc_ProfileIcons18">ภาพดาวเสาร์บนพื้นหลังสีพีช</string>
+
+    <string name="desc_ProfileIcons19">ภาพดาวและวงกลมสีขาวและสีส้มลายท้องฟ้าบนพื้นหลังสีดำ</string>
+
+    <string name="desc_ProfileIcons2">ภาพนามธรรมของทรงกระบอกตัดกันสีขาวดำ</string>
+
+    <string name="desc_ProfileIcons20">ภาพสุนัขหน้าขาวที่มีหูสีฟ้าบนพื้นหลังสีเหลือง</string>
+
+    <string name="desc_ProfileIcons21">ภาพนกพิราบขาวคาบกิ่งมะกอกโบยบินบนพื้นหลังสีม่วง</string>
+
+    <string name="desc_ProfileIcons22">ภาพสุนัขหน้าขาวที่มีหูสีดำบนพื้นหลังสีน้ำเงิน</string>
+
+    <string name="desc_ProfileIcons23">ภาพดอกไม้สีชมพูกับใบไม้สีเขียวบนพื้นหลังสีครีม</string>
+
+    <string name="desc_ProfileIcons24">ภาพนามธรรมของกระบอกสูบสีน้ำเงิน 6 อันบนพื้นหลังสีแดง</string>
+
+    <string name="desc_ProfileIcons3">ภาพนามธรรมของรูปใบโคลเวอร์สีฟ้าอ่อนบนพื้นหลังสีน้ำเงินเข้ม</string>
+
+    <string name="desc_ProfileIcons4">ภาพนามธรรมของสามเหลี่ยม 3 มิติสีชมพู 2 อัน</string>
+
+    <string name="desc_ProfileIcons5">ภาพนามธรรมของชั้นสีน้ำเงินอมเขียวบนพื้นหลังสีเหลือง</string>
+
+    <string name="desc_ProfileIcons6">ภาพนามธรรมของหินสีม่วงบนพื้นหลังสีเขียว</string>
+
+    <string name="desc_ProfileIcons7">ภาพดอกไม้ขาวรูปทรงเรขาคณิต 5 ดอกบนพื้นหลังสีส้ม</string>
+
+    <string name="desc_ProfileIcons8">ภาพบลูเบอร์รี่ 3 ลูกบนพื้นหลังสีชมพู</string>
+
+    <string name="desc_ProfileIcons9">ภาพมะนาวที่มีใบสีดำบนพื้นหลังสีเขียว</string>
+</resources>

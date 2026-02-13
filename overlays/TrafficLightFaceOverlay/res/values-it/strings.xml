@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Usa il tuo volto per sbloccare lo smartphone</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Usa il tuo volto per sbloccare lo smartphone.
+
+Tieni presente che:
+Puoi configurare un solo volto alla volta. Per aggiungere un altro volto devi eliminare quello attuale.
+
+Se guardi direttamente lo smartphone, potresti sbloccarlo anche senza volerlo.
+
+Il tuo smartphone può essere sbloccato da un'altra persona se viene rivolto verso il tuo viso.
+
+Il tuo smartphone può essere sbloccato da qualcuno che ti assomiglia molto, ad esempio un gemello."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Usa il tuo volto per sbloccare lo smartphone.
+
+Tieni presente che:
+Puoi configurare un solo volto alla volta. Per aggiungere un altro volto devi eliminare quello attuale.
+
+Se guardi direttamente lo smartphone, potresti sbloccarlo anche senza volerlo.
+
+Il tuo smartphone può essere sbloccato da un'altra persona se viene rivolto verso il tuo viso, anche se hai gli occhi chiusi.
+
+Il tuo smartphone può essere sbloccato da qualcuno che ti assomiglia molto, ad esempio un gemello."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Come configurare lo Sblocco con il Volto</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">Nella prossima schermata, tieni lo smartphone all'altezza degli occhi</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Se normalmente porti gli occhiali, puoi indossarli anche durante la configurazione</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Elimina l'attuale modello del volto per riconfigurare lo Sblocco con il Volto.
+
+Il modello del volto verrà eliminato definitivamente e in sicurezza.
+
+Dopo l'eliminazione dovrai usare il PIN, la sequenza o la password per sbloccare lo smartphone."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Elimina l'attuale modello del volto per riconfigurare lo Sblocco con il Volto.
+
+Il modello del volto verrà eliminato definitivamente e in sicurezza.
+
+Dopo l'eliminazione dovrai usare l'impronta, il PIN, la sequenza o la password per sbloccare lo smartphone."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">Per sbloccare lo smartphone, devi tenere gli occhi aperti. Per risultati ottimali, togliti gli occhiali da sole quando sblocchi lo smartphone.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Ora puoi usare il tuo volto per sbloccare il tuo telefono</string>
+</resources>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Selector de avatar de Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">Ilustración divertida de dos semicírculos verde oscuro sobre un fondo verde claro</string>
+
+    <string name="desc_ProfileIcons10">Ilustración divertida de una mariposa naranja sobre un fondo amarillo</string>
+
+    <string name="desc_ProfileIcons11">Figura de nariz de color negro con bordes redondeados sobre un fondo gris oscuro</string>
+
+    <string name="desc_ProfileIcons12">Figura de trébol de color negro con bordes redondeados sobre un fondo gris claro</string>
+
+    <string name="desc_ProfileIcons13">Círculo ondulado color morado claro sobre un fondo morado oscuro</string>
+
+    <string name="desc_ProfileIcons14">Figura de trébol de color celeste con bordes redondeados sobre un fondo naranja</string>
+
+    <string name="desc_ProfileIcons15">Hexágono verde claro con bordes redondeados sobre un fondo verde oscuro</string>
+
+    <string name="desc_ProfileIcons16">Figura de diamante de color negro con bordes redondeados sobre un fondo gris claro</string>
+
+    <string name="desc_ProfileIcons17">Ilustración divertida de una hoja naranja sobre un fondo amarillo</string>
+
+    <string name="desc_ProfileIcons18">Ilustración divertida del planeta Saturno sobre un fondo color durazno</string>
+
+    <string name="desc_ProfileIcons19">Ilustración divertida de estrellas blancas y naranjas y círculos en un patrón celestial sobre un fondo negro</string>
+
+    <string name="desc_ProfileIcons2">Ilustración abstracta de cilindros en interseccion negros y blancos</string>
+
+    <string name="desc_ProfileIcons20">Ilustración divertida de un perro con orejas azules y rostro blanco sobre un fondo amarillo</string>
+
+    <string name="desc_ProfileIcons21">Ilustración divertida de una paloma blanca volando con una rama de olivo en el pico sobre un fondo morado</string>
+
+    <string name="desc_ProfileIcons22">Ilustración divertida de un perro con orejas negras y rostro blanco sobre un fondo azul</string>
+
+    <string name="desc_ProfileIcons23">Ilustración divertida de una flor rosada con hojas verdes sobre un fondo crema</string>
+
+    <string name="desc_ProfileIcons24">Ilustración abstracta de seis cilindros azules sobre un fondo rojo</string>
+
+    <string name="desc_ProfileIcons3">Ilustración abstracta de una figura de trébol celeste sobre un fondo azul oscuro</string>
+
+    <string name="desc_ProfileIcons4">Ilustración abstracta de dos triángulos tridimensionales rosados</string>
+
+    <string name="desc_ProfileIcons5">Ilustración abstracta de capas verde azuladas sobre un fondo amarillo</string>
+
+    <string name="desc_ProfileIcons6">Ilustración abstracta de rocas moradas sobre un fondo verde</string>
+
+    <string name="desc_ProfileIcons7">Ilustración divertida de cinco flores geométricas blancas sobre un fondo naranja</string>
+
+    <string name="desc_ProfileIcons8">Ilustración divertida de tres arándanos sobre un fondo rosado</string>
+
+    <string name="desc_ProfileIcons9">Ilustración divertida de un limón con una hoja negra sobre un fondo verde</string>
+</resources>

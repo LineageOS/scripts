@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"Ekran qoruyucunuz varsa, mükəmməl performans üçün barmaq izi quraşdırmazdan əvvəl ekran qoruyucusunu taxın.
+
+Mükəmməl nəticə üçün \"Google üçün hazırlanıb\" sertifikatlı ekran qoruyucusu istifadə edin. Digər ekran qoruyucuları ilə barmaq iziniz işləməyə bilər."</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">Barmağınızı əyib, ucu ilə toxunun</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">Barmağınızı çevirib, sol kənarı ilə toxunun</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">Yenidən çevirib, sağ kənarı ilə toxunun</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">Sensor sahəsini təmizləyin</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">Zolaq, ləkə və ya izləri təmizləmək üçün ekranı silin. Bu, daha aydın barmaq izi təsvirləri çəkməyə kömək edir.</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">Davam etməzdən əvvəl ekranı təmizləyin</string>
+</resources>

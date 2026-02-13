@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Gamitin ang iyong mukha para i-unlock ang telepono mo</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Gamitin ang iyong mukha para i-unlock ang telepono mo.
+
+Tandaan:
+Isang mukha lang ang puwedeng naka-set up para sa iyo sa bawat pagkakataon. Para magdagdag pa ng mukha, i-delete ang kasalukuyang mukha.
+
+Kapag tumingin ka sa telepono, puwede mong hindi sinasadyang ma-unlock ito.
+
+Puwedeng ma-unlock ng ibang tao ang telepono mo kung itatapat ito sa iyong mukha.
+
+Puwedeng ma-unlock ng isang taong may malaking pagkakahawig sa iyo ang telepono mo, gaya ng kapatid na kamukha mo."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Gamitin ang iyong mukha para i-unlock ang telepono mo.
+
+Tandaan:
+Isang mukha lang ang puwedeng naka-set up para sa iyo sa bawat pagkakataon. Para magdagdag pa ng mukha, i-delete ang kasalukuyang mukha.
+
+Kapag tumingin ka sa telepono, puwede mong hindi sinasadyang ma-unlock ito.
+
+Puwedeng ma-unlock ng ibang tao ang telepono mo kung itatapat ito sa iyong mukha, kahit na nakapikit ka.
+
+Puwedeng ma-unlock ng isang taong may malaking pagkakahawig sa iyo ang telepono mo, gaya ng kapatid na kamukha mo."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Pag-set up ng Pag-unlock Gamit ang Mukha</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">Sa susunod na screen, hawakan ang iyong telepono nang kapantay ng mata</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Kung karaniwan kang nagsusuot ng salamin sa mata, puwede mo itong isuot habang nagse-set up</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"I-delete ang iyong kasalukuyang face model para ma-set up ulit ang Pag-unlock Gamit ang Mukha.
+
+Permanente at secure na made-delete ang iyong face model.
+
+Pagkatapos mag-delete, kakailanganin mo ang iyong PIN, pattern, o password para i-unlock ang telepono mo."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"I-delete ang kasalukuyan mong face model para ma-set up ulit ang Pag-unlock Gamit ang Mukha.
+
+Permanente at secure na made-delete ang iyong face model.
+
+Pagkatapos mag-delete, kakailanganin mo ang fingerprint, PIN, pattern, o password mo para i-unlock ang telepono mo."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">Para i-unlock ang telepono, dapat ay nakadilat ka. Para sa mga pinakamainam na resulta, alisin ang salamin kapag ina-unlock ang telepono.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Puwede mo nang kunin ang iyong telepono at gamitin ang mukha mo para i-unlock ito</string>
+</resources>

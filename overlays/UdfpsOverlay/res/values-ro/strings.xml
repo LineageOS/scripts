@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Când folosești Deblocarea cu amprenta, imaginile sunt folosite pentru a-ți actualiza modelul de amprentă. Imaginile amprentelor și modelul de amprentă sunt stocate în siguranță pe telefon și nu îl părăsesc niciodată. Toată procesarea are loc în siguranță pe telefonul tău.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Când folosește Deblocarea cu amprenta, imaginile sunt folosite pentru a-i actualiza modelul de amprentă. Imaginile amprentelor și modelul de amprentă ale copilului tău sunt stocate în siguranță pe telefon și nu îl părăsesc niciodată. Toată procesarea are loc în siguranță pe telefon.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Poți să ștergi imaginile amprentelor și modelul de amprentă sau să dezactivezi Deblocarea cu amprenta oricând din Setări. Imaginile amprentelor și modelul de amprentă sunt stocate pe telefon până când le ștergi.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Tu și copilul tău puteți să ștergeți imaginile amprentelor și modelul de amprentă sau să dezactivați Deblocarea cu amprenta oricând din Setări. Imaginile amprentelor și modelele de amprentă sunt stocate pe telefon până când le ștergi.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">Cu Deblocarea cu amprenta, poți debloca telefonul folosind amprenta. Din motive de securitate, această opțiune necesită o blocare a ecranului de rezervă.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Deblocarea cu amprenta</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">Deblocare cu amprenta pentru serviciu</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Configurează Deblocarea cu amprenta</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">Permite Deblocarea cu amprenta</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">Deblocarea cu amprenta creează un model unic al amprentei tale pentru a-ți confirma identitatea. Pentru a crea acest model de amprentă, în timpul configurării vei captura imagini ale amprentei tale din diferite poziții.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">Deblocarea cu amprenta creează un model unic al amprentei copilului tău pentru a-i confirma identitatea. Pentru a crea acest model de amprentă în timpul configurării, va captura imagini ale amprentei sale din diferite poziții.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">Vizitează un furnizor de servicii de reparații sau accesează g.co/pixel/fingerprintunlock.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">Folosește Deblocarea cu amprenta</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">Modelul • Amprenta</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">Codul PIN • Amprenta</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">Parola • Amprenta</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">Continuă fără Deblocare cu amprenta</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"Un model îți protejează telefonul dacă este pierdut sau furat.
+
+În plus, această funcție șterge imaginile și modelul cu amprentă stocate pe dispozitiv. Nu vei putea să îți folosești amprenta pentru autentificare în aplicații."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"Un model îți protejează telefonul dacă este pierdut sau furat.
+
+Această funcție șterge imaginile și modelul cu amprentă stocate pe dispozitiv. În plus, modelul facial va fi șters definitiv și în siguranță. Nu vei putea să folosești fața sau amprenta pentru autentificare în aplicații."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"Un PIN îți protejează telefonul dacă este pierdut sau furat.
+
+În plus, această funcție șterge imaginile și modelul cu amprentă stocate pe dispozitiv. Nu vei putea să îți folosești amprenta pentru autentificare în aplicații."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"Un PIN îți protejează telefonul dacă este pierdut sau furat.
+
+Această funcție șterge imaginile și modelul cu amprentă stocate pe dispozitiv. În plus, modelul facial va fi șters definitiv și în siguranță. Nu vei putea să folosești fața sau amprenta pentru autentificare în aplicații."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"O parolă îți protejează telefonul dacă este pierdut sau furat.
+
+În plus, această funcție șterge imaginile și modelul cu amprentă stocate pe dispozitiv. Nu vei putea să îți folosești amprenta pentru autentificare în aplicații."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"O parolă îți protejează telefonul dacă este pierdut sau furat.
+
+Această funcție șterge imaginile și modelul cu amprentă stocate pe dispozitiv. În plus, modelul facial va fi șters definitiv și în siguranță. Nu vei putea să folosești fața sau amprenta pentru autentificare în aplicații."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"Funcțiile de protecție a dispozitivului nu vor funcționa fără blocarea ecranului.
+
+În plus, această funcție șterge imaginile și modelul cu amprentă stocate pe dispozitiv. Nu vei putea să îți folosești amprenta pentru autentificare în aplicații."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"Funcțiile de protecție a dispozitivului nu vor funcționa fără blocarea ecranului.
+
+Această funcție șterge imaginile și modelul cu amprentă stocate pe dispozitiv. În plus, modelul facial va fi șters definitiv și în siguranță. Nu vei putea să folosești fața sau amprenta pentru autentificare în aplicații."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">Deblocarea cu amprenta se îmbunătățește pe măsură ce o folosești pentru a debloca telefonul sau a-ți confirma identitatea în aplicații</string>
+</resources>

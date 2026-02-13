@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Whether to enable the advanced vpn feature. The default is not to. -->
+    <bool name="config_advanced_vpn_enabled">true</bool>
+</resources>

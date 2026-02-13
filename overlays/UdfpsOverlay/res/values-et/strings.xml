@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Kui kasutate sõrmejäljega avamist, kasutatakse kujutisi teie sõrmejäljemudeli värskendamiseks. Teie sõrmejäljekujutised ja -mudel salvestatakse turvaliselt teie telefoni, kust neid välja ei saadeta. Kogu töötlus toimub turvaliselt teie telefonis.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Kui ta kasutab sõrmejäljega avamist, kasutatakse kujutisi tema sõrmejäljemudeli värskendamiseks. Teie lapse sõrmejäljekujutised ja -mudel salvestatakse turvaliselt telefoni, kust neid välja ei saadeta. Kogu töötlus toimub turvaliselt telefonis.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Seadetes saate oma sõrmejäljekujutised ja -mudeli alati kustutada või sõrmejäljega avamise funktsiooni välja lülitada. Sõrmejäljekujutisi ja -mudeleid talletatakse telefonis, kuni need kustutate.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Seadetes saate (või saab laps) sõrmejäljekujutised ja -mudeli alati kustutada või sõrmejäljega avamise funktsiooni välja lülitada. Sõrmejäljekujutised ja -mudelid salvestatakse telefoni, kuni need kustutatakse.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">Sõrmejäljega avamise funktsiooniga saate oma telefoni avada sõrmejäljega. Turvalisuse tagamiseks nõuab see valik varuekraanilukku.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Sõrmejäljega avamine</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">Sõrmejäljega avamine töö jaoks</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Sõrmejäljega avamise seadistamine</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">Lubage sõrmejäljega avamine</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">Sõrmejäljega avamise funktsioon loob teie sõrmejäljest kordumatu mudeli, mille abil teie isik kinnitada. Sõrmejäljemudeli loomiseks jäädvustate seadistamise ajal kujutised oma sõrmejäljest eri asendites.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">Sõrmejäljega avamise funktsioon loob teie lapse sõrmejäljest kordumatu mudeli, mille abil tema isik kinnitada. Sõrmejäljemudeli loomiseks jäädvustatakse seadistamise ajal kujutised tema sõrmejäljest eri asendites.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">Külastage remonditeenuse pakkujat või lehte g.co/pixel/fingerprintunlock.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">Sõrmejäljega avamise kasutamine</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">Muster • Sõrmejälg</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">PIN-kood • Sõrmejälg</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">Parool • Sõrmejälg</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">Jätka ilma sõrmejäljega avamiseta</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"Muster kaitseb teie telefoni olukorras, kus see läheb kaotsi või varastatakse.
+
+Samuti kustutab see teie seadmesse salvestatud sõrmejäljekujutised ja -mudeli. Te ei saa oma sõrmejälge rakendustes autentimiseks kasutada."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"Muster kaitseb teie telefoni olukorras, kus see läheb kaotsi või varastatakse.
+
+See kustutab teie seadmesse salvestatud sõrmejäljekujutised ja -mudeli. Samuti kustutatakse jäädavalt ja turvaliselt teie näomudel. Te ei saa oma nägu ega sõrmejälge rakendustes autentimiseks kasutada."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"PIN-kood kaitseb teie telefoni olukorras, kus see läheb kaotsi või varastatakse.
+
+Samuti kustutab see teie seadmesse salvestatud sõrmejäljekujutised ja -mudeli. Te ei saa oma sõrmejälge rakendustes autentimiseks kasutada."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"PIN-kood kaitseb teie telefoni olukorras, kus see läheb kaotsi või varastatakse.
+
+See kustutab teie seadmesse salvestatud sõrmejäljekujutised ja -mudeli. Samuti kustutatakse jäädavalt ja turvaliselt teie näomudel. Te ei saa oma nägu ega sõrmejälge rakendustes autentimiseks kasutada."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"Parool kaitseb teie telefoni olukorras, kus see läheb kaotsi või varastatakse.
+
+Samuti kustutab see teie seadmesse salvestatud sõrmejäljekujutised ja -mudeli. Te ei saa oma sõrmejälge rakendustes autentimiseks kasutada."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"Parool kaitseb teie telefoni olukorras, kus see läheb kaotsi või varastatakse.
+
+See kustutab teie seadmesse salvestatud sõrmejäljekujutised ja -mudeli. Samuti kustutatakse jäädavalt ja turvaliselt teie näomudel. Te ei saa oma nägu ega sõrmejälge rakendustes autentimiseks kasutada."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"Seadme kaitsefunktsioonid ei tööta ilma teie ekraanilukuta.
+
+Samuti kustutab see teie seadmesse salvestatud sõrmejäljekujutised ja -mudeli. Te ei saa oma sõrmejälge rakendustes autentimiseks kasutada."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"Seadme kaitsefunktsioonid ei tööta ilma teie ekraanilukuta.
+
+See kustutab teie seadmesse salvestatud sõrmejäljekujutised ja -mudeli. Samuti kustutatakse jäädavalt ja turvaliselt teie näomudel. Te ei saa oma nägu ega sõrmejälge rakendustes autentimiseks kasutada."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">Mida rohkem te sõrmejäljega avamist kasutate, seda paremini see teie telefoni avab või rakendustes teie isikut kinnitab</string>
+</resources>

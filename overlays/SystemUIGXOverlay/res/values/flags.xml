@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <bool name="are_flags_overrideable">true</bool>
+
+    <!-- People Tile flag -->
+    <bool name="flag_conversations">true</bool>
+
+    <bool name="flag_charging_ripple">true</bool>
+</resources>

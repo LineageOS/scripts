@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"Hvis du har en skærmbeskytter, skal du anvende skærmbeskytteren, før du konfigurerer dit fingeraftryk, så du kan opnå den bedste effektivitet.
+
+Du får de bedste resultater ved at bruge en skærmbeskytter, der er Made For Google-certificeret. Dit fingeraftryk fungerer muligvis ikke sammen med andre skærmbeskyttere."</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">Vip fingeren, og berør skærmen med fingerspidsen</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">Vip fingeren, og berør skærmen med venstre side</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">Vip fingeren igen, og berør skærmen med højre side</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">Rengør skærmen i nærheden af sensoren</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">Tør din skærm af for at fjerne striber, snavs eller pletter. På den måde kan der registreres mere tydelige fingeraftryksbilleder.</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">Rens din skærm, før du fortsætter</string>
+</resources>

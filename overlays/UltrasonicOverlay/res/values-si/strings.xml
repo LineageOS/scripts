@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"ඔබට තිර ආරක්ෂණයක් තිබේ නම්, හොඳම කාර්ය සාධනය සඳහා ඔබේ ඇඟිලි සලකුණ සැකසීමට පෙර ඔබේ තිර ආරක්ෂකය යොදන්න.
+
+හොඳම ප්‍රතිඵල සඳහා, සහතික කළ Google සඳහා සාදන ලද තිර ආරක්ෂකයක් භාවිත කරන්න. වෙනත් තිර ආරක්ෂක සමඟ, ඔබ‍ගේ ඇඟිලි සලකුණ ක්‍රියා නොකරනු ඇත."</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">ඔබේ ඇඟිල්ල ඇල කර තුඩෙන් ස්පර්ශ කරන්න</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">ඇඟිල්ල හරවා වම් කෙළවරින් ස්පර්ශ කරන්න</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">නැවත හරවා දකුණු කෙළවරින් ස්පර්ශ කරන්න</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">සංවේදකය අසල ඔබේ තිරය පිරිසිදු කරන්න</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">ඕනෑම ඉරක්, පැල්ලමක්, හෝ කැලැලක් ඉවත් කිරීමට ඔබේ තිරය පිස දමන්න. මෙය වඩාත් පැහැදිලි ඇඟිලි සලකුණු රූප ලබා ගැනීමට උපකාරී වේ.</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">දිගටම කරගෙන යාමට පෙර ඔබේ තිරය පිරිසිදු කරන්න</string>
+</resources>

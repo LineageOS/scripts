@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Výber avatara v Google Pixeli</string>
+
+    <string name="desc_ProfileIcons1">Zábavný obrázok dvoch zelených polkruhov na svetlozelenom pozadí</string>
+
+    <string name="desc_ProfileIcons10">Zábavný obrázok oranžového motýľa na žltom pozadí</string>
+
+    <string name="desc_ProfileIcons11">Čierny nos s oblými hranami na tmavosivom pozadí</string>
+
+    <string name="desc_ProfileIcons12">Čierny ďatelinový lístok s oblými hranami na svetlosivom pozadí</string>
+
+    <string name="desc_ProfileIcons13">Svetlopurpurový zvlnený kruh na tmavopurpurovom pozadí</string>
+
+    <string name="desc_ProfileIcons14">Svetlomodrý ďatelinový lístok s oblými hranami na oranžovom pozadí</string>
+
+    <string name="desc_ProfileIcons15">Svetlozelený šesťuholník s oblými hranami na tmavozelenom pozadí</string>
+
+    <string name="desc_ProfileIcons16">Čierny diamant s oblými hranami na svetlosivom pozadí</string>
+
+    <string name="desc_ProfileIcons17">Zábavný obrázok oranžového lístka na žltom pozadí</string>
+
+    <string name="desc_ProfileIcons18">Zábavný obrázok planéty Saturn na pozadí broskyňovej farby</string>
+
+    <string name="desc_ProfileIcons19">Zábavný obrázok bielych a oranžových hviezd a kruhov na čiernom pozadí s nebeským vzorom</string>
+
+    <string name="desc_ProfileIcons2">Abstraktný obrázok pretínajúcich sa čiernych a bielych valcov</string>
+
+    <string name="desc_ProfileIcons20">Zábavný obrázok psa s modrými ušami a bielou tvárou na žltom pozadí</string>
+
+    <string name="desc_ProfileIcons21">Zábavný obrázok letiacej bielej holubice s olivovou vetvičkou na purpurovom pozadí</string>
+
+    <string name="desc_ProfileIcons22">Zábavný obrázok psa s čiernymi ušami a bielou tvárou na modrom pozadí</string>
+
+    <string name="desc_ProfileIcons23">Zábavný obrázok fialového kvetu so zelenými lístkami na krémovom pozadí</string>
+
+    <string name="desc_ProfileIcons24">Abstraktný obrázok šiestich modrých valcov na červenom pozadí</string>
+
+    <string name="desc_ProfileIcons3">Abstraktný obrázok svetlomodrého ďatelinového lístka na tmavomodrom pozadí</string>
+
+    <string name="desc_ProfileIcons4">Abstraktný obrázok dvoch fialových trojrozmerných trojuholníkov</string>
+
+    <string name="desc_ProfileIcons5">Abstraktný obrázok modrozelených vrstiev na žltom pozadí</string>
+
+    <string name="desc_ProfileIcons6">Abstraktný obrázok purpurových skál na zelenom pozadí</string>
+
+    <string name="desc_ProfileIcons7">Zábavný obrázok piatich bielych geometrických kvetov na oranžovom pozadí</string>
+
+    <string name="desc_ProfileIcons8">Zábavný obrázok troch čučoriedok na ružovom pozadí</string>
+
+    <string name="desc_ProfileIcons9">Zábavný obrázok citróna s čiernym listom na zelenom pozadí</string>
+</resources>

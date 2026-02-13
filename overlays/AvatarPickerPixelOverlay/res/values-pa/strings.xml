@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel ਅਵਤਾਰ ਚੋਣਕਾਰ</string>
+
+    <string name="desc_ProfileIcons1">ਹਲਕੇ ਹਰੇ ਰੰਗ ਦੇ ਬੈਕਗ੍ਰਾਊਂਡ 'ਤੇ ਦੋ ਗੂੜ੍ਹੇ-ਹਰੇ ਅਰਧ-ਚੱਕਰਾਂ ਦਾ ਮਜ਼ੇਦਾਰ ਚਿੱਤਰ</string>
+
+    <string name="desc_ProfileIcons10">ਪੀਲੇ ਰੰਗ ਦੇ ਬੈਕਗ੍ਰਾਊਂਡ 'ਤੇ ਇੱਕ ਸੰਤਰੀ ਤਿਤਲੀ ਦਾ ਮਜ਼ੇਦਾਰ ਚਿੱਤਰ</string>
+
+    <string name="desc_ProfileIcons11">ਗੂੜ੍ਹੇ ਸਲੇਟੀ ਰੰਗ ਦੇ ਬੈਕਗ੍ਰਾਊਂਡ 'ਤੇ ਗੋਲ ਕਿਨਾਰਿਆਂ ਵਾਲੀ ਕਾਲੇ ਰੰਗ ਦੇ ਨੱਕ ਦੀ ਆਕ੍ਰਿਤੀ</string>
+
+    <string name="desc_ProfileIcons12">ਹਲਕੇ ਸਲੇਟੀ ਰੰਗ ਦੇ ਬੈਕਗ੍ਰਾਊਂਡ 'ਤੇ ਗੋਲ ਕਿਨਾਰਿਆਂ ਵਾਲੀ ਕਾਲੇ ਰੰਗ ਦੇ ਕਲੋਵਰ ਦੀ ਆਕ੍ਰਿਤੀ</string>
+
+    <string name="desc_ProfileIcons13">ਗੂੜ੍ਹੇ ਜਾਮਨੀ ਰੰਗ ਦੇ ਬੈਕਗ੍ਰਾਊਂਡ 'ਤੇ ਘੁੰਮਦਾ ਹੋਇਆ ਹਲਕੇ ਜਾਮਨੀ ਰੰਗ ਦਾ ਚੱਕਰ</string>
+
+    <string name="desc_ProfileIcons14">ਸੰਤਰੀ ਰੰਗ ਦੇ ਬੈਕਗ੍ਰਾਊਂਡ 'ਤੇ ਗੋਲ ਕਿਨਾਰਿਆਂ ਵਾਲੀ ਹਲਕੇ ਨੀਲੇ ਰੰਗ ਦੇ ਕਲੋਵਰ ਦੀ ਆਕ੍ਰਿਤੀ</string>
+
+    <string name="desc_ProfileIcons15">ਗੂੜ੍ਹੇ ਹਰੇ ਰੰਗ ਦੇ ਬੈਕਗ੍ਰਾਊਂਡ 'ਤੇ ਗੋਲ ਕਿਨਾਰਿਆਂ ਵਾਲਾ ਹਲਕੇ ਹਰੇ ਰੰਗ ਦਾ ਹੈਕਸਾਗਨ</string>
+
+    <string name="desc_ProfileIcons16">ਹਲਕੇ ਸਲੇਟੀ ਰੰਗ ਦੇ ਬੈਕਗ੍ਰਾਊਂਡ 'ਤੇ ਗੋਲ ਕਿਨਾਰਿਆਂ ਵਾਲੀ ਕਾਲੇ ਰੰਗ ਦੇ ਡਾਇਮੰਡ ਦੀ ਆਕ੍ਰਿਤੀ</string>
+
+    <string name="desc_ProfileIcons17">ਪੀਲੇ ਰੰਗ ਦੇ ਬੈਕਗ੍ਰਾਊਂਡ 'ਤੇ ਇੱਕ ਸੰਤਰੀ ਪੱਤੇ ਦਾ ਮਜ਼ੇਦਾਰ ਚਿੱਤਰ</string>
+
+    <string name="desc_ProfileIcons18">ਆੜੂ ਰੰਗੇ ਬੈਕਗ੍ਰਾਊਂਡ 'ਤੇ ਸ਼ਨੀ ਗ੍ਰਹਿ ਦਾ ਮਜ਼ੇਦਾਰ ਚਿੱਤਰ</string>
+
+    <string name="desc_ProfileIcons19">ਕਾਲੇ ਰੰਗ ਦੇ ਬੈਕਗ੍ਰਾਊਂਡ 'ਤੇ ਸਫ਼ੈਦ ਅਤੇ ਸੰਤਰੀ ਤਾਰਿਆਂ ਅਤੇ ਚੱਕਰਾਂ ਦਾ ਆਕਾਸ਼ੀ ਪੈਟਰਨ ਵਿੱਚ ਇੱਕ ਮਜ਼ੇਦਾਰ ਚਿੱਤਰ</string>
+
+    <string name="desc_ProfileIcons2">ਇੱਕ ਦੂਜੇ ਨੂੰ ਕੱਟਣ ਵਾਲੇ ਕਾਲੇ ਅਤੇ ਚਿੱਟੇ ਸਿਲੰਡਰਾਂ ਦਾ ਐਬਸਟਰੈਕਟ ਚਿੱਤਰ</string>
+
+    <string name="desc_ProfileIcons20">ਪੀਲੇ ਰੰਗ ਦੇ ਬੈਕਗ੍ਰਾਊਂਡ 'ਤੇ ਨੀਲੇ ਕੰਨਾਂ ਅਤੇ ਚਿੱਟੇ ਚਿਹਰੇ ਵਾਲੇ ਕੁੱਤੇ ਦਾ ਮਜ਼ੇਦਾਰ ਚਿੱਤਰ</string>
+
+    <string name="desc_ProfileIcons21">ਜਾਮਨੀ ਰੰਗ ਦੇ ਬੈਕਗ੍ਰਾਊਂਡ 'ਤੇ ਜੈਤੂਨ ਦੀ ਟਾਹਣੀ ਨਾਲ ਉੱਡਦੀ ਸਫ਼ੈਦ ਘੁੱਗੀ ਦਾ ਮਜ਼ੇਦਾਰ ਚਿੱਤਰ</string>
+
+    <string name="desc_ProfileIcons22">ਨੀਲੇ ਰੰਗ ਦੇ ਬੈਕਗ੍ਰਾਊਂਡ 'ਤੇ ਕਾਲੇ ਕੰਨਾਂ ਅਤੇ ਚਿੱਟੇ ਚਿਹਰੇ ਵਾਲੇ ਕੁੱਤੇ ਦਾ ਮਜ਼ੇਦਾਰ ਚਿੱਤਰ</string>
+
+    <string name="desc_ProfileIcons23">ਕਰੀਮ ਰੰਗ ਦੇ ਬੈਕਗ੍ਰਾਊਂਡ 'ਤੇ ਹਰੇ ਪੱਤਿਆਂ ਦੇ ਨਾਲ ਇੱਕ ਗੁਲਾਬੀ ਫੁੱਲ ਦਾ ਮਜ਼ੇਦਾਰ ਚਿੱਤਰ</string>
+
+    <string name="desc_ProfileIcons24">ਲਾਲ ਰੰਗ ਦੇ ਬੈਕਗ੍ਰਾਊਂਡ 'ਤੇ ਛੇ ਨੀਲੇ ਸਿਲੰਡਰਾਂ ਦਾ ਮਜ਼ੇਦਾਰ ਚਿੱਤਰ</string>
+
+    <string name="desc_ProfileIcons3">ਗੂੜ੍ਹੇ ਨੀਲੇ ਰੰਗ ਦੇ ਬੈਕਗ੍ਰਾਊਂਡ 'ਤੇ ਹਲਕੇ ਨੀਲੇ ਰੰਗ ਦੇ ਕਲੋਵਰ ਦੀ ਆਕ੍ਰਿਤੀ ਦਾ ਐਬਸਟਰੈਕਟ ਚਿੱਤਰ</string>
+
+    <string name="desc_ProfileIcons4">ਦੋ ਗੁਲਾਬੀ, ਤਿੰਨ-ਅਯਾਮੀ ਤਿਕੋਣਾਂ ਦਾ ਐਬਸਟਰੈਕਟ ਚਿੱਤਰ</string>
+
+    <string name="desc_ProfileIcons5">ਪੀਲੇ ਰੰਗ ਦੇ ਬੈਕਗ੍ਰਾਊਂਡ 'ਤੇ ਟੀਲ ਰੰਗ ਦੀਆਂ ਤਹਿਆਂ ਦਾ ਐਬਸਟਰੈਕਟ ਚਿੱਤਰ</string>
+
+    <string name="desc_ProfileIcons6">ਹਰੇ ਰੰਗ ਦੇ ਬੈਕਗ੍ਰਾਊਂਡ 'ਤੇ ਜਾਮਨੀ ਰੰਗ ਦੀਆਂ ਚਟਾਨਾਂ ਦਾ ਐਬਸਟਰੈਕਟ ਚਿੱਤਰ</string>
+
+    <string name="desc_ProfileIcons7">ਸੰਤਰੀ ਰੰਗ ਦੇ ਬੈਕਗ੍ਰਾਊਂਡ 'ਤੇ ਪੰਜ ਚਿੱਟੇ, ਜਿਓਮੈਟ੍ਰਿਕ ਫੁੱਲਾਂ ਦਾ ਮਜ਼ੇਦਾਰ ਚਿੱਤਰ</string>
+
+    <string name="desc_ProfileIcons8">ਗੁਲਾਬੀ ਰੰਗ ਦੇ ਬੈਕਗ੍ਰਾਊਂਡ 'ਤੇ ਤਿੰਨ ਬਲੂਬੈਰੀਆਂ ਦਾ ਮਜ਼ੇਦਾਰ ਚਿੱਤਰ</string>
+
+    <string name="desc_ProfileIcons9">ਹਰੇ ਰੰਗ ਦੇ ਬੈਕਗ੍ਰਾਊਂਡ 'ਤੇ ਕਾਲੇ ਪੱਤੇ ਦੇ ਨਾਲ ਨਿੰਬੂ ਦਾ ਮਜ਼ੇਦਾਰ ਚਿੱਤਰ</string>
+</resources>

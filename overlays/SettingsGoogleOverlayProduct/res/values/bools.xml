@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <bool name="config_adaptive_touch_sensitivity_enabled">true</bool>
+
+    <bool name="config_screen_protector_notification_v2">true</bool>
+</resources>

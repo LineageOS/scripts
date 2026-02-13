@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">ເມື່ອທ່ານປົດລັອກດ້ວຍລາຍນິ້ວມື, ຮູບຈະຖືກໃຊ້ເພື່ອອັບເດດຮູບແບບລາຍນິ້ວມືຂອງທ່ານ. ຮູບ ແລະ ຮູບແບບລາຍນິ້ວມືຂອງທ່ານແມ່ນຖືກຈັດເກັບໄວ້ຢ່າງປອດໄພຢູ່ໂທລະສັບຂອງທ່ານ ແລະ ຈະບໍ່ຖືກສົ່ງອອກຈາກໂທລະສັບເດັດຂາດ. ການປະມວນຜົນທັງໝົດຈະເກີດຂຶ້ນຢ່າງປອດໄພຢູ່ໂທລະສັບຂອງທ່ານ.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">ເມື່ອເຂົາເຈົ້າປົດລັອກດ້ວຍລາຍນິ້ວມື, ຮູບຈະຖືກໃຊ້ເພື່ອອັບເດດຮູບແບບລາຍນິ້ວມືຂອງເຂົາເຈົ້າ. ຮູບ ແລະ ຮູບແບບລາຍນິ້ວມືຂອງລູກທ່ານແມ່ນຖືກຈັດເກັບໄວ້ຢ່າງປອດໄພຢູ່ໂທລະສັບ ແລະ ຈະບໍ່ຖືກສົ່ງອອກຈາກໂທລະສັບເດັດຂາດ. ການປະມວນຜົນທັງໝົດຈະເກີດຂຶ້ນຢ່າງປອດໄພຢູ່ໂທລະສັບ.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">ທ່ານສາມາດລຶບຮູບ ແລະ ຮູບແບບລາຍນິ້ວມືຂອງທ່ານ ຫຼື ປິດການປົດລັອກດ້ວຍລາຍນິ້ວມືຕອນໃດກໍໄດ້ໃນການຕັ້ງຄ່າ. ຮູບ ແລະ ຮູບແບບລາຍນິ້ວມືແມ່ນຖືກຈັດເກັບໄວ້ຢູ່ໂທລະສັບຈົນກວ່າທ່ານຈະລຶບພວກມັນອອກ.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">ທ່ານ ແລະ ລູກຂອງທ່ານສາມາດລຶບຮູບ ແລະ ຮູບແບບລາຍນິ້ວມືຂອງເຂົາເຈົ້າອອກ ຫຼື ປິດການໃຊ້ການປົດລັອກດ້ວຍລາຍນິ້ວມືຕອນໃດກໍໄດ້ໃນການຕັ້ງຄ່າ. ຮູບລາຍນິ້ວມື ແລະ ຮູບແບບແມ່ນຖືກຈັດເກັບໄວ້ຢູ່ໂທລະສັບຈົນກວ່າພວກມັນຈະຖືກລຶບອອກ.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">ດ້ວຍການປົດລັອກດ້ວຍລາຍນິ້ວມື, ທ່ານຈະສາມາດປົດລັອກໂທລະສັບຂອງທ່ານໂດຍໃຊ້ລາຍນິ້ວມືຂອງທ່ານໄດ້. ເພື່ອຄວາມປອດໄພ, ຕົວເລືອກນີ້ຈຳເປັນຕ້ອງມີການລັອກໜ້າຈໍສຳຮອງໄວ້ກ່ອນ.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">ປົດລັອກດ້ວຍລາຍນິ້ວມື</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">ປົດລັອກດ້ວຍລາຍນິ້ວມືສຳລັບວຽກ</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">ຕັ້ງຄ່າການປົດລັອກດ້ວຍລາຍນິ້ວມື</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">ອະນຸຍາດໃຫ້ປົດລັອກດ້ວຍລາຍນິ້ວມື</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">ການປົດລັອກດ້ວຍລາຍນິ້ວມືຈະສ້າງຮູບແບບທີ່ບໍ່ຊ້ຳກັນຂອງລາຍນິ້ວມືທ່ານເພື່ອຢັ້ງຢືນວ່າແມ່ນທ່ານແທ້. ເພື່ອສ້າງຮູບແບບລາຍນິ້ວມືນີ້ໃນລະຫວ່າງການຕັ້ງຄ່າ, ທ່ານຈະຖ່າຍຮູບຂອງລາຍນິ້ວມືຂອງທ່ານຈາກຫຼາຍໆມຸມ.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">ການປົດລັອກດ້ວຍລາຍນິ້ວມືຈະສ້າງຮູບແບບທີ່ບໍ່ຊ້ຳກັນຂອງລາຍນິ້ວມືຂອງລູກທ່ານເພື່ອຢັ້ງຢືນວ່າແມ່ນເຂົາເຈົ້າແທ້. ເພື່ອສ້າງຮູບແບບລາຍນິ້ວມືນີ້ໃນລະຫວ່າງການຕັ້ງຄ່າ, ເຂົາເຈົ້າຈະຖ່າຍຮູບລາຍນິ້ວມືຂອງເຂົາເຈົ້າຈາກມຸມຕ່າງໆ.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">ກະລຸນາໄປຫາຜູ້ໃຫ້ບໍລິການສ້ອມແປງ ຫຼື g.co/pixel/fingerprintunlock.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">ໃຊ້ການປົດລັອກດ້ວຍລາຍນິ້ວມື</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">ຮູບແບບ • ລາຍນິ້ວມື</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">PIN • ລາຍນິ້ວມື</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">ລະຫັດຜ່ານ • ລາຍນິ້ວມື</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">ສືບຕໍ່ໂດຍບໍ່ໃຊ້ການປົດລັອກດ້ວຍລາຍນິ້ວມື</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"ຮູບແບບຈະປົກປ້ອງໂທລະສັບຂອງທ່ານຫາກທ່ານເຮັດເສຍ ຫຼື ຖືກລັກ.
+
+ນີ້ຈະເປັນການລຶບຮູບ ແລະ ຮູບແບບລາຍນິ້ວມືທີ່ຈັດເກັບຢູ່ອຸປະກອນຂອງທ່ານອອກນຳ. ທ່ານຈະບໍ່ສາມາດໃຊ້ລາຍນິ້ວມືຂອງທ່ານສຳລັບການພິສູດຢືນຢັນໃນແອັບໄດ້."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"ຮູບແບບຈະປົກປ້ອງໂທລະສັບຂອງທ່ານຫາກທ່ານເຮັດເສຍ ຫຼື ຖືກລັກ.
+
+ນີ້ຈະເປັນການລຶບຮູບ ແລະ ຮູບແບບລາຍນິ້ວມືທີ່ຈັດເກັບຢູ່ອຸປະກອນຂອງທ່ານອອກ. ຮູບແບບໃບໜ້າຂອງທ່ານຈະຖືກລຶບອອກຢ່າງປອດໄພ ແລະ ຖາວອນນຳ. ທ່ານຈະບໍ່ສາມາດໃຊ້ໜ້າ ຫຼື ລາຍນິ້ວມືຂອງທ່ານສຳລັບການພິສູດຢືນຢັນໃນແອັບໄດ້."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"PIN ຈະປົກປ້ອງໂທລະສັບຂອງທ່ານຫາກທ່ານເຮັດເສຍ ຫຼື ຖືກລັກ.
+
+ນີ້ຈະເປັນການລຶບຮູບ ແລະ ຮູບແບບລາຍນິ້ວມືທີ່ຈັດເກັບຢູ່ອຸປະກອນຂອງທ່ານອອກນຳ. ທ່ານຈະບໍ່ສາມາດໃຊ້ລາຍນິ້ວມືຂອງທ່ານສຳລັບການພິສູດຢືນຢັນໃນແອັບໄດ້."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"PIN ຈະປົກປ້ອງໂທລະສັບຂອງທ່ານຫາກທ່ານເຮັດເສຍ ຫຼື ຖືກລັກ.
+
+ນີ້ຈະເປັນການລຶບຮູບ ແລະ ຮູບແບບລາຍນິ້ວມືທີ່ຈັດເກັບຢູ່ອຸປະກອນຂອງທ່ານອອກ. ຮູບແບບໃບໜ້າຂອງທ່ານຈະຖືກລຶບອອກຢ່າງປອດໄພ ແລະ ຖາວອນນຳ. ທ່ານຈະບໍ່ສາມາດໃຊ້ໜ້າ ຫຼື ລາຍນິ້ວມືຂອງທ່ານສຳລັບການພິສູດຢືນຢັນໃນແອັບໄດ້."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"ລະຫັດຜ່ານຈະປົກປ້ອງໂທລະສັບຂອງທ່ານຫາກທ່ານເຮັດເສຍ ຫຼື ຖືກລັກ.
+
+ນີ້ຈະເປັນການລຶບຮູບ ແລະ ຮູບແບບລາຍນິ້ວມືທີ່ຈັດເກັບຢູ່ອຸປະກອນຂອງທ່ານອອກນຳ. ທ່ານຈະບໍ່ສາມາດໃຊ້ລາຍນິ້ວມືຂອງທ່ານສຳລັບການພິສູດຢືນຢັນໃນແອັບໄດ້."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"ລະຫັດຜ່ານຈະປົກປ້ອງໂທລະສັບຂອງທ່ານຫາກທ່ານເຮັດເສຍ ຫຼື ຖືກລັກ.
+
+ນີ້ຈະເປັນການລຶບຮູບ ແລະ ຮູບແບບລາຍນິ້ວມືທີ່ຈັດເກັບຢູ່ອຸປະກອນຂອງທ່ານອອກ. ຮູບແບບໃບໜ້າຂອງທ່ານຈະຖືກລຶບອອກຢ່າງປອດໄພ ແລະ ຖາວອນນຳ. ທ່ານຈະບໍ່ສາມາດໃຊ້ໜ້າ ຫຼື ລາຍນິ້ວມືຂອງທ່ານສຳລັບການພິສູດຢືນຢັນໃນແອັບໄດ້."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"ຄຸນສົມບັດການປົກປ້ອງອຸປະກອນຈະບໍ່ເຮັດວຽກຫາກບໍ່ມີການລັອກໜ້າຈໍຂອງທ່ານ.
+
+ນີ້ຈະເປັນການລຶບຮູບ ແລະ ຮູບແບບລາຍນິ້ວມືທີ່ຈັດເກັບຢູ່ອຸປະກອນຂອງທ່ານອອກນຳ. ທ່ານຈະບໍ່ສາມາດໃຊ້ລາຍນິ້ວມືຂອງທ່ານສຳລັບການພິສູດຢືນຢັນໃນແອັບໄດ້."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"ຄຸນສົມບັດການປົກປ້ອງອຸປະກອນຈະບໍ່ເຮັດວຽກຫາກບໍ່ມີການລັອກໜ້າຈໍຂອງທ່ານ.
+
+ນີ້ຈະເປັນການລຶບຮູບ ແລະ ຮູບແບບລາຍນິ້ວມືທີ່ຈັດເກັບຢູ່ອຸປະກອນຂອງທ່ານອອກ. ຮູບແບບໃບໜ້າຂອງທ່ານຈະຖືກລຶບອອກຢ່າງປອດໄພ ແລະ ຖາວອນນຳ. ທ່ານຈະບໍ່ສາມາດໃຊ້ໜ້າ ຫຼື ລາຍນິ້ວມືຂອງທ່ານສຳລັບການພິສູດຢືນຢັນໃນແອັບໄດ້."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">ການປົດລັອກດ້ວຍລາຍນິ້ວມືຈະປັບປຸງຫຼາຍຂຶ້ນເມື່ອທ່ານໃຊ້ມັນເພື່ອປົດລັອກໂທລະສັບຂອງທ່ານ ຫຼື ຢັ້ງຢືນວ່າແມ່ນທ່ານໃນແອັບຕ່າງໆ</string>
+</resources>

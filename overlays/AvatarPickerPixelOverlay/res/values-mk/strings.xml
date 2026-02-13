@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">„Избирач на аватари“ на Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">Разиграна илустрација од два темнозелени полукругови пред светлозелена заднина</string>
+
+    <string name="desc_ProfileIcons10">Разиграна илустрација од портокалова пеперутка пред жолта заднина</string>
+
+    <string name="desc_ProfileIcons11">Црн облик на нос со заоблени рабови пред темносива заднина</string>
+
+    <string name="desc_ProfileIcons12">Црн облик на детелина со заоблени рабови пред светлосива заднина</string>
+
+    <string name="desc_ProfileIcons13">Светловиолетов кривулест круг пред темновиолетова заднина</string>
+
+    <string name="desc_ProfileIcons14">Светлосин облик на детелина со заоблени рабови пред портокалова заднина</string>
+
+    <string name="desc_ProfileIcons15">Светлозелен шестоагилник со заоблени рабови пред темнозелена заднина</string>
+
+    <string name="desc_ProfileIcons16">Црн облик на дијамант со заоблени рабови пред светлосива заднина</string>
+
+    <string name="desc_ProfileIcons17">Разиграна илустрација од портокалов лист пред жолта заднина</string>
+
+    <string name="desc_ProfileIcons18">Разиграна илустрација од планетата Сатурн пред заднина со праска</string>
+
+    <string name="desc_ProfileIcons19">Разиграна илустрација од бели и портокалови ѕвезди и кругови во небесна шема пред црна заднина</string>
+
+    <string name="desc_ProfileIcons2">Апстрактна илустрација од црни и бели цилиндри што се пресекуваат</string>
+
+    <string name="desc_ProfileIcons20">Разиграна илустрација од куче со сини уши и бел лик пред жолта заднина</string>
+
+    <string name="desc_ProfileIcons21">Разиграна илустрација од бел гулаб што лета со маслиново гранче пред виолетова заднина</string>
+
+    <string name="desc_ProfileIcons22">Разиграна илустрација од куче со црни уши и бел лик пред сина заднина</string>
+
+    <string name="desc_ProfileIcons23">Разиграна илустрација од розов цвет со зелени листови пред заднина во крем боја</string>
+
+    <string name="desc_ProfileIcons24">Апстрактна илустрација од шест сини цилиндри пред црвена заднина</string>
+
+    <string name="desc_ProfileIcons3">Апстрактна илустрација од светлосин облик на детелина пред темносина заднина</string>
+
+    <string name="desc_ProfileIcons4">Апстрактна илустрација од два розови, тродимензионални триаголници</string>
+
+    <string name="desc_ProfileIcons5">Апстрактна илустрација од синозелени слоеви пред жолта заднина</string>
+
+    <string name="desc_ProfileIcons6">Апстрактна илустрација од виолетови камења пред зелена заднина</string>
+
+    <string name="desc_ProfileIcons7">Разиграна илустрација од пет бели, геометриски цветови пред портокалова заднина</string>
+
+    <string name="desc_ProfileIcons8">Разиграна илустрација од три боровинки пред розова заднина</string>
+
+    <string name="desc_ProfileIcons9">Разиграна илустрација од лимон со црн лист пред зелена заднина</string>
+</resources>

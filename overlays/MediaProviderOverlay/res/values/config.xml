@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Configs for Cloud-Media-in-Photo-Picker -->
+    <string name="config_default_cloud_media_provider_package">com.google.android.apps.photos</string>
+
+    <!-- DEPRECATED: Use the config_defaultCloudMediaProviderPackage. -->
+    <string name="config_default_cloud_provider_authority">com.google.android.apps.photos.cloudpicker</string>
+</resources>

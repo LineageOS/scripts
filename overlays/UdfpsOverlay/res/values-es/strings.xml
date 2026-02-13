@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Cuando usas Desbloqueo con huella digital, se usan imágenes para actualizar el modelo de tu huella digital. Las imágenes y el modelo de tu huella digital se almacenan de forma segura en tu teléfono y nunca salen de él. Todos los procesos se llevan a cabo de forma segura en el teléfono.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Cuando usa Desbloqueo con huella digital, se utilizan imágenes para actualizar el modelo de su huella digital. El modelo y las imágenes de la huella digital de tu hijo/a se almacenan de manera segura en el teléfono y nunca salen de él. Todos los procesos se llevan a cabo de forma segura en el teléfono.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Puedes eliminar las imágenes y el modelo de tu huella, así como desactivar Desbloqueo con huella digital desde Ajustes en cualquier momento. Las imágenes y los modelos de huellas digitales se almacenan en el teléfono hasta que los eliminas.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Tú y tu hijo/a podéis eliminar el modelo y las imágenes de su huella digital, así como desactivar Desbloqueo con huella digital en cualquier momento desde Ajustes. Los modelos y las imágenes de la huella digital se almacenan en el teléfono hasta que se eliminan.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">Desbloqueo con Huella Digital te permite desbloquear el teléfono con tu huella digital. Por motivos de seguridad, para utilizar esta opción necesitas un método de bloqueo de pantalla alternativo.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Desbloqueo con huella digital</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">Desbloqueo con huella digital para el trabajo</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Configura Desbloqueo con huella digital</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">Permite Desbloqueo con huella digital</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">Desbloqueo con huella digital crea un modelo único de tu huella digital para verificar que eres tú. Para crear este modelo durante la configuración, se toman imágenes de tu huella en diferentes posiciones.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">Desbloqueo con huella digital crea un modelo único de la huella digital de tu hijo/a para verificar su identidad. Para crear este modelo de huella digital durante la configuración, se toman imágenes de su huella desde diferentes posiciones.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">Consulta con un proveedor de reparaciones o visita g.co/pixel/fingerprintunlock.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">Usar Desbloqueo con huella digital</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">Patrón • Huella digital</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">PIN • Huella digital</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">Contraseña • Huella digital</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">Continuar sin Desbloqueo con huella digital</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"El patrón protege tu teléfono si lo pierdes o te lo roban.
+
+Esta acción también eliminará el modelo y las imágenes de huella digital guardados en tu dispositivo. No podrás usar tu huella digital para autenticarte en aplicaciones."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"El patrón protege tu teléfono si lo pierdes o te lo roban.
+
+Esta acción eliminará el modelo y las imágenes de huella digital guardados en tu dispositivo. Tu modelo facial también se eliminará de forma permanente y segura. No podrás usar tu cara ni tu huella digital para autenticarte en aplicaciones."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"El PIN protege tu teléfono si lo pierdes o te lo roban.
+
+Esta acción también eliminará el modelo y las imágenes de huella digital guardados en tu dispositivo. No podrás usar tu huella digital para autenticarte en aplicaciones."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"El PIN protege tu teléfono si lo pierdes o te lo roban.
+
+Esta acción también eliminará el modelo y las imágenes de huella digital guardados en tu dispositivo. Tu modelo facial también se eliminará de forma permanente y segura. No podrás usar tu cara ni tu huella digital para autenticarte en aplicaciones."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"La contraseña protege tu teléfono si lo pierdes o te lo roban.
+
+Esta acción también eliminará el modelo y las imágenes de huella digital guardados en tu dispositivo. No podrás usar tu huella digital para autenticarte en aplicaciones."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"La contraseña protege tu teléfono si lo pierdes o te lo roban.
+
+Esta acción eliminará el modelo y las imágenes de huella digital guardados en tu dispositivo. Tu modelo facial también se eliminará de forma permanente y segura. No podrás usar tu cara ni tu huella digital para autenticarte en aplicaciones."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"Las funciones de protección del dispositivo no funcionarán sin el bloqueo de pantalla.
+
+Esta acción eliminará el modelo y las imágenes de huella digital guardados en tu dispositivo. No podrás usar tu huella digital para autenticarte en aplicaciones."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"Las funciones de protección del dispositivo no funcionarán sin el bloqueo de pantalla.
+
+Esta acción eliminará el modelo y las imágenes de huella digital guardados en tu dispositivo. Tu modelo facial también se eliminará de forma permanente y segura. No podrás usar tu cara ni tu huella digital para autenticarte en aplicaciones."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">Desbloqueo con huella digital mejora a medida que lo usas para desbloquear tu teléfono o verificar que eres tú en aplicaciones</string>
+</resources>

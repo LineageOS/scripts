@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">கைரேகை அன்லாக் அம்சத்தைப் பயன்படுத்தும்போது கைரேகைப் பதிவைப் புதுப்பிக்க படங்கள் பயன்படுத்தப்படும். கைரேகைப் படங்களும் பதிவும் உங்கள் மொபைலில் பாதுகாப்பாகச் சேமிக்கப்படும், அவை யாருடனும் பகிரப்படாது. அனைத்துச் செயலாக்கங்களும் உங்கள் மொபைலில் பாதுகாப்பாக நடைபெறும்.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">கைரேகை அன்லாக் அம்சத்தைப் பயன்படுத்தும்போது அவரின் கைரேகைப் பதிவைப் புதுப்பிக்க படங்கள் பயன்படுத்தப்படும். உங்கள் பிள்ளையின் கைரேகைப் படங்களும் பதிவும் மொபைலில் பாதுகாப்பாகச் சேமிக்கப்படும், அவை யாருடனும் பகிரப்படாது. அனைத்துச் செயலாக்கங்களும் மொபைலில் பாதுகாப்பாக நடைபெறும்.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">உங்கள் கைரேகைப் பதிவையும் படங்களையும் நீக்கலாம், அல்லது அமைப்புகளில் எப்போது வேண்டுமானாலும் ‘கைரேகை அன்லாக்’ அம்சத்தை முடக்கலாம். கைரேகைப் பதிவுகளையும் படங்களையும் நீங்கள் நீக்கும்வரை உங்கள் மொபைலில் அவை பாதுகாப்பாகச் சேமிக்கப்பட்டிருக்கும்.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">அமைப்புகளில் எப்போது வேண்டுமானாலும் நீங்களும் உங்கள் பிள்ளையும் அவரின் கைரேகைப் படங்களையும் பதிவுகளையும் நீக்கலாம், கைரேகை அன்லாக் அம்சத்தை முடக்கலாம். நீக்கப்படும் வரை கைரேகைப் படங்களும் பதிவுகளும் மொபைலிலேயே சேமிக்கப்பட்டிருக்கும்.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">கைரேகை அன்லாக் அம்சத்தின் மூலம் உங்கள் கைரேகையைப் பயன்படுத்தி மொபைலை அன்லாக் செய்யலாம். பாதுகாப்பிற்காக, மாற்றுத் திரைப் பூட்டையும் அமைக்க வேண்டியிருக்கும்.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">கைரேகை அன்லாக்</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">பணிக் கணக்குக்கான கைரேகை அன்லாக்</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">கைரேகை அன்லாக் அம்சத்தை அமைத்தல்</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">கைரேகை அன்லாக் அம்சத்தை அனுமதித்தல்</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">நீங்கள்தான் என்பதை உறுதிப்படுத்த, கைரேகை அன்லாக் அம்சமானது உங்கள் கைரேகையின் தனித்துவமான பதிவை உருவாக்கிடும். அமைவின்போது இந்தக் கைரேகைப் பதிவை உருவாக்க, வெவ்வேறு நிலைகளில் உங்கள் கைரேகையைப் படமெடுப்பீர்கள்.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">உங்கள் பிள்ளைதான் என்பதை உறுதிப்படுத்த, கைரேகை அன்லாக் அம்சமானது அவரது கைரேகையின் தனித்துவமான பதிவை உருவாக்கிடும். அமைவின்போது இந்தக் கைரேகைப் பதிவை உருவாக்க, அவர் தனது கைரேகையை வெவ்வேறு நிலைகளில் படமெடுப்பார்.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">பழுதுபார்ப்புச் சேவை வழங்குநரைத் தொடர்புகொள்ளவும் அல்லது g.co/pixel/fingerprintunlock பக்கத்திற்குச் செல்லவும்.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">கைரேகை அன்லாக்கைப் பயன்படுத்துதல்</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">பேட்டர்ன் • கைரேகை</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">பின் (PIN) • கைரேகை</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">கடவுச்சொல் • கைரேகை</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">கைரேகை அன்லாக் அம்சம் இல்லாமல் தொடர்க</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"உங்கள் மொபைல் தொலைந்தாலோ திருடப்பட்டாலோ பேட்டர்ன் அதைப் பாதுகாத்திடும்.
+
+உங்கள் சாதனத்தில் சேமிக்கப்பட்டுள்ள கைரேகையின் படங்களையும் பதிவையும் இது நீக்கிவிடும். ஆப்ஸில் அங்கீகரிக்க கைரேகையைப் பயன்படுத்த முடியாது."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"உங்கள் மொபைல் தொலைந்தாலோ திருடப்பட்டாலோ பேட்டர்ன் அதைப் பாதுகாத்திடும்.
+
+உங்கள் சாதனத்தில் சேமிக்கப்பட்டுள்ள கைரேகையின் படங்களையும் பதிவையும் இது நீக்கிவிடும். உங்கள் முகத் தோற்றப் பதிவும் நிரந்தரமாகவும் பாதுகாப்பாகவும் நீக்கப்படும். ஆப்ஸில் அங்கீகரிக்க முகத்தையோ கைரேகையையோ பயன்படுத்த முடியாது."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"உங்கள் மொபைல் தொலைந்தாலோ திருடப்பட்டாலோ 'பின்' அதைப் பாதுகாத்திடும்.
+
+உங்கள் சாதனத்தில் சேமிக்கப்பட்டுள்ள கைரேகையின் படங்களையும் பதிவையும் இது நீக்கிவிடும். ஆப்ஸில் அங்கீகரிக்க கைரேகையைப் பயன்படுத்த முடியாது."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"உங்கள் மொபைல் தொலைந்தாலோ திருடப்பட்டாலோ 'பின்' அதைப் பாதுகாத்திடும்.
+
+உங்கள் சாதனத்தில் சேமிக்கப்பட்டுள்ள கைரேகையின் படங்களையும் பதிவையும் இது நீக்கிவிடும். உங்கள் முகத் தோற்றப் பதிவும் நிரந்தரமாகவும் பாதுகாப்பாகவும் நீக்கப்படும். ஆப்ஸில் அங்கீகரிக்க முகத்தையோ கைரேகையையோ பயன்படுத்த முடியாது."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"உங்கள் மொபைல் தொலைந்தாலோ திருடப்பட்டாலோ கடவுச்சொல் அதைப் பாதுகாத்திடும்.
+
+உங்கள் சாதனத்தில் சேமிக்கப்பட்டுள்ள கைரேகையின் படங்களையும் பதிவையும் இது நீக்கிவிடும். ஆப்ஸில் அங்கீகரிக்க கைரேகையைப் பயன்படுத்த முடியாது."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"உங்கள் மொபைல் தொலைந்தாலோ திருடப்பட்டாலோ கடவுச்சொல் அதைப் பாதுகாத்திடும்.
+
+உங்கள் சாதனத்தில் சேமிக்கப்பட்டுள்ள கைரேகையின் படங்களையும் பதிவையும் இது நீக்கிவிடும். உங்கள் முகத் தோற்றப் பதிவும் நிரந்தரமாகவும் பாதுகாப்பாகவும் நீக்கப்படும். ஆப்ஸில் அங்கீகரிக்க முகத்தையோ கைரேகையையோ பயன்படுத்த முடியாது."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"திரைப் பூட்டு இல்லாமல் சாதனப் பாதுகாப்பு அம்சங்கள் செயல்படாது.
+
+உங்கள் சாதனத்தில் சேமிக்கப்பட்டுள்ள கைரேகையின் படங்களையும் பதிவையும் இது நீக்கிவிடும். ஆப்ஸில் அங்கீகரிக்க கைரேகையைப் பயன்படுத்த முடியாது."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"திரைப் பூட்டு இல்லாமல் சாதனப் பாதுகாப்பு அம்சங்கள் செயல்படாது.
+
+உங்கள் சாதனத்தில் சேமிக்கப்பட்டுள்ள கைரேகையின் படங்களையும் பதிவையும் இது நீக்கிவிடும். உங்கள் முகத் தோற்றப் பதிவும் நிரந்தரமாகவும் பாதுகாப்பாகவும் நீக்கப்படும். ஆப்ஸில் அங்கீகரிக்க முகத்தையோ கைரேகையையோ பயன்படுத்த முடியாது."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">உங்கள் மொபைலை அன்லாக் செய்வதற்கோ ஆப்ஸைப் பயன்படுத்துவது நீங்கள்தான் என்பதை உறுதிசெய்வதற்கோ 'கைரேகை அன்லாக்' அம்சத்தை எந்தளவிற்கு அதிகமாகப் பயன்படுத்துகிறீர்களோ அந்தளவிற்கு அந்த அம்சம் மேம்படும்</string>
+</resources>

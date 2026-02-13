@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- [CHAR_LIMIT=NONE] [BACKUP_MESSAGE_ID: 5444908404021316250] Battery saver: Feature description, with a "learn more" link. -->
+    <string name="battery_saver_description_with_learn_more">"배터리 수명을 늘리기 위해 절전 모드가 다음과 같이 작동합니다.
+
+• 어두운 테마를 사용 설정합니다.
+• 백그라운드 활동, 일부 시각 효과, 'Hey Google'과 같은 기타 기능을 사용 중지하거나 제한합니다.
+• 네트워크 연결을 최적화합니다.
+
+"<annotation id="url">자세히 알아보기</annotation></string>
+</resources>

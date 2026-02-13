@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="branded_monitoring_description_app_personal">Google štiti ovu vezu šaljući podatke putem svojih poslužitelja</string>
+
+    <string name="branded_vpn_footer">Vezu štiti Google</string>
+</resources>

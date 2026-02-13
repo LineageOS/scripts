@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"Dacă ai o protecție pentru ecran, aplic-o înainte să configurezi amprenta, pentru performanțe optime.
+
+Pentru rezultate optime, folosește o protecție pentru ecran cu certificarea Made for Google. Este posibil ca amprenta să nu funcționeze cu alte protecții pentru ecran."</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">Înclină degetul și atinge cu vârful degetului</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">Întoarce degetul și atinge cu partea stângă</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">Întoarce din nou degetul și atinge cu partea dreaptă</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">Curăță ecranul în zona senzorului</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">Șterge ecranul pentru a îndepărta urmele sau petele. Astfel vei putea captura imagini mai clare cu amprentele.</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">Curăță ecranul înainte de a continua</string>
+</resources>

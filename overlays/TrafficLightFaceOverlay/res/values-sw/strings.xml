@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Tumia uso wako kufungua simu yako</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Tumia uso wako kufungua simu yako.
+
+Kumbuka:
+Unaruhusiwa kuweka uso mmoja tu kwa wakati. Ili uweke uso mwingine, futa uso wa sasa.
+
+Kuangalia simu kunaweza kuifungua wakati hujakusudia.
+
+Simu yako inaweza kufunguliwa na mtu mwingine akiiweka mbele ya uso wako.
+
+Simu yako inaweza kufunguliwa na mtu mnayefanana, kama vile ndugu mnayefanana sana."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Tumia uso wako kufungua simu yako.
+
+Kumbuka:
+Unaruhusiwa kuweka uso mmoja tu kwa wakati. Ili uweke uso mwingine, futa uso wa sasa.
+
+Kuangalia simu kunaweza kuifungua wakati hujakusudia.
+
+Simu yako inaweza kufunguliwa na mtu mwingine akiiweka mbele ya uso wako, hata ukiwa umefumba macho.
+
+Simu yako inaweza kufunguliwa na mtu mnayefanana, kama vile ndugu mnayefanana sana."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Kuweka mipangilio ya Kufungua kwa uso</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">Kwenye skrini inayofuata, shikilia simu mbele ya macho yako</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Ikiwa kwa kawaida unavaa miwani, unaweza kuivaa unapoweka mipangilio</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Futa muundo wa sasa wa uso wako ili uweke tena mipangilio ya kufungua kwa uso.
+
+Muundo wa uso wako utafutwa kabisa kwa usalama.
+
+Baada ya kuufuta, utahitaji PIN, mchoro au nenosiri lako ili kufungua simu yako."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Futa muundo wa sasa wa uso wako ili uweke tena mipangilio ya kufungua kwa uso.
+
+Muundo wa uso wako utafutwa kabisa kwa usalama.
+
+Baada ya kuufuta, utahitaji alama ya kidole, PIN, mchoro au nenosiri lako ili kufungua simu yako."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">Ili ufungue simu, lazima uwe umefungua macho yako. Kwa matokeo bora, vua miwani ya jua unapofungua simu.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Sasa unaweza kuchukua simu yako kisha utumie uso wako kuifungua</string>
+</resources>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Telefonu kiliddən çıxarmaq üçün üzünüzdən istifadə edin</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Telefonu kiliddən çıxarmaq üçün üzünüzdən istifadə edin.
+
+Unutmayın:
+Eyni anda yalnız bir üz ayarlaya bilərsiniz. Başqa bir üz əlavə etmək üçün cari üzü silin.
+
+Telefona baxarkən istəmədiyiniz halda onu kiliddən çıxara bilərsiniz.
+
+Telefonunuz başqası tərəfindən üzünüzə doğru tutularaq kiliddən çıxarıla bilər.
+
+Telefonunuz sizə çox bənzəyən biri tərəfindən (məsələn, eynilə bənzəyən bacı/qardaş) kiliddən çıxarıla bilər."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Telefonu kiliddən çıxarmaq üçün üzünüzdən istifadə edin.
+
+Unutmayın:
+Eyni anda yalnız bir üz ayarlaya bilərsiniz. Başqa bir üz əlavə etmək üçün cari üzü silin.
+
+Telefona baxarkən istəmədiyiniz halda onu kiliddən çıxara bilərsiniz.
+
+Telefonunuz başqası tərəfindən üzünüzə doğru tutularaq kiliddən çıxarıla bilər (hətta gözləriniz bağlı olsa belə).
+
+Telefonunuz sizə çox bənzəyən biri tərəfindən (məsələn, eynilə bənzəyən bacı/qardaş) kiliddən çıxarıla bilər."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Üz ilə kiliddən çıxarmanı necə ayarlamalı</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">Növbəti ekranda telefonunuzu göz səviyyəsində saxlayın</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Normalda eynəkdən istifadə edirsinizsə, ayarlama zamanı onu taxa bilərsiniz</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Üz ilə kiliddən çıxarmanı yenidən ayarlamaq üçün cari üz modelinizi silin.
+
+Üz modeliniz həmişəlik və təhlükəsiz qaydada silinəcək.
+
+Silindikdən sonra telefonu kiliddən çıxarmaq üçün PIN, model və ya parol tələb ediləcək."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Üz ilə kiliddən çıxarmanı yenidən ayarlamaq üçün cari üz modelinizi silin.
+
+Üz modeliniz həmişəlik və təhlükəsiz qaydada silinəcək.
+
+Silindikdən sonra telefonu kiliddən çıxarmaq üçün barmaq izi, PIN, model və ya parol tələb ediləcək."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">Telefonu kiliddən çıxarmaq üçün gözləriniz açıq olmalıdır. Ən yaxşı nəticə üçün telefonun kilidini açarkən gün eynəyinizi çıxarın.</string>
+
+    <string name="security_settings_face_enroll_finish_description">İndi telefonunuzu götürə və üzünüzdən istifadə edərək kilidini aça bilərsiniz</string>
+</resources>

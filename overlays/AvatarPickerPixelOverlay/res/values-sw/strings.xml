@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Kiteua Ishara cha Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">Mchoro wa kuvutia wa nusu mbili za duara za kijani kilichokolea kwenye mandharinyuma ya kijani kisichokolea</string>
+
+    <string name="desc_ProfileIcons10">Mchoro wa kuvutia wa kipepeo wa rangi ya chungwa kwenye mandharinyuma ya manjano</string>
+
+    <string name="desc_ProfileIcons11">Umbo jeusi la pua lenye fremu duara kwenye mandharinyuma ya kijivu kilichokolea</string>
+
+    <string name="desc_ProfileIcons12">Umbo jeusi la karafuu lenye fremu duara kwenye mandharinyuma ya kijivu kisichokolea</string>
+
+    <string name="desc_ProfileIcons13">Mduara uliopinda wa zambarau isiyokolea kwenye mandharinyuma ya zambarau iliyokolea</string>
+
+    <string name="desc_ProfileIcons14">Umbo la karafuu la buluu isiyokolea lenye fremu duara kwenye mandharinyuma ya rangi ya chungwa</string>
+
+    <string name="desc_ProfileIcons15">Heksagoni ya kijani kisichokolea yenye fremu duara kwenye mandharinyuma ya kijani kilichokolea</string>
+
+    <string name="desc_ProfileIcons16">Umbo jeusi la almasi lenye fremu duara kwenye mandharinyuma ya kijivu kisichokolea</string>
+
+    <string name="desc_ProfileIcons17">Mchoro wa kuvutia wa jani la chungwa kwenye mandharinyuma ya manjano</string>
+
+    <string name="desc_ProfileIcons18">Mchoro wa kuvutia wa sayari ya Zohali kwenye mandharinyuma ya rangi ya pichi</string>
+
+    <string name="desc_ProfileIcons19">Mchoro wa kuvutia wa nyota nyeupe na za rangi ya chungwa na miduara katika muundo wa angani kwenye mandharinyuma nyeusi</string>
+
+    <string name="desc_ProfileIcons2">Mchoro dhahania wa silinda nyeusi na nyeupe zikiwa zimeunganishwa</string>
+
+    <string name="desc_ProfileIcons20">Mchoro wa kuvutia wa mbwa mwenye masikio ya buluu na uso mweupe kwenye mandharinyuma ya manjano</string>
+
+    <string name="desc_ProfileIcons21">Mchoro wa kuvutia wa njiwa mweupe akipaa akiwa na tawi la mzeituni kwenye mandharinyuma ya zambarau</string>
+
+    <string name="desc_ProfileIcons22">Mchoro wa kuvutia wa mbwa mwenye masikio meusi na uso mweupe kwenye mandharinyuma ya buluu</string>
+
+    <string name="desc_ProfileIcons23">Mchoro wa kuvutia wa ua la waridi lenye majani ya kijani kwenye mandharinyuma ya rangi ya malai</string>
+
+    <string name="desc_ProfileIcons24">Mchoro dhahania wa silinda sita za buluu kwenye mandharinyuma nyekundu</string>
+
+    <string name="desc_ProfileIcons3">Mchoro dhahania wa umbo la karafuu la buluu isiyokolea kwenye mandharinyuma ya buluu iliyokolea</string>
+
+    <string name="desc_ProfileIcons4">Mchoro dhahania wa pembetatu mbili za rangi ya waridi zenye mwonekano wa sehemu tatu</string>
+
+    <string name="desc_ProfileIcons5">Mchoro dhahania wa safu za samawati-kijani kwenye mandharinyuma ya manjano</string>
+
+    <string name="desc_ProfileIcons6">Mchoro dhahania wa miamba ya zambarau kwenye mandharinyuma ya kijani kibichi</string>
+
+    <string name="desc_ProfileIcons7">Mchoro wa kuvutia wa maua matano meupe ya muundo wa kijiometri kwenye mandharinyuma ya rangi ya chungwa</string>
+
+    <string name="desc_ProfileIcons8">Mchoro wa kuvutia wa bluberi tatu kwenye mandharinyuma ya waridi</string>
+
+    <string name="desc_ProfileIcons9">Mchoro wa kuvutia wa limau lenye jani jeusi kwenye mandharinyuma ya kijani kibichi</string>
+</resources>

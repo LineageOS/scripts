@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"Jei turite apsauginį ekrano stiklą, uždėkite jį prieš nustatydami piršto atspaudą, kad užtikrintumėte geriausią veikimą.
+
+Kad pasiektumėte geriausių rezultatų, naudokite „Made for Google“ sertifikuotą apsauginį ekrano stiklą. Naudojant kitus apsauginius ekrano stiklus piršto atspaudas gali neveikti."</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">Pakreipkite pirštą ir paliesktie galiuku</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">Pasukite pirštą ir palieskite kairiuoju kraštu</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">Pasukite dar kartą ir palieskite dešiniuoju kraštu</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">Nuvalykite ekraną šalia jutiklio</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">Nuvalykite ekraną, kad pašalintumėte visus ruoželius, purvą ar dėmes. Tai padeda užfiksuoti aiškesnius piršto atspaudo vaizdus.</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">Nuvalykite ekraną prieš tęsdami</string>
+</resources>

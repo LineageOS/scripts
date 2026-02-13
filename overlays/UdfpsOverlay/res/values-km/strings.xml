@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">នៅពេលអ្នកប្រើ​ការដោះសោ​ដោយស្កេន​ស្នាមម្រាមដៃ រូបភាពត្រូវបានប្រើ ដើម្បីធ្វើបច្ចុប្បន្នភាព​គំរូស្នាមម្រាមដៃរបស់អ្នក។ គំរូ និងរូបភាព​ស្នាមម្រាមដៃរបស់អ្នក​ត្រូវបានរក្សាទុក​ដោយសុវត្ថិភាព​នៅលើទូរសព្ទរបស់អ្នក និងមិនចាកចេញ​ពីទូរសព្ទឡើយ។ ការដំណើរការ​ទាំងអស់​ប្រព្រឹត្តទៅ​ដោយសុវត្ថិភាព​នៅលើ​ទូរសព្ទ​របស់អ្នក​។</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">នៅពេលគាត់ប្រើការដោះសោ​ដោយប្រើស្នាមម្រាមដៃ រូបភាពត្រូវ​បានប្រើ ដើម្បីធ្វើបច្ចុប្បន្នភាព​គំរូស្នាមម្រាមដៃរបស់គាត់។ គំរូ និងរូបភាព​ស្នាមម្រាមដៃរបស់កូនអ្នក​ត្រូវបានរក្សាទុក​ដោយសុវត្ថិភាព​នៅលើទូរសព្ទ និងមិនចាកចេញ​ពីទូរសព្ទឡើយ។ ការដំណើរការ​ទាំងអស់​ប្រព្រឹត្តទៅ​ដោយសុវត្ថិភាព​នៅលើ​ទូរសព្ទ។</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">អ្នកអាច​លុបគំរូ​ និងរូបភាព​ស្នាមម្រាមដៃរបស់អ្នក ឬបិទ​ការដោះសោ​ដោយស្កេន​ស្នាមម្រាមដៃបានគ្រប់ពេល​នៅក្នុង​ការកំណត់។ គំរូ​ និងរូបភាពស្នាមម្រាមដៃត្រូវបានរក្សាទុកនៅលើទូរសព្ទ រហូតទាល់តែ​អ្នកលុបវា។</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">អ្នក និងកូនរបស់អ្នកអាច​លុបគំរូ និងរូបភាព​ស្នាមម្រាមដៃរបស់គាត់ ឬបិទ​ការដោះសោ​ដោយប្រើស្នាមម្រាមដៃ​បានគ្រប់ពេល​នៅក្នុង​ការកំណត់។ គំរូ និងរូបភាពស្នាមម្រាមដៃត្រូវបានរក្សាទុកនៅលើទូរសព្ទ រហូតទាល់តែគំរូ និងរូបភាព​ស្នាមម្រាមដៃទាំងនោះត្រូវបានលុប។</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">តាមរយៈការប្រើ​ការដោះសោ​ដោយប្រើស្នាមម្រាមដៃ អ្នកអាច​ដោះសោ​ទូរសព្ទ​របស់អ្នក​ដោយ​ប្រើ​ស្នាមម្រាម​ដៃ​របស់អ្នក។ ដើម្បី​សុវត្ថិភាព ជម្រើសនេះ​តម្រូវឱ្យ​មានការ​ចាក់សោ​អេក្រង់​បម្រុង។</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">ការដោះសោ​ដោយស្កេន​ស្នាមម្រាមដៃ</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">ការដោះសោ​ដោយប្រើ​ស្នាមម្រាមដៃសម្រាប់ការងារ</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">រៀបចំការដោះសោ​ដោយស្កេន​ស្នាមម្រាមដៃ</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">អនុញ្ញាតការដោះសោដោយប្រើស្នាមម្រាមដៃ</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">ការដោះសោ​ដោយស្កេន​ស្នាមម្រាមដៃ​បង្កើតគំរូស្នាមម្រាមដៃ​របស់អ្នក​ខុសប្លែកពីគេ ដើម្បីផ្ទៀងផ្ទាត់​ថាជាអ្នក។ ដើម្បីបង្កើត​គំរូស្នាមម្រាមដៃនេះ​ក្នុងអំឡុងពេល​រៀបចំ អ្នកនឹងត្រូវ​ថតរូបស្នាមម្រាមដៃ​របស់អ្នក​ពីផ្នែកខុសៗគ្នា។</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">ការដោះសោ​ដោយប្រើស្នាមម្រាមដៃ​បង្កើតគំរូស្នាមម្រាមដៃ​របស់កូនអ្នក​ខុសប្លែកពីគេ ដើម្បីផ្ទៀងផ្ទាត់​ថាជាគាត់។ ដើម្បីបង្កើត​គំរូស្នាមម្រាមដៃនេះ​ក្នុងអំឡុងពេល​រៀបចំ គាត់នឹងត្រូវ​ថតរូបស្នាមម្រាមដៃ​របស់គាត់​ពីផ្នែក​ខុសៗគ្នា។</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">ទាក់ទង​ក្រុមហ៊ុនផ្ដល់ការជួសជុល ឬចូលទៅកាន់ g.co/pixel/fingerprintunlock។</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">ប្រើការដោះសោ​ដោយប្រើស្នាម​ម្រាមដៃ</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">លំនាំ • ស្នាមម្រាមដៃ</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">កូដ PIN • ស្នាមម្រាមដៃ</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">ពាក្យសម្ងាត់ • ស្នាមម្រាមដៃ</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">បន្តដោយ​មិនប្រើការដោះសោ​ដោយប្រើស្នាមម្រាមដៃ</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"លំនាំការពារទូរសព្ទរបស់អ្នក ប្រសិនបើវាបាត់ ឬត្រូវបានគេលួច។
+
+សកម្មភាពនេះក៏លុបគំរូ និងរូបភាពស្នាមម្រាមដៃ ដែលបានរក្សាទុកនៅលើឧបករណ៍របស់អ្នកផងដែរ។ អ្នក​នឹង​មិនអាច​ប្រើ​ស្នាមម្រាមដៃរបស់អ្នក​ ដើម្បីផ្ទៀងផ្ទាត់នៅក្នុងកម្មវិធីបានទេ។"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"លំនាំការពារទូរសព្ទរបស់អ្នក ប្រសិនបើវាបាត់ ឬត្រូវបានគេលួច។
+
+សកម្មភាពនេះលុបគំរូ និងរូបភាពស្នាមម្រាមដៃ ដែលបានរក្សាទុកនៅលើឧបករណ៍របស់អ្នក។ គំរូមុខ​របស់អ្នកក៏​នឹងត្រូវលុប​ដោយសុវត្ថិភាព​ជាអចិន្ត្រៃយ៍ផងដែរ។ អ្នក​នឹង​មិនអាច​ប្រើ​មុខ ឬស្នាមម្រាមដៃរបស់អ្នក​ ដើម្បីផ្ទៀងផ្ទាត់នៅក្នុងកម្មវិធីបានទេ។"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"កូដ PIN ការពារទូរសព្ទរបស់អ្នក ប្រសិនបើវាបាត់ ឬត្រូវបានគេលួច។
+
+សកម្មភាពនេះក៏លុបគំរូ និងរូបភាពស្នាមម្រាមដៃ ដែលបានរក្សាទុកនៅលើឧបករណ៍របស់អ្នកផងដែរ។ អ្នក​នឹង​មិនអាច​ប្រើ​ស្នាមម្រាមដៃរបស់អ្នក​ ដើម្បីផ្ទៀងផ្ទាត់នៅក្នុងកម្មវិធីបានទេ។"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"កូដ PIN ការពារទូរសព្ទរបស់អ្នក ប្រសិនបើវាបាត់ ឬត្រូវបានគេលួច។
+
+សកម្មភាពនេះលុបគំរូ និងរូបភាពស្នាមម្រាមដៃ ដែលបានរក្សាទុកនៅលើឧបករណ៍របស់អ្នក។ គំរូមុខ​របស់អ្នកក៏​នឹងត្រូវលុប​ដោយសុវត្ថិភាព​ជាអចិន្ត្រៃយ៍ផងដែរ។ អ្នក​នឹង​មិនអាច​ប្រើ​មុខ ឬស្នាមម្រាមដៃរបស់អ្នក​ ដើម្បីផ្ទៀងផ្ទាត់នៅក្នុងកម្មវិធីបានទេ។"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"ពាក្យ​សម្ងាត់ការពារទូរសព្ទរបស់អ្នក ប្រសិនបើវាបាត់ ឬត្រូវបានគេលួច។
+
+សកម្មភាពនេះក៏លុបគំរូ និងរូបភាពស្នាមម្រាមដៃ ដែលបានរក្សាទុកនៅលើឧបករណ៍របស់អ្នកផងដែរ។ អ្នក​នឹង​មិនអាច​ប្រើ​ស្នាមម្រាមដៃរបស់អ្នក​ ដើម្បីផ្ទៀងផ្ទាត់នៅក្នុងកម្មវិធីបានទេ។"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"ពាក្យ​សម្ងាត់ការពារទូរសព្ទរបស់អ្នក ប្រសិនបើវាបាត់ ឬត្រូវបានគេលួច។
+
+សកម្មភាពនេះលុបគំរូ និងរូបភាពស្នាមម្រាមដៃ ដែលបានរក្សាទុកនៅលើឧបករណ៍របស់អ្នក។ គំរូមុខ​របស់អ្នកក៏​នឹងត្រូវលុប​ដោយសុវត្ថិភាព​ជាអចិន្ត្រៃយ៍ផងដែរ។ អ្នក​នឹង​មិនអាច​ប្រើ​មុខ ឬស្នាមម្រាមដៃរបស់អ្នក​ ដើម្បីផ្ទៀងផ្ទាត់នៅក្នុងកម្មវិធីបានទេ។"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"មុខងារ​ការពារ​ឧបករណ៍​នឹងមិន​ដំណើរការ​ដោយគ្មាន​ការចាក់សោ​អេក្រង់របស់​អ្នកទេ។
+
+សកម្មភាពនេះក៏លុបគំរូ និងរូបភាពស្នាមម្រាមដៃ ដែលបានរក្សាទុកនៅលើឧបករណ៍របស់អ្នកផងដែរ។ អ្នក​នឹង​មិនអាច​ប្រើ​ស្នាមម្រាមដៃរបស់អ្នក​ ដើម្បីផ្ទៀងផ្ទាត់នៅក្នុងកម្មវិធីបានទេ។"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"មុខងារ​ការពារ​ឧបករណ៍​នឹងមិន​ដំណើរការ​ដោយគ្មាន​ការចាក់សោ​អេក្រង់របស់​អ្នកទេ។
+
+សកម្មភាពនេះលុបគំរូ និងរូបភាពស្នាមម្រាមដៃ ដែលបានរក្សាទុកនៅលើឧបករណ៍របស់អ្នក។ គំរូមុខ​របស់អ្នកក៏​នឹងត្រូវលុប​ដោយសុវត្ថិភាព​ជាអចិន្ត្រៃយ៍ផងដែរ។ អ្នក​នឹង​មិនអាច​ប្រើ​មុខ ឬស្នាមម្រាមដៃរបស់អ្នក​ ដើម្បីផ្ទៀងផ្ទាត់នៅក្នុងកម្មវិធីបានទេ។"</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">ការដោះសោ​ដោយប្រើ​ស្នាមម្រាមដៃដំណើរការកាន់តែប្រសើរ នៅពេលដែលអ្នកប្រើវាកាន់តែច្រើន ដើម្បីដោះសោទូរសព្ទរបស់អ្នក ឬផ្ទៀងផ្ទាត់ថាជាអ្នកនៅក្នុងកម្មវិធី</string>
+</resources>

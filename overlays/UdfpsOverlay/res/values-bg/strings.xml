@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Изображенията от взаимодействията ви с функцията за отключване с отпечатък се използват за актуализиране на съответния модел. Изображенията и моделът на отпечатъка ви се съхраняват надеждно на телефона ви и никога не го напускат. Цялото обработване се извършва надеждно на телефона ви.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Изображенията от взаимодействието на детето ви с функцията за отключване с отпечатък се използват за актуализиране на съответния модел. Изображенията и моделът на отпечатъка му се съхраняват надеждно на телефона и никога не го напускат. Цялото обработване се извършва надеждно на телефона.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">По всяко време можете да изтриете изображенията и модела на отпечатъка си или да изключите функцията за отключване с отпечатък от настройките. Изображенията и моделите се съхраняват на телефона, докато не ги изтриете.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Вие и детето ви можете по всяко време да изтриете изображенията и модела на отпечатъка му или да изключите функцията за отключване с отпечатък от настройките. Изображенията и моделите се съхраняват на телефона, докато не бъдат изтрити.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">Функцията за отключване с отпечатък ви дава възможност да отключвате телефона си посредством отпечатъка си. От съображения за сигурност трябва да зададете резервна опция за заключване на екрана.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Отключване с отпечатък</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">Отключване с отпечатък за служебни цели</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Настройване на отключването с отпечатък</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">Разрешаване на отключването с отпечатък</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">Функцията за отключване с отпечатък изгражда уникален модел на отпечатъка ви с цел потвърждаване на самоличността ви. За да създадете такъв модел по време на настройването, ще трябва да заснемете отпечатъка си от различни позиции.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">Функцията за отключване с отпечатък изгражда уникален модел на отпечатъка на детето ви с цел потвърждаване на самоличността му. За да създаде такъв модел по време на настройването, то ще трябва да заснеме отпечатъка си от различни позиции.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">Посетете оторизиран сервиз или g.co/pixel/fingerprintunlock.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">Използване на функцията за отключване с отпечатък</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">Фигура • Отпечатък</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">ПИН • Отпечатък</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">Парола • Отпечатък</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">Продължаване без функцията за отключване с отпечатък</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"Фигурата защитава телефона ви, ако бъде изгубен или откраднат.
+
+Това действие ще изтрие също изображенията и модела на отпечатъка, съхранявани на устройството ви. Няма да можете да използвате отпечатъка си за удостоверяване в приложения."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"Фигурата защитава телефона ви, ако бъде изгубен или откраднат.
+
+Това действие ще изтрие изображенията и модела на отпечатъка, съхранявани на устройството ви. Моделът на лицето ви също ще бъде изтрит надеждно и за постоянно. Няма да можете да използвате лицето и отпечатъка си за удостоверяване в приложения."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"ПИН кодът защитава телефона ви, ако устройството бъде изгубено или откраднато.
+
+Това действие ще изтрие също изображенията и модела на отпечатъка, съхранявани на устройството ви. Няма да можете да използвате отпечатъка си за удостоверяване в приложения."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"ПИН кодът защитава телефона ви, ако устройството бъде изгубено или откраднато.
+
+Това действие ще изтрие изображенията и модела на отпечатъка, съхранявани на устройството ви. Моделът на лицето ви също ще бъде изтрит надеждно и за постоянно. Няма да можете да използвате лицето и отпечатъка си за удостоверяване в приложения."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"Паролата защитава телефона ви, ако бъде изгубен или откраднат.
+
+Това действие ще изтрие също изображенията и модела на отпечатъка, съхранявани на устройството ви. Няма да можете да използвате отпечатъка си за удостоверяване в приложения."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"Паролата защитава телефона ви, ако бъде изгубен или откраднат.
+
+Това действие ще изтрие изображенията и модела на отпечатъка, съхранявани на устройството ви. Моделът на лицето ви също ще бъде изтрит надеждно и за постоянно. Няма да можете да използвате лицето и отпечатъка си за удостоверяване в приложения."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"Функциите за защита на устройството няма да работят без опцията ви за заключване на екрана.
+
+Това действие ще изтрие също изображенията и модела на отпечатъка, съхранявани на устройството ви. Няма да можете да използвате отпечатъка си за удостоверяване в приложения."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"Функциите за защита на устройството няма да работят без опцията ви за заключване на екрана.
+
+Това действие ще изтрие изображенията и модела на отпечатъка, съхранявани на устройството ви. Моделът на лицето ви също ще бъде изтрит надеждно и за постоянно. Няма да можете да използвате лицето и отпечатъка си за удостоверяване в приложения."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">Колкото повече използвате отпечатъка си, за да отключвате телефона си или да потвърждавате самоличността си в приложения, толкова по-добра става съответната функция</string>
+</resources>

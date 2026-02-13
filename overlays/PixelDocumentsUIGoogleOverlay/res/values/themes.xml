@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- DocumentsTheme is allow customize by run time overlay -->
+    <style name="DocumentsTheme" parent="@android:style/Theme.DeviceDefault.DocumentsUI">
+        <item name="android:windowBackground">?android:colorBackground</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowSoftInputMode">adjustUnspecified|stateUnspecified</item>
+        <item name="android:actionModeBackground">?android:colorBackground</item>
+        <item name="android:actionBarSize">48.0dip</item>
+        <item name="android:strokeColor">#ffdadce0</item>
+        <item name="android:colorControlActivated">?android:colorForeground</item>
+        <item name="android:statusBarColor">?android:colorBackground</item>
+        <item name="android:navigationBarColor">?android:colorBackground</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:colorSecondary">@android:color/materialColorSecondary</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:navigationBarDividerColor">?android:strokeColor</item>
+    </style>
+</resources>

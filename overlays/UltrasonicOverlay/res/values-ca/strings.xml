@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"Si utilitzes un protector de pantalla, aplica'l abans de configurar l'empremta digital per a un millor rendiment.
+
+Per obtenir els millors resultats, utilitza un protector de pantalla que tingui la certificació Made for Google. Si utilitzes altres protectors de pantalla, pot ser que la teva empremta digital no funcioni."</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">Inclina el dit i toca amb la punta</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">Gira el dit i toca amb la vora esquerra</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">Torna'l a girar i toca amb la vora dreta</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">Neteja la part de la pantalla propera al sensor</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">Neteja la pantalla per esborrar ratlles, esborralls o taques. Això ajuda a capturar imatges d'empremta digital amb més claredat.</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">Neteja la pantalla abans de continuar</string>
+</resources>

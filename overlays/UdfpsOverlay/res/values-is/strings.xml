@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Þegar þú notar fingrafarskenni eru myndir notaðar til að uppfæra fingrafarslíkanið. Fingrafaramyndirnar og -líkanið eru geymd á öruggan hátt í símanum og fara aldrei þaðan. Öll úrvinnsla fer fram í símanum á öruggan hátt.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Þegar það notar fingrafarskenni eru myndir notaðar til að uppfæra fingrafarslíkan þess. Fingrafaramyndir og -líkan barnsins er geymt á öruggan hátt í símanum og fer aldrei þaðan. Öll úrvinnsla fer fram í símanum á öruggan hátt.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Þú getur eytt fingrafaramyndunum og -líkaninu eða slökkt á fingrafarskenni hvenær sem er í stillingunum. Fingrafaramyndir og -líkön eru geymd á öruggan hátt í símanum þar til þeim er eytt.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Þú og barnið þitt getið eytt fingrafarsmyndunum og -líkaninu eða slökkt á fingrafarskenni hvenær sem er í stillingunum. Fingrafaramyndir og -líkön eru geymd á öruggan hátt í símanum þar til þeim er eytt.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">Með fingrafarskenni geturðu tekið símann úr lás með því að nota fingrafarið. Af öryggisástæðum krefst þessi valkostur þess að varaskjálás sé til staðar.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Fingrafarskenni</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">Fingrafarskenni fyrir vinnu</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Setja upp fingrafarskenni</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">Leyfa fingrafarskenni</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">Fingrafarskenni býr til einkvæmt líkan af fingrafarinu þínu til að staðfesta hver þú ert. Til að búa líkanið til við uppsetningu þarf að taka myndir af fingrafarinu þínu frá nokkrum sjónarhornum.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">Fingrafarskenni býr til einkvæmt líkan af fingrafari barnsins þíns til að staðfesta hver það er. Til að búa líkanið til við uppsetningu tekur barnið myndir af fingrafarinu sínu frá mismunandi sjónarhornum.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">Farðu á verkstæði eða opnaðu g.co/pixel/fingerprintunlock.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">Nota fingrafarskenni</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">Mynstur • Fingrafar</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">PIN-númer • Fingrafar</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">Aðgangsorð • Fingrafar</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">Halda áfram án fingrafarskennis</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"Mynstur verndar símann ef hann týnist eða ef honum er stolið.
+
+Þetta eyðir einnig fingrafaramyndum og -líkani úr tækinu þínu. Þú munt ekki geta notað fingrafarið til auðkenningar í forritum."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"Mynstur verndar símann ef hann týnist eða ef honum er stolið.
+
+Þetta eyðir fingrafaramyndum og -líkani úr tækinu þínu. Andlitslíkaninu þínu verður einnig eytt endanlega á öruggan hátt. Þú munt ekki geta notað andlitið eða fingrafarið til auðkenningar í forritum."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"PIN-númer verndar símann ef hann týnist eða ef honum er stolið.
+
+Þetta eyðir einnig fingrafaramyndum og -líkani úr tækinu þínu. Þú munt ekki geta notað fingrafarið til auðkenningar í forritum."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"PIN-númer verndar símann ef hann týnist eða ef honum er stolið.
+
+Þetta eyðir fingrafaramyndum og -líkani úr tækinu þínu. Andlitslíkaninu þínu verður einnig eytt endanlega á öruggan hátt. Þú munt ekki geta notað andlitið eða fingrafarið til auðkenningar í forritum."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"Aðgangsorð verndar símann ef hann týnist eða ef honum er stolið.
+
+Þetta eyðir einnig fingrafaramyndum og -líkani úr tækinu þínu. Þú munt ekki geta notað fingrafarið til auðkenningar í forritum."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"Aðgangsorð verndar símann ef hann týnist eða ef honum er stolið.
+
+Þetta eyðir fingrafaramyndum og -líkani úr tækinu þínu. Andlitslíkaninu þínu verður einnig eytt endanlega á öruggan hátt. Þú munt ekki geta notað andlitið eða fingrafarið til auðkenningar í forritum."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"Öryggiseiginleikar til að vernda tækið virka ekki án skjáláss.
+
+Þetta eyðir einnig fingrafaramyndum og -líkani úr tækinu þínu. Þú munt ekki geta notað fingrafarið til auðkenningar í forritum."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"Öryggiseiginleikar til að vernda tækið virka ekki án skjáláss.
+
+Þetta eyðir fingrafaramyndum og -líkani úr tækinu þínu. Andlitslíkaninu þínu verður einnig eytt endanlega á öruggan hátt. Þú munt ekki geta notað andlitið eða fingrafarið til auðkenningar í forritum."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">Fingrafarskenni verður betra því oftar sem þú notar það til að taka símann þinn úr lás eða staðfesta hver þú ert í forritum</string>
+</resources>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Selettore avatar Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">Illustrazione gioiosa di due semicerchi verde scuro su uno sfondo verde chiaro</string>
+
+    <string name="desc_ProfileIcons10">Illustrazione gioiosa di una farfalla arancione su sfondo giallo</string>
+
+    <string name="desc_ProfileIcons11">Forma nera del naso con bordi arrotondati su sfondo grigio scuro</string>
+
+    <string name="desc_ProfileIcons12">Trifoglio nero con bordi arrotondati su sfondo grigio chiaro</string>
+
+    <string name="desc_ProfileIcons13">Cerchio ondulato viola chiaro su sfondo viola scuro</string>
+
+    <string name="desc_ProfileIcons14">Trifoglio azzurro con bordi arrotondati su sfondo arancione</string>
+
+    <string name="desc_ProfileIcons15">Esagono verde chiaro con bordi arrotondati su sfondo verde scuro</string>
+
+    <string name="desc_ProfileIcons16">Forma nera di diamante con bordi arrotondati su sfondo grigio chiaro</string>
+
+    <string name="desc_ProfileIcons17">Illustrazione gioiosa di una foglia arancione su sfondo giallo</string>
+
+    <string name="desc_ProfileIcons18">Illustrazione gioiosa del pianeta Saturno su uno sfondo color pesca</string>
+
+    <string name="desc_ProfileIcons19">Illustrazione gioiosa di stelle e cerchi bianchi e arancioni in un motivo celeste su sfondo nero</string>
+
+    <string name="desc_ProfileIcons2">Illustrazione astratta di cilindri intersecati in bianco e nero</string>
+
+    <string name="desc_ProfileIcons20">Illustrazione gioiosa di un cane con orecchie blu e muso bianco su sfondo giallo</string>
+
+    <string name="desc_ProfileIcons21">Illustrazione gioiosa di una colomba bianca che vola con un ramo d'ulivo su uno sfondo viola</string>
+
+    <string name="desc_ProfileIcons22">Illustrazione gioiosa di un cane con orecchie nere e muso bianco su sfondo blu</string>
+
+    <string name="desc_ProfileIcons23">Illustrazione gioiosa di un fiore rosa con foglie verdi su sfondo crema</string>
+
+    <string name="desc_ProfileIcons24">Illustrazione astratta di sei cilindri blu su sfondo rosso</string>
+
+    <string name="desc_ProfileIcons3">Illustrazione astratta di una forma di trifoglio blu chiaro su sfondo blu scuro</string>
+
+    <string name="desc_ProfileIcons4">Illustrazione astratta di due triangoli rosa tridimensionali</string>
+
+    <string name="desc_ProfileIcons5">Illustrazione astratta di strati di color foglia di tè su sfondo giallo</string>
+
+    <string name="desc_ProfileIcons6">Illustrazione astratta di rocce viola su sfondo verde</string>
+
+    <string name="desc_ProfileIcons7">Illustrazione gioiosa di cinque fiori geometrici bianchi su sfondo arancione</string>
+
+    <string name="desc_ProfileIcons8">Illustrazione gioiosa di tre mirtilli su uno sfondo rosa</string>
+
+    <string name="desc_ProfileIcons9">Illustrazione gioiosa di un limone con una foglia nera su sfondo verde</string>
+</resources>

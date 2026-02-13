@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Cando usas o desbloqueo dactilar, utilízanse imaxes para actualizar o modelo da túa impresión dixital. As imaxes e o modelo da túa impresión almacénanse de forma segura no teléfono e nunca saen del. Todo o procesamento ten lugar de maneira fiable no teléfono.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Cando usa o desbloqueo dactilar, utilízanse imaxes para actualizar o modelo da súa impresión dixital. As imaxes e o modelo da impresión da túa filla ou fillo almacénanse de forma segura no teléfono e nunca saen del. Todo o procesamento ten lugar de maneira fiable no teléfono.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Podes eliminar as imaxes e o modelo da túa impresión dixital ou desactivar o desbloqueo dactilar en calquera momento desde Configuración. As imaxes e os modelos da túa impresión dixital almacénanse no teléfono ata que os elimines.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">O teu fillo ou filla e mais ti podedes eliminar as imaxes e o modelo da súa impresión dixital ou desactivar o desbloqueo dactilar cando queirades en Configuración. As imaxes e os modelos de impresións dixitais gardaranse no teléfono ata que se eliminen.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">Co desbloqueo dactilar podes desbloquear o teléfono utilizando a túa impresión dixital. Por motivos de seguranza, esta opción require un bloqueo da pantalla alternativo.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Desbloqueo dactilar</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">Desbloqueo dactilar para o traballo</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Configura o desbloqueo dactilar</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">Permitir desbloqueo dactilar</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">Co desbloqueo dactilar, créase un modelo único da túa impresión dixital para verificar a túa identidade. Se queres crear este modelo durante a configuración, debes xerar imaxes da impresión dixital desde distintas posicións.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">Co desbloqueo dactilar, créase un modelo único da impresión dixital do teu fillo ou filla para verificar a súa identidade. Para crear este modelo durante a configuración, a túa filla ou fillo deberá facer fotos da impresión dixital en distintas posicións.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">Visita un provedor de reparacións ou accede a g.co/pixel/fingerprintunlock.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">Usa o desbloqueo dactilar</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">Padrón • Impresión dixital</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">PIN • Impresión dixital</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">Contrasinal • Impresión dixital</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">Continuar sen desbloqueo dactilar</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"O teléfono está protexido por un padrón en caso de perda ou roubo.
+
+Tamén se eliminarán o modelo e as imaxes de impresión dixital almacenados no dispositivo. Non poderás utilizar a impresión dixital para autenticarte nas aplicacións."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"O teléfono está protexido por un padrón en caso de perda ou roubo.
+
+Eliminaranse o modelo e as imaxes de impresión dixital almacenados no dispositivo. O teu modelo facial tamén se eliminará de xeito seguro e permanente. Non poderás utilizar a cara nin a impresión dixital para autenticarte nas aplicacións."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"O teléfono está protexido por un PIN en caso de perda ou roubo.
+
+Tamén se eliminarán o modelo e as imaxes de impresión dixital almacenados no dispositivo. Non poderás utilizar a impresión dixital para autenticarte nas aplicacións."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"O teléfono está protexido por un PIN en caso de perda ou roubo.
+
+Eliminaranse o modelo e as imaxes de impresión dixital almacenados no dispositivo. O teu modelo facial tamén se eliminará de xeito seguro e permanente. Non poderás utilizar a cara nin a impresión dixital para autenticarte nas aplicacións."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"O teléfono está protexido por un contrasinal en caso de perda ou roubo.
+
+Tamén se eliminarán o modelo e as imaxes de impresión dixital almacenados no dispositivo. Non poderás utilizar a impresión dixital para autenticarte nas aplicacións."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"O teléfono está protexido por un contrasinal en caso de perda ou roubo.
+
+Eliminaranse o modelo e as imaxes de impresión dixital almacenados no dispositivo. O teu modelo facial tamén se eliminará de xeito seguro e permanente. Non poderás utilizar a cara nin a impresión dixital para autenticarte nas aplicacións."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"As funcións de protección do dispositivo non funcionarán sen o bloqueo de pantalla.
+
+Tamén se eliminarán o modelo e as imaxes de impresión dixital almacenados no dispositivo. Non poderás utilizar a impresión dixital para autenticarte nas aplicacións."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"As funcións de protección do dispositivo non funcionarán sen o bloqueo de pantalla.
+
+Eliminaranse o modelo e as imaxes de impresión dixital almacenados no dispositivo. O teu modelo facial tamén se eliminará de xeito seguro e permanente. Non poderás utilizar a cara nin a impresión dixital para autenticarte nas aplicacións."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">O desbloqueo dactilar mellora a medida que o usas para desbloquear o teléfono ou verificar a túa identidade nas aplicacións</string>
+</resources>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">तपाईंले फिंगरप्रिन्ट अनलक प्रयोग गर्दा तपाईंको फिंगरप्रिन्ट मोडेल अपडेट गर्न ती फोटोहरू प्रयोग गरिन्छन्। तपाईंको फिंगरप्रिन्टका फोटो र मोडेल तपाईंको फोनमा सुरक्षित तरिकाले भण्डारण गरिन्छ र कहिल्यै पनि यो फोनबाहेक अन्यत्र पठाइँदैन। यी सबै कारबाही तपाईंको फोनमा सुरक्षित तरिकाले गरिन्छ।</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">तपाईंका बच्चाले फिंगरप्रिन्ट अनलक प्रयोग गर्दा उनको फिंगरप्रिन्ट मोडेल अपडेट गर्न ती फोटोहरू प्रयोग गरिन्छन्। तपाईंका बच्चाको फिंगरप्रिन्टका फोटो र मोडेल यो फोनमा सुरक्षित तरिकाले भण्डारण गरिन्छ र कहिल्यै पनि यो फोनबाहेक अन्यत्र पठाइँदैन। यी सबै कारबाही यो फोनमा सुरक्षित तरिकाले गरिन्छ।</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">तपाईं जुनसुकै बेला सेटिङमा गई आफ्नो फिंगरप्रिन्टका फोटो र मोडेल मेटाउन वा फिंगरप्रिन्ट अनलक अफ गर्न सक्नुहुन्छ। तपाईंले फिंगरप्रिन्टका फोटो र मोडेल नमेटाउन्जेल ती फोटो र मोडेल यो फोनमा नै भण्डारण गरिन्छन्।</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">तपाईं र तपाईंका बच्चा सेटिङमा गई जुनसुकै बेला उनको फिंगरप्रिन्टका फोटो र मोडेल मेटाउन वा फिंगरप्रिन्ट अनलक अफ गर्न सक्नुहुन्छ। तपाईंले फिंगरप्रिन्टका फोटो र मोडेलहरू नमेटाउन्जेल ती मोडेल र फोटो फोनमा नै भण्डारण गरिन्छन्।</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">तपाईंले फिंगरप्रिन्ट अनलक सेट गरेपछि तपाईं आफ्नो फिंगरप्रिन्ट प्रयोग गरी आफ्नो फोन अनलक गर्न सक्नुहुन्छ। तपाईंको डिभाइसको सुरक्षाका खातिर ब्याकअपका रूपमा स्क्रिन लक पनि सेटअप गर्नु पर्ने हुन्छ।</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">फिंगरप्रिन्ट अनलक</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">वर्क प्रोफाइलका लागि फिंगरप्रिन्ट अनलक</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">फिंगरप्रिन्ट अनलक सेटअप गर्नुहोस्</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">फिंगरप्रिन्ट अनलक प्रयोग गर्न दिनुहोस्</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">फिंगरप्रिन्ट अनलकले तपाईंको पहिचान पुष्टि गर्ने प्रयोजनका लागि तपाईंको फिंगरप्रिन्टको अद्वितीय मोडेल बनाउँछ। सेटअप गर्ने क्रममा यो फिंगरप्रिन्ट मोडेल बनाउन तपाईंले विभिन्न कोणबाट आफ्नो फिंगरप्रिन्टका फोटोहरू खिच्नु पर्ने हुन्छ।</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">फिंगरप्रिन्ट अनलकले तपाईंका बच्चाको पहिचान पुष्टि गर्ने प्रयोजनका लागि उनको फिंगरप्रिन्टको अद्वितीय मोडेल बनाउँछ। सेटअप गर्ने क्रममा यो फिंगरप्रिन्ट मोडेल बनाउन तपाईंका बच्चाले विभिन्न कोणबाट आफ्नो फिंगरप्रिन्टका फोटोहरू खिच्नु पर्ने हुन्छ।</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">मर्मत केन्द्रमा जानुहोस् वा g.co/pixel/fingerprintunlock हेर्नुहोस्।</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">फिंगरप्रिन्ट अनलक प्रयोग गर्नुहोस्</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">प्याटर्न • फिंगरप्रिन्ट</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">PIN • फिंगरप्रिन्ट</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">पासवर्ड • फिंगरप्रिन्ट</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">फिंगरप्रिन्ट अनलक सेटअप नगरिकनै जारी राख्नुहोस्</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"तपाईंको फोन हराएको वा चोरी भएको खण्डमा प्याटर्नले उक्त फोन सुरक्षित राख्छ।
+
+तपाईंले यो प्याटर्न हटाउनुभयो भने तपाईंको डिभाइसमा भण्डारण गरिएका फिंगरप्रिन्टका फोटो र मोडेल पनि मेटिने छन्। तपाईं एपहरूमा आफ्नो पहिचान पुष्टि गर्नका निम्ति आफ्नो फिंगरप्रिन्ट प्रयोग गर्न सक्नु हुने छैन।"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"तपाईंको फोन हराएको वा चोरी भएको खण्डमा प्याटर्नले उक्त फोन सुरक्षित राख्छ।
+
+तपाईंले यो प्याटर्न हटाउनुभयो भने तपाईंको डिभाइसमा भण्डारण गरिएका फिंगरप्रिन्टका फोटो र मोडेल पनि मेटिने छन्। साथै, तपाईंको फेस मोडेल पनि सुरक्षित रूपले सदाको लागि मेटिने छ। तपाईं एपहरूमा आफ्नो पहिचान पुष्टि गर्नका निम्ति आफ्नो अनुहार वा फिंगरप्रिन्ट प्रयोग गर्न सक्नु हुने छैन।"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"तपाईंको फोन हराएको वा चोरी भएको खण्डमा PIN ले उक्त फोन सुरक्षित राख्छ।
+
+तपाईंले यो PIN हटाउनुभयो भने तपाईंको डिभाइसमा भण्डारण गरिएका फिंगरप्रिन्टका फोटो र मोडेल पनि मेटिने छन्। तपाईं एपहरूमा आफ्नो पहिचान पुष्टि गर्नका निम्ति आफ्नो फिंगरप्रिन्ट प्रयोग गर्न सक्नु हुने छैन।"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"तपाईंको फोन हराएको वा चोरी भएको खण्डमा PIN ले उक्त फोन सुरक्षित राख्छ।
+
+तपाईंले यो PIN हटाउनुभयो भने तपाईंको डिभाइसमा भण्डारण गरिएका फिंगरप्रिन्टका फोटो र मोडेल पनि मेटिने छन्। साथै, तपाईंको फेस मोडेल पनि सुरक्षित रूपले सदाको लागि मेटिने छ। तपाईं एपहरूमा आफ्नो पहिचान पुष्टि गर्नका निम्ति आफ्नो अनुहार वा फिंगरप्रिन्ट प्रयोग गर्न सक्नु हुने छैन।"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"तपाईंको फोन हराएको वा चोरी भएको खण्डमा पासवर्डले उक्त फोन सुरक्षित राख्छ।
+
+तपाईंले यो पासवर्ड हटाउनुभयो भने तपाईंको डिभाइसमा भण्डारण गरिएका फिंगरप्रिन्टका फोटो र मोडेल पनि मेटिने छन्। तपाईं एपहरूमा आफ्नो पहिचान पुष्टि गर्नका निम्ति आफ्नो फिंगरप्रिन्ट प्रयोग गर्न सक्नु हुने छैन।"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"तपाईंको फोन हराएको वा चोरी भएको खण्डमा पासवर्डले उक्त फोन सुरक्षित राख्छ।
+
+तपाईंले यो पासवर्ड हटाउनुभयो भने तपाईंको डिभाइसमा भण्डारण गरिएका फिंगरप्रिन्टका फोटो र मोडेल पनि मेटिने छन्। साथै, तपाईंको फेस मोडेल पनि सुरक्षित रूपले सदाको लागि मेटिने छ। तपाईं एपहरूमा आफ्नो पहिचान पुष्टि गर्नका निम्ति आफ्नो अनुहार वा फिंगरप्रिन्ट प्रयोग गर्न सक्नु हुने छैन।"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"डिभाइसका सुरक्षासम्बन्धी सुविधाहरूले स्क्रिन लक अन गरेपछि मात्र काम गर्ने छन्।
+
+तपाईंले यो स्क्रिन लक हटाउनुभयो भने तपाईंको डिभाइसमा भण्डारण गरिएको फिंगरप्रिन्टका फोटो र मोडेल पनि मेटिने छन्। तपाईं एपहरूमा आफ्नो पहिचान पुष्टि गर्नका निम्ति आफ्नो फिंगरप्रिन्ट प्रयोग गर्न सक्नु हुने छैन।"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"डिभाइसका सुरक्षासम्बन्धी सुविधाहरूले स्क्रिन लक अन गरेपछि मात्र काम गर्ने छन्।
+
+तपाईंले यो स्क्रिन लक हटाउनुभयो भने तपाईंको डिभाइसमा भण्डारण गरिएका फिंगरप्रिन्टका फोटो र मोडेल पनि मेटिने छन्। साथै, तपाईंको फेस मोडेल पनि सुरक्षित रूपले सदाको लागि मेटिने छ। तपाईं एपहरूमा आफ्नो पहिचान पुष्टि गर्नका निम्ति आफ्नो अनुहार वा फिंगरप्रिन्ट प्रयोग गर्न सक्नु हुने छैन।"</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">तपाईं आफ्नो फोन अनलक गर्न वा एपहरूमा आफ्नो पहिचान पुष्टि गर्न जति धेरै फिंगरप्रिन्ट अनलक प्रयोग गर्नुहुन्छ त्यति नै त्यसको गुणस्तर सुधार हुँदै जान्छ</string>
+</resources>

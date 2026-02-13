@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">ផ្ទាំងជ្រើសរើសរូបអវតារនៅលើ Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">រូបភាពគួរឱ្យចាប់អារម្មណ៍នៃពាក់កណ្ដាលរង្វង់ពណ៌បៃតងចាស់ចំនួនពីរនៅលើផ្ទៃខាងក្រោយពណ៌បៃតងស្រាល</string>
+
+    <string name="desc_ProfileIcons10">រូបភាពគួរឱ្យចាប់អារម្មណ៍នៃមេអំបៅពណ៌ទឹកក្រូចនៅលើផ្ទៃខាងក្រោយពណ៌លឿង</string>
+
+    <string name="desc_ProfileIcons11">រូបរាងច្រមុះពណ៌ខ្មៅដែលមានគែមរាងមូលនៅលើផ្ទៃខាងក្រោយពណ៌ប្រផេះចាស់</string>
+
+    <string name="desc_ProfileIcons12">រូបរាងស្លឹកនាំសំណាងបួនស្រទាប់ពណ៌ខ្មៅដែលមានគែមរាងមូលនៅលើផ្ទៃខាងក្រោយពណ៌ប្រផេះស្រាល</string>
+
+    <string name="desc_ProfileIcons13">រង្វង់ដែលមានគែមរាងអង្កាញ់ៗពណ៌ស្វាយស្រាលនៅលើផ្ទៃខាងក្រោយពណ៌ស្វាយចាស់</string>
+
+    <string name="desc_ProfileIcons14">រូបរាងស្លឹកនាំសំណាងបួនស្រទាប់ពណ៌ខៀវស្រាលដែលមានគែមរាងមូលនៅលើផ្ទៃខាងក្រោយពណ៌ទឹកក្រូច</string>
+
+    <string name="desc_ProfileIcons15">ឆកោនពណ៌បៃតងស្រាលដែលមានគែមរាងមូលនៅលើផ្ទៃខាងក្រោយពណ៌បៃតងចាស់</string>
+
+    <string name="desc_ProfileIcons16">រូបរាងការ៉ូពណ៌ខ្មៅដែលមានគែមរាងមូលនៅលើផ្ទៃខាងក្រោយពណ៌ប្រផេះស្រាល</string>
+
+    <string name="desc_ProfileIcons17">រូបភាពគួរឱ្យចាប់អារម្មណ៍នៃស្លឹកពណ៌ទឹកក្រូចនៅលើផ្ទៃខាងក្រោយពណ៌លឿង</string>
+
+    <string name="desc_ProfileIcons18">រូបភាពគួរឱ្យចាប់អារម្មណ៍នៃភពសៅរ៍នៅលើផ្ទៃខាងក្រោយពណ៌ផ្កាឈូកស្រាល</string>
+
+    <string name="desc_ProfileIcons19">រូបភាពគួរឱ្យចាប់អារម្មណ៍នៃផ្កាយ និងរង្វង់ពណ៌ស និងទឹកក្រូចក្នុងលំនាំលើលំហអាកាសនៅលើផ្ទៃខាងក្រោយពណ៌ខ្មៅ</string>
+
+    <string name="desc_ProfileIcons2">រូបភាពអូរូបីនៃស៊ីឡាំងដែលប្រសព្វគ្នាពណ៌ខ្មៅ និងស</string>
+
+    <string name="desc_ProfileIcons20">រូបភាពគួរឱ្យចាប់អារម្មណ៍នៃឆ្កែដែលមានត្រចៀកខៀវ និងមុខសនៅលើផ្ទៃខាងក្រោយពណ៌លឿង</string>
+
+    <string name="desc_ProfileIcons21">រូបភាពគួរឱ្យចាប់អារម្មណ៍នៃព្រាបហើរពណ៌សជាមួយមែកឈើពណ៌ស្វាយត្រាំនៅលើផ្ទៃខាងក្រោយពណ៌ស្វាយ</string>
+
+    <string name="desc_ProfileIcons22">រូបភាពគួរឱ្យចាប់អារម្មណ៍នៃឆ្កែដែលមានត្រចៀកខ្មៅ និងមុខសនៅលើផ្ទៃខាងក្រោយពណ៌ខៀវ</string>
+
+    <string name="desc_ProfileIcons23">រូបភាពគួរឱ្យចាប់អារម្មណ៍នៃផ្កាពណ៌ផ្កាឈូកដែលមានស្លឹកពណ៌បៃតងនៅលើផ្ទៃខាងក្រោយពណ៌លឿងស្លេក</string>
+
+    <string name="desc_ProfileIcons24">រូបភាពអរូបីនៃស៊ីឡាំងពណ៌ខៀវចំនួនប្រាំមួយនៅលើផ្ទៃខាងក្រោយពណ៌ក្រហម</string>
+
+    <string name="desc_ProfileIcons3">រូបភាពអរូបីនៃរូបរាងស្លឹកនាំសំណាងបួនស្រទាប់ពណ៌ខៀវស្រាលនៅលើផ្ទៃខាងក្រោយពណ៌ខៀវចាស់</string>
+
+    <string name="desc_ProfileIcons4">រូបភាពអរូបីនៃត្រីកោណដែលមានវិមាត្របីពណ៌ផ្កាឈូកចំនួនពីរ</string>
+
+    <string name="desc_ProfileIcons5">រូបភាពអរូបីនៃស្រទាប់ពណ៌បៃតងចាស់នៅលើផ្ទៃខាងក្រោយពណ៌លឿង</string>
+
+    <string name="desc_ProfileIcons6">រូបភាពអរូបីនៃថ្មពណ៌ស្វាយនៅលើផ្ទៃខាងក្រោយពណ៌បៃតង</string>
+
+    <string name="desc_ProfileIcons7">រូបភាពគួរឱ្យចាប់អារម្មណ៍នៃផ្ការាងធរណីមាត្រពណ៌សចំនួនប្រាំនៅលើផ្ទៃខាងក្រោយពណ៌ទឹកក្រូច</string>
+
+    <string name="desc_ProfileIcons8">រូបភាពគួរឱ្យចាប់អារម្មណ៍នៃប៊្លូបឺរីចំនួនបីនៅលើផ្ទៃខាងក្រោយពណ៌ផ្កាឈូក</string>
+
+    <string name="desc_ProfileIcons9">រូបភាពគួរឱ្យចាប់អារម្មណ៍នៃក្រូចឆ្មារបារាំងដែលមានស្លឹកពណ៌ខ្មៅនៅលើផ្ទៃខាងក្រោយពណ៌បៃតង</string>
+</resources>

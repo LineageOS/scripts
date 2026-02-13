@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel-н аватар сонгогч</string>
+
+    <string name="desc_ProfileIcons1">Цайвар ногоон дэвсгэр дээрх хоёр бараан ногоон хагас тойргийн зугаатай зурагт тайлбар</string>
+
+    <string name="desc_ProfileIcons10">Шар дэвсгэр дээрх улбар шар эрвээхэйн зугаатай зурагт тайлбар</string>
+
+    <string name="desc_ProfileIcons11">Бараан саарал дэвсгэр дээрх дугуй булант ирмэгтэй хар хамрын дүрс</string>
+
+    <string name="desc_ProfileIcons12">Цайвар саарал дэвсгэр дээрх дугуй булант ирмэгтэй хар хошоонгорын дүрс</string>
+
+    <string name="desc_ProfileIcons13">Бараан нил ягаан дэвсгэр дээрх цайвар нил ягаан долгионтой тойрог</string>
+
+    <string name="desc_ProfileIcons14">Улбар шар дэвсгэр дээрх дугуй булант ирмэгтэй цайвар цэнхэр хошоонгорын дүрс</string>
+
+    <string name="desc_ProfileIcons15">Бараан ногоон дэвсгэр дээрх дугуй булант ирмэгтэй цайвар ногоон зургаан өнцөгт</string>
+
+    <string name="desc_ProfileIcons16">Цайвар саарал дэвсгэр дээрх дугуй булант ирмэгтэй хар алмазын дүрс</string>
+
+    <string name="desc_ProfileIcons17">Шар дэвсгэр дээрх улбар шар навчны зугаатай зурагт тайлбар</string>
+
+    <string name="desc_ProfileIcons18">Тоорын өнгөтэй дэвсгэр дээрх Санчир гаргийн зугаатай зурагт тайлбар</string>
+
+    <string name="desc_ProfileIcons19">Хар дэвсгэр дээрх тэнгэр огторгуйн хээн дээрх цагаан, улбар од болон тойргуудын зугаатай зурагт тайлбар</string>
+
+    <string name="desc_ProfileIcons2">Хар цагаан огтлолцсон цилиндрүүдийн хийсвэр зурагт тайлбар</string>
+
+    <string name="desc_ProfileIcons20">Шар дэвсгэр дээрх цэнхэр чих, цагаан царайтай нохойн зугаатай зурагт тайлбар</string>
+
+    <string name="desc_ProfileIcons21">Нил ягаан дэвсгэр дээрх чидун жимсний мөчиртэй цагаан тагтаа нисэж буйг харуулсан зугаатай зурагт тайлбар</string>
+
+    <string name="desc_ProfileIcons22">Цэнхэр дэвсгэр дээрх хар чих, цагаан царайтай нохойн зугаатай зурагт тайлбар</string>
+
+    <string name="desc_ProfileIcons23">Кремийн өнгөтэй дэвсгэр дээрх ногоон навчистай нил ягаан цэцгийн зугаатай зурагт тайлбар</string>
+
+    <string name="desc_ProfileIcons24">Улаан дэвсгэр дээрх зургаан цэнхэр цилиндрийн хийсвэр зурагт тайлбар</string>
+
+    <string name="desc_ProfileIcons3">Бараан хөх дэвсгэр дээрх цайвар цэнхэр хошоонгорын дүрсийн хийсвэр зурагт тайлбар</string>
+
+    <string name="desc_ProfileIcons4">Ягаан өнгөтэй, гурван хэмжээст хоёр гурвалжны хийсвэр зурагт тайлбар</string>
+
+    <string name="desc_ProfileIcons5">Шар дэвсгэр дээрх усан цэнхэр давхаргуудын хийсвэр зурагт тайлбар</string>
+
+    <string name="desc_ProfileIcons6">Ногоон дэвсгэр дээрх нил ягаан чулуунуудын хийсвэр зурагт тайлбар</string>
+
+    <string name="desc_ProfileIcons7">Улбар шар дэвсгэр дээрх цагаан, геометрийн дүрс бүхий таван цэцгийн зугаатай зурагт тайлбар</string>
+
+    <string name="desc_ProfileIcons8">Нил ягаан дэвсгэр дээрх гурван нэрсний зугаатай зурагт тайлбар</string>
+
+    <string name="desc_ProfileIcons9">Ногоон дэвсгэр дээрх хар навчтай нимбэгийн зугаатай зурагт тайлбар</string>
+</resources>

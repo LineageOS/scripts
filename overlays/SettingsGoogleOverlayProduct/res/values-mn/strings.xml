@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">Та Pixel Imprint-р хурууны хээ ашиглан утасныхаа түгжээг тайлж болно. Аюулгүй байдлын үүднээс энэ сонголтод дэлгэцийн нөөц түгжээ шаардлагатай.</string>
+
+    <!-- Summary for suggested actions for settings up a fingerprint lock (phone) [CHAR LIMIT=55] -->
+    <string name="suggested_fingerprint_lock_settings_summary">Утасныхаа түгжээг тайлахын тулд Pixel Imprint-г ашиглана уу</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Pixel Imprint</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Pixel Imprint-г тохируулах</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">Pixel Imprint-г зөвшөөрөх</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature, when fingerprint unlock is disabled by device admin [CHAR LIMIT=40] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled">Pixel Imprint</string>
+
+    <!-- Introduction detail message shown in fingerprint enrollment dialog, when fingerprint unlock is disabled by device admin [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled">"Та Pixel Imprint-р худалдан авалтыг зөвшөөрөх эсвэл аппуудад нэвтрэхийн тулд хурууныхаа хээг ашиглаж болно.
+
+Хурууных нь хээг нэмэх хүнээ болгоомжтой сонгоно уу. Хурууных нь хээг нэмсэн бүх хүн эдгээр зүйлийг хийх боломжтой болно.
+
+Санамж: Та энэ төхөөрөмжийн түгжээг тайлахын тулд хурууныхаа хээг ашиглах боломжгүй. Нэмэлт мэдээлэл авахын тулд байгууллагынхаа админтай холбогдоно уу."</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">Pixel Imprint + Хээ</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">Pixel Imprint + ПИН</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">Pixel Imprint + Нууц үг</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">Pixel Imprint-гүйгээр үргэлжлүүлэх</string>
+
+    <!-- Display settings screen, display white balance settings title [CHAR LIMIT=30] -->
+    <string name="display_white_balance_title">Орчинтой зохицох өнгө</string>
+
+    <!-- Display settings screen, display white balance settings summary [CHAR LIMIT=NONE] -->
+    <string name="display_white_balance_summary">Дэлгэцийг динамик байдлаар орчны гэрэлтүүлэгт тулгуурлан дулаан эсвэл хүйтэн өнгөнүүд рүү зохицуулна</string>
+</resources>

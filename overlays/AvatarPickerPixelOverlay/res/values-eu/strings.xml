@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel-erako abatar-hautatzailea</string>
+
+    <string name="desc_ProfileIcons1">Bi zirkuluerdi berde ilun atzeko plano berde argi batean erakusten dituen ilustrazio dibertigarria</string>
+
+    <string name="desc_ProfileIcons10">Tximeleta laranja bat atzeko plano hori batean erakusten duen ilustrazio dibertigarria</string>
+
+    <string name="desc_ProfileIcons11">Sudur beltz baten forma ertz biribilduekin, atzeko plano gris ilun batean</string>
+
+    <string name="desc_ProfileIcons12">Hirusta beltz baten forma ertz biribilduekin, atzeko plano gris argi batean</string>
+
+    <string name="desc_ProfileIcons13">Biribil izurtu more argia atzeko plano more argi batean</string>
+
+    <string name="desc_ProfileIcons14">Hirusta urdin argi baten forma ertz biribilduekin, atzeko plano laranja batean</string>
+
+    <string name="desc_ProfileIcons15">Hexagono berde argia ertz biribilduekin, atzeko plano berde ilun batean</string>
+
+    <string name="desc_ProfileIcons16">Erronbo beltz baten forma ertz biribilduekin, atzeko plano gris argi batean</string>
+
+    <string name="desc_ProfileIcons17">Hosto laranja bat atzeko plano hori batean erakusten duen ilustrazio dibertigarria</string>
+
+    <string name="desc_ProfileIcons18">Saturno planeta mertxika-koloreko atzeko plano batean erakusten duen ilustrazio dibertigarria</string>
+
+    <string name="desc_ProfileIcons19">Zeruaren eredu bat eratzen duten izar eta biribil hori eta laranjak atzeko plano beltz batean erakusten dituen ilustrazio dibertigarria</string>
+
+    <string name="desc_ProfileIcons2">Zilindro zuri-beltz gurutzatuak erakusten dituen ilustrazio abstraktua</string>
+
+    <string name="desc_ProfileIcons20">Belarri urdinak eta aurpegi zuria dituen txakur bat atzeko plano hori batean erakusten duen ilustrazio dibertigarria</string>
+
+    <string name="desc_ProfileIcons21">Oliba-adaxka bat daraman uso zuri bat atzeko plano more batean erakusten duen ilustrazio dibertigarria</string>
+
+    <string name="desc_ProfileIcons22">Belarri beltzak eta aurpegi zuria dituen txakur bat atzeko plano urdin batean erakusten duen ilustrazio dibertigarria</string>
+
+    <string name="desc_ProfileIcons23">Hosto berdeak dituen lore arrosa bat krema-koloreko atzeko plano batean erakusten duen ilustrazio dibertigarria</string>
+
+    <string name="desc_ProfileIcons24">Sei zilindro urdin atzeko plano gorri batean erakusten duen ilustrazio abstraktua</string>
+
+    <string name="desc_ProfileIcons3">Hirusta urdin argi baten forma bat atzeko plano urdin ilun batean erakusten duen ilustrazio abstraktua</string>
+
+    <string name="desc_ProfileIcons4">Hiru dimentsioko bi hiruki arrosen ilustrazio abstraktua</string>
+
+    <string name="desc_ProfileIcons5">Geruza berde urdinxkak atzeko plano hori batean erakusten dituen ilustrazio abstraktua</string>
+
+    <string name="desc_ProfileIcons6">Arroka moreak atzeko plano berde batean erakusten duen ilustrazio abstraktua</string>
+
+    <string name="desc_ProfileIcons7">Bost lore geometriko zuri atzeko plano laranja batean erakusten dituen ilustrazio dibertigarria</string>
+
+    <string name="desc_ProfileIcons8">Hiru ahabi atzeko plano arrosa batean erakusten dituen ilustrazio dibertigarria</string>
+
+    <string name="desc_ProfileIcons9">Hosto beltz bat duen limoi baten atzeko plano berde batean erakusten dituen ilustrazio dibertigarria</string>
+</resources>

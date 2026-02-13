@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Lås telefonen op med ansigtsgenkendelse</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Lås telefonen op med ansigtsgenkendelse.
+
+Husk!
+Du kan kun have ét ansigt konfigureret ad gangen. Hvis du vil tilføje et nyt ansigt, skal du først slette det aktuelle ansigt.
+
+Hvis du kigger på din telefon, kan den blive låst op, selv om det ikke var din hensigt.
+
+Din telefon kan låses op af en anden, hvis den holdes op foran dit ansigt.
+
+Din telefon kan låses op af en anden, der ligner dig meget, f.eks. en tvillingebror eller -søster."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Lås telefonen op med ansigtsgenkendelse.
+
+Husk!
+Du kan kun have ét ansigt konfigureret ad gangen. Hvis du vil tilføje et nyt ansigt, skal du først slette det aktuelle ansigt.
+
+Hvis du kigger på din telefon, kan den blive låst op, selv om det ikke var din hensigt.
+
+Din telefon kan låses op af en anden, hvis den holdes op foran dit ansigt, også selvom dine øjne er lukkede.
+
+Din telefon kan låses op af en anden, der ligner dig meget, f.eks. en tvillingebror eller -søster."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Sådan konfigurerer du ansigtsoplåsning</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">Gå til næste skærm, og hold din telefon i øjenhøjde</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Hvis du normalt har briller på, kan du beholde dem på under konfigurationen</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Slet din aktuelle ansigtsmodel for at konfigurere ansigtsoplåsning igen.
+
+Din ansigtsmodel slettes permanent og forsvarligt.
+
+Efter sletningen skal du bruge din pinkode, dit mønster eller din adgangskode til at låse telefonen op."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Slet din aktuelle ansigtsmodel for at konfigurere ansigtsoplåsning igen.
+
+Din ansigtsmodel slettes permanent og forsvarligt.
+
+Efter sletningen skal du bruge dit fingeraftryk, din pinkode, dit mønster eller din adgangskode til at låse telefonen op."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">Dine øjne skal være åbne for at låse telefonen op. Du får de bedste resultater, hvis du tager dine solbriller af, når du låser telefonen op.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Nu kan du tage din telefon op og låse den op med ansigtet</string>
+</resources>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Izmantojot autorizāciju ar pirksta nospiedumu, pirksta nospieduma modeļa atjaunināšanai tiek izmantoti attēli. Jūsu pirksta nospieduma attēli un modelis tiek droši glabāti jūsu tālrunī un netiek sūtīti uz citām ierīcēm. Apstrāde tiek veikta drošā veidā un tikai jūsu tālrunī.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Izmantojot autorizāciju ar pirksta nospiedumu, pirksta nospieduma modeļa atjaunināšanai tiek izmantoti attēli. Jūsu bērna pirksta nospieduma attēli un modelis tiek droši glabāts jūsu tālrunī un netiek sūtīts uz citām ierīcēm. Apstrāde tiek veikta drošā veidā un tikai bērna tālrunī.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Jebkurā brīdī iestatījumos varat izdzēst pirksta nospieduma attēlus un modeli vai izslēgt autorizāciju ar pirksta nospiedumu. Pirkstu nospiedumu attēli un modeļi tiek glabāti tālrunī, līdz jūs tos izdzēšat.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Iestatījumos jūs un jūsu bērns varat jebkurā laikā dzēst pirksta nospieduma attēlus un modeli vai izslēgt autorizāciju ar pirksta nospiedumu. Pirksta nospieduma attēli un modeļi tiek glabāti tālrunī, līdz tie tiek izdzēsti.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">Izmantojot autorizāciju ar pirksta nospiedumu, varat atbloķēt savu tālruni ar pirksta nospiedumu. Drošības nolūkos šai opcijai nepieciešama rezerves ekrāna bloķēšanas funkcija.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Autorizācija ar pirksta nosp.</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">Autorizācija ar pirksta nospiedumu darba profilam</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Pirksta nospieduma iestatīšana</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">Autorizācija ar pirksta nospiedumu</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">Iestatot autorizāciju ar pirksta nospiedumu, tiek izveidots unikāls jūsu pirksta nospieduma modelis jūsu identitātes apstiprināšanai. Lai iestatīšanas laikā izveidotu šo pirksta nospieduma modeli, jūs uzņemsiet pirksta nospieduma attēlus no dažādām pozīcijām.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">Iestatot autorizāciju ar pirksta nospiedumu, tiek izveidots unikāls jūsu bērna pirksta nospieduma modelis viņa identitātes apstiprināšanai. Lai iestatīšanas laikā izveidotu šo pirksta nospieduma modeli, jūsu bērns uzņems pirksta nospieduma attēlus no dažādām pozīcijām.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">Apmeklējiet remonta pakalpojumu sniedzēju vai vietni g.co/pixel/fingerprintunlock.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">Izmantot autorizāciju ar pirksta nospiedumu</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">Kombinācija • Pirksta nospiedums</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">PIN • Pirksta nospiedums</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">Parole • Pirksta nospiedums</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">Turpināt, neiestatot autorizāciju ar pirksta nospiedumu</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"Kombinācija aizsargā tālruni, ja tas tiek nozaudēts vai nozagts.
+
+Veicot šo darbību, tiks arī izdzēsti ierīcē saglabātie pirksta nospieduma attēli un pirksta nospieduma modelis. Lietotnēs nevarēsiet izmantot pirksta nospiedumu autentifikācijai."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"Kombinācija aizsargā tālruni, ja tas tiek nozaudēts vai nozagts.
+
+Veicot šo darbību, tiks izdzēsti ierīcē saglabātie pirksta nospieduma attēli un pirksta nospieduma modelis. Arī sejas modelis tiks neatgriezeniski un droši izdzēsts. Lietotnēs nevarēsiet izmantot seju vai pirksta nospiedumu autentifikācijai."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"PIN aizsargā tālruni, ja tas tiek nozaudēts vai nozagts.
+
+Veicot šo darbību, tiks arī izdzēsti ierīcē saglabātie pirksta nospieduma attēli un pirksta nospieduma modelis. Lietotnēs nevarēsiet izmantot pirksta nospiedumu autentifikācijai."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"PIN aizsargā tālruni, ja tas tiek nozaudēts vai nozagts.
+
+Veicot šo darbību, tiks izdzēsti ierīcē saglabātie pirksta nospieduma attēli un pirksta nospieduma modelis. Arī sejas modelis tiks neatgriezeniski un droši izdzēsts. Lietotnēs nevarēsiet izmantot seju vai pirksta nospiedumu autentifikācijai."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"Parole aizsargā tālruni, ja tas tiek nozaudēts vai nozagts.
+
+Veicot šo darbību, tiks arī izdzēsti ierīcē saglabātie pirksta nospieduma attēli un pirksta nospieduma modelis. Lietotnēs nevarēsiet izmantot pirksta nospiedumu autentifikācijai."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"Parole aizsargā tālruni, ja tas tiek nozaudēts vai nozagts.
+
+Veicot šo darbību, tiks izdzēsti ierīcē saglabātie pirksta nospieduma attēli un pirksta nospieduma modelis. Arī sejas modelis tiks neatgriezeniski un droši izdzēsts. Lietotnēs nevarēsiet izmantot seju vai pirksta nospiedumu autentifikācijai."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"Ja tiks atspējota ekrāna bloķēšana, ierīces aizsardzības funkcijas nedarbosies.
+
+Veicot šo darbību, tiks arī izdzēsti ierīcē saglabātie pirksta nospieduma attēli un pirksta nospieduma modelis. Lietotnēs nevarēsiet izmantot pirksta nospiedumu autentifikācijai."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"Ja tiks atspējota ekrāna bloķēšana, ierīces aizsardzības funkcijas nedarbosies.
+
+Veicot šo darbību, tiks izdzēsti ierīcē saglabātie pirksta nospieduma attēli un pirksta nospieduma modelis. Arī sejas modelis tiks neatgriezeniski un droši izdzēsts. Lietotnēs nevarēsiet izmantot seju vai pirksta nospiedumu autentifikācijai."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">Jo biežāk izmantojat autorizāciju ar pirksta nospiedumu, lai atbloķētu tālruni vai apliecinātu savu identitāti lietotnēs, jo vairāk tā tiek uzlabota</string>
+</resources>

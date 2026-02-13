@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Name for an app setting that lets the user authenticate for that app using biometrics (e.g. fingerprint or face). [CHAR LIMIT=30] -->
+    <string name="biometric_app_setting_name">फ़िंगरप्रिंट या फ़ेस अनलॉक सुविधा का इस्तेमाल करें</string>
+
+    <!-- Name for an app setting that lets the user authenticate for that app using biometrics (e.g. fingerprint or face) or their screen lock credential (i.e. PIN, pattern, or password). [CHAR LIMIT=70] -->
+    <string name="biometric_or_screen_lock_app_setting_name">स्क्रीन लॉक, फ़िंगरप्रिंट या फ़ेस अनलॉक सुविधा का इस्तेमाल करें</string>
+
+    <!-- Subtitle shown on the system-provided biometric dialog, asking the user to authenticate with a biometric (e.g. fingerprint or face). [CHAR LIMIT=70] -->
+    <string name="biometric_dialog_default_subtitle">जारी रखने के लिए, फ़िंगरप्रिंट या फ़ेस अनलॉक सुविधा का इस्तेमाल करें</string>
+
+    <!-- Subtitle shown on the system-provided biometric dialog, asking the user to authenticate with a biometric (e.g. fingerprint or face) or their screen lock credential (i.e. PIN, pattern, or password). [CHAR LIMIT=90] -->
+    <string name="biometric_or_screen_lock_dialog_default_subtitle">जारी रखने के लिए, स्क्रीन लॉक, फ़िंगरप्रिंट या फ़ेस अनलॉक सुविधा का इस्तेमाल करें</string>
+
+    <!-- Notification name shown when the system requires the user to re-enroll their face. [CHAR LIMIT=NONE] -->
+    <string name="face_recalibrate_notification_name">मालिक का चेहरा पहचानकर अनलॉक करने की सुविधा</string>
+
+    <!-- Notification title shown when the system requires the user to re-enroll their face. [CHAR LIMIT=NONE] -->
+    <string name="face_recalibrate_notification_title">कृपया अपने चेहरे की फिर से पहचान कराएं</string>
+
+    <!-- Notification content shown when the system requires the user to re-enroll their face. [CHAR LIMIT=NONE] -->
+    <string name="face_recalibrate_notification_content">मालिक का चेहरा पहचानकर अनलॉक करने की सुविधा, शायद तब तक काम न करें, जब तक आप चेहरे की फिर से पहचान नहीं कराते</string>
+
+    <!-- Array containing custom messages shown during face acquisition from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="face_acquired_vendor"/>
+
+    <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="face_error_vendor">
+        <item>प्रमाणपत्र की समयसीमा खत्म हो गई है</item>
+        <item>सेंसर कुछ समय के लिए बंद कर दिया गया है</item>
+        <item>चेहरा पहचानने की सेटिंग में हुई गड़बड़ी</item>
+        <item>मालिक का चेहरा पहचानकर अनलॉक करने की सुविधा उपलब्ध नहीं है. फ़ोन बहुत गर्म है.</item>
+        <item>मालिक का चेहरा पहचानकर अनलॉक करने की सुविधा को फिर से सेट अप करना होगा</item>
+    </string-array>
+
+    <!-- Title for the harmful app warning dialog. [CHAR LIMIT=40] -->
+    <string name="harmful_app_warning_title">Play Protect की चेतावनी</string>
+</resources>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel アバター選択ツール</string>
+
+    <string name="desc_ProfileIcons1">ライトグリーンの背景の上に 2 つのダークグリーンの半円がある陽気なイラスト</string>
+
+    <string name="desc_ProfileIcons10">黄色い背景の上にオレンジ色の蝶がいる陽気なイラスト</string>
+
+    <string name="desc_ProfileIcons11">ダークグレーの背景の上に丸みを帯びた黒い鼻の形</string>
+
+    <string name="desc_ProfileIcons12">ライトグレーの背景の上に丸みを帯びた黒いクローバー形</string>
+
+    <string name="desc_ProfileIcons13">濃い紫色の背景の上に薄い紫色の波状の円</string>
+
+    <string name="desc_ProfileIcons14">オレンジ色の背景の上に丸みを帯びたライトブルーのクローバー形</string>
+
+    <string name="desc_ProfileIcons15">ダークグリーンの背景の上に丸みを帯びたライトグリーンの六角形</string>
+
+    <string name="desc_ProfileIcons16">ライトグレーの背景の上に丸みを帯びた黒いダイヤモンド形</string>
+
+    <string name="desc_ProfileIcons17">黄色い背景の上にオレンジ色の葉がある陽気なイラスト</string>
+
+    <string name="desc_ProfileIcons18">桃色の背景の上に土星がある陽気なイラスト</string>
+
+    <string name="desc_ProfileIcons19">黒い背景の天空のパターンに白やオレンジ色の星と円が散らばる陽気なイラスト</string>
+
+    <string name="desc_ProfileIcons2">黒と白の円柱が交差する抽象的なイラスト</string>
+
+    <string name="desc_ProfileIcons20">黄色い背景の上に青い耳と白い顔を持つ犬がいる陽気なイラスト</string>
+
+    <string name="desc_ProfileIcons21">紫色の背景でオリーブの枝をくわえたハトが飛んでいる陽気なイラスト</string>
+
+    <string name="desc_ProfileIcons22">青い背景の上に黒い耳と白い顔を持つ犬がいる陽気なイラスト</string>
+
+    <string name="desc_ProfileIcons23">クリーム色の背景の上にピンク色の花と緑色の葉がある陽気なイラスト</string>
+
+    <string name="desc_ProfileIcons24">赤い背景の上に 6 つの青い円柱がある抽象的なイラスト</string>
+
+    <string name="desc_ProfileIcons3">ダークブルーの背景の上にライトブルーのクローバー形がある抽象的なイラスト</string>
+
+    <string name="desc_ProfileIcons4">2 つのピンク色の立体的な三角形がある抽象的なイラスト</string>
+
+    <string name="desc_ProfileIcons5">黄色い背景の上に青緑色のレイヤが重なった抽象的なイラスト</string>
+
+    <string name="desc_ProfileIcons6">緑色の背景の上に紫色の岩がある抽象的なイラスト</string>
+
+    <string name="desc_ProfileIcons7">オレンジ色の背景の上に 5 つの白い幾何学的な花がある陽気なイラスト</string>
+
+    <string name="desc_ProfileIcons8">ピンク色の背景の上に 3 つのブルーベリーがある陽気なイラスト</string>
+
+    <string name="desc_ProfileIcons9">緑色の背景の上に黒い葉の付いたレモンがある陽気なイラスト</string>
+</resources>

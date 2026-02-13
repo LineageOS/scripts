@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel Avatar Seçici</string>
+
+    <string name="desc_ProfileIcons1">Açık yeşil arka plan üzerindeki iki koyu yeşil yarım dairenin eğlenceli çizimi</string>
+
+    <string name="desc_ProfileIcons10">Sarı arka plan üzerindeki turuncu bir kelebeğin eğlenceli çizimi</string>
+
+    <string name="desc_ProfileIcons11">Koyu gri arka plan üzerinde yuvarlak kenarlara sahip siyah burun şekli</string>
+
+    <string name="desc_ProfileIcons12">Açık gri arka plan üzerinde yuvarlak kenarlara sahip siyah yonca şekli</string>
+
+    <string name="desc_ProfileIcons13">Koyu mor arka plan üzerindeki kıvrımlı açık mor daire</string>
+
+    <string name="desc_ProfileIcons14">Turuncu arka plan üzerinde yuvarlak kenarlara sahip açık mavi yonca şekli</string>
+
+    <string name="desc_ProfileIcons15">Koyu yeşil arka plan üzerinde yuvarlak kenarlara sahip açık yeşil altıgen</string>
+
+    <string name="desc_ProfileIcons16">Açık gri arka plan üzerinde yuvarlak kenarlara sahip siyah elmas şekli</string>
+
+    <string name="desc_ProfileIcons17">Sarı arka plan üzerindeki turuncu bir yaprağın eğlenceli çizimi</string>
+
+    <string name="desc_ProfileIcons18">Şeftali rengi arka plan üzerindeki Satürn gezegeninin eğlenceli çizimi</string>
+
+    <string name="desc_ProfileIcons19">Siyah arka plan üzerinde gökyüzündeki gibi dizilmiş beyaz ve turuncu yıldızlar ile dairelerin eğlenceli çizimi</string>
+
+    <string name="desc_ProfileIcons2">Siyah ve beyaz renkli kesişen silindirlerin soyut çizimi</string>
+
+    <string name="desc_ProfileIcons20">Beyaz arka plan üzerinde mavi kulakları ve beyaz suratı olan bir köpeğin eğlenceli çizimi</string>
+
+    <string name="desc_ProfileIcons21">Mor arka plan üzerinde zeytin dalı taşıyarak uçan bir beyaz güvercinin eğlenceli çizimi</string>
+
+    <string name="desc_ProfileIcons22">Mavi arka plan üzerinde siyah kulakları ve beyaz suratı olan bir köpeğin eğlenceli çizimi</string>
+
+    <string name="desc_ProfileIcons23">Krem rengi arka plan üzerindeki yeşil yapraklı pembe bir çiçeğin eğlenceli çizimi</string>
+
+    <string name="desc_ProfileIcons24">Kırmızı arka plan üzerindeki altı tane mavi silindirin soyut çizimi</string>
+
+    <string name="desc_ProfileIcons3">Koyu mavi arka plan üzerindeki açık mavi yonca şeklinin soyut çizimi</string>
+
+    <string name="desc_ProfileIcons4">İki tane üç boyutlu ve pembe renkli üçgenin soyut çizimi</string>
+
+    <string name="desc_ProfileIcons5">Sarı arka plan üzerindeki turkuaz katmanların soyut çizimi</string>
+
+    <string name="desc_ProfileIcons6">Yeşil arka plan üzerindeki mor kayaların soyut çizimi</string>
+
+    <string name="desc_ProfileIcons7">Turuncu arka plan üzerindeki beş tane geometrik şekilli ve beyaz renkli çiçeğin eğlenceli çizimi</string>
+
+    <string name="desc_ProfileIcons8">Pembe arka plan üzerindeki üç tane yaban mersininin eğlenceli çizimi</string>
+
+    <string name="desc_ProfileIcons9">Yeşil arka plan üzerindeki siyah yapraklı bir limonun eğlenceli çizimi</string>
+</resources>

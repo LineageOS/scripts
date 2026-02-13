@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Seletor de avatar do Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">Ilustração divertida de dois semicírculos verde-escuros em um fundo verde-claro</string>
+
+    <string name="desc_ProfileIcons10">Ilustração divertida de uma borboleta laranja em um fundo amarelo</string>
+
+    <string name="desc_ProfileIcons11">Forma de um nariz na cor preta, com cantos arredondados, em um fundo cinza-escuro</string>
+
+    <string name="desc_ProfileIcons12">Forma de um trevo preto, com cantos arredondados, em um fundo cinza-claro</string>
+
+    <string name="desc_ProfileIcons13">Círculo tortuoso roxo-claro em um fundo roxo-escuro</string>
+
+    <string name="desc_ProfileIcons14">Forma de um trevo azul-claro, com cantos arredondados, em um fundo laranja</string>
+
+    <string name="desc_ProfileIcons15">Hexágono verde-claro, com cantos arredondados, em um fundo verde-escuro</string>
+
+    <string name="desc_ProfileIcons16">Forma de um diamante preto, com cantos arredondados, em um fundo cinza-claro</string>
+
+    <string name="desc_ProfileIcons17">Ilustração divertida de uma folha laranja em um fundo amarelo</string>
+
+    <string name="desc_ProfileIcons18">Ilustração divertida do planeta Saturno em um fundo na cor pêssego</string>
+
+    <string name="desc_ProfileIcons19">Ilustração divertida de estrelas nas cores branco e laranja e círculos em um padrão celestial em um fundo preto</string>
+
+    <string name="desc_ProfileIcons2">Ilustração abstrata de cilindros cruzados nas cores preto e branco</string>
+
+    <string name="desc_ProfileIcons20">Ilustração divertida de um cachorro com orelhas azuis e rosto branco em um fundo amarelo</string>
+
+    <string name="desc_ProfileIcons21">Ilustração divertida de uma pomba branca com um ramo de oliveira em um fundo roxo</string>
+
+    <string name="desc_ProfileIcons22">Ilustração divertida de um cachorro com orelhas pretas e rosto branco em um fundo azul</string>
+
+    <string name="desc_ProfileIcons23">Ilustração divertida de uma flor rosa com folhas verdes em um fundo na cor creme</string>
+
+    <string name="desc_ProfileIcons24">Ilustração abstrata de seis cilindros azuis em um fundo vermelho</string>
+
+    <string name="desc_ProfileIcons3">Ilustração abstrata da forma de um trevo azul-claro em um fundo azul-escuro</string>
+
+    <string name="desc_ProfileIcons4">Ilustração abstrata de dois triângulos tridimensionais na cor rosa</string>
+
+    <string name="desc_ProfileIcons5">Ilustração abstrata de camadas na cor azul-petróleo em um fundo amarelo</string>
+
+    <string name="desc_ProfileIcons6">Ilustração abstrata de pedras roxas em um fundo verde</string>
+
+    <string name="desc_ProfileIcons7">Ilustração divertida de cinco flores geométricas na cor azul em um fundo laranja</string>
+
+    <string name="desc_ProfileIcons8">Ilustração divertida de três mirtilos em um fundo rosa</string>
+
+    <string name="desc_ProfileIcons9">Ilustração divertida de um limão com uma folha preta em um fundo verde</string>
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- [CHAR_LIMIT=NONE] [BACKUP_MESSAGE_ID: 5444908404021316250] Battery saver: Feature description, with a "learn more" link. -->
+    <string name="battery_saver_description_with_learn_more">"ដើម្បី​បង្កើនកម្រិត​ថាមពលថ្ម មុខងារ​សន្សំថ្ម៖
+
+• បើករចនាប័ទ្មងងឹត
+• បិទ ឬដាក់កំហិតលើ​សកម្មភាពផ្ទៃខាងក្រោយ ឥទ្ធិពល​រូបភាពមួយចំនួន និងមុខងារផ្សេងទៀត​ដូចជា “Hey Google” ជាដើម
+• បង្កើនប្រសិទ្ធភាពនៃការតភ្ជាប់បណ្ដាញរបស់អ្នក
+
+"<annotation id="url">ស្វែងយល់​បន្ថែម</annotation></string>
+</resources>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">మీ ఫోన్‌ను అన్‌లాక్ చేయడానికి మీ ముఖాన్ని ఉపయోగించండి</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"మీ ఫోన్‌ను అన్‌లాక్ చేయడానికి మీ ముఖాన్ని ఉపయోగించండి.
+
+అలాగే, దీనిని గుర్తుంచుకోండి:
+మీరు ఒకేసారి ఒక ముఖాన్ని మాత్రమే సెట్ చేయవచ్చు. మరొక ముఖాన్ని జోడించడానికి, ప్రస్తుతం ఉన్న దానిని తొలగించండి.
+
+మీరు అనుకోకుండా ఫోన్ వైపు చూసినా కూడా అన్‌లాక్ అయ్యే అవకాశం ఉంటుంది.
+
+మీ ముఖాన్ని స్క్రీన్ వైపు చూపితే, ఇతరులు కూడా మీ ఫోన్‌ను అన్‌లాక్ చేయగలుగుతారు.
+
+మీలాంటి రూపం ఉన్న వ్యక్తులు, ఉదాహరణకు, మీ కవల తోబుట్టువు మీ ఫోన్‌ను అన్‌లాక్ చేయగలిగే అవకాశం ఉంది."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"మీ ఫోన్‌ను అన్‌లాక్ చేయడానికి మీ ముఖాన్ని ఉపయోగించండి.
+
+అలాగే, దీనిని గుర్తుంచుకోండి:
+మీరు ఒకేసారి ఒక ముఖాన్ని మాత్రమే సెట్ చేయవచ్చు. మరొక ముఖాన్ని జోడించడానికి, ప్రస్తుతం ఉన్న దానిని తొలగించండి.
+
+మీరు అనుకోకుండా ఫోన్ వైపు చూసినా కూడా అన్‌లాక్ అయ్యే అవకాశం ఉంటుంది.
+
+మీ కళ్లు మూసి ఉన్నా కూడా, మీ ముఖాన్ని స్క్రీన్ వైపు చూపితే, ఇతరులు కూడా మీ ఫోన్‌ను అన్‌లాక్ చేయగలుగుతారు.
+
+మీలాంటి రూపం ఉన్న వ్యక్తులు, ఉదాహరణకు, మీ కవల తోబుట్టువు మీ ఫోన్‌ను అన్‌లాక్ చేయగలిగే అవకాశం ఉంది."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">ఫేస్ అన్‌లాక్‌ను ఎలా సెటప్ చేయాలి</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">తదుపరి స్క్రీన్‌లో, మీ ఫోన్‌ను కళ్లకు ఎదురుగా ఉంచండి.</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">మీరు సాధారణంగా కళ్లద్దాలు ధరించి ఉండేట్లయితే, సెటప్ సమయంలో మీరు వాటిని ధరించవచ్చు</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"ఫేస్ అన్‌లాక్‌ను మళ్లీ సెటప్ చేయడానికి మీ ప్రస్తుత ఫేస్ మోడల్‌ను తొలగించండి.
+
+మీ ఫేస్ మోడల్ శాశ్వతంగా, సురక్షితంగా తొలగించబడుతుంది.
+
+తొలగించిన తర్వాత, మీ ఫోన్‌ను అన్‌లాక్ చేయడానికి మీకు మీ PIN, ఆకృతి లేదా పాస్‌వర్డ్ అవసరం."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"ఫేస్ అన్‌లాక్‌ను మళ్లీ సెటప్ చేయడానికి మీ ప్రస్తుత ఫేస్ మోడల్‌ను తొలగించండి.
+
+మీ ఫేస్ మోడల్ శాశ్వతంగా, సురక్షితంగా తొలగించబడుతుంది.
+
+తొలగించిన తర్వాత, మీ ఫోన్‌ను అన్‌లాక్ చేయడానికి మీకు మీ వేలిముద్ర, PIN, ఆకృతి లేదా పాస్‌వర్డ్ అవసరం."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">ఫోన్‌ను అన్‌లాక్ చేయడానికి, మీ కళ్లను తప్పనిసరిగా తెరిచి ఉంచాలి. ఉత్తమ ఫలితాల కోసం, ఫోన్‌ను అన్‌లాక్ చేస్తున్నప్పుడు సన్ గ్లాసెస్‌ను తీసివేయండి.</string>
+
+    <string name="security_settings_face_enroll_finish_description">ఇప్పుడు మీరు మీ ఫోన్‌ను ప్రారంభించవచ్చు, దాన్ని అన్‌లాక్ చేయడానికి మీ ముఖాన్ని ఉపయోగించవచ్చు</string>
+</resources>

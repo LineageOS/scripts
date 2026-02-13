@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"যদি আপোনাৰ ওচৰত কোনো স্ক্ৰীনৰ সুৰক্ষা প্ৰদানকাৰী থাকে, শ্ৰেষ্ঠ কাৰ্যদক্ষতা লাভ কৰিবলৈ আপোনাৰ ফিংগাৰপ্ৰিণ্ট ছেট আপ কৰাৰ পূৰ্বে আপোনাৰ স্ক্ৰীনৰ সুৰক্ষা প্ৰদানকাৰী প্ৰয়োগ কৰক।
+
+শ্ৰেষ্ঠ ফলাফল পাবলৈ, Googleৰ বাবে প্ৰস্তুত কৰা বুলি প্ৰমাণিত এটা স্ক্ৰীনৰ সুৰক্ষা প্ৰদানকাৰী ব্যৱহাৰ কৰক। অন্য স্ক্ৰীনৰ সুৰক্ষা প্ৰদানকাৰীৰ সৈতে আপোনাৰ ফিংগাৰপ্ৰিণ্টে কাম নকৰিব পাৰে।"</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">আপোনাৰ আঙুলিটো হেলনীয়া কৰক আৰু ওপৰৰ অংশৰে স্পৰ্শ কৰক</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">আঙুলিটো ঘূৰাওক আৰু বাওঁফালৰ কাষেৰে স্পৰ্শ কৰক</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">পুনৰ ঘূৰাওক আৰু সোঁফালৰ কাষেৰে স্পৰ্শ কৰক</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">আপোনাৰ স্ক্ৰীনখনৰ ছেন্সৰৰ কাষৰ ঠাইখিনি পৰিষ্কাৰ কৰক</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">আপোনাৰ স্ক্ৰীনত থকা যিকোনো আঁচ, দাগ অথবা চেকা আঁতৰাবলৈ স্ক্ৰীনখন মচক। এইটোৱে ফিংগাৰপ্ৰিণ্টৰ অধিক স্পষ্ট প্ৰতিচ্ছবি কেপচাৰ কৰাত সহায় কৰে।</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">অব্যাহত ৰখাৰ পূৰ্বে আপোনাৰ স্ক্ৰীনখন পৰিষ্কাৰ কৰক</string>
+</resources>

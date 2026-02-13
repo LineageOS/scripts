@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"‏אם יש לך מגן מסך, צריך לשים אותו לפני תהליך ההגדרה של טביעת האצבע כדי שהחיישן יידע לזהות את האצבע דרך מגן המסך.
+
+לקבלת התוצאות הטובות ביותר, כדאי להשתמש במגן מסך שקיבל אישור Made for Google. יכול להיות שטביעת האצבע שלך לא תעבוד עם מגני מסך אחרים."</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">צריך להטות את האצבע ולגעת עם קצה האצבע</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">מסובבים את האצבע ונוגעים עם הקצה השמאלי</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">מסובבים את האצבע שוב ונוגעים עם הקצה הימני</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">צריך לנקות את אזור החיישן במסך</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">צריך לנגב את המסך כדי להסיר כתמים או אבק. כך אפשר לצלם תמונות ברורות יותר של טביעת האצבע.</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">צריך לנקות את המסך לפני שממשיכים</string>
+</resources>

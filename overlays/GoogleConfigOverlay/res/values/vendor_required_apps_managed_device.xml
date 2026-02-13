@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- A list of apps to be retained on the managed device by a particular vendor.
+            Takes precedence over the disallowed apps lists. -->
+    <string-array name="vendor_required_apps_managed_device">
+        <item>com.android.vending</item>
+        <item>com.google.android.gms</item>
+        <item>com.google.android.contacts</item>
+        <item>com.google.android.apps.safetyhub</item>
+        <item>com.google.android.apps.wellbeing</item>
+        <item>com.google.android.GoogleCamera</item>
+        <item>com.google.android.googlequicksearchbox</item>
+        <item>com.google.android.launcher</item>
+        <item>com.google.android.apps.nexuslauncher</item>
+        <item>com.android.launcher</item>
+        <item>com.google.android.dialer</item>
+        <item>com.google.android.apps.messaging</item>
+        <item>com.google.android.setupwizard</item>
+        <item>com.google.android.settings.intelligence</item>
+        <item>com.android.settings.intelligence</item>
+        <item>com.google.android.documentsui</item>
+        <item>com.google.android.apps.nbu.files</item>
+        <item>com.google.android.apps.tips</item>
+        <item>com.google.android.apps.assistant</item>
+        <item>com.google.android.apps.searchlite</item>
+        <item>com.google.android.cellbroadcastreceiver</item>
+        <item>com.google.android.projection.gearhead</item>
+        <item>com.google.android.apps.accessibility.voiceaccess</item>
+        <item>com.google.android.apps.tycho</item>
+        <item>com.google.android.apps.internal.betterbug</item>
+        <item>com.google.android.apps.internal.gyotaku</item>
+        <item>com.google.android.webview</item>
+        <item>com.google.android.trichromelibrary</item>
+    </string-array>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string-array name="dm_account_info">
+        <item>Sprint, sprint, https://oma.ssprov.sprint.com/oma, URI, 443, , Sprint, HMAC, SPRINT, MTIzNDU=, MEID, SPRINT, MTIzNDU=, oma.ssprov.sprint.com, 80</item>
+        <item>VerizonLTE, com.vzwdmserver, https://4g3.vzwdm.com/, 1, 443, , VzWDMServer, DIGEST, 0000000000000000, abc123, e0e5e7eaebeb, ebe8efeeecec, 123abc, ,</item>
+        <item>w7, msvpcdp, https://mdm.uscc.net/southbound-connector/dm, URI, 443, , USC_DM_Server, DIGEST, 0000000000000000, dynamic, , , dynamic, ,</item>
+    </string-array>
+</resources>

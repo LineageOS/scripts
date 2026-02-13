@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"ຫາກທ່ານມີຕົວປົກປ້ອງໜ້າຈໍ, ໃຫ້ຕິດຕົວປົກປ້ອງໜ້າຈໍຂອງທ່ານກ່ອນທີ່ຈະຕັ້ງຄ່າລາຍນິ້ວມືຂອງທ່ານເພື່ອປະສິດທິພາບທີ່ດີທີ່ສຸດ.
+
+ເພື່ອໃຫ້ໄດ້ຜົນຮັບທີ່ດີທີ່ສຸດ, ໃຫ້ໃຊ້ຕົວປົກປ້ອງໜ້າຈໍທີ່ໄດ້ຮັບການຮັບຮອງ Made for Google. ດ້ວຍຕົວປົກປ້ອງໜ້າຈໍແບບອື່ນ, ລາຍນິ້ວມືຂອງທ່ານອາດໃຊ້ບໍ່ໄດ້."</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">ອຽງນິ້ວມືຂອງທ່ານ ແລະ ສຳຜັດດ້ວຍປາຍນິ້ວ</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">ໝຸນນິ້ວມື ແລະ ສຳຜັດດ້ວຍຂອບຊ້າຍ</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">ໝຸນອີກຄັ້ງ ແລະ ສຳຜັດດ້ວຍຂອບຂວາ</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">ອະນາໄມໜ້າຈໍຂອງທ່ານທີ່ໃກ້ກັບເຊັນເຊີ</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">ລ້າງໜ້າຈໍຂອງທ່ານເພື່ອລຶບຮອຍ, ຮອຍເປື້ອນ ຫຼື ຄາບຕ່າງໆອອກ. ສິ່ງນີ້ຊ່ວຍຖ່າຍຮູບລາຍນິ້ວມືຊັດເຈນຂຶ້ນ.</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">ອະນາໄມໜ້າຈໍຂອງທ່ານກ່ອນທີ່ຈະສືບຕໍ່</string>
+</resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Allowed device identifiers bitmap -->
+    <integer name="device_id_type_bitmap">3</integer>
+
+    <!-- Packages allow-listed in locked mode -->
+    <array name="lock_task_allowlist">
+        <item>com.google.android.gms</item>
+        <item>com.google.android.apps.restore</item>
+    </array>
+
+    <!-- Port number of the check in server -->
+    <integer name="check_in_server_port_number">443</integer>
+
+    <!-- Host name of the check in server -->
+    <string name="check_in_server_host_name">devicelockcheckin-pa.googleapis.com</string>
+
+    <!-- Port number of the finalize server -->
+    <integer name="finalize_server_port_number">443</integer>
+
+    <!-- Host name of the check in server -->
+    <string name="finalize_server_host_name">devicelockfinalize-pa.googleapis.com</string>
+</resources>

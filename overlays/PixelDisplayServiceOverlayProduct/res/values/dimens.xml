@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <dimen name="config_compensation_filter_intercept">10.0</dimen>
+
+    <dimen name="config_display_mode_brightness_vote_threshold">0.001466346</dimen>
+
+    <dimen name="config_lbe_lux_switch_threshold">1.0</dimen>
+
+    <dimen name="config_za_compensation_brightness_enter_threshold">0.4</dimen>
+</resources>

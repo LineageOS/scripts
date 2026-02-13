@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Class name for the default main dialer activity [DO NOT TRANSLATE] -->
+    <string name="dialer_default_class">com.google.android.dialer.extensions.GoogleDialtactsActivity</string>
+
+    <!-- Determines if the granting of temporary location permission to the default dialer
+         during an emergency call should be allowed. -->
+    <bool name="grant_location_permission_enabled">true</bool>
+
+    <!-- When set, Telecom will attempt to bind to the {@link CallDiagnosticService} implementation
+         defined by the app with this package name. -->
+    <string name="call_diagnostic_service_package_name">com.google.android.apps.scone</string>
+
+    <!-- When true, logcat collection will be enabled for all emergency calls. -->
+    <bool name="enable_logcat_collection_for_all_emergency_calls">true</bool>
+</resources>

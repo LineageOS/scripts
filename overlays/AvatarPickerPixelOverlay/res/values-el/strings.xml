@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Εργαλείο επιλογής avatar του Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">Χαριτωμένη εικόνα με δύο ημικύκλια με σκούρο πράσινο χρώμα σε ανοικτό πράσινο φόντο</string>
+
+    <string name="desc_ProfileIcons10">Χαριτωμένη εικόνα μιας πεταλούδας με πορτοκαλί χρώμα σε κίτρινο φόντο</string>
+
+    <string name="desc_ProfileIcons11">Σχήμα μύτης με μαύρο χρώμα και στρογγυλεμένες άκρες σε σκούρο γκρι φόντο</string>
+
+    <string name="desc_ProfileIcons12">Σχήμα τριφυλλιού με μαύρο χρώμα και στρογγυλεμένες άκρες σε ανοικτό γκρι φόντο</string>
+
+    <string name="desc_ProfileIcons13">Κυματοειδής κύκλος με ανοικτό μοβ χρώμα σε σκούρο μοβ φόντο</string>
+
+    <string name="desc_ProfileIcons14">Σχήμα τριφυλλιού με ανοικτό μπλε χρώμα με στρογγυλεμένες άκρες σε πορτοκαλί φόντο</string>
+
+    <string name="desc_ProfileIcons15">Εξάγωνο με ανοικτό πράσινο χρώμα και στρογγυλεμένες άκρες σε σκούρο πράσινο φόντο</string>
+
+    <string name="desc_ProfileIcons16">Σχήμα διαμαντιού με μαύρο χρώμα και στρογγυλεμένες άκρες σε ανοικτό γκρι φόντο</string>
+
+    <string name="desc_ProfileIcons17">Χαριτωμένη εικόνα ενός φύλλου με πορτοκαλί χρώμα σε κίτρινο φόντο</string>
+
+    <string name="desc_ProfileIcons18">Χαριτωμένη εικόνα με τον πλανήτη Κρόνο σε ροδακινί φόντο</string>
+
+    <string name="desc_ProfileIcons19">Χαριτωμένη εικόνα με λευκά και πορτοκαλί αστέρια και κύκλους σε ένα ουράνιο μοτίβο με μαύρο φόντο</string>
+
+    <string name="desc_ProfileIcons2">Αφηρημένη εικόνα με διασταυρούμενους κυλίνδρους άσπρου και μαύρου χρώματος</string>
+
+    <string name="desc_ProfileIcons20">Χαριτωμένη εικόνα με έναν σκύλο με μπλε αυτιά και λευκό πρόσωπο σε κίτρινο φόντο</string>
+
+    <string name="desc_ProfileIcons21">Χαριτωμένη εικόνα με ένα λευκό περιστέρι και ένα κλαδί ελιάς σε μοβ φόντο</string>
+
+    <string name="desc_ProfileIcons22">Χαριτωμένη εικόνα με έναν σκύλο με μαύρα αυτιά και λευκό πρόσωπο σε μπλε φόντο</string>
+
+    <string name="desc_ProfileIcons23">Χαριτωμένη εικόνα με ένα ροζ λουλούδι με πράσινα φύλλα σε μπεζ φόντο</string>
+
+    <string name="desc_ProfileIcons24">Αφηρημένη εικόνα με έξι μπλε κυλίνδρους σε κόκκινο φόντο</string>
+
+    <string name="desc_ProfileIcons3">Αφηρημένη εικόνα με ένα σχήμα τριφυλλιού με ανοικτό μπλε χρώμα σε σκούρο μπλε φόντο</string>
+
+    <string name="desc_ProfileIcons4">Αφηρημένη εικόνα με δύο ροζ τρισδιάστατα τρίγωνα</string>
+
+    <string name="desc_ProfileIcons5">Αφηρημένη εικόνα με γαλαζοπράσινα επίπεδα σε κίτρινο φόντο</string>
+
+    <string name="desc_ProfileIcons6">Αφηρημένη εικόνα με μοβ πέτρες σε πράσινο φόντο</string>
+
+    <string name="desc_ProfileIcons7">Χαριτωμένη εικόνα με πέντε λευκά, γεωμετρικά λουλούδια σε πορτοκαλί φόντο</string>
+
+    <string name="desc_ProfileIcons8">Χαριτωμένη εικόνα με τρία μύρτιλα σε ροζ φόντο</string>
+
+    <string name="desc_ProfileIcons9">Χαριτωμένη εικόνα με ένα λεμόνι και ένα μαύρο φύλλο σε πράσινο φόντο</string>
+</resources>

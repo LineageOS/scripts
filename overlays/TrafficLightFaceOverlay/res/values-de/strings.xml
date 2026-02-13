@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Verwende die Entsperrung per Gesichtserkennung, um dein Smartphone zu entsperren</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Du kannst die Entsperrung per Gesichtserkennung verwenden, um dein Smartphone zu entsperren.
+
+Hinweis:
+Es kann immer nur jeweils ein Gesichtsmodell eingerichtet sein. Wenn du ein anderes hinzufügen möchtest, lösche zuerst das aktuelle.
+
+Es kann passieren, dass das Smartphone unbeabsichtigt entsperrt wird, wenn du auf das Gerät blickst.
+
+Eine andere Person kann es  entsperren, indem sie es vor dein Gesicht hält.
+
+Dein Smartphone kann eventuell auch von jemandem entsperrt werden, der dir sehr ähnlich sieht, beispielsweise von einem eineiigen Zwilling."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Du kannst die Entsperrung per Gesichtserkennung verwenden, um dein Smartphone zu entsperren.
+
+Hinweis:
+Es kann immer nur jeweils ein Gesichtsmodell eingerichtet sein. Wenn du ein anderes hinzufügen möchtest, lösche zuerst das aktuelle.
+
+Es kann passieren, dass das Smartphone unbeabsichtigt entsperrt wird, wenn du auf das Gerät blickst.
+
+Eine andere Person kann es dadurch entsperren, dass sie es vor dein Gesicht hält, auch wenn deine Augen geschlossen sind.
+
+Dein Smartphone kann eventuell auch von jemandem entsperrt werden, der dir sehr ähnlich sieht, beispielsweise von einem eineiigen Zwilling."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Entsperrung per Gesichts­erkennung einrichten</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">Auf dem nächsten Bildschirm musst du dein Gerät auf Augenhöhe halten</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Falls du eine Brille trägst, kannst du sie auch während der Einrichtung tragen</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Du musst dein aktuelles Gesichtsmodell löschen, um die Entsperrung per Gesichtserkennung neu einzurichten.
+
+Dein Gesichtsmodell wird dauerhaft und sicher gelöscht.
+
+Nach dem Entfernen benötigst du deine PIN, dein Muster oder dein Passwort, um dein Smartphone zu entsperren."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Du musst dein aktuelles Gesichtsmodell löschen, um die Entsperrung per Gesichtserkennung neu einzurichten.
+
+Dein Gesichtsmodell wird dauerhaft und sicher gelöscht.
+
+Nach dem Entfernen benötigst du deinen Fingerabdruck, deine PIN, dein Muster oder dein Passwort, um dein Smartphone zu entsperren."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">Zum Entsperren des Smartphones müssen deine Augen geöffnet sein. Falls du gerade eine Sonnenbrille trägst, solltest du sie abnehmen.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Jetzt kannst du dein Smartphone in die Hand nehmen und es mithilfe der Gesichtserkennung entsperren</string>
+</resources>

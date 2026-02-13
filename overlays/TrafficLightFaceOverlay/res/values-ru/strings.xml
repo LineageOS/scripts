@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Снимайте блокировку телефона с помощью фейсконтроля.</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Снимайте блокировку телефона с помощью фейсконтроля.
+
+Внимание!
+Вы можете зарегистрировать только одно лицо. Чтобы добавить другую модель лица, сначала удалите предыдущую.
+
+Вы можете случайно разблокировать телефон, посмотрев на экран.
+
+Телефон может быть разблокирован, если кто-то поднесет его к вашему лицу.
+
+Телефон также может разблокировать человек, очень похожий на вас (например, ваш близнец)."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Снимайте блокировку телефона с помощью фейсконтроля.
+
+Внимание!
+Вы можете зарегистрировать только одно лицо. Чтобы добавить другую модель лица, сначала удалите предыдущую.
+
+Вы можете случайно разблокировать телефон, посмотрев на экран.
+
+Телефон может быть разблокирован, если кто-то поднесет его к вашему лицу, даже когда у вас закрыты глаза.
+
+Телефон также может разблокировать человек, очень похожий на вас (например, ваш близнец)."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Как настроить фейсконтроль</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">Когда откроется следующий экран, держите телефон на уровне глаз.</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Если вы носите очки, то можете не снимать их во время настройки.</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Чтобы настроить фейсконтроль ещё раз, удалите модель лица.
+
+Она будет удалена надежно и навсегда.
+
+После этого снимать блокировку телефона можно будет с помощью PIN-кода, пароля или графического ключа."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Чтобы настроить фейсконтроль ещё раз, удалите модель лица.
+
+Она будет удалена надежно и навсегда.
+
+После этого снимать блокировку телефона можно будет с помощью отпечатка пальца, PIN-кода, пароля или графического ключа."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">Для разблокировки нужно, чтобы ваши глаза были открыты. Солнцезащитные очки желательно снять.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Теперь вы можете разблокировать телефон с помощью фейсконтроля</string>
+</resources>

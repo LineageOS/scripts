@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="branded_monitoring_description_app_personal">தனது சேவையகங்கள் மூலம் தரவை அனுப்பி இந்த இணைப்பை Google பாதுகாக்கிறது</string>
+
+    <string name="branded_vpn_footer">இணைப்பு Googleளால் பாதுகாக்கப்படுகிறது</string>
+</resources>

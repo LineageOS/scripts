@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Lås upp telefonen med ansiktet</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Lås upp telefonen med ansiktet.
+
+Tänk på detta:
+Bara ett ansikte i taget kan vara konfigurerat. Radera det nuvarande ansiktet innan du lägger till ett nytt.
+
+Om du tittar på telefonen kan du oavsiktligt låsa upp den.
+
+Andra kan låsa upp din telefon om de håller upp den mot ditt ansikte.
+
+Telefonen kanske kan låsas upp av någon som är mycket lik dig, till exempel ett syskon."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Lås upp telefonen med ansiktet.
+
+Tänk på detta:
+Bara ett ansikte i taget kan vara konfigurerat. Radera det nuvarande ansiktet innan du lägger till ett nytt.
+
+Om du tittar på telefonen kan du oavsiktligt låsa upp den.
+
+Andra kan låsa upp telefonen om de håller upp den mot ditt ansikte, även om du inte har ögonen öppna.
+
+Telefonen kanske kan låsas upp av någon som är mycket lik dig, till exempel ett syskon."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Så här konfigurerar du ansiktslås</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">Håll telefonen i ögonhöjd när du kommer till nästa skärm</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Om du vanligen använder glasögon kan du ha dem på dig under konfigureringen</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Radera din nuvarande ansiktsmodell och konfigurera om ansiktslåset.
+
+Ansiktsmodellen raderas permanent på ett säkert sätt.
+
+Efter borttagningen behöver du pinkod, lösenord eller mönster för att låsa upp telefonen."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Radera din nuvarande ansiktsmodell och konfigurera om ansiktslåset.
+
+Ansiktsmodellen raderas permanent på ett säkert sätt.
+
+Efter borttagningen behöver du fingeravtryck, pinkod, lösenord eller mönster för att låsa upp telefonen."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">Du måste ha ögonen öppna för att låsa upp telefonen. Vi rekommenderar att du tar av solglasögon när du låser upp telefonen.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Nu kan du använda ansiktet för att låsa upp telefonen</string>
+</resources>

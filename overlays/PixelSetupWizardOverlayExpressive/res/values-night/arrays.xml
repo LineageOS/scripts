@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string-array name="aod_animation_customization">
+        <item>.primary:@sud_system_primary_dark</item>
+        <item>.primaryContainer:@sud_system_primary_container_dark</item>
+        <item>.onSurface:@sud_system_on_surface_dark</item>
+        <item>.surfaceContainer:@sud_system_surface_container_dark</item>
+    </string-array>
+
+    <string-array name="deferred_setup_welcome_lottie_illustration_color_customization">
+        <item>.primary:@sud_system_primary_dark</item>
+        <item>.surfaceContainer:@sud_system_surface_container_dark</item>
+    </string-array>
+
+    <string-array name="gesture_nav_edu_lottie_illustration_color_customization">
+        <item>.primary:@sud_system_primary_dark</item>
+        <item>.primaryContainer:@sud_system_primary_container_dark</item>
+        <item>.onPrimary:@sud_system_on_primary_dark</item>
+        <item>.onPrimaryContainer:@sud_system_on_primary_container_dark</item>
+        <item>.onSurface:@sud_system_on_surface_dark</item>
+        <item>.surfaceContainer:@sud_system_surface_container_dark</item>
+        <item>.onTertiaryFixed:@sud_system_tertiary_fixed_dark</item>
+        <item>.tertiary:@sud_system_tertiary_dark</item>
+    </string-array>
+
+    <string-array name="moment_lottie_placeholder_customization">
+        <item>.inverseSurface:@sud_system_surface_inverse_dark</item>
+        <item>.primary:@sud_system_primary_dark</item>
+        <item>.primaryContainer:@sud_system_primary_container_dark</item>
+        <item>.surface:@sud_system_surface_dark</item>
+        <item>.onPrimary:@sud_system_on_primary_dark</item>
+        <item>.onPrimaryContainer:@sud_system_on_primary_container_dark</item>
+        <item>.surfaceContainer:@sud_system_surface_container_dark</item>
+    </string-array>
+
+    <string-array name="welcome_animation_customization">
+        <item>.primaryContainer:@sud_system_primary_container_dark</item>
+        <item>.onSecondary:@sud_system_secondary_container_dark</item>
+        <item>.surfaceContainer:@sud_system_surface_container_dark</item>
+    </string-array>
+</resources>

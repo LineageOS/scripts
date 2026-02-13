@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- 38% Grey800 -->
+    <color name="list_item_selected_background_color">@android:color/system_accent1_900</color>
+</resources>

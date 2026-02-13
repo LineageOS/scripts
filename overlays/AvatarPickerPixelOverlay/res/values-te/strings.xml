@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel అవతార్ సెలెక్టర్</string>
+
+    <string name="desc_ProfileIcons1">లేత ఆకుపచ్చ రంగు బ్యాక్‌గ్రౌండ్‌లో రెండు ముదురు ఆకుపచ్చ సెమీ సర్కిల్‌‌లతో ఉల్లాసంగా కనిపించే ఫోటో</string>
+
+    <string name="desc_ProfileIcons10">పసుపు రంగు బ్యాక్‌గ్రౌండ్‌లో ఉల్లాసంగా కనిపించే నారింజ రంగు సీతాకోకచిలుక ఉన్న ఫోటో</string>
+
+    <string name="desc_ProfileIcons11">ముదురు బూడిద రంగు బ్యాక్‌గ్రౌండ్‌లో గుండ్రపు అంచులతో నల్లటి ముక్కు ఆకారం</string>
+
+    <string name="desc_ProfileIcons12">లేత బూడిద రంగు బ్యాక్‌గ్రౌండ్‌లో గుండ్రపు అంచులతో నలుపు రంగు క్లోవర్ ఆకారం</string>
+
+    <string name="desc_ProfileIcons13">ముదురు ఊదా రంగు బ్యాక్‌గ్రౌండ్‌లో లేత ఊదా రంగు విగ్లీ సర్కిల్</string>
+
+    <string name="desc_ProfileIcons14">నారింజ రంగు బ్యాక్‌గ్రౌండ్‌లో గుండ్రపు అంచులతో లేత నీలం రంగు క్లోవర్ ఆకారం</string>
+
+    <string name="desc_ProfileIcons15">ముదురు ఆకుపచ్చ బ్యాక్‌గ్రౌండ్‌లో గుండ్రపు అంచులతో లేత ఆకుపచ్చ హెక్సగాన్</string>
+
+    <string name="desc_ProfileIcons16">లేత బూడిద రంగు బ్యాక్‌గ్రౌండ్‌లో గుండ్రపు అంచులతో నలుపు డైమండ్ ఆకారం</string>
+
+    <string name="desc_ProfileIcons17">పసుపు రంగు బ్యాక్‌గ్రౌండ్‌లో ఉల్లాసంగా కనిపించే నారింజ రంగు ఆకు ఫోటో</string>
+
+    <string name="desc_ProfileIcons18">పీచు రంగు బ్యాక్‌గ్రౌండ్‌లో శని గ్రహం ఉన్న ఉల్లాసభరితమైన ఫోటో</string>
+
+    <string name="desc_ProfileIcons19">నలుపు బ్యాక్‌గ్రౌండ్‌లో ఖగోళ నమూనాలో తెలుపు, అలాగే నారింజ రంగు నక్షత్రాలు, అలాగే సర్కిల్‌‌లు ఉన్న ఉల్లాసభరితమైన ఫోటో</string>
+
+    <string name="desc_ProfileIcons2">నలుపు, అలాగే తెలుపు రంగులో ఇంటర్‌సెక్ట్ అయిన సిలిండర్ల అబ్‌స్ట్రాక్ట్ ఫోటో</string>
+
+    <string name="desc_ProfileIcons20">పసుపు రంగు బ్యాక్‌గ్రౌండ్‌లో నీలం రంగు చెవులు, అలాగే తెల్లటి ముఖం గల కుక్క ఉన్న ఉల్లాసభరితమైన ఫోటో</string>
+
+    <string name="desc_ProfileIcons21">ఊదారంగు బ్యాక్‌గ్రౌండ్‌లో ఆలివ్ కొమ్మతో ఎగురుతున్న తెల్లటి పావురం ఉన్న ఉల్లాసభరితమైన ఫోటో</string>
+
+    <string name="desc_ProfileIcons22">నీలం రంగు బ్యాక్‌గ్రౌండ్‌లో నల్లటి చెవులు, అలాగే తెల్లటి ముఖం గల కుక్క ఉన్న ఉల్లాసభరితమైన ఫోటో</string>
+
+    <string name="desc_ProfileIcons23">క్రీమ్ బ్యాక్‌గ్రౌండ్‌లో ఆకుపచ్చ ఆకులతో గులాబీ రంగు పువ్వు ఉన్న ఉల్లాసభరితమైన ఫోటో</string>
+
+    <string name="desc_ProfileIcons24">ఎరుపు రంగు బ్యాక్‌గ్రౌండ్‌లో ఆరు నీలి రంగు సిలిండర్‌‌లు ఉన్న అబ్‌స్ట్రాక్ట్ ఫోటో</string>
+
+    <string name="desc_ProfileIcons3">ముదురు నీలం రంగు బ్యాక్‌గ్రౌండ్‌లో లేత నీలం రంగు క్లోవర్ ఆకారం ఉన్న అబ్‌స్ట్రాక్ట్ ఫోటో</string>
+
+    <string name="desc_ProfileIcons4">రెండు గులాబీ రంగు, త్రీ-డైమెన్షనల్ ట్రయాంగిల్స్ ఉన్న అబ్‌స్ట్రాక్ట్ ఫోటో</string>
+
+    <string name="desc_ProfileIcons5">పసుపు రంగు బ్యాక్‌గ్రౌండ్‌లో నీలి ఆకుపచ్చ రంగు లేయర్‌ల అబ్‌స్ట్రాక్ట్ ఫోటో</string>
+
+    <string name="desc_ProfileIcons6">ఆకుపచ్చ బ్యాక్‌గ్రౌండ్‌లో ఊదా రంగు రాళ్ళు ఉన్న అబ్‌స్ట్రాక్ట్ ఫోటో</string>
+
+    <string name="desc_ProfileIcons7">నారింజ బ్యాక్‌గ్రౌండ్‌లో ఐదు తెలుపు, జియోమెట్రిక్ పువ్వుల ఉల్లాసభరితమైన ఫోటో</string>
+
+    <string name="desc_ProfileIcons8">పింక్ బ్యాక్‌గ్రౌండ్‌లో మూడు బ్లూబెర్రీస్ ఉన్న ఉల్లాసభరితమైన ఫోటో</string>
+
+    <string name="desc_ProfileIcons9">ఆకుపచ్చ బ్యాక్‌గ్రౌండ్‌లో నల్ల ఆకుతో నిమ్మకాయ ఉన్న ఉల్లాసభరితమైన ఫోటో</string>
+</resources>

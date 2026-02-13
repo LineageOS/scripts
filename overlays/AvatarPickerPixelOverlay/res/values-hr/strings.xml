@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel alat za odabir avatara</string>
+
+    <string name="desc_ProfileIcons1">Razigrana ilustracija dva tamnozelena polukruga na svijetlozelenoj pozadini</string>
+
+    <string name="desc_ProfileIcons10">Razigrana ilustracija narančastog leptira na žutoj pozadini</string>
+
+    <string name="desc_ProfileIcons11">Crni oblik nosa sa zaobljenim rubovima na tamnosivoj pozadini</string>
+
+    <string name="desc_ProfileIcons12">Oblik crne djeteline sa zaobljenim rubovima na svijetlosivoj pozadini</string>
+
+    <string name="desc_ProfileIcons13">svijetloljubičasti vijugavi krug na tamnoljubičastoj pozadini</string>
+
+    <string name="desc_ProfileIcons14">svijetloplavi oblik djeteline sa zaobljenim rubovima na narančastoj pozadini</string>
+
+    <string name="desc_ProfileIcons15">svijetlozeleni šesterokut sa zaobljenim rubovima na tamnozelenoj pozadini</string>
+
+    <string name="desc_ProfileIcons16">Crni dijamantni oblik sa zaobljenim rubovima na svijetlosivoj pozadini</string>
+
+    <string name="desc_ProfileIcons17">Razigrana ilustracija narančastog lista na žutoj pozadini</string>
+
+    <string name="desc_ProfileIcons18">Razigrana ilustracija planeta Saturna na pozadini boje breskve</string>
+
+    <string name="desc_ProfileIcons19">Razigrana ilustracija bijelih i narančastih zvijezda i krugova na nebeskom obrascu i na crnoj pozadini</string>
+
+    <string name="desc_ProfileIcons2">Apstraktna ilustracija crnih i bijelih cilindara koji se presijecaju</string>
+
+    <string name="desc_ProfileIcons20">Razigrana ilustracija psa s plavim ušima i bijelim licem na žutoj pozadini</string>
+
+    <string name="desc_ProfileIcons21">Razigrana ilustracija bijele golubice koja leti s maslinovom grančicom na ljubičastoj pozadini</string>
+
+    <string name="desc_ProfileIcons22">Razigrana ilustracija psa s crnim ušima i bijelim licem na plavoj pozadini</string>
+
+    <string name="desc_ProfileIcons23">Razigrana ilustracija ružičastog cvijeta sa zelenim listovima na pozadini krem boje</string>
+
+    <string name="desc_ProfileIcons24">Apstraktna ilustracija šest plavih cilindara na crvenoj pozadini</string>
+
+    <string name="desc_ProfileIcons3">Apstraktna ilustracija svijetloplavog oblika djeteline na tamnoplavoj pozadini</string>
+
+    <string name="desc_ProfileIcons4">Apstraktna ilustracija dva ružičasta, trodimenzionalna trokuta</string>
+
+    <string name="desc_ProfileIcons5">Apstraktna ilustracija plavozelenih slojeva na žutoj pozadini</string>
+
+    <string name="desc_ProfileIcons6">Apstraktna ilustracija ljubičastog kamenja na zelenoj pozadini</string>
+
+    <string name="desc_ProfileIcons7">Razigrana ilustracija pet bijelih geometrijskih cvjetova na narančastoj pozadini</string>
+
+    <string name="desc_ProfileIcons8">Razigrana ilustracija tri borovnice na ružičastoj pozadini</string>
+
+    <string name="desc_ProfileIcons9">Razigrana ilustracija limuna s crnim listom na zelenom pozadini</string>
+</resources>

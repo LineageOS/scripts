@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel-avatarválasztó</string>
+
+    <string name="desc_ProfileIcons1">Játékos illusztráció világoszöld háttéren lévő két sötétzöld félkörről</string>
+
+    <string name="desc_ProfileIcons10">Játékos illusztráció sárga háttéren lévő narancssárga pillangóról</string>
+
+    <string name="desc_ProfileIcons11">Fekete orr alakzat lekerekített élekkel sötétszürke háttéren</string>
+
+    <string name="desc_ProfileIcons12">Fekete lóhere alakzat lekerekített élekkel világosszürke háttéren</string>
+
+    <string name="desc_ProfileIcons13">Világoslila hullámos kör sötétlila háttéren</string>
+
+    <string name="desc_ProfileIcons14">Világoskék lóhere alakzat lekerekített élekkel narancssárga háttéren</string>
+
+    <string name="desc_ProfileIcons15">Világoszöld hatszög lekerekített élekkel sötétzöld háttéren</string>
+
+    <string name="desc_ProfileIcons16">Fekete gyémánt alakzat lekerekített élekkel világosszürke háttéren</string>
+
+    <string name="desc_ProfileIcons17">Játékos illusztráció sárga háttéren lévő narancssárga levélről</string>
+
+    <string name="desc_ProfileIcons18">Játékos illusztráció a Szaturnusz bolygóról barackszínű háttéren</string>
+
+    <string name="desc_ProfileIcons19">Játékos illusztráció fekete háttéren lévő fehér és narancssárga csillagokról és körökről, amelyek égboltmintázatot alkotnak</string>
+
+    <string name="desc_ProfileIcons2">Absztrakt illusztráció egymást metsző fekete és fehér hengerekről</string>
+
+    <string name="desc_ProfileIcons20">Játékos illusztráció egy sárga háttéren lévő, kék fülű és fehér arcú kutyáról</string>
+
+    <string name="desc_ProfileIcons21">Játékos illusztráció egy lila háttéren, olajággal a csőrében repülő fehér galambról</string>
+
+    <string name="desc_ProfileIcons22">Játékos illusztráció egy kék háttéren lévő, fekete fülű és fehér arcú kutyáról</string>
+
+    <string name="desc_ProfileIcons23">Játékos illusztráció egy krémszínű háttéren lévő, zöld leveles rózsaszín virágról</string>
+
+    <string name="desc_ProfileIcons24">Absztrakt illusztráció piros háttéren lévő hat kék hengerről</string>
+
+    <string name="desc_ProfileIcons3">Absztrakt illusztráció sötétkék háttéren lévő világoskék lóhere alakzatról</string>
+
+    <string name="desc_ProfileIcons4">Absztrakt illusztráció két rózsaszín, háromdimenziós háromszögről</string>
+
+    <string name="desc_ProfileIcons5">Absztrakt illusztráció sárga háttéren lévő pávakék rétegekről</string>
+
+    <string name="desc_ProfileIcons6">Absztrakt illusztráció zöld háttéren lévő lila sziklákról</string>
+
+    <string name="desc_ProfileIcons7">Játékos illusztráció narancssárga háttéren lévő, öt fehér, geometrikus virágról</string>
+
+    <string name="desc_ProfileIcons8">Játékos illusztráció rózsaszín háttéren lévő három áfonyáról</string>
+
+    <string name="desc_ProfileIcons9">Játékos illusztráció zöld háttéren lévő citromról fekete levéllel</string>
+</resources>

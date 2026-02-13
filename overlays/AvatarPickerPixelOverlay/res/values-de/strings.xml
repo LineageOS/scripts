@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel-Avatarauswahl</string>
+
+    <string name="desc_ProfileIcons1">Verspielte Illustration von zwei dunkelgrünen Halbkreisen auf einem hellgrünen Hintergrund</string>
+
+    <string name="desc_ProfileIcons10">Verspielte Illustration eines orangefarbenen Schmetterlings auf einem gelben Hintergrund</string>
+
+    <string name="desc_ProfileIcons11">Schwarze Nasenform mit runden Ecken auf einem dunkelgrauen Hintergrund</string>
+
+    <string name="desc_ProfileIcons12">Schwarze Kleeblattform mit runden Ecken auf einem hellgrauen Hintergrund</string>
+
+    <string name="desc_ProfileIcons13">Helllila gewellter Kreis auf einem dunkellila Hintergrund</string>
+
+    <string name="desc_ProfileIcons14">Hellblaue Kleeblattform mit runden Ecken auf einem orangefarbenen Hintergrund</string>
+
+    <string name="desc_ProfileIcons15">Hellgrünes Sechseck mit runden Ecken auf einem dunkelgrünen Hintergrund</string>
+
+    <string name="desc_ProfileIcons16">Schwarze Rautenform mit runden Ecken auf einem hellgrauen Hintergrund</string>
+
+    <string name="desc_ProfileIcons17">Verspielte Illustration eines orangefarbenen Blattes auf einem gelben Hintergrund</string>
+
+    <string name="desc_ProfileIcons18">Verspielte Illustration des Planeten Saturn auf einem pfirsichfarbenen Hintergrund</string>
+
+    <string name="desc_ProfileIcons19">Verspielte Illustration mit weißen und orangefarbenen Sternen und Kreisen mit einem Himmelsmuster auf einem schwarzen Hintergrund</string>
+
+    <string name="desc_ProfileIcons2">Abstrakte Illustration schwarzer und weißer Zylinder, die sich überschneiden</string>
+
+    <string name="desc_ProfileIcons20">Verspielte Illustration eines Hundes mit blauen Ohren und einem weißen Gesicht auf einem gelben Hintergrund</string>
+
+    <string name="desc_ProfileIcons21">Verspielte Illustration einer fliegenden weißen Taube mit einem Olivenzweig auf einem lila Hintergrund</string>
+
+    <string name="desc_ProfileIcons22">Verspielte Illustration eines Hundes mit schwarzen Ohren und einem weißen Gesicht auf einem blauen Hintergrund</string>
+
+    <string name="desc_ProfileIcons23">Verspielte Illustration einer rosafarbenen Blume mit grünen Blättern auf einem cremefarbenen Hintergrund</string>
+
+    <string name="desc_ProfileIcons24">Abstrakte Illustration von sechs blauen Zylindern auf einem roten Hintergrund</string>
+
+    <string name="desc_ProfileIcons3">Abstrakte Illustration einer hellblauen Kleeblattform auf einem dunkelblauen Hintergrund</string>
+
+    <string name="desc_ProfileIcons4">Abstrakte Illustration von zwei rosafarbenen, dreidimensionalen Dreiecken</string>
+
+    <string name="desc_ProfileIcons5">Abstrakte Illustration blaugrüner Ebenen auf einem gelben Hintergrund</string>
+
+    <string name="desc_ProfileIcons6">Abstrakte Illustration von lila Felsen auf einem grünen Hintergrund</string>
+
+    <string name="desc_ProfileIcons7">Verspielte Illustration von fünf weißen, geometrischen Blumen auf einem orangefarbenen Hintergrund</string>
+
+    <string name="desc_ProfileIcons8">Verspielte Illustration von drei Heidelbeeren auf einem rosafarbenen Hintergrund</string>
+
+    <string name="desc_ProfileIcons9">Verspielte Illustration einer Zitrone mit einem schwarzen Blatt auf einem grünen Hintergrund</string>
+</resources>

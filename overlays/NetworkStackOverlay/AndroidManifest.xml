@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.android.networkstack.overlay">
+    <overlay android:targetPackage="com.android.networkstack"
+             android:targetName="NetworkStackConfig"
+             android:isStatic="true" />
+</manifest>

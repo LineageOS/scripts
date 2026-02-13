@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Name for an app setting that lets the user authenticate for that app using biometrics (e.g. fingerprint or face). [CHAR LIMIT=30] -->
+    <string name="biometric_app_setting_name">ముఖం, వేలిముద్రను ఉపయోగించండి</string>
+
+    <!-- Name for an app setting that lets the user authenticate for that app using biometrics (e.g. fingerprint or face) or their screen lock credential (i.e. PIN, pattern, or password). [CHAR LIMIT=70] -->
+    <string name="biometric_or_screen_lock_app_setting_name">ముఖం, వేలిముద్ర లేదా స్క్రీన్ లాక్‌ను ఉపయోగించండి</string>
+
+    <!-- Subtitle shown on the system-provided biometric dialog, asking the user to authenticate with a biometric (e.g. fingerprint or face). [CHAR LIMIT=70] -->
+    <string name="biometric_dialog_default_subtitle">కొనసాగించడానికి మీ ముఖం లేదా వేలిముద్రను ఉపయోగించండి</string>
+
+    <!-- Subtitle shown on the system-provided biometric dialog, asking the user to authenticate with a biometric (e.g. fingerprint or face) or their screen lock credential (i.e. PIN, pattern, or password). [CHAR LIMIT=90] -->
+    <string name="biometric_or_screen_lock_dialog_default_subtitle">కొనసాగించడానికి మీ ముఖం, వేలిముద్ర లేదా స్క్రీన్ లాక్‌ను ఉపయోగించండి</string>
+
+    <!-- Notification name shown when the system requires the user to re-enroll their face. [CHAR LIMIT=NONE] -->
+    <string name="face_recalibrate_notification_name">ఫేస్ అన్‌లాక్</string>
+
+    <!-- Notification title shown when the system requires the user to re-enroll their face. [CHAR LIMIT=NONE] -->
+    <string name="face_recalibrate_notification_title">దయచేసి మీ ముఖాన్ని మళ్లీ నమోదు చేయండి</string>
+
+    <!-- Notification content shown when the system requires the user to re-enroll their face. [CHAR LIMIT=NONE] -->
+    <string name="face_recalibrate_notification_content">మీరు తిరిగి ఎన్‌రోల్ చేసే దాకా ఫేస్ అన్‌లాక్ పని చేయకపోవచ్చు</string>
+
+    <!-- Array containing custom messages shown during face acquisition from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="face_acquired_vendor"/>
+
+    <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="face_error_vendor">
+        <item>సర్టిఫికెట్ గడువు ముగిసింది</item>
+        <item>సెన్సార్ తాత్కాలికంగా డిజేబుల్ చేయబడింది</item>
+        <item>క్రమాంకనం ఎర్రర్</item>
+        <item>ఫేస్ అన్‌లాక్ అందుబాటులో లేదు. ఫోన్ చాలా వేడిగా ఉంది.</item>
+        <item>ఫేస్ అన్‌లాక్‌ను మళ్లీ సెటప్ చేయాలి</item>
+    </string-array>
+
+    <!-- Title for the harmful app warning dialog. [CHAR LIMIT=40] -->
+    <string name="harmful_app_warning_title">Play Protect హెచ్చరిక</string>
+</resources>

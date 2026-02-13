@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- This setting is deprecated, please use
+         com.android.networkstack.tethering.R.array.config_mobile_hotspot_provision_app instead. -->
+    <string-array name="config_mobile_hotspot_provision_app">
+        <item>com.google.android.tetheringentitlement</item>
+        <item>com.google.android.tetheringentitlement.CarrierEntitlementActivity</item>
+    </string-array>
+
+    <!-- This setting is deprecated, please use
+         com.android.networkstack.tethering.R.string.config_mobile_hotspot_provision_app_no_ui
+         instead. -->
+    <string name="config_mobile_hotspot_provision_app_no_ui">com.google.android.carrierentitlement.SILENT_ENTITLEMENT_CHECK</string>
+
+    <!-- This setting is deprecated, please use
+         com.android.networkstack.tethering.R.string.config_mobile_hotspot_provision_response
+         instead. -->
+    <string name="config_mobile_hotspot_provision_response">com.google.android.carrierentitlement.SILENT_ENTITLEMENT_CHECK_RESULT</string>
+
+    <!-- If Voice Radio Technology is RIL_RADIO_TECHNOLOGY_LTE:14 or
+         RIL_RADIO_TECHNOLOGY_UNKNOWN:0 this is the value that should be used instead.
+         A configuration value of RIL_RADIO_TECHNOLOGY_UNKNOWN:0 means
+         there is no replacement value and that the default assumption
+         for phone type (GSM) should be used. -->
+    <integer name="config_volte_replacement_rat">3</integer>
+
+    <!-- Configure mobile tcp buffer sizes in the form:
+         rat-name:rmem_min,rmem_def,rmem_max,wmem_min,wmem_def,wmem_max
+         If no value is found for the rat-name in use, the system default will be applied.
+
+         This is deprecated. Please use config_mobile_tcp_buffers for rat-based TCP buffers sizes or
+         config_tcp_buffers for rat-independent TCP buffer sizes.
+    -->
+    <string-array name="config_mobile_tcp_buffers">
+        <item>umts:131072,262144,1452032,4096,16384,399360</item>
+        <item>hspa:131072,262144,1452032,4096,16384,399360</item>
+        <item>hsdpa:131072,262144,1452032,4096,16384,399360</item>
+        <item>hsupa:131072,262144,1452032,4096,16384,399360</item>
+        <item>hspap:131072,262144,1452032,4096,16384,399360</item>
+        <item>edge:4093,26280,35040,4096,16384,35040</item>
+        <item>gprs:4092,8760,11680,4096,8760,11680</item>
+        <item>evdo:4094,87380,262144,4096,16384,262144</item>
+        <item>lte:524288,1048576,8388608,262144,524288,4194304</item>
+    </string-array>
+</resources>

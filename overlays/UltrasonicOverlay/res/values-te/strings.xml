@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"మీ వద్ద స్క్రీన్ గార్డ్ ఉంటే, అత్యుత్తమ పనితీరు కోసం మీ వేలిముద్రను సెటప్ చేయడానికి ముందే దాన్ని సెట్ చేయించుకోండి.
+
+అత్యుత్తమ ఫలితాల కోసం, Google కోసం తయారు చేసిన, సర్టిఫైడ్ స్క్రీన్ గార్డ్‌ను ఉపయోగించండి. ఇతర స్క్రీన్ గార్డ్‌లతో, మీ వేలిముద్ర పని చేయకపోవచ్చు."</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">మీ వేలిని వంచి, కొనతో తాకండి</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">వేలిని తిప్పి, ఎడమ అంచుతో తాకండి</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">మళ్లీ తిప్పి, కుడి అంచుతో తాకండి</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">సెన్సార్‌కు సమీపంలో ఉన్న మీ స్క్రీన్‌ను క్లీన్ చేయండి</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">మీ స్క్రీన్‌ను శుభ్రం చేయడం వలన గీతలు, మచ్చలు, లేదా మరకలు ఏవైనా ఉంటే, తొలగిపోతాయి. ఇది స్పష్టమైన వేలిముద్ర ఇమేజ్‌లను క్యాప్చర్ చేయడంలో సహాయపడుతుంది.</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">కొనసాగించడానికి ముందు మీ స్క్రీన్‌ను క్లీన్ చేయండి</string>
+</resources>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Dùng khuôn mặt để mở khóa điện thoại</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Dùng khuôn mặt để mở khóa điện thoại.
+
+Lưu ý:
+Mỗi lần bạn chỉ có thể thiết lập một khuôn mặt. Để thêm một khuôn mặt khác, hãy xóa khuôn mặt hiện tại.
+
+Việc nhìn vào điện thoại có thể khiến điện thoại mở khóa ngay cả khi bạn không định làm vậy.
+
+Người khác có thể mở khóa điện thoại của bạn khi họ giơ điện thoại trước mặt bạn.
+
+Người có diện mạo giống bạn, chẳng hạn như anh chị em ruột giống hệt bạn, có thể mở khóa điện thoại của bạn."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Dùng khuôn mặt để mở khóa điện thoại.
+
+Lưu ý:
+Mỗi lần bạn chỉ có thể thiết lập một khuôn mặt. Để thêm một khuôn mặt khác, hãy xóa khuôn mặt hiện tại.
+
+Việc nhìn vào điện thoại có thể khiến điện thoại mở khóa ngay cả khi bạn không định làm vậy.
+
+Người khác có thể mở khóa điện thoại của bạn khi họ giơ điện thoại trước mặt bạn, ngay cả khi bạn đang nhắm mắt.
+
+Người có diện mạo giống bạn, chẳng hạn như anh chị em ruột giống hệt bạn, có thể mở khóa điện thoại của bạn."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Cách thiết lập tính năng Mở khóa bằng khuôn mặt</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">Trên màn hình tiếp theo, hãy cầm điện thoại ngang tầm mắt</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Nếu thường đeo kính, bạn có thể đeo kính khi thiết lập</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Xóa mẫu khuôn mặt hiện tại của bạn để thiết lập lại tính năng Mở khóa bằng khuôn mặt.
+
+Mẫu khuôn mặt của bạn sẽ bị xóa vĩnh viễn theo cách an toàn.
+
+Sau khi xóa, bạn sẽ cần nhập mã PIN, hình mở khóa hoặc mật khẩu để mở khóa điện thoại."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Xóa mẫu khuôn mặt hiện tại của bạn để thiết lập lại tính năng Mở khóa bằng khuôn mặt.
+
+Mẫu khuôn mặt của bạn sẽ bị xóa vĩnh viễn theo cách an toàn.
+
+Sau khi xóa, bạn sẽ cần nhập vân tay, mã PIN, hình mở khóa hoặc mật khẩu để mở khóa điện thoại."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">Để mở khóa điện thoại, bạn phải mở mắt. Để có kết quả tốt nhất, hãy tháo kính râm khi mở khóa điện thoại.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Giờ bạn có thể cầm điện thoại lên và sử dụng khuôn mặt để mở khóa</string>
+</resources>

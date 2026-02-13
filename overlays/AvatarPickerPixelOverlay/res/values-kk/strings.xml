@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel аватар таңдау құралы</string>
+
+    <string name="desc_ProfileIcons1">Қою жасыл екі жарты шеңбердің ашық жасыл фондағы көңілді кескіні</string>
+
+    <string name="desc_ProfileIcons10">Қызғылт сары көбелектің сары фондағы көңілді кескіні</string>
+
+    <string name="desc_ProfileIcons11">Күңгірт сұр фондағы жұмыр жиекті қара мұрын пішіні</string>
+
+    <string name="desc_ProfileIcons12">Ашық сұр фондағы жұмыр жиекті қара клевер пішіні</string>
+
+    <string name="desc_ProfileIcons13">Қою күлгін фондағы ашық күлгін ирек шеңбер</string>
+
+    <string name="desc_ProfileIcons14">Қызғылт сары фондағы жұмыр жиекті ашық көк клевер пішіні</string>
+
+    <string name="desc_ProfileIcons15">Қою жасыл фондағы жұмыр жиекті ашық жасыл алтыбұрыш</string>
+
+    <string name="desc_ProfileIcons16">Ашық сұр фондағы жұмыр жиекті қара гауһар пішіні</string>
+
+    <string name="desc_ProfileIcons17">Қызғылт сары жапырақтың сары фондағы көңілді кескіні</string>
+
+    <string name="desc_ProfileIcons18">Шабдалы түсті фондағы Сатурн планетасының көңілді кескіні</string>
+
+    <string name="desc_ProfileIcons19">Қара фондағы аспанға салынған ақ және қызғылт сары жұлдыздар мен шеңберлердің көңілді кескіні</string>
+
+    <string name="desc_ProfileIcons2">Ақ және қара айқаспалы цилиндрлердің абстрактілі кескіні</string>
+
+    <string name="desc_ProfileIcons20">Көк құлақты, ақ жүзді иттің сары фондағы көңілді кескіні</string>
+
+    <string name="desc_ProfileIcons21">Зәйтүн бұтағын ұстап ұшып бара жатқан ақ көгершіннің күлгін фондағы көңілді кескіні</string>
+
+    <string name="desc_ProfileIcons22">Қара құлақты, ақ жүзді иттің көк фондағы көңілді кескіні</string>
+
+    <string name="desc_ProfileIcons23">Жасыл жапырақты алқызыл гүлдің қоңырқай ақ түсті фондағы көңілді кескіні</string>
+
+    <string name="desc_ProfileIcons24">Алты көк цилиндрдің қызыл фондағы абстрактілі кескіні</string>
+
+    <string name="desc_ProfileIcons3">Ашық көк клевер пішінінің қою көк фондағы абстрактілі кескіні</string>
+
+    <string name="desc_ProfileIcons4">Үш өлшемді қос алқызыл үшбұрыштың абстрактілі кескіні</string>
+
+    <string name="desc_ProfileIcons5">Көк-жасыл қабаттардың сары фондағы абстрактілі кескіні</string>
+
+    <string name="desc_ProfileIcons6">Күлгін тастардың жасыл фондағы абстрактілі кескіні</string>
+
+    <string name="desc_ProfileIcons7">Геометриялық пішінді бес ақ гүлдің қызғылт сары фондағы көңілді кескіні</string>
+
+    <string name="desc_ProfileIcons8">Үш қаражидектің алқызыл фондағы көңілді кескіні</string>
+
+    <string name="desc_ProfileIcons9">Қара жапырақты лимонның жасыл фондағы көңілді кескіні</string>
+</resources>

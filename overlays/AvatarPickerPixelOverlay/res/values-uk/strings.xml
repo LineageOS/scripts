@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Вибір аватара Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">Весела ілюстрація: два темно-зелені півкола на світло-зеленому фоні</string>
+
+    <string name="desc_ProfileIcons10">Весела ілюстрація: помаранчевий метелик на жовтому фоні</string>
+
+    <string name="desc_ProfileIcons11">Чорний контур носа із заокругленими краями на темно-сірому фоні</string>
+
+    <string name="desc_ProfileIcons12">Чорний контур конюшини із заокругленими краями на світло-сірому фоні</string>
+
+    <string name="desc_ProfileIcons13">Світло-фіолетове хвилясте коло на темно-фіолетовому фоні</string>
+
+    <string name="desc_ProfileIcons14">Блакитний контур конюшини із заокругленими краями на помаранчевому фоні</string>
+
+    <string name="desc_ProfileIcons15">Світло-зелений шестикутник із заокругленими кутами на темно-зеленому фоні</string>
+
+    <string name="desc_ProfileIcons16">Чорний контур ромба із заокругленими краями на світло-сірому фоні</string>
+
+    <string name="desc_ProfileIcons17">Весела ілюстрація: помаранчевий листок на жовтому фоні</string>
+
+    <string name="desc_ProfileIcons18">Весела ілюстрація: планета Сатурн на персиковому фоні</string>
+
+    <string name="desc_ProfileIcons19">Весела ілюстрація: білі й помаранчеві зірки і кола, що утворюють небесний візерунок, на чорному фоні</string>
+
+    <string name="desc_ProfileIcons2">Абстрактна ілюстрація: чорно-білі циліндри, що перетинаються</string>
+
+    <string name="desc_ProfileIcons20">Весела ілюстрація: собака з блакитними вухами й білою мордою на жовтому фоні</string>
+
+    <string name="desc_ProfileIcons21">Весела ілюстрація: білий голуб, що летить з оливковою гілкою, на фіолетовому фоні</string>
+
+    <string name="desc_ProfileIcons22">Весела ілюстрація: собака з чорними вухами й білою мордою на синьому фоні</string>
+
+    <string name="desc_ProfileIcons23">Весела ілюстрація: рожева квітка із зеленим листям на кремовому фоні</string>
+
+    <string name="desc_ProfileIcons24">Абстрактна ілюстрація: шість синіх циліндрів на червоному фоні</string>
+
+    <string name="desc_ProfileIcons3">Абстрактна ілюстрація: світло-синій контур конюшини на темно-синьому фоні</string>
+
+    <string name="desc_ProfileIcons4">Абстрактна ілюстрація: два рожеві об’ємні трикутники</string>
+
+    <string name="desc_ProfileIcons5">Абстрактна ілюстрація: бірюзові шари на жовтому фоні</string>
+
+    <string name="desc_ProfileIcons6">Абстрактна ілюстрація: фіолетове каміння на зеленому фоні</string>
+
+    <string name="desc_ProfileIcons7">Весела ілюстрація: п’ять білих квітів геометричної форми на помаранчевому фоні</string>
+
+    <string name="desc_ProfileIcons8">Весела ілюстрація: три ягоди чорниці на рожевому фоні</string>
+
+    <string name="desc_ProfileIcons9">Весела ілюстрація: лимон із чорним листком на зеленому фоні</string>
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- [CHAR_LIMIT=NONE] [BACKUP_MESSAGE_ID: 5444908404021316250] Battery saver: Feature description, with a "learn more" link. -->
+    <string name="battery_saver_description_with_learn_more">"Батареяны көбүрөөк убакытка жеткирүү үчүн Батареяны үнөмдөгүч режиминде:
+
+• Караңгы тема күйгүзүлөт
+• Фондогу аракеттер, айрым визуалдык эффекттер жана \"Окей, Google\" сыяктуу башка функциялар өчүрүлөт же чектелет
+• Тармакка туташууларыңыз оптималдаштырылат
+
+"<annotation id="url">Кеңири маалымат</annotation></string>
+</resources>

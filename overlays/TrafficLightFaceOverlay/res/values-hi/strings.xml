@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">अपने चेहरे से फ़ोन अनलॉक करें</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"फ़ोन अनलॉक करने के लिए, अपने चेहरे का इस्तेमाल करें.
+
+याद रखें:
+फ़ेस अनलॉक की सुविधा के लिए, एक समय में चेहरे का सिर्फ़ एक मॉडल सेट अप किया जा सकता है. दूसरा चेहरा जोड़ने के लिए, चेहरे का मौजूदा मॉडल मिटाएं.
+
+फ़ोन को सामने से देखने पर, आपके न चाहते हुए भी फ़ोन अनलॉक हो सकता है.
+
+आपके फ़ोन को आपके चेहरे के सामने लाकर, कोई भी व्यक्ति उसे अनलॉक कर सकता है.
+
+आपका फ़ोन कोई ऐसा व्यक्ति भी अनलॉक कर सकता है जिसका चेहरा आपसे बहुत मिलता हो, जैसे कि जुड़वा भाई या बहन."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"फ़ोन अनलॉक करने के लिए, अपने चेहरे का इस्तेमाल करें.
+
+याद रखें:
+फ़ेस अनलॉक की सुविधा के लिए, एक समय में आप चेहरे का सिर्फ़ एक ही मॉडल सेट अप कर सकते हैं. दूसरा चेहरा जोड़ने के लिए, चेहरे का मौजूदा मॉडल मिटाएं.
+
+फ़ोन को सामने से देखने पर, आपके न चाहते हुए भी फ़ोन अनलॉक हो सकता है.
+
+आपके फ़ोन को आपके चेहरे के सामने लाकर, कोई भी व्यक्ति उसे अनलॉक कर सकता है, भले ही आपकी आंखें बंद हों.
+
+आपका फ़ोन कोई ऐसा व्यक्ति भी अनलॉक कर सकता है जिसका चेहरा आपसे बहुत मिलता हो, जैसे कि जुड़वा भाई या बहन."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">फ़ेस अनलॉक की सुविधा सेट अप करने का तरीका</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">अगली स्क्रीन पर फ़ोन को अपनी आंखों के ठीक सामने रखें</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">अगर आपको चश्मा लगा है, तो सेटअप के दौरान उसे पहनें</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"फ़ेस अनलॉक की सुविधा को फिर से सेट अप करने के लिए, चेहरे का मौजूदा मॉडल मिटाएं.
+
+आपके चेहरे के मॉडल को सुरक्षित तरीके से हमेशा के लिए मिटा दिया जाएगा.
+
+इसके बाद, फ़ोन अनलॉक करने के लिए, आपको पिन, पैटर्न या पासवर्ड डालने की ज़रूरत होगी."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"फ़ेस अनलॉक की सुविधा को फिर से सेट अप करने के लिए, चेहरे का मौजूदा मॉडल मिटाएं.
+
+आपके चेहरे के मॉडल को सुरक्षित तरीके से हमेशा के लिए मिटा दिया जाएगा.
+
+इसके बाद, फ़ोन अनलॉक करने के लिए, आपको फ़िंगरप्रिंट, पिन, पैटर्न या पासवर्ड डालने की ज़रूरत होगी."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">फ़ाेन अनलॉक करने के लिए, आंखें खुली होनी चाहिए. बेहतर नतीजों के लिए, फ़ोन को अनलॉक करते समय धूप का चश्मा निकाल दें.</string>
+
+    <string name="security_settings_face_enroll_finish_description">अब अपने चेहरे की मदद से फ़ोन को अनलॉक करें</string>
+</resources>

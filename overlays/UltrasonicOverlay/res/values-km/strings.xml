@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"ប្រសិនបើអ្នកមានកញ្ចក់​ការពារ​អេក្រង់ សូមប្រើកញ្ចក់​ការពារ​អេក្រង់របស់អ្នកមុនពេលរៀបចំស្នាមម្រាមដៃរបស់អ្នក ដើម្បីឱ្យមានប្រតិបត្តិការល្អបំផុត។
+
+ដើម្បីទទួលបាន​លទ្ធផល​ល្អបំផុត សូមប្រើកញ្ចក់​ការពារ​អេក្រង់​ដែលបានទទួលស្គាល់​ពី Made for Google។ បើប្រើកញ្ចក់​ការពារ​អេក្រង់ផ្សេងទៀត ស្នាមម្រាមដៃរបស់អ្នកអាចមិនដំណើរការ។"</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">ផ្អៀងម្រាមដៃរបស់អ្នក រួចប៉ះដោយប្រើចុងម្រាម</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">ផ្អៀងម្រាមដៃ រួចប៉ះដោយប្រើគែមខាងឆ្វេង</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">ផ្អៀងម្ដងទៀត រួចប៉ះដោយប្រើគែមខាងស្ដាំ</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">សម្អាតអេក្រង់របស់អ្នក​ដែលនៅជិតសេនស័រ</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">ជូតអេក្រង់របស់អ្នក ដើម្បីសម្អាតស្នាមឆ្នូត ប្រតាក ឬប្រឡាក់។ ការធ្វើបែបនេះជួយថតរូបភាពស្នាមម្រាមដៃកាន់តែច្បាស់។</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">សម្អាតអេក្រង់របស់អ្នក មុនពេលបន្ត</string>
+</resources>

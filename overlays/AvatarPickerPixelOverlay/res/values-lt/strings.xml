@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">„Google Pixel“ pseudoportreto pasirinkimo priemonė</string>
+
+    <string name="desc_ProfileIcons1">Žaisminga dviejų tamsiai žalių puslankių šviesiai žaliame fone iliustracija</string>
+
+    <string name="desc_ProfileIcons10">Žaisminga oranžinio drugelio geltoname fone iliustracija</string>
+
+    <string name="desc_ProfileIcons11">Juoda nosies forma suapvalintais kampais tamsiai pilkame fone</string>
+
+    <string name="desc_ProfileIcons12">Juoda dobilo forma suapvalintais kampais šviesiai pilkame fone</string>
+
+    <string name="desc_ProfileIcons13">Šviesiai violetinis vingiuotas apskritimas tamsiai violetiniame fone</string>
+
+    <string name="desc_ProfileIcons14">Šviesiai mėlyna dobilo forma suapvalintais kampais oranžiniame fone</string>
+
+    <string name="desc_ProfileIcons15">Šviesiai žalias šešiakampis suapvalintais kampais tamsiai žaliame fone</string>
+
+    <string name="desc_ProfileIcons16">Juoda deimanto forma suapvalintais kampais šviesiai pilkame fone</string>
+
+    <string name="desc_ProfileIcons17">Žaisminga oranžinio lapo geltoname fone iliustracija</string>
+
+    <string name="desc_ProfileIcons18">Žaisminga Saturno planetos persiko spalvos fone iliustracija</string>
+
+    <string name="desc_ProfileIcons19">Žaisminga baltų ir oranžinių žvaigždžių ir apskritimų dangaus struktūroje juodame fone iliustracija</string>
+
+    <string name="desc_ProfileIcons2">Abstrakti nespalvotų susikertančių cilindrų iliustracija</string>
+
+    <string name="desc_ProfileIcons20">Žaisminga šuns mėlynomis ausimis ir baltu snukiu geltoname fone iliustracija</string>
+
+    <string name="desc_ProfileIcons21">Žaisminga balto balandžio, skrendančio su alyvos šakele, violetiniame fone iliustracija</string>
+
+    <string name="desc_ProfileIcons22">Žaisminga šuns juodomis ausimis ir baltu snukiu mėlyname fone iliustracija</string>
+
+    <string name="desc_ProfileIcons23">Žaisminga rožinės gėlės su žaliais lapais kreminės spalvos fone iliustracija</string>
+
+    <string name="desc_ProfileIcons24">Abstrakti šešių mėlynų cilindrų raudoname fone iliustracija</string>
+
+    <string name="desc_ProfileIcons3">Abstrakti šviesiai mėlynos dobilo formos tamsiai mėlyname fone iliustracija</string>
+
+    <string name="desc_ProfileIcons4">Abstrakti dviejų rožinių, trimačių trikampių iliustracija</string>
+
+    <string name="desc_ProfileIcons5">Abstrakti žalsvai mėlynų sluoksnių geltoname fone iliustracija</string>
+
+    <string name="desc_ProfileIcons6">Abstrakti violetinių akmenų žaliame fone iliustracija</string>
+
+    <string name="desc_ProfileIcons7">Žaisminga penkių baltų, geometrinių formų gėlių oranžiniame fone iliustracija</string>
+
+    <string name="desc_ProfileIcons8">Žaisminga trijų mėlynių rožiniame fone iliustracija</string>
+
+    <string name="desc_ProfileIcons9">Žaisminga citrinos su juodu lapu žaliame fone iliustracija</string>
+</resources>

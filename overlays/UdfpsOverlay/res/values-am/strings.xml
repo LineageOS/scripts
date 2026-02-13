@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">በጣት አሻራ መክፈቻን ሲጠቀሙ ምስሎች የጣት አሻራዎን ሞዴል ለማዘመን ሥራ ላይ ይውላሉ። የጣት አሻራዎ ምስሎች እና ሞዴል በስልክዎ ላይ ደህንነታቸው በተጠበቀ ሁኔታ የተከማቹ ናቸው፣ እና በጭራሽ ከስልኩ አይወጡም። ሁሉም ሂደቶች በስልክዎ ላይ ደህንነቱ በተጠበቀ ሁኔታ ይከሰታል።</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">በጣት አሻራ መክፈቻን ሲጠቀሙ ምስሎች የጣት አሻራቸውን ሞዴል ለማዘመን ሥራ ላይ ይውላሉ። የልጅዎ የጣት አሻራ ምስሎች እና ሞዴል በስልኩ ድህንነታቸው በተጠበቀ ሁኔታ የተከማቹ ናቸው፣ እና በጭራሽ ከስልኩ አይወጡም። ሁሉም ሂደቶች በስልኩ ላይ ደህንነቱ በተጠበቀ ሁኔታ ይከሰታል።</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">የጣት አሻራዎን ምስሎች እና ሞዴል መሰረዝ ወይም በቅንብሮች ውስጥ በማንኛውም ጊዜ በጣት አሻራ መከፈትን ማጥፋት ይችላሉ። የጣት አሻራ ምስሎች እና ሞዴሎች እስኪሰርዟቸው ድረስ በስልኩ ላይ ይቀመጣሉ።</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">እርስዎ እና ልጅዎ የጣት አሻራቸውን ምስሎች እና ሞዴል መሰረዝ ወይም በቅንብሮች ውስጥ በማንኛውም ጊዜ በጣት አሻራ መክፈቻን ማጥፋት ትችላላችሁ። የጣት አሻራ ምስሎች እና ሞዴሎች እስኪሰረዙ ድረስ በስልኩ ላይ ይቀመጣሉ።</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">በጣት አሻራ መክፈቻ አማካኝነት የእርስዎን የጣት አሻራ በመጠቀም የእርስዎን ስልክ መክፈት ይችላሉ። ለደህንነት ሲባል ይህ አማራጭ የምትኬ የማያ ገፅ መቆለፊያ ያስፈልገዋል።</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">በጣት አሻራ መክፈቻ</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">በጣት አሻራ መክፈት ለሥራ</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">የጣት አሻራ መክፈቻን ያዋቅሩ</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">በጣት አሻራ መክፈትን ይፍቀዱ</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">በጣት አሻራ መክፈቻ እርስዎ መሆንዎን ለማረጋገጥ የጣት አሻራዎ ልዩ ሞዴል ይፈጥራል። በሚቀናበርበት ጊዜ ይህን የጣት አሻራ ሞዴል ለመፍጠር የጣት አሻራዎ ምስሎችን ከተለያዩ ቦታዎች ያነሳሉ።</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">በጣት አሻራ መክፈቻ እነሱ መሆናቸውን ለማረጋገጥ የልጅዎን ጣት አሻራ ልዩ ሞዴል ይፈጥራል። በሚቀናበቀርበት ጊዜ ይህን የጣት አሻራ ሞዴል ለመፍጠር የጣት አሻራቸው ምስሎችን ከተለያዩ ቦታዎች ያነሳሉ።</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">የጥገና አገልግሎት ሰጪን ወይም g.co/pixel/fingerprintunlock ይጎብኙ።</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">በጣት አሻራ መክፈቻን ይጠቀሙ</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">ሥርዓተ ጥለት • የጣት አሻራ</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">ፒን • የጣት አሻራ</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">የይለፍ ቃል • የጣት አሻራ</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">ያለ በጣት አሻራ መክፈቻ ይቀጥሉ</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"ስልክዎ ከጠፋ ወይም ከተሰረቀ ሥርዓተ ጥለት ይጠብቀዋል።
+
+ይህ እንዲሁም በመሣሪያዎ ላይ የተከማቹትን የጣት አሻራ ምስሎች እና ሞዴል ይሰርዛል። በመተግበሪያዎች ውስጥ ማንነትን ለማረጋገጥ የጣት አሻራዎን መጠቀም አይችሉም።"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"ስልክዎ ከጠፋ ወይም ከተሰረቀ ሥርዓተ ጥለት ይጠብቀዋል።
+
+ ይህ በመሣሪያዎ ላይ የተከማቹትን የጣት አሻራ ምስሎች እና ሞዴል ይሰርዛል። የእርስዎ መልክ ሞዴል በቋሚነት እና ደህንነቱ በተጠበቀ ሁኔታ ይሰረዛል። በመተግበሪያዎች ውስጥ ማንነትን ለማረጋገጥ የእርስዎን መልክ ወይም የጣት አሻራ መጠቀም አይችሉም።"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"ስልክዎ ከጠፋ ወይም ከተሰረቀ ፒን ይጠብቀዋል። 
+
+ይህ እንዲሁም በመሣሪያዎ ላይ የተከማቹትን የጣት አሻራ ምስሎች እና ሞዴል ይሰርዛል። በመተግበሪያዎች ውስጥ ማንነትን ለማረጋገጥ የጣት አሻራዎን መጠቀም አይችሉም።"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"ስልክዎ ከጠፋ ወይም ከተሰረቀ ፒን ይጠብቀዋል። 
+
+ይህ እንዲሁም በመሣሪያዎ ላይ የተከማቹትን የጣት አሻራ ምስሎች እና ሞዴል ይሰርዛል። የእርስዎ መልክ ሞዴል በቋሚነት እና ደህንነቱ በተጠበቀ ሁኔታ ይሰረዛል። በመተግበሪያዎች ውስጥ ማንነትን ለማረጋገጥ የእርስዎን መልክ ወይም የጣት አሻራ መጠቀም አይችሉም።"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"ስልክዎ ከጠፋ ወይም ከተሰረቀ የይለፍ ቃል ይጠብቀዋል።
+
+ይህ እንዲሁም በመሣሪያዎ ላይ የተከማቹትን የጣት አሻራ ምስሎች እና ሞዴል ይሰርዛል። በመተግበሪያዎች ውስጥ ማንነትን ለማረጋገጥ የጣት አሻራዎን መጠቀም አይችሉም።"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"ስልክዎ ከጠፋ ወይም ከተሰረቀ የይለፍ ቃል ይጠብቀዋል።
+
+ይህ በመሣሪያዎ ላይ የተከማቹትን የጣት አሻራ ምስሎች እና ሞዴል ይሰርዛል። የእርስዎ መልክ ሞዴል በቋሚነት እና ደህንነቱ በተጠበቀ ሁኔታ ይሰረዛል። በመተግበሪያዎች ውስጥ ማንነትን ለማረጋገጥ የእርስዎን መልክ ወይም የጣት አሻራ መጠቀም አይችሉም።"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"የመሣሪያ ጥበቃ ባህሪዎች ያለ የእርስዎ የማያ ገፅ መቆለፊያ አይሰሩም።
+
+ይህ እንዲሁም በመሣሪያዎ ላይ የተከማቹትን የጣት አሻራ ምስሎች እና ሞዴል ይሰርዛል። በመተግበሪያዎች ውስጥ ማንነትን ለማረጋገጥ የጣት አሻራዎን መጠቀም አይችሉም።"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"የመሣሪያ ጥበቃ ባህሪዎች ያለ የእርስዎ ማያ ገፅ መቆለፊያ አይሰሩም።
+
+ይህ በመሣሪያዎ ላይ የተከማቹትን የጣት አሻራ ምስሎች እና ሞዴል ይሰርዛል። የእርስዎ መልክ ሞዴል በቋሚነት እና ደህንነቱ በተጠበቀ ሁኔታ ይሰረዛል። በመተግበሪያዎች ውስጥ ማንነትን ለማረጋገጥ የእርስዎን መልክ ወይም የጣት አሻራ መጠቀም አይችሉም።"</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">በጣት አሻራ መክፈቻ ስልክዎን ለመክፈት ወይም በመተግበሪያዎች ውስጥ እርስዎ መሆንዎን ለማረጋገጥ ይበልጥ በተጠቀሙበት ቁጥር ያሻሽላል</string>
+</resources>

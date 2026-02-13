@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- [CHAR_LIMIT=NONE] [BACKUP_MESSAGE_ID: 5444908404021316250] Battery saver: Feature description, with a "learn more" link. -->
+    <string name="battery_saver_description_with_learn_more">"Aku tööea pikendamiseks teeb akusäästja järgmist.
+
+• Lülitab sisse tumeda teema.
+• Lülitab välja taustategevused, mõned visuaalsed efektid ja muud funktsioonid (nt „Ok Google”) või piirab neid.
+• Optimeerib teie võrguühendusi.
+
+"<annotation id="url">Lisateave</annotation></string>
+</resources>

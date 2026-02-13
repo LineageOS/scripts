@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel અવતાર પિકર</string>
+
+    <string name="desc_ProfileIcons1">આછા લીલા બૅકગ્રાઉન્ડમાં બે ઘેરા લીલા અર્ધવર્તુળોનું મનોહર ચિત્ર</string>
+
+    <string name="desc_ProfileIcons10">પીળા બૅકગ્રાઉન્ડમાં નારંગી પતંગિયાનું મનોહર ચિત્ર</string>
+
+    <string name="desc_ProfileIcons11">ઘેરા ગ્રે બૅકગ્રાઉન્ડમાં ગોળાકાર ધારવાળો કાળા રંગનો નાકનો આકાર</string>
+
+    <string name="desc_ProfileIcons12">ઘેરા ગ્રે બૅકગ્રાઉન્ડમાં ગોળાકાર ધારવાળો કાળા રંગનો કલોવરનો આકાર</string>
+
+    <string name="desc_ProfileIcons13">ઘેરા જાંબલી બૅકગ્રાઉન્ડમાં આછા જાંબલી રંગનું ગોળાકાર વર્તુળ</string>
+
+    <string name="desc_ProfileIcons14">નારંગી બૅકગ્રાઉન્ડમાં ગોળાકાર ધારવાળો આછા વાદળી રંગનો કલોવરનો આકાર</string>
+
+    <string name="desc_ProfileIcons15">ઘેરા લીલા બૅકગ્રાઉન્ડમાં ગોળાકાર ધારવાળો આછા લીલા રંગનો ષટકોણ</string>
+
+    <string name="desc_ProfileIcons16">આછા ગ્રે બૅકગ્રાઉન્ડમાં ગોળાકાર ધારવાળો કાળા રંગનો ડાયમંડ આકાર</string>
+
+    <string name="desc_ProfileIcons17">પીળા બૅકગ્રાઉન્ડમાં નારંગી પાંદડાનું મનોહર ચિત્ર</string>
+
+    <string name="desc_ProfileIcons18">પીચ બૅકગ્રાઉન્ડમાં શનિ ગ્રહનું મનોહર ચિત્ર</string>
+
+    <string name="desc_ProfileIcons19">કાળા બૅકગ્રાઉન્ડમાં અવકાશીય ભાતમાં સફેદ અને નારંગી રંગના તારા અને વર્તુળોનું મનોહર ચિત્ર</string>
+
+    <string name="desc_ProfileIcons2">એકબીજામાંથી પસાર થતાં કાળા અને સફેદ નળાકારોનું અમૂર્ત ચિત્ર</string>
+
+    <string name="desc_ProfileIcons20">પીળા બૅકગ્રાઉન્ડમાં બ્લૂ કાન અને સફેદ મોં ધરાવતા કુતરાનું મનોહર ચિત્ર</string>
+
+    <string name="desc_ProfileIcons21">જાંબલી બૅકગ્રાઉન્ડમાં ઓલિવની ડાળી સાથે ઉડતા સફેદ કબૂતરનું મનોહર ચિત્ર</string>
+
+    <string name="desc_ProfileIcons22">બ્લૂ બૅકગ્રાઉન્ડમાં કાળા કાન અને સફેદ મોં ધરાવતા કુતરાનું મનોહર ચિત્ર</string>
+
+    <string name="desc_ProfileIcons23">ક્રીમ બૅકગ્રાઉન્ડમાં લીલા પાન સાથેના ગુલાબી ફૂલનું મનોહર ચિત્ર</string>
+
+    <string name="desc_ProfileIcons24">લાલ બૅકગ્રાઉન્ડમાં બ્લૂ રંગના છ નળાકારનું અમૂર્ત ચિત્ર</string>
+
+    <string name="desc_ProfileIcons3">ઘેરા વાદળી બૅકગ્રાઉન્ડમાં આછા વાદળી રંગના કલોવરના આકારનું અમૂર્ત ચિત્ર</string>
+
+    <string name="desc_ProfileIcons4">ગુલાબી રંગના બે ત્રિપરિમાણીય ત્રિકોણનું અમૂર્ત ચિત્ર</string>
+
+    <string name="desc_ProfileIcons5">પીળા બૅકગ્રાઉન્ડમાં મોરપીંછ રંગના સ્તરોનું અમૂર્ત ચિત્ર</string>
+
+    <string name="desc_ProfileIcons6">લીલા બૅકગ્રાઉન્ડમાં જાંબલી પથ્થરોનું અમૂર્ત ચિત્ર</string>
+
+    <string name="desc_ProfileIcons7">નારંગી બૅકગ્રાઉન્ડમાં પાંચ સફેદ ભૌમિતિક આકારના ફૂલોનું મનોહર ચિત્ર</string>
+
+    <string name="desc_ProfileIcons8">ગુલાબી બૅકગ્રાઉન્ડમાં ત્રણ બ્લૂબેરીનું મનોહર ચિત્ર</string>
+
+    <string name="desc_ProfileIcons9">લીલા બૅકગ્રાઉન્ડમાં કાળા પાન સાથેના લીંબુનું મનોહર ચિત્ર</string>
+</resources>

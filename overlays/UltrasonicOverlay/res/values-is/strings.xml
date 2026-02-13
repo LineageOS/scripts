@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"Ef þú ert með skjávörn skaltu setja hana á áður en þú setur upp fingrafarskenni svo að eiginleikinn virki sem best.
+
+Best er að nota skjávörn sem er vottuð sem „Hannað fyrir Google“. Fingrafarskenni virkar hugsanlega ekki með öðrum skjávörnum."</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">Hallaðu fingrinum og snertu með fingurgómnum</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">Snúðu fingrinum og snertu með vinstri brúninni</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">Snúðu aftur og snertu með hægri brúninni</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">Hreinsaðu skjáinn við skynjarann</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">Strjúktu af skjánum til að fjarlægja öll óhreinindi. Þannig er hægt að fá skýrari mynd af fingrafarinu.</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">Þrífðu skjáinn áður en þú heldur áfram</string>
+</resources>

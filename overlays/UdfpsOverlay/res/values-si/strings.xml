@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">ඔබ ඇඟිලි සලකුණු අගුලු හැරීම භාවිත කරන විට, ඔබගේ ඇඟිලි සලකුණු ආකෘතිය යාවත්කාලීන කිරීමට රූප භාවිත කෙරේ. ඔබගේ ඇඟිලි සලකුණු රූප සහ ආකෘතිය ඔබගේ දුරකථනයේ ආරක්ෂිතව ගබඩා කර ඇති අතර කිසි විටක දුරකථනයෙන් ඉවත් නොවේ. සියලු සැකසීම් ඔබගේ දුරකථනයේ ආරක්ෂිතව සිදු වේ.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">ඔවුන් ඇඟිලි සලකුණු අගුලු හැරීම භාවිත කරන විට, ඔවුන්ගේ ඇඟිලි සලකුණු ආකෘතිය යාවත්කාලීන කිරීමට රූප භාවිත කෙරේ. ඔබගේ දරුවාගේ ඇඟිලි සලකුණු රූප සහ ආකෘතිය දුරකථනයේ ආරක්ෂිතව ගබඩා කර ඇති අතර කිසි විටක දුරකථනයෙන් ඉවත් නොවේ. සියලු සැකසීම් දුරකථනයේ ආරක්ෂිතව සිදු වේ.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">ඔබට සැකසීම් තුළ ඕනෑම වේලාවක ඔබගේ ඇඟිලි සලකුණු රූප සහ ආකෘතිය මැකීමට, හෝ ඇඟිලි සලකුණු අගුළු හැරීම ක්‍රියාවිරහිත කිරීමට හැකිය. ඇඟිලි සලකුණු රූප සහ ආකෘති ඔබ මකන තෙක් දුරකථනයේ ගබඩා කර ඇත.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">ඔබට සහ ඔබගේ දරුවාට සැකසීම් තුළ ඕනෑම වේලාවක සිය ඇඟිලි සලකුණු රූප සහ ආකෘතිය මැකීමට, හෝ ඇඟිලි සලකුණු අගුලු හැරීම ක්‍රියාවිරහිත කිරීමට හැකිය. ඇඟිලි සලකුණු රූප සහ ආකෘති ඔබ ඒවා මකන තෙක් දුරකථනයේ ගබඩා කර ඇත.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">ඇඟිලි සලකුණු අගුලු හැරීම සමගින්, ඔබට ඔබගේ ඇඟිලි සලකුණ භාවිතයෙන් ඔබගේ දුරකථනය අගුලු හැරීමට හැකිය. ආරක්ෂාව සඳහා, මෙම විකල්පයට උපස්ථ තිර අගුලක් අවශ්‍යය.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">ඇඟිලි සලකුණු අගුළු හැරීම</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">කාර්යාලය සඳහා ඇඟිලි සලකුණු අගුළු හැරීම</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">ඇඟිලි සලකුණු අගුළු හැරීම පිහිටුවන්න</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">ඇඟිලි සලකුණු අගුලු හැරීමට ඉඩ දෙන්න</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">ඒ ඔබ බව සත්‍යාපනය කිරීමට ඇඟිලි සලකුණු අගුලු හැරීම ඔබගේ ඇඟිලි සලකුණෙහි අනන්‍ය ආකෘතියක් තනයි. පිහිටුවීම අතරතුර මෙම ඇඟිලි සලකුණු ආකෘතිය තැනීම සඳහා, ඔබ විවිධ පිහිටීම්වලින් ඔබගේ ඇඟිලි සලකුණේ රූප ගනු ඇත.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">ඒ ඔවුන් බව සත්‍යාපනය කිරීමට ඇඟිලි සලකුණු අගුලු හැරීම ඔබගේ දරුවාගේ ඇඟිලි සලකුණෙහි අනන්‍ය ආකෘතියක් තනයි. පිහිටුවීම අතරතුර මෙම ඇඟිලි සලකුණු ආකෘතිය තැනීම සඳහා, ඔවුන් විවිධ පිහිටීම්වලින් ඔවුන්ගේ ඇඟිලි සලකුණේ රූප ගනු ඇත.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">අලුත්වැඩියා සැපයුම්කරු හෝ g.co/pixel/fingerprintunlock වෙත පිවිසෙන්න.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">ඇඟිලි සලකුණු අගුලු හැරීම භාවිත කරන්න</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">රටාව • ඇඟිලි සලකුණ</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">PIN • ඇඟිලි සලකුණ</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">මුරපදය • ඇඟිලි සලකුණ</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">ඇඟිලි සලකුණු අගුලු හැරීම නොමැතිව ඉදිරියට යන්න</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"රටාවක් ඔබගේ දුරකථනය නැති වුවහොත් හෝ සොරකම් කර ඇත්නම් එය ආරක්ෂා කරයි.
+
+මෙය ඔබගේ උපාංගයේ ගබඩා කර ඇති ඇඟිලි සලකුණු රූප සහ ආකෘතියද මකයි. ඔබට යෙදුම්වල සත්‍යාපනය සඳහා ඔබගේ ඇඟිලි සලකුණ භාවිත කළ නොහැකි වනු ඇත."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"රටාවක් ඔබගේ දුරකථනය නැති වුවහොත් හෝ සොරකම් කර ඇත්නම් එය ආරක්ෂා කරයි.
+
+මෙය ඔබගේ උපාංගයේ ගබඩා කර ඇති ඇඟිලි සලකුණු රූප සහ ආකෘතිය මකයි. ඔබගේ මුහුණු ආකෘතියද ස්ථිරව සහ ආරක්ෂිතව මකනු ඇත. ඔබට යෙදුම්වල සත්‍යාපනය සඳහා ඔබගේ මුහුණ හෝ ඇඟිලි සලකුණ භාවිත කළ නොහැකි වනු ඇත."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"PIN එකක් ඔබගේ දුරකථනය නැති වුවහොත් හෝ සොරකම් කර ඇත්නම් එය ආරක්ෂා කරයි.
+
+මෙය ඔබගේ උපාංගයේ ගබඩා කර ඇති ඇඟිලි සලකුණු රූප සහ ආකෘතියද මකයි. ඔබට යෙදුම්වල සත්‍යාපනය සඳහා ඔබගේ ඇඟිලි සලකුණ භාවිත කළ නොහැකි වනු ඇත."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"PIN එකක් ඔබගේ දුරකථනය නැති වුවහොත් හෝ සොරකම් කර ඇත්නම් එය ආරක්ෂා කරයි.
+
+මෙය ඔබගේ උපාංගයේ ගබඩා කර ඇති ඇඟිලි සලකුණු රූප සහ ආකෘතිය මකයි. ඔබගේ මුහුණු ආකෘතියද ස්ථිරව සහ ආරක්ෂිතව මකනු ඇත. ඔබට යෙදුම්වල සත්‍යාපනය සඳහා ඔබගේ මුහුණ හෝ ඇඟිලි සලකුණ භාවිත කළ නොහැකි වනු ඇත."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"මුරපදයක් ඔබගේ දුරකථනය නැති වුවහොත් හෝ සොරකම් කර ඇත්නම් එය ආරක්ෂා කරයි.
+
+මෙය ඔබගේ උපාංගයේ ගබඩා කර ඇති ඇඟිලි සලකුණු රූප සහ ආකෘතිය ද මකයි. ඔබට යෙදුම්වල සත්‍යාපනය සඳහා ඔබගේ ඇඟිලි සලකුණ භාවිත කළ නොහැකි වනු ඇත."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"මුරපදයක් ඔබගේ දුරකථනය නැති වුවහොත් හෝ සොරකම් කර ඇත්නම් එය ආරක්ෂා කරයි.
+
+මෙය ඔබගේ උපාංගයේ ගබඩා කර ඇති ඇඟිලි සලකුණු රූප සහ ආකෘතිය මකයි. ඔබගේ මුහුණු ආකෘතියද ස්ථිරව සහ ආරක්ෂිතව මකනු ඇත. ඔබට යෙදුම්වල සත්‍යාපනය සඳහා ඔබගේ මුහුණ හෝ ඇඟිලි සලකුණ භාවිත කළ නොහැකි වනු ඇත."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"උපාංග ආරක්ෂණ විශේෂාංග ඔබගේ තිර අගුල නොමැතිව ක්‍රියා නොකරනු ඇත.
+
+මෙය ඔබගේ උපාංගයේ ගබඩා කර ඇති ඇඟිලි සලකුණු රූප සහ ආකෘතියද මකයි. ඔබට යෙදුම්වල සත්‍යාපනය සඳහා ඔබගේ ඇඟිලි සලකුණ භාවිත කළ නොහැකි වනු ඇත."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"උපාංග ආරක්ෂණ විශේෂාංග ඔබගේ තිර අගුල නොමැතිව ක්‍රියා නොකරනු ඇත.
+
+මෙය ඔබගේ උපාංගයේ ගබඩා කර ඇති ඇඟිලි සලකුණු රූප සහ ආකෘතිය මකයි. ඔබගේ මුහුණු ආකෘතියද ස්ථිරව සහ ආරක්ෂිතව මකනු ඇත. ඔබට යෙදුම්වල සත්‍යාපනය සඳහා ඔබගේ මුහුණ හෝ ඇඟිලි සලකුණ භාවිත කළ නොහැකි වනු ඇත."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">ඔබගේ දුරකථනය අගුලු හැරීමට හෝ යෙදුම් තුළ ඒ ඔබ බව සත්‍යාපනය කිරීමට ඔබ එය වැඩිපුර භාවිත කරන තරමට ඇඟිලි සලකුණු අගුලු හැරීම වැඩි දියුණු වේ</string>
+</resources>

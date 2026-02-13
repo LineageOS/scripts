@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"‏إذا كان لديك واقي شاشة، يُرجى تركيبه قبل ضبط بصمة الإصبع لتعمل بشكل صحيح.
+
+للحصول على أفضل نتائج، استخدِم واقي شاشة مُعتمَدًا ويحمل شعار Made for Google. قد لا تعمل بصمة إصبعك مع واقيات الشاشة الأخرى."</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">ضَع طرف إصبعك على منطقة أداة الاستشعار</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">واصِل اللمس مع تدوير إصبعك جهة اليسار</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">واصِل اللمس مع تدوير إصبعك جهة اليمين</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">يُرجى تنظيف الشاشة بالقرب من أداة الاستشعار</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">امسح شاشتك لإزالة البقع والأوساخ. يساعد هذا على التقاط صور أوضح لبصمة الإصبع.</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">تنظيف الشاشة قبل المتابعة</string>
+</resources>

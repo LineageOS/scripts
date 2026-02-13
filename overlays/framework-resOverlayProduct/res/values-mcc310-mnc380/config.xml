@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- This setting is deprecated, please use
+         com.android.networkstack.tethering.R.array.config_mobile_hotspot_provision_app instead. -->
+    <string-array name="config_mobile_hotspot_provision_app">
+        <item>com.google.android.tetheringentitlement</item>
+        <item>com.google.android.tetheringentitlement.CarrierEntitlementActivity</item>
+    </string-array>
+
+    <!-- This setting is deprecated, please use
+         com.android.networkstack.tethering.R.string.config_mobile_hotspot_provision_app_no_ui
+         instead. -->
+    <string name="config_mobile_hotspot_provision_app_no_ui">com.google.android.carrierentitlement.SILENT_ENTITLEMENT_CHECK</string>
+
+    <!-- This setting is deprecated, please use
+         com.android.networkstack.tethering.R.string.config_mobile_hotspot_provision_response
+         instead. -->
+    <string name="config_mobile_hotspot_provision_response">com.google.android.carrierentitlement.SILENT_ENTITLEMENT_CHECK_RESULT</string>
+</resources>

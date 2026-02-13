@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">የGoogle Pixel አምሳያ መራጭ</string>
+
+    <string name="desc_ProfileIcons1">በውሃማ አረንጓዴ ዳራ ላይ ያለ የሁለት ጠቆር ያሉ አረንጓዴ ከፊል ክቦች ተጫዋች ስዕላዊ ማብራሪያ</string>
+
+    <string name="desc_ProfileIcons10">በቢጫ ዳራ ላይ ያለ የብርቱካናማ ቢራቢሮ ተጫዋች ስዕላዊ ማብራሪያ</string>
+
+    <string name="desc_ProfileIcons11">ጠቆር ያለ ግራጫ ዳራ ላይ ያለ የተድቦለቦሉ ጫፎች ያሉት የጥቁር አፍንጫ ቅርጽ</string>
+
+    <string name="desc_ProfileIcons12">ጠቆር ያለ ግራጫ ዳራ ላይ ያለ የተድቦለቦሉ ጫፎች ያሉት የጥቁር ማገጥ ቅርጽ</string>
+
+    <string name="desc_ProfileIcons13">ጠቆር ያለ ወይን ጠጅ ዳራ ላይ ያለ ውሃ ወይን ጠጅ ጠመዝማዛ ክብ</string>
+
+    <string name="desc_ProfileIcons14">ብርቱካናማ ዳራ ላይ ያለ የተድቦለቦሉ ጫፎች ያሉት የውሃ ሰማያዊ ማገጥ ቅርጽ</string>
+
+    <string name="desc_ProfileIcons15">ጠቆር ያለ አረንጓዴ ዳራ ላይ ያለ የተድቦለቦሉ ጫፎች ያሉት አረንጓዴ ስድስት ጎን</string>
+
+    <string name="desc_ProfileIcons16">ውሃ ግራጫ ዳራ ላይ ያለ የተድቦለቦሉ ጫፎች ያሉት ጥቁር የአልማዝ ቅርጽ</string>
+
+    <string name="desc_ProfileIcons17">በቢጫ ዳራ ላይ ያለ የብርቱካን ቅጠል ተጫዋች ስዕላዊ ማብራሪያ</string>
+
+    <string name="desc_ProfileIcons18">ፈዘዝ ያለ ብርቱካናማ ዳራ ላይ ያለ የሳተርን ፕላኔት ተጫዋች ስዕላዊ ማብራሪያ</string>
+
+    <string name="desc_ProfileIcons19">ጥቁር ዳራ ላይ ያለ በሰማይ አካላት ስርዓተ ጥለት ውስጥ የነጭ እና ብርቱካናማ ኮኮቦች እና ክቦች ተጫዋች ስዕላዊ ማብራሪያ</string>
+
+    <string name="desc_ProfileIcons2">የጥቁር እና ነጭ የሚጠላለፉ ሲሊንደሮች ረቂቅ ስዕላዊ ማብራሪያ</string>
+
+    <string name="desc_ProfileIcons20">ቢጫ ዳራ ላይ ያለ ሰማያዊ ጆሮዎች እና ነጭ ፊት ያለው ውሻ ተጫዋች ስዕላዊ ማብራሪያ</string>
+
+    <string name="desc_ProfileIcons21">በወይን ጠጅ ዳራ ላይ የወይራ ቅርንጫፍ ይዞ የሚበር ነጭ እርግብ ተጫዋች ስዕላዊ ማብራሪያ</string>
+
+    <string name="desc_ProfileIcons22">በሰማያዊ ዳራ ላይ ያለ ጥቁር ጆሮዎች እና ነጭ ፊት ያለው ውሻ ተጫዋች ስዕላዊ ማብራሪያ</string>
+
+    <string name="desc_ProfileIcons23">በክሬም ዳራ ላይ ያለ አረንጓዴ ቅጠሎች ያሉት ፒንክ አበባ ተጫዋች ስዕላዊ ማብራሪያ</string>
+
+    <string name="desc_ProfileIcons24">በቀይ ዳራ ላይ ያለ የስድስት ሰማያዊ ሲሊንደሮች ረቂቅ ስዕላዊ ማብራሪያ</string>
+
+    <string name="desc_ProfileIcons3">ጠቆር ያለ ሰማያዊ ዳራ ላይ ያለ የሰማያዊ ማገጥ ቅርጽ ረቂቅ ስዕላዊ ማብራሪያ</string>
+
+    <string name="desc_ProfileIcons4">የሁለት ፒንክ ባለ ሦስት ልኬት ሦስት ማዕዘኖች ረቂቅ ስዕላዊ ማብራሪያ</string>
+
+    <string name="desc_ProfileIcons5">ቢጫ ዳራ ላይ ያሉ መካከለኛ አረንጓዴ ንብርብሮች ረቂቅ ስዕላዊ ማብራሪያ</string>
+
+    <string name="desc_ProfileIcons6">በአረንጓዴ ዳራ ላይ ያሉ ወይን ጠጅ ድንጋዮች ረቂቅ ስዕላዊ ማብራሪያ</string>
+
+    <string name="desc_ProfileIcons7">በብርቱካናማ ዳራ ላይ ያሉ የአምስት ነጭ ጂኦሜትሪያዊ አበቦች ተጫዋች ስዕላዊ ማብራሪያ</string>
+
+    <string name="desc_ProfileIcons8">በፒንክ ዳራ ላይ ያሉ የሦስት ብሉቤሪዎች ተጫዋች ስዕላዊ ማብራሪያ</string>
+
+    <string name="desc_ProfileIcons9">በአረንጓዴ ዳራ ላይ ያለ ጥቁር ቅጠል ያለው ሎሚ ተጫዋች ስዕላዊ ማብራሪያ</string>
+</resources>

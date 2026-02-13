@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"‏اگر محافظ صفحه‌نمایش دارید، برای بهره‌مندی از بهترین عملکرد، محافظ صفحه‌نمایش را قبل‌از راه‌اندازی اثر انگشت نصب کنید.
+
+برای داشتن بهترین نتیجه، از محافظ صفحه‌نمایشی استفاده کنید که گواهی Made for Google داشته باشد. درصورت استفاده از دیگر محافظ‌های صفحه‌نمایش، ممکن است اثر انگشتتان کار نکند."</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">با کج کردن نوک انگشت، به لمس کردن ادامه دهید</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">با چرخاندن انگشت به‌سمت چپ، به لمس کردن ادامه دهید</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">با چرخاندن انگشت به‌سمت راست، به لمس کردن ادامه دهید</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">صفحه اطراف حسگر را تمیز کنید</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">صفحه‌نمایش را با دستمال پاک کنید تا هرگونه خط، لکه، یا آلودگی برطرف شود. این کار کمک می‌کند تصاویر واضح‌تری از اثر انگشت ثبت شود.</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">قبل‌از ادامه دادن، صفحه‌نمایش را تمیز کنید</string>
+</resources>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel, val á notandamynd</string>
+
+    <string name="desc_ProfileIcons1">Gamansöm myndskreyting af tveimur dökkgrænum hálfhringjum á ljósgrænum bakgrunni</string>
+
+    <string name="desc_ProfileIcons10">Gamansöm myndskreyting af appelsínugulu fiðrildi á gulum bakgrunni</string>
+
+    <string name="desc_ProfileIcons11">Svart neflaga form með ávölum brúnum á dökkgráum bakgrunni</string>
+
+    <string name="desc_ProfileIcons12">Svart form í laginu eins og smári með ávölum brúnum á ljósgráum bakgrunni</string>
+
+    <string name="desc_ProfileIcons13">Ljósfjólublár ójafn hringur á dökkfjólubláum bakgrunni</string>
+
+    <string name="desc_ProfileIcons14">Ljósblátt smáralaga form með ávölum brúnum á appelsínugulum bakgrunni</string>
+
+    <string name="desc_ProfileIcons15">Ljósgrænn sexhyrningur með ávölum brúnum á dökkgrænum bakgrunni</string>
+
+    <string name="desc_ProfileIcons16">Svart tígullaga form með ávölum brúnum á ljósgráum bakgrunni</string>
+
+    <string name="desc_ProfileIcons17">Gamansöm myndskreyting af appelsínugulu laufi á gulum bakgrunni</string>
+
+    <string name="desc_ProfileIcons18">Gamansöm myndskreyting af Satúrnusi á ferskjulituðum bakgrunni</string>
+
+    <string name="desc_ProfileIcons19">Gamansöm myndskreyting af hvítum og appelsínugulum stjörnum og hringjum sem mynda himintunglamynstur á svörtum bakgrunni</string>
+
+    <string name="desc_ProfileIcons2">Abstraktmyndskreyting af svarthvítum sívalningum sem skarast</string>
+
+    <string name="desc_ProfileIcons20">Gamansöm myndskreyting af hundi með blá eyru og hvítt andlit á gulum bakgrunni</string>
+
+    <string name="desc_ProfileIcons21">Gamansöm myndskreyting af hvítri dúfu sem flýgur með ólífugrein á fjólubláum bakgrunni</string>
+
+    <string name="desc_ProfileIcons22">Gamansöm myndskreyting af hundi með svört eyru og hvítt andlit á bláum bakgrunni</string>
+
+    <string name="desc_ProfileIcons23">Gamansöm myndskreyting af bleiku blómi með grænum laufblöðum á rjómagulum bakgrunni</string>
+
+    <string name="desc_ProfileIcons24">Abstraktmyndskreyting af sex bláum sívalningum á rauðum bakgrunni</string>
+
+    <string name="desc_ProfileIcons3">Abstraktmyndskreyting af ljósbláu smáralaga formi á dökkbláum bakgrunni</string>
+
+    <string name="desc_ProfileIcons4">Abstraktmyndskreyting af tveimur bleikum þrívíðum þríhyrningum</string>
+
+    <string name="desc_ProfileIcons5">Abstraktmyndskreyting af grænbláum lögum á gulum bakgrunni</string>
+
+    <string name="desc_ProfileIcons6">Abstraktmyndskreyting af fjólubláum steinum á grænum bakgrunni</string>
+
+    <string name="desc_ProfileIcons7">Gamansöm myndskreyting af fimm hvítum geómetrískum blómum á appelsínugulum bakgrunni</string>
+
+    <string name="desc_ProfileIcons8">Gamansöm myndskreyting af þremur bláberjum á bleikum bakgrunni</string>
+
+    <string name="desc_ProfileIcons9">Gamansöm myndskreyting af sítrónu með svörtu laufblaði á grænum bakgrunni</string>
+</resources>

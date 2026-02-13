@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Default user icon colors -->
+    <color name="user_icon_1">@android:color/accent_device_default_light</color>
+
+    <color name="system_error">#ffea4335</color>
+</resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"Para melhores resultados, coloque sua película (caso tenha uma) antes de configurar a impressão digital.
+
+O ideal é usar uma película com o certificado Made For Google. Sua digital pode não funcionar com outras opções."</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">Incline o dedo e toque com a ponta</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">Vire o dedo e toque com o lado esquerdo</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">Vire de novo e toque com o lado direito</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">Limpe a tela perto do sensor</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">Limpe a tela para remover manchas, borrões ou poeira. Isso ajuda a capturar imagens mais nítidas das impressões digitais.</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">Limpe a tela antes de continuar</string>
+</resources>

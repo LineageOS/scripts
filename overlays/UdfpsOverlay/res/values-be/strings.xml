@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Калі вы ўжываеце разблакіроўку адбіткам пальца, відарысы выкарыстоўваюцца для абнаўлення мадэлі адбітка пальца. Відарысы і мадэль вашага адбітка пальца бяспечна захоўваюцца на вашым тэлефоне і нікуды з яго не адпраўляюцца. Уся апрацоўка выконваецца толькі на вашым тэлефоне.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Калі дзіця ўжывае разблакіроўку адбіткам пальца, відарысы выкарыстоўваюцца для абнаўлення мадэлі адбітка пальца. Відарысы і мадэль адбітка пальца вашага дзіцяці бяспечна захоўваюцца на тэлефоне і нікуды з яго не адпраўляюцца. Уся апрацоўка выконваецца толькі на тэлефоне.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Вы можаце ў любы час выдаліць відарысы і мадэль адбітка пальца ці выключыць разблакіроўку адбіткам пальца ў Наладах. Відарысы і мадэлі адбіткаў пальца будуць захоўвацца на вашым тэлефоне, пакуль вы іх не выдаліце.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Вы і ваша дзіця можаце ў любы час выдаліць відарысы і мадэль адбітка пальца ці выключыць разблакіроўку адбіткам пальца ў Наладах. Відарысы і мадэлі адбіткаў пальца будуць захоўвацца на тэлефоне, пакуль іх не выдаляць.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">Дзякуючы функцыі разблакіроўкі адбіткам пальца вы можаце разблакіраваць тэлефон адбіткам пальца. У мэтах бяспекі для гэтага варыянта патрабуецца дадатковы спосаб блакіроўкі экрана.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Разблакіроўка адбіткам пальца</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">Разблакіроўка адбіткам пальца для працы</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Задаць разблакіроўку адбіткам пальца</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">Дазволіць разблакіроўку адбіткам</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">Каб спраўджваць вашу асобу, функцыя разблакіроўкі адбіткам пальца стварае ўнікальную мадэль адбітка вашага пальца. Для стварэння мадэлі адсканіруйце свой палец у розных паставах.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">Каб спраўджваць асобу дзіцяці, функцыя разблакіроўкі адбіткам пальца стварае ўнікальную мадэль адбітка яго пальца. Для стварэння мадэлі трэба адсканіраваць палец дзіцяці ў розных паставах.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">Звярніцеся ў сэрвісны цэнтр або наведайце старонку g.co/pixel/fingerprintunlock.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">Выкарыстоўваць разблакіроўку адбіткам пальца</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">Узор разблакіроўкі • Адбітак пальца</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">PIN-код • Адбітак пальца</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">Пароль • Адбітак пальца</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">Працягнуць без разблакіроўкі адбіткам пальца</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"Узор разблакіроўкі абараняе ваш тэлефон у выпадку страты ці крадзяжу.
+
+Гэта дзеянне таксама выдаліць відарысы і мадэль адбіткаў пальцаў, захаваныя на вашай прыладзе. Вы не зможаце скарыстаць функцыю разблакіравання адбіткам пальца для аўтэнтыфікацыі ў праграмах."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"Узор разблакіроўкі абараняе ваш тэлефон у выпадку страты ці крадзяжу. 
+
+Гэта дзеянне выдаліць відарысы і мадэль адбіткаў пальцаў, захаваныя на вашай прыладзе. Акрамя таго, будзе канчаткова і бяспечна выдалена мадэль вашага твару. Вы не зможаце скарыстаць функцыі распазнавання твару і разблакіравання адбіткам пальца для аўтэнтыфікацыі ў праграмах."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"PIN-код абараняе ваш тэлефон у выпадку страты ці крадзяжу.
+
+Гэта дзеянне таксама выдаліць відарысы і мадэль адбіткаў пальцаў, захаваныя на вашай прыладзе. Вы не зможаце скарыстаць функцыю разблакіравання адбіткам пальца для аўтэнтыфікацыі ў праграмах."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"PIN-код абараняе ваш тэлефон у выпадку страты ці крадзяжу.
+
+Гэта дзеянне выдаліць відарысы і мадэль адбіткаў пальцаў, захаваныя на вашай прыладзе. Акрамя таго, будзе канчаткова і бяспечна выдалена мадэль вашага твару. Вы не зможаце скарыстаць функцыі распазнавання твару і разблакіравання адбіткам пальца для аўтэнтыфікацыі ў праграмах."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"Пароль абараняе ваш тэлефон у выпадку страты ці крадзяжу.
+
+Гэта дзеянне таксама выдаліць відарысы і мадэль адбіткаў пальцаў, захаваныя на вашай прыладзе. Вы не зможаце скарыстаць функцыю разблакіравання адбіткам пальца для аўтэнтыфікацыі ў праграмах."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"Пароль абараняе ваш тэлефон на выпадак страты ці крадзяжу.
+
+Гэта дзеянне выдаліць відарысы і мадэль адбіткаў пальцаў, захаваныя на вашай прыладзе. Акрамя таго, будзе канчаткова і бяспечна выдалена мадэль вашага твару. Вы не зможаце скарыстаць функцыі распазнавання твару і разблакіравання адбіткам пальца для аўтэнтыфікацыі ў праграмах."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"Функцыі абароны прылады не будуць працаваць без зададзенага вамі спосабу блакіроўкі экрана.
+
+Гэта дзеянне таксама выдаліць відарысы і мадэль адбіткаў пальцаў, захаваныя на вашай прыладзе. Вы не зможаце скарыстаць функцыю разблакіравання адбіткам пальца для аўтэнтыфікацыі ў праграмах."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"Функцыі абароны прылады не будуць працаваць без зададзенага вамі спосабу блакіроўкі экрана.
+
+Гэта дзеянне выдаліць відарысы і мадэль адбіткаў пальцаў, захаваныя на вашай прыладзе. Акрамя таго, будзе канчаткова і бяспечна выдалена мадэль вашага твару. Вы не зможаце скарыстаць функцыі распазнавання твару і разблакіравання адбіткам пальца для аўтэнтыфікацыі ў праграмах."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">Чым часцей вы будзеце выкарыстоўваць на тэлефоне функцыю разблакіроўкі адбіткам пальца, тым лепш яна будзе працаваць</string>
+</resources>

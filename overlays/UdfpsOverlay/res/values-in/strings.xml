@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Saat Anda menggunakan Buka dengan Sidik Jari, gambar digunakan untuk memperbarui model sidik jari Anda. Gambar dan model sidik jari disimpan secara aman di ponsel dan tidak pernah dikirim ke luar ponsel. Semua pemrosesan dilakukan secara aman di ponsel Anda.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Saat dia menggunakan Buka dengan Sidik Jari, gambar digunakan untuk memperbarui model sidik jarinya. Gambar dan model sidik jari anak Anda disimpan secara aman di ponsel dan tidak pernah dikirim ke luar ponsel. Semua pemrosesan dilakukan secara aman di ponsel.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Anda dapat menghapus gambar dan model sidik jari atau menonaktifkan Buka dengan Sidik Jari kapan pun di Setelan. Gambar dan model sidik jari disimpan di ponsel hingga Anda menghapusnya.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Anda dan anak Anda dapat menghapus gambar dan model sidik jarinya atau menonaktifkan Buka dengan Sidik Jari kapan saja di Setelan. Gambar dan model sidik jari disimpan di ponsel sampai dihapus.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">Dengan Buka dengan Sidik Jari, Anda dapat membuka kunci ponsel menggunakan sidik jari. Demi keamanan, opsi ini memerlukan kunci layar cadangan.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Buka dengan Sidik Jari</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">Buka dengan Sidik Jari untuk profil kerja</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Siapkan Buka dengan Sidik Jari</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">Izinkan Buka dengan Sidik Jari</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">Buka dengan Sidik Jari membuat model unik sidik jari untuk memverifikasi diri Anda. Untuk membuat model sidik jari ini selama penyiapan, Anda akan mengambil gambar sidik jari dari berbagai posisi.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">Buka dengan Sidik Jari membuat model unik dari sidik jari anak Anda untuk memverifikasi dirinya. Untuk membuat model sidik jari ini selama penyiapan, dia akan mengambil gambar sidik jari dari berbagai posisi.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">Kunjungi penyedia reparasi atau g.co/pixel/fingerprintunlock.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">Gunakan Buka dengan Sidik Jari</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">Pola • Sidik jari</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">PIN • Sidik jari</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">Sandi • Sidik jari</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">Lanjutkan tanpa Buka dengan Sidik Jari</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"Pola melindungi ponsel Anda jika hilang atau dicuri.
+
+Pola ini juga menghapus gambar dan model sidik jari yang disimpan di perangkat. Anda tidak akan dapat menggunakan sidik jari Anda untuk autentikasi dalam aplikasi."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"Pola melindungi ponsel Anda jika hilang atau dicuri.
+
+Pola ini menghapus gambar dan model sidik jari yang disimpan di perangkat. Model wajah Anda juga akan dihapus secara permanen dan aman. Anda tidak akan dapat menggunakan wajah atau sidik jari Anda untuk autentikasi dalam aplikasi."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"PIN melindungi ponsel Anda jika hilang atau dicuri.
+
+Tindakan ini juga menghapus gambar dan model sidik jari yang disimpan di perangkat. Anda tidak akan dapat menggunakan sidik jari Anda untuk autentikasi dalam aplikasi."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"PIN melindungi ponsel Anda jika hilang atau dicuri.
+
+PIN ini menghapus gambar dan model sidik jari yang disimpan di perangkat. Model wajah Anda juga akan dihapus secara permanen dan aman. Anda tidak akan dapat menggunakan wajah atau sidik jari Anda untuk autentikasi dalam aplikasi."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"Sandi melindungi ponsel Anda jika hilang atau dicuri.
+
+Sandi ini juga menghapus gambar dan model sidik jari yang disimpan di perangkat. Anda tidak akan dapat menggunakan sidik jari Anda untuk autentikasi dalam aplikasi."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"Sandi melindungi ponsel Anda jika hilang atau dicuri.
+
+Sandi ini menghapus gambar dan model sidik jari yang disimpan di perangkat. Model wajah Anda juga akan dihapus secara permanen dan aman. Anda tidak akan dapat menggunakan wajah atau sidik jari Anda untuk autentikasi dalam aplikasi."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"Fitur perlindungan perangkat tidak akan berfungsi tanpa kunci layar.
+
+Fitur perlindungan perangkat ini juga menghapus gambar dan model sidik jari yang disimpan di perangkat. Anda tidak akan dapat menggunakan sidik jari Anda untuk autentikasi dalam aplikasi."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"Fitur perlindungan perangkat tidak akan berfungsi tanpa kunci layar.
+
+Fitur perlindungan perangkat ini menghapus gambar dan model sidik jari yang disimpan di perangkat. Model wajah Anda juga akan dihapus secara permanen dan aman. Anda tidak akan dapat menggunakan wajah atau sidik jari Anda untuk autentikasi dalam aplikasi."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">Buka dengan Sidik Jari menjadi lebih akurat jika Anda makin sering menggunakannya untuk membuka kunci ponsel atau memverifikasi diri Anda di aplikasi</string>
+</resources>

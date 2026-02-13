@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Name for an app setting that lets the user authenticate for that app using biometrics (e.g. fingerprint or face). [CHAR LIMIT=30] -->
+    <string name="biometric_app_setting_name">മുഖമോ ഫിംഗർപ്രിന്റോ ഉപയോഗിക്കൂ</string>
+
+    <!-- Name for an app setting that lets the user authenticate for that app using biometrics (e.g. fingerprint or face) or their screen lock credential (i.e. PIN, pattern, or password). [CHAR LIMIT=70] -->
+    <string name="biometric_or_screen_lock_app_setting_name">മുഖമോ ഫിംഗർപ്രിന്റോ സ്‌ക്രീൻ ലോക്കോ ഉപയോഗിക്കൂ</string>
+
+    <!-- Subtitle shown on the system-provided biometric dialog, asking the user to authenticate with a biometric (e.g. fingerprint or face). [CHAR LIMIT=70] -->
+    <string name="biometric_dialog_default_subtitle">തുടരാൻ നിങ്ങളുടെ മുഖമോ ഫിംഗർപ്രിന്റോ ഉപയോഗിക്കൂ</string>
+
+    <!-- Subtitle shown on the system-provided biometric dialog, asking the user to authenticate with a biometric (e.g. fingerprint or face) or their screen lock credential (i.e. PIN, pattern, or password). [CHAR LIMIT=90] -->
+    <string name="biometric_or_screen_lock_dialog_default_subtitle">തുടരാൻ നിങ്ങളുടെ മുഖമോ ഫിംഗർപ്രിന്റോ സ്‌ക്രീൻ ലോക്കോ ഉപയോഗിക്കൂ</string>
+
+    <!-- Notification name shown when the system requires the user to re-enroll their face. [CHAR LIMIT=NONE] -->
+    <string name="face_recalibrate_notification_name">ഫെയ്‌സ് അൺലോക്ക്</string>
+
+    <!-- Notification title shown when the system requires the user to re-enroll their face. [CHAR LIMIT=NONE] -->
+    <string name="face_recalibrate_notification_title">നിങ്ങളുടെ മുഖം വീണ്ടും എൻറോൾ ചെയ്യുക</string>
+
+    <!-- Notification content shown when the system requires the user to re-enroll their face. [CHAR LIMIT=NONE] -->
+    <string name="face_recalibrate_notification_content">നിങ്ങൾ വീണ്ടും എൻറോൾ ചെയ്യുന്നത് വരെ ഫെയ്‌സ് അൺലോക്ക് പ്രവർത്തിച്ചേക്കില്ല</string>
+
+    <!-- Array containing custom messages shown during face acquisition from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="face_acquired_vendor"/>
+
+    <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="face_error_vendor">
+        <item>സർട്ടിഫിക്കറ്റ് കാലഹരണപ്പെട്ടു</item>
+        <item>സെൻസർ താൽക്കാലികമായി പ്രവർത്തനരഹിതമാക്കി</item>
+        <item>കാലിബ്രേഷൻ പിശക്</item>
+        <item>ഫെയ്‌സ് അൺലോക്ക് ലഭ്യമല്ല. ഫോൺ വളരെയധികം ചൂടായിരിക്കുന്നു.</item>
+        <item>ഫെയ്‌സ് അൺലോക്ക് വീണ്ടും സജ്ജീകരിക്കേണ്ടതുണ്ട്</item>
+    </string-array>
+
+    <!-- Title for the harmful app warning dialog. [CHAR LIMIT=40] -->
+    <string name="harmful_app_warning_title">Play Protect മുന്നറിയിപ്പ്</string>
+</resources>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Коли ви користуєтеся функцією розблокування відбитком пальця, модель відбитка постійно оновлюється на основі отриманих зображень. Зображення й модель надійно зберігаються на телефоні та нікуди не передаються. Усі дані безпечно обробляються на телефоні.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Коли дитина користується функцією розблокування відбитком пальця, модель відбитка пальця оновлюється на основі зображень. Зображення й модель відбитка пальця дитини надійно зберігаються на телефоні та нікуди не передаються. Усі процедури обробки безпечно відбуваються на телефоні.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Ви будь-коли можете видалити зображення й модель свого відбитка пальця або вимкнути цей спосіб розблокування в налаштуваннях. Зображення й модель відбитка пальця зберігаються на телефоні, доки ви їх не видалите.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Ви та дитина будь-коли можете видалити зображення й модель відбитка пальця або вимкнути цю функцію в налаштуваннях. Зображення й моделі відбитків пальців зберігаються на телефоні, доки ви їх не видалите.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">Ви можете розблоковувати телефон відбитком пальця. З міркувань безпеки для цього потрібно налаштувати резервний спосіб блокування екрана.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Розблокування відбитком пальця</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">Розблокування відбитком пальця для роботи</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Розблокування відбитком пальця</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">Дозвольте розблокування відбитком пальця</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">Функція розблокування відбитком пальця створює унікальну модель вашого відбитка, щоб підтверджувати вашу особу. Для цього під час налаштування потрібно створити зображення свого відбитка пальця в різних положеннях.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">Функція розблокування відбитком пальця створює унікальну модель відбитка вашої дитини, щоб підтверджувати її особу. Для цього дитині потрібно зберегти зображення свого відбитка пальця в різних положеннях.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">Зверніться до постачальника послуг із ремонту або перейдіть на сторінку g.co/pixel/fingerprintunlock.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">Використовувати розблокування відбитком пальця</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">Ключ • Відбиток пальця</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">PIN-код • Відбиток пальця</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">Пароль • Відбиток пальця</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">Продовжити без розблокування відбитком пальця</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"Ключ захищає телефон у разі втрати чи викрадення.
+
+Зображення й модель відбитка пальця, що зберігаються на пристрої, також буде видалено. Ви не зможете використовувати відбиток пальця для автентифікації в додатках."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"Ключ захищає телефон у разі втрати чи викрадення.
+
+Зображення й модель відбитка пальця, що зберігаються на пристрої, буде видалено. Модель обличчя також буде остаточно видалено без можливості відновлення. Ви не зможете використовувати фейс-контроль або відбиток пальця для автентифікації в додатках."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"PIN-код захищає телефон у разі втрати чи викрадення.
+
+Зображення й модель відбитка пальця, що зберігаються на пристрої, також буде видалено. Ви не зможете використовувати відбиток пальця для автентифікації в додатках."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"PIN-код захищає телефон у разі втрати чи викрадення.
+
+Зображення й модель відбитка пальця, що зберігаються на пристрої, буде видалено. Модель обличчя також буде остаточно видалено без можливості відновлення. Ви не зможете використовувати фейс-контроль або відбиток пальця для автентифікації в додатках."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"Пароль захищає телефон у разі втрати чи викрадення.
+
+Зображення й модель відбитка пальця, що зберігаються на пристрої, також буде видалено. Ви не зможете використовувати відбиток пальця для автентифікації в додатках."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"Пароль захищає телефон у разі втрати чи викрадення.
+
+Зображення й модель відбитка пальця, що зберігаються на пристрої, буде видалено. Модель обличчя також буде остаточно видалено без можливості відновлення. Ви не зможете використовувати фейс-контроль або відбиток пальця для автентифікації в додатках."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"Функції захисту пристрою не працюватимуть без блокування екрана.
+
+Зображення й модель відбитка пальця, що зберігаються на пристрої, також буде видалено. Ви не зможете використовувати відбиток пальця для автентифікації в додатках."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"Функції захисту пристрою не працюватимуть без блокування екрана.
+
+Зображення й модель відбитка пальця, що зберігаються на пристрої, буде видалено. Модель обличчя також буде остаточно видалено без можливості відновлення. Ви не зможете використовувати фейс-контроль або відбиток пальця для автентифікації в додатках."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">Функція розблокування відбитком пальця покращується в міру того, як ви за її допомогою розблоковуєте телефон або підтверджуєте свою особу в додатках</string>
+</resources>

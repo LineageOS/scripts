@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"Ако имате защитен слой на екрана, с цел най-добра ефективност трябва да го приложите, преди да настроите отпечатъка си.
+
+За най-добри резултати използвайте защитен слой на екрана, който е със сертификат „Създадено за Google“. Отпечатъкът ви може да не работи с други защитни слоеве на екрана."</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">Наклонете пръста си и докоснете с върха му</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">Завъртете пръста и докоснете с левия му край</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">Завъртете пръста отново и докоснете с десния му край</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">Почистете екрана си около сензора</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">Забършете екрана, за да отстраните всички зацапвания и петна. Това помага за заснемането на по-ясни изображения на отпечатъците.</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">Почистете екрана, преди да продължите</string>
+</resources>

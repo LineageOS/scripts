@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Name of the body font family. If empty, falls back to platform default -->
+    <string name="config_fontFamily">google-sans</string>
+
+    <!-- Name of the body font family medium. -->
+    <string name="config_fontFamilyMedium">google-sans-medium</string>
+</resources>

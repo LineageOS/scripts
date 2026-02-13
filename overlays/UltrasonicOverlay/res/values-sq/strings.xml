@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"Nëse ke një mbrojtës ekrani, vendose mbrojtësin e ekranit para se të konfigurosh gjurmën e gishtit për performancën më të mirë.
+
+Për rezultatet më të mira, përdor një mbrojtës ekrani që është i certifikuar me \"Prodhuar për Google\". Me mbrojtës të tjerë ekrani, gjurma jote e gishtit mund të mos funksionojë."</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">Anoje gishtin dhe prek me majën</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">Rrotullo gishtin dhe prek me anën e majtë</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">Rrotulloje përsëri dhe prek me anën e djathtë</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">Pastro ekranin tënd pranë sensorit</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">Fshije ekranin për të hequr vijat, fërkimet ose njollat. Kjo ndihmon për të regjistruar imazhe më të qarta të gjurmëve të gishtave.</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">Pastro ekranin para se të vazhdosh</string>
+</resources>

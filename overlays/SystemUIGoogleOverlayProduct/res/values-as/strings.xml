@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="branded_monitoring_description_app_personal">Googleএ নিজৰ ছার্ভাৰসমূহৰ জৰিয়তে ডেটা পঠিয়াই এই সংযোগটো সুৰক্ষিত কৰিছে</string>
+
+    <string name="branded_vpn_footer">সংযোগটো Googleৰ দ্বাৰা সুৰক্ষিত কৰা হৈছে</string>
+</resources>

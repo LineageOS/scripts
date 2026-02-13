@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel avatāra atlasītājs</string>
+
+    <string name="desc_ProfileIcons1">Rotaļīga ilustrācija: divi tumšzaļi pusapļi uz gaišzaļa fona</string>
+
+    <string name="desc_ProfileIcons10">Rotaļīga ilustrācija: oranžs taurenis uz dzeltena fona</string>
+
+    <string name="desc_ProfileIcons11">Melns deguna siluets ar noapaļotām malām uz tumši pelēka fona</string>
+
+    <string name="desc_ProfileIcons12">Melns āboliņa siluets ar noapaļotām malām uz gaiši pelēka fona</string>
+
+    <string name="desc_ProfileIcons13">Gaiši violets viļņains aplis uz tumši violeta fona</string>
+
+    <string name="desc_ProfileIcons14">Gaišzils āboliņa siluets ar noapaļotām malām uz oranža fona</string>
+
+    <string name="desc_ProfileIcons15">Gaišzaļš sešstūris ar noapaļotiem stūriem uz tumšzaļa fona</string>
+
+    <string name="desc_ProfileIcons16">Melns rombs ar noapaļotiem stūriem uz gaiši pelēka fona</string>
+
+    <string name="desc_ProfileIcons17">Rotaļīga ilustrācija: oranža lapa uz dzeltena fona</string>
+
+    <string name="desc_ProfileIcons18">Rotaļīga ilustrācija: Saturns uz persiku krāsas fona</string>
+
+    <string name="desc_ProfileIcons19">Rotaļīga ilustrācija: baltas un oranžas zvaigznes un apļi rakstā, kas atgādina debesis, uz melna fona</string>
+
+    <string name="desc_ProfileIcons2">Abstrakta melnbalta ilustrācija: cilindri, kas krustojas</string>
+
+    <string name="desc_ProfileIcons20">Rotaļīga ilustrācija: suns ar zilām ausīm un baltu seju uz dzeltena fona</string>
+
+    <string name="desc_ProfileIcons21">Rotaļīga ilustrācija: balta lidojoša dūja ar olīvas zaru knābī uz violeta fona</string>
+
+    <string name="desc_ProfileIcons22">Rotaļīga ilustrācija: suns ar melnām ausīm un baltu seju uz zila fona</string>
+
+    <string name="desc_ProfileIcons23">Rotaļīga ilustrācija: rozā puķe ar zaļām lapām uz krēmkrāsas fona</string>
+
+    <string name="desc_ProfileIcons24">Abstrakta ilustrācija: seši zili cilindri uz sarkana fona</string>
+
+    <string name="desc_ProfileIcons3">Abstrakta ilustrācija: gaišzils āboliņa siluets uz tumšzila fona</string>
+
+    <string name="desc_ProfileIcons4">Abstrakta ilustrācija: divi rozā trīsdimensiju trijstūri</string>
+
+    <string name="desc_ProfileIcons5">Abstrakta ilustrācija: zilganzaļi slāņi uz dzeltena fona</string>
+
+    <string name="desc_ProfileIcons6">Abstrakta ilustrācija: violeti akmeņi uz zaļa fona</string>
+
+    <string name="desc_ProfileIcons7">Rotaļīga ilustrācija: pieci balti, ģeometriski ziedi uz oranža fona</string>
+
+    <string name="desc_ProfileIcons8">Rotaļīga ilustrācija: trīs mellenes uz rozā fona</string>
+
+    <string name="desc_ProfileIcons9">Rotaļīga ilustrācija: citrons ar melnu lapu uz zaļa fona</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Specify a service to bind to that returns an implementation of the
+         IApnSourceService interface.
+         (e.g. com.foo/.Bar for the package com.foo and class com.foo.Bar)
+         If this value is empty or unparsable, we will apply APNs from the APN
+         conf xml file.  -->
+    <string name="apn_source_service">com.google.android.carrier/.ApnSourceService</string>
+</resources>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">A Feloldás ujjlenyomattal funkció használatakor a rendszer felhasználja a képeket az ujjlenyomatmodell frissítésére. Az ujjlenyomatképeket és -modellt biztonságosan tárolja a telefon, és sosem kerülnek ki róla. A feldolgozás teljes mértékben és biztonságos módon a telefonon történik.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Amikor gyermeke a Feloldás ujjlenyomattal funkciót használja, a rendszer felhasználja a képeket az ujjlenyomatmodell frissítésére. Gyermeke ujjlenyomatképeit és -modelljét biztonságosan tárolja a telefon, és sosem kerülnek ki róla. A feldolgozás teljes mértékben és biztonságos módon a telefonon történik.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">A Beállítások menüben bármikor törölheti az ujjlenyomatképeket és -modellt, illetve kikapcsolhatja az ujjlenyomat-alapú feloldást. A telefon addig tárolja az ujjlenyomatképeket és -modelleket, amíg Ön nem törli őket.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Ön és gyermeke a Beállításokban bármikor törölheti gyermeke ujjlenyomatképeit és -modelljét, illetve kikapcsolhatja a Feloldás ujjlenyomattal funkciót. A telefon addig tárolja az ujjlenyomatképeket és -modelleket, amíg Ön vagy gyermeke nem törli őket.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">A Feloldás ujjlenyomattal funkció használatával telefonját az ujjlenyomatával oldhatja fel. Biztonsági okokból ennek a beállításnak az esetében szükség van másodlagos képernyőzárra is.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Feloldás ujjlenyomattal</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">Feloldás ujjlenyomattal munkaprofilnál</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Ujjlenyomat-alapú feloldás beállítása</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">A Feloldás ujjlenyomattal engedélyezése</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">A Feloldás ujjlenyomattal funkció egyéni modellt hoz létre az Ön ujjlenyomatáról a személyazonossága ellenőrzéséhez. Az ujjlenyomatmodellnek a beállítás során való létrehozásához képeket kell készítenie az ujjlenyomatáról különböző szögekből.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">A Feloldás ujjlenyomattal funkció egyéni modellt hoz létre az Ön gyermekének ujjlenyomatáról a személyazonossága ellenőrzéséhez. Az ujjlenyomatmodellnek a beállítás során való létrehozásához gyermekének képeket kell készítenie az ujjlenyomatáról különböző szögekből.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">Keresse fel a szervizt vagy a g.co/pixel/fingerprintunlock oldalt.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">A Feloldás ujjlenyomattal funkció használata</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">Minta • Ujjlenyomat</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">PIN-kód • Ujjlenyomat</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">Jelszó • Ujjlenyomat</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">Folytatás a Feloldás ujjlenyomattal funkció nélkül</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"Minta védi a telefonját, ha elveszik vagy ellopják.
+
+Ezzel törli az eszközön tárolt ujjlenyomatok képeit és modelljét is. Nem tudja majd hitelesítésre használni az ujjlenyomatát az appokban."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"Minta védi a telefonját, ha elveszik vagy ellopják.
+
+Ezzel törli az eszközön tárolt ujjlenyomatok képeit és modelljét. Arcmodellje is véglegesen és biztonságosan törölve lesz. Nem tudja majd hitelesítésre használni az arcát és ujjlenyomatát az appokban."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"PIN-kód védi a telefonját, ha elveszik vagy ellopják.
+
+Ezzel törli az eszközön tárolt ujjlenyomatok képeit és modelljét is. Nem tudja majd hitelesítésre használni az ujjlenyomatát az appokban."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"PIN-kód védi a telefonját, ha elveszik vagy ellopják.
+
+Ezzel törli az eszközön tárolt ujjlenyomatok képeit és modelljét. Arcmodellje is véglegesen és biztonságosan törölve lesz. Nem tudja majd hitelesítésre használni az arcát és ujjlenyomatát az appokban."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"Jelszó védi a telefonját, ha elveszik vagy ellopják.
+
+Ezzel törli az eszközön tárolt ujjlenyomatok képeit és modelljét is. Nem tudja majd hitelesítésre használni az ujjlenyomatát az appokban."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"Jelszó védi a telefonját, ha elveszik vagy ellopják.
+
+Ezzel törli az eszközön tárolt ujjlenyomatok képeit és modelljét. Arcmodellje is véglegesen és biztonságosan törölve lesz. Nem tudja majd hitelesítésre használni az arcát és ujjlenyomatát az appokban."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"Az eszközvédelmi funkciók nem működnek majd a képernyőzár nélkül.
+
+Ezzel törli az eszközön tárolt ujjlenyomatok képeit és modelljét is. Nem tudja majd hitelesítésre használni az ujjlenyomatát az appokban."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"Az eszközvédelmi funkciók nem működnek majd a képernyőzár nélkül.
+
+Ezzel törli az eszközön tárolt ujjlenyomatok képeit és modelljét. Arcmodellje is véglegesen és biztonságosan törölve lesz. Nem tudja majd hitelesítésre használni az arcát és ujjlenyomatát az appokban."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">A Feloldás ujjlenyomattal funkció fejlesztését elősegítheti azzal, hogy minél gyakrabban használja telefonja feloldására vagy személyazonossága hitelesítésére az alkalmazásokban</string>
+</resources>

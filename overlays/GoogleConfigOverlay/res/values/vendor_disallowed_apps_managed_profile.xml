@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- A list of apps to be removed from the managed profile by a particular vendor. -->
+    <string-array name="vendor_disallowed_apps_managed_profile">
+        <item>com.google.android.apps.healthdata</item>
+        <item>com.google.android.apps.stargate</item>
+    </string-array>
+</resources>

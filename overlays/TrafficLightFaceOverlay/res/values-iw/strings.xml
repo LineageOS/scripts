@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">שימוש בזיהוי פנים כדי לבטל את נעילת הטלפון</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"אפשר לבטל את הנעילה של הטלפון בעזרת הפנים.
+
+חשוב לזכור:
+ניתן להגדיר פנים של אדם אחד בלבד בכל פעם. כדי להוסיף פנים אחרות, יש למחוק את הפנים הנוכחיות.
+
+מבט לטלפון עשוי לבטל נעילה בלי כוונה.
+
+נעילת הטלפון עשויה להתבטל על ידי מישהו אחר, אם הטלפון מוחזק אל מול הפנים שלך.
+
+נעילת הטלפון עשויה להתבטל על ידי מישהו שדומה לך מאוד, כמו אח או אחות זהים."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"אפשר לבטל את הנעילה של הטלפון בעזרת הפנים.
+
+חשוב לזכור:
+ניתן להגדיר פנים של אדם אחד בלבד בכל פעם. כדי להוסיף פנים אחרות, יש למחוק את הפנים הנוכחיות.
+
+מבט לטלפון עשוי לבטל נעילה בלי כוונה.
+
+נעילת הטלפון עשויה להתבטל על ידי מישהו אחר אם הטלפון מוחזק אל מול הפנים שלך, גם אם העיניים שלך עצומות.
+
+נעילת הטלפון עשויה להתבטל על ידי מישהו שדומה לך מאוד, כמו אח או אחות זהים."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">איך להגדיר פתיחה בזיהוי הפנים</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">במסך הבא, הטלפון צריך להיות בגובה העיניים</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">אנשים שמרכיבים משקפיים יכולים להרכיב אותם במהלך ההגדרה</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"כדי להגדיר שוב את התכונה 'פתיחה ע\"י זיהוי הפנים', עליך למחוק את התבנית הנוכחית לזיהוי הפנים.
+
+התבנית לזיהוי הפנים שלך תימחק באופן סופי ומאובטח.
+
+אחרי המחיקה יהיה צורך בקוד האימות, בקו ביטול הנעילה או בסיסמה כדי לבטל את נעילת הטלפון."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"כדי להגדיר שוב את התכונה 'פתיחה ע\"י זיהוי הפנים', עליך למחוק את התבנית הנוכחית לזיהוי הפנים.
+
+התבנית לזיהוי הפנים שלך תימחק באופן סופי ומאובטח.
+
+אחרי המחיקה יהיה צורך בטביעת האצבע, בקוד האימות, בקו ביטול הנעילה או בסיסמה כדי לבטל את נעילת הטלפון."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">העיניים שלך חייבות להיות פקוחות כדי לפתוח את הנעילה של הטלפון. לתוצאות הטובות ביותר, צריך להסיר את משקפי השמש כשפותחים את הטלפון.</string>
+
+    <string name="security_settings_face_enroll_finish_description">עכשיו אפשר להשתמש בפנים שלך כדי לבטל את נעילת הטלפון</string>
+</resources>

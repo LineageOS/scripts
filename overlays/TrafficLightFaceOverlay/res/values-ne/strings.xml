@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">फोन अनलक गर्न आफ्नो अनुहार प्रयोग गर्नुहोस्</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"फोन अनलक गर्न आफ्नो अनुहार प्रयोग गर्नुहोस्।
+
+स्मरण रहोस्:
+तपाईं एक पटकमा एउटा अनुहार मात्र सेटअप गर्न सक्नुहुन्छ। अर्को अनुहार हाल्न हालको अनुहार मेटाउनुहोस्।
+
+तपाईंले अनलक गर्न नचाहेका बेला पनि फोनमा हेर्नुभयो भने फोन अनलक हुन सक्छ।
+
+अरू कसैले तपाईंको अनुहारका अगाडि फोन लग्यो भने पनि तपाईंको फोन अनलक हुन सक्छ।
+
+तपाईंको अनुहारसँग धेरै मिल्दोजुल्दो अनुहार भएका (तपाईंका दाजुभाइ/दिदीबहिनी जस्ता) मान्छेहरूले पनि तपाईंको फोन अनलक गर्न सक्ने सम्भावना हुन्छ।"</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"फोन अनलक गर्न आफ्नो अनुहार प्रयोग गर्नुहोस्।
+
+स्मरण रहोस्:
+तपाईं एक पटकमा एउटा अनुहार मात्र सेटअप गर्न सक्नुहुन्छ। अर्को अनुहार हाल्न हालको अनुहार मेटाउनुहोस्।
+
+तपाईंले अनलक गर्न नचाहेका बेला पनि फोनमा हेर्नुभयो भने फोन अनलक हुन सक्छ।
+
+तपाईंका आँखा बन्द भएका बेला अरू कसैले तपाईंको अनुहारका अगाडि फोन लग्यो भने तपाईंको फोन अनलक हुन सक्छ।
+
+तपाईंको अनुहारसँग धेरै मिल्दोजुल्दो अनुहार भएका (तपाईंका दाजुभाइ/दिदीबहिनी जस्ता) मान्छेहरूले पनि तपाईंको फोन अनलक गर्न सक्ने सम्भावना हुन्छ।"</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">फेस अनलक सेटअप गर्ने तरिका</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">यसपछि देखाइने स्क्रिनमा आफ्नो फोन आँखाअघि राखी समात्नुहोस्</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">तपाईं प्रायः चस्मा लगाउने गर्नुहुन्छ भने तपाईं चस्मा लगाएरै सेटअप गर्न सक्नुहुन्छ</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"फेरि फेस अनलक सेटअप गर्न आफ्नो हाल प्रयोग गरिएको फेस मोडेल मेटाउनुहोस्।
+
+तपाईंको फेस मोडेल सुरक्षित रूपले सदाका लागि मेटिने छ।
+
+उक्त फेस मोडेल मेटिएपछि फोन अनलक गर्न तपाईंले आफ्नो PIN, प्याटर्न वा पासवर्ड प्रयोग गर्नु पर्ने हुन्छ।"</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"फेरि फेस अनलक सेटअप गर्न आफ्नो हाल प्रयोग गरिएको फेस मोडेल मेटाउनुहोस्।
+
+तपाईंको फेस मोडेल सुरक्षित रूपले सदाका लागि मेटिने छ।
+
+उक्त फेस मोडेल मेटाएपछि फोन अनलक गर्न तपाईंले आफ्नो फिंगरप्रिन्ट, PIN, प्याटर्न वा पासवर्ड प्रयोग गर्नु पर्ने हुन्छ।"</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">फोन अनलक गर्न तपाईंका आँखा खुला हुनै पर्छ। उत्कृष्ट नतिजा प्राप्त गर्न, फोन अनलक गर्दा सनग्लास खोल्नुहोस्।</string>
+
+    <string name="security_settings_face_enroll_finish_description">तपाईं अब आफ्नो फोन अनलक गर्न आफ्नो अनुहार प्रयोग गर्न सक्नुहुन्छ</string>
+</resources>

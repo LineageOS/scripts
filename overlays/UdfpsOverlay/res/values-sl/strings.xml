@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Ko uporabljate odklepanje s prstnim odtisom, se model prstnega odtisa posodablja s slikami iz teh interakcij. Slike in model prstnega odtisa so varno shranjeni v telefonu in ga nikoli ne zapustijo. Celotna obdelava je izvedena varno v telefonu.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Ko uporablja odklepanje s prstnim odtisom, se model prstnega odtisa posodablja s slikami iz teh interakcij. Slike in model otrokovega prstnega odtisa so varno shranjeni v telefonu in ga nikoli ne zapustijo. Celotna obdelava je izvedena varno v telefonu.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">V nastavitvah lahko kadar koli izbrišete slike in model prstnega odtisa ali izklopite odklepanje s prstnim odtisom. Slike in modeli prstnih odtisov so shranjeni v telefonu, dokler jih ne izbrišete.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Vi in otrok lahko v nastavitvah kadar koli izbrišete slike in model prstnega odtisa ali izklopite odklepanje s prstnim odtisom. Slike in modeli prstnega odtisa so shranjeni v telefonu, dokler niso izbrisani.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">Funkcija odklepanja s prstnim odtisom omogoča odklepanje telefona s prstnim odtisom. Zaradi varnosti ta možnost zahteva uporabo nadomestnega načina zaklepanja zaslona.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Odklepanje s prstnim odtisom</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">Odklepanje s prstnim odtisom za delo</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Nastavite odklepanje s prstnim odtisom</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">Omogočanje odklepanja s prstnim odtisom</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">Odklepanje s prstnim odtisom ustvari edinstven model vašega prstnega odtisa, s katerim potrdite svojo identiteto. Za ustvarjanje modela prstnega odtisa med postopkom nastavitve morate posneti svoj prstni odtis v različnih položajih.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">Odklepanje s prstnim odtisom ustvari edinstven model otrokovega prstnega odtisa, s katerim potrdi svojo identiteto. Za ustvarjanje modela prstnega odtisa med postopkom nastavitve mora posneti svoj prstni odtis v različnih položajih.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">Obiščite ponudnika popravil ali spletno stran g.co/pixel/fingerprintunlock.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">Uporaba odklepanja s prstnim odtisom</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">Vzorec • Prstni odtis</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">Koda PIN • Prstni odtis</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">Geslo • Prstni odtis</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">Nadaljevanje brez odklepanja s prstnim odtisom</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"Vzorec ščiti telefon, če ga izgubite ali vam ga ukradejo.
+
+S tem boste izbrisali tudi slike prstnih odtisov in model prstnega odtisa, ki so shranjeni v napravi. Prstnega odtisa ne boste več mogli uporabljati za preverjanje pristnosti v aplikacijah."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"Vzorec ščiti telefon, če ga izgubite ali vam ga ukradejo.
+
+S tem boste izbrisali slike prstnih odtisov in model prstnega odtisa, ki so shranjeni v napravi. Trajno in varno bo izbrisan tudi model obraza. Obraza in prstnega odtisa ne boste več mogli uporabljati za preverjanje pristnosti v aplikacijah."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"Koda PIN ščiti telefon, če ga izgubite ali vam ga ukradejo.
+
+S tem boste izbrisali tudi slike prstnih odtisov in model prstnega odtisa, ki so shranjeni v napravi. Prstnega odtisa ne boste več mogli uporabljati za preverjanje pristnosti v aplikacijah."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"Koda PIN ščiti telefon, če ga izgubite ali vam ga ukradejo.
+
+S tem boste izbrisali slike prstnih odtisov in model prstnega odtisa, ki so shranjeni v napravi. Trajno in varno bo izbrisan tudi model obraza. Obraza in prstnega odtisa ne boste več mogli uporabljati za preverjanje pristnosti v aplikacijah."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"Geslo ščiti telefon, če ga izgubite ali vam ga ukradejo.
+
+S tem boste izbrisali tudi slike prstnih odtisov in model prstnega odtisa, ki so shranjeni v napravi. Prstnega odtisa ne boste več mogli uporabljati za preverjanje pristnosti v aplikacijah."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"Geslo ščiti telefon, če ga izgubite ali vam ga ukradejo.
+
+S tem boste izbrisali slike prstnih odtisov in model prstnega odtisa, ki so shranjeni v napravi. Trajno in varno bo izbrisan tudi model obraza. Obraza in prstnega odtisa ne boste več mogli uporabljati za preverjanje pristnosti v aplikacijah."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"Funkcije za zaščito naprave ne bodo delovale brez zaklepanja zaslona.
+
+S tem boste izbrisali tudi slike prstnih odtisov in model prstnega odtisa, ki so shranjeni v napravi. Prstnega odtisa ne boste več mogli uporabljati za preverjanje pristnosti v aplikacijah."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"Funkcije za zaščito naprave ne bodo delovale brez zaklepanja zaslona.
+
+S tem boste izbrisali slike prstnih odtisov in model prstnega odtisa, ki so shranjeni v napravi. Trajno in varno bo izbrisan tudi model obraza. Obraza in prstnega odtisa ne boste več mogli uporabljati za preverjanje pristnosti v aplikacijah."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">Večkrat ko s funkcijo odklepanja s prstnim odtisom odklenete telefon ali potrdite svojo identiteto v aplikacijah, bolje bo delovala.</string>
+</resources>

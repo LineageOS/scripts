@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"আপনার ডিভাইসে স্ক্রিন প্রোটেকটর থাকলে, সেরা পারফর্ম্যান্সের জন্য আপনার ফিঙ্গারপ্রিন্ট সেট-আপ করার আগে স্ক্রিন প্রোটেকটর প্রয়োগ করুন।
+
+সেরা ফলাফল পেতে, এমন কোনও স্ক্রিন প্রোটেকটর ব্যবহার করুন যেটি Google-এর জন্য তৈরি হিসেবে সার্টিফিকেটপ্রাপ্ত। অন্যান্য স্ক্রিন প্রোটেকটর ব্যবহার করলে, আপনার ফিঙ্গারপ্রিন্ট কাজ নাও করতে পারে।"</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">আপনার আঙুল টিল্ট করুন ও আঙুল দিয়ে টাচ করুন</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">আঙুল ঘুরিয়ে বাঁদিকের কোণের মাধ্যমে টাচ করুন</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">আবার ঘুরিয়ে নিয়ে ডান দিকের কোণের মাধ্যমে টাচ করুন</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">সেন্সরের কাছাকাছি থাকা স্ক্রিন পরিষ্কার করুন</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">কাঁচের ওপর দাগ হলে, অস্পষ্ট হয়ে গেলে বা কোনও ছোপ পড়লে তা সরিয়ে দিতে আপনার স্ক্রিন ওয়াইপ করুন। এটি আরও পরিস্কার ফিঙ্গারপ্রিন্টের ছবি ক্যাপচার করতে সাহায্য করে।</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">চালিয়ে যাওয়ার আগে আপনার স্ক্রিন পরিস্কার করুন</string>
+</resources>

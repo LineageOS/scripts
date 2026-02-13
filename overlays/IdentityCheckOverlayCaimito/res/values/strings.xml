@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="identity_check_setup_watch_description_caimito">Outside of trusted places like your home:&lt;ul&gt;&lt;li&gt;If you have a connected Pixel Watch 3 or later, you can use either biometrics or your PIN&lt;/li&gt;&lt;li&gt;If you don't have a connected Pixel Watch, you'll be required to use Fingerprint or Face Unlock&lt;/li&gt;&lt;/ul&gt;</string>
+</resources>

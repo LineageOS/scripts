@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Gunakan wajah Anda untuk membuka kunci ponsel</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Gunakan wajah Anda untuk membuka kunci ponsel.
+
+Perlu diperhatikan:
+Anda hanya dapat menyiapkan satu wajah dalam satu waktu. Untuk menambahkan wajah lain, hapus wajah saat ini.
+
+Dengan melihat ponsel, Anda dapat membuka kuncinya meski tidak bermaksud melakukannya.
+
+Seseorang dapat membuka kunci ponsel Anda jika dia mendekatkannya ke wajah Anda.
+
+Ponsel Anda dapat dibuka kuncinya oleh seseorang yang sangat mirip dengan Anda, seperti saudara kembar identik."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Gunakan wajah Anda untuk membuka kunci ponsel.
+
+Perlu diperhatikan:
+Anda hanya dapat menyiapkan satu wajah dalam satu waktu. Untuk menambahkan wajah lain, hapus wajah saat ini.
+
+Dengan melihat ponsel, Anda dapat membuka kuncinya meski tidak bermaksud melakukannya.
+
+Seseorang dapat membuka kunci ponsel Anda jika dia mendekatkannya ke wajah Anda, bahkan saat mata Anda tertutup.
+
+Ponsel Anda dapat dibuka kuncinya oleh seseorang yang sangat mirip dengan Anda, seperti saudara kembar identik."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Cara menyiapkan Buka dengan Wajah</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">Di layar berikutnya, pegang ponsel sejajar dengan mata</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Jika Anda biasanya memakai kacamata, Anda dapat memakainya selama penyiapan</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Hapus model wajah Anda saat ini untuk menyiapkan Buka dengan Wajah lagi.
+
+Model wajah Anda akan dihapus secara permanen dan aman.
+
+Setelah dihapus, Anda akan memerlukan PIN, pola, atau sandi untuk membuka kunci ponsel."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Hapus model wajah Anda saat ini untuk menyiapkan Buka dengan Wajah lagi.
+
+Model wajah Anda akan dihapus secara permanen dan aman.
+
+Setelah model dihapus, Anda akan memerlukan sidik jari, PIN, pola, atau sandi untuk membuka kunci ponsel."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">Untuk membuka kunci ponsel, mata Anda harus terbuka. Agar lebih lancar, lepas kaca mata hitam saat membuka kunci ponsel.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Anda kini dapat mengambil ponsel dan menggunakan wajah untuk membuka kuncinya</string>
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- [CHAR_LIMIT=NONE] [BACKUP_MESSAGE_ID: 5444908404021316250] Battery saver: Feature description, with a "learn more" link. -->
+    <string name="battery_saver_description_with_learn_more">"Batareya quvvatini uzaytirish uchun Quvvat tejash funksiyasi:
+
+• Tungi mavzuni yoqadi
+• Fondagi harakatlar, vizual effektlar va “Ok Google” kabi boshqa funksiyalarni faolsizlantiradi
+• Tarmoq aloqalarini optimallashtiradi
+
+"<annotation id="url">Batafsil</annotation></string>
+</resources>

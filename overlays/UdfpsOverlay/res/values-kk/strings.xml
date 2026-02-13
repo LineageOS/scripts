@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Саусақ ізімен ашу функциясын қолданған кезде, суреттер саусақ ізінің үлгісін жаңарту үшін пайдаланылады. Саусақ ізінің суреттері мен үлгісі телефонда қауіпсіз сақталады және басқа ешқайда жіберілмейді. Барлық өңдеу жұмысы телефонда ғана орындалады.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Саусақ ізімен ашу функциясын қолданған кездегі суреттер саусақ ізінің үлгісін жаңарту үшін қолданылады. Балаңыздың саусақ ізінің суреттері мен үлгісі телефонда қауіпсіз түрде сақталады және басқа ешқайда жіберілмейді. Барлық өңдеу жұмыстары телефонда ғана орындалады.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Кез келген уақытта \"Параметрлер\" бөлімінен саусақ ізінің суреттері мен үлгісін жоюға немесе құлыпты саусақ ізі арқылы ашу функциясын өшіріп қоюға болады. Суреттер мен үлгілер өзіңіз жойғанша телефонда сақталады.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Балаңыз екеуіңіз кез келген уақытта \"Параметрлер\" бөлімінен оның саусақ ізінің суреттері мен үлгісін жоя аласызда. Саусақ ізімен ашу функциясын өшіріп қоюға да болады. Суреттер мен үлгілер өзіңіз жойғанша сақталып тұрады.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">Саусақ ізімен ашу функциясы арқылы телефон құлпын ашуға болады. Қауіпсіздік мақсатында бұл опцияда қосымша экран құлпы талап етіледі.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Саусақ ізімен ашу</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">Жұмысқа арналған саусақ ізімен ашу</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Саусақ ізімен ашу функциясын реттеу</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">Саусақ ізімен ашуға рұқсат беріңіз</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">Жеке басыңызды растау үшін саусақ ізімен ашу функциясы саусақ ізінің қайталанбас үлгісін жасайды. Реттеу кезінде саусақ ізінің үлгісін жасау үшін оны жан-жағынан суретке түсіресіз.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">Балаңыздың жеке басын растау үшін Саусақ ізімен ашу функциясы оның саусақ ізінің қайталанбас үлгісін жасайды. Реттеу кезінде саусақ ізінің үлгісін жасау үшін балаңыз саусағын жан-жағынан суретке түсіреді.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">Жөндеу қызметіне жүгініңіз немесе g.co/pixel/fingerprintunlock сілтемесіне өтіңіз.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">Саусақ ізімен ашу функциясын пайдалану</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">Өрнек • саусақ ізі</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">PIN коды • саусақ ізі</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">Құпия сөз • саусақ ізі</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">Саусақ ізімен ашу функциясынсыз жалғастыру</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"Жоғалған немесе ұрланған жағдайда, өрнек телефоныңызды қорғайды.
+
+Саусақ ізінің құрылғыда сақталған кескіндері мен үлгісі де жойылады. Қолданбалардағы аутентификацияға саусақ ізі жарамай қалады."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"Жоғалған немесе ұрланған жағдайда, өрнек телефоныңызды қорғайды.
+
+Саусақ ізінің құрылғыда сақталған кескіндері мен үлгісі де жойылады. Бетіңіздің үлгісі де қауіпсіз түрде мүлдем жойылады. Қолданбалардағы аутентификацияға саусақ ізі жарамай қалады."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"Жоғалған немесе ұрланған жағдайда, PIN коды телефоныңызды қорғайды.
+
+Саусақ ізінің құрылғыда сақталған кескіндері мен үлгісі де жойылады. Қолданбалардағы аутентификацияға саусақ ізі жарамай қалады."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"Жоғалған немесе ұрланған жағдайда, PIN коды телефоныңызды қорғайды.
+
+Саусақ ізінің құрылғыда сақталған кескіндері мен үлгісі де жойылады. Бетіңіздің үлгісі де қауіпсіз түрде мүлдем жойылады. Қолданбалардағы аутентификацияға саусақ ізі жарамай қалады."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"Жоғалған немесе ұрланған жағдайда, құпия сөз телефоныңызды қорғайды.
+
+Саусақ ізінің құрылғыда сақталған кескіндері мен үлгісі де жойылады. Қолданбалардағы аутентификацияға саусақ ізі жарамай қалады."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"Жоғалған немесе ұрланған жағдайда, құпия сөз телефоныңызды қорғайды.
+
+Саусақ ізінің құрылғыда сақталған кескіндері мен үлгісі де жойылады. Бетіңіздің үлгісі де қауіпсіз түрде мүлдем жойылады. Қолданбалардағы аутентификацияға саусақ ізі жарамай қалады."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"Құрылғыны қорғау функциялары экран құлпысыз жұмыс істемейді.
+
+Саусақ ізінің құрылғыда сақталған кескіндері мен үлгісі де жойылады. Қолданбалардағы аутентификацияға саусақ ізі жарамай қалады."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"Құрылғыны қорғау функциялары экран құлпысыз жұмыс істемейді.
+
+Саусақ ізінің құрылғыда сақталған кескіндері мен үлгісі де жойылады. Бетіңіздің үлгісі де қауіпсіз түрде мүлдем жойылады. Қолданбалардағы аутентификацияға саусақ ізі жарамай қалады."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">Саусақ ізімен ашу функциясын телефонның құлпын ашу немесе қолданбаларда өзіңізді растау үшін жиі пайдалансаңыз, ол соғұрлым жақсы жұмыс істейтін болады.</string>
+</resources>

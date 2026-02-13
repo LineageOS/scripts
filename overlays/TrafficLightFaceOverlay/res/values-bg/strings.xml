@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Използвайте лицето си, за да отключвате телефона си</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Използвайте лицето си, за да отключвате телефона си.
+
+Имайте предвид следното:
+В даден момент може да е настроено само едно лице. За да добавите друго, изтрийте текущото.
+
+Можете да отключите телефона неволно, като го погледнете.
+
+Телефонът ви може да бъде отключен от друг човек, ако бъде приближен до лицето ви.
+
+Той би могъл да бъде отключен и от някого, който много прилича на вас, например брат или сестра близнак."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Използвайте лицето си, за да отключвате телефона си.
+
+Имайте предвид следното:
+В даден момент може да е настроено само едно лице. За да добавите друго, изтрийте текущото.
+
+Можете да отключите телефона неволно, като го погледнете.
+
+Телефонът ви може да бъде отключен от друг човек, ако бъде приближен до лицето ви дори ако очите ви са затворени.
+
+Той би могъл да бъде отключен и от някого, който много прилича на вас, например брат или сестра близнак."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Как да настроите отключването с лице</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">На следващия екран дръжте телефона на нивото на очите си</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Ако обикновено сте с очила, можете да ги носите и при настройването</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Изтрийте текущия модел на лицето си, за да настроите отново отключването с лице.
+
+Моделът на лицето ви ще бъде изтрит надеждно и за постоянно.
+
+След изтриването ще имате нужда от ПИН кода, фигурата или паролата си, за да отключвате телефона си."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Изтрийте текущия модел на лицето си, за да настроите отново отключването с лице.
+
+Моделът на лицето ви ще бъде изтрит надеждно и за постоянно.
+
+След изтриването ще имате нужда от отпечатъка, ПИН кода, фигурата или паролата си, за да отключвате телефона си."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">За да отключите телефона, очите ви трябва да са отворени. За най-добри резултати свалете слънчевите си очила, когато отключвате телефона.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Вече можете да вземете телефона си и да го отключите с лицето си</string>
+</resources>

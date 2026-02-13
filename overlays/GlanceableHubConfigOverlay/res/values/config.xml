@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- If this is true, then always allow auto-rotation when dreaming, regardless of the user's
+         auto-rotation setting. -->
+    <bool name="config_alwaysAllowDreamRotation">true</bool>
+
+    <!-- Control the behavior when the user short presses the power button.
+            0 - Nothing
+            1 - Go to sleep (doze)
+            2 - Really go to sleep (don't doze)
+            3 - Really go to sleep and go home (don't doze)
+            4 - Go to home
+            5 - Dismiss IME if shown. Otherwise go to home
+            6 - Lock if keyguard enabled or go to sleep (doze)
+            7 - Dream if possible or go to sleep (doze)
+            8 - Go to glanceable hub or dream if possible, or sleep if neither is available (doze)
+            9 - Go to dream if device is not dreaming, stop dream if device is dreaming, or sleep if
+                neither is available (doze)
+    -->
+    <integer name="config_shortPressOnPowerBehavior">7</integer>
+
+    <!-- If supported, are dreams enabled? (by default) -->
+    <bool name="config_dreamsEnabledByDefault">false</bool>
+
+    <!-- If supported and enabled, are dreams activated when docked? (by default) -->
+    <bool name="config_dreamsActivatedOnDockByDefault">false</bool>
+
+    <!-- If supported and enabled, are dreams activated when asleep and charging? (by default) -->
+    <bool name="config_dreamsActivatedOnSleepByDefault">true</bool>
+
+    <!-- If supported and enabled, are dreams enabled while device is stationary and upright?
+         (by default) -->
+    <bool name="config_dreamsActivatedOnPosturedByDefault">false</bool>
+
+    <!-- ComponentNames of the dreams that we should hide -->
+    <string-array name="config_disabledDreamComponents">
+        <item>com.android.systemui/com.android.systemui.lowlightclock.LowLightClockDreamService</item>
+    </string-array>
+
+    <!-- The list of supported dream complications -->
+    <integer-array name="config_supportedDreamComplications">
+        <item>1</item>
+        <item>3</item>
+    </integer-array>
+
+    <!-- Whether dreams are disabled when ambient mode is suppressed. -->
+    <bool name="config_dreamsDisabledByAmbientModeSuppressionConfig">true</bool>
+
+    <!-- Whether to send a user activity event to PowerManager when a dream quits unexpectedly so
+         that the screen won't immediately shut off.
+
+         When a dream stops unexpectedly, such as due to an app update, if the device has been
+         inactive less than the user's screen timeout, the device goes to keyguard and times out
+         back to dreaming after a few seconds. If the device has been inactive longer, the screen
+         will immediately turn off. With this flag on, the device will go back to keyguard in all
+         scenarios rather than turning off, which gives the device a chance to start dreaming
+         again. -->
+    <bool name="config_resetScreenTimeoutOnUnexpectedDreamExit">true</bool>
+
+    <!-- Whether to enable glanceable hub features on this device. -->
+    <bool name="config_glanceableHubEnabled">true</bool>
+</resources>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!--
+    OEMs that wish to change the below settings must do so via a runtime resource overlay package
+    and *NOT* by changing this file. This file is part of the tethering mainline module.
+    TODO: define two resources for each config item: a default_* resource and a config_* resource,
+    config_* is empty by default but may be overridden by RROs.
+    -->
+    <!-- List of regexpressions describing the interface (if any) that represent tetherable
+         USB interfaces.  If the device doesn't want to support tethering over USB this should
+         be empty.  An example would be "usb.*" -->
+    <string-array name="config_tether_usb_regexs">
+        <item>rndis\\d</item>
+    </string-array>
+
+    <!-- List of regexpressions describing the interface (if any) that represent tetherable
+         NCM interfaces.  If the device doesn't want to support tethering over NCM this should
+         be empty. -->
+    <string-array name="config_tether_ncm_regexs">
+        <item>ncm\\d</item>
+    </string-array>
+
+    <!-- List of regexpressions describing the interface (if any) that represent tetherable
+         Wifi P2P interfaces.  If the device doesn't want to support tethering over Wifi P2p this
+         should be empty.  An example would be "p2p-p2p\\d-.*" -->
+    <string-array name="config_tether_wifi_p2p_regexs">
+        <item>p2p-p2p\\d-.*</item>
+        <item>p2p\\d</item>
+        <item>p2p-wlan\\d-.*</item>
+    </string-array>
+
+    <!-- Which USB function should be enabled when TETHERING_USB is requested. 0: RNDIS, 1: NCM.
+         -->
+    <integer name="config_tether_usb_functions">1</integer>
+</resources>

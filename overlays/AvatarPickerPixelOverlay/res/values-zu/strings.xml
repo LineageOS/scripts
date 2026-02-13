@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Isikhethi Sesithombe se-Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">Umfanekiso odlalayo wokusandilinga ekabili eluhlaza ngokumnyama kungemuva eliluhlaza ngokukhanyayo</string>
+
+    <string name="desc_ProfileIcons10">Umfanekiso odlalayo wovemvane oluwolintshi kungemuva eliphuzi</string>
+
+    <string name="desc_ProfileIcons11">Ikhala elimnyama elinemiphetho eyindilinga kungemuva elimpunga ngokumnyama</string>
+
+    <string name="desc_ProfileIcons12">Umumo we-clover omnyama onemiphetho eyindilinga kungemuva elimpunga ngokukhanyayo</string>
+
+    <string name="desc_ProfileIcons13">Indilinga ye-wiggly ensomi kungemuva elinsomi ngokumnyama</string>
+
+    <string name="desc_ProfileIcons14">Umumo we-clover oluhlaza okwesibhakabhaka okhanyayo onemiphetho eyindilinga kungemuva eliwolintshi</string>
+
+    <string name="desc_ProfileIcons15">I-hexagon eluhlaza ngokukhanyayo enemiphetho eyindilinga kungemuva eliluhlaza ngokumnyama</string>
+
+    <string name="desc_ProfileIcons16">Umumo wedayimani elimnyama onemiphetho eyindilinga kungemuva elimpunga ngokukhanyayo</string>
+
+    <string name="desc_ProfileIcons17">Umfanekiso odlalayo weqabunga eluwolintshi kungemuva eliphuzi</string>
+
+    <string name="desc_ProfileIcons18">Umfanekiso odlalayo weplanethi i-Saturn kungemuva lepentshisi</string>
+
+    <string name="desc_ProfileIcons19">Umfanekiso odlalayo wezinkanyezi ezimhlophe neziwolintshi kanye nemibuthano kuphethini yasezulwini kungemuva elimnyama</string>
+
+    <string name="desc_ProfileIcons2">Umfanekiso ongabonakali wamasilinda ahlanganayo amnyama namhlophe</string>
+
+    <string name="desc_ProfileIcons20">Umfanekiso odlalayo wenja enamadlebe aluhlaza kanye nobuso obumhlophe kungemuva eliphuzi</string>
+
+    <string name="desc_ProfileIcons21">Umfanekiso odlalayo wenja enamadlebe aluhlaza kanye nobuso obumhlophe kungemuva eliphuzi</string>
+
+    <string name="desc_ProfileIcons22">Umfanekiso odlalayo wenja enamadlebe amnyama nobuso obumhlophe kungemuva eliluhlaza okwesibhakabhaka</string>
+
+    <string name="desc_ProfileIcons23">Umfanekiso odlalayo wembali ephinki enamaqabunga aluhlaza kungemuva eliwukhilimu</string>
+
+    <string name="desc_ProfileIcons24">Umfanekiso ongabonakali wamasilinda aluhlaza okwesibhakabhaka kungemuva elibomvu</string>
+
+    <string name="desc_ProfileIcons3">Umfanekiso ongabonakali womumo we-clover eluhlaza okwesibhakabhaka ngokukhanyayo kungemuva eliluhlaza okwesibhakabhaka ngokumnyama</string>
+
+    <string name="desc_ProfileIcons4">Umfanekiso ongabonakali wonxantathu ababili abaphinki, abanohlangothi-ntathu</string>
+
+    <string name="desc_ProfileIcons5">Umfanekiso ongabonakali wezendlalelo eziphuzi kungemuva eliphuzi</string>
+
+    <string name="desc_ProfileIcons6">Umfanekiso ongabonakali wamatshe ansomi kungemuva eliluhlaza</string>
+
+    <string name="desc_ProfileIcons7">Umfanekiso odlalayo wezimbali ezinhlanu ezimhlophe, zejiyomethri kungemuva eliwolintshi</string>
+
+    <string name="desc_ProfileIcons8">Umfanekiso odlalayo wamajikijolo amathathu kungemuva eliphinki</string>
+
+    <string name="desc_ProfileIcons9">Umfanekiso odlalayo kalamula oneqabunga elimnyama kungemuva eliluhlaza</string>
+</resources>

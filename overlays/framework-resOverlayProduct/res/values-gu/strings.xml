@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- [CHAR_LIMIT=NONE] [BACKUP_MESSAGE_ID: 5444908404021316250] Battery saver: Feature description, with a "learn more" link. -->
+    <string name="battery_saver_description_with_learn_more">"બૅટરીની આવરદા વધારવા માટે, બૅટરી સેવર:
+
+• ઘેરી થીમ ચાલુ કરે છે
+• બૅકગ્રાઉન્ડ પ્રવૃત્તિ, અમુક વિઝ્યુઅલ ઇફેક્ટ અને “ઓકે Google” જેવી અન્ય સુવિધાઓ બંધ અથવા પ્રતિબંધિત કરે છે
+• તમારું નેટવર્ક કનેક્શન ઑપ્ટિમાઇઝ કરે છે
+
+"<annotation id="url">વધુ જાણો</annotation></string>
+</resources>

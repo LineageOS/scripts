@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Title for setting to select Wi-Fi call manager account -->
+    <string name="wifi_calling">Wi‑Fi Calling</string>
+
+    <!-- Mobile network settings screen, title of Wi-Fi calling setting -->
+    <string name="wifi_calling_settings_title">Wi‑Fi Calling</string>
+
+    <!-- In-call screen: call failure message displayed in an error dialog when the user is connected to a wireless network, but wifi calling is turned off. [CHAR_LIMIT=NONE] -->
+    <string name="incall_error_promote_wfc">Aktiviere Wi‑Fi Calling, um anzurufen.</string>
+
+    <!-- Status hint label for an incoming call over a wifi network which has not been accepted yet.
+         [CHAR LIMIT=25] -->
+    <string name="status_hint_label_incoming_wifi_call">Wi‑Fi Calling von</string>
+
+    <!-- Status hint label for a call being made over a wifi network. [CHAR LIMIT=25] -->
+    <string name="status_hint_label_wifi_call">Wi‑Fi Call</string>
+</resources>

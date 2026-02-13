@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <bool name="show_pixel_personalization_illustration">false</bool>
+
+    <bool name="skip_decision_point_action">true</bool>
+</resources>

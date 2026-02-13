@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"Эгер түзмөктүн экранына пленка же айнек чаптай турган болсоңуз, аны манжаңыздын изин коюудан мурун чаптаңыз.
+
+\"Google үчүн жасалган\" программасы боюнча жасалган пленканы же айнекти колдонгонуңуз оң. Башка пленка же айнек чапталган түзмөктөр манжанын изин тааныбай коюшу мүмкүн."</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">Манжаңыздын учун тийгизиңиз</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">Манжаңыздын сол жагын тийгизиңиз</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">Эми манжаңыздын оң жагын тийгизиңиз</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">Сенсордун жанындагы экраныңызды тазалаңыз</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">Экранды сүртүп, сызыктарды жана тактарды кетириңиз. Бул манжа изинин так сүрөттөрүн тартууга жардам берет.</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">Улантуудан мурун экраныңызды тазалаңыз</string>
+</resources>

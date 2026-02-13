@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixeli avatari valija</string>
+
+    <string name="desc_ProfileIcons1">Mänguline illustratsioon kahest tumerohelisest poolringist helerohelisel taustal</string>
+
+    <string name="desc_ProfileIcons10">Mänguline illustratsioon oranžist liblikast kollasel taustal</string>
+
+    <string name="desc_ProfileIcons11">Ümardatud servadega must ninakuju tumehallil taustal</string>
+
+    <string name="desc_ProfileIcons12">Ümardatud servadega must ristiku kuju helehallil taustal</string>
+
+    <string name="desc_ProfileIcons13">Helelilla vigurdav ring tumelillal taustal</string>
+
+    <string name="desc_ProfileIcons14">Helesinise ristiku kuju ümardatud servadega oranžil taustal</string>
+
+    <string name="desc_ProfileIcons15">Heleroheline ümardatud servadega kuusnurk tumerohelisel taustal</string>
+
+    <string name="desc_ProfileIcons16">Must rombikujuline ümardatud servadega helehallil taustal</string>
+
+    <string name="desc_ProfileIcons17">Mänguline illustratsioon oranžist lehest kollasel taustal</string>
+
+    <string name="desc_ProfileIcons18">Mänguline illustratsioon planeedist Saturn virsikutoonis taustal</string>
+
+    <string name="desc_ProfileIcons19">Mänguline illustratsioon valgetest ja oranžidest tähtedest ja taevamustriga ringidest mustal taustal</string>
+
+    <string name="desc_ProfileIcons2">Abstraktne illustratsioon mustvalgetest ristuvatest silindritest</string>
+
+    <string name="desc_ProfileIcons20">Mänguline illustratsioon siniste kõrvade ja valge näoga koerast kollasel taustal</string>
+
+    <string name="desc_ProfileIcons21">Mänguline illustratsioon valgest tuvist, kes lendab oliivioksaga lillal taustal</string>
+
+    <string name="desc_ProfileIcons22">Mänguline illustratsioon mustade kõrvade ja valge näoga koerast sinisel taustal</string>
+
+    <string name="desc_ProfileIcons23">Mänguline illustratsioon roosast lillest koos roheliste lehtedega kreemika taustal</string>
+
+    <string name="desc_ProfileIcons24">Abstraktne illustratsioon kuuest sinisest silindrist punasel taustal</string>
+
+    <string name="desc_ProfileIcons3">Abstraktne illustratsioon helesinisest ristiku kujust tumesinisel taustal</string>
+
+    <string name="desc_ProfileIcons4">Abstraktne illustratsioon kahest roosast kolmemõõtmelisest kolmnurgast</string>
+
+    <string name="desc_ProfileIcons5">Abstraktne illustratsioon sinakatest kihtidest kollasel taustal</string>
+
+    <string name="desc_ProfileIcons6">Abstraktne illustratsioon lilladest kividest rohelisel taustal</string>
+
+    <string name="desc_ProfileIcons7">Mänguline illustratsioon viiest valgest geomeetrilisest lillest oranžil taustal</string>
+
+    <string name="desc_ProfileIcons8">Mänguline illustratsioon kolmest mustikast roosal taustal</string>
+
+    <string name="desc_ProfileIcons9">Mänguline illustratsioon sidrunist musta lehega rohelisel taustal</string>
+</resources>

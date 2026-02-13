@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Component names of allowed communal widgets -->
+    <string-array name="config_communalWidgetAllowlist">
+        <item>com.google.android.apps.bard/com.google.android.apps.bard.widget.RobinToolBarAppWidgetReceiver</item>
+        <item>com.google.android.apps.weather/com.google.android.apps.weather.widget.FullForecastWidgetReceiver</item>
+        <item>com.google.android.googlequicksearchbox/com.google.android.apps.search.widgets.stocks.StocksWidgetReceiver</item>
+    </string-array>
+
+    <!-- This value is used when calculating whether the device is in ambient light mode. It is
+        light mode when the light sensor sample value exceeds above this value. -->
+    <dimen name="config_ambientLightModeThreshold">12.0</dimen>
+
+    <!-- This value is used when calculating whether the device is in ambient dark mode. It is
+        dark mode when the light sensor sample value drops below this value. -->
+    <dimen name="config_ambientDarkModeThreshold">5.0</dimen>
+
+    <!-- Configuration to swipe to open glanceable hub -->
+    <bool name="config_swipeToOpenGlanceableHub">true</bool>
+</resources>

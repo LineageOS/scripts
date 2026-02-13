@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Wireless networks, item title to go into the WFC settings [CHAR LIMIT=30] -->
+    <string name="wifi_calling_settings_title">Wi‑Fi Calling</string>
+
+    <!-- Summary of suggestion to turn on wifi calling [CHAR LIMIT=55] -->
+    <string name="wifi_calling_suggestion_summary">\"WiFi Calling\" aktivieren, um Abdeckung zu erweitern</string>
+
+    <!-- Wi-Fi Calling settings. Text displayed when Wi-Fi Calling is off -->
+    <string name="wifi_calling_off_explanation">Wenn die Option \"Wi‑Fi Calling\" aktiviert ist, kann dein Smartphone abhängig von deiner Einstellung und von der Signalstärke Anrufe über WLANs oder über das Netz deines Mobilfunkanbieters übertragen. Erkundige dich bei deinem Mobilfunkanbieter über die hierfür erhobenen Gebühren und andere Informationen, bevor du diese Funktion aktivierst.%1$s</string>
+
+    <!-- Wi-Fi Calling settings. Additional text displayed when Wi-Fi Calling is off. Default empty. [CHAR LIMIT=NONE] -->
+    <string name="wifi_calling_off_explanation_2">"
+
+Du kannst von deinem Gerät via \"Wi‑Fi Calling\" keine Notrufe tätigen. Wenn du versuchst, den Notruf zu erreichen, nutzt dein Gerät automatisch das Mobilfunknetz. Notrufe sind nur an Orten mit Mobilfunkabdeckung möglich."</string>
+
+    <!-- Message to display when wifi calling needs activation [CHAR LIMIT=NONE] -->
+    <string name="wifi_calling_settings_activation_instructions">Wi‑Fi Calling aktivieren</string>
+
+    <!-- Message to display when wifi calling should be on [CHAR LIMIT=NONE] -->
+    <string name="wifi_calling_turn_on">Wi‑Fi Calling verwenden</string>
+
+    <!-- Search keyword for "Flashlight" settings [CHAR_LIMIT=NONE]-->
+    <string name="keywords_wifi_calling">Wi‑Fi, anruf, anrufen, Wi‑Fi Calling, anrufe über Wi‑Fi</string>
+
+    <!-- Warn the user that the phone have emergency call limitation. [CHAR LIMIT=NONE] -->
+    <string name="wfc_disclaimer_emergency_limitation_desc_text">"Notrufe über Wi‑Fi Calling werden von deinem Mobilfunkanbieter nicht unterstützt.
+Das Gerät wechselt automatisch zu einem Mobilfunknetz, um einen Notruf abzusetzen.
+Notrufe sind nur in Bereichen mit Mobilfunkabdeckung möglich."</string>
+
+    <string name="wifi_calling_not_supported">Wi‑Fi Calling wird von %1$s nicht unterstützt</string>
+</resources>

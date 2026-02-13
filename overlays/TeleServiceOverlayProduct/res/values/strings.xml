@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string-array name="enabled_networks_except_gsm_values">
+        <item>10</item>
+        <item>0</item>
+    </string-array>
+
+    <string-array name="enabled_networks_values">
+        <item>10</item>
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+</resources>

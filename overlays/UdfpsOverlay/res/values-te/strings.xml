@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">మీరు వేలిముద్ర అన్‌లాక్‌ను ఉపయోగించినప్పుడు, వేలిముద్ర ఇమేజ్‌లు తీసుకొనబడతాయి. ఇవి మీ వేలిముద్ర మోడల్‌ను అప్‌డేట్ చేయడానికి ఉపయోగించబడతాయి. మీ వేలిముద్ర ఇమేజ్‌లు, అలాగే వాటి ఆధారిత మోడల్‌ కూడా మీ ఫోన్‌లో భద్రంగా స్టోర్ అవుతాయి. ఇవి ఎప్పుడూ ఫోన్ నుండి బయటకు వెళ్లవు. ప్రాసెసింగ్ మొత్తం మీ ఫోన్‌లోనే సురక్షితంగా జరుగుతుంది.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">వారు వేలిముద్ర అన్‌లాక్‌ను ఉపయోగించినప్పుడు, వారి వేలిముద్ర మోడల్‌ను అప్‌డేట్ చేయడానికి ఇమేజ్‌లు ఉపయోగించబడతాయి. మీ చిన్నారి వేలిముద్ర ఇమేజ్‌లు, మోడల్‌లు సురక్షితంగా ఫోన్‌లో స్టోర్ చేయబడతాయి, ఫోన్ నుండి బయటకు పంపబడవు. మొత్తం ప్రాసెస్ విధానం ఫోన్‌లో సురక్షితంగా జరుగుతుంది.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">మీరు సెట్టింగ్‌లలో ఎప్పుడైనా మీ వేలిముద్ర ఇమేజ్‌లను, మోడల్‌ను తొలగించవచ్చు లేదా 'వేలిముద్ర అన్‌లాక్'ను ఆఫ్ చేయవచ్చు. వేలిముద్ర ఇమేజ్‌లు, మోడళ్లు మీరు తొలగించే వరకు ఫోన్‌లో స్టోర్ చేయబడతాయి.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">మీరు, మీ చిన్నారి వారి వేలిముద్ర ఇమేజ్‌లను, మోడల్‌ను తొలగించవచ్చు లేదా సెట్టింగ్‌లలో ఎప్పుడైనా వేలిముద్ర అన్‌లాక్‌ను ఆఫ్ చేయవచ్చు. వేలిముద్ర ఇమేజ్‌లు అలాగే మోడల్‌లు తొలగించబడే వరకు ఫోన్‌లో స్టోర్ చేయబడతాయి.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">వేలిముద్ర అన్‌లాక్‌తో, మీ వేలిముద్రను ఉపయోగించి ఫోన్‌ను అన్‌లాక్ చేయవచ్చు. సెక్యూరిటీని దృష్టిలో ఉంచుకుని, ఈ ఆప్షన్‌కు బ్యాకప్ స్క్రీన్ లాక్ అవసరం.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">వేలిముద్ర అన్‌లాక్</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">వర్క్‌ప్లేస్ కోసం వేలిముద్ర అన్‌లాక్</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">వేలిముద్ర అన్‌లాక్‌ను సెటప్ చేయండి</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">వేలిముద్ర అన్‌లాక్‌ను అనుమతించండి</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">\"వేలిముద్ర అన్‌లాక్\" అన్నది మీ వేలిముద్రకు సంబంధించి ఒక ప్రత్యేకమైన మోడల్‌ను క్రియేట్ చేస్తుంది. ఫోన్‌ను అన్‌లాక్‌ చేస్తోంది మీరేనని వెరిఫై చేయడానికి ఈ మోడల్‌ ఉపయోగించబడుతుంది. ఫోన్‌ను సెటప్ చేసే సమయంలో ఈ వేలిముద్ర మోడల్‌ను క్రియేట్ చేయడానికి, మీరు మీ వేలిముద్ర ఇమేజ్‌లను విభిన్న స్థానాల నుండి తీసుకుంటారు.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">అది వారేనని వెరిఫై చేయడానికి, వేలిముద్ర అన్‌లాక్ మీ చిన్నారి వేలిముద్ర ప్రత్యేకమైన మోడల్‌ను క్రియేట్ చేస్తుంది. సెటప్ సమయంలో ఈ వేలిముద్ర మోడల్‌ను క్రియేట్ చేయడానికి, వారి వేలిముద్ర తాలూకు ఇమేజ్‌లను వారు వివిధ స్థానాల నుండి తీసుకుంటారు.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">రిపెయిర్ ప్రొవైడర్ లేదా g.co/pixel/fingerprintunlock వెబ్‌సైట్‌కు వెళ్లండి.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">వేలిముద్ర అన్‌లాక్‌ను ఉపయోగించండి</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">ఆకృతి • వేలిముద్ర</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">PIN • వేలిముద్ర</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">పాస్‌వర్డ్ • వేలిముద్ర</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">వేలిముద్ర అన్‌లాక్ లేకుండా కొనసాగించండి</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"మీ ఫోన్‌ను పోగొట్టుకున్నా లేదా దొంగిలించబడినా దాన్ని ఆకృతి రక్షిస్తుంది.
+
+మీ పరికరంలో స్టోర్ అయి ఉన్న వేలిముద్ర ఇమేజ్‌లు, మోడల్‌ను ఇది తొలగిస్తుంది. యాప్‌లలో ప్రామాణీకరణ కోసం మీరు మీ వేలిముద్రను ఉపయోగించలేరు."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"మీ ఫోన్‌ను పోగొట్టుకున్నా లేదా దొంగిలించబడినా దాన్ని ఆకృతి రక్షిస్తుంది.
+
+మీ పరికరంలో స్టోర్ అయి ఉన్న వేలిముద్ర ఇమేజ్‌లు, మోడల్‌ను ఇది తొలగిస్తుంది. మీ ఫేస్ మోడల్ కూడా శాశ్వతంగా, సురక్షితంగా తొలగించబడుతుంది. యాప్‌లలో ప్రామాణీకరణ కోసం మీరు మీ ఫేస్ లేదా వేలిముద్రను ఉపయోగించలేరు."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"మీ ఫోన్‌ను పోగొట్టుకున్నా లేదా దొంగిలించబడినా దాన్ని PIN రక్షిస్తుంది.
+
+మీ పరికరంలో స్టోర్ అయి ఉన్న వేలిముద్ర ఇమేజ్‌లు, మోడల్‌ను ఇది తొలగిస్తుంది. యాప్‌లలో ప్రామాణీకరణ కోసం మీరు మీ వేలిముద్రను ఉపయోగించలేరు."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"మీ ఫోన్‌ను పోగొట్టుకున్నా లేదా దొంగిలించబడినా దాన్ని PIN రక్షిస్తుంది.
+
+మీ పరికరంలో స్టోర్ అయి ఉన్న వేలిముద్ర ఇమేజ్‌లు, మోడల్‌ను ఇది తొలగిస్తుంది. మీ ఫేస్ మోడల్ కూడా శాశ్వతంగా, సురక్షితంగా తొలగించబడుతుంది. యాప్‌లలో ప్రామాణీకరణ కోసం మీరు మీ ఫేస్ లేదా వేలిముద్రను ఉపయోగించలేరు."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"మీ ఫోన్‌ను పోగొట్టుకున్నా లేదా దొంగిలించబడినా దాన్ని పాస్‌వర్డ్ రక్షిస్తుంది.
+
+మీ పరికరంలో స్టోర్ అయి ఉన్న వేలిముద్ర ఇమేజ్‌లు, మోడల్‌ను ఇది తొలగిస్తుంది. యాప్‌లలో ప్రామాణీకరణ కోసం మీరు మీ వేలిముద్రను ఉపయోగించలేరు."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"మీ ఫోన్‌ను పోగొట్టుకున్నా లేదా దొంగిలించబడినా దాన్ని పాస్‌వర్డ్ రక్షిస్తుంది.
+
+మీ పరికరంలో స్టోర్ అయిన వేలిముద్ర ఇమేజ్‌లు, మోడల్‌ను ఇది తొలగిస్తుంది. మీ ఫేస్ మోడల్ కూడా శాశ్వతంగా, సురక్షితంగా తొలగించబడుతుంది. యాప్‌లలో ప్రామాణీకరణ కోసం మీరు మీ ఫేస్ లేదా వేలిముద్రను ఉపయోగించలేరు."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"మీ స్క్రీన్ లాక్ లేకుండా పరికర రక్షణ ఫీచర్‌లు పనిచేయవు.
+
+మీ పరికరంలో స్టోర్ అయి ఉన్న వేలిముద్ర ఇమేజ్‌లు, మోడల్‌ను ఇది తొలగిస్తుంది. యాప్‌లలో ప్రామాణీకరణ కోసం మీరు మీ వేలిముద్రను ఉపయోగించలేరు."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"మీ స్క్రీన్ లాక్ లేకుండా పరికర రక్షణ ఫీచర్‌లు పనిచేయవు.
+
+మీ పరికరంలో స్టోర్ అయి ఉన్న వేలిముద్ర ఇమేజ్‌లు, మోడల్‌ను ఇది తొలగిస్తుంది. మీ ఫేస్ మోడల్ కూడా శాశ్వతంగా, సురక్షితంగా తొలగించబడుతుంది. యాప్‌లలో ప్రామాణీకరణ కోసం మీరు మీ ఫేస్ లేదా వేలిముద్రను ఉపయోగించలేరు."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">వేలిముద్ర అన్‌లాక్ మీ ఫోన్‌ను అన్‌లాక్ చేయడానికి లేదా యాప్‌లలో ఇది మీరేనని వెరిఫై చేయడానికి ఎంత ఎక్కువగా ఉపయోగిస్తే అంత మెరుగుపడుతుంది</string>
+</resources>

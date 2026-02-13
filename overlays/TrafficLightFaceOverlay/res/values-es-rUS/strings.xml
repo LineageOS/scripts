@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Usa el rostro para desbloquear el teléfono.</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Usa tu rostro para desbloquear el teléfono.
+
+Ten en cuenta lo siguiente:
+Solo puedes configurar un rostro a la vez. Para agregar otro rostro, borra el actual.
+
+Puedes desbloquear el teléfono aunque no lo desees cuando lo miras.
+
+Un tercero puede desbloquear el teléfono si lo sostiene frente a tu rostro.
+
+También puede desbloquearlo cualquier persona que se parezca a ti, como un hermano gemelo."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Usa tu rostro para desbloquear el teléfono.
+
+Ten en cuenta lo siguiente:
+Solo puedes configurar un rostro a la vez. Para agregar otro rostro, borra el actual.
+
+Puedes desbloquear el teléfono aunque no lo desees cuando lo miras.
+
+Un tercero puede desbloquear el teléfono si lo sostiene frente a tu rostro, incluso aunque tengas los ojos cerrados.
+
+También puede desbloquearlo cualquier persona que se parezca a ti, como un hermano gemelo."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Cómo configurar el Desbloqueo facial</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">En la pantalla siguiente, sostén el teléfono a la altura de los ojos</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Si usas anteojos, no es necesario que te los quites durante la configuración</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Borra tu modelo de rostro actual para volver a configurar Desbloqueo facial.
+
+Tu modelo de rostro se borrará de manera segura y permanente.
+
+Luego, deberás usar tu PIN, patrón o contraseña para desbloquear el teléfono."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Borra tu modelo actual de rostro para volver a configurar Desbloqueo facial.
+
+Tu modelo de rostro se borrará de manera segura y permanente.
+
+Luego, deberás usar tu huella dactilar, PIN, patrón o contraseña para desbloquear el teléfono."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">Para desbloquear el teléfono, debes tener los ojos abiertos. Obtendrás mejores resultados si no llevas puestos anteojos de sol.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Ahora puedes tomar tu teléfono y usar el rostro para desbloquearlo</string>
+</resources>

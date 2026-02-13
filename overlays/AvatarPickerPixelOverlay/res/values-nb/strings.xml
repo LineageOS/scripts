@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Valgverktøy for brukerbilde for Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">Leken illustrasjon av to mørkegrønne halvsirkler på lysegrønn bakgrunn</string>
+
+    <string name="desc_ProfileIcons10">Leken illustrasjon av en oransje sommerfugl på gul bakgrunn</string>
+
+    <string name="desc_ProfileIcons11">Svart neseform med avrundede kanter på mørkegrå bakgrunn</string>
+
+    <string name="desc_ProfileIcons12">Svart kløverform med avrundede kanter på lysegrå bakgrunn</string>
+
+    <string name="desc_ProfileIcons13">Lyselilla ujevn sirkel på mørkelilla bakgrunn</string>
+
+    <string name="desc_ProfileIcons14">Lyseblå kløverform med avrundede kanter på oransje bakgrunn</string>
+
+    <string name="desc_ProfileIcons15">Lysegrønn sekskant med avrundede kanter på mørkegrønn bakgrunn</string>
+
+    <string name="desc_ProfileIcons16">Svart diamantform med avrundede kanter på lysegrå bakgrunn</string>
+
+    <string name="desc_ProfileIcons17">Leken illustrasjon av et oransje blad på gul bakgrunn</string>
+
+    <string name="desc_ProfileIcons18">Leken illustrasjon av planeten Saturn på ferskenfarget bakgrunn</string>
+
+    <string name="desc_ProfileIcons19">Leken illustrasjon av hvite og oransje stjerner og sirkler i et kosmisk mønster på svart bakgrunn</string>
+
+    <string name="desc_ProfileIcons2">Abstrakt illustrasjon av svarte og hvite sylindere som overlapper</string>
+
+    <string name="desc_ProfileIcons20">Leken illustrasjon av en hund med blå ører og hvitt ansikt på gul bakgrunn</string>
+
+    <string name="desc_ProfileIcons21">Leken illustrasjon av en hvit due som flyr med en olivengren på lilla bakgrunn</string>
+
+    <string name="desc_ProfileIcons22">Leken illustrasjon av en hund med svarte ører og hvitt ansikt på blå bakgrunn</string>
+
+    <string name="desc_ProfileIcons23">Leken illustrasjon av en rosa blomst med grønne blader på kremgul bakgrunn</string>
+
+    <string name="desc_ProfileIcons24">Abstrakt illustrasjon av seks blå sylindere på rød bakgrunn</string>
+
+    <string name="desc_ProfileIcons3">Abstrakt illustrasjon av en lyseblå kløverform på mørkeblå bakgrunn</string>
+
+    <string name="desc_ProfileIcons4">Abstrakt illustrasjon av to rosa, tredimensjonale trekanter</string>
+
+    <string name="desc_ProfileIcons5">Abstrakt illustrasjon av blågrønne lag på gul bakgrunn</string>
+
+    <string name="desc_ProfileIcons6">Abstrakt illustrasjon av lilla steiner på grønn bakgrunn</string>
+
+    <string name="desc_ProfileIcons7">Leken illustrasjon av fem hvite, geometriske blomster på oransje bakgrunn</string>
+
+    <string name="desc_ProfileIcons8">Leken illustrasjon av tre blåbær på rosa bakgrunn</string>
+
+    <string name="desc_ProfileIcons9">Leken illustrasjon av en sitron med et svart blad på grønn bakgrunn</string>
+</resources>

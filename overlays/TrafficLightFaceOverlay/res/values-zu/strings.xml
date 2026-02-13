@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Sebenzisa ubuso bakho ukuze uvule ifoni yakho</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Sebenzisa ubuso bakho ukuze uvule ifoni yakho.
+
+Khumbula:
+Ungasetha ubuso obubodwa ngesikhathi. Ukwengeza obunye ubuso, sula obamanje.
+
+Ukubheka ifoni kungayivula lapho ungahlosile.
+
+Ifoni yakho ingavulwa ngothile uma ibhekiswe ebusweni bakho.
+
+Ifoni yakho ingavulwa ngothile ofana kakhulu nawe, njengolamana naye ofana nawe."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Sebenzisa ubuso bakho ukuze uvule ifoni yakho.
+
+Khumbula:
+Ungasetha ubuso obubodwa ngesikhathi. Ukwengeza obunye ubuso, sula obamanje.
+
+Ukubheka ifoni kungayivula lapho ungahlosile.
+
+Ifoni yakho ingavulwa ngothile uma ibhekiswe ebusweni bakho, ngisho noma amehlo wakho evaliwe.
+
+Ifoni yakho ingavulwa ngothile ofana kakhulu nawe, njengolamana naye ofana nawe."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Indlela yokusetha Ukuvula ngobuso</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">Esikrinini esilandelayo, bamba ifoni yakho iqondane namehlo</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Uma uvame ukugqoka izibuko, ungazigqoka phakathi nokusetha</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Sula imodeli yakho yobuso yamanje ukuze usethe Ukuvula ngobuso.
+
+Imodeli yakho yobuso izosulwa ngunaphakade futhi ngokuvikelekile.
+
+Ngemva kokusulwa uzodinga Iphinikhodi yakho, iphethini, noma iphasiwedi ukuze uvule ifoni yakho."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Sula imodeli yakho yobuso yamanje ukusetha futhi Ukuvula ngobuso.
+
+Imodeli yakho yobuso izosulwa ngunaphakade futhi ngokuvikelekile.
+
+Ngemva kokusulwa, uzodinga izigxivizo zakho zeminwe, iphinikhodi, iphethini, noma iphasiwedi ukuvula ifoni yakho noma iphasiwedi yakho ukuze uvule ifoni yakho."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">Ukuze uvule ifoni, amehlo akho kumele avuleke. Ngemiphumela emihle, susa izibuko uma uvula ifoni.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Manje usungakwazi ukuthatha ifoni yakho futhi usebenzise ubuso bakho ukuze uyivule</string>
+</resources>

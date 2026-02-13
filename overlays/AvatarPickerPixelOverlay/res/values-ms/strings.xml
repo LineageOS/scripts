@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Pemilih Avatar Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">Ilustrasi menarik yang menampilkan dua separa bulatan pada latar berwarna hijau cerah</string>
+
+    <string name="desc_ProfileIcons10">Ilustrasi menarik yang menampilkan kupu-kupu jingga pada latar berwarna kuning</string>
+
+    <string name="desc_ProfileIcons11">Bentuk hidung berwarna hitam dengan tepi bulat pada latar berwarna kelabu gelap</string>
+
+    <string name="desc_ProfileIcons12">Bentuk klover berwarna hitam dengan tepi bulat pada latar berwarna kelabu cerah</string>
+
+    <string name="desc_ProfileIcons13">Bulatan bergoyang-goyang berwarna ungu cerah pada latar berwarna ungu gelap</string>
+
+    <string name="desc_ProfileIcons14">Bentuk klover berwarna biru cerah dengan tepi bulat pada latar berwarna jingga</string>
+
+    <string name="desc_ProfileIcons15">Heksagon berwarna hijau cerah dengan tepi bulat pada latar berwarna hijau gelap</string>
+
+    <string name="desc_ProfileIcons16">Bentuk berlian berwarna hitam dengan tepi bulat pada latar berwarna kelabu cerah</string>
+
+    <string name="desc_ProfileIcons17">Ilustrasi menarik yang menampilkan daun jingga pada latar berwarna kuning</string>
+
+    <string name="desc_ProfileIcons18">Ilustrasi menarik yang menampilkan planet Zuhal pada latar berwarna kuning kemerah-merahan</string>
+
+    <string name="desc_ProfileIcons19">Ilustrasi menarik yang menampilkan bintang berwarna putih dan jingga serta bulatan dalam corak cakerawala pada latar berwarna hitam</string>
+
+    <string name="desc_ProfileIcons2">Ilustrasi abstrak silinder berwarna hitam dan putih yang bersilang</string>
+
+    <string name="desc_ProfileIcons20">Ilustrasi menarik yang menampilkan anjing dengan telinga berwarna biru dan muka berwarna putih pada latar berwarna kuning</string>
+
+    <string name="desc_ProfileIcons21">Ilustrasi menarik yang menampilkan merpati berwarna putih terbang dengan ranting zaitun pada latar berwarna ungu</string>
+
+    <string name="desc_ProfileIcons22">Ilustrasi menarik yang menampilkan anjing dengan telinga berwarna hitam dan muka berwarna putih pada latar berwarna biru</string>
+
+    <string name="desc_ProfileIcons23">Ilustrasi menarik yang menampilkan bunga berwarna merah jambu dengan daun berwarna hijau pada latar berwarna krim</string>
+
+    <string name="desc_ProfileIcons24">Ilustrasi abstrak enam silinder berwarna biru pada latar berwarna merah</string>
+
+    <string name="desc_ProfileIcons3">Ilustrasi abstrak bentuk klover berwarna biru cerah pada latar berwarna biru gelap</string>
+
+    <string name="desc_ProfileIcons4">Ilustrasi abstrak dua segi tiga dalam tiga dimensi berwarna merah jambu</string>
+
+    <string name="desc_ProfileIcons5">Ilustrasi abstrak lapisan hijau kebiruan pada latar berwarna kuning</string>
+
+    <string name="desc_ProfileIcons6">Ilustrasi abstrak batu berwarna ungu pada latar berwarna hijau</string>
+
+    <string name="desc_ProfileIcons7">Ilustrasi menarik yang menampilkan lima bunga geometri berwarna putih pada latar berwarna jingga</string>
+
+    <string name="desc_ProfileIcons8">Ilustrasi menarik yang menampilkan tiga beri biru pada latar berwarna merah jambu</string>
+
+    <string name="desc_ProfileIcons9">Ilustrasi menarik yang menampilkan lemon dengan daun berwarna hitam pada latar berwarna hijau</string>
+</resources>

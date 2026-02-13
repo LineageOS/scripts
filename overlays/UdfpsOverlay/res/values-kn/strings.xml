@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">ನೀವು ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಅನ್‌ಲಾಕ್ ಬಳಸುವಾಗ, ನಿಮ್ಮ ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಮಾಡೆಲ್ ಅನ್ನು ಅಪ್‌ಡೇಟ್ ಮಾಡಲು ಚಿತ್ರಗಳನ್ನು ಬಳಸಲಾಗುತ್ತದೆ. ನಿಮ್ಮ ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಚಿತ್ರಗಳು ಮತ್ತು ಮಾಡೆಲ್ ಅನ್ನು ನಿಮ್ಮ ಫೋನ್‌ನಲ್ಲಿ ಸುರಕ್ಷಿತವಾಗಿ ಸಂಗ್ರಹಿಸಲಾಗುತ್ತದೆ ಹಾಗೂ ಅವುಗಳು ಯಾವಾಗಲೂ ನಿಮ್ಮ ಫೋನ್‌ನಲ್ಲಿಯೇ ಉಳಿಯುತ್ತವೆ. ಎಲ್ಲಾ ಪ್ರಕ್ರಿಯೆಗಳು ನಿಮ್ಮ ಫೋನ್‌ನಲ್ಲಿ ಸುರಕ್ಷಿತವಾಗಿ ಸಂಭವಿಸುತ್ತವೆ.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">ಅವರು ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಅನ್‌ಲಾಕ್ ಬಳಸುವಾಗ, ಅವರು ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಮಾಡೆಲ್ ಅನ್ನು ಅಪ್‌ಡೇಟ್ ಮಾಡಲು ಚಿತ್ರಗಳನ್ನು ಬಳಸಲಾಗುತ್ತದೆ. ನಿಮ್ಮ ಮಗುವಿನ ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಚಿತ್ರಗಳು ಮತ್ತು ಮಾಡೆಲ್ ಅನ್ನು ಫೋನ್‌ನಲ್ಲಿ ಸುರಕ್ಷಿತವಾಗಿ ಸಂಗ್ರಹಿಸಲಾಗಿದೆ ಹಾಗೂ ಅವುಗಳು ಯಾವಾಗಲೂ ನಿಮ್ಮ ಫೋನ್‌ನಲ್ಲಿಯೇ ಉಳಿಯುತ್ತವೆ. ಎಲ್ಲಾ ಪ್ರಕ್ರಿಯೆಗಳು ಫೋನ್‌ನಲ್ಲಿ ಸುರಕ್ಷಿತವಾಗಿ ಸಂಭವಿಸುತ್ತವೆ.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">ಸೆಟ್ಟಿಂಗ್‌ಗಳಲ್ಲಿ ಯಾವಾಗ ಬೇಕಾದರೂ ನಿಮ್ಮ ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಚಿತ್ರಗಳು ಮತ್ತು ಮಾಡೆಲ್ ಅನ್ನು ನೀವು ಅಳಿಸಬಹುದು ಅಥವಾ ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಅನ್‌ಲಾಕ್ ಅನ್ನು ಆಫ್ ಮಾಡಬಹುದು. ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಚಿತ್ರಗಳು ಮತ್ತು ಮಾಡೆಲ್‌ಗಳನ್ನು ನೀವು ಅಳಿಸುವವರೆಗೆ, ಫೋನ್‌ನಲ್ಲಿ ಸಂಗ್ರಹಿಸಲಾಗುತ್ತದೆ.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">ಸೆಟ್ಟಿಂಗ್‌ಗಳಲ್ಲಿ ಯಾವಾಗ ಬೇಕಾದರೂ ಅವರ ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಚಿತ್ರಗಳು ಮತ್ತು ಮಾಡೆಲ್ ಅನ್ನು ನೀವು ಮತ್ತು ನಿಮ್ಮ ಮಗು ಅಳಿಸಬಹುದು ಅಥವಾ ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಅನ್‌ಲಾಕ್ ಅನ್ನು ಆಫ್ ಮಾಡಬಹುದು. ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಚಿತ್ರಗಳು ಮತ್ತು ಮಾಡೆಲ್‌ಗಳನ್ನು ಅವರು ಅಳಿಸುವವರೆಗೆ, ಫೋನ್‌ನಲ್ಲಿ ಸಂಗ್ರಹಿಸಲಾಗುತ್ತದೆ.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಅನ್‌ಲಾಕ್ ಮೂಲಕ, ನಿಮ್ಮ ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಬಳಸಿಕೊಂಡು ನಿಮ್ಮ ಫೋನ್ ಅನ್ನು ನೀವು ಅನ್‌ಲಾಕ್ ಮಾಡಬಹುದು. ಭದ್ರತೆಗಾಗಿ, ಈ ಆಯ್ಕೆಗೆ ಒಂದು ಬ್ಯಾಕಪ್ ಸ್ಕ್ರೀನ್ ಲಾಕ್‌ನ ಅಗತ್ಯವಿದೆ.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಅನ್‌ಲಾಕ್</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">ಕೆಲಸಕ್ಕಾಗಿ ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಅನ್‌ಲಾಕ್</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಅನ್‌ಲಾಕ್ ಸೆಟಪ್‌ ಮಾಡಿ</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">ಫಿಂಗರ್‌ ಪ್ರಿಂಟ್ ಅನ್‌ಲಾಕ್ ಅನ್ನು ಅನುಮತಿಸಿ</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಅನ್‍ಲಾಕ್, ದೃಢೀಕರಣದ ಸಮಯದಲ್ಲಿ ನಿಮ್ಮನ್ನು ಗುರುತಿಸಲು ನಿಮ್ಮ ಫಿಂಗರ್‌ಪ್ರಿಂಟ್‌ನ ವಿಶಿಷ್ಟ ಮಾಡೆಲ್ ಅನ್ನು ರಚಿಸುತ್ತದೆ. ಸೆಟಪ್ ಮಾಡುವ ಸಮಯದಲ್ಲಿ ಈ ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಮಾಡೆಲ್ ಅನ್ನು ರಚಿಸಲು, ನಿಮ್ಮ ಫಿಂಗರ್‌ಪ್ರಿಂಟ್‌ನ ಚಿತ್ರಗಳನ್ನು ನೀವು ವಿವಿಧ ಸ್ಥಾನಗಳಿಂದ ತೆಗೆದುಕೊಳ್ಳುತ್ತೀರಿ.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">ದೃಢೀಕರಣದ ಸಮಯದಲ್ಲಿ ಗುರುತಿಸಲು ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಅನ್‌ಲಾಕ್ ನಿಮ್ಮ ಮಗುವಿನ ಫಿಂಗರ್‌ಪ್ರಿಂಟ್‌ನ ವಿಶಿಷ್ಟ ಮಾಡೆಲ್ ಅನ್ನು ರಚಿಸುತ್ತದೆ. ಸೆಟಪ್ ಸಮಯದಲ್ಲಿ ಈ ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಮಾಡೆಲ್ ಅನ್ನು ರಚಿಸಲು, ಅವರು ತಮ್ಮ ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಚಿತ್ರಗಳನ್ನು ವಿವಿಧ ಆಯಾಮಗಳಲ್ಲಿ ತೆಗೆದುಕೊಳ್ಳುತ್ತಾರೆ.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">ರಿಪೇರಿ ಮಾಡುವವರನ್ನು ಸಂಪರ್ಕಿಸಿ ಅಥವಾ g.co/pixel/fingerprintunlock ಗೆ ಭೇಟಿ ನೀಡಿ.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಅನ್‌ಲಾಕ್ ಅನ್ನು ಬಳಸಿ</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">ಪ್ಯಾಟರ್ನ್ • ಫಿಂಗರ್‌ಪ್ರಿಂಟ್</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">ಪಿನ್ • ಫಿಂಗರ್‌ಪ್ರಿಂಟ್</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">ಪಾಸ್‌ವರ್ಡ್ • ಫಿಂಗರ್‌ಪ್ರಿಂಟ್</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಅನ್‌ಲಾಕ್ ಇಲ್ಲದೆಯೇ ಮುಂದುವರಿಯಿರಿ</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"ನಿಮ್ಮ ಫೋನ್ ಕಳೆದುಹೋದರೆ ಅಥವಾ ಕಳುವಾದರೆ ಅದನ್ನು ಪ್ಯಾಟರ್ನ್ ರಕ್ಷಿಸುತ್ತದೆ.
+
+ಇದು ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿ ಸಂಗ್ರಹವಾಗಿರುವ ಫಿಂಗರ್‌ ಪ್ರಿಂಟ್ ಚಿತ್ರಗಳು ಮತ್ತು ಮಾಡೆಲ್ ಅನ್ನು ಸಹ ಅಳಿಸುತ್ತದೆ. ಆ್ಯಪ್‌ಗಳಲ್ಲಿ ದೃಢೀಕರಣಕ್ಕಾಗಿ ನಿಮ್ಮ ಫಿಂಗರ್‌ ಪ್ರಿಂಟ್ ಅನ್ನು ಬಳಸಲು ನಿಮಗೆ ಸಾಧ್ಯವಾಗುವುದಿಲ್ಲ."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"ನಿಮ್ಮ ಫೋನ್ ಕಳೆದುಹೋದರೆ ಅಥವಾ ಕಳುವಾದರೆ ಅದನ್ನು ಪ್ಯಾಟರ್ನ್ ರಕ್ಷಿಸುತ್ತದೆ.
+
+ಇದು ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿ ಸಂಗ್ರಹವಾಗಿರುವ ಫಿಂಗರ್‌ ಪ್ರಿಂಟ್ ಚಿತ್ರಗಳು ಮಾಡೆಲ್ ಅನ್ನು ಅಳಿಸುತ್ತದೆ. ನಿಮ್ಮ ಫೇಸ್ ಮಾಡೆಲ್ ಅನ್ನು ಸಹ ಶಾಶ್ವತವಾಗಿ ಮತ್ತು ಸುರಕ್ಷಿತವಾಗಿ ಅಳಿಸಲಾಗುತ್ತದೆ. ಆ್ಯಪ್‌ಗಳಲ್ಲಿ ದೃಢೀಕರಿಸಲು ನಿಮ್ಮ ಫೇಸ್ ಅಥವಾ ಫಿಂಗರ್‌ ಪ್ರಿಂಟ್ ಅನ್ನು ಬಳಸಲು ನಿಮಗೆ ಸಾಧ್ಯವಾಗುವುದಿಲ್ಲ."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"ನಿಮ್ಮ ಫೋನ್ ಕಳೆದುಹೋದರೆ ಅಥವಾ ಕಳುವಾದರೆ ಅದನ್ನು ಪಿನ್ ರಕ್ಷಿಸುತ್ತದೆ.
+
+ಇದು ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿ ಸಂಗ್ರಹವಾಗಿರುವ ಫಿಂಗರ್‌ ಪ್ರಿಂಟ್ ಚಿತ್ರಗಳು ಮತ್ತು ಮಾಡೆಲ್ ಅನ್ನು ಸಹ ಅಳಿಸುತ್ತದೆ. ಆ್ಯಪ್‌ಗಳಲ್ಲಿ ದೃಢೀಕರಣಕ್ಕಾಗಿ ನಿಮ್ಮ ಫಿಂಗರ್‌ ಪ್ರಿಂಟ್ ಅನ್ನು ಬಳಸಲು ನಿಮಗೆ ಸಾಧ್ಯವಾಗುವುದಿಲ್ಲ."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"ನಿಮ್ಮ ಫೋನ್ ಕಳೆದುಹೋದರೆ ಅಥವಾ ಕಳುವಾದರೆ ಅದನ್ನು ಪಿನ್ ರಕ್ಷಿಸುತ್ತದೆ.
+
+ಇದು ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿ ಸಂಗ್ರಹವಾಗಿರುವ ಫಿಂಗರ್‌ ಪ್ರಿಂಟ್ ಚಿತ್ರಗಳು ಮತ್ತು ಮಾಡೆಲ್ ಅನ್ನು ಅಳಿಸುತ್ತದೆ. ನಿಮ್ಮ ಫೇಸ್ ಮಾಡೆಲ್ ಅನ್ನು ಸಹ ಶಾಶ್ವತವಾಗಿ ಮತ್ತು ಸುರಕ್ಷಿತವಾಗಿ ಅಳಿಸಲಾಗುತ್ತದೆ. ಆ್ಯಪ್‌ಗಳಲ್ಲಿ ದೃಢೀಕರಿಸಲು ನಿಮ್ಮ ಫೇಸ್ ಅಥವಾ ಫಿಂಗರ್‌ ಪ್ರಿಂಟ್ ಅನ್ನು ಬಳಸಲು ನಿಮಗೆ ಸಾಧ್ಯವಾಗುವುದಿಲ್ಲ."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"ನಿಮ್ಮ ಫೋನ್ ಕಳೆದುಹೋದರೆ ಅಥವಾ ಕಳುವಾದರೆ ಅದನ್ನು ಪಾಸ್‌ವರ್ಡ್ ರಕ್ಷಿಸುತ್ತದೆ.
+
+ಇದು ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿ ಸಂಗ್ರಹವಾಗಿರುವ ಫಿಂಗರ್‌ ಪ್ರಿಂಟ್ ಚಿತ್ರಗಳು ಮತ್ತು ಮಾಡೆಲ್ ಅನ್ನು ಸಹ ಅಳಿಸುತ್ತದೆ. ಆ್ಯಪ್‌ಗಳಲ್ಲಿ ದೃಢೀಕರಣಕ್ಕಾಗಿ ನಿಮ್ಮ ಫಿಂಗರ್‌ ಪ್ರಿಂಟ್ ಅನ್ನು ಬಳಸಲು ನಿಮಗೆ ಸಾಧ್ಯವಾಗುವುದಿಲ್ಲ."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"ನಿಮ್ಮ ಫೋನ್ ಕಳೆದುಹೋದರೆ ಅಥವಾ ಕಳುವಾದರೆ ಅದನ್ನು ಪಾಸ್‌ವರ್ಡ್ ರಕ್ಷಿಸುತ್ತದೆ.
+
+ಇದು ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿ ಸಂಗ್ರಹವಾಗಿರುವ ಫಿಂಗರ್‌ ಪ್ರಿಂಟ್ ಚಿತ್ರಗಳು ಮಾಡೆಲ್ ಅನ್ನು ಅಳಿಸುತ್ತದೆ. ನಿಮ್ಮ ಫೇಸ್ ಮಾಡೆಲ್ ಅನ್ನು ಸಹ ಶಾಶ್ವತವಾಗಿ ಮತ್ತು ಸುರಕ್ಷಿತವಾಗಿ ಅಳಿಸಲಾಗುತ್ತದೆ. ಆ್ಯಪ್‌ಗಳಲ್ಲಿ ದೃಢೀಕರಿಸಲು ನಿಮ್ಮ ಫೇಸ್ ಅಥವಾ ಫಿಂಗರ್‌ ಪ್ರಿಂಟ್ ಅನ್ನು ಬಳಸಲು ನಿಮಗೆ ಸಾಧ್ಯವಾಗುವುದಿಲ್ಲ."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"ನಿಮ್ಮ ಸ್ಕ್ರೀನ್ ಲಾಕ್ ಇಲ್ಲದೆ ಸಾಧನ ರಕ್ಷಣೆ ವೈಶಿಷ್ಟ್ಯಗಳು ಕಾರ್ಯನಿರ್ವಹಿಸುವುದಿಲ್ಲ.
+
+ಇದು ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿ ಸಂಗ್ರಹವಾಗಿರುವ ಫಿಂಗರ್‌ ಪ್ರಿಂಟ್ ಚಿತ್ರಗಳು ಮಾಡೆಲ್ ಅನ್ನು ಸಹ ಅಳಿಸುತ್ತದೆ. ಆ್ಯಪ್‌ಗಳಲ್ಲಿ ದೃಢೀಕರಣಕ್ಕಾಗಿ ನಿಮ್ಮ ಫಿಂಗರ್‌ ಪ್ರಿಂಟ್ ಅನ್ನು ಬಳಸಲು ನಿಮಗೆ ಸಾಧ್ಯವಾಗುವುದಿಲ್ಲ."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"ನಿಮ್ಮ ಸ್ಕ್ರೀನ್ ಲಾಕ್ ಇಲ್ಲದೆ ಸಾಧನ ರಕ್ಷಣೆ ವೈಶಿಷ್ಟ್ಯಗಳು ಕಾರ್ಯನಿರ್ವಹಿಸುವುದಿಲ್ಲ.
+
+ಇದು ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿ ಸಂಗ್ರಹವಾಗಿರುವ ಫಿಂಗರ್‌ ಪ್ರಿಂಟ್ ಚಿತ್ರಗಳು ಮಾಡೆಲ್ ಅನ್ನು ಅಳಿಸುತ್ತದೆ. ನಿಮ್ಮ ಫೇಸ್ ಮಾಡೆಲ್ ಅನ್ನು ಸಹ ಶಾಶ್ವತವಾಗಿ ಮತ್ತು ಸುರಕ್ಷಿತವಾಗಿ ಅಳಿಸಲಾಗುತ್ತದೆ. ಆ್ಯಪ್‌ಗಳಲ್ಲಿ ದೃಢೀಕರಿಸಲು ನಿಮ್ಮ ಫೇಸ್ ಅಥವಾ ಫಿಂಗರ್‌ ಪ್ರಿಂಟ್ ಅನ್ನು ಬಳಸಲು ನಿಮಗೆ ಸಾಧ್ಯವಾಗುವುದಿಲ್ಲ."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">ನಿಮ್ಮ ಫೋನ್ ಅನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಲು ಅಥವಾ ಆ್ಯಪ್‌ಗಳಲ್ಲಿ ಇದು ನೀವೇ ಎಂದು ದೃಢೀಕರಿಸಲು ನೀವು ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಅನ್‌ಲಾಕ್ ಅನ್ನು ಹೆಚ್ಚಾಗಿ ಬಳಸಿದಾಗ ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಅನ್‌ಲಾಕ್ ಸುಧಾರಿಸುತ್ತದೆ</string>
+</resources>

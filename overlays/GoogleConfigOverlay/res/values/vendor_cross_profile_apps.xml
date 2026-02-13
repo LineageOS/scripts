@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!--
+    A collection of apps that have been pre-approved for cross-profile communication.
+    These will not require admin consent, but will still require user consent during provisioning.
+    -->
+    <string-array name="vendor_cross_profile_apps">
+        <item>com.google.android.googlequicksearchbox</item>
+        <item>com.google.android.inputmethod.latin</item>
+        <item>com.google.android.projection.gearhead</item>
+        <item>com.google.android.inputmethod.latin.dev</item>
+        <item>com.google.android.inputmethod.latin.canary</item>
+    </string-array>
+</resources>

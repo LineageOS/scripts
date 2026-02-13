@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">আপোনাৰ ফ’নটো আনলক কৰিবলৈ নিজৰ মুখাৱয়ব ব্যৱহাৰ কৰক</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"আপোনাৰ ফ’নটো আনলক কৰিবলৈ নিজৰ মুখাৱয়ব ব্যৱহাৰ কৰক।
+
+মনত ৰাখিব যে:
+আপোনাৰ ওচৰত এবাৰত মাত্ৰ এখন মুখাৱয়ব থাকিব পাৰে। নতুন মুখাৱয়ব যোগ দিবলৈ বৰ্তমানৰ মুখাৱয়বখন আঁতৰাওক।
+
+আপুনি নিবিচাৰিলেও ফ’নটোলৈ চোৱাৰ ফলত সেইটো আনলক হ’ব।
+
+আপোনাৰ ফ’নটো আন কোনোবাই আপোনাৰ মুখৰ আগত দাঙি ধৰিও সেইটো আনলক কৰিব পাৰে।
+
+আপোনাৰ ফ’নটো এনে কোনো লোকেও আনলক কৰিব পাৰে যি দেখাত বহুখিনি আপোনাৰ দৰে, যেনে একেই সহোদৰ-সহোদৰা।"</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"আপোনাৰ ফ’নটো আনলক কৰিবলৈ নিজৰ মুখাৱয়ব ব্যৱহাৰ কৰক।
+
+মনত ৰাখিব যে:
+আপুনি এবাৰত মাত্ৰ এখন মুখাৱয়ব ছেট কৰি ৰাখিব পাৰে। নতুন মুখাৱয়ব যোগ দিবলৈ বৰ্তমানৰ মুখাৱয়বখন আঁতৰাওক।
+
+আপুনি নিবিচাৰিলেও ফ’নটোলৈ চোৱাৰ ফলত সেইটো আনলক হ’ব।
+
+আপোনাৰ দুচকু বন্ধ থাকিলেও আন কোনোবাই আপোনাৰ ফ’নটো আপোনাৰ মুখৰ আগত দাঙি ধৰিও সেইটো আনলক কৰিব পাৰে।
+
+আপোনাৰ ফ’নটো এনে কোনো লোকেও আনলক কৰিব পাৰে যি দেখাত বহুখিনি আপোনাৰ দৰে, যেনে একেই সহোদৰ-সহোদৰা।"</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">ফে’চ আনলক কেনেকৈ ছেটআপ কৰে</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">পৰৱৰ্তী স্ক্ৰীনখনত, আপোনাৰ ফ’নটো চকুৰ স্তৰত ধৰি ৰাখক</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">আপুনি সচৰাচৰ চশমা পিন্ধিলে, ছেটআপৰ সময়ত সেয়া পিন্ধি থাকিব পাৰে</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"ফেচ আনলক পুনৰ ছেট আপ কৰিবলৈ বৰ্তমানৰ মুখাৱয়বৰ মডেলটো মচক।
+
+আপোনাৰ মুখাৱয়বৰ মডেলটো স্থায়ী তথা সুৰক্ষিতভাৱে মচা হ’ব।
+
+মচি পেলোৱাৰ পাছত, ফ’নটো আনলক কৰিবলৈ আপোনাক নিজৰ পিন, আৰ্হি অথবা পাছৱৰ্ডৰ প্ৰয়োজন হ’ব।"</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"ফেচ আনলক পুনৰ ছেট আপ কৰিবলৈ বৰ্তমানৰ মুখাৱয়বৰ মডেলটো মচক।
+
+আপোনাৰ মুখাৱয়বৰ মডেলটো স্থায়ী তথা সুৰক্ষিতভাৱে মচা হ’ব।
+
+মচি পেলোৱাৰ পাছত, ফ’নটো আনলক কৰিবলৈ আপোনাক নিজৰ ফিংগাৰপ্ৰিণ্ট, পিন, আৰ্হি অথবা পাছৱৰ্ডৰ প্ৰয়োজন হ’ব।"</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">ফ’নটো আনলক কৰিবলৈ আপুনি চকু দুটা মেলি থাকিবই লাগিব। শ্ৰেষ্ঠ ফলাফল পাবলৈ, ফ'নটো আনলক কৰাৰ সময়ত ছানগ্লাছযোৰ খুলি লওক।</string>
+
+    <string name="security_settings_face_enroll_finish_description">এতিয়া আপুনি আপোনাৰ ফ’নটো তুলি ল’ব পাৰিব আৰু আপোনাৰ মুখাৱয়ব ব্যৱহাৰ কৰি সেইটো আনলক কৰিব পাৰিব</string>
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- [CHAR_LIMIT=NONE] [BACKUP_MESSAGE_ID: 5444908404021316250] Battery saver: Feature description, with a "learn more" link. -->
+    <string name="battery_saver_description_with_learn_more">"Për të rritur kohëzgjatjen e baterisë, \"Kursyesi i baterisë\":
+
+• Aktivizon \"Temën e errët\"
+• Çaktivizon ose kufizon aktivitetin në sfond, disa efekte vizuale dhe veçori të tjera si “Ok Google”
+• Optimizon lidhjet e tua të rrjetit
+
+"<annotation id="url">Mëso më shumë</annotation></string>
+</resources>

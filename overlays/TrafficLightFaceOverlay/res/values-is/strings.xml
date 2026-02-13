@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Notaðu andlitið til að taka símann úr lás</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Notaðu andlitið til að taka símann úr lás.
+
+Hafðu eftirfarandi í huga:
+Þú getur aðeins verið með eitt andlit uppsett í einu. Eyddu núverandi andliti til að bæta nýju andliti við.
+
+Síminn gæti opnast óvart þegar þú lítur á hann.
+
+Aðrir geta opnað símann þinn með því að halda honum upp að andlitinu á þér.
+
+Manneskja sem er mjög lík þér getur opnað símann þinn, t.d. eineggja tvíburi."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Notaðu andlitið til að taka símann úr lás.
+
+Hafðu eftirfarandi í huga:
+Þú getur aðeins verið með eitt andlit uppsett í einu. Eyddu núverandi andliti til að bæta nýju andliti við.
+
+Síminn gæti opnast óvart þegar þú lítur á hann.
+
+Aðrir geta opnað símann þinn með því að halda honum upp að andlitinu á þér, jafnvel þótt þú sért með lokuð augun.
+
+Manneskja sem er mjög lík þér getur opnað símann þinn, t.d. eineggja tvíburi."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Uppsetning andlitskennis</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">Á næsta skjá skaltu halda símanum í augnhæð</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Ef þú notar gleraugu að staðaldri geturðu verið með þau við uppsetningu</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Eyddu núverandi andlitslíkani til að setja upp andlitskenni aftur.
+
+Andlitslíkaninu þínu verður eytt varanlega á öruggan hátt.
+
+Þegar búið er að eyða því þarftu að nota PIN-númer, mynstur eða aðgangsorð til að taka símann úr lás."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Eyddu núverandi andlitslíkani til að setja upp andlitskenni aftur.
+
+Andlitslíkaninu þínu verður eytt varanlega á öruggan hátt.
+
+Þegar búið er að eyða því þarftu að nota fingrafar, PIN-númer, mynstur eða aðgangsorð til að taka símann úr lás."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">Þú verður að hafa augun opin til að taka símann úr lás. Betra er að taka af sér sólgleraugun til að taka símann úr lás.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Nú geturðu tekið upp símann og notað andlitið til að opna hann</string>
+</resources>

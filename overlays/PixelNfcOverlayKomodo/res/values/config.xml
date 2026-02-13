@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <bool name="polling_disable_allowed">true</bool>
+
+    <bool name="nfcc_always_on_allowed">false</bool>
+
+    <bool name="tag_intent_app_pref_supported">true</bool>
+
+    <!-- List of SKUs where Secure NFC functionality is supported -->
+    <string-array name="config_skuSupportsSecureNfc">
+        <item>GGX8B</item>
+        <item>GQ57S</item>
+        <item>GZC4K</item>
+    </string-array>
+
+    <!-- NFC Antenna Location API -->
+    <integer name="device_width">76</integer>
+    <integer name="device_height">162</integer>
+    <bool name="device_foldable">false</bool>
+    <integer-array name="antenna_x">
+        <item>38</item>
+    </integer-array>
+    <integer-array name="antenna_y">
+        <item>50</item>
+    </integer-array>
+    <bool name="nfc_observe_mode_supported">true</bool>
+</resources>

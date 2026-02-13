@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Telefonunuzun kilidini açmak için yüzünüzü kullanın.</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Telefonunuzun kilidini açmak için yüzünüzü kullanın.
+
+Unutmayın:
+Tek seferde yalnızca bir tane yüz tanımlayabilirsiniz. Başka bir yüz eklemek için mevcut yüzü silin.
+
+Telefona bakarsanız, istemediğiniz zamanlarda da telefonunuzun kilidi açılabilir.
+
+Telefonunuz başka birisi tarafından yüzünüze tutulduğunda kilidi açılabilir.
+
+Telefonunuzun kilidi, ikiziniz gibi size çok benzeyen başka biri tarafından da açılabilir."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Telefonunuzun kilidini açmak için yüzünüzü kullanın.
+
+Unutmayın:
+Tek seferde yalnızca bir tane yüz tanımlayabilirsiniz. Başka bir yüz eklemek için mevcut yüzü silin.
+
+Telefona bakarsanız, istemediğiniz zamanlarda da telefonunuzun kilidi açılabilir.
+
+Gözleriniz kapalı olsa bile telefonunuz başka birisi tarafından yüzünüze tutulduğunda kilidi açılabilir.
+
+Telefonunuzun kilidi, ikiziniz gibi size çok benzeyen başka biri tarafından da açılabilir."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Yüz Tanıma Kilidi'ni ayarlama</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">Sonraki ekranda telefonunuzu göz hizasında tutun.</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Normalde gözlük takıyorsanız kurulum sırasında da takabilirsiniz.</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Yüz Tanıma Kilidi'ni tekrar kurmak için mevcut yüz modelinizi silin.
+
+Yüz modeliniz güvenli bir şekilde kalıcı olarak silinir.
+
+Silme işleminden sonra, telefonunuzun kilidini açmak için PIN'iniz, deseniniz veya şifreniz gerekir."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Yüz Tanıma Kilidi'ni tekrar kurmak için mevcut yüz modelinizi silin.
+
+Yüz modeliniz güvenli bir şekilde kalıcı olarak silinir.
+
+Silme işleminden sonra, telefonunuzun kilidini açmak için parmak iziniz, PIN'iniz, deseniniz veya şifreniz gerekir."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">Telefonunuzun kilidini açmak için gözleriniz açık olmalıdır. En iyi sonucu elde etmek için telefonunuzun kilidini açarken güneş gözlüğünüzü çıkarın.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Artık telefonunuzu elinize alıp kilidini açmak için yüzünüzü kullanabilirsiniz</string>
+</resources>

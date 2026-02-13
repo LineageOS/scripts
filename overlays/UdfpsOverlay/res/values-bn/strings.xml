@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">আপনি 'ফিঙ্গারপ্রিন্ট আনলক' ফিচার ব্যবহার করার সময়, ছবিগুলি আপনার ফিঙ্গারপ্রিন্ট মডেল আপডেট করতে ব্যবহৃত হয়। আপনার ফিঙ্গারপ্রিন্টের ছবি এবং মডেল নিরাপদে সেভ করে রাখা হয় এবং কখনও ফোন থেকে মুছে যায় না। আপনার ফোনে সবকটি প্রসেস নিরাপদে করা হয়।</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">সে 'ফিঙ্গারপ্রিন্ট আনলক' ব্যবহার করার সময়, ছবিগুলি তার ফিঙ্গারপ্রিন্ট মডেল আপডেট করার জন্য ব্যবহৃত হয়। আপনার সন্তানের ফিঙ্গারপ্রিন্টের ছবি ও মডেল নিরাপদে সেভ করা থাকে এবং কখনও ফোন থেকে মুছে যায় না। ফোনে সবকটি প্রসেস নিরাপদে করা হয়।</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">সেটিংস থেকে যেকোনও সময় আপনি ফিঙ্গারপ্রিন্টের ছবি এবং মডেল মুছে ফেলতে পারবেন অথবা ফিঙ্গারপ্রিন্ট আনলক ফিচারটি বন্ধ করতে পারবেন। আপনি মুছে না দেওয়া পর্যন্ত ফিঙ্গারপ্রিন্টের ছবি এবং মডেল ফোনে থেকে যায়।</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">আপনি ও আপনার সন্তান ফিঙ্গারপ্রিন্টের ছবি ও মডেল মুছে ফেলতে পারেন অথবা যে কোনও সময় সেটিংস থেকে 'ফিঙ্গারপ্রিন্ট আনলক' ফিচারটি বন্ধ করে দিতে পারেন। মুছে না ফেলা পর্যন্ত ফিঙ্গারপ্রিন্টের ছবি ও মডেল ফোনে সেভ করা থাকে।</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">ফিঙ্গারপ্রিন্ট আনলক ব্যবহার করে আপনি আপনার ফিঙ্গারপ্রিন্ট দিয়ে ফোন আনলক করতে পারেন। সুরক্ষার জন্য, এই বিকল্পটির একটি ব্যাক-আপ স্ক্রিন লক থাকতে হবে।</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">ফিঙ্গারপ্রিন্ট আনলক</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">অফিসের জন্য 'ফিঙ্গারপ্রিন্ট আনলক'</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">ফিঙ্গারপ্রিন্ট আনলক সেট-আপ করুন</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">'ফিঙ্গারপ্রিন্ট আনলক' করার অনুমতি দিন</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">আপনার পরিচয় যাচাই করার জন্য, 'ফিঙ্গারপ্রিন্ট আনলক' ফিচার আপনার ফিঙ্গারপ্রিন্টের একটি অনন্য মডেল তৈরি করে। সেট-আপ করার সময় ফিঙ্গারপ্রিন্ট মডেলটি তৈরি করার জন্য, বিভিন্ন দিক থেকে আপনাকে ফিঙ্গারপ্রিন্টের ছবি নিতে হবে।</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">আপনার সন্তানের পরিচয় যাচাই করার জন্য, 'ফিঙ্গারপ্রিন্ট আনলক' ফিচার তার ফিঙ্গারপ্রিন্টের একটি অনন্য মডেল তৈরি করে। সেটআপ করার সময় এই ফিঙ্গারপ্রিন্ট মডেল তৈরি করার জন্য, বিভিন্ন দিক থেকে তার ফিঙ্গারপ্রিন্টের ছবি নিতে হবে।</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">সারাতে পারবেন এমন কারওর কাছে বা g.co/pixel/fingerprintunlock লিঙ্কে যান।</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">ফিঙ্গারপ্রিন্ট আনলক ব্যবহার করুন</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">প্যাটার্ন • ফিঙ্গারপ্রিন্ট</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">পিন • ফিঙ্গারপ্রিন্ট</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">পাসওয়ার্ড • ফিঙ্গারপ্রিন্ট</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">ফিঙ্গারপ্রিন্ট আনলক সেট আপ না করে চালিয়ে যান</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"আপনার ফোন হারিয়ে বা চুরি হয়ে গেলে, প্যাটার্ন সেটি সুরক্ষিত রাখে।
+
+ এটি আপনার ডিভাইসে স্টোর করা আঙ্গুলের ছাপের ছবি এবং মডেলও মুছে ফেলে। অ্যাপে যাচাইকরণ করার জন্য আপনার আঙ্গুলের ছাপ ব্যবহার করতে পারবেন না।"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"আপনার ফোন হারিয়ে বা চুরি হয়ে গেলে, প্যাটার্ন সেটি সুরক্ষিত রাখে।
+
+ এটি আপনার ডিভাইসে স্টোর করা আঙ্গুলের ছাপের ছবি এবং মডেল মুছে ফেলে। আপনার ফেস মডেলও স্থায়ীভাবে এবং নিরাপদে মুছে ফেলা হবে। অ্যাপে যাচাইকরণ করার জন্য আপনার ফেস বা আঙ্গুলের ছাপ ব্যবহার করতে পারবেন না।"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"আপনার ফোন হারিয়ে বা চুরি হয়ে গেলে, পিন সেটি সুরক্ষিত রাখে।
+
+ এটি আপনার ডিভাইসে স্টোর করা আঙ্গুলের ছাপের ছবি এবং মডেলও মুছে ফেলে। অ্যাপে যাচাইকরণ করার জন্য আপনার আঙ্গুলের ছাপ ব্যবহার করতে পারবেন না।"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"আপনার ফোন হারিয়ে বা চুরি হয়ে গেলে, পিন সেটি সুরক্ষিত রাখে।
+
+ এটি আপনার ডিভাইসে স্টোর করা আঙ্গুলের ছাপের ছবি এবং মডেল মুছে ফেলে। আপনার ফেস মডেলও স্থায়ীভাবে এবং নিরাপদে মুছে ফেলা হবে। অ্যাপে যাচাইকরণ করার জন্য আপনার ফেস বা আঙ্গুলের ছাপ ব্যবহার করতে পারবেন না।"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"আপনার ফোন হারিয়ে বা চুরি হয়ে গেলে, পাসওয়ার্ড সেটি সুরক্ষিত রাখে।
+
+ এটি আপনার ডিভাইসে স্টোর করা আঙ্গুলের ছাপের ছবি এবং মডেলও মুছে ফেলে। অ্যাপে যাচাইকরণ করার জন্য আপনার আঙ্গুলের ছাপ ব্যবহার করতে পারবেন না।"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"আপনার ফোন হারিয়ে বা চুরি হয়ে গেলে, পাসওয়ার্ড সেটি সুরক্ষিত রাখে।
+
+ এটি আপনার ডিভাইসে স্টোর করা আঙ্গুলের ছাপের ছবি এবং মডেল মুছে ফেলে। আপনার ফেস মডেলও স্থায়ীভাবে এবং নিরাপদে মুছে ফেলা হবে। অ্যাপে যাচাইকরণ করার জন্য আপনার ফেস বা আঙ্গুলের ছাপ ব্যবহার করতে পারবেন না।"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"আপনার ডিভাইসের সুরক্ষা ফিচার স্ক্রিন লক ছাড়া কাজ করবে না।
+
+ এটি আপনার ডিভাইসে স্টোর করা আঙ্গুলের ছাপের ছবি এবং মডেলও মুছে ফেলে। অ্যাপে যাচাইকরণ করার জন্য আপনার আঙ্গুলের ছাপ ব্যবহার করতে পারবেন না।"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"আপনার ডিভাইসের সুরক্ষা ফিচার স্ক্রিন লক ছাড়া কাজ করবে না।
+
+ এটি আপনার ডিভাইসে স্টোর করা আঙ্গুলের ছাপের ছবি এবং মডেল মুছে ফেলে। আপনার ফেস মডেলও স্থায়ীভাবে এবং নিরাপদে মুছে ফেলা হবে। অ্যাপে যাচাইকরণ করার জন্য আপনার ফেস বা আঙ্গুলের ছাপ ব্যবহার করতে পারবেন না।"</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">ফিঙ্গারপ্রিন্ট আনলক ফিচারটি ব্যবহার করা হয় ফোন আনলক করা বা অ্যাপে আপনার পরিচয় শনাক্ত করার জন্য। ফিচারটি যত বেশি ব্যবহার করা হয় তত উন্নত হয়</string>
+</resources>

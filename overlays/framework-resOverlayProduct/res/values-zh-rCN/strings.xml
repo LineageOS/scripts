@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- [CHAR_LIMIT=NONE] [BACKUP_MESSAGE_ID: 5444908404021316250] Battery saver: Feature description, with a "learn more" link. -->
+    <string name="battery_saver_description_with_learn_more">"为了延长电池续航时间，省电模式会执行以下操作：
+
+• 开启深色主题
+• 关闭或限制后台活动、部分视觉效果和其他功能，例如“Ok Google”
+• 优化网络连接
+
+"<annotation id="url">了解详情</annotation></string>
+</resources>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Utilitza la cara per desbloquejar el telèfon</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Utilitza la cara per desbloquejar el telèfon.
+
+Tingues en compte el següent:
+Només pots tenir configurada una cara a la vegada. Per afegir una altra cara, suprimeix l'actual.
+
+Si mires el telèfon, es pot desbloquejar sense voler.
+
+Una altra persona pot desbloquejar el telèfon si te'l subjecta davant de la cara.
+
+És possible que algú que s'assembli molt a tu, com ara un bessó idèntic, pugui desbloquejar el telèfon."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Utilitza la cara per desbloquejar el telèfon.
+
+Tingues en compte el següent:
+Només pots tenir configurada una cara a la vegada. Per afegir una altra cara, suprimeix l'actual.
+
+Si mires el telèfon, es pot desbloquejar sense voler.
+
+Una altra persona pot desbloquejar el telèfon si te'l subjecta davant de la cara, encara que tinguis els ulls tancats.
+
+És possible que algú que s'assembli molt a tu, com ara un bessó idèntic, pugui desbloquejar el telèfon."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Com es pot configurar Desbloqueig facial</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">A la pantalla següent, subjecta el telèfon a l'altura dels ulls</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Si normalment portes ulleres, pots dur-les posades durant la configuració</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Suprimeix el model facial actual per tornar a configurar Desbloqueig facial.
+
+El model facial se suprimirà permanentment i de manera segura.
+
+Un cop suprimit, necessitaràs el PIN, el patró o la contrasenya per desbloquejar el telèfon."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Suprimeix el model facial actual per tornar a configurar Desbloqueig facial.
+
+El model facial se suprimirà permanentment i de manera segura.
+
+Un cop suprimit, necessitaràs l'empremta digital, el PIN, el patró o la contrasenya per desbloquejar el telèfon."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">Per desbloquejar el telèfon, has de tenir els ulls oberts. Per obtenir els millors resultats, treu-te les ulleres de sol quan desbloquegis el telèfon.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Ara pots agafar el telèfon i utilitzar la cara per desbloquejar-lo</string>
+</resources>

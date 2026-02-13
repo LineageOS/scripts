@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Erabili aurpegia telefonoa desblokeatzeko</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Erabili aurpegia telefonoa desblokeatzeko.
+
+Kontuan izan:
+Aurpegi bakarra konfigura dezakezu aldiko. Beste aurpegi bat gehitzeko, ezabatu une honetan dagoena.
+
+Telefonoari begiratuz gero, baliteke hura desblokeatzea, horretarako asmorik ez baduzu ere.
+
+Beste norbaitek ere desblokea dezake telefonoa, zuri begira jartzen badu.
+
+Zure antz handia dutenek ere desblokea dezakete telefonoa; esate baterako, biki batek."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Erabili aurpegia telefonoa desblokeatzeko.
+
+Kontuan izan:
+Aurpegi bakarra konfigura dezakezu aldiko. Beste aurpegi bat gehitzeko, ezabatu une honetan dagoena.
+
+Telefonoari begiratuz gero, baliteke hura desblokeatzea, horretarako asmorik ez baduzu ere.
+
+Beste norbaitek ere desblokea dezake telefonoa, zuri begira jartzen badu, nahiz eta zure begiak itxita egon.
+
+Zure antz handia dutenek ere desblokea dezakete telefonoa; esate baterako, biki batek."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Nola konfiguratu Aurpegi bidez desblokeatzea</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">Hurrengo pantailan, eutsi telefonoari begien parean</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Betaurrekoak erabili ohi badituzu, konfigurazio-prozesuan jantzita eduki ditzakezu</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Aurpegi bidez desblokeatzeko eginbidea berriro konfiguratu nahi baduzu, lehendabizi ezabatu oraingo aurpegi-eredua.
+
+Aurpegi-eredua betiko eta modu seguruan ezabatuko da.
+
+Ezabatu ondoren, PINa, eredua edo pasahitza beharko duzu telefonoa desblokeatzeko."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Aurpegi bidez desblokeatzeko eginbidea berriro konfiguratu nahi baduzu, lehendabizi ezabatu oraingo aurpegi-eredua.
+
+Aurpegi-eredua betiko eta modu seguruan ezabatuko da.
+
+Ezabatu ondoren, hatz-marka, PINa, eredua edo pasahitza beharko duzu telefonoa desblokeatzeko."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">Begiek irekita egon behar dute telefonoa desblokeatzeko. Hobeto funtziona dezan, kendu eguzkitako betaurrekoak telefonoa desblokeatzeko.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Orain, telefonoa har dezakezu, eta aurpegiaren bidez desblokeatu</string>
+</resources>

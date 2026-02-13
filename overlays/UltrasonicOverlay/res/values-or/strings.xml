@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"ଯଦି ଆପଣଙ୍କ ପାଖରେ ଏକ ସ୍କ୍ରିନ ପ୍ରୋଟେକ୍ଟର ଅଛି, ତେବେ ସର୍ବୋତ୍ତମ ପରଫରମାନ୍ସ ପାଇଁ ଆପଣଙ୍କର ଟିପଚିହ୍ନ ସେଟ ଅପ କରିବା ପୂର୍ବରୁ ଆପଣଙ୍କ ସ୍କ୍ରିନ ପ୍ରୋଟେକ୍ଟରକୁ ଲାଗୁ କରନ୍ତୁ।
+
+ସର୍ବୋତ୍ତମ ଫଳାଫଳ ପାଇଁ Made for Google ସାର୍ଟିଫାଏ କରାଯାଇଥିବା ଏକ ସ୍କ୍ରିନ ପ୍ରୋଟେକ୍ଟରକୁ ବ୍ୟବହାର କରନ୍ତୁ। ଅନ୍ୟ ସ୍କ୍ରିନ ପ୍ରୋଟେକ୍ଟରଗୁଡ଼ିକ ସହିତ ଆପଣଙ୍କ ଟିପଚିହ୍ନ କାମ କରିନପାରେ।"</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">ଆପଣଙ୍କ ଆଙ୍ଗୁଠିକୁ ଟିଲ୍ଟ କରି ଟିପରେ ସ୍ପର୍ଶ କରନ୍ତୁ</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">ଆଙ୍ଗୁଠିକୁ ବୁଲାଇ ବାମ ଧାରରେ ସ୍ପର୍ଶ କରନ୍ତୁ</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">ପୁଣି ବୁଲାଇ ଡାହାଣ ଧାରରେ ସ୍ପର୍ଶ କରନ୍ତୁ</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">ଆପଣଙ୍କ ସ୍କ୍ରିନର ସେନ୍ସର ପାଖରେ ସଫା କରନ୍ତୁ</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">ଯେ କୌଣସି ଷ୍ଟ୍ରିକ, ସ୍ମଜ କିମ୍ବା ଦାଗ କାଢ଼ି ଦେବା ପାଇଁ ଆପଣଙ୍କ ସ୍କ୍ରିନକୁ ପୋଛି ଦିଅନ୍ତୁ। ଏହା ସ୍ପଷ୍ଟ ଟିପଚିହ୍ନ ଇମେଜ କେପଚର କରିବାରେ ସାହାଯ୍ୟ କରେ।</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">ଜାରି ରଖିବା ପୂର୍ବରୁ ଆପଣଙ୍କ ସ୍କ୍ରିନକୁ ସଫା କରନ୍ତୁ</string>
+</resources>

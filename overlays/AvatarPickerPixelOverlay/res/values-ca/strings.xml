@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Selector d'avatars de Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">Il·lustració divertida de dos semicercles de color verd fosc sobre un fons verd clar</string>
+
+    <string name="desc_ProfileIcons10">Il·lustració divertida d'una papallona de color taronja sobre un fons groc</string>
+
+    <string name="desc_ProfileIcons11">Forma de nas de color negre amb vores arrodonides sobre un fons gris fosc</string>
+
+    <string name="desc_ProfileIcons12">Forma de trèvol de color negre amb vores arrodonides sobre un fons gris clar</string>
+
+    <string name="desc_ProfileIcons13">Cercle ondulat de color porpra clar sobre un fons porpra fosc</string>
+
+    <string name="desc_ProfileIcons14">Forma de trèvol de color blau clar amb vores arrodonides sobre un fons taronja</string>
+
+    <string name="desc_ProfileIcons15">Hexàgon de color verd clar amb vores arrodonides sobre un fons verd fosc</string>
+
+    <string name="desc_ProfileIcons16">Forma de diamant de color negre amb vores arrodonides sobre un fons gris clar</string>
+
+    <string name="desc_ProfileIcons17">Il·lustració divertida d'una fulla de color taronja sobre un fons groc</string>
+
+    <string name="desc_ProfileIcons18">Il·lustració divertida del planeta Saturn sobre un fons de color préssec</string>
+
+    <string name="desc_ProfileIcons19">Il·lustració divertida d'estrelles i cercles de color blanc i taronja en un patró celestial sobre un fons negre</string>
+
+    <string name="desc_ProfileIcons2">Il·lustració abstracta de cilindres superposats de color blanc i negre</string>
+
+    <string name="desc_ProfileIcons20">Il·lustració divertida d'un gos amb les orelles blaves i la cara blanca sobre un fons groc</string>
+
+    <string name="desc_ProfileIcons21">Il·lustració divertida d'un colom blanc volant amb una branca d'olivera sobre un fons porpra</string>
+
+    <string name="desc_ProfileIcons22">Il·lustració divertida d'un gos amb les orelles negres i la cara blanca sobre un fons blau</string>
+
+    <string name="desc_ProfileIcons23">Il·lustració divertida d'una flor rosa amb fulles verdes sobre un fons crema</string>
+
+    <string name="desc_ProfileIcons24">Il·lustració abstracta de sis cilindres de color blau sobre un fons vermell</string>
+
+    <string name="desc_ProfileIcons3">Il·lustració abstracta d'una forma de trèvol de color blau clar sobre un fons blau fosc</string>
+
+    <string name="desc_ProfileIcons4">Il·lustració abstracta de dos triangles tridimensionals de color rosa</string>
+
+    <string name="desc_ProfileIcons5">Il·lustració abstracta de capes de color verd blavós sobre un fons groc</string>
+
+    <string name="desc_ProfileIcons6">Il·lustració abstracta de roques de color porpra sobre un fons verd</string>
+
+    <string name="desc_ProfileIcons7">Il·lustració divertida de cinc flors geomètriques de color blanc sobre un fons taronja</string>
+
+    <string name="desc_ProfileIcons8">Il·lustració divertida de tres nabius sobre un fons rosa</string>
+
+    <string name="desc_ProfileIcons9">Il·lustració divertida d'una llimona amb una fulla negra sobre un fons verd</string>
+</resources>

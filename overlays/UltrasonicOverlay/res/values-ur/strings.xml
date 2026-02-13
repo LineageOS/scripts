@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"‏اگر آپ کے پاس اسکرین پروٹیکٹر ہے تو بہترین کارکردگی کے لیے اپنے فنگر پرنٹ کو سیٹ اپ کرنے سے پہلے اپنا اسکرین پروٹیکٹر لگائیں۔
+
+بہترین نتائج کے لیے، ایک اسکرین پروٹیکٹر استعمال کریں جو Google کے لیے تیار کردہ سند یافتہ ہو۔ ممکن ہے کہ دوسرے اسکرین پروٹیکٹرز کے ساتھ آپ کا فنگر پرنٹ کام نہ کرے۔"</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">اپنی انگلی کو جھکائیں اور کنارے سے ٹچ کریں</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">انگلی کو دوبارہ گھمائیں اور بائیں کنارے سے ٹچ کریں</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">دوبارہ گھمائیں اور دائیں کنارے سے ٹچ کریں</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">سینسر کے قریب کی اپنی اسکرین کو صاف کریں</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">کسی بھی اسٹریک، دھبے یا داغ کو ہٹانے کے لیے اپنی اسکرین کو صاف کریں۔ اس سے فنگر پرنٹ کی زیادہ واضح تصاویر کیپچر کرنے میں مدد ملتی ہے۔</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">جاری رکھنے سے پہلے اپنی اسکرین صاف کریں</string>
+</resources>

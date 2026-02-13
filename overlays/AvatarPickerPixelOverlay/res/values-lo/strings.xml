@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">ຕົວເລືອກຮູບແທນຕົວຂອງ Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">ຮູບເຄິ່ງວົງມົນສີຂຽວເຂັ້ມ 2 ອັນຢູ່ພື້ນຫຼັງສີຂຽວອ່ອນ</string>
+
+    <string name="desc_ProfileIcons10">ຮູບແມງກະເບື້ອສີສົ້ມຢູ່ພື້ນຫຼັງສີເຫຼືອງ</string>
+
+    <string name="desc_ProfileIcons11">ຮູບດັງຂອບມົນສີດຳຢູ່ພື້ນຫຼັງສີເທົາເຂັ້ມ</string>
+
+    <string name="desc_ProfileIcons12">ຮູບໃບໂຄລເວີຂອບມົນສີດຳຢູ່ພື້ນຫຼັງສີເທົາອ່ອນ</string>
+
+    <string name="desc_ProfileIcons13">ວົງມົນຂອບແຂ້ວເລື່ອຍສີມ່ວງອ່ອນຢູ່ພື້ນຫຼັງສີມ່ວງເຂັ້ມ</string>
+
+    <string name="desc_ProfileIcons14">ຮູບໃບໂຄລເວີຂອບມົນສີຟ້າອ່ອນຢູ່ພື້ນຫຼັງສີສົ້ມ</string>
+
+    <string name="desc_ProfileIcons15">ຮູບຫົກຫຼ່ຽມຂອບມົນສີຂຽວອ່ອນຢູ່ພື້ນຫຼັງສີຂຽວເຂັ້ມ</string>
+
+    <string name="desc_ProfileIcons16">ຮູບເພັດຂອບມົນສີດຳຢູ່ພື້ນຫຼັງສີເທົາອ່ອນ</string>
+
+    <string name="desc_ProfileIcons17">ຮູບໃບໄມ້ສີສົ້ມຢູ່ພື້ນຫຼັງສີເຫຼືອງ</string>
+
+    <string name="desc_ProfileIcons18">ຮູບດາວເສົາຢູ່ພື້ນຫຼັງສີໝາກຄາຍ</string>
+
+    <string name="desc_ProfileIcons19">ຮູບດາວ ແລະ ວົງມົນສີຂາວ ແລະ ສີສົ້ມລາຍທ້ອງຟ້າຢູ່ພື້ນຫຼັງສີດຳ</string>
+
+    <string name="desc_ProfileIcons2">ຮູບນາມມະທຳຂອງກະບອກຕັດກັນສີຂາວດຳ</string>
+
+    <string name="desc_ProfileIcons20">ຮູບໝາໜ້າຂາວທີ່ມີຫູສີຟ້າຢູ່ພື້ນຫຼັງສີເຫຼືອງ</string>
+
+    <string name="desc_ProfileIcons21">ຮູບນົກກາງແກຂາວບິນຄາບກິ່ງໝາກກອກຢູ່ພື້ນຫຼັງສີມ່ວງ</string>
+
+    <string name="desc_ProfileIcons22">ຮູບໝາໜ້າຂາວທີ່ມີຫູສີດຳຢູ່ພື້ນຫຼັງສີຟ້າ</string>
+
+    <string name="desc_ProfileIcons23">ຮູບດອກໄມ້ສີບົວກັບໃບໄມ້ສີຂຽວຢູ່ພື້ນຫຼັງສີຄີມ</string>
+
+    <string name="desc_ProfileIcons24">ຮູບນາມມະທຳຂອງກະບອກສູບສີຟ້າ 6 ອັນຢູ່ພື້ນຫຼັງສີແດງ</string>
+
+    <string name="desc_ProfileIcons3">ຮູບນາມມະທຳຂອງຮູບໃບໂຄລເວີສີຟ້າອ່ອນຢູ່ພື້ນຫຼັງສີຟ້າເຂັ້ມ</string>
+
+    <string name="desc_ProfileIcons4">ຮູບນາມມະທຳຂອງສາມຫຼ່ຽມ 3 ມິຕິສີບົວ 2 ອັນ</string>
+
+    <string name="desc_ProfileIcons5">ຮູບນາມມະທຳຂອງຊັ້ນສີຟ້າອົມຂຽວຢູ່ພື້ນຫຼັງສີເຫຼືອງ</string>
+
+    <string name="desc_ProfileIcons6">ຮູບນາມມະທຳຂອງຫິນສີມ່ວງຢູ່ພື້ນຫຼັງສີຂຽວ</string>
+
+    <string name="desc_ProfileIcons7">ຮູບດອກໄມ້ຂາວຮູບຊົງເລຂາຄະນິດ 5 ດອກຢູ່ພື້ນຫຼັງສີສົ້ມ</string>
+
+    <string name="desc_ProfileIcons8">ຮູບບລູເບີຣີ 3 ໜ່ວຍຢູ່ພື້ນຫຼັງສີບົວ</string>
+
+    <string name="desc_ProfileIcons9">ຮູບໝາກເລມອນທີ່ມີໃບສີດຳຢູ່ພື້ນຫຼັງສີຂຽວ</string>
+</resources>

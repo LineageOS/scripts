@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">மொபைலை அன்லாக் செய்வதற்கு உங்கள் முகத்தைப் பயன்படுத்துங்கள்</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"மொபைலை அன்லாக் செய்வதற்கு உங்கள் முகத்தைப் பயன்படுத்தலாம்.
+
+கவனத்திற்கு:
+ஒரே சமயத்தில் ஒரு முகத்தை மட்டுமே அமைக்க முடியும். மற்றொரு முகத்தைச் சேர்க்க, தற்போதைய முகத்தை நீக்கவும்.
+
+நீங்கள் தற்செயலாக மொபைலைப் பார்க்கும்போதும் அது அன்லாக் செய்யப்படலாம்.
+
+உங்கள் முகத்திற்கு முன் மொபைலைக் காட்டி வேறொருவர் அதை அன்லாக் செய்ய முடியும்.
+
+உங்களை ஒத்த முகச் சாயலுடைய உடன்பிறந்தவர் போல, பார்ப்பதற்கு உங்களைப் போலவே இருக்கும் எவராலும் உங்கள் மொபைலை அன்லாக் செய்ய முடியும்."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"மொபைலை அன்லாக் செய்வதற்கு உங்கள் முகத்தைப் பயன்படுத்தலாம்.
+
+கவனத்திற்கு:
+ஒரே சமயத்தில் ஒரு முகத்தை மட்டுமே அமைக்க முடியும். மற்றொரு முகத்தைச் சேர்க்க, தற்போதைய முகத்தை நீக்கவும்.
+
+நீங்கள் தற்செயலாக மொபைலைப் பார்க்கும்போதும் அது அன்லாக் செய்யப்படலாம்.
+
+நீங்கள் கண்களை மூடியிருக்கும்போதும் உங்கள் முகத்திற்கு முன் மொபைலைக் காட்டி வேறொருவர் அதை அன்லாக் செய்ய முடியும்.
+
+உங்களை ஒத்த முகச் சாயலுடைய உடன்பிறந்தவர் போல, பார்ப்பதற்கு உங்களைப் போலவே இருக்கும் எவராலும் உங்கள் மொபைலை அன்லாக் செய்ய முடியும்."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">முகம் காட்டித் திறத்தல் அம்சத்தை எப்படி அமைப்பது?</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">அடுத்த திரையில், மொபைலைக் கண்களுக்கு நேராகப் பிடிக்கவும்</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">வழக்கமாகக் கண் கண்ணாடி அணிபவராக இருந்தால், அமைவின்போது நீங்கள் அதை அணிந்துகொள்ளலாம்</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"'முகம் காட்டித் திறத்தல்' அம்சத்தை மீண்டும் அமைக்க, தற்போதைய முகத் தோற்றப் பதிவை நீக்கவும்.
+
+முகத் தோற்றப் பதிவு நிரந்தரமாகவும் பாதுகாப்பாகவும் நீக்கப்படும்.
+
+அவ்வாறு நீக்கப்பட்ட பிறகு, மொபைலை அன்லாக் செய்வதற்கு உங்கள் பேட்டர்னோ பின்னோ கடவுச்சொல்லோ தேவைப்படும்."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"'முகம் காட்டித் திறத்தல்' அம்சத்தை மீண்டும் அமைக்க, தற்போதைய முகத் தோற்றப் பதிவை நீக்கவும்.
+
+முகத் தோற்றப் பதிவு நிரந்தரமாகவும் பாதுகாப்பாகவும் நீக்கப்படும்.
+
+அவ்வாறு நீக்கப்பட்ட பிறகு, மொபைலை அன்லாக் செய்வதற்கு உங்கள் கைரேகையோ பின்னோ பேட்டர்னோ கடவுச்சொல்லோ தேவைப்படும்."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">மொபைலை அன்லாக் செய்ய, கண்கள் திறந்த நிலையில் இருக்க வேண்டும். சிறந்த முடிவுகளைப் பெற, மொபைலை அன்லாக் செய்யும்போது சன்கிளாஸ்களைக் கழற்றிவிடவும்.</string>
+
+    <string name="security_settings_face_enroll_finish_description">இனி உங்கள் மொபைலில் முகத்தைக் காட்டி அன்லாக் செய்யலாம்</string>
+</resources>

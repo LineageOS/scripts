@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Unapotumia kipengele cha Kufungua kwa Alama ya Kidole, picha hutumiwa ili kusasisha muundo wako wa alama ya kidole. Muundo na picha za alama ya kidole chako huhifadhiwa kwa njia salama na husalia kwenye simu yako. Mchakato wote hufanyika kwenye simu yako kwa njia salama.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Anapotumia kipengele cha Kufungua kwa alama ya kidole, picha zinatumiwa ili kusasisha muundo wa alama ya kidole chake. Muundo na picha za alama ya kidole cha mtoto wako zinahifadhiwa kwa njia salama na kusalia kwenye simu. Mchakato wote hufanyika kwenye simu kwa njia salama.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Unaweza kufuta muundo na picha za alama ya kidole chako, au uzime kipengele cha Kufungua kwa Alama ya Kidole wakati wowote katika Mipangilio. Miundo na picha za alama ya kidole zinahifadhiwa kwenye simu hadi utakapozifuta.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Wewe na mtoto wako mnaweza kufuta muundo na picha za alama ya kidole chake, au kuzima kipengele cha Kufungua kwa Alama ya Kidole wakati wowote katika Mipangilio. Miundo na picha za alama ya kidole zinahifadhiwa kwenye simu hadi utakapozifuta.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">Ukitumia kipengele cha Kufungua kwa alama ya kidole, unaweza kufungua simu yako ukitumia alama ya kidole chako. Kwa ajili ya usalama, chaguo hili linahitaji mbinu mbadala ya kufunga skrini.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Kufungua kwa Alama ya Kidole</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">Kufungua kwa alama ya kidole kwenye wasifu wa kazini</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Weka Kufungua kwa Alama ya Kidole</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">Ruhusu kipengele cha Kufungua kwa alama ya kidole</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">Kipengele cha Kufungua kwa Alama ya Kidole huunda muundo wa kipekee wa alama ya kidole chako ili kuthibitisha kuwa ni wewe. Ili uunde muundo wa alama ya kidole wakati wa kuweka mipangilio, utanasa picha za alama ya kidole chako kutoka pembe tofauti.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">Kipengele cha Kufungua kwa Alama ya Kidole huunda muundo wa kipekee wa alama ya kidole cha mtoto wako ili kuthibitisha kuwa ni yeye. Ili kuunda muundo huu wa alama ya kidole wakati wa kuweka mipangilio, atapiga picha za alama ya kidole chake kutoka pembe tofauti.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">Tembelea mtoa huduma za urekebishaji au nenda katika g.co/pixel/fingerprintunlock.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">Tumia kipengele cha Kufungua kwa alama ya kidole</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">Mchoro • Alama ya kidole</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">PIN • Alama ya kidole</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">Nenosiri • Alama ya kidole</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">Endelea bila kutumia kipengele cha Kufungua kwa alama ya kidole</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"Mchoro hulinda simu yako ikipotea au ikiibwa.
+
+Hatua hii pia hufuta picha za alama ya kidole na muundo zilizohifadhiwa kwenye kifaa chako. Hutaweza kutumia alama ya kidole chako kuthibitisha katika programu."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"Mchoro hulinda simu yako ikipotea au ikiibwa.
+
+Hatua hii hufuta picha za alama ya kidole na muundo zilizohifadhiwa kwenye kifaa chako. Muundo wa uso wako pia utafutwa kabisa kwa usalama. Hutaweza kutumia uso wala alama ya kidole chako kuthibitisha katika programu."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"PIN hulinda simu yako ikipotea au ikiibwa.
+
+Hatua hii pia hufuta picha za alama ya kidole na muundo zilizohifadhiwa kwenye kifaa chako. Hutaweza kutumia alama ya kidole chako kuthibitisha katika programu."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"PIN hulinda simu yako ikipotea au ikiibwa.
+
+Hatua hii hufuta picha za alama ya kidole na muundo zilizohifadhiwa kwenye kifaa chako. Muundo wa uso wako pia utafutwa kabisa kwa usalama. Hutaweza kutumia uso wala alama ya kidole chako kuthibitisha katika programu."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"Nenosiri hulinda simu yako ikipotea au ikiibwa.
+
+Hatua hii pia hufuta picha za alama ya kidole na muundo zilizohifadhiwa kwenye kifaa chako. Hutaweza kutumia alama ya kidole chako kuthibitisha katika programu."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"Nenosiri hulinda simu yako ikipotea au ikiibwa.
+
+Hatua hii hufuta picha za alama ya kidole na muundo zilizohifadhiwa kwenye kifaa chako. Muundo wa uso wako pia utafutwa kabisa kwa usalama. Hutaweza kutumia uso wala alama ya kidole chako kuthibitisha katika programu."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"Vipengele vya ulinzi wa kifaa havitafanya kazi bila mbinu yako ya kufunga skrini.
+
+Hatua hii pia hufuta picha za alama ya kidole na muundo zilizohifadhiwa kwenye kifaa chako. Hutaweza kutumia alama ya kidole chako kuthibitisha katika programu."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"Vipengele vya ulinzi wa kifaa havitafanya kazi bila mbinu yako ya kufunga skrini.
+
+Hatua hii hufuta picha za alama ya kidole na muundo zilizohifadhiwa kwenye kifaa chako. Muundo wa uso wako pia utafutwa kabisa kwa usalama. Hutaweza kutumia uso wala alama ya kidole chako kuthibitisha katika programu."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">Kipengele cha kufungua kwa alama ya kidole hujiboresha kadiri unavyokitumia katika simu yako au kuthibitisha kuwa ni wewe kwenye programu</string>
+</resources>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel аватарын тандагыч</string>
+
+    <string name="desc_ProfileIcons1">Ачык жашыл фондогу эки кочкул жашыл жарым тегеректин ойноок сүрөтү</string>
+
+    <string name="desc_ProfileIcons10">Сары фондогу кызгылт сары көпөлөктүн ойноок сүрөтү</string>
+
+    <string name="desc_ProfileIcons11">Кочкул боз фондогу жумуру бурчтуу кара мурун формасы</string>
+
+    <string name="desc_ProfileIcons12">Ачык боз фондогу жумуру бурчтуу кара беде формасы</string>
+
+    <string name="desc_ProfileIcons13">Кочкул кызгылт көгүш фондогу ачык кызгылт көгүш түстөгү тегерек</string>
+
+    <string name="desc_ProfileIcons14">Кызгылт сары фондогу жумуру бурчтуу ачык көк беде формасы</string>
+
+    <string name="desc_ProfileIcons15">Кочкул жашыл фондогу жумуру бурчтуу ачык жашыл алты бурчтук</string>
+
+    <string name="desc_ProfileIcons16">Ачык боз фондогу жумуру бурчтуу кара алмаз формасы</string>
+
+    <string name="desc_ProfileIcons17">Сары фондогу кызгылт сары жалбырактын ойноок сүрөтү</string>
+
+    <string name="desc_ProfileIcons18">Шабдалы түсүндөгү фондо Сатурн планетасынын ойноок сүрөтү</string>
+
+    <string name="desc_ProfileIcons19">Кара фондогу асман үлгүсүндөгү ак жана кызгылт сары жылдыздардын жана тегеректердин ойноок сүрөтү</string>
+
+    <string name="desc_ProfileIcons2">Кара жана ак кесилишкен цилиндрлердин абстракттуу сүрөтү</string>
+
+    <string name="desc_ProfileIcons20">Сары фондогу көк кулагы бар жана жүзү ак иттин ойноок сүрөтү</string>
+
+    <string name="desc_ProfileIcons21">Кызгылт көгүш фондогу зайтун бутагы менен учуп бараткан ак көгүчкөндүн ойноок сүрөтү</string>
+
+    <string name="desc_ProfileIcons22">Көк фондогу кара кулагы бар жана жүзү ак иттин ойноок сүрөтү</string>
+
+    <string name="desc_ProfileIcons23">Каймак түстөгү фондо жашыл жалбырактары бар кызгылтым гүлдүн ойноок сүрөтү</string>
+
+    <string name="desc_ProfileIcons24">Кызыл фондогу алты көк цилиндрдин абстракттуу сүрөтү</string>
+
+    <string name="desc_ProfileIcons3">Кочкул көк фондогу ачык көк беде формасынын абстракттуу сүрөтү</string>
+
+    <string name="desc_ProfileIcons4">Эки кызгылтым үч өлчөмдүү үч бурчтуктун абстракттуу сүрөтү</string>
+
+    <string name="desc_ProfileIcons5">Сары фондогу көгүш жашыл катмарлардын абстракттуу сүрөтү</string>
+
+    <string name="desc_ProfileIcons6">Жашыл фондогу кызгылт көгүш таштардын абстрактуу сүрөтү</string>
+
+    <string name="desc_ProfileIcons7">Кызгылт сары фондогу беш ак, геометриялык гүлдүн ойноок сүрөтү</string>
+
+    <string name="desc_ProfileIcons8">Кызгылтым фондогу үч көк бүлдүркөндүн ойноок сүрөтү</string>
+
+    <string name="desc_ProfileIcons9">Жашыл фондогу кара жалбырак менен лимондун ойноок сүрөтү</string>
+</resources>

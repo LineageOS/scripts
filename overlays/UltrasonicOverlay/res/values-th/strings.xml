@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"หากมีแผ่นปกป้องหน้าจอ ให้ติดก่อนทำการตั้งค่าลายนิ้วมือเพื่อประสิทธิภาพที่ดีที่สุด
+
+โปรดใช้แผ่นปกป้องหน้าจอที่มีป้ายรับรอง Made For Google เพื่อให้ได้ผลลัพธ์ที่ดีที่สุด หากใช้แผ่นปกป้องหน้าจอแบบอื่น การใช้ลายนิ้วมืออาจไม่ทำงาน"</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">เอียงนิ้วและแตะด้วยปลายนิ้ว</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">หมุนนิ้วและแตะด้วยขอบนิ้วด้านซ้าย</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">หมุนอีกครั้งและแตะด้วยขอบนิ้วด้านขวา</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">ทำความสะอาดหน้าจอใกล้กับเซ็นเซอร์</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">เช็ดหน้าจอเพื่อลบริ้วรอย คราบเปื้อน หรือคราบสกปรก การทำเช่นนี้จะช่วยจับภาพลายนิ้วมือได้ชัดเจนยิ่งขึ้น</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">ทำความสะอาดหน้าจอก่อนดำเนินการต่อ</string>
+</resources>

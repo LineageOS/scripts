@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Avatarkiezer van Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">Speelse afbeelding van 2 donkergroene halve cirkels tegen een lichtgroene achtergrond</string>
+
+    <string name="desc_ProfileIcons10">Speelse afbeelding van een oranje vlinder tegen een gele achtergrond</string>
+
+    <string name="desc_ProfileIcons11">Zwarte neusvorm met ronde randen tegen een donkergrijze achtergrond</string>
+
+    <string name="desc_ProfileIcons12">Zwarte klavervorm met ronde randen tegen een lichtgrijze achtergrond</string>
+
+    <string name="desc_ProfileIcons13">Lichtpaarse wiebelende cirkel tegen een donkerpaarse achtergrond</string>
+
+    <string name="desc_ProfileIcons14">Lichtblauwe klavervorm met ronde randen tegen een oranje achtergrond</string>
+
+    <string name="desc_ProfileIcons15">Lichtgroene zeshoek met ronde randen tegen een donkergroene achtergrond</string>
+
+    <string name="desc_ProfileIcons16">Zwarte ruitvorm met ronde randen tegen een lichtgrijze achtergrond</string>
+
+    <string name="desc_ProfileIcons17">Speelse afbeelding van een oranje blad tegen een gele achtergrond</string>
+
+    <string name="desc_ProfileIcons18">Speelse afbeelding van de planeet Saturnus tegen een perzikkleurige achtergrond</string>
+
+    <string name="desc_ProfileIcons19">Speelse afbeelding met witte en oranje sterren en cirkels in een ruimtepatroon tegen een zwarte achtergrond</string>
+
+    <string name="desc_ProfileIcons2">Abstracte afbeelding met zwarte en witte overlappende cilinders</string>
+
+    <string name="desc_ProfileIcons20">Speelse afbeelding van een hond met blauwe oren en een wit gezicht tegen een gele achtergrond</string>
+
+    <string name="desc_ProfileIcons21">Speelse afbeelding van een witte, vliegende duif met een olijftak tegen een paarse achtergrond</string>
+
+    <string name="desc_ProfileIcons22">Speelse afbeelding van een hond met zwarte oren en een wit gezicht tegen een blauwe achtergrond</string>
+
+    <string name="desc_ProfileIcons23">Speelse afbeelding van een roze bloem met groene bladeren tegen een crèmekleurige achtergrond</string>
+
+    <string name="desc_ProfileIcons24">Abstracte afbeelding van 6 blauwe cilinders tegen een rode achtergrond</string>
+
+    <string name="desc_ProfileIcons3">Abstracte afbeelding van een lichtblauwe klavervorm tegen een donkerblauwe achtergrond</string>
+
+    <string name="desc_ProfileIcons4">Abstracte afbeelding van 2 roze, driedimensionale triangels</string>
+
+    <string name="desc_ProfileIcons5">Abstracte afbeelding van groenblauwe lagen tegen een gele achtergrond</string>
+
+    <string name="desc_ProfileIcons6">Abstracte afbeelding van paarse rotsen tegen een groene achtergrond</string>
+
+    <string name="desc_ProfileIcons7">Speelse afbeelding van 5 witte, geometrische bloemen tegen een oranje achtergrond</string>
+
+    <string name="desc_ProfileIcons8">Speelse afbeelding van 3 bosbessen tegen een roze achtergrond</string>
+
+    <string name="desc_ProfileIcons9">Speelse afbeelding van een citroen met een zwart blad tegen een groene achtergrond</string>
+</resources>

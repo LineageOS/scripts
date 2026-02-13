@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Naudokite veido atpažinimo funkciją telefonui atrakinti</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Naudokite veido atpažinimo funkciją telefonui atrakinti.
+
+Pastaba:
+vienu metu gali būti nustatytas tik vienas veidas. Norėdami pridėti kitą veidą, ištrinkite esamą.
+
+Žiūrint į telefoną jis gali būti atrakintas, kai to neketinate atlikti.
+
+Telefoną gali atrakinti kitas asmuo, laikydamas jį prieš jus.
+
+Telefoną gali atrakinti į jus labai panašus asmuo, pvz., identiškas dvynys."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Naudokite veido atpažinimo funkciją telefonui atrakinti.
+
+Pastaba:
+vienu metu gali būti nustatytas tik vienas veidas. Norėdami pridėti kitą veidą, ištrinkite esamą.
+
+Žiūrint į telefoną jis gali būti atrakintas, kai to neketinate atlikti.
+
+Telefoną gali atrakinti kitas asmuo, laikydamas jį prieš jus.
+
+Telefoną gali atrakinti į jus labai panašus asmuo, pvz., identiškas dvynys."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Kaip nustatyti atrakinimą pagal veidą</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">Kitame ekrane laikykite telefoną akių lygyje</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Jei įprastai nešiojate akinius, nustatydami galite juos užsidėti</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Kad galėtumėte iš naujo nustatyti atrakinimą pagal veidą, ištrinkite esamą veido modelį.
+
+Veido modelis bus visam laikui saugiai ištrintas.
+
+Ištrynus, kad galėtumėte atrakinti telefoną, reikės PIN kodo, atrakinimo piešinio arba slaptažodžio."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Kad galėtumėte iš naujo nustatyti atrakinimą pagal veidą, ištrinkite esamą veido modelį.
+
+Veido modelis bus visam laikui saugiai ištrintas.
+
+Ištrynus, kad galėtumėte atrakinti telefoną, reikės kontrolinio kodo, PIN kodo, atrakinimo piešinio arba slaptažodžio."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">Norint atrakinti telefoną, reikia būti atsimerkus. Kad užtikrintumėte geriausius rezultatus, atrakindami telefoną nusiimkite akinius nuo saulės.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Dabar galite paimti telefoną ir atrakinti jį pagal veidą</string>
+</resources>

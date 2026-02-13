@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">‏Google Pixel اوتار منتخب کنندہ</string>
+
+    <string name="desc_ProfileIcons1">ہلکے سبز پس منظر پر دو گہرے سبز نیم دائروں کا چنچل خاکہ</string>
+
+    <string name="desc_ProfileIcons10">پیلے پس منظر پر نارنجی تتلی کا چنچل خاکہ</string>
+
+    <string name="desc_ProfileIcons11">گہرے سرمئی پس منظر پر گول کناروں کے ساتھ سیاہ ناک کی شکل</string>
+
+    <string name="desc_ProfileIcons12">ہلکے سرمئی پس منظر پر گول کناروں کے ساتھ سیاہ سہ شاخہ کی شکل</string>
+
+    <string name="desc_ProfileIcons13">گہرے جامنی پس منظر پر ہلکے جامنی رنگ کا ہلکا دائرہ</string>
+
+    <string name="desc_ProfileIcons14">نارنجی پس منظر پر گول کناروں کے ساتھ ہلکے نیلے رنگ کی سہ شاخہ کی شکل</string>
+
+    <string name="desc_ProfileIcons15">گہرے سبز پس منظر پر گول کناروں کے ساتھ ہلکا سبز ہکساگن</string>
+
+    <string name="desc_ProfileIcons16">ہلکے سرمئی پس منظر پر گول کناروں کے ساتھ سیاہ ہیرے کی شکل</string>
+
+    <string name="desc_ProfileIcons17">پیلے پس منظر پر نارنجی پتے کا چنچل خاکہ</string>
+
+    <string name="desc_ProfileIcons18">ہلکے پاس منظر پر زحل سیارے کا چنچل خاکہ</string>
+
+    <string name="desc_ProfileIcons19">سیاہ پس منظر پر آسمانی پیٹرن میں سفید اور نارنجی ستاروں اور دائروں کا چنچل خاکہ</string>
+
+    <string name="desc_ProfileIcons2">سیاہ اور سفید ایک دوسرے کو کاٹتے ہوئے سیلینڈرز کے خلاصے کا خاکہ</string>
+
+    <string name="desc_ProfileIcons20">پیلے پس منظر پر نیلے کان اور سفید چہرے والے کتے کا چنچل خاکہ</string>
+
+    <string name="desc_ProfileIcons21">جامنی پس منظر پر زیتون کی شاخ کے ساتھ اڑتے ہوئے سفید کبوتر کا چنچل خاکہ</string>
+
+    <string name="desc_ProfileIcons22">نیلے پس منظر پر سیاہ کان اور سفید چہرے والے کتے کا چنچل خاکہ</string>
+
+    <string name="desc_ProfileIcons23">کریم پس منظر پر سبز پتوں کے ساتھ گلابی پھول کا چنچل خاکہ</string>
+
+    <string name="desc_ProfileIcons24">سرخ پس منظر پر چھ نیلے سلنڈروں کے خلاصہ کا خاکہ</string>
+
+    <string name="desc_ProfileIcons3">گہرے نیلے پس منظر پر ہلکے نیلے سہ شاخہ کے خلاصے کا خاکہ</string>
+
+    <string name="desc_ProfileIcons4">دو گلابی، تین جہتی مثلثوں کے خلاصہ کا خاکہ</string>
+
+    <string name="desc_ProfileIcons5">پیلے پس منظر پر ٹی لیئرز کے خلاصہ کا خاکہ</string>
+
+    <string name="desc_ProfileIcons6">سبز پس منظر پر جامنی پتھروں کے خلاصے کا خاکہ</string>
+
+    <string name="desc_ProfileIcons7">نارنجی پس منظر پر پانچ سفید، ہندسی پھولوں کا چنچل خاکہ</string>
+
+    <string name="desc_ProfileIcons8">گلابی پس منظر پر تین بلیو بیریز کا چنچل خاکہ</string>
+
+    <string name="desc_ProfileIcons9">سبز پس منظر پر سیاہ پتے کے ساتھ لیموں کا چنچل خاکہ</string>
+</resources>

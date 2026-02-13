@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"화면 보호필름을 가지고 있다면 지문을 설정하기 전에 붙이세요. 그래야 지문 인식이 가장 잘 작동합니다.
+
+Made For Google 인증을 받은 화면 보호필름을 사용하는 것이 가장 좋습니다. 다른 화면 보호필름을 사용할 경우 지문이 인식되지 않을 수 있습니다."</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">손가락을 세워 손끝으로 터치하세요</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">손가락을 돌려 왼쪽 가장자리로 터치하세요</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">손가락을 다시 돌려 오른쪽 가장자리로 터치하세요</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">센서 주변 화면을 닦으세요.</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">화면을 닦아 지저분한 얼룩이나 자국, 이물질을 제거하세요. 지문 이미지를 더 또렷하게 캡처할 수 있습니다.</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">화면을 닦은 후 계속하기</string>
+</resources>

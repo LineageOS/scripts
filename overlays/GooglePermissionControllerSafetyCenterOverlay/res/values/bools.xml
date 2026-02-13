@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- config for opting out of expressive Safety Center. This has no effect currently
+    but may be enabled in a subsequent release -->
+    <bool name="config_enableExpressiveDesignInSafetyCenter">true</bool>
+</resources>

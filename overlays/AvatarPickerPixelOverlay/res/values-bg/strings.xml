@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Инструмент на Google Pixel за избор на аватар</string>
+
+    <string name="desc_ProfileIcons1">Закачлива илюстрация на два тъмнозелени полукръга на светлозелен фон</string>
+
+    <string name="desc_ProfileIcons10">Закачлива илюстрация на оранжева пеперуда на жълт фон</string>
+
+    <string name="desc_ProfileIcons11">Черна форма на нос със заоблени краища на тъмносив фон</string>
+
+    <string name="desc_ProfileIcons12">Черна форма на детелина със заоблени краища на светлосив фон</string>
+
+    <string name="desc_ProfileIcons13">Неравен светлолилав кръг на тъмнолилав фон</string>
+
+    <string name="desc_ProfileIcons14">Светлосиня форма на детелина със заоблени краища на оранжев фон</string>
+
+    <string name="desc_ProfileIcons15">Светлозелен шестоъгълник със заоблени краища на тъмнозелен фон</string>
+
+    <string name="desc_ProfileIcons16">Черна ромбоидна фигура със заоблени краища на светлосив фон</string>
+
+    <string name="desc_ProfileIcons17">Закачлива илюстрация на оранжево листо на жълт фон</string>
+
+    <string name="desc_ProfileIcons18">Закачлива илюстрация на планетата Сатурн на прасковен фон</string>
+
+    <string name="desc_ProfileIcons19">Закачлива илюстрация на бели и оранжеви звезди и кръгове в небесен десен на черен фон</string>
+
+    <string name="desc_ProfileIcons2">Абстрактна илюстрация на черни и бели пресичащи се цилиндри</string>
+
+    <string name="desc_ProfileIcons20">Закачлива илюстрация на куче със сини уши и бяло лице на жълт фон</string>
+
+    <string name="desc_ProfileIcons21">Закачлива илюстрация на летящ бял гълъб с маслинова клонка на лилав фон</string>
+
+    <string name="desc_ProfileIcons22">Закачлива илюстрация на куче с черни уши и бяло лице на син фон</string>
+
+    <string name="desc_ProfileIcons23">Закачлива илюстрация на розово цвете със зелени листа на кремав фон</string>
+
+    <string name="desc_ProfileIcons24">Абстрактна илюстрация на шест сини цилиндъра на червен фон</string>
+
+    <string name="desc_ProfileIcons3">Абстрактна илюстрация на светлосиня форма на детелина на тъмносин фон</string>
+
+    <string name="desc_ProfileIcons4">Абстрактна илюстрация на два розови триизмерни триъгълника</string>
+
+    <string name="desc_ProfileIcons5">Абстрактна илюстрация на синьо-зелени слоеве на жълт фон</string>
+
+    <string name="desc_ProfileIcons6">Абстрактна илюстрация на лилави скали на зелен фон</string>
+
+    <string name="desc_ProfileIcons7">Закачлива илюстрация на пет бели геометрични цветя на оранжев фон</string>
+
+    <string name="desc_ProfileIcons8">Закачлива илюстрация на три боровинки на розов фон</string>
+
+    <string name="desc_ProfileIcons9">Закачлива илюстрация на лимон с черно листо на зелен фон</string>
+</resources>

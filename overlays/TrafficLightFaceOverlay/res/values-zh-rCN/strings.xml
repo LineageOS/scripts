@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">刷脸解锁手机</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"您可以通过刷脸来解锁手机。
+
+请注意：
+同一时间只能设置有 1 张脸。如需添加其他人脸，请先删除当前的人脸。
+
+目视手机可能会让手机在您并未要求的情况下解锁。
+
+如果有人将手机对准您的脸，手机可能会解锁。
+
+长相与您非常相似的人（例如孪生兄弟姐妹）可能也能解锁您的手机。"</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"您可以通过刷脸来解锁手机。
+
+请注意：
+同一时间只能设置有 1 张脸。如需添加其他人脸，请先删除当前的人脸。
+
+目视手机可能会让手机在您并未要求的情况下解锁。
+
+如果有人将手机对准您的脸，即使您闭着眼睛，手机可能也会解锁。
+
+长相与您非常相似的人（例如孪生兄弟姐妹）可能也能解锁您的手机。"</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">如何设置人脸解锁</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">进入下一个界面后，请将手机举到与眼睛齐平的位置</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">如果您平时戴眼镜，在设置过程中可如常佩戴</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"请删除您当前的脸部模型以重新设置人脸解锁。
+
+系统会安全地永久删除您的脸部模型。
+
+脸部模型删除后，如需解锁手机，您将需要使用 PIN 码、解锁图案或密码。"</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"请删除您当前的脸部模型以重新设置人脸解锁。
+
+系统会安全地永久删除您的脸部模型。
+
+脸部模型删除后，如需解锁手机，您将需要使用指纹、PIN 码、解锁图案或密码。"</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">必须睁开双眼才能解锁手机。为获得最佳效果，请在解锁手机时取下太阳镜。</string>
+
+    <string name="security_settings_face_enroll_finish_description">现在您可以拿起手机并使用自己的脸部来解锁了</string>
+</resources>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Utilisez votre visage pour déverrouiller votre téléphone</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Utilisez votre visage pour déverrouiller votre téléphone.
+
+À savoir :
+Vous ne pouvez configurer qu'un seul visage à la fois. Supprimez le visage actuel pour en ajouter un.
+
+Vous pouvez déverrouiller votre téléphone sans le vouloir, en le regardant.
+
+Une autre personne peut le déverrouiller en le tenant devant votre visage.
+
+Quelqu'un qui vous ressemble beaucoup, comme votre jumeau/jumelle, peut aussi déverrouiller votre téléphone."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Utilisez votre visage pour déverrouiller votre téléphone.
+
+À savoir :
+Vous ne pouvez configurer qu'un seul visage à la fois. Supprimez le visage actuel pour en ajouter un.
+
+Vous pouvez déverrouiller votre téléphone sans le vouloir, en le regardant.
+
+Une autre personne peut le déverrouiller en le tenant devant votre visage, même si vous fermez les yeux.
+
+Quelqu'un qui vous ressemble beaucoup, comme votre jumeau/jumelle, peut aussi déverrouiller votre téléphone."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Configurer la reconnaissance faciale</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">Sur l'écran suivant, tenez votre téléphone à hauteur des yeux</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Si vous portez des lunettes, vous pouvez les mettre lors de la configuration.</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Supprimez votre empreinte faciale actuelle pour reconfigurer le déverrouillage par reconnaissance faciale.
+
+Elle sera supprimée de façon définitive et sécurisée.
+
+Vous devrez ensuite utiliser votre code, schéma ou mot de passe pour déverrouiller votre téléphone."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Supprimez votre empreinte faciale actuelle pour reconfigurer le déverrouillage par reconnaissance faciale.
+
+Elle sera supprimée de façon définitive et sécurisée.
+
+Vous devrez ensuite utiliser votre empreinte, code, schéma ou mot de passe pour déverrouiller votre téléphone."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">Vous devrez avoir les yeux ouverts pour déverrouiller le téléphone. Enlevez vos lunettes de soleil pour de meilleurs résultats.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Vous pouvez désormais prendre votre téléphone et utiliser la reconnaissance faciale pour le déverrouiller</string>
+</resources>

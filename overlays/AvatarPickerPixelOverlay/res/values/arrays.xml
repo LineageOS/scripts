@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <array name="avatar_images">
+        <item>@drawable/ProfileIcons11</item>
+        <item>@drawable/ProfileIcons15</item>
+        <item>@drawable/ProfileIcons22</item>
+        <item>@drawable/ProfileIcons7</item>
+        <item>@drawable/ProfileIcons21</item>
+        <item>@drawable/ProfileIcons10</item>
+        <item>@drawable/ProfileIcons24</item>
+        <item>@drawable/ProfileIcons5</item>
+        <item>@drawable/ProfileIcons4</item>
+        <item>@drawable/ProfileIcons6</item>
+        <item>@drawable/ProfileIcons18</item>
+        <item>@drawable/ProfileIcons9</item>
+        <item>@drawable/ProfileIcons17</item>
+        <item>@drawable/ProfileIcons8</item>
+        <item>@drawable/ProfileIcons23</item>
+        <item>@drawable/ProfileIcons19</item>
+        <item>@drawable/ProfileIcons1</item>
+        <item>@drawable/ProfileIcons14</item>
+        <item>@drawable/ProfileIcons3</item>
+        <item>@drawable/ProfileIcons16</item>
+        <item>@drawable/ProfileIcons20</item>
+        <item>@drawable/ProfileIcons12</item>
+        <item>@drawable/ProfileIcons2</item>
+        <item>@drawable/ProfileIcons13</item>
+    </array>
+
+    <!-- Content descriptions for each of the images in the avatar_images array. -->
+    <string-array name="avatar_image_descriptions">
+        <item>@string/desc_ProfileIcons11</item>
+        <item>@string/desc_ProfileIcons15</item>
+        <item>@string/desc_ProfileIcons22</item>
+        <item>@string/desc_ProfileIcons7</item>
+        <item>@string/desc_ProfileIcons21</item>
+        <item>@string/desc_ProfileIcons10</item>
+        <item>@string/desc_ProfileIcons24</item>
+        <item>@string/desc_ProfileIcons5</item>
+        <item>@string/desc_ProfileIcons4</item>
+        <item>@string/desc_ProfileIcons6</item>
+        <item>@string/desc_ProfileIcons18</item>
+        <item>@string/desc_ProfileIcons9</item>
+        <item>@string/desc_ProfileIcons17</item>
+        <item>@string/desc_ProfileIcons8</item>
+        <item>@string/desc_ProfileIcons23</item>
+        <item>@string/desc_ProfileIcons19</item>
+        <item>@string/desc_ProfileIcons1</item>
+        <item>@string/desc_ProfileIcons14</item>
+        <item>@string/desc_ProfileIcons3</item>
+        <item>@string/desc_ProfileIcons16</item>
+        <item>@string/desc_ProfileIcons20</item>
+        <item>@string/desc_ProfileIcons12</item>
+        <item>@string/desc_ProfileIcons2</item>
+        <item>@string/desc_ProfileIcons13</item>
+    </string-array>
+</resources>

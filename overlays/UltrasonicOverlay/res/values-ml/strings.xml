@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"നിങ്ങൾക്ക് സ്ക്രീൻ പ്രൊട്ടക്ടർ ഉണ്ടെങ്കിൽ, മികച്ച പ്രകടനത്തിന് ഫിംഗർപ്രിന്റ് സജ്ജീകരിക്കുന്നതിന് മുമ്പ് നിങ്ങളുടെ സ്ക്രീൻ പ്രൊട്ടക്ടർ ഉപയോഗിക്കുക.
+
+മികച്ച ഫലങ്ങൾക്ക്, Google-നായി നിർമ്മിച്ചതെന്ന് സാക്ഷ്യപ്പെടുത്തിയ സ്‌ക്രീൻ പ്രൊട്ടക്ടർ ഉപയോഗിക്കുക. മറ്റ് സ്ക്രീൻ പ്രൊട്ടക്‌ടറുകളിൽ നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് പ്രവർത്തിച്ചേക്കില്ല."</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">നിങ്ങളുടെ വിരൽ ചരിച്ച് അഗ്രം കൊണ്ട് സ്പർശിക്കുക</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">വിരൽ തിരിച്ച് ഇടത് അറ്റത്ത് സ്പർശിക്കുക</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">വീണ്ടും തിരിച്ച് വലത് അറ്റത്ത് സ്പർശിക്കുക</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">സെൻസറിന് സമീപമുള്ള സ്ക്രീൻ വൃത്തിയാക്കുക</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">എല്ലാ പാടുകളും അഴുക്കുകളും അല്ലെങ്കിൽ കറകളും നീക്കം ചെയ്യാൻ സ്ക്രീൻ തുടയ്ക്കുക. വ്യക്തമായ ഫിംഗർപ്രിന്റ് ചിത്രങ്ങൾ പകർത്താൻ ഇത് സഹായിക്കുന്നു.</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">തുടരുന്നതിന് മുമ്പ് നിങ്ങളുടെ സ്ക്രീൻ വൃത്തിയാക്കുക</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<overlay
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item target="dimen/sud_items_icon_size" value="@dimen/sud_items_icon_size" />
+    <item target="dimen/sud_items_summary_margin_start" value="@dimen/sud_items_summary_margin_start" />
+    <item target="dimen/sud_items_summary_margin_top" value="@dimen/sud_items_summary_margin_top" />
+    <item target="dimen/sud_items_margin_top" value="@dimen/sud_items_margin_top" />
+    <item target="dimen/sud_items_margin_inbetween" value="@dimen/sud_items_margin_inbetween" />
+    <item target="dimen/terms_disclaimer_header_vertical_margin" value="@dimen/terms_disclaimer_header_vertical_margin" />
+    <item target="dimen/terms_disclaimer_content_margin_top" value="@dimen/terms_disclaimer_content_margin_top" />
+    <item target="dimen/terms_disclaimer_content_margin_bottom" value="@dimen/terms_disclaimer_content_margin_bottom" />
+    <item target="bool/show_progress_label_on_left_side" value="@bool/show_progress_label_on_left_side" />
+</overlay>

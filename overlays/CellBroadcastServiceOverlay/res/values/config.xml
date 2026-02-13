@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Package names of additional cell broadcast receivers -->
+    <string-array name="additional_cell_broadcast_receiver_packages">
+        <item>com.google.android.apps.safetyhub</item>
+    </string-array>
+
+    <!-- Package names of the test cell broadcast receivers, only used on debug builds -->
+    <string-array name="test_cell_broadcast_receiver_packages">
+        <item>com.googlecode.android_scripting</item>
+    </string-array>
+</resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"Хэрэв танд дэлгэц хамгаалагч байгаа бол шилдэг гүйцэтгэлийг авахын тулд хурууны хээгээ тохируулахаас өмнө дэлгэц хамгаалагчаа ашиглана уу.
+
+Шилдэг үр дүн авах бол Made for Google гэрчилгээтэй дэлгэц хамгаалагч ашиглана уу. Бусад дэлгэц хамгаалагчийг ашиглах үед таны хурууны хээг танихгүй байж болзошгүй."</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">Хуруугаа хазайлгаж, үзүүрээр нь хүрнэ үү</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">Хуруугаа эргүүлж, зүүн ирмэгээр нь хүрнэ үү</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">Дахин эргүүлж, баруун ирмэгээр нь хүрнэ үү</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">Мэдрэгчийн ойролцоох дэлгэцээ цэвэрлэнэ үү</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">Ямар нэг зураас, толбо эсвэл сэвийг арилгахын тулд дэлгэцээ арчина уу. Энэ нь хурууны хээний илүү тод зураг авахад тусална.</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">Үргэлжлүүлэхээсээ өмнө дэлгэцээ цэвэрлэнэ үү</string>
+</resources>

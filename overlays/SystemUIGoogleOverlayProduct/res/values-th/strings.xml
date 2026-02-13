@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="branded_monitoring_description_app_personal">Google กำลังรักษาความปลอดภัยให้การเชื่อมต่อนี้ด้วยการส่งข้อมูลผ่านเซิร์ฟเวอร์</string>
+
+    <string name="branded_vpn_footer">การเชื่อมต่อที่รักษาความปลอดภัยโดย Google</string>
+</resources>

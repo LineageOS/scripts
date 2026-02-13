@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel ଅବତାର ପିକର</string>
+
+    <string name="desc_ProfileIcons1">ଏକ ହାଲୁକା ସବୁଜ ପୃଷ୍ଠପଟରେ ଦୁଇଟି ଗାଢ଼-ସବୁଜ ସେମି-ସର୍କଲର ପ୍ଲେଫୁଲ ଇଲୁଷ୍ଟ୍ରେସନ</string>
+
+    <string name="desc_ProfileIcons10">ଏକ ହଳଦିଆ ପୃଷ୍ଠପଟରେ ଗୋଟିଏ କମଳା ରଙ୍ଗର ପ୍ରଜାପତିର ପ୍ଲେଫୁଲ ଇଲୁଷ୍ଟ୍ରେସନ</string>
+
+    <string name="desc_ProfileIcons11">ଏକ ଗାଢ଼ ଧୂସର ପୃଷ୍ଠପଟରେ ରାଉଣ୍ଡେଡ ଏଜଗୁଡ଼ିକ ସହ କଳା ନାକ ଆକୃତି</string>
+
+    <string name="desc_ProfileIcons12">ଏକ ହାଲୁକା ଧୂସର ପୃଷ୍ଠପଟରେ ରାଉଣ୍ଡେଡ ଏଜଗୁଡ଼ିକ ସହ କଳା କ୍ଲୋଭର ଆକୃତି</string>
+
+    <string name="desc_ProfileIcons13">ଏକ ଗାଢ଼ ବାଇଗଣୀ ପୃଷ୍ଠପଟରେ ହାଲୁକା ବାଇଗଣୀ ୱିଗଲି ସର୍କଲ</string>
+
+    <string name="desc_ProfileIcons14">ଏକ କମଳା ପୃଷ୍ଠପଟରେ ରାଉଣ୍ଡେଡ ଏଜଗୁଡ଼ିକ ସହ ହାଲୁକା ନୀଳ କ୍ଲୋଭର ଆକୃତି</string>
+
+    <string name="desc_ProfileIcons15">ଏକ ଗାଢ଼ ସବୁଜ ପୃଷ୍ଠପଟରେ ରାଉଣ୍ଡେଡ ଏଜଗୁଡ଼ିକ ସହ ହାଲୁକା ସବୁଜ ହେକ୍ସାଗନ</string>
+
+    <string name="desc_ProfileIcons16">ଏକ ହାଲୁକା ଧୂସର ପୃଷ୍ଠପଟରେ ରାଉଣ୍ଡେଡ ଏଜଗୁଡ଼ିକ ସହ କଳା ଡାଇମଣ୍ଡ ଆକୃତି</string>
+
+    <string name="desc_ProfileIcons17">ଏକ ହଳଦିଆ ପୃଷ୍ଠପଟରେ ଗୋଟିଏ କମଳା ରଙ୍ଗର ପତ୍ରର ପ୍ଲେଫୁଲ ଇଲୁଷ୍ଟ୍ରେସନ</string>
+
+    <string name="desc_ProfileIcons18">ଏକ ପିଚ ପୃଷ୍ଠପଟରେ ଶନି ଗ୍ରହର ପ୍ଲେଫୁଲ ଇଲୁଷ୍ଟ୍ରେସନ</string>
+
+    <string name="desc_ProfileIcons19">ଏକ କଳା ପୃଷ୍ଠପଟରେ ଗୋଟିଏ ସିଲେଷ୍ଟିଆଲ ପାଟର୍ନରେ ଧଳା ଓ କମଳା ରଙ୍ଗର ଷ୍ଟାର ଓ ସର୍କଲର ପ୍ଲେଫୁଲ ଇଲୁଷ୍ଟ୍ରେସନ</string>
+
+    <string name="desc_ProfileIcons2">କଳା ଓ ଧଳା ଇଣ୍ଟରସେକ୍ଟିଂ ସିଲିଣ୍ଡରଗୁଡ଼ିକର ଆବଷ୍ଟ୍ରାକ୍ଟ ଇଲୁଷ୍ଟ୍ରେସନ</string>
+
+    <string name="desc_ProfileIcons20">ଏକ ହଳଦିଆ ପୃଷ୍ଠପଟରେ ନୀଳ କାନ ଓ ଏକ ଧଳା ଫେସ ଥିବା ଗୋଟିଏ କୁକୁରର ପ୍ଲେଫୁଲ ଇଲୁଷ୍ଟ୍ରେସନ</string>
+
+    <string name="desc_ProfileIcons21">ଏକ ବାଇଗଣୀ ପୃଷ୍ଠପଟରେ ଏକ ଅଲିଭ ଶାଖା ସହ ଉଡ଼ୁଥିବା ଗୋଟିଏ ଧଳା କପୋତର ପ୍ଲେଫୁଲ ଇଲୁଷ୍ଟ୍ରେସନ</string>
+
+    <string name="desc_ProfileIcons22">ଏକ ନୀଳ ପୃଷ୍ଠପଟରେ କଳା କାନ ଓ ଏକ ଧଳା ଫେସ ଥିବା ଗୋଟିଏ କୁକୁରର ପ୍ଲେଫୁଲ ଇଲୁଷ୍ଟ୍ରେସନ</string>
+
+    <string name="desc_ProfileIcons23">ଏକ କ୍ରିମ ପୃଷ୍ଠପଟରେ ସବୁଜ ପତ୍ର ଥିବା ଏକ ଗୋଲାପୀ ଫୁଲର ପ୍ଲେଫୁଲ ଇଲୁଷ୍ଟ୍ରେସନ</string>
+
+    <string name="desc_ProfileIcons24">ଏକ ଲାଲ ପୃଷ୍ଠପଟରେ ଛଅଟି ନୀଳ ସିଲିଣ୍ଡରର ଆବଷ୍ଟ୍ରାକ୍ଟ ଇଲୁଷ୍ଟ୍ରେସନ</string>
+
+    <string name="desc_ProfileIcons3">ଏକ ଗାଢ଼ ନୀଳ ପୃଷ୍ଠପଟରେ ଏକ ହାଲୁକା ନୀଳ କୋଭର ଆକୃତିର ଆବଷ୍ଟ୍ରାକ୍ଟ ଇଲୁଷ୍ଟ୍ରେସନ</string>
+
+    <string name="desc_ProfileIcons4">ଦୁଇଟି ଗୋଲାପୀ, ତିନି-ଡାଇମେନସନ ଥିବା ତ୍ରିଭୁଜର ଆବଷ୍ଟ୍ରାକ୍ଟ ଇଲୁଷ୍ଟ୍ରେସନ</string>
+
+    <string name="desc_ProfileIcons5">ଏକ ହଳଦିଆ ପୃଷ୍ଠପଟରେ ଟିଲ ଲେୟରଗୁଡ଼ିକର ଆବଷ୍ଟ୍ରାକ୍ଟ ଇଲୁଷ୍ଟ୍ରେସନ</string>
+
+    <string name="desc_ProfileIcons6">ଏକ ସବୁଜ ପୃଷ୍ଠପଟରେ ବାଇଗଣୀ ପଥରଗୁଡ଼ିକର ଆବଷ୍ଟ୍ରାକ୍ଟ ଇଲୁଷ୍ଟ୍ରେସନ</string>
+
+    <string name="desc_ProfileIcons7">ଏକ କମଳା ପୃଷ୍ଠପଟରେ ପାଞ୍ଚଟି ଧଳା, ଜିଓମେଟ୍ରିକ ଫୁଲର ପ୍ଲେଫୁଲ ଇଲୁଷ୍ଟ୍ରେସନ</string>
+
+    <string name="desc_ProfileIcons8">ଏକ ଗୋଲାପୀ ପୃଷ୍ଠପଟରେ ତିନିଟି ବ୍ଲୁବେରିର ପ୍ଲେଫୁଲ ଇଲୁଷ୍ଟ୍ରେସନ</string>
+
+    <string name="desc_ProfileIcons9">ଏକ ସବୁଜ ପୃଷ୍ଠପଟରେ ଗୋଟିଏ କଳା ପତ୍ର ଥିବା ଏକ ଲେମ୍ବୁର ପ୍ଲେଫୁଲ ଇଲୁଷ୍ଟ୍ରେସନ</string>
+</resources>

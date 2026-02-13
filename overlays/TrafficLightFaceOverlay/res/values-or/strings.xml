@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">ଆପଣଙ୍କ ଫୋନକୁ ଅନଲକ କରିବା ପାଇଁ ଆପଣଙ୍କ ଫେସ ବ୍ୟବହାର କରନ୍ତୁ</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"ଆପଣଙ୍କ ଫୋନକୁ ଅନଲକ କରିବା ପାଇଁ ଆପଣଙ୍କ ଫେସ ବ୍ୟବହାର କରନ୍ତୁ।
+
+ମନେ ରଖନ୍ତୁ:
+ଆପଣ ଥରକେ କେବଳ ଗୋଟିଏ ଫେସ ସେଟ ଅପ କରିପାରିବେ। ଅନ୍ୟ ଏକ ଫେସ ଯୋଗ କରିବା ପାଇଁ, ବର୍ତ୍ତମାନର ଫେସକୁ ଡିଲିଟ କରନ୍ତୁ।
+
+ଆପଣ ଅଜାଣତରେ ମଧ୍ୟ ଆପଣଙ୍କ ଫୋନକୁ ଦେଖିଲେ ଏହା ଅନଲକ ହୋଇପାରିବ।
+
+ଅନ୍ୟ କେହି ଜଣେ ଆପଣଙ୍କ ଫୋନକୁ ଆପଣଙ୍କ ଫେସ ସାମ୍ନାରେ ରଖି ଏହାକୁ ଅନଲକ କରିପାରିବେ।
+
+ଆପଣଙ୍କ ପରି ଦେଖାଯାଉଥିବା କୌଣସି ବ୍ୟକ୍ତି ଯେପରି ଯାଆଁଳା ଭାଇ/ଭଉଣୀଙ୍କ ଦ୍ୱାରା ଆପଣଙ୍କ ଫୋନକୁ ଅନଲକ କରାଯାଇପାରିବ।"</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"ଆପଣଙ୍କ ଫୋନକୁ ଅନଲକ କରିବା ପାଇଁ ଆପଣଙ୍କ ଫେସ ବ୍ୟବହାର କରନ୍ତୁ।
+
+ମନେ ରଖନ୍ତୁ:
+ଆପଣ ଥରକେ କେବଳ ଗୋଟିଏ ଫେସ ସେଟ ଅପ କରିପାରିବେ। ଅନ୍ୟ ଏକ ଫେସ ଯୋଗ କରିବା ପାଇଁ, ବର୍ତ୍ତମାନର ଫେସକୁ ଡିଲିଟ କରନ୍ତୁ।
+
+ଆପଣ ଅଜାଣତରେ ମଧ୍ୟ ଆପଣଙ୍କ ଫୋନକୁ ଦେଖିଲେ ଏହା ଅନଲକ ହୋଇପାରିବ।
+
+ଆପଣଙ୍କ ଆଖି ବନ୍ଦ ଥିବା ବେଳେ ମଧ୍ୟ ଅନ୍ୟ କେହି ଜଣେ ଆପଣଙ୍କ ଫୋନକୁ ଆପଣଙ୍କ ଫେସ ସାମ୍ନାରେ ରଖି ଏହାକୁ ଅନଲକ କରିପାରିବେ।
+
+ଆପଣଙ୍କ ପରି ଦେଖାଯାଉଥିବା କୌଣସି ବ୍ୟକ୍ତି ଯେପରି ଯାଆଁଳା ଭାଇ/ଭଉଣୀଙ୍କ ଦ୍ୱାରା ଆପଣଙ୍କ ଫୋନକୁ ଅନଲକ କରାଯାଇପାରିବ।"</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">ଫେସ ଅନଲକ କିପରି ସେଟ ଅପ କରିବେ</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">ପରବର୍ତ୍ତୀ ସ୍କ୍ରିନରେ, ଆପଣଙ୍କ ଫୋନକୁ ଆଖି ସିଧାରେ ଧରି ରଖନ୍ତୁ</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">ଯଦି ଆପଣ ସାଧାରଣତଃ ଚଷମା ପିନ୍ଧନ୍ତି, ତେବେ ସେଟଅପ କରିବା ସମୟରେ ଆପଣ ସେଗୁଡ଼ିକୁ ପିନ୍ଧିପାରିବେ</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"ଫେସ ଅନଲକକୁ ପୁଣି ସେଟ ଅପ କରିବା ପାଇଁ ଆପଣଙ୍କ ବର୍ତ୍ତମାନର ଫେସ ମଡେଲକୁ ଡିଲିଟ କରନ୍ତୁ।
+
+ଆପଣଙ୍କ ଫେସ ମଡେଲକୁ ସ୍ଥାୟୀ ଏବଂ ସୁରକ୍ଷିତ ଭାବରେ ଡିଲିଟ କରିଦିଆଯିବ।
+
+ଡିଲିଟ କରିବା ପରେ ଆପଣଙ୍କ ଫୋନକୁ ଅନଲକ କରିବା ପାଇଁ ଆପଣ ଆପଣଙ୍କର PIN, ପାଟର୍ନ କିମ୍ବା ପାସୱାର୍ଡ ଆବଶ୍ୟକ କରିବେ।"</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"ଫେସ ଅନଲକକୁ ପୁଣି ସେଟ ଅପ କରିବା ପାଇଁ ଆପଣଙ୍କ ବର୍ତ୍ତମାନର ଫେସ ମଡେଲକୁ ଡିଲିଟ କରନ୍ତୁ।
+
+ଆପଣଙ୍କ ଫେସ ମଡେଲକୁ ସ୍ଥାୟୀ ଏବଂ ସୁରକ୍ଷିତ ଭାବରେ ଡିଲିଟ କରିଦିଆଯିବ।
+
+ଡିଲିଟ କରିବା ପରେ ଆପଣଙ୍କ ଫୋନକୁ ଅନଲକ କରିବା ପାଇଁ ଆପଣ ଆପଣଙ୍କର ଟିପଚିହ୍ନ, PIN, ପାଟର୍ନ କିମ୍ବା ପାସୱାର୍ଡ ଆବଶ୍ୟକ କରିବେ।"</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">ଫୋନକୁ ଅନଲକ କରିବା ପାଇଁ, ଆପଣଙ୍କ ଆଖି ଖୋଲା ରହିବା ଆବଶ୍ୟକ। ସର୍ବୋତ୍ତମ ଫଳାଫଳ ପାଇଁ, ଫୋନକୁ ଅନଲକ କରିବା ବେଳେ ସନଗ୍ଲାସକୁ କାଢ଼ି ଦିଅନ୍ତୁ।</string>
+
+    <string name="security_settings_face_enroll_finish_description">ବର୍ତ୍ତମାନ ଆପଣ ଆପଣଙ୍କ ଫୋନକୁ ପିକ ଅପ କରି ଏହାକୁ ଅନଲକ କରିବା ପାଇଁ ଆପଣଙ୍କ ଫେସ ବ୍ୟବହାର କରିପାରିବେ</string>
+</resources>

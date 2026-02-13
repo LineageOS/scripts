@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- [CHAR_LIMIT=NONE] [BACKUP_MESSAGE_ID: 5444908404021316250] Battery saver: Feature description, with a "learn more" link. -->
+    <string name="battery_saver_description_with_learn_more">"Ukuze unwebe impilo yebhethri, Isilondolozi Sebhethri:
+
+•Sivula itimu emnyama
+• Sivala noma sibeka umkhawulo emsebenzini wangemuva, kweminye imithelela yokubuka, nakwezinye izici ezifana ne-“Ok Google”
+• Silungiselela uxhumo lenethiwekhi yakho
+
+"<annotation id="url">Funda kabanzi</annotation></string>
+</resources>

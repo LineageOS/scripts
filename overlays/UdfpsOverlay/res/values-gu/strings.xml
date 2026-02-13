@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">જ્યારે તમે ફિંગરપ્રિન્ટ અનલૉક સુવિધાનો ઉપયોગ કરો, ત્યારે તમારી ફિંગરપ્રિન્ટના મૉડલને અપડેટ કરવા માટે છબીઓનો ઉપયોગ કરવામાં આવે છે. તમારી ફિંગરપ્રિન્ટની છબીઓ અને મૉડલને સુરક્ષિત રીતે તમારા ફોન પર સ્ટોર કરવામાં આવે છે અને તે હંમેશાં તમારા ફોનમાં જ રહે છે. બધી પ્રક્રિયાઓ સુરક્ષિત રીતે તમારા ફોનમાં જ કરવામાં આવે છે.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">જ્યારે તેઓ ફિંગરપ્રિન્ટ અનલૉક સુવિધાનો ઉપયોગ કરે, ત્યારે તેમની ફિંગરપ્રિન્ટના મૉડલને અપડેટ કરવા માટે છબીઓનો ઉપયોગ કરવામાં આવે છે. તમારા બાળકની ફિંગરપ્રિન્ટની છબીઓ અને મૉડલને સુરક્ષિત રીતે ફોન પર સ્ટોર કરવામાં આવે છે અને તે હંમેશાં તમારા ફોનમાં જ રહે છે. બધી પ્રક્રિયાઓ સુરક્ષિત રીતે ફોનમાં જ કરવામાં આવે છે.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">તમે સેટિંગમાં જઈને તમારી ફિંગરપ્રિન્ટની છબીઓ અને મૉડલ ડિલીટ કરી શકો છો અથવા કોઈપણ સમયે ફિંગરપ્રિન્ટ વડે અનલૉક કરવાની સુવિધાને બંધ કરી શકો છો. જ્યાં સુધી તમે તમારી ફિંગરપ્રિન્ટની છબીઓ અને મૉડલ ડિલીટ ન કરો, ત્યાં સુધી તેમને તમારા ફોનમાં સ્ટોર કરવામાં આવે છે.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">સેટિંગમાં જઈને તમે અને તમારું બાળક કોઈપણ સમયે તેમની ફિંગરપ્રિન્ટની છબીઓ અને મૉડલ ડિલીટ કરી શકશો અથવા ફિંગરપ્રિન્ટ અનલૉક સુવિધા બંધ કરી શકશો. જ્યાં સુધી ફિંગરપ્રિન્ટની છબીઓ અને મૉડલને ડિલીટ ન કરવામાં આવે, ત્યાં સુધી તેને ફોન પર સ્ટોર કરવામાં આવે છે.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">ફિંગરપ્રિન્ટ અનલૉકની સુવિધા વડે તમે તમારા ફોનને તમારી ફિંગરપ્રિન્ટનો ઉપયોગ કરીને અનલૉક કરી શકો છો. સુરક્ષાના કારણસર આ વિકલ્પ માટે જરૂરી છે કે બૅકઅપ સ્ક્રીન લૉક સેટ કરવામાં આવે.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">ફિંગરપ્રિન્ટ અનલૉક</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">ઑફિસ માટે ફિંગરપ્રિન્ટ અનલૉકની સુવિધા</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">ફિંગરપ્રિન્ટ અનલૉકનું સેટઅપ કરો</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">ફિંગરપ્રિન્ટ અનલૉક સુવિધાને મંજૂરી આપો</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">એ તમે જ છો તેની ચકાસણી કરવા માટે, ફિંગરપ્રિન્ટ અનલૉક સુવિધા તમારી ફિંગરપ્રિન્ટનું વિશેષ મૉડલ બનાવે છે. સેટઅપ દરમિયાન ફિંગરપ્રિન્ટનું આ મૉડલ બનાવવા માટે, તમે જુદી-જુદી સ્થિતિમાં તમારી ફિંગરપ્રિન્ટની છબીઓ લેશો.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">એ તમારું બાળક જ છે તેની ચકાસણી કરવા માટે, ફિંગરપ્રિન્ટ અનલૉક સુવિધા તમારા બાળકની ફિંગરપ્રિન્ટનું વિશેષ મૉડલ બનાવે છે. સેટઅપ દરમિયાન ફિંગરપ્રિન્ટનું આ મૉડલ બનાવવા માટે, તેઓ જુદી-જુદી સ્થિતિમાં તેમની ફિંગરપ્રિન્ટની છબીઓ લેશે.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">રિપેર કરવાની સેવા આપતા પ્રદાતા અથવા g.co/pixel/fingerprintunlockની મુલાકાત લો.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">ફિંગરપ્રિન્ટ અનલૉકની સુવિધાનો ઉપયોગ કરો</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">પૅટર્ન • ફિંગરપ્રિન્ટ</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">પિન • ફિંગરપ્રિન્ટ</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">પાસવર્ડ • ફિંગરપ્રિન્ટ</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">ફિંગરપ્રિન્ટ અનલૉકની સુવિધાનું સેટઅપ કર્યા વિના આગળ વધો</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"જો તમારો ફોન ખોવાઈ જાય કે ચોરાઈ જાય, તો પૅટર્ન તેને સુરક્ષિત રાખી શકે છે.
+
+આમ કરવાથી તમારા ડિવાઇસ પર સ્ટોર કરેલી ફિંગરપ્રિન્ટની છબીઓ અને તેનું મૉડલ પણ ડિલીટ થઈ જશે. ઍપમાં પ્રમાણીકરણ માટે, તમે તમારી ફિંગરપ્રિન્ટનો ઉપયોગ કરી શકશો નહીં."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"જો તમારો ફોન ખોવાઈ જાય કે ચોરાઈ જાય, તો પૅટર્ન તેને સુરક્ષિત રાખી શકે છે.
+
+આમ કરવાથી તમારા ડિવાઇસ પર સ્ટોર કરેલી ફિંગરપ્રિન્ટની છબીઓ અને તેનું મૉડલ ડિલીટ થઈ જશે. તમારા ચહેરાનું મૉડલ પણ કાયમ માટે અને સુરક્ષિત રીતે ડિલીટ કરવામાં આવશે. ઍપમાં પ્રમાણીકરણ માટે, તમે તમારા ચહેરા અથવા ફિંગરપ્રિન્ટનો ઉપયોગ કરી શકશો નહીં."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"જો તમારો ફોન ખોવાઈ જાય કે ચોરાઈ જાય, તો પિન તેને સુરક્ષિત રાખી શકે છે.
+
+આમ કરવાથી તમારા ડિવાઇસ પર સ્ટોર કરેલી ફિંગરપ્રિન્ટની છબીઓ અને તેનું મૉડલ પણ ડિલીટ થઈ જશે. ઍપમાં પ્રમાણીકરણ માટે, તમે તમારી ફિંગરપ્રિન્ટનો ઉપયોગ કરી શકશો નહીં."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"જો તમારો ફોન ખોવાઈ જાય કે ચોરાઈ જાય, તો પિન તેને સુરક્ષિત રાખી શકે છે.
+
+આમ કરવાથી તમારા ડિવાઇસ પર સ્ટોર કરેલી ફિંગરપ્રિન્ટની છબીઓ અને તેનું મૉડલ ડિલીટ થઈ જશે. તમારા ચહેરાનું મૉડલ પણ કાયમ માટે અને સુરક્ષિત રીતે ડિલીટ કરવામાં આવશે. ઍપમાં પ્રમાણીકરણ માટે, તમે તમારા ચહેરા અથવા ફિંગરપ્રિન્ટનો ઉપયોગ કરી શકશો નહીં."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"જો તમારો ફોન ખોવાઈ જાય કે ચોરાઈ જાય, તો પાસવર્ડ તેને સુરક્ષિત રાખી શકે છે.
+
+આમ કરવાથી તમારા ડિવાઇસ પર સ્ટોર કરેલી ફિંગરપ્રિન્ટની છબીઓ અને તેનું મૉડલ પણ ડિલીટ થઈ જશે. ઍપમાં પ્રમાણીકરણ માટે, તમે તમારી ફિંગરપ્રિન્ટનો ઉપયોગ કરી શકશો નહીં."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"જો તમારો ફોન ખોવાઈ જાય કે ચોરાઈ જાય, તો પાસવર્ડ તેને સુરક્ષિત રાખી શકે છે.
+
+આમ કરવાથી તમારા ડિવાઇસ પર સ્ટોર કરેલી ફિંગરપ્રિન્ટની છબીઓ અને તેનું મૉડલ ડિલીટ થઈ જશે. તમારા ચહેરાનું મૉડલ પણ કાયમ માટે અને સુરક્ષિત રીતે ડિલીટ કરવામાં આવશે. ઍપમાં પ્રમાણીકરણ માટે, તમે તમારા ચહેરા અથવા ફિંગરપ્રિન્ટનો ઉપયોગ કરી શકશો નહીં."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"ડિવાઇસની સુરક્ષાની સુવિધાઓ તમારા સ્ક્રીન લૉક વિના કામ કરશે નહીં.
+
+આમ કરવાથી તમારા ડિવાઇસ પર સ્ટોર કરેલી ફિંગરપ્રિન્ટની છબીઓ અને તેનું મૉડલ પણ ડિલીટ થઈ જશે. ઍપમાં પ્રમાણીકરણ માટે, તમે તમારી ફિંગરપ્રિન્ટનો ઉપયોગ કરી શકશો નહીં."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"ડિવાઇસની સુરક્ષાની સુવિધાઓ તમારા સ્ક્રીન લૉક વિના કામ કરશે નહીં.
+
+આમ કરવાથી તમારા ડિવાઇસ પર સ્ટોર કરેલી ફિંગરપ્રિન્ટની છબીઓ અને તેનું મૉડલ ડિલીટ થઈ જશે. તમારા ચહેરાનું મૉડલ પણ કાયમ માટે અને સુરક્ષિત રીતે ડિલીટ કરવામાં આવશે. ઍપમાં પ્રમાણીકરણ માટે, તમે તમારા ચહેરા અથવા ફિંગરપ્રિન્ટનો ઉપયોગ કરી શકશો નહીં."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">ફિંગરપ્રિન્ટ અનલૉક કરવાની સુવિધાનો ઉપયોગ તમારા ફોનને અનલૉક કરવા અથવા ઍપમાં તમે જ છો તે ચકાસવા માટે કરવામાં આવે છે, આ સુવિધાનો ઉપયોગ જેટલો વધુ કરવામાં આવે, તેટલી તે વધુ બહેતર બને છે</string>
+</resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"Wil je een screenprotector gebruiken, breng die dan eerst aan op je telefoon zodat de herkenning van je vingerafdruk beter werkt.
+
+Voor de beste resultaten gebruik je een Made for Google-gecertificeerde screenprotector. Bij andere screenprotectors werkt je vingerafdruk misschien niet."</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">Kantel je vinger omhoog en tik met je vingertop</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">Draai je vinger en tik met de linkerrand</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">Draai opnieuw je vinger en tik met de rechterrand</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">Maak het scherm in de buurt van de sensor schoon</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">Maak je scherm schoon om strepen of vlekken te verwijderen. Zo kun je betere vingerafdrukfoto's maken.</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">Veeg je scherm schoon voordat je doorgaat</string>
+</resources>

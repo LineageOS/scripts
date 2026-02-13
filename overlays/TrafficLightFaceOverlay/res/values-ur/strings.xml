@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">اپنے فون کو غیر مقفل کرنے کیلئے اپنے چہرے کا استعمال کریں</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"اپنے فون کو غیر مقفل کرنے کے لیے اپنے چہرے کا استعمال کریں۔
+
+یاد رکھیں:
+آپ ایک وقت میں صرف ایک ہی چہرہ سیٹ اپ کر سکتے ہیں۔ دوسرا چہرہ شامل کرنے کے لیے موجودہ چہرے کو حذف کریں۔
+
+جب آپ کا ارادہ نہ بھی ہو تب بھی فون پر دیکھنے سے وہ غیر مقفل ہو سکتا ہے۔
+
+کوئی اور شخص فون کو آپ کے چہرے کے سامنے رکھ کر آپ کے فون کو غیر مقفل کر سکتا ہے۔
+
+آپ سے بہت زیادہ مشابہ کوئی بھی شخص، جیسے کوئی ہم شکل بھائی بہن، آپ کے فون کو غیر مقفل کر سکتا ہے۔"</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"اپنے فون کو غیر مقفل کرنے کے لیے اپنے چہرے کا استعمال کریں۔
+
+یاد رکھیں:
+آپ ایک وقت میں صرف ایک ہی چہرہ سیٹ اپ کر سکتے ہیں۔ دوسرا چہرہ شامل کرنے کے لیے موجودہ چہرے کو حذف کریں۔
+
+جب آپ کا ارادہ نہ بھی ہو تب بھی فون پر دیکھنے سے وہ غیر مقفل ہو سکتا ہے۔
+
+آپ کی آنکھیں بند ہونے پر بھی، کوئی اور شخص فون کو آپ کے چہرے کے سامنے رکھ کر آپ کے فون کو غیر مقفل کر سکتا ہے۔
+
+آپ سے بہت زیادہ مشابہ کوئی بھی شخص، جیسے کوئی ہم شکل بھائی بہن، آپ کے فون کو غیر مقفل کر سکتا ہے۔"</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">فیس اَنلاک سیٹ اپ کرنے کا طریقہ</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">اگلی اسکرین پر، اپنے فون کو آنکھ کے سامنے پکڑے رکھیں</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">اگر آپ عام طور پر عینک پہنتے ہیں تو آپ انہیں سیٹ اپ کے دوران پہن سکتے ہیں</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"‏فیس اَنلاک کو دوبارہ سیٹ اپ کرنے کے لیے اپنا موجودہ چہرے کا ماڈل حذف کریں۔
+
+آپ کے چہرے کے ماڈل کو مستقل طور پر اور محفوظ طریقے سے حذف کر دیا جائے گا۔
+
+حذف کرنے کے بعد اپنے فون کو غیر مقفل کرنے کے لیے آپ کو اپنا PIN، پیٹرن یا پاس ورڈ درکار ہوگا۔"</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"‏فیس اَنلاک کو دوبارہ سیٹ اپ کرنے کے لیے اپنا موجودہ چہرے کا ماڈل حذف کریں۔
+
+آپ کے چہرے کے ماڈل کو مستقل طور پر اور محفوظ طریقے سے حذف کر دیا جائے گا۔
+
+حذف کرنے کے بعد اپنے فون کو غیر مقفل کرنے کے لیے آپ کو اپنا فنگر پرنٹ، PIN، پیٹرن یا پاس ورڈ درکار ہوگا۔"</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">فون کو غیر مقفل کرنے کے لیے، آپ کی آنکھیں کھلی ہونی چاہئیں۔ بہترین نتائج کے لیے، فون کو غیر مقفل کرتے وقت دھوپ کے شیشے اتاریں۔</string>
+
+    <string name="security_settings_face_enroll_finish_description">اب آپ اپنا فون پک اپ کر سکتے ہیں اور اسے غیر مقفل کرنے کے لیے اپنا چہرہ استعمال کر سکتے ہیں</string>
+</resources>

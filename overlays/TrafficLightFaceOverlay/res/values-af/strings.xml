@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Gebruik jou gesig om jou foon te ontsluit</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Gebruik jou gesig om jou foon te ontsluit.
+
+Hou in gedagte:
+Jy kan net een gesig op 'n slag opgestel hê. Om nog 'n gesig by te voeg, moet jy die huidige een uitvee.
+
+As jy na die foon kyk, kan dit ontsluit word wanneer jy nie bedoel om dit te doen nie.
+
+Iemand anders kan jou foon ontsluit as dit voor jou gesig gehou word.
+
+Iemand anders wat baie soos jy lyk, soos 'n identiese broer of suster, kan jou foon ontsluit."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Gebruik jou gesig om jou foon te ontsluit.
+
+Hou in gedagte:
+Jy kan net een gesig op 'n slag opgestel hê. Om nog 'n gesig by te voeg, moet jy die huidige een uitvee.
+
+As jy na die foon kyk, kan dit ontsluit word wanneer jy nie bedoel om dit te doen nie.
+
+Iemand anders kan jou foon ontsluit as dit voor jou gesig gehou word, selfs as jou oë toe is.
+
+Iemand anders wat baie soos jy lyk, soos 'n identiese broer of suster, kan jou foon ontsluit."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Hoe om Gesigslot op te stel</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">Hou jou foon op die volgende skerm op oogvlak</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">As jy gewoonlik ’n bril dra, kan jy dit gedurende die opstelling dra</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Vee jou huidige gesigmodel uit om Gesigslot weer op te stel.
+
+Jou gesigmodel sal permanent en veilig uitgevee word.
+
+Nadat dit uitgevee is, sal jy jou PIN, patroon of wagwoord moet hê om jou foon te ontsluit."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Vee jou huidige gesigmodel uit om Gesigslot weer op te stel.
+
+Jou gesigmodel sal permanent en veilig uitgevee word.
+
+Nadat dit uitgevee is, sal jy jou vingerafdruk, PIN, patroon of wagwoord moet hê om jou foon te ontsluit."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">Jou oë moet oop wees om die foon te ontsluit. Vir die beste resultate moet jy jou sonbril afhaal wanneer jy die foon ontsluit.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Jy kan nou jou foon optel en jou gesig gebruik om dit te ontsluit</string>
+</resources>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Apabila anda menggunakan Buka Kunci Cap Jari, imej-imej digunakan untuk mengemaskinikan model cap jari anda. Imej dan model cap jari anda disimpan selamat dan tidak sesekali meninggalkan telefon anda. Semua pemprosesan berlaku dengan selamat pada telefon anda.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Apabila mereka menggunakan Buka Kunci Cap Jari, imej digunakan untuk mengemas kini model cap jari mereka. Imej dan model cap jari anak anda disimpan dengan selamat pada telefon dan tidak akan keluar daripada telefon. Semua pemprosesan berlaku dengan selamat pada telefon.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Anda boleh memadamkan imej dan model cap jari anda atau mematikan Buka Kunci Cap Jari pada bila-bila masa dalam Tetapan. Imej dan model cap jari disimpan pada telefon sehingga anda memadamkan imej dan model itu.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Anda dan anak anda boleh memadamkan imej dan model cap jari mereka atau mematikan Buka Kunci Cap Jari pada bila-bila masa dalam Tetapan. Imej dan model cap jari disimpan pada telefon sehingga dipadamkan.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">Dengan Buka Kunci Cap Jari, anda boleh membuka kunci telefon dengan menggunakan cap jari anda. Untuk keselamatan, pilihan ini memerlukan kunci skrin sandaran.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Buka Kunci Cap Jari</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">Buka Kunci Cap Jari untuk kerja</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Sediakan Buka Kunci Cap Jari</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">Benarkan Buka Kunci Cap Jari</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">Buka Kunci Cap Jari menghasilkan model unik cap jari untuk mengesahkan identiti anda. Untuk menghasilkan model cap jari ini semasa persediaan, anda akan mengambil imej cap jari anda dari kedudukan yang berbeza.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">Buka Kunci Cap Jari menghasilkan model unik cap jari anak anda untuk mengesahkan sama ada itulah mereka atau tidak. Untuk menghasilkan model cap jari ini semasa persediaan, mereka akan mengambil imej cap jari mereka daripada kedudukan yang berbeza.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">Lawati penyedia pembaikan atau g.co/pixel/fingerprintunlock.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">Gunakan Buka Kunci Cap Jari</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">Corak • Cap Jari</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">PIN • Cap Jari</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">Kata Laluan • Cap Jari</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">Teruskan tanpa Buka Kunci Cap Jari</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"Corak melindungi telefon anda jika ia hilang atau dicuri.
+
+Ini juga memadamkan imej dan model cap jari yang disimpan pada peranti anda. Anda tidak akan dapat menggunakan cap jari anda untuk pengesahan dalam apl."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"Corak melindungi telefon anda jika ia hilang atau dicuri.
+
+Ini memadamkan imej dan model cap jari yang disimpan pada peranti anda. Model wajah anda juga akan dipadamkan secara kekal dan selamat. Anda tidak akan dapat menggunakan wajah atau cap jari anda untuk pengesahan dalam apl."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"PIN melindungi telefon anda jika telefon hilang atau dicuri.
+
+Ini juga memadamkan imej dan model cap jari yang disimpan pada peranti anda. Anda tidak akan dapat menggunakan cap jari anda untuk pengesahan dalam apl."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"PIN melindungi telefon anda jika telefon hilang atau dicuri.
+
+Ini memadamkan imej dan model cap jari yang disimpan pada peranti anda. Model wajah anda juga akan dipadamkan secara kekal dan selamat. Anda tidak akan dapat menggunakan wajah atau cap jari anda untuk pengesahan dalam apl."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"Kata laluan melindungi telefon anda jika ia hilang atau dicuri.
+
+Ini juga memadamkan imej dan model cap jari yang disimpan pada peranti anda. Anda tidak akan dapat menggunakan cap jari anda untuk pengesahan dalam apl."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"Kata laluan melindungi telefon anda jika ia hilang atau dicuri.
+
+Ini memadamkan imej dan model cap jari yang disimpan pada peranti anda. Model wajah anda juga akan dipadamkan secara kekal dan selamat. Anda tidak akan dapat menggunakan wajah atau cap jari anda untuk pengesahan dalam apl."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"Ciri perlindungan peranti tidak akan berfungsi tanpa kunci skrin anda.
+
+Hal ini juga memadamkan imej dan model cap jari yang disimpan pada peranti anda. Anda tidak akan dapat menggunakan cap jari anda untuk pengesahan dalam apl."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"Ciri perlindungan peranti tidak akan berfungsi tanpa kunci skrin anda.
+
+Ini memadamkan imej dan model cap jari yang disimpan pada peranti anda. Model wajah anda juga akan dipadamkan secara kekal dan selamat. Anda tidak akan dapat menggunakan wajah atau cap jari anda untuk pengesahan dalam apl."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">Prestasi Buka Kunci Cap Jari meningkat jika anda menggunakan ciri dengan lebih kerap untuk membuka kunci telefon anda atau mengenal pasti identiti anda dalam apl</string>
+</resources>

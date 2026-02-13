@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"Če uporabljate zaščito zaslona, jo za najboljše delovanje namestite, preden nastavite prstni odtis.
+
+Za najboljše rezultate uporabite zaščito zaslona, ki ima potrdilo »Narejeno za Google«. Če uporabljate druge zaščite zaslona, prstni odtis morda ne bo deloval."</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">Nagnite prst in se dotaknite s konico</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">Zasukajte prst in se dotaknite z levim robom</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">Znova zasukajte prst in se dotaknite z desnim robom</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">Očistite zaslon v bližini tipala</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">Obrišite zaslon, da odstranite morebitne lise, packe ali madeže. S tem omogočite zajem razločnejših slik prstnih odtisov.</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">Pred nadaljevanjem očistite zaslon</string>
+</resources>

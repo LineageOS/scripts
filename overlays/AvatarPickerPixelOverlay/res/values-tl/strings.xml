@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Picker ng Avatar sa Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">Masiglang larawan ng dalawang dark-green na semi-circle sa light green na background</string>
+
+    <string name="desc_ProfileIcons10">Masiglang larawan ng orange na paruparo sa dilaw na background</string>
+
+    <string name="desc_ProfileIcons11">Itim na hugis ilong na may mga pabilog na kanto sa dark gray na background</string>
+
+    <string name="desc_ProfileIcons12">Itim na hugis clover na may mga pabilog na kanto sa light gray na background</string>
+
+    <string name="desc_ProfileIcons13">Light purple na wiggly na bilog sa dark purple na background</string>
+
+    <string name="desc_ProfileIcons14">Light blue na hugis clover na may mga pabilog na kanto sa orange na background</string>
+
+    <string name="desc_ProfileIcons15">Light green na hexagon na may mga pabilog na kanto sa dark green na background</string>
+
+    <string name="desc_ProfileIcons16">Itim na hugis diamond na may mga pabilog na kanto sa light gray na background</string>
+
+    <string name="desc_ProfileIcons17">Masiglang larawan ng orange na dahon sa dilaw na background</string>
+
+    <string name="desc_ProfileIcons18">Masiglang larawan ng planetang Saturn sa peach na background</string>
+
+    <string name="desc_ProfileIcons19">Masiglang larawan ng mga puti at orange na bitwin at bilog sa pattern ng kalawakan sa itim na background</string>
+
+    <string name="desc_ProfileIcons2">Abstract na larawan ng mga itim at puting nagkakasalubong na cylinder</string>
+
+    <string name="desc_ProfileIcons20">Masiglang larawan ng asong may mga asul na tainga at puting mukha sa dilaw na background</string>
+
+    <string name="desc_ProfileIcons21">Masiglang larawan ng puting kalapating lumilipad na may sanga ng olive sa purple na background</string>
+
+    <string name="desc_ProfileIcons22">Masiglang larawan ng asong may mga itim na tainga at puting mukha sa asul na background</string>
+
+    <string name="desc_ProfileIcons23">Masiglang larawan ng pink na bulaklak na may mga berdeng dahon sa cream na background</string>
+
+    <string name="desc_ProfileIcons24">Abstract na larawan ng anim na asul na cylinder sa pulang background</string>
+
+    <string name="desc_ProfileIcons3">Abstract na larawan ng light blue na hugis clover sa dark blue na background</string>
+
+    <string name="desc_ProfileIcons4">Abstract na larawan ng dalawang pink na three-dimensional na tatsulok</string>
+
+    <string name="desc_ProfileIcons5">Abstract na larawan ng mga teal na layer sa dilaw na background</string>
+
+    <string name="desc_ProfileIcons6">Abstract na larawan ng mga purple na bato sa berdeng background</string>
+
+    <string name="desc_ProfileIcons7">Masiglang larawan ng limang puting geometric na bulaklak sa orange na background</string>
+
+    <string name="desc_ProfileIcons8">Masiglang larawan ng tatlong blueberry sa pink na background</string>
+
+    <string name="desc_ProfileIcons9">Masiglang larawan ng lemon na may itim na dahon sa berdeng background</string>
+</resources>

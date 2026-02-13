@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">顔認証を使用して、スマートフォンのロックを解除できます</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"顔認証を使用して、スマートフォンのロックを解除できます。
+
+注意事項:
+一度に設定できる顔は 1 つのみです。別の顔を追加するには、現在の顔を削除してください。
+
+スマートフォンに無意識に顔を向けても、ロックが解除されることがあります。
+
+スマートフォンを顔に近づけられた場合、他のユーザーによってスマートフォンのロックが解除されることがあります。
+
+双子など、あなたによく似た人でもスマートフォンのロックが解除されることがあります。"</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"顔認証を使用して、スマートフォンのロックを解除できます。
+
+注意事項:
+一度に設定できる顔は 1 つのみです。別の顔を追加するには、現在の顔を削除してください。
+
+スマートフォンに無意識に顔を向けても、ロックが解除されることがあります。
+
+目を閉じているときでもスマートフォンを顔に近づけられた場合、他のユーザーによってスマートフォンのロックが解除されることがあります。
+
+双子など、あなたによく似た人でもスマートフォンのロックを解除されることがあります。"</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">顔認証の設定方法</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">次の画面で、スマートフォンを目の高さに合わせて持ってください</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">メガネを普段かけている場合は、設定の際にも着用できます</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"現在の顔モデルを削除して顔認証をもう一度設定してください。
+
+顔モデルは安全かつ完全に削除されます。
+
+削除後にスマートフォンのロックを解除するには、PIN、パターン、パスワードのいずれかが必要になります。"</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"現在の顔モデルを削除して顔認証をもう一度設定してください。
+
+顔モデルは安全かつ完全に削除されます。
+
+削除後に、スマートフォンのロックを解除するには、指紋、PIN、パターン、パスワードのいずれかが必要になります。"</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">デバイスのロックを解除する際に、目を開いていることを確認します。正しく認証されるように、スマートフォンのロックを解除する際はサングラスを外してください。</string>
+
+    <string name="security_settings_face_enroll_finish_description">顔でスマートフォンのロックを解除できるようになりました</string>
+</resources>

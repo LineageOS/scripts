@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Content description of the data connection type 5G+. [CHAR LIMIT=NONE] -->
+    <string name="data_connection_5g_plus">5G UC</string>
+</resources>

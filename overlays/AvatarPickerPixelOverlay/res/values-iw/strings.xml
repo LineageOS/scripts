@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">‏בוחר הדמות של Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">איור של שני חצאי עיגול בצבע ירוק כהה על רקע ירוק בהיר</string>
+
+    <string name="desc_ProfileIcons10">איור של פרפר כתום על רקע צהוב</string>
+
+    <string name="desc_ProfileIcons11">צורה של אף בצבע שחור עם קצוות מעוגלים על רקע אפור כהה</string>
+
+    <string name="desc_ProfileIcons12">צורה של תלתן בצבע שחור עם קצוות מעוגלים על רקע אפור בהיר</string>
+
+    <string name="desc_ProfileIcons13">צורה של מעגל גלי בצבע סגול בהיר על רקע סגול כהה</string>
+
+    <string name="desc_ProfileIcons14">צורה של תלתן בצבע תכלת עם קצוות מעוגלים על רקע כתום</string>
+
+    <string name="desc_ProfileIcons15">משושה בצבע ירוק בהיר עם קצוות מעוגלים על רקע ירוק כהה</string>
+
+    <string name="desc_ProfileIcons16">צורה של יהלום בצבע שחור עם קצוות מעוגלים על רקע אפור בהיר</string>
+
+    <string name="desc_ProfileIcons17">איור של עלה כתום על רקע צהוב</string>
+
+    <string name="desc_ProfileIcons18">איור של כוכב שבתאי על רקע בצבע אפרסק</string>
+
+    <string name="desc_ProfileIcons19">איור עליז של כוכבים ומעגלים בצבעי לבן וכתום בדוגמה שמימית על רקע שחור</string>
+
+    <string name="desc_ProfileIcons2">איור מופשט של גלילים מצטלבים בצבעי שחור ולבן</string>
+
+    <string name="desc_ProfileIcons20">איור עליז של כלב עם אוזניים כחולות ופרצוף לבן על רקע צהוב</string>
+
+    <string name="desc_ProfileIcons21">איור של יונה לבנה מעופפת עם ענף זית על רקע סגול</string>
+
+    <string name="desc_ProfileIcons22">איור של כלב עם אוזניים שחורות ופרצוף לבן על רקע כחול</string>
+
+    <string name="desc_ProfileIcons23">איור של פרח ורוד עם עלים ירוקים על רקע בצבע קרם</string>
+
+    <string name="desc_ProfileIcons24">איור מופשט של שישה גלילים כחולים על רקע אדום</string>
+
+    <string name="desc_ProfileIcons3">איור מופשט של צורת תלתן בצבע תכלת על רקע כחול כהה</string>
+
+    <string name="desc_ProfileIcons4">איור מופשט של שני משולשים ורודים תלת-ממדיים</string>
+
+    <string name="desc_ProfileIcons5">איור מופשט של שכבות בצבע כחול-ירקרק על רקע צהוב</string>
+
+    <string name="desc_ProfileIcons6">איור מופשט של סלעים סגולים על רקע ירוק</string>
+
+    <string name="desc_ProfileIcons7">איור של חמישה פרחים גיאומטריים לבנים על רקע כתום</string>
+
+    <string name="desc_ProfileIcons8">איור של שלוש אוכמניות על רקע ורוד</string>
+
+    <string name="desc_ProfileIcons9">איור של לימון עם עלה שחור על רקע ירוק</string>
+</resources>

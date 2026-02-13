@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel avatar seçici</string>
+
+    <string name="desc_ProfileIcons1">Açıq-yaşıl arxa fonda iki tünd-yaşıl yarımdairənin maraqlı təsviri</string>
+
+    <string name="desc_ProfileIcons10">Sarı arxa fonda narıncı kəpənəyin maraqlı təsviri</string>
+
+    <string name="desc_ProfileIcons11">Tünd-boz arxa fonda yuvarlaq kənarlı qara burun forması</string>
+
+    <string name="desc_ProfileIcons12">Açıq-boz arxa fonda yuvarlaq kənarlı qara yonca forması</string>
+
+    <string name="desc_ProfileIcons13">Tünd-bənövşəyi arxa fonda açıq-bənövşəyi qıvrım dairə</string>
+
+    <string name="desc_ProfileIcons14">Narıncı arxa fonda yuvarlaq kənarlı açıq-mavi yonca forması</string>
+
+    <string name="desc_ProfileIcons15">Tünd-yaşıl arxa fonda yuvarlaq kənarlı açıq-yaşıl altıbucaqlı</string>
+
+    <string name="desc_ProfileIcons16">Açıq-boz arxa fonda yuvarlaq kənarlı qara almaz forması</string>
+
+    <string name="desc_ProfileIcons17">Sarı arxa fonda narıncı yarpağın maraqlı təsviri</string>
+
+    <string name="desc_ProfileIcons18">Şaftalı rəngli arxa fonda Saturn planetinin maraqlı təsviri</string>
+
+    <string name="desc_ProfileIcons19">Qara arxa fonda səma görüntülü ağ, narıncı ulduz və dairələrin maraqlı təsviri</string>
+
+    <string name="desc_ProfileIcons2">Ağ-qara kəsişən silindrlərin abstrakt təsviri</string>
+
+    <string name="desc_ProfileIcons20">Sarı arxa fonda mavi qulaqlı və ağ üzlü itin maraqlı təsviri</string>
+
+    <string name="desc_ProfileIcons21">Bənövşəyi arxa fonda zeytun budağı ilə uçan ağ göyərçinin maraqlı təsviri</string>
+
+    <string name="desc_ProfileIcons22">Mavi arxa fonda qara qulaqlı və ağ üzlü itin maraqlı təsviri</string>
+
+    <string name="desc_ProfileIcons23">Krem rəngli arxa fonda yaşıl yarpaqlı çəhrayı çiçəyin maraqlı təsviri</string>
+
+    <string name="desc_ProfileIcons24">Qırmızı arxa fonda altı mavi silindrin abstrakt təsviri</string>
+
+    <string name="desc_ProfileIcons3">Tünd-mavi arxa fonda açıq-mavi yonca formasının abstrakt təsviri</string>
+
+    <string name="desc_ProfileIcons4">İki üçölçülü çəhrayı üçbucağın abstrakt təsviri</string>
+
+    <string name="desc_ProfileIcons5">Sarı arxa fonda firuzəyi təbəqələrin abstrakt təsviri</string>
+
+    <string name="desc_ProfileIcons6">Yaşıl arxa fonda bənövşəyi qayaların abstrakt təsviri</string>
+
+    <string name="desc_ProfileIcons7">Narıncı arxa fonda beş həndəsi ağ çiçəyin maraqlı təsviri</string>
+
+    <string name="desc_ProfileIcons8">Çəhrayı arxa fonda üç qaragilənin maraqlı təsviri</string>
+
+    <string name="desc_ProfileIcons9">Yaşıl arxa fonda qara yarpaqlı limonun maraqlı təsviri</string>
+</resources>

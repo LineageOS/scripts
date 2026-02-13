@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Text of the first time usage tooltip of the "ambientcue" area. [CHAR LIMIT=NONE] -->
+    <string name="ambientcue_first_time_edu_text">Magic Cue uses AI to proactively suggest info and actions relevant to what you’re doing on screen</string>
+
+    <string name="branded_monitoring_description_app_personal">Google is securing this connection by sending data through its servers</string>
+
+    <string name="branded_vpn_footer">Connection secured by Google</string>
+</resources>

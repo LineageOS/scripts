@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"ဖန်သားပြင်အကာအကွယ် ရှိပါက အကောင်းဆုံး စွမ်းဆောင်ရည်အတွက် သင့်လက်ဗွေ မထည့်သွင်းမီ ဖန်သားပြင်အကာအကွယ်ကို ကပ်ပါ။
+
+အကောင်းဆုံး ရလဒ်များရရန် ‘Google အတွက် ပြုလုပ်ထားသည်’ အသိအမှတ်ပြုလက်မှတ် ရှိသော ဖန်သားပြင်အကာအကွယ် သုံးပါ။ အခြား ဖန်သားပြင်အကာအကွယ်များ သုံးပါက သင့်လက်ဗွေ အလုပ်မလုပ်နိုင်ပါ။"</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">လက်ချောင်းကို စောင်းပြီး လက်ထိပ်နှင့် ထိပါ</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">လက်ချောင်းကို လှည့်ပြီး ဘယ်ဘက်အစွန်းနှင့် ထိပါ</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">ထပ်လှည့်ပြီး ညာဘက်အစွန်းနှင့် ထိပါ</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">အာရုံခံကိရိယာအနီးရှိ စခရင်ကို သန့်ရှင်းရေးလုပ်ပါ</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">အစင်း၊ ပေကျံရာ (သို့) စွန်းထင်းရာများကို ဖယ်ရှားရန် သင့်စခရင်ကို သုတ်ပစ်ပါ။ ၎င်းက ပိုရှင်းလင်းသော လက်ဗွေပုံများကို မှတ်သားပေးသည်။</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">ရှေ့မဆက်မီ သင့်စခရင်ကို သန့်ရှင်းရေးလုပ်ပါ</string>
+</resources>

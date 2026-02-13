@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"Kui teil on ekraanikaitse, pange see parima toimivuse tagamiseks peale enne sõrmejälje seadistamist.
+
+Parimate tulemuste jaoks kasutage ekraanikaitset, millel on sertifikaat Made for Google. Teiste ekraanikaitsmetega ei pruugi teie sõrmejälg toimida."</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">Kallutage sõrme ja puudutage sõrmeotsaga</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">Pöörake sõrme ja puudutage vasaku servaga</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">Pöörake uuesti ja puudutage parema servaga</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">Puhastage ekraan anduri ümbruses</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">Pühkige ekraani, et eemaldada kõik kriimud, plekid või mustus. See aitab jäädvustada selgemad sõrmejälje pildid.</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">Puhastage ekraan enne jätkamist</string>
+</resources>

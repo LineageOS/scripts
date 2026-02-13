@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="branded_monitoring_description_app_personal">Google odesílá data skrz své servery a tím toto připojení zabezpečuje</string>
+
+    <string name="branded_vpn_footer">Připojení je zabezpečeno Googlem</string>
+</resources>

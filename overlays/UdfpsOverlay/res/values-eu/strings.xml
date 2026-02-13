@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Hatz-marka bidez desblokeatzea erabiltzen duzunean, zure hatz-markaren eredua eguneratzeko erabiltzen dira irudiak. Hatz-markaren irudiak eta eredua telefonoan gordetzen dira, modu seguruan, eta ez dira inoiz ateratzen gailutik. Guztia telefonoan prozesatzen da, modu seguruan.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Hatz-marka bidez desblokeatzeko eginbidea erabiltzen duenean, haren hatz-markaren eredua eguneratzeko erabiltzen dira irudiak. Haurraren hatz-markaren irudiak eta eredua telefonoan gordetzen dira, modu seguruan, eta ez dira inoiz ateratzen telefonotik. Guztia telefonoan prozesatzen da, modu seguruan.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Hatz-markaren irudiak eta eredua ezabatzeko edo hatz-marka bidez desblokeatzeko eginbidea desaktibatzeko, joan Ezarpenak atalera. Ezabatzen dituzun arte, telefonoan gordeko dira hatz-markaren irudi eta ereduak.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Haurrak eta zuk haren hatz-markaren irudiak eta eredua ezabatu nahi badituzue edo hatz-marka bidez desblokeatzeko eginbidea desaktibatu nahi baduzue, joan Ezarpenak atalera. Ezabatzen dituzuen arte, telefonoan gordeko dira hatz-markaren irudiak eta ereduak.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">Hatz-marka bidez desblokeatzeko eginbidearekin, hatz-marka erabilita desblokea dezakezu telefonoa. Segurtasuna bermatzeko, pantaila blokeatzeko ordezko metodo bat konfiguratu behar da.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Hatz-marka bidez desblokeatzea</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">Laneko profila hatz-marka bidez desblokeatzea</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Konfiguratu Hatz-marka bidez desblokeatzea</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">Eman hatz-marka bidez desblokeatzeko baimena</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">Hatz-marka bidez desblokeatzeko eginbideak zure hatz-markaren eredu esklusibo bat sortzen du zeu zarela egiaztatzeko. Konfigurazio-prozesuan hatz-markaren eredu hori sortzeko, hatz-markaren irudiak aterako dituzu, hainbat posiziotan.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">Hatz-marka bidez desblokeatzeko eginbideak haurraren hartz-markaren eredu esklusibo bat sortzen du hura dela egiaztatzeko. Konfigurazio-prozesuan hatz-markaren eredu hori sortzeko, hatz-markaren argazkiak aterako ditu haurrak, hainbat posiziotan.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">Jarri harremanetan konponketak egiten dituen hornitzaile batekin edo joan g.co/pixel/fingerprintunlock helbidera.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">Erabili hatz-marka bidez desblokeatzeko eginbidea</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">Eredua • Hatz-marka</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">PINa • Hatz-marka</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">Pasahitza • Hatz-marka</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">Egin aurrera hatz-marka bidez desblokeatzeko eginbidea erabili gabe</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"Ereduak babestu egiten du telefonoa hura galtzen baduzu edo lapurtzen badizute.
+
+Gailuan gordetako hatz-markaren irudiak eta eredua ere ezabatuko dira. Ezingo duzu erabili hatz-marka aplikazioetan autentifikatzeko."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"Ereduak babestu egiten du telefonoa hura galtzen baduzu edo lapurtzen badizute.
+
+Gailuan gordetako hatz-markaren irudiak eta eredua ezabatuko dira. Halaber, aurpegi-eredua modu seguruan eta betiko ezabatuko da. Ezingo duzu erabili aurpegia edo hatz-marka aplikazioetan autentifikatzeko."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"PINak babestu egiten du telefonoa hura galtzen baduzu edo lapurtzen badizute.
+
+Gailuan gordetako hatz-markaren irudiak eta eredua ere ezabatuko dira. Ezingo duzu erabili hatz-marka aplikazioetan autentifikatzeko."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"PINak babestu egiten du telefonoa hura galtzen baduzu edo lapurtzen badizute.
+
+Gailuan gordetako hatz-markaren irudiak eta eredua ezabatuko dira. Halaber, aurpegi-eredua modu seguruan eta betiko ezabatuko da. Ezingo duzu erabili aurpegia edo hatz-marka aplikazioetan autentifikatzeko."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"Pasahitzak babestu egiten du telefonoa hura galtzen baduzu edo lapurtzen badizute.
+
+Gailuan gordetako hatz-markaren irudiak eta eredua ere ezabatuko dira. Ezingo duzu erabili hatz-marka aplikazioetan autentifikatzeko."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"Pasahitzak babestu egiten du telefonoa hura galtzen baduzu edo lapurtzen badizute.
+
+Gailuan gordetako hatz-markaren irudiak eta eredua ezabatuko dira. Halaber, aurpegi-eredua modu seguruan eta betiko ezabatuko da. Ezingo duzu erabili aurpegia edo hatz-marka aplikazioetan autentifikatzeko."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"Pantailaren blokeoa behar da gailua babesteko eginbideek funtziona dezaten.
+
+Gailuan gordetako hatz-markaren irudiak eta eredua ere ezabatuko dira. Ezingo duzu erabili hatz-marka aplikazioetan autentifikatzeko."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"Pantailaren blokeoa behar da gailua babesteko eginbideek funtziona dezaten.
+
+Gailuan gordetako hatz-markaren irudiak eta eredua ezabatuko dira. Halaber, aurpegi-eredua modu seguruan eta betiko ezabatuko da. Ezingo duzu erabili aurpegia edo hatz-marka aplikazioetan autentifikatzeko."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">Telefonoa desblokeatzeko edo aplikazioetan zeu zarela egiaztatzeko erabili ahala hobetuko da hatz-marka bidez desblokeatzeko eginbidea</string>
+</resources>

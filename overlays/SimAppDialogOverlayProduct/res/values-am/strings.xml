@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Empty placeholder string for an illustration content description that is supplied via resource overlay. [DO NOT TRANSLATE] -->
+    <string name="install_carrier_app_image_content_description">የGoogle Play አርማን ለይቶ የሚያቀርብ ስዕላዊ ማብራሪያ</string>
+</resources>

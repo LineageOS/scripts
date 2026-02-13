@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Выкарыстоўвайце функцыю распазнавання твару для разблакіроўкі тэлефона</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Выкарыстоўвайце твар для разблакіроўкі тэлефона.
+
+Прыміце пад увагу:
+За раз можна наладзіць толькі адзін твар. Каб дадаць іншы твар, выдаліце існуючы.
+
+Гледзячы на тэлефон, вы можаце разблакіраваць яго, нават калі не маеце такога намеру.
+
+Ваш тэлефон можа быць разблакіраваны кімсьці яшчэ, хто трымае яго на ўзроўні вашага твару.
+
+Ваш тэлефон можа быць разблакіраваны кімсьці, хто падобны на вас – напрыклад, гэта можа быць ваш брат ці сястра."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Выкарыстоўвайце твар для разблакіроўкі тэлефона.
+
+Прыміце пад увагу:
+За раз можна наладзіць толькі адзін твар. Каб дадаць іншы твар, выдаліце існуючы.
+
+Гледзячы на тэлефон, вы можаце разблакіраваць яго, нават калі не маеце такога намеру.
+
+Ваш тэлефон можа быць разблакіраваны кімсьці яшчэ, хто трымае яго на ўзроўні вашага твару, нават калі ў вас заплюшчаны вочы.
+
+Ваш тэлефон можа быць разблакіраваны кімсьці, хто падобны на вас – напрыклад, гэта можа быць ваш брат ці сястра."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Як наладзіць распазнаванне твару</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">Калі адкрыецца наступны экран, трымайце тэлефон на ўзроўні вачэй</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Калі вы звычайна носіце акуляры, падчас наладжвання вы можаце не здымаць іх</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Каб паўторна наладзіць функцыю распазнавання твару, выдаліце існуючую мадэль твару.
+
+Ваша мадэль твару будзе канчаткова і бяспечна выдалена.
+
+Пасля выдалення для разблакіроўкі тэлефона вам трэба выкарыстоўваць PIN-код, узор разблакіроўкі ці пароль."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Каб паўторна наладзіць функцыю распазнавання твару, выдаліце існуючую мадэль твару.
+
+Ваша мадэль твару будзе канчаткова і бяспечна выдалена.
+
+Пасля выдалення для разблакіроўкі тэлефона вам трэба выкарыстоўваць адбітак пальца, PIN-код, узор разблакіроўкі ці пароль."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">Каб разблакіраваць тэлефон, расплюшчыце вочы. Для дасягнення найлепшых вынікаў падчас разблакіроўкі зніміце сонечныя акуляры.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Цяпер вы можаце разблакіраваць тэлефон з дапамогай распазнавання твару</string>
+</resources>

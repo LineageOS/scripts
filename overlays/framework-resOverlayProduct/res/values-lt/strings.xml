@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- [CHAR_LIMIT=NONE] [BACKUP_MESSAGE_ID: 5444908404021316250] Battery saver: Feature description, with a "learn more" link. -->
+    <string name="battery_saver_description_with_learn_more">"Kad akumuliatorius veiktų ilgiau, Akumuliatoriaus tausojimo priemonė:
+
+• įjungia tamsiąją temą;
+• išjungia arba apriboja veiklą fone, kai kuriuos vaizdinius efektus ir kitas funkcijas, pvz., „Ok Google“;
+• optimizuoja tinklo ryšius.
+
+"<annotation id="url">Sužinokite daugiau</annotation></string>
+</resources>

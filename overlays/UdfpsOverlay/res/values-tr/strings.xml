@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Parmak İzi Kilidi'ni kullandığınızda resimler, parmak izi modelinizi güncellemek için kullanılır. Parmak izi resimleriniz ve modeliniz, telefonunuzda güvenli bir şekilde saklanıp hiçbir zaman telefondan dışarı çıkmaz. Tüm işlemler, güvenli bir şekilde telefonunuzda gerçekleşir.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Çocuğunuz Parmak İzi Kilidi'ni kullandığında resimler, parmak izi modelini güncellemek için kullanılır. Çocuğunuzun parmak izi resimleri ve modeli, telefonda güvenli bir şekilde saklanıp hiçbir zaman telefondan dışarı çıkmaz. Tüm işlemler, güvenli bir şekilde telefonda gerçekleşir.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">İstediğiniz zaman Ayarlar'da parmak izi resimlerinizi ve modelinizi silebilir veya Parmak İzi Kilidi'ni kapatabilirsiniz. Siz silene kadar, parmak izi resimleri ve modelleri telefonda saklanır.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Siz ve çocuğunuz, istediğiniz zaman Ayarlar'dan Parmak İzi Kilidi'ni devre dışı bırakabilir veya çocuğunuzun parmak izi resimlerini ve modelini silebilirsiniz. Parmak izi resimleri ve modelleri, silinene kadar telefonda saklanır.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">Parmak İzi Kilidi'ni kullanarak telefonunuzun kilidini parmak izinizle açabilirsiniz. Güvenlik amacıyla, bu seçenek için yedek bir ekran kilidi gerekir.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Parmak İzi Kilidi</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">İş profili için Parmak İzi Kilidi</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Parmak İzi Kilidi'ni ayarlama</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">Parmak İzi Kilidi'ne izin verin</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">Parmak İzi Kilidi, kimliğinizi doğrulamak için parmak izinizin benzersiz bir modelini oluşturur. Kurulum sırasında bu parmak izi modelini oluşturmak için parmak izinizin farklı pozisyonlardan resmi çekilir.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">Parmak İzi Kilidi, çocuğunuzun kimliğini doğrulamak için parmak izinin benzersiz bir modelini oluşturur. Çocuğunuz, kurulum sırasında bu parmak izi modelini oluşturmak için parmak izinin farklı konumlardan resimlerini çeker.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">Bir onarım hizmeti sağlayıcıyı veya g.co/pixel/fingerprintunlock adresini ziyaret edin.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">Parmak İzi Kilidi kullanın</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">Desen • Parmak İzi</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">PIN • Parmak İzi</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">Şifre • Parmak İzi</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">Parmak İzi Kilidi olmadan devam edin</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"Kaybolur veya çalınırsa desen telefonunuzu korur.
+
+Bu işlem, cihazınızda depolanan parmak izi resimlerini ve modelini de siler. Uygulamalarda kimlik doğrulama için parmak izinizi kullanamazsınız."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"Kaybolur veya çalınırsa desen telefonunuzu korur.
+
+Bu işlem, cihazınızda depolanan parmak izi resimlerini ve modelini siler. Yüz modeliniz de güvenli bir şekilde kalıcı olarak silinir. Uygulamalarda kimlik doğrulama için yüzünüzü ve parmak izinizi kullanamazsınız."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"Kaybolur veya çalınırsa PIN telefonunuzu korur.
+
+Bu işlem, cihazınızda depolanan parmak izi resimlerini ve modelini de siler. Uygulamalarda kimlik doğrulama için parmak izinizi kullanamazsınız."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"Kaybolur veya çalınırsa PIN telefonunuzu korur.
+
+Bu işlem, cihazınızda depolanan parmak izi resimlerini ve modelini siler. Yüz modeliniz de güvenli bir şekilde kalıcı olarak silinir. Uygulamalarda kimlik doğrulama için yüzünüzü ve parmak izinizi kullanamazsınız."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"Kaybolur veya çalınırsa şifre telefonunuzu korur.
+
+Bu işlem, cihazınızda depolanan parmak izi resimlerini ve modelini de siler. Uygulamalarda kimlik doğrulama için parmak izinizi kullanamazsınız."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"Kaybolur veya çalınırsa şifre telefonunuzu korur.
+
+Bu işlem, cihazınızda depolanan parmak izi resimlerini ve modelini siler. Yüz modeliniz de güvenli bir şekilde kalıcı olarak silinir. Uygulamalarda kimlik doğrulama için yüzünüzü ve parmak izinizi kullanamazsınız."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"Cihaz koruma özellikleri, ekran kilidiniz olmadan çalışmaz.
+
+Bu işlem, cihazınızda depolanan parmak izi resimlerini ve modelini de siler. Uygulamalarda kimlik doğrulama için parmak izinizi kullanamazsınız."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"Cihaz koruma özellikleri, ekran kilidiniz olmadan çalışmaz.
+
+Bu işlem, cihazınızda depolanan parmak izi resimlerini ve modelini siler. Yüz modeliniz de güvenli bir şekilde kalıcı olarak silinir. Uygulamalarda kimlik doğrulama için yüzünüzü ve parmak izinizi kullanamazsınız."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">Telefonunuzun kilidini açmak veya uygulamalardaki kişinin siz olduğunu doğrulamak için Parmak İzi Kilidi'ni kullandıkça bu özellik daha da iyileşir</string>
+</resources>

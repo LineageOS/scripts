@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Khi bạn dùng tính năng Mở khóa bằng vân tay, các hình ảnh sẽ được dùng để cập nhật mẫu vân tay của bạn. Các hình ảnh và mẫu vân tay của bạn được lưu trữ an toàn trên điện thoại và chỉ lưu trên điện thoại của bạn mà thôi. Toàn bộ quá trình xử lý sẽ diễn ra một cách an toàn trên điện thoại.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Khi con bạn dùng tính năng Mở khóa bằng vân tay, các hình ảnh sẽ được dùng để cập nhật mẫu vân tay của con. Các hình ảnh và mẫu vân tay của con được lưu trữ an toàn trên điện thoại và chỉ lưu trên điện thoại của con bạn mà thôi. Toàn bộ quá trình xử lý sẽ diễn ra một cách an toàn trên điện thoại.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Bạn có thể xóa các hình ảnh và mẫu vân tay của mình hoặc tắt tính năng Mở khóa bằng vân tay bất cứ lúc nào trong phần Cài đặt. Các hình ảnh và mẫu vân tay sẽ được lưu trữ trên điện thoại cho đến khi bạn xóa chúng.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Bạn và con bạn có thể xóa hình ảnh và mẫu vân tay của con hoặc tắt tính năng Mở khóa bằng vân tay bất cứ lúc nào trong phần Cài đặt. Các hình ảnh và mẫu vân tay sẽ được lưu trữ trên điện thoại này cho đến khi bạn hoặc con bạn xóa đi.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">Với tính năng Mở khóa bằng vân tay, bạn có thể mở khóa điện thoại bằng vân tay. Để bảo mật, tùy chọn này yêu cầu bạn phải có một phương thức khóa màn hình dự phòng.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Mở khóa bằng vân tay</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">Mở khóa bằng vân tay cho công việc</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Thiết lập tính năng Mở khóa bằng vân tay</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">Cho phép mở khóa bằng vân tay</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">Tính năng Mở khóa bằng vân tay sẽ tạo một mẫu vân tay duy nhất để xác minh danh tính của bạn. Để tạo mẫu vân tay này trong khi thiết lập, bạn cần chụp ảnh vân tay của mình ở nhiều vị trí.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">Tính năng Mở khóa bằng vân tay sẽ tạo một mẫu vân tay duy nhất để xác minh danh tính của con bạn. Để tạo mẫu vân tay này trong khi thiết lập, con bạn cần chụp ảnh vân tay của mình ở nhiều vị trí.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">Hãy liên hệ với một nhà cung cấp dịch vụ sửa chữa hoặc truy cập g.co/pixel/fingerprintunlock.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">Dùng tính năng Mở khóa bằng vân tay</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">Hình mở khoá • Vân tay</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">Mã PIN • Vân tay</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">Mật khẩu • Vân tay</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">Tiếp tục mà không thiết lập tính năng Mở khóa bằng vân tay</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"Hình mở khóa giúp bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp.
+
+Thao tác xóa hình mở khóa cũng sẽ xóa các hình ảnh và mẫu vân tay lưu trên thiết bị của bạn. Bạn sẽ không thể dùng vân tay của mình để xác thực trong các ứng dụng."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"Hình mở khóa giúp bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp.
+
+Thao tác xóa hình mở khóa sẽ xóa các hình ảnh và mẫu vân tay lưu trên thiết bị của bạn. Mẫu khuôn mặt của bạn cũng sẽ bị xóa vĩnh viễn theo cách an toàn. Bạn sẽ không thể dùng khuôn mặt hoặc vân tay của mình để xác thực trong các ứng dụng."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"Mã PIN giúp bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp.
+
+Thao tác xóa mã PIN cũng sẽ xóa các hình ảnh và mẫu vân tay lưu trên thiết bị của bạn. Bạn sẽ không thể dùng vân tay của mình để xác thực trong các ứng dụng."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"Mã PIN giúp bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp.
+
+Thao tác xóa mã PIN sẽ xóa các hình ảnh và mẫu vân tay lưu trên thiết bị của bạn. Mẫu khuôn mặt của bạn cũng sẽ bị xóa vĩnh viễn theo cách an toàn. Bạn sẽ không thể dùng khuôn mặt hoặc vân tay của mình để xác thực trong các ứng dụng."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"Mật khẩu giúp bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp.
+
+Thao tác xóa mật khẩu cũng sẽ xóa các hình ảnh và mẫu vân tay lưu trên thiết bị của bạn. Bạn sẽ không thể dùng vân tay của mình để xác thực trong các ứng dụng."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"Mật khẩu giúp bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp.
+
+Thao tác xóa mật khẩu sẽ xóa các hình ảnh và mẫu vân tay lưu trên thiết bị của bạn. Mẫu khuôn mặt của bạn cũng sẽ bị xóa vĩnh viễn theo cách an toàn. Bạn sẽ không thể dùng khuôn mặt hoặc vân tay của mình để xác thực trong các ứng dụng."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"Các tính năng bảo vệ thiết bị sẽ không hoạt động nếu không có phương thức khóa màn hình.
+
+Thao tác xóa phương thức khóa cũng sẽ xóa các hình ảnh và mẫu vân tay lưu trên thiết bị của bạn. Bạn sẽ không thể dùng vân tay của mình để xác thực trong các ứng dụng."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"Các tính năng bảo vệ thiết bị sẽ không hoạt động nếu không có phương thức khóa màn hình.
+
+Thao tác xóa phương thức khóa sẽ xóa các hình ảnh và mẫu vân tay lưu trên thiết bị của bạn. Mẫu khuôn mặt của bạn cũng sẽ bị xóa vĩnh viễn theo cách an toàn. Bạn sẽ không thể dùng khuôn mặt hoặc vân tay của mình để xác thực trong các ứng dụng."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">Mở khóa bằng vân tay cải thiện hơn khi bạn sử dụng nó để mở khóa điện thoại hoặc xác minh nhận dạng trong các ứng dụng</string>
+</resources>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Сродак выбару аватара Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">Гуллівая ілюстрацыя з двума цёмна-зялёнымі паўколамі на светла-зялёным фоне</string>
+
+    <string name="desc_ProfileIcons10">Гуллівая ілюстрацыя аранжавага матылька на жоўтым фоне</string>
+
+    <string name="desc_ProfileIcons11">Чорны вобраз у форме носа са скругленымі краямі на цёмна-шэрым фоне</string>
+
+    <string name="desc_ProfileIcons12">Чорны вобраз у форме канюшыны са скругленымі краямі на светла-шэрым фоне</string>
+
+    <string name="desc_ProfileIcons13">Светла-фіялетавы круг на цёмна-фіялетавым фоне</string>
+
+    <string name="desc_ProfileIcons14">Светла-сіні вобраз у форме канюшыны са скругленымі краямі на аранжавым фоне</string>
+
+    <string name="desc_ProfileIcons15">Светла-зялёны шасцівугольнік са скругленымі краямі на цёмна-зялёным фоне</string>
+
+    <string name="desc_ProfileIcons16">Чорны вобраз у форме алмаза са скругленымі краямі на светла-шэрым фоне</string>
+
+    <string name="desc_ProfileIcons17">Гуллівая ілюстрацыя аранжавага лістка на жоўтым фоне</string>
+
+    <string name="desc_ProfileIcons18">Гуллівая ілюстрацыя планеты Сатурн на персікавым фоне</string>
+
+    <string name="desc_ProfileIcons19">Гуллівая ілюстрацыя белых і аранжавых зорак і колаў нябеснага ўзору на чорным фоне</string>
+
+    <string name="desc_ProfileIcons2">Абстрактная ілюстрацыя чорна-белых цыліндраў, якія перасякаюцца</string>
+
+    <string name="desc_ProfileIcons20">Гуллівая ілюстрацыя сабакі з сінімі вушамі і белай мордай на жоўтым фоне</string>
+
+    <string name="desc_ProfileIcons21">Гуллівая ілюстрацыя белага голуба, які ляціць з аліўкавай галінкай у дзюбе на фіялетавым фоне</string>
+
+    <string name="desc_ProfileIcons22">Гуллівая ілюстрацыя сабакі з чорнымі вушамі і белай мордай на сінім фоне</string>
+
+    <string name="desc_ProfileIcons23">Гуллівая ілюстрацыя ружовай кветкі з зялёнымі лісткамі на крэмавым фоне</string>
+
+    <string name="desc_ProfileIcons24">Абстрактная ілюстрацыя шасці сініх цыліндраў на чырвоным фоне</string>
+
+    <string name="desc_ProfileIcons3">Абстрактная ілюстрацыя блакітнай формы канюшыны на цёмна-сінім фоне</string>
+
+    <string name="desc_ProfileIcons4">Абстрактная ілюстрацыя двух ружовых трохмерных трохвугольнікаў</string>
+
+    <string name="desc_ProfileIcons5">Абстрактная ілюстрацыя сіне-зялёных слаёў на жоўтым фоне</string>
+
+    <string name="desc_ProfileIcons6">Абстрактная ілюстрацыя фіялетавых камянёў на зялёным фоне</string>
+
+    <string name="desc_ProfileIcons7">Гуллівая ілюстрацыя пяці белых геаметрычных кветак на аранжавым фоне</string>
+
+    <string name="desc_ProfileIcons8">Гуллівая ілюстрацыя трох чарніц на ружовым фоне</string>
+
+    <string name="desc_ProfileIcons9">Гуллівая ілюстрацыя лімона з чорным лістком на зялёным фоне</string>
+</resources>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Name for an app setting that lets the user authenticate for that app using biometrics (e.g. fingerprint or face). [CHAR LIMIT=30] -->
+    <string name="biometric_app_setting_name">ಮುಖ ಅಥವಾ ಫಿಂಗರ್‌ ಪ್ರಿಂಟ್ ಬಳಸಿ</string>
+
+    <!-- Name for an app setting that lets the user authenticate for that app using biometrics (e.g. fingerprint or face) or their screen lock credential (i.e. PIN, pattern, or password). [CHAR LIMIT=70] -->
+    <string name="biometric_or_screen_lock_app_setting_name">ಮುಖ, ಫಿಂಗರ್‌ ಪ್ರಿಂಟ್ ಅಥವಾ ಸ್ಕ್ರೀನ್ ಲಾಕ್ ಬಳಸಿ</string>
+
+    <!-- Subtitle shown on the system-provided biometric dialog, asking the user to authenticate with a biometric (e.g. fingerprint or face). [CHAR LIMIT=70] -->
+    <string name="biometric_dialog_default_subtitle">ಮುಂದುವರಿಸಲು, ನಿಮ್ಮ ಮುಖ ಅಥವಾ ಫಿಂಗರ್‌ ಪ್ರಿಂಟ್ ಬಳಸಿ</string>
+
+    <!-- Subtitle shown on the system-provided biometric dialog, asking the user to authenticate with a biometric (e.g. fingerprint or face) or their screen lock credential (i.e. PIN, pattern, or password). [CHAR LIMIT=90] -->
+    <string name="biometric_or_screen_lock_dialog_default_subtitle">ಮುಂದುವರಿಸಲು, ನಿಮ್ಮ ಮುಖ, ಫಿಂಗರ್‌ ಪ್ರಿಂಟ್ ಅಥವಾ ಸ್ಕ್ರೀನ್ ಲಾಕ್ ಬಳಸಿ</string>
+
+    <!-- Notification name shown when the system requires the user to re-enroll their face. [CHAR LIMIT=NONE] -->
+    <string name="face_recalibrate_notification_name">ಫೇಸ್ ಅನ್‌ಲಾಕ್</string>
+
+    <!-- Notification title shown when the system requires the user to re-enroll their face. [CHAR LIMIT=NONE] -->
+    <string name="face_recalibrate_notification_title">ನಿಮ್ಮ ಮುಖವನ್ನು ಮರುನೋಂದಾಯಿಸಿ</string>
+
+    <!-- Notification content shown when the system requires the user to re-enroll their face. [CHAR LIMIT=NONE] -->
+    <string name="face_recalibrate_notification_content">ಮರುನೋಂದಣಿ ಮಾಡುವವರೆಗೂ ಫೇಸ್ ಅನ್‌ಲಾಕ್ ಕಾರ್ಯನಿರ್ವಹಿಸದಿರಬಹುದು</string>
+
+    <!-- Array containing custom messages shown during face acquisition from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="face_acquired_vendor"/>
+
+    <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="face_error_vendor">
+        <item>ಪ್ರಮಾಣಪತ್ರ ಅವಧಿ ಮೀರಿದೆ</item>
+        <item>ಸೆನ್ಸಾರ್ ಅನ್ನು ತಾತ್ಕಾಲಿಕವಾಗಿ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ</item>
+        <item>ದೃಢೀಕರಣದ ದೋಷ ಉಂಟಾಗಿದೆ</item>
+        <item>ಫೇಸ್ ಅನ್‌ಲಾಕ್ ಲಭ್ಯವಿಲ್ಲ. ಫೋನ್ ತುಂಬಾ ಹೆಚ್ಚು ಬಿಸಿಯಾಗಿದೆ.</item>
+        <item>ಫೇಸ್ ಅನ್‌ಲಾಕ್ ಅನ್ನು ಪುನಃ ಸೆಟಪ್ ಮಾಡುವ ಅಗತ್ಯವಿದೆ</item>
+    </string-array>
+
+    <!-- Title for the harmful app warning dialog. [CHAR LIMIT=40] -->
+    <string name="harmful_app_warning_title">Play ರಕ್ಷಣೆ ಎಚ್ಚರಿಕೆ</string>
+</resources>

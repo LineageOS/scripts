@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">ანაბეჭდით განბლოკვის გამოყენებისას თითის ანაბეჭდის მოდელი სურათების მეშვეობით განახლდება. თქვენი თითის ანაბეჭდის სურათები და მოდელი უსაფრთხოდ ინახება თქვენს ტელეფონში და არასოდეს ტოვებს ტელეფონს. ყველა დამუშავება ხდება ტელეფონში, უსაფრთხოდ.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">ანაბეჭდით განბლოკვის გამოყენებისას თითის ანაბეჭდის მოდელი სურათების მეშვეობით იქმნება. თქვენი ბავშვის თითის ანაბეჭდის სურათები და მოდელები უსაფრთხოდ ინახება ტელეფონში. ტელეფონში ყველა დამუშავება ხდება უსაფრთხოდ.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">თქვენი თითის ანაბეჭდის სურათებისა და მოდელის წაშლა ან ანაბეჭდით განბლოკვის პარამეტრებიდან გამორთვა ნებისმიერ დროს შეგიძლიათ. თითის ანაბეჭდის სურათები და მოდელები ტელეფონზე შეინახება, სანამ მათ წაშლიდეთ.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">თქვენ ან თქვენ ბავშვს შეგიძლიათ თითის ანაბეჭდის სურათების და მოდელის წაშლა ან ანაბეჭდით განბლოკვის ნებისმიერ დროს გამორთვა პარამეტრებიდან. თითის ანაბეჭდის სურათები და მოდელები მანამ ინახება ტელეფონში, სანამ მათ არ წაშლით.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">ანაბეჭდით განბლოკვის მეშვეობით შეგეძლებათ ტელეფონის განბლოკვა თითის ანაბეჭდით. უსაფრთხოების მოსაზრებებიდან გამომდინარე, ეს ვარიანტი საჭიროებს ეკრანის დაბლოკვის სარეზერვო მეთოდსაც.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">ანაბეჭდით განბლოკვა</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">ანაბეჭდით განბლოკვა სამსახურისთვის</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">ანაბეჭდით განბლოკვის დაყენება</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">ანაბეჭდით განბლოკვის დაშვება</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">თითის ანაბეჭდით განბლოკვის ფუნქცია თქვენი თითის ანაბეჭდის უნიკალურ მოდელს ქმნის ვინაობის დადასტურებისას თქვენს ამოსაცნობად. დაყენებისას ამ თითის ანაბეჭდის მოდელის შესაქმნელად თითის ანაბეჭდი სხვადასხვა რაკურსიდან უნდა გადაიღოთ.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">ანაბეჭდით განბლოკვის ფუნქცია თქვენი ბავშვის თითის ანაბეჭდის უნიკალურ მოდელს ქმნის, ვინაობის დადასტურების მიზნით. დაყენების პროცესში თითის ანაბეჭდის ამ მოდელის შესაქმნელად საჭირო იქნება თითის ანაბეჭდის სურათების გადაღება სხვადასხვა რაკურსიდან.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">ეწვიეთ შეკეთების სერვისის პროვაიდერს ან ბმულს g.co/pixel/fingerprintunlock.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">ანაბეჭდით განბლოკვის გამოყენება</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">ნიმუში • თითის ანაბეჭდი</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">PIN-კოდი • თითის ანაბეჭდი</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">პაროლი • თითის ანაბეჭდი</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">განაგრძეთ ანაბეჭდით განბლოკვის გარეშე</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"ნიშანი დაიცავს თქვენს ტელეფონს, თუ ის დაიკარგება ან მას მოგპარავენ.
+
+ამით თქვენს მოწყობილობაში შენახული თითის ანაბეჭდის გამოსახულება და მოდელი წაიშლება. თქვენ ვეღარ შეძლებთ თითის ანაბეჭდის გამოყენებას აპებში შესასვლელად ავტორიზაციისთვის."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"ნიშანი დაიცავს თქვენს ტელეფონს თუ ის დაიკარგება ან მას მოგპარავენ.
+
+ამით თქვენს მოწყობილობაში შენახული თითის ანაბეჭდის გამოსახულება და მოდელი წაიშლება. თქვენი სახის მოდელი სამუდამოდ და საიმედოდ წაიშლება. თქვენ ვეღარ შეძლებთ სახის ან თითის ანაბეჭდის გამოყენებას აპებში შესასვლელად ავტორიზაციისთვის."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"PIN-კოდი დაიცავს თქვენს ტელეფონს, თუ ის დაიკარგება ან მას მოგპარავენ.
+
+ამით თქვენს მოწყობილობაში შენახული თითის ანაბეჭდის გამოსახულება და მოდელი წაიშლება. თქვენ ვეღარ შეძლებთ თითის ანაბეჭდის გამოყენებას აპებში შესასვლელად ავტორიზაციისთვის."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"PIN-კოდი დაიცავს თქვენს ტელეფონს, თუ ის დაიკარგება ან მას მოგპარავენ.
+
+ამით თქვენს მოწყობილობაში შენახული თითის ანაბეჭდის გამოსახულება და მოდელი წაიშლება. თქვენი სახის მოდელი სამუდამოდ და საიმედოდ წაიშლება. თქვენ ვეღარ შეძლებთ სახის ან თითის ანაბეჭდის გამოყენებას აპებში შესასვლელად ავტორიზაციისთვის."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"პაროლი დაიცავს თქვენს ტელეფონს, თუ ის დაიკარგება ან მას მოგპარავენ.
+
+ამით თქვენს მოწყობილობაში შენახული თითის ანაბეჭდის გამოსახულება და მოდელი წაიშლება. თქვენ ვეღარ შეძლებთ თითის ანაბეჭდის გამოყენებას აპებში შესასვლელად ავტორიზაციისთვის."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"პაროლი დაიცავს თქვენს ტელეფონს, თუ ის დაიკარგება ან მას მოგპარავენ.
+
+ამით თქვენს მოწყობილობაში შენახული თითის ანაბეჭდის გამოსახულება და მოდელი წაიშლება. თქვენი სახის მოდელი სამუდამოდ და საიმედოდ წაიშლება. თქვენ ვეღარ შეძლებთ სახის ან თითის ანაბეჭდის გამოყენებას აპებში შესასვლელად ავტორიზაციისთვის."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"მოწყობილობის დაცვის ფუნქციები ეკრანის ჩაკეტვის გარეშე არ იმუშავებს.
+
+ამით თქვენს მოწყობილობაში შენახული თითის ანაბეჭდის გამოსახულება და მოდელი წაიშლება. თქვენ ვეღარ შეძლებთ თითის ანაბეჭდის გამოყენებას აპებში შესასვლელად ავტორიზაციისთვის."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"მოწყობილობის დაცვის ფუნქციები ეკრანის ჩაკეტვის გარეშე არ იმუშავებს.
+
+ამით თქვენს მოწყობილობაში შენახული თითის ანაბეჭდის გამოსახულება და მოდელი წაიშლება. თქვენი სახის მოდელი სამუდამოდ და საიმედოდ წაიშლება. თქვენ ვეღარ შეძლებთ სახის ან თითის ანაბეჭდის გამოყენებას აპებში შესასვლელად ავტორიზაციისთვის."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">ანაბეჭდით განბლოკვა მით უფრო უმჯობესდება, რაც უფრო მეტად გამოიყენებთ მას თქვენი ტელეფონის განსაბლოკად ან აპებში თქვენი ვინაობის დადასტურებითვის</string>
+</resources>

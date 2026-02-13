@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="branded_monitoring_description_app_personal">Google에서 데이터를 Google 서버를 통해 전송하여 이 연결을 안전하게 처리합니다.</string>
+
+    <string name="branded_vpn_footer">Google에서 연결을 안전하게 처리 중</string>
+</resources>

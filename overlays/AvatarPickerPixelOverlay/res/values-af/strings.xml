@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel-avatarkieser</string>
+
+    <string name="desc_ProfileIcons1">Vrolike illustrasie van twee donkergroen halfsirkels teen ’n liggroen agtergrond</string>
+
+    <string name="desc_ProfileIcons10">Vrolike illustrasie van ’n oranje skoenlapper teen ’n geel agtergrond</string>
+
+    <string name="desc_ProfileIcons11">Swart neusvorm met geronde rande teen ’n donkergrys agtergrond</string>
+
+    <string name="desc_ProfileIcons12">Swart klawervorm met geronde rande teen ’n liggrys agtergrond</string>
+
+    <string name="desc_ProfileIcons13">Ligpers kronkelende sirkel teen ’n donkerpers agtergrond</string>
+
+    <string name="desc_ProfileIcons14">Ligblou klawervorm met geronde rande teen ’n oranje agtergrond</string>
+
+    <string name="desc_ProfileIcons15">Liggroen seshoek met geronde rande teen ’n donkergroen agtergrond</string>
+
+    <string name="desc_ProfileIcons16">Swart diamantvorm met geronde rande teen ’n liggrys agtergrond</string>
+
+    <string name="desc_ProfileIcons17">Vrolike illustrasie van ’n oranje blaar teen ’n geel agtergrond</string>
+
+    <string name="desc_ProfileIcons18">Vrolike illustrasie van die planeet Saturnus teen ’n perskekleurige agtergrond</string>
+
+    <string name="desc_ProfileIcons19">Vrolike illustrasie van wit en oranje sterre en sirkels in ’n hemelpatroon teen ’n swart agtergrond</string>
+
+    <string name="desc_ProfileIcons2">Abstrakte illustrasie van kruisende swart en wit silinders</string>
+
+    <string name="desc_ProfileIcons20">Vrolike illustrasie van ’n hond met blou ore en ’n wit gesig teen ’n geel agtergrond</string>
+
+    <string name="desc_ProfileIcons21">Vrolike illustrasie van ’n wit duif wat met ’n olyftakkie vlieg teen ’n pers agtergrond</string>
+
+    <string name="desc_ProfileIcons22">Vrolike illustrasie van ’n hond met swart ore en ’n wit gesig teen ’n blou agtergrond</string>
+
+    <string name="desc_ProfileIcons23">Vrolike illustrasie van ’n pienk blom met groen blare teen ’n roomkleurige agtergrond</string>
+
+    <string name="desc_ProfileIcons24">Abstrakte illustrasie van ses blou silinders teen ’n rooi agtergrond</string>
+
+    <string name="desc_ProfileIcons3">Abstrakte illustrasie van ’n ligblou klawervorm teen ’n donkerblou agtergrond</string>
+
+    <string name="desc_ProfileIcons4">Abstrakte illustrasie van twee driedimensionele, pienk driehoeke</string>
+
+    <string name="desc_ProfileIcons5">Abstrakte illustrasie van blougroen lae teen ’n geel agtergrond</string>
+
+    <string name="desc_ProfileIcons6">Abstrakte illustrasie van pers rotse teen ’n groen agtergrond</string>
+
+    <string name="desc_ProfileIcons7">Vrolike illustrasie van vyf wit, geometriese blomme teen ’n oranje agtergrond</string>
+
+    <string name="desc_ProfileIcons8">Vrolike illustrasie van drie bloubessies teen ’n pienk agtergrond</string>
+
+    <string name="desc_ProfileIcons9">Vrolike illustrasie van ’n suurlemoen met ’n swart blaar teen ’n groen agtergrond</string>
+</resources>

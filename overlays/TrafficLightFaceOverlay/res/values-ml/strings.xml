@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">നിങ്ങളുടെ മുഖം ഉപയോഗിച്ച് ഫോൺ അൺലോക്ക് ചെയ്യുക</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"നിങ്ങളുടെ മുഖം ഉപയോഗിച്ച് ഫോൺ അൺലോക്ക് ചെയ്യുക.
+
+ശ്രദ്ധിക്കുക:
+ഒരു സമയത്ത് നിങ്ങൾക്ക് ഒരു മുഖം മാത്രമേ സജ്ജീകരിക്കാനാകൂ. മറ്റൊരു മുഖം ചേർക്കാൻ നിലവിലുള്ളത് ഇല്ലാതാക്കുക.
+
+അൺലോക്ക് ചെയ്യാൻ ഉദ്ദേശിച്ചില്ലെങ്കിലും നിങ്ങൾ ഫോണിൽ നോക്കുന്നതിലൂടെ അത് അൺലോക്കാകും.
+
+നിങ്ങളുടെ മുഖത്തിന് നേരെ ഫോൺ പിടിക്കുന്നതിലൂടെ മറ്റൊരാൾക്ക് അത് അൺലോക്ക് ചെയ്യാനാകും.
+
+ഒരേ മുഖച്ഛായയുള്ള സഹോദരങ്ങളെ പോലെ, നിങ്ങളുമായി വളരെയധികം രൂപസാദൃശ്യമുള്ള ആർക്കും നിങ്ങളുടെ ഫോൺ അൺലോക്ക് ചെയ്യാനാകും."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"നിങ്ങളുടെ മുഖം ഉപയോഗിച്ച് ഫോൺ അൺലോക്ക് ചെയ്യുക.
+
+ശ്രദ്ധിക്കുക:
+ഒരു സമയത്ത് നിങ്ങൾക്ക് ഒരു മുഖം മാത്രമേ സജ്ജീകരിക്കാനാകൂ. മറ്റൊരു മുഖം ചേർക്കാൻ നിലവിലുള്ളത് ഇല്ലാതാക്കുക.
+
+അൺലോക്ക് ചെയ്യാൻ ഉദ്ദേശിച്ചില്ലെങ്കിലും നിങ്ങൾ ഫോണിൽ നോക്കുന്നതിലൂടെ അത് അൺലോക്കാകും.
+
+നിങ്ങൾ കണ്ണടച്ചിരിക്കുകയാണെങ്കിലും നിങ്ങളുടെ മുഖത്തിന് നേരെ ഫോൺ പിടിക്കുന്നതിലൂടെ മറ്റൊരാൾക്ക് അത് അൺലോക്ക് ചെയ്യാനാകും.
+
+ഒരേ മുഖച്ഛായയുള്ള സഹോദരങ്ങളെ പോലെ, നിങ്ങളുമായി വളരെയധികം രൂപസാദൃശ്യമുള്ള ആർക്കും നിങ്ങളുടെ ഫോൺ അൺലോക്ക് ചെയ്യാനാകും."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">ഫെയ്‌സ് അൺലോക്ക് സജ്ജീകരിക്കുന്ന വിധം</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">അടുത്ത സ്ക്രീനിൽ നിങ്ങളുടെ ഫോൺ കണ്ണിന് നേരെ പിടിക്കുക</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">നിങ്ങൾ സാധാരണ കണ്ണട ധരിക്കാറുണ്ടെങ്കിൽ, സജ്ജീകരിക്കുമ്പോൾ അവ ധരിക്കാം</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"ഫെയ്‌സ് അൺലോക്ക് വീണ്ടും സജ്ജീകരിക്കാൻ നിങ്ങളുടെ നിലവിലെ മുഖ മോഡൽ ഇല്ലാതാക്കുക.
+
+നിങ്ങളുടെ മുഖ മോഡൽ ശാശ്വതമായും സുരക്ഷിതമായും ഇല്ലാതാക്കും.
+
+ഇല്ലാതാക്കിയതിന് ശേഷം, ഫോൺ അൺലോക്ക് ചെയ്യാൻ നിങ്ങളുടെ പിൻ, പാറ്റേൺ അല്ലെങ്കിൽ പാസ്‌വേഡ് ആവശ്യമാണ്."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"ഫെയ്‌സ് അൺലോക്ക് വീണ്ടും സജ്ജീകരിക്കാൻ നിങ്ങളുടെ നിലവിലെ മുഖ മോഡൽ ഇല്ലാതാക്കുക.
+
+നിങ്ങളുടെ മുഖ മോഡൽ ശാശ്വതമായും സുരക്ഷിതമായും ഇല്ലാതാക്കും.
+
+ഇല്ലാതാക്കിയതിന് ശേഷം, ഫോൺ അൺലോക്ക് ചെയ്യാൻ നിങ്ങളുടെ ഫിംഗർപ്രിന്റ്, പിൻ അല്ലെങ്കിൽ പാസ്‌വേഡ് ആവശ്യമാണ്."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">ഫോൺ അൺലോക്ക് ചെയ്യാൻ നിങ്ങളുടെ കണ്ണുകൾ തുറന്നിരിക്കണം. മികച്ച ഫലങ്ങൾക്ക്, ഫോൺ അൺലോക്ക് ചെയ്യുമ്പോൾ സൺഗ്ലാസുകൾ എടുത്ത് മാറ്റുക.</string>
+
+    <string name="security_settings_face_enroll_finish_description">ഇനി നിങ്ങളുടെ മുഖം ഉപയോഗിച്ച് നിങ്ങളുടെ ഫോൺ അൺലോക്ക് ചെയ്യാം</string>
+</resources>

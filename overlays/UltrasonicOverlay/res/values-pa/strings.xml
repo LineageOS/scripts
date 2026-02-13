@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"ਜੇ ਤੁਹਾਡੇ ਕੋਲ ਸਕ੍ਰੀਨ ਗਾਰਡ ਹੈ, ਤਾਂ ਬਿਹਤਰੀਨ ਕਾਰਗੁਜ਼ਾਰੀ ਲਈ ਆਪਣੇ ਫਿੰਗਰਪ੍ਰਿੰਟ ਦਾ ਸੈੱਟਅੱਪ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਸਕ੍ਰੀਨ ਗਾਰਡ ਲਗਾਓ।
+
+ਬਿਹਤਰੀਨ ਨਤੀਜਿਆਂ ਲਈ, Made for Google ਵੱਲੋਂ ਪ੍ਰਮਾਣਿਤ ਸਕ੍ਰੀਨ ਗਾਰਡ ਦੀ ਵਰਤੋਂ ਕਰੋ। ਸ਼ਾਇਦ ਦੂਜੇ ਸਕ੍ਰੀਨ ਗਾਰਡਾਂ ਨਾਲ ਤੁਹਾਡਾ ਫਿੰਗਰਪ੍ਰਿੰਟ ਕੰਮ ਨਾ ਕਰੇ।"</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">ਆਪਣੀ ਉਂਗਲ ਟੇਢੀ ਕਰ ਕੇ ਸਿਰੇ ਤੋਂ ਸਪਰਸ਼ ਕਰੋ</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">ਉਂਗਲ ਘੁਮਾਓ ਅਤੇ ਖੱਬੇ ਕਿਨਾਰੇ ਨਾਲ ਸਪਰਸ਼ ਕਰੋ</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">ਉਂਗਲ ਨੂੰ ਦੁਬਾਰਾ ਘੁਮਾਓ ਅਤੇ ਸੱਜੇ ਕਿਨਾਰੇ ਨਾਲ ਸਪਰਸ਼ ਕਰੋ</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">ਸੈਂਸਰ ਦੇ ਆਸੇ-ਪਾਸੇ ਆਪਣੀ ਸਕ੍ਰੀਨ ਸਾਫ਼ ਕਰੋ</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">ਕਿਸੇ ਵੀ ਲੀਕ, ਧੱਬੇ ਜਾਂ ਦਾਗ ਨੂੰ ਹਟਾਉਣ ਲਈ ਆਪਣੀ ਸਕ੍ਰੀਨ ਨੂੰ ਸਾਫ਼ ਕਰੋ। ਇਸ ਨਾਲ ਸਾਫ਼ ਫਿੰਗਰਪ੍ਰਿੰਟ ਚਿੱਤਰਾਂ ਨੂੰ ਕੈਪਚਰ ਕਰਨ ਵਿੱਚ ਮਦਦ ਮਿਲਦੀ ਹੈ।</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">ਜਾਰੀ ਰੱਖਣ ਤੋਂ ਪਹਿਲਾਂ ਆਪਣੀ ਸਕ੍ਰੀਨ ਨੂੰ ਸਾਫ਼ ਕਰੋ</string>
+</resources>

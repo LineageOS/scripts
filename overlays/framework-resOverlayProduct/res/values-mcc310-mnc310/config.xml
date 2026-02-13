@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Configure mobile tcp buffer sizes in the form:
+         rat-name:rmem_min,rmem_def,rmem_max,wmem_min,wmem_def,wmem_max
+         If no value is found for the rat-name in use, the system default will be applied.
+
+         This is deprecated. Please use config_mobile_tcp_buffers for rat-based TCP buffers sizes or
+         config_tcp_buffers for rat-independent TCP buffer sizes.
+    -->
+    <string-array name="config_mobile_tcp_buffers">
+        <item>umts:21135,131070,1056768,6144,24576,165312</item>
+        <item>hspa:18300,131070,1056768,6144,24576,393216</item>
+        <item>hsdpa:18300,131070,1056768,6144,24576,393216</item>
+        <item>hsupa:6141,131070,1056768,6144,24576,393216</item>
+        <item>hspap:31455,131070,1830912,6144,24576,1830912</item>
+        <item>edge:8192,26280,704512,4096,16384,110208</item>
+        <item>gprs:8192,8760,704512,4096,8760,110208</item>
+        <item>lte:2097152,4194304,8388608,32768,131072,1048576</item>
+        <item>lte_ca:2097152,4194304,8388608,32768,131072,1048576</item>
+        <item>nr:2097152,6291456,16777216,32768,131072,8388608</item>
+        <item>nr_sa:2097152,6291456,16777216,32768,131072,8388608</item>
+    </string-array>
+
+    <!--From SmsMessage-->
+    <!--Support decoding the user data payload as pack GSM 8-bit (a GSM alphabet
+        string that's stored in 8-bit unpacked format) characters.-->
+    <bool name="config_sms_decode_gsm_8bit_data">true</bool>
+</resources>

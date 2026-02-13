@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <integer name="config_ambient_brightness_changed_debounce_ms">500</integer>
+
+    <integer name="config_compensation_filter_horizon">1500</integer>
+</resources>

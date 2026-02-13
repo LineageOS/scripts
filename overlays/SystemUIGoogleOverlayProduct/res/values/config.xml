@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Control whether status bar should distinguish HSPA data icon form UMTS
+    data icon on devices -->
+    <bool name="config_hspa_data_distinguishable">true</bool>
+
+    <!-- Edit User avatar explicit package name -->
+    <string name="config_avatar_picker_package">com.google.android.avatarpicker</string>
+
+    <!-- Whether to show a warning notification when device's skin temperature is high. -->
+    <integer name="config_showTemperatureWarning">1</integer>
+
+    <!-- Whether to show a alarm dialog when device's usb port is overheating. -->
+    <integer name="config_showUsbPortAlarm">1</integer>
+
+    <!-- Should we vibrate on an icon animation of the shelf. This should only be active if the
+     vibrator is capable of subtle vibrations -->
+    <bool name="config_vibrateOnIconAnimation">true</bool>
+
+    <!-- Screenshot editing default activity. Will only be used if the provided component exists and
+      is enabled.
+
+      Must handle ACTION_EDIT image/png intents.
+      Blank falls back to config_screenshotEditor.
+      This name is in the ComponentName flattened format (package/class)  -->
+    <string name="config_preferredScreenshotEditor">com.google.android.apps.pixel.creativeassistant/com.google.android.apps.pixel.creativeassistant.ExternalEditActivity</string>
+
+    <!-- Screenshot editing activity used if config_preferredScreenshotEditor is not available.
+     Must handle ACTION_EDIT image/png intents.
+         Blank sends the user to the Chooser first.
+         This name is in the ComponentName flattened format (package/class)  -->
+    <string name="config_screenshotEditor">com.google.android.markup/com.google.android.markup.AnnotateActivity</string>
+
+    <!-- ComponentName for the file browsing app that the system would expect to be used for
+         screenshots. The icon for this app will be shown to the user when informing them that a
+         screenshot has been saved to a different profile (e.g. work profile). If blank, a default
+         icon will be shown. -->
+    <string name="config_screenshotFilesApp">com.google.android.apps.nbu.files/com.google.android.apps.nbu.files.home.HomeActivity</string>
+
+    <!-- Remote copy default activity.  Must handle REMOTE_COPY_ACTION intents.
+     This name is in the ComponentName flattened format (package/class)  -->
+    <string name="config_remoteCopyPackage">com.google.android.gms/.nearby.sharing.RemoteCopyShareSheetActivity</string>
+
+    <!-- SystemUI Plugins that can be loaded on user builds. -->
+    <string-array name="config_pluginAllowlist">
+        <item>com.android.systemui</item>
+        <item>com.android.systemui.plugin.globalactions.wallet</item>
+        <item>com.android.systemui.clocks</item>
+        <item>com.android.systemui.clocks.debug</item>
+        <item>com.android.systemui.clocks.bignum</item>
+        <item>com.android.systemui.clocks.calligraphy</item>
+        <item>com.android.systemui.clocks.flex</item>
+        <item>com.android.systemui.clocks.growth</item>
+        <item>com.android.systemui.clocks.handwritten</item>
+        <item>com.android.systemui.clocks.inflate</item>
+        <item>com.android.systemui.clocks.metro</item>
+        <item>com.android.systemui.clocks.numoverlap</item>
+        <item>com.android.systemui.clocks.weather</item>
+    </string-array>
+
+    <!-- Controls can query 2 preferred applications for limited number of suggested controls.
+         This config value should contain a list of package names of thoses preferred applications.
+    -->
+    <string-array name="config_controlsPreferredPackages">
+        <item>com.google.android.apps.chromecast.app</item>
+    </string-array>
+</resources>

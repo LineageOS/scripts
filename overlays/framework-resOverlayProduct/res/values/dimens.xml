@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- The height of the navigation larger gesture area if the gesture is starting from
+         the bottom. -->
+    <dimen name="navigation_bar_gesture_larger_height">110dp</dimen>
+</resources>

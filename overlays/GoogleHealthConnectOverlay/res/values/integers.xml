@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Values are from https://developer.android.com/reference/android/view/Gravity. -->
+    <integer name="gravity_start">0x00800003</integer>
+    <integer name="gravity_center">0x00000011</integer>
+    <integer name="gravity_bottom">0x00000050</integer>
+
+    <!-- Values are from https://developer.android.com/reference/android/view/View#attr_android:visibility. -->
+    <integer name="visibility_visible">0</integer>
+    <integer name="visibility_gone">2</integer>
+</resources>

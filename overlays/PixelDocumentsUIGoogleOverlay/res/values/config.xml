@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Intentionally unset. Vendors should set this in an overlay. -->
+    <string name="trusted_quick_viewer_package">com.google.android.apps.docs</string>
+
+    <!-- Indicates if DocumentsUI should handle VIEW_DOWNLOADS Intent.
+    on ARC++ devices, there exists another handler which handles VIEW_DOWNLOADS Intent. -->
+    <bool name="handle_view_downloads_intent">false</bool>
+
+    <!-- Indicates if showing as search bar design -->
+    <bool name="show_search_bar">true</bool>
+
+    <!-- The value is used in sorting process on Drawer menu. If the root's package name
+     start with it, the item will have higher order than others.-->
+    <string name="preferred_root_package">com.google.android</string>
+
+    <!-- Whether to show capitalize string on Button -->
+    <bool name="config_button_all_caps">false</bool>
+
+    <!-- This option allows us to hide the Files app icon from launcher on Android Go device.
+    Android Go device will have Files Go app for file management. -->
+    <bool name="is_launcher_enabled">false</bool>
+</resources>

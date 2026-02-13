@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">ඔබගේ දුරකථනය අගුලු හැරීමට ඔබගේ මුහුණ භාවිත කරන්න</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"ඔබගේ දුරකථනය අගුලු හැරීමට ඔබගේ මුහුණ භාවිත කරන්න.
+
+සිතෙහි තබා ගන්න:
+ඔබට එක් වරකට පිහිටුවිය හැක්කේ එක් මුහුණක් පමණි. තවත් මුහුණක් එක් කිරීමට, වත්මන් මුහුණ මකන්න.
+
+දුරකථනය දෙස බැලීම ඔබ එය අගුලු හැරීමට අදහස් නොකරන විට අගුලු හැරිය හැකිය.
+
+ඔබගේ දුරකථනය ඔබගේ මුහුණට ඇල්ලුවහොත් වෙනත් කෙනෙකු විසින් අගුලු හරිනු ලැබිය හැකිය.
+
+ඔබගේ දුරකථනය බොහෝ දුරට ඔබ මෙන් පෙනෙන, එනම් සර්වසම සහෝදර සහෝදරියක් වැනි කෙනෙකු විසින් අගුලු හැරිය හැකිය."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"ඔබගේ දුරකථනය අගුලු හැරීමට ඔබගේ මුහුණ භාවිත කරන්න.
+
+සිතෙහි තබා ගන්න:
+ඔබට එක් වරකට පිහිටුවිය හැක්කේ එක් මුහුණක් පමණි. තවත් මුහුණක් එක් කිරීමට, වත්මන් මුහුණ මකන්න.
+
+දුරකථනය දෙස බැලීම ඔබ එය අගුලු හැරීමට අදහස් නොකරන විට අගුලු හැරිය හැකිය.
+
+ඔබගේ දුරකථනය ඔබගේ මුහුණට ඇල්ලුවහොත්, ඔබ ඇස් පියාගෙන සිටියදී පවා වෙනත් කෙනෙකු විසින් අගුලු හරිනු ලැබිය හැකිය.
+
+ඔබගේ දුරකථනය බොහෝ දුරට ඔබ මෙන් පෙනෙන, එනම් සර්වසම සහෝදර සහෝදරියක් වැනි කෙනෙකු විසින් අගුලු හැරිය හැකිය."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">මුහුණෙන් අගුළු හැරීම පිහිටුවන ආකාරය</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">ඊළඟ තිරයේ, ඔබගේ දුරකථනය ඇස් මට්ටමේ තබා ගන්න</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">ඔබ සාමාන්‍යයෙන් ඇස් කණ්ණාඩි පළඳින්නේ නම්, පිහිටුවීම අතරතුර ඔබට ඒවා පැළඳිය හැකිය</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"මුහුණෙන් අගුළු හැරීම නැවත පිහිටුවීමට ඔබගේ වත්මන් මුහුණු ආකෘතිය මකන්න.
+
+ඔබගේ මුහුණු ආකෘතිය ස්ථිරව සහ ආරක්ෂිතව මකනු ඇත.
+
+මැකීමෙන් පසුව, ඔබගේ දුරකථනය අගුලු හැරීමට ඔබට ඔබගේ PIN, රටාව හෝ මුරපදය අවශ්‍ය වනු ඇත."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"මුහුණෙන් අගුළු හැරීම නැවත පිහිටුවීමට ඔබගේ වත්මන් මුහුණු ආකෘතිය මකන්න.
+
+ඔබගේ මුහුණු ආකෘතිය ස්ථිරව සහ ආරක්ෂිතව මකනු ඇත.
+
+මැකීමෙන් පසුව, ඔබගේ දුරකථනය අගුලු හැරීමට ඔබට ඔබගේ PIN, රටාව හෝ මුරපදය අවශ්‍ය වනු ඇත."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">දුරකථනය අගුලු හැරීමට, ඔබගේ ඇස් විවෘත විය යුතුය. හොඳම ප්‍රතිඵල සඳහා, දුරකථනය අගුලු හරින විට අව් කණ්ණාඩි ගලවන්න.</string>
+
+    <string name="security_settings_face_enroll_finish_description">දැන් ඔබට ඔබේ දුරකථනය තෝරා ගෙන එය අගුලු හැරීමට ඔබේ මුහුණ භාවිත කළ හැක</string>
+</resources>

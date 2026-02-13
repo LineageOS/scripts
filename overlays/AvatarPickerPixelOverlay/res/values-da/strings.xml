@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel-avatarvælger</string>
+
+    <string name="desc_ProfileIcons1">Munter illustration af to mørkegrønne halvcirkler på en lysegrøn baggrund</string>
+
+    <string name="desc_ProfileIcons10">Munter illustration af en orange sommerfugl på en gul baggrund</string>
+
+    <string name="desc_ProfileIcons11">Sort næseform med afrundede kanter på en grå baggrund</string>
+
+    <string name="desc_ProfileIcons12">Sort kløverform med afrundede kanter på en lysegrå baggrund</string>
+
+    <string name="desc_ProfileIcons13">Lyslilla cirkel med mange kurver på en mørkelilla baggrund</string>
+
+    <string name="desc_ProfileIcons14">Blå kløverform med afrundede kanter på en orange baggrund</string>
+
+    <string name="desc_ProfileIcons15">Lysegrøn sekskant med afrundede kanter på en mørkegrøn baggrund</string>
+
+    <string name="desc_ProfileIcons16">Sort diamantform med afrundede kanter på en lysegrå baggrund</string>
+
+    <string name="desc_ProfileIcons17">Munter illustration af et orange blad på en gul baggrund</string>
+
+    <string name="desc_ProfileIcons18">Munter illustration af planeten Saturn på en ferskenfarvet baggrund</string>
+
+    <string name="desc_ProfileIcons19">Munter illustration af hvide og orange stjerner og cirkler i et himmelsk mønster på en sort baggrund</string>
+
+    <string name="desc_ProfileIcons2">Abstrakt illustration af sorte og hvide overlappende cylindre</string>
+
+    <string name="desc_ProfileIcons20">Munter illustration af en hund med blå ører og et hvidt ansigt på en gul baggrund</string>
+
+    <string name="desc_ProfileIcons21">Munter illustration af en hvid due, der flyver med en olivengren, på en lilla baggrund</string>
+
+    <string name="desc_ProfileIcons22">Munter illustration af en hund med sorte ører og et hvidt ansigt på en blå baggrund</string>
+
+    <string name="desc_ProfileIcons23">Munter illustration af en lyserød blomst med grønne blade på en cremefarvet baggrund</string>
+
+    <string name="desc_ProfileIcons24">Abstrakt illustration af seks blå cylindre på en rød baggrund</string>
+
+    <string name="desc_ProfileIcons3">Abstrakt illustration af formen af en lyseblå kløver på en mørkeblå baggrund</string>
+
+    <string name="desc_ProfileIcons4">Abstrakt illustration af to lyserøde og tredimensionelle trekanter</string>
+
+    <string name="desc_ProfileIcons5">Abstrakt illustration af grønblå lag på en gul baggrund</string>
+
+    <string name="desc_ProfileIcons6">Abstrakt illustration af lilla sten på en grøn baggrund</string>
+
+    <string name="desc_ProfileIcons7">Munter illustration af fem hvide geometriske blomster på en orange baggrund</string>
+
+    <string name="desc_ProfileIcons8">Munter illustration af tre blåbær på en lyserød baggrund</string>
+
+    <string name="desc_ProfileIcons9">Munter illustration af en citron med et sort blad på en grøn baggrund</string>
+</resources>

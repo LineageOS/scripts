@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Selector de avataruri Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">Ilustrație jucăușă cu două semicercuri verde închis pe fundal verde deschis</string>
+
+    <string name="desc_ProfileIcons10">Ilustrație jucăușă cu un fluture portocaliu pe fundal galben</string>
+
+    <string name="desc_ProfileIcons11">Formă de nas negru cu margini rotunjite pe fundal gri închis</string>
+
+    <string name="desc_ProfileIcons12">Formă de trifoi negru cu margini rotunjite pe fundal gri deschis</string>
+
+    <string name="desc_ProfileIcons13">Cerc unduitor mov deschis pe fundal mov închis</string>
+
+    <string name="desc_ProfileIcons14">Formă de trifoi albastru deschis cu margini rotunjite pe fundal portocaliu</string>
+
+    <string name="desc_ProfileIcons15">Hexagon verde deschis cu margini rotunjite pe fundal verde închis</string>
+
+    <string name="desc_ProfileIcons16">Formă de diamant negru cu margini rotunjite pe fundal gri deschis</string>
+
+    <string name="desc_ProfileIcons17">Ilustrație jucăușă cu o frunză portocalie pe fundal galben</string>
+
+    <string name="desc_ProfileIcons18">Ilustrație jucăușă cu planeta Saturn pe fundal portocaliu piersică</string>
+
+    <string name="desc_ProfileIcons19">Ilustrație jucăușă cu stele și cercuri albe și portocalii într-un model celest pe fundal negru</string>
+
+    <string name="desc_ProfileIcons2">Ilustrație abstractă cu cilindri negri și albi care se intersectează</string>
+
+    <string name="desc_ProfileIcons20">Ilustrație jucăușă cu un câine cu urechi albastre și fața albă pe fundal galben</string>
+
+    <string name="desc_ProfileIcons21">Ilustrație jucăușă cu o turturea albă care zboară cu o ramură de măslin pe fundal mov</string>
+
+    <string name="desc_ProfileIcons22">Ilustrație jucăușă cu un câine cu urechi negre și fața albă pe fundal albastru</string>
+
+    <string name="desc_ProfileIcons23">Ilustrație jucăușă cu o floare roz cu frunze verzi pe fundal crem</string>
+
+    <string name="desc_ProfileIcons24">Ilustrație abstractă cu șase cilindri albaștri pe fundal roșu</string>
+
+    <string name="desc_ProfileIcons3">Ilustrație abstractă cu o formă de trifoi albastru deschis pe fundal albastru închis</string>
+
+    <string name="desc_ProfileIcons4">Ilustrație abstractă cu două triunghiuri tridimensionale roz</string>
+
+    <string name="desc_ProfileIcons5">Ilustrație abstractă cu straturi verde-albăstrui pe fundal galben</string>
+
+    <string name="desc_ProfileIcons6">Ilustrație abstractă cu pietre mov pe fundal verde</string>
+
+    <string name="desc_ProfileIcons7">Ilustrație jucăușă cu cinci flori geometrice albe pe fundal portocaliu</string>
+
+    <string name="desc_ProfileIcons8">Ilustrație jucăușă cu trei afine pe fundal roz</string>
+
+    <string name="desc_ProfileIcons9">Ilustrație jucăușă cu o lămâie cu frunză neagră pe fundal verde</string>
+</resources>

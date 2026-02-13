@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"Agar sizda ekran himoyasi bor boʻlsa, yaxshi ishlashi uchun barmoq izini sozlashdan oldin uni taqing.
+
+Eng yaxshi natijaga erishish uchun Made for Google sertifikatli ekran himoyasidan foydalaning. Boshqa ekran himoyasida barmoq izi ishlamasligi mumkin."</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">Barmoq uchi bilan tegining</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">Barmoqni buring va chap qirrasi bilan tegining</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">Yana buring va oʻng qirrasi bilan tegining</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">Ekranning sensorga yaqin qismini tozalang</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">Ekrandagi dogʻ va chiziqlarni artib tozalang. Bu barmoq izini tiniqroq yozib olishga yordam beradi.</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">Davom etishdan avval ekranni tozalang</string>
+</resources>

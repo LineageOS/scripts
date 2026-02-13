@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Утасныхаа түгжээг тайлахын тулд царайгаа ашиглана уу</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Утасныхаа түгжээг тайлахын тулд царайгаа ашиглана уу.
+
+Санамж:
+Та нэг удаад зөвхөн нэг царай тохируулах боломжтой. Өөр царай нэмэхийн тулд одоогийн царайг устгана уу.
+
+Та утас руугаа санаандгүй харснаар түгжээг нь тайлах боломжтой.
+
+Хэрэв хэн нэгэн таны утсыг нүүрний тань урд баривал таны утасны түгжээг тайлах боломжтой.
+
+Таны төрсөн ах, эгч, дүү зэрэг тантай адилхан царайтай хэн нэгэн таны утасны түгжээг тайлах боломжтой."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Утасныхаа түгжээг тайлахын тулд царайгаа ашиглана уу.
+
+Санамж:
+Та нэг удаад зөвхөн нэг царай тохируулах боломжтой. Өөр царай нэмэхийн тулд одоогийн царайг устгана уу.
+
+Та утас руугаа санаандгүй харснаар түгжээг нь тайлах боломжтой.
+
+Хэрэв хэн нэгэн таны утсыг нүүрний тань урд баривал та нүдээ аньсан байсан ч таны утасны түгжээг тайлах боломжтой.
+
+Таны төрсөн ах, эгч, дүү зэрэг тантай адилхан царайтай хэн нэгэн таны утасны түгжээг тайлах боломжтой."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Царайгаар түгжээ тайлахыг хэрхэн тохируулах вэ?</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">Дараагийн дэлгэц дээр утсаа нүднийхээ түвшинд барина уу</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Хэрэв та ердийн үед нүдний шил зүүдэг бол тохируулгын үеэр нүдний шилээ зүүж болно.</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Царайгаар түгжээ тайлахыг дахин тохируулах бол одоогийн нүүрний загвараа устгана уу.
+
+Таны нүүрний загварыг аюулгүйгээр бүрмөсөн устгана.
+
+Устгасны дараа та утасныхаа түгжээг тайлахын тулд ПИН, хээ эсвэл нууц үгээ оруулах шаардлагатай."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Царайгаар түгжээ тайлахыг дахин тохируулах бол одоогийн нүүрний загвараа устгана уу.
+
+Таны нүүрний загварыг аюулгүйгээр бүрмөсөн устгана.
+
+Устгасны дараа та утасныхаа түгжээг тайлахын тулд хурууны хээ, ПИН, хээ эсвэл нууц үгээ оруулах шаардлагатай болно."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">Утасны түгжээг тайлахын тулд таны нүд нээлттэй байх ёстой. Хамгийн сайн үр дүнд хүрэхийн тулд утасны түгжээг тайлах үедээ нарны шилээ аваарай.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Одоо та утсаа аваад, түгжээг нь царайгаараа тайлах боломжтой</string>
+</resources>

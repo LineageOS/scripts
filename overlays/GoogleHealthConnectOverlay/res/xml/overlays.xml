@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<overlay
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item target="string/config_headlineFontFamily" value="@string/overlay_config_headlineFontFamily" />
+</overlay>

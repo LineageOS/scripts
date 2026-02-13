@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Template for showing mobile network operator name while WFC is active -->
+    <string-array name="wfcSpnFormats">
+        <item>%s</item>
+        <item>WLAN</item>
+    </string-array>
+</resources>

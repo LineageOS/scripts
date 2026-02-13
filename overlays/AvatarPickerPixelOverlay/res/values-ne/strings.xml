@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel अवतार पिकर</string>
+
+    <string name="desc_ProfileIcons1">हल्का हरियो रङको ब्याकग्राउन्डमा गाढा हरियो रङको दुई वटा अर्धवृत्त भएको रमाइलो चित्र</string>
+
+    <string name="desc_ProfileIcons10">पहेँलो ब्याकग्राउन्डमा सुन्तले रङको पुतली भएको रमाइलो चित्र</string>
+
+    <string name="desc_ProfileIcons11">गाढा खरानी रङको ब्याकग्राउन्डमा गोलाकार किनाराहरू भएको कालो नाकको आकार</string>
+
+    <string name="desc_ProfileIcons12">हल्का खैरो रङको ब्याकग्राउन्डमा गोलाकार किनाराहरू भएको कालो क्लोभरको आकार</string>
+
+    <string name="desc_ProfileIcons13">गाढा बैजनी रङको ब्याकग्राउन्डमा हल्का बैजनी रङको गुँडुल्किएको वृत्त</string>
+
+    <string name="desc_ProfileIcons14">सुन्तले रङको ब्याकग्राउन्डमा गोलाकार किनाराहरू भएको हल्का निलो क्लोभरको आकार</string>
+
+    <string name="desc_ProfileIcons15">गाढा हरियो ब्याकग्राउन्डमा गोलाकार किनाराहरू भएको हल्का हरियो रङको षट्भुज</string>
+
+    <string name="desc_ProfileIcons16">हल्का खैरो रङको ब्याकग्राउन्डमा गोलाकार किनाराहरू भएको कालो हिराको आकार</string>
+
+    <string name="desc_ProfileIcons17">पहेँलो ब्याकग्राउन्डमा सुन्तले रङको पात भएको रमाइलो चित्र</string>
+
+    <string name="desc_ProfileIcons18">आरु जस्तो रङको ब्याकग्राउन्डमा शनि ग्रह भएको रमाइलो चित्र</string>
+
+    <string name="desc_ProfileIcons19">कालो रङको ब्याकग्राउन्डमा खगोलीय ढाँचाअनुसार राखिएका सेतो र सुन्तले रङका तारा तथा वृत्तहरू भएको रमाइलो चित्र</string>
+
+    <string name="desc_ProfileIcons2">कालो रङको सिलिन्डर र सेतो रङको सिलिन्डर प्रतिच्छेद भइरहेको दृश्य देखाउने अमूर्त चित्र</string>
+
+    <string name="desc_ProfileIcons20">पहेँलो ब्याकग्राउन्डमा निलो कान र सेतो अनुहार भएको कुकुरको रमाइलो चित्र</string>
+
+    <string name="desc_ProfileIcons21">बैजनी रङको ब्याकग्राउन्डमा मुखमा जैतुनको हाँगा च्यापेर उडिरहेको सेतो ढुकुरको रमाइलो चित्र</string>
+
+    <string name="desc_ProfileIcons22">निलो ब्याकग्राउन्डमा कालो कान र सेतो अनुहार भएको कुकुरको रमाइलो चित्र</string>
+
+    <string name="desc_ProfileIcons23">क्रिम रङको ब्याकग्राउन्डमा हरिया पातहरू भएको गुलाबी फूलको रमाइलो चित्र</string>
+
+    <string name="desc_ProfileIcons24">रातो रङको ब्याकग्राउन्डमा छ वटा निला सिलिन्डरहरू भएको अमूर्त चित्र</string>
+
+    <string name="desc_ProfileIcons3">गाढा निलो ब्याकग्राउन्डमा हल्का निलो क्लोभर आकारको अमूर्त चित्र</string>
+
+    <string name="desc_ProfileIcons4">दुई वटा तीनआयामिक त्रिकोणको अमूर्त चित्र</string>
+
+    <string name="desc_ProfileIcons5">पहेँलो ब्याकग्राउन्डमा निलो र हरियो मिसिएको रङका तहको अमूर्त चित्र</string>
+
+    <string name="desc_ProfileIcons6">हरियो ब्याकग्राउन्डमा बैजनी रङका ढुङ्गाहरू भएको अमूर्त चित्र</string>
+
+    <string name="desc_ProfileIcons7">सुन्तले रङको ब्याकग्राउन्डमा सेतो रङको पाँच वटा ज्यामितीय फूलहरू भएको रमाइलो चित्र</string>
+
+    <string name="desc_ProfileIcons8">गुलाबी रङको ब्याकग्राउन्डमा तीन वटा ब्लुबेरी भएको रमाइलो चित्र</string>
+
+    <string name="desc_ProfileIcons9">हरियो ब्याकग्राउन्डमा कालो पात भएको कागजीको रमाइलो चित्र</string>
+</resources>

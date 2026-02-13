@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Odemykejte telefon obličejem</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Odemykejte telefon obličejem.
+
+Důležité poznámky:
+V jednu chvíli lze mít nastavený jen jeden obličej. Pokud chcete přidat jiný obličej, smažte stávající.
+
+Může se stát, že telefon odemknete pohledem, i když zrovna nechcete.
+
+Telefon může odemknout i někdo jiný, když ho namíří na váš obličej.
+
+Váš telefon by mohl odemknout i někdo, kdo je vám hodně podobný, například vaše dvojče."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Odemykejte telefon obličejem.
+
+Důležité poznámky:
+V jednu chvíli lze mít nastavený jen jeden obličej. Pokud chcete přidat jiný obličej, smažte stávající.
+
+Může se stát, že telefon odemknete pohledem, i když zrovna nechcete.
+
+Telefon může odemknout i někdo jiný, když ho namíří na váš obličej (i když budete mít zavřené oči).
+
+Váš telefon by mohl odemknout i někdo, kdo je vám hodně podobný, například vaše dvojče."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Jak nastavit odemknutí obličejem</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">Na další obrazovce držte telefon v úrovni očí</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Pokud běžně nosíte brýle, můžete je mít i při nastavování</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Pokud chcete odemknutí obličejem nastavit znovu, smažte stávající model obličeje.
+
+Model obličeje bude trvale a bezpečně smazán.
+
+Po smazání budete k odemknutí telefonu potřebovat PIN, gesto nebo heslo."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Pokud chcete odemknutí obličejem nastavit znovu, smažte stávající model obličeje.
+
+Model obličeje bude trvale a bezpečně smazán.
+
+Po smazání budete k odemknutí telefonu potřebovat PIN, gesto nebo heslo."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">K odemknutí telefonu musíte mít otevřené oči. Doporučujeme sundat si sluneční brýle.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Nyní můžete zvednout telefon a odemknout ho obličejem</string>
+</resources>

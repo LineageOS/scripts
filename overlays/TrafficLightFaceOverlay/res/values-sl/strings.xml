@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Telefon odklepajte z obrazom.</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Telefon odklepajte z obrazom.
+
+Upoštevajte:
+Naenkrat je lahko nastavljen le en obraz. Če želite dodati nov obraz, morate obstoječega izbrisati.
+
+Če pogledate proti telefonu, ga boste morda nenamerno odklenili.
+
+Vaš telefon lahko odklene tudi nekdo drug, če ga podrži pred vašim obrazom.
+
+Prav tako lahko telefon odklene nekdo, ki vam je zelo podoben, na primer vaš enojajčni dvojček."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Telefon odklepajte z obrazom.
+
+Upoštevajte:
+Naenkrat je lahko nastavljen le en obraz. Če želite dodati nov obraz, morate obstoječega izbrisati.
+
+Če pogledate proti telefonu, ga boste morda nenamerno odklenili.
+
+Telefon lahko odklene tudi nekdo drug, če ga podrži pred vašim obrazom – celo kadar imate oči zaprte.
+
+Prav tako lahko telefon odklene nekdo, ki vam je zelo podoben, na primer vaš enojajčni dvojček."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Kako nastaviti odklepanje z obrazom</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">Ko bo prikazan naslednji zaslon, držite telefon v višini oči.</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Če običajno nosite očala, jih lahko nadenete med postopkom nastavitve</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Če želite znova nastaviti odklepanje z obrazom, izbrišite trenutni model obraza.
+
+Model obraza bo trajno in varno izbrisan.
+
+Po izbrisu boste za odklepanje telefona morali uporabiti kodo PIN, vzorec ali geslo."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Če želite znova nastaviti odklepanje z obrazom, izbrišite trenutni model obraza.
+
+Model obraza bo trajno in varno izbrisan.
+
+Po izbrisu boste za odklepanje telefona morali uporabiti prstni odtis, kodo PIN, vzorec ali geslo."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">Če želite odkleniti telefon, morate imeti odprte oči. Za brezhibno odklepanje telefona snemite sončna očala.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Zdaj lahko telefon primete in odklenete z obrazom.</string>
+</resources>

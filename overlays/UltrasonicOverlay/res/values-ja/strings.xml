@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">"画面保護シートをお使いになる場合は、性能の低下を防ぐため、シートを装着してから指紋を追加してください。
+
+正常に動作するよう、Made For Google 認定の画面保護シートを使用してください。これ以外の製品を使うと、指紋が認識されないおそれがあります。"</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">指先を押し当ててください</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">指の左端を押し当ててください</string>
+
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">指の右端を押し当ててください</string>
+
+    <!--Text for acquire msg on UDFPS devices -->
+    <string name="fingerprint_acquired_imager_dirty_udfps">画面でセンサー付近の汚れを取り除いてください</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_message">画面を拭いて、すじ、汚れ、しみなどを取り除いてください。指紋の画像をより鮮明に登録できるようになります。</string>
+
+    <string name="fingerprint_udfps_pre_enroll_runner_dialog_title">次に進む前に画面をきれいにします</string>
+</resources>

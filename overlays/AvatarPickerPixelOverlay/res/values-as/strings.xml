@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel অৱতাৰ বাছনিকৰ্তা</string>
+
+    <string name="desc_ProfileIcons1">এক পাতল সেউজীয়া পটভূমিত দুটা গাঢ় সেউজীয়া অৰ্ধ-চক্ৰৰ ধেমেলীয়া চিত্ৰণ</string>
+
+    <string name="desc_ProfileIcons10">এক হালধীয়া পটভূমিত এটা কমলাৰঙী পখিলাৰ ধেমেলীয়া চিত্ৰণ</string>
+
+    <string name="desc_ProfileIcons11">এক গাঢ় ধোঁৱাবৰণীয়া পটভূমিত ঘূৰণীয়া সীমান্তযুক্ত ক’লা ৰঙৰ নাকৰ আকৃতি</string>
+
+    <string name="desc_ProfileIcons12">এক পাতল ধোঁৱাবৰণীয়া পটভূমিত ঘূৰণীয়া সীমান্তযুক্ত ক’লা ৰঙৰ ক্ল'ভাৰ বনৰ আকৃতি</string>
+
+    <string name="desc_ProfileIcons13">এক গাঢ় বেঙুনীয়া পটভূমিত লৰচৰ কৰি থকা পাতল বেঙুনীয়া চক্ৰ</string>
+
+    <string name="desc_ProfileIcons14">এক কমলাৰঙী পটভূমিত ঘূৰণীয়া সীমান্তযুক্ত পাতল নীলা ৰঙৰ বনৰ আকৃতি</string>
+
+    <string name="desc_ProfileIcons15">এক গাঢ় সেউজীয়া পটভূমিত ঘূৰণীয়া সীমান্তযুক্ত পাতল সেউজীয়া ষড়ভুজ</string>
+
+    <string name="desc_ProfileIcons16">এক পাতল ধোঁৱাবৰণীয়া পটভূমিত ঘূৰণীয়া সীমান্তযুক্ত ক’লা হীৰাৰ আকৃতি</string>
+
+    <string name="desc_ProfileIcons17">এক হালধীয়া পটভূমিত এটা কমলাৰঙী পাতৰ ধেমেলীয়া চিত্ৰণ</string>
+
+    <string name="desc_ProfileIcons18">এক ঈষৎ কজলা পটভূমিত শনি গ্ৰহটোৰ ধেমেলীয়া চিত্ৰণ</string>
+
+    <string name="desc_ProfileIcons19">এক ক’লা পটভূমিত এটা আকাশৰ আৰ্হিত বগা আৰু কমলাৰঙী তৰা আৰু চক্ৰৰ ধেমেলীয়া চিত্ৰণ</string>
+
+    <string name="desc_ProfileIcons2">ইটোৱে সিটোক ছেদ কৰা বগা আৰু ক’লা চিলিণ্ডাৰৰ বিমূৰ্ত চিত্ৰণ</string>
+
+    <string name="desc_ProfileIcons20">এক হালধীয়া পটভূমিত নীলা কাণ আৰু বগা মুখৰ এটা কুকুৰৰ ধেমেলীয়া চিত্ৰণ</string>
+
+    <string name="desc_ProfileIcons21">এক বেঙুনীয়া পটভূমিত জলফাই গছৰ ডাল এটাৰ সৈতে উৰি থকা এটা কপৌ চৰাইৰ ধেমেলীয়া চিত্ৰণ</string>
+
+    <string name="desc_ProfileIcons22">এক নীলা পটভূমিত ক’লা কাণ আৰু বগা মুখৰ এটা কুকুৰৰ ধেমেলীয়া চিত্ৰণ</string>
+
+    <string name="desc_ProfileIcons23">এক ক্ৰীম ৰঙৰ পটভূমিত সেউজীয়া গছপাতৰ সৈতে এপাহ গুলপীয়া ফুলৰ ধেমেলীয়া চিত্ৰণ</string>
+
+    <string name="desc_ProfileIcons24">এক ৰঙা পটভূমিত ছটা নীলা চিলিণ্ডাৰৰ বিমূৰ্ত চিত্ৰণ</string>
+
+    <string name="desc_ProfileIcons3">এক গাঢ় নীলা পটভূমিত এক পাতল নীলা ৰঙৰ বনৰ আকৃতিৰ বিমূৰ্ত চিত্ৰণ</string>
+
+    <string name="desc_ProfileIcons4">দুটা গুলপীয়া ৰঙৰ তিনি-মাত্ৰিক ত্ৰিভুজৰ বিমূৰ্ত চিত্ৰণ</string>
+
+    <string name="desc_ProfileIcons5">এক হালধীয়া পটভূমিত গাঢ় সেউজ-নীলা স্তৰৰ বিমূৰ্ত চিত্ৰণ</string>
+
+    <string name="desc_ProfileIcons6">এক সেউজীয়া পটভূমিত বেঙুনীয়া শিলাখণ্ডৰ বিমূৰ্ত চিত্ৰণ</string>
+
+    <string name="desc_ProfileIcons7">এক কমলাৰঙী পটভূমিত পাঁচপাহ বগা ৰঙৰ, জ্যামিতিক ফুলৰ ধেমেলীয়া চিত্ৰণ</string>
+
+    <string name="desc_ProfileIcons8">এক গুলপীয়া পটভূমিত তিনিটা ব্লুবেৰীৰ ধেমেলীয়া চিত্ৰণ</string>
+
+    <string name="desc_ProfileIcons9">এক সেউজীয়া পটভূমিত এটা ক’লা ৰঙৰ পাতৰ সৈতে এটা নেমুৰ ধেমেলীয়া চিত্ৰণ</string>
+</resources>

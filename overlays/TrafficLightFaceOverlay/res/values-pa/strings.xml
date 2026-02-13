@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">ਆਪਣੇ ਫ਼ੋਨ ਨੂੰ ਅਣਲਾਕ ਕਰਨ ਲਈ ਆਪਣੇ ਚਿਹਰੇ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"ਆਪਣੇ ਫ਼ੋਨ ਨੂੰ ਅਣਲਾਕ ਕਰਨ ਲਈ ਆਪਣੇ ਚਿਹਰੇ ਦੀ ਵਰਤੋਂ ਕਰੋ।
+
+ਧਿਆਨ ਵਿੱਚ ਰੱਖੋ:
+ਤੁਸੀਂ ਇੱਕ ਸਮੇਂ 'ਤੇ ਇੱਕੋ ਹੀ ਚਿਹਰੇ ਦਾ ਸੈੱਟਅੱਪ ਕਰ ਸਕਦੇ ਹੋ। ਇੱਕ ਹੋਰ ਚਿਹਰਾ ਸ਼ਾਮਲ ਕਰਨ ਲਈ, ਪਹਿਲਾਂ ਮੌਜੂਦਾ ਚਿਹਰੇ ਨੂੰ ਮਿਟਾਓ।
+
+ਫ਼ੋਨ ਨੂੰ ਦੇਖਣ ਸਾਰ ਹੀ ਫ਼ੋਨ ਅਣਲਾਕ ਹੋ ਸਕਦਾ ਹੈ, ਭਾਵੇਂ ਇੰਝ ਕਰਨ ਦਾ ਤੁਹਾਡਾ ਇਰਾਦਾ ਨਾ ਹੋਵੇ।
+
+ਕਿਸੇ ਵੱਲੋਂ ਤੁਹਾਡਾ ਫ਼ੋਨ ਤੁਹਾਡੇ ਮੂਹਰੇ ਕਰਨ 'ਤੇ ਫ਼ੋਨ ਅਣਲਾਕ ਹੋ ਸਕਦਾ ਹੈ।
+
+ਤੁਹਾਡੇ ਵਰਗੇ ਦਿਸਣ ਵਾਲੇ ਕਿਸੇ ਵਿਅਕਤੀ ਵੱਲੋਂ ਵੀ ਤੁਹਾਡਾ ਫ਼ੋਨ ਅਣਲਾਕ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ, ਜਿਵੇਂ ਇੱਕੋ ਜਿਹੇ ਦਿਸਣ ਵਾਲੇ ਭੈਣ-ਭਰਾ।"</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"ਆਪਣੇ ਫ਼ੋਨ ਨੂੰ ਅਣਲਾਕ ਕਰਨ ਲਈ ਆਪਣੇ ਚਿਹਰੇ ਦੀ ਵਰਤੋਂ ਕਰੋ।
+
+ਧਿਆਨ ਵਿੱਚ ਰੱਖੋ:
+ਤੁਸੀਂ ਇੱਕ ਸਮੇਂ 'ਤੇ ਇੱਕੋ ਹੀ ਚਿਹਰੇ ਦਾ ਸੈੱਟਅੱਪ ਕਰ ਸਕਦੇ ਹੋ। ਇੱਕ ਹੋਰ ਚਿਹਰਾ ਸ਼ਾਮਲ ਕਰਨ ਲਈ, ਪਹਿਲਾਂ ਮੌਜੂਦਾ ਚਿਹਰੇ ਨੂੰ ਮਿਟਾਓ।
+
+ਫ਼ੋਨ ਨੂੰ ਦੇਖਣ ਸਾਰ ਹੀ ਫ਼ੋਨ ਅਣਲਾਕ ਹੋ ਸਕਦਾ ਹੈ, ਭਾਵੇਂ ਇੰਝ ਕਰਨ ਦਾ ਤੁਹਾਡਾ ਇਰਾਦਾ ਨਾ ਹੋਵੇ।
+
+ਕਿਸੇ ਵੱਲੋਂ ਤੁਹਾਡਾ ਫ਼ੋਨ ਤੁਹਾਡੇ ਮੂਹਰੇ ਕਰਨ 'ਤੇ ਫ਼ੋਨ ਅਣਲਾਕ ਹੋ ਸਕਦਾ ਹੈ, ਭਾਵੇਂ ਤੁਹਾਡੀਆਂ ਅੱਖਾਂ ਬੰਦ ਹੋਣ।
+
+ਤੁਹਾਡੇ ਵਰਗੇ ਦਿਸਣ ਵਾਲੇ ਕਿਸੇ ਵਿਅਕਤੀ ਵੱਲੋਂ ਵੀ ਤੁਹਾਡਾ ਫ਼ੋਨ ਅਣਲਾਕ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ, ਜਿਵੇਂ ਇੱਕੋ ਜਿਹੇ ਦਿਸਣ ਵਾਲੇ ਭੈਣ-ਭਰਾ।"</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">ਫ਼ੇਸ ਅਣਲਾਕ ਸੈੱਟਅੱਪ ਕਰਨ ਦਾ ਤਰੀਕਾ</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">ਅਗਲੀ ਸਕ੍ਰੀਨ 'ਤੇ, ਆਪਣੇ ਫ਼ੋਨ ਨੂੰ ਅੱਖਾਂ ਦੀ ਸੀਧ ਵਿੱਚ ਰੱਖੋ</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">ਜੇ ਤੁਸੀਂ ਆਮ ਤੌਰ 'ਤੇ ਐਨਕਾਂ ਪਹਿਨਦੇ ਹੋ, ਤਾਂ ਤੁਸੀਂ ਸੈੱਟਅੱਪ ਦੌਰਾਨ ਇਨ੍ਹਾਂ ਨੂੰ ਪਹਿਨ ਸਕਦੇ ਹੋ।</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"ਫ਼ੇਸ ਅਣਲਾਕ ਨੂੰ ਦੁਬਾਰਾ ਸੈੱਟਅੱਪ ਕਰਨ ਲਈ ਆਪਣੇ ਚਿਹਰੇ ਦਾ ਮੌਜੂਦਾ ਮਾਡਲ ਮਿਟਾਓ।
+
+ਤੁਹਾਡੇ ਚਿਹਰੇ ਦਾ ਮਾਡਲ ਪੱਕੇ ਤੌਰ 'ਤੇ ਅਤੇ ਸੁਰੱਖਿਅਤ ਤਰੀਕੇ ਨਾਲ ਮਿਟਾਇਆ ਜਾਵੇਗਾ।
+
+ਮਿਟਾਉਣ ਤੋਂ ਬਾਅਦ, ਤੁਹਾਨੂੰ ਆਪਣੇ ਫ਼ੋਨ ਨੂੰ ਅਣਲਾਕ ਕਰਨ ਲਈ ਆਪਣੇ ਪਿੰਨ, ਪੈਟਰਨ ਜਾਂ ਪਾਸਵਰਡ ਦੀ ਲੋੜ ਹੋਵੇਗੀ।"</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"ਫ਼ੇਸ ਅਣਲਾਕ ਨੂੰ ਦੁਬਾਰਾ ਸੈੱਟਅੱਪ ਕਰਨ ਲਈ ਆਪਣੇ ਚਿਹਰੇ ਦਾ ਮੌਜੂਦਾ ਮਾਡਲ ਮਿਟਾਓ।
+
+ਤੁਹਾਡੇ ਚਿਹਰੇ ਦਾ ਮਾਡਲ ਪੱਕੇ ਤੌਰ 'ਤੇ ਅਤੇ ਸੁਰੱਖਿਅਤ ਤਰੀਕੇ ਨਾਲ ਮਿਟਾਇਆ ਜਾਵੇਗਾ।
+
+ਮਿਟਾਉਣ ਤੋਂ ਬਾਅਦ, ਤੁਹਾਨੂੰ ਆਪਣੇ ਫ਼ੋਨ ਨੂੰ ਅਣਲਾਕ ਕਰਨ ਲਈ ਆਪਣੇ ਫਿੰਗਰਪ੍ਰਿੰਟ, ਪਿੰਨ, ਪੈਟਰਨ ਜਾਂ ਪਾਸਵਰਡ ਦੀ ਲੋੜ ਹੋਵੇਗੀ।"</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">ਫ਼ੋਨ ਅਣਲਾਕ ਕਰਨ ਲਈ, ਤੁਹਾਡੀਆਂ ਅੱਖਾਂ ਦਾ ਖੁੱਲ੍ਹੇ ਹੋਣਾ ਲਾਜ਼ਮੀ ਹੈ। ਬਿਹਤਰੀਨ ਨਤੀਜਿਆਂ ਲਈ, ਫ਼ੋਨ ਅਣਲਾਕ ਕਰਨ ਵੇਲੇ ਧੁੱਪ ਵਾਲੀਆਂ ਐਨਕਾਂ ਉਤਾਰੋ।</string>
+
+    <string name="security_settings_face_enroll_finish_description">ਹੁਣ ਤੁਸੀਂ ਆਪਣੇ ਫ਼ੋਨ ਨੂੰ ਚੁੱਕ ਕੇ ਆਪਣੇ ਚਿਹਰੇ ਦੀ ਵਰਤੋਂ ਕਰ ਕੇ ਇਸਨੂੰ ਅਣਲਾਕ ਕਰ ਸਕਦੇ ਹੋ</string>
+</resources>

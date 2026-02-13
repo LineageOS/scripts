@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Кулпуланган түзмөктү манжа изи менен ачып жатканда алынган сүрөттөр аркылуу манжа изинин үлгүсүн жаңыртууга болот. Сүрөттөр телефондо гана иштелип, манжа изинин үлгүсү менен кошо түзмөгүңүздө гана сакталып, эч жакка жөнөтүлбөйт.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Кулпуланган түзмөктү манжа изи менен ачып жатканда алынган сүрөттөр аркылуу манжа изинин үлгүсүн жаңыртууга болот. Сүрөттөр менен үлгү телефондо гана иштелип, балаңыздын түзмөгүндө гана сакталып, эч жакка жөнөтүлбөйт.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Манжаңыздын изинин сүрөттөрүн жана үлгүсүн же \"Кулпуланган түзмөктү манжа изи менен ачуу\" функциясын каалаган убакта Параметрлерге өтүп, өчүрсөңүз болот. Манжа изинин сүрөттөрү жана үлгүлөрү өчүрүлмөйүнчө телефонуңузда сакталат.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Манжа изинин сүрөттөрүн жана үлгүсүн, же болбосо Манжа изи менен ачуу функциясын каалаган убакта Параметрлерге өтүп, өчүрсөңүздөр болот. Манжа изинин сүрөттөрү жана үлгүлөрү өчүрүлмөйүнчө телефондо сакталат.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">Манжа изи менен ачуу аркылуу телефонуңуздун кулпусун манжаңыздын изи менен ачсаңыз болот. Коопсуздук максатында экранды кулпулоонун дагы бир ыкмасын тандап коюңуз.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Манжа изи менен ачуу</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">Жумуш профили үчүн Манжа изи менен ачуу функциясы</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Кулпуланган түзмөктү манжа изи менен ачуу</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">Кулпуланган түзмөктү манжа изи менен ачууга уруксат берүү</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">Манжа изи менен ачуу функциясы сизди таануу үчүн манжаңыздын изинин уникалдуу үлгүсүн түзөт. Үлгүнү түзүү үчүн манжаңызды ар кайсы абалдан скандашыңыз керек.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">Манжа изи менен ачуу функциясы балаңызды таануу үчүн манжасынын изинин кайталанбас үлгүсүн түзөт. Манжа изинин үлгүсүн түзүү үчүн ал манжасынын изин ар кайсы абалдан сүрөткө тартышы керек.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">Тейлөө кызматына кайрылыңыз же g.co/pixel/fingerprintunlock бөлүмүнө өтүңүз.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">Манжа изи менен ачуу функциясын колдонуу</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">Графикалык ачкыч • Манжа изи</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">PIN код • Манжа изи</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">Сырсөз • Манжа изи</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">Манжа изи менен ачуу функциясын колдонбой улантуу</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"Графикалык ачкыч аркылуу жоготкон же уурдаткан телефонуңузду коргойсуз.
+
+Мындан тышкары, ал түзмөгүңүздө сакталган манжа изинин сүрөттөрү менен үлгүсүн өчүрөт. Колдонмолордо манжа изиңиз менен аутентификациядан өтө албай каласыз."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"Графикалык ачкыч аркылуу жоготкон же уурдаткан телефонуңузду коргойсуз.
+
+Мындан тышкары, ал түзмөгүңүздө сакталган манжа изинин сүрөттөрү менен үлгүсүн өчүрөт. Жүзүңүздүн үлгүсү да өчүп калат. Колдонмолордо жүзүңүздүн же манжаңыздын үлгүсү менен аутентификациядан өтө албай каласыз."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"PIN код жоголгон же уурдаткан телефонуңузду коргойт.
+
+Мындан тышкары, түзмөгүңүздө сакталган манжа изинин сүрөттөрү менен үлгүсү өчүп калат. Ошентип колдонмолордо манжаңыздын изи менен аутентификациядан өтө албай каласыз."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"PIN код жоголгон же уурдаткан телефонуңузду коргойт.
+
+Мындан тышкары, түзмөгүңүздө сакталган манжа изинин сүрөттөрү менен үлгүсү өчүп калат. Жүзүңүздүн үлгүсү да өчөт. Ошентип колдонмолордо жүзүңүздүн же манжаңыздын үлгүсү менен аутентификациядан өтө албай каласыз."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"Сырсөз жоголгон же уурдалган телефондогу нерселерди коргойт.
+
+Ошондой эле, ал түзмөгүңүздө сакталган манжа изинин сүрөттөрүн жана үлгүсүн өчүрөт. Колдонмолордо аутентификациялоо үчүн манжа изиңизди колдоно албай каласыз."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"Сырсөз жоголгон же уурдалган телефондогу нерселерди коргойт.
+
+Ал түзмөгүңүздө сакталган манжа изинин сүрөттөрүн жана үлгүсүн өчүрөт. Жүзүңүздүн үлгүсү да биротоло өчөт. Колдонмолордо аутентификациялоо үчүн жүзүңүздү же манжа изиңизди колдоно албай каласыз."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"Түзмөктү коргоо функциялары экранды кулпулоо функциясы жок иштебейт.
+
+Ошондой эле, ал түзмөгүңүздө сакталган манжа изинин сүрөттөрүн жана үлгүсүн өчүрөт. Колдонмолордо аутентификациялоо үчүн манжа изиңизди колдоно албай каласыз."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"Түзмөктү коргоо функциялары экранды кулпулоо функциясы жок иштебейт.
+
+Ал түзмөгүңүздө сакталган манжа изинин сүрөттөрүн жана үлгүсүн өчүрөт. Жүзүңүздүн үлгүсү да биротоло өчөт. Колдонмолордо аутентификациялоо үчүн жүзүңүздү же манжа изиңизди колдоно албай каласыз."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">Телефондун кулпусун ачуу же колдонмолордо өзүңүздү ырастоо үчүн Манжа изи менен ачуу функциясын канчалык көп колдонсоңуз, ал ошончолук жакшы иштейт</string>
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- [CHAR_LIMIT=NONE] [BACKUP_MESSAGE_ID: 5444908404021316250] Battery saver: Feature description, with a "learn more" link. -->
+    <string name="battery_saver_description_with_learn_more">"Šetrič batérie predlžuje výdrž batérie:
+
+• zapnutím tmavého motívu;
+• vypnutím alebo obmedzením aktivity na pozadí, niektorých vizuálnych efektov a ďalších funkcií, napríklad kľúčového výrazu „Hey Google“;
+• optimalizáciou pripojení k sieti.
+
+"<annotation id="url">Ďalšie informácie</annotation></string>
+</resources>

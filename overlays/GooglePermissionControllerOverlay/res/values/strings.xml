@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Help URL, application permissions [DO NOT TRANSLATE] -->
+    <string name="help_app_permissions">https://support.google.com/googleplay/answer/6270602</string>
+
+    <!-- Link for Safety Label Data Sharing help center page. [CHAR LIMIT=NONE]-->
+    <string name="data_sharing_help_center_link">https://support.google.com/android?p=data_sharing</string>
+
+    <!-- Help URI, action disabled by restricted settings [DO NOT TRANSLATE] -->
+    <string name="help_url_action_disabled_by_restricted_settings">https://support.google.com/android/?p=restricted_settings</string>
+</resources>

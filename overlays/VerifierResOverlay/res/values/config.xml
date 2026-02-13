@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Package name for developer verification service provider app [DO NOT TRANSLATE] -->
+    <string name="config_developerVerificationServiceProviderPackageName">com.google.android.verifier</string>
+
+    <!-- Package name for developer verification policy delegate app [DO NOT TRANSLATE] -->
+    <string name="config_developerVerificationPolicyDelegatePackageName">com.google.android.gms</string>
+</resources>

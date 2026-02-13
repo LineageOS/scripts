@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Avatarväljare för Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">En lekfull illustration av två mörkgröna halvcirklar på en ljusgrön bakgrund</string>
+
+    <string name="desc_ProfileIcons10">En lekfull illustration av en orange fjäril på en gul bakgrund</string>
+
+    <string name="desc_ProfileIcons11">En svart nosform med rundade kanter på en mörkgrå bakgrund</string>
+
+    <string name="desc_ProfileIcons12">En svart klöverform med rundade kanter på en ljusgrå bakgrund</string>
+
+    <string name="desc_ProfileIcons13">En ljuslila snirklande cirkel på en mörklila bakgrund</string>
+
+    <string name="desc_ProfileIcons14">En ljusblå klöverform med rundade kanter på en orange bakgrund</string>
+
+    <string name="desc_ProfileIcons15">En ljusgrön sexhörning med rundade kanter på en mörkgrön bakgrund</string>
+
+    <string name="desc_ProfileIcons16">En svart ruterform med rundade kanter på en ljusgrå bakgrund</string>
+
+    <string name="desc_ProfileIcons17">En lekfull illustration av ett orange löv på en gul bakgrund</string>
+
+    <string name="desc_ProfileIcons18">En lekfull illustration av planeten Saturnus på en persikofärgad bakgrund</string>
+
+    <string name="desc_ProfileIcons19">En lekfull illustration av vita och svarta stjärnor och cirklar i ett himlamönster på en svart bakgrund</string>
+
+    <string name="desc_ProfileIcons2">En abstrakt illustration av svarta och vita korsande cylindrar</string>
+
+    <string name="desc_ProfileIcons20">En lekfull illustration av en hund med blå öron och vitt ansikte på en gul bakgrund</string>
+
+    <string name="desc_ProfileIcons21">En lekfull illustration av en flygande duva med en olivkvist på en lila bakgrund</string>
+
+    <string name="desc_ProfileIcons22">En lekfull illustration av en hund med svarta öron och vitt ansikte på en blå bakgrund</string>
+
+    <string name="desc_ProfileIcons23">En lekfull illustration av en rosa blomma med gröna blad på en gräddvit bakgrund</string>
+
+    <string name="desc_ProfileIcons24">En abstrakt illustration av sex blå cylindrar på en röd bakgrund</string>
+
+    <string name="desc_ProfileIcons3">En abstrakt illustration av en ljusblå klöverform på en mörkblå bakgrund</string>
+
+    <string name="desc_ProfileIcons4">En abstrakt illustration av två rosa, tredimensionella trianglar</string>
+
+    <string name="desc_ProfileIcons5">En abstrakt illustration av blågröna lager på en gul bakgrund</string>
+
+    <string name="desc_ProfileIcons6">En abstrakt illustration av lila stenar på en grön bakgrund</string>
+
+    <string name="desc_ProfileIcons7">En lekfull illustration av fem vita, geometriska blommor på en orange bakgrund</string>
+
+    <string name="desc_ProfileIcons8">En lekfull illustration av tre blåbär på en rosa bakgrund</string>
+
+    <string name="desc_ProfileIcons9">En lekfull illustration av en citron med ett svart blad på en grön bakgrund</string>
+</resources>

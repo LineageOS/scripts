@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel-ის ავატარის ამომრჩევი</string>
+
+    <string name="desc_ProfileIcons1">ღია მწვანე ფონზე გამოსახული ორი მუქი მწვანე ნახევარწრის სახალისო ილუსტრაცია</string>
+
+    <string name="desc_ProfileIcons10">ყვითელ ფონზე გამოსახული ნარინჯისფერი პეპლის სახალისო ილუსტრაცია</string>
+
+    <string name="desc_ProfileIcons11">მომრგვალებული კიდეების მქონე მუქ ნაცრისფერ ფონზე გამოსახული ცხვირის ფორმა</string>
+
+    <string name="desc_ProfileIcons12">მომრგვალებული კიდეების მქონე ღია ნაცრისფერ ფონზე გამოსახული შავი სამყურა</string>
+
+    <string name="desc_ProfileIcons13">ღია ფერის ტალღოვანი წრე მუქ იისფერ ფონზე</string>
+
+    <string name="desc_ProfileIcons14">მომრგვალებული კიდეების მქონე ნარინჯისფერ ფონზე გამოსახული ცისფერი სამყურა</string>
+
+    <string name="desc_ProfileIcons15">მომრგვალებული კიდეების მქონე მუქ მწვანე ფონზე გამოსახული ღია მწვანე ექვსკუთხედი</string>
+
+    <string name="desc_ProfileIcons16">მომრგვალებული კიდეების მქონე ღია ნაცრისფერ ფონზე გამოსახული შავი ბრილიანტი</string>
+
+    <string name="desc_ProfileIcons17">ყვითელ ფონზე გამოსახული ნარინჯისფერი ფოთლის ხალისიანი ილუსტრაცია</string>
+
+    <string name="desc_ProfileIcons18">ატმისფერ ფონზე გამოსახული პლანეტა სატურნის ხალისიანი ილუსტრაცია</string>
+
+    <string name="desc_ProfileIcons19">შავ ფონზე გამოსახული თეთრი და ნარინჯისფერი ვარსკვლავებისა და წრეების ციური განლაგების ხალისიანი ილუსტრაცია</string>
+
+    <string name="desc_ProfileIcons2">შავი და თეთრი მკვეთი ცილინდრების აბსტრაქტული ილუსტრაცია</string>
+
+    <string name="desc_ProfileIcons20">ყვითელ ფონზე გამოსახული ლურჯყურებიანი და თეთრსახიანი ძაღლის ხალისიანი ილუსტრაცია</string>
+
+    <string name="desc_ProfileIcons21">იისფერ ფონზე გამოსახული მფრინავი თეთრი მტრედის, ზეთისხილის ხის ტოტით, ხალისიანი ილუსტრაცია</string>
+
+    <string name="desc_ProfileIcons22">ლურჯ ფონზე გამოსახული შავყურა და თეთრსახიანი ძაღლის ხალისიანი ილუსტრაცია</string>
+
+    <string name="desc_ProfileIcons23">კრემისფერ ფონზე გამოსახული მწვანეფოთლება ვარდისფერი ყვავილის ხალისიანი ილუსტრაცია</string>
+
+    <string name="desc_ProfileIcons24">წითელ ფონზე გამოსახული ექვსი ლურჯი ცილინდრის აბსტრაქტული ილუსტრაცია</string>
+
+    <string name="desc_ProfileIcons3">მუქ ლურჯ ფონზე გამოსახული ცისფერი სამყურას ფორმის აბსტრაქტული ილუსტრაცია</string>
+
+    <string name="desc_ProfileIcons4">ორი ვარდისფერი, სამგანზომილებიანი სამკუთხედის აბსტრაქტული ილუსტრაცია</string>
+
+    <string name="desc_ProfileIcons5">ყვითელ ფონზე გამოსახული მოზაიკების შრეების აბსტრაქტული ილუსტრაცია</string>
+
+    <string name="desc_ProfileIcons6">მწვანე ფონზე გამოსახული იისფერი კლდეების აბსტრაქტული ილუსტრაცია</string>
+
+    <string name="desc_ProfileIcons7">ნარინჯისფერ ფონზე გამოსახული ხუთი თეთრი, გეომეტრიული ფორმის ყვავილის სახალისო ილუსტრაცია</string>
+
+    <string name="desc_ProfileIcons8">ვარდისფერ ფონზე გამოსახული სამი მოცვის სახალისო ილუსტრაცია</string>
+
+    <string name="desc_ProfileIcons9">მწვანე ფონზე გამოსახული შავფოთლება ლიმონის სახალისო ილუსტრაცია</string>
+</resources>

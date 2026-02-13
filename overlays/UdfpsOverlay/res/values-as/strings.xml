@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">আপুনি ফিংগাৰপ্ৰিণ্ট আনলক ব্যৱহাৰ কৰাৰ সময়ত, আপোনাৰ ফিংগাৰপ্ৰিণ্টৰ মডেলটো আপডে’ট কৰিবলৈ প্ৰতিচ্ছবিসমূহ ব্যৱহাৰ কৰা হয়। আপোনাৰ ফিংগাৰপ্ৰিণ্টৰ প্ৰতিচ্ছবি আৰু মডেল আপোনাৰ ফ’নত সুৰক্ষিতভাৱে ষ্ট’ৰ কৰা হয় আৰু সেয়া ফ’নটোৰ পৰা কেতিয়াও আঁতৰি নাযায়। আটাইবোৰ প্ৰক্ৰিয়া আপোনাৰ ফ’নত সুৰক্ষিতভাৱে সম্পাদন কৰা হয়।</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">তেওঁ ফিংগাৰপ্ৰিণ্ট আনলক ব্যৱহাৰ কৰাৰ সময়ত, তেওঁৰ ফিংগাৰপ্ৰিণ্টৰ মডেলটো আপডে’ট কৰিবলৈ প্ৰতিচ্ছবিসমূহ ব্যৱহাৰ কৰা হয়। আপোনাৰ শিশুৰ ফিংগাৰপ্ৰিণ্টৰ প্ৰতিচ্ছবি আৰু মডেল ফ’নটোত সুৰক্ষিতভাৱে ষ্ট’ৰ কৰা হয় আৰু সেয়া ফ’নটোৰ পৰা কেতিয়াও আঁতৰি নাযায়। আটাইবোৰ প্ৰক্ৰিয়া আপোনাৰ ফ’নটোত সুৰক্ষিতভাৱে সম্পাদন কৰা হয়।</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">আপুনি যিকোনো সময়তে ছেটিঙলৈ গৈ নিজৰ ফিংগাৰপ্ৰিণ্টৰ প্ৰতিচ্ছবি আৰু মডেলটো মচিব পাৰে অথবা ফিংগাৰপ্ৰিণ্ট আনলক অফ কৰিব পাৰে। ফিংগাৰপ্ৰিণ্টৰ প্ৰতিচ্ছবি আৰু মডেলসমূহ আপুনি মচি নেপেলোৱালৈকে আপোনাৰ ফ’নত ষ্ট’ৰ হৈ থাকে।</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">আপুনি আৰু আপোনাৰ শিশুৱে যিকোনো সময়তে ছেটিঙলৈ গৈ তেওঁৰ ফিংগাৰপ্ৰিণ্টৰ প্ৰতিচ্ছবি আৰু মডেলটো মচিব পাৰে অথবা ফিংগাৰপ্ৰিণ্ট আনলক সুবিধাটো অফ কৰিব পাৰে। ফিংগাৰপ্ৰিণ্টৰ প্ৰতিচ্ছবি আৰু মডেলসমূহ মচি নেপেলোৱালৈকে ফ’নটোত ষ্ট’ৰ হৈ থাকে।</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">আপুনি ফিংগাৰপ্ৰিন্ট আনলকৰ জৰিয়তে আপোনাৰ ফিংগাৰপ্ৰিণ্ট ব্যৱহাৰ কৰি আপোনাৰ ফ’নটো আনলক কৰিব পাৰে। সুৰক্ষাৰ বাবে এই বিকল্পটোক এটা বেক আপ স্ক্ৰীন লকৰ প্ৰয়োজন।</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">ফিংগাৰপ্ৰিণ্ট আনলক</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">কৰ্মস্থানৰ বাবে ফিংগাৰপ্ৰিণ্ট আনলক</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">ফিংগাৰপ্ৰিণ্ট আনলক ছেট আপ কৰক</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">ফিংগাৰপ্ৰিণ্ট আনলকৰ অনুমতি দিয়ক</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">ফিংগাৰপ্ৰিণ্ট আনলক সুবিধাটোৱে এইয়া আপুনিয়েই বুলি সত্যাপন কৰিবলৈ আপোনাৰ ফিংগাৰপ্ৰিণ্টৰ এটা অদ্বিতীয় মডেল সৃষ্টি কৰে। ছেটআপৰ সময়ত এই ফিংগাৰপ্ৰিণ্টৰ মডেলটো সৃষ্টি কৰিবলৈ, আপুনি ভিন্ন দিশৰ পৰা নিজৰ ফিংগাৰপ্ৰিণ্টটোৰ প্ৰতিচ্ছবি ল’ব লাগিব।</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">ফিংগাৰপ্ৰিণ্ট আনলক সুবিধাটোৱে সেইয়া তেৱেঁই বুলি সত্যাপন কৰিবলৈ আপোনাৰ শিশুৰ ফিংগাৰপ্ৰিণ্টৰ এটা অদ্বিতীয় মডেল সৃষ্টি কৰে। ছেটআপৰ সময়ত এই ফিংগাৰপ্ৰিণ্টৰ মডেলটো সৃষ্টি কৰিবলৈ, তেওঁ ভিন্ন দিশৰ পৰা নিজৰ ফিংগাৰপ্ৰিণ্টটোৰ প্ৰতিচ্ছবি ল’ব লাগিব।</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">মেৰামতি সেৱা প্ৰদানকাৰী কোনো প্ৰতিষ্ঠান অথবা g.co/pixel/fingerprintunlockলৈ যাওক</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">ফিংগাৰপ্ৰিন্ট আনলক ব্যৱহাৰ কৰক</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">আৰ্হি • ফিংগাৰপ্ৰিণ্ট</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">পিন • ফিংগাৰপ্ৰিণ্ট</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">পাছৱৰ্ড • ফিংগাৰপ্ৰিণ্ট</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">ফিংগাৰপ্ৰিণ্ট আনলকৰ অবিহনে অব্যাহত ৰাখক</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"এটা আৰ্হিয়ে আপোনাৰ ফ’নটো হেৰালে অথবা চুৰি হ’লে তাক সুৰক্ষিত কৰে।
+
+ই আপোনাৰ ডিভাইচত ষ্ট’ৰ হৈ থকা ফিংগাৰপ্ৰিণ্টৰ প্ৰতিচ্ছবিসমূহ আৰু ম’ডেলটোও মচে। আপুনি আপোনাৰ ফিংগাৰপ্ৰিণ্ট এপত বিশ্বাসযোগ্যতা প্ৰমাণীকৰণৰ বাবে ব্যৱহাৰ কৰিব নোৱাৰিব।"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"এটা আৰ্হিয়ে আপোনাৰ ফ’নটো হেৰালে অথবা চুৰি হ’লে তাক সুৰক্ষিত কৰে।
+
+ই আপোনাৰ ডিভাইচত ষ্ট’ৰ হৈ থকা ফিংগাৰপ্ৰিণ্টৰ প্ৰতিচ্ছবিসমূহ আৰু মডেলটো মচে। আপোনাৰ মুখাৱয়বৰ মডেলটোও স্থায়ী তথা সুৰক্ষিতভাৱে মচা হ’ব। আপুনি আপোনাৰ মুখাৱয়ব অথবা ফিংগাৰপ্ৰিণ্ট এপত বিশ্বাসযোগ্যতা প্ৰমাণীকৰণৰ বাবে ব্যৱহাৰ কৰিব নোৱাৰিব।"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"এটা পিনে আপোনাৰ ফ’নটো হেৰালে অথবা চুৰি হ’লে তাক সুৰক্ষিত কৰে।
+
+ই আপোনাৰ ডিভাইচত ষ্ট’ৰ হৈ থকা ফিংগাৰপ্ৰিণ্টৰ প্ৰতিচ্ছবিসমূহ আৰু ম’ডেলটোও মচে। আপুনি আপোনাৰ ফিংগাৰপ্ৰিণ্ট এপত বিশ্বাসযোগ্যতা প্ৰমাণীকৰণৰ বাবে ব্যৱহাৰ কৰিব নোৱাৰিব।"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"এটা পিনে আপোনাৰ ফ’নটো হেৰালে অথবা চুৰি হ’লে তাক সুৰক্ষিত কৰে।
+
+ই আপোনাৰ ডিভাইচত ষ্ট’ৰ হৈ থকা ফিংগাৰপ্ৰিণ্টৰ প্ৰতিচ্ছবিসমূহ আৰু মডেলটো মচে। আপোনাৰ মুখাৱয়বৰ মডেলটোও স্থায়ী তথা সুৰক্ষিতভাৱে মচা হ’ব। আপুনি আপোনাৰ মুখাৱয়ব অথবা ফিংগাৰপ্ৰিণ্ট এপত বিশ্বাসযোগ্যতা প্ৰমাণীকৰণৰ বাবে ব্যৱহাৰ কৰিব নোৱাৰিব।"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"এটা পাছৱৰ্ডে আপোনাৰ ফ’নটো হেৰালে অথবা চুৰি হ’লে তাক সুৰক্ষিত কৰে।
+
+ই আপোনাৰ ডিভাইচত ষ্ট’ৰ হৈ থকা ফিংগাৰপ্ৰিণ্টৰ প্ৰতিচ্ছবিসমূহ আৰু ম’ডেলটোও মচে। আপুনি আপোনাৰ ফিংগাৰপ্ৰিণ্ট এপত বিশ্বাসযোগ্যতা প্ৰমাণীকৰণৰ বাবে ব্যৱহাৰ কৰিব নোৱাৰিব।"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"এটা পাছৱৰ্ডে আপোনাৰ ফ’নটো হেৰালে অথবা চুৰি হ’লে তাক সুৰক্ষিত কৰে।
+
+ই আপোনাৰ ডিভাইচত ষ্ট’ৰ হৈ থকা ফিংগাৰপ্ৰিণ্টৰ প্ৰতিচ্ছবিসমূহ আৰু মডেলটো মচে। আপোনাৰ মুখাৱয়বৰ মডেলটোও স্থায়ী তথা সুৰক্ষিতভাৱে মচা হ’ব। আপুনি আপোনাৰ মুখাৱয়ব অথবা ফিংগাৰপ্ৰিণ্ট এপত বিশ্বাসযোগ্যতা প্ৰমাণীকৰণৰ বাবে ব্যৱহাৰ কৰিব নোৱাৰিব।"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"আপোনাৰ স্ক্ৰীন লকৰ অবিহনে ডিভাইচৰ সুৰক্ষা সম্পৰ্কীয় সুবিধাসমূহে কাম নকৰিব।
+
+ই আপোনাৰ ডিভাইচত ষ্ট’ৰ হৈ থকা ফিংগাৰপ্ৰিণ্টৰ প্ৰতিচ্ছবিসমূহ আৰু ম’ডেলটোও মচে। আপুনি আপোনাৰ ফিংগাৰপ্ৰিণ্ট এপত বিশ্বাসযোগ্যতা প্ৰমাণীকৰণৰ বাবে ব্যৱহাৰ কৰিব নোৱাৰিব।"</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"আপোনাৰ স্ক্ৰীন লকৰ অবিহনে ডিভাইচৰ সুৰক্ষা সম্পৰ্কীয় সুবিধাসমূহে কাম নকৰিব।
+
+ই আপোনাৰ ডিভাইচত ষ্ট’ৰ হৈ থকা ফিংগাৰপ্ৰিণ্টৰ প্ৰতিচ্ছবিসমূহ আৰু মডেলটো মচে। আপোনাৰ মুখাৱয়বৰ মডেলটোও স্থায়ী তথা সুৰক্ষিতভাৱে মচা হ’ব। আপুনি আপোনাৰ মুখাৱয়ব অথবা ফিংগাৰপ্ৰিণ্ট এপত বিশ্বাসযোগ্যতা প্ৰমাণীকৰণৰ বাবে ব্যৱহাৰ কৰিব নোৱাৰিব।"</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">আপোনাৰ ফ’ন আনলক কৰিবলৈ অথবা এপ্‌সমূহত আপুনি বুলি সত্যাপিত কৰিবলৈ আপুনি যিমানেই ফিংগাৰপ্ৰিণ্ট আনলক ব্যৱহাৰ কৰিব সিমানেই ই উন্নত হ’ব</string>
+</resources>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Kasutage oma telefoni avamiseks oma nägu.</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Kasutage oma telefoni avamiseks oma nägu.
+
+Pidage meeles järgmist.
+Korraga saab olla seadistatud ainult üks nägu. Uue näo lisamiseks kustutage praegune nägu.
+
+Telefoni vaatamisel võib see soovimatult avaneda.
+
+Keegi teine võib teie telefoni avada, kui seda hoitakse teie näo ees.
+
+Võib juhtuda, et teiega sarnane inimene, näiteks identne vend/õde, saab teie telefoni avada."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Kasutage oma telefoni avamiseks oma nägu.
+
+Pidage meeles järgmist.
+Korraga saab olla seadistatud ainult üks nägu. Uue näo lisamiseks kustutage praegune nägu.
+
+Telefoni vaatamisel võib see soovimatult avaneda.
+
+Keegi teine võib teie telefoni avada, kui seda hoitakse teie näo ees, isegi kui teie silmad on suletud.
+
+Võib juhtuda, et teiega sarnane inimene, näiteks identne vend/õde, saab teie telefoni avada."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Näoga avamise seadistamine</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">Hoidke järgmisel kuval telefoni silmade kõrgusel.</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Kui kannate tavaliselt prille, võite neid kanda ka seadistamise ajal.</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Näoga avamise uuesti seadistamiseks kustutage oma praegune näomudel.
+
+Teie näomudel kustutatakse jäädavalt ja turvaliselt.
+
+Pärast kustutamist tuleb teil telefoni avamiseks kasutada PIN-koodi, mustrit või parooli."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Näoga avamise uuesti seadistamiseks kustutage oma praegune näomudel.
+
+Teie näomudel kustutatakse jäädavalt ja turvaliselt.
+
+Pärast kustutamist tuleb teil telefoni avamiseks kasutada sõrmejälge, PIN-koodi, mustrit või parooli."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">Telefoni avamiseks peavad teie silmad avatud olema. Parima tulemuse saavutamiseks võtke telefoni avamisel päikeseprillid ära.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Nüüd saate oma telefoni kätte võtta ja selle oma näo abil avada</string>
+</resources>

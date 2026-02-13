@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Quando usa o Desbloqueio por impressão digital, são usadas imagens para atualizar o seu modelo de impressão digital. O modelo e as imagens da sua impressão digital são armazenados em segurança no telemóvel e nunca saem do dispositivo. Todo o processamento ocorre de forma segura no seu telemóvel.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Quando a criança utiliza o Desbloqueio por impressão digital, são utilizadas imagens para atualizar o respetivo modelo de impressão digital. O modelo e as imagens da impressão digital da criança são armazenados em segurança no telemóvel e nunca saem do dispositivo. Todo o processamento ocorre de forma segura no telemóvel.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Pode eliminar o modelo e as imagens da sua impressão digital ou desativar o Desbloqueio por impressão digital em qualquer altura nas Definições. Os modelos e as imagens de impressões digitais são armazenados no telemóvel até os eliminar.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">O utilizador e a criança podem eliminar o modelo e as imagens da impressão digital ou desativar o Desbloqueio por impressão digital em qualquer altura nas Definições. Os modelos e as imagens de impressões digitais são armazenados no telemóvel até serem eliminados.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">Com o Desbloqueio por impressão digital, pode desbloquear o telemóvel com a sua impressão digital. Por motivos de segurança, esta opção requer um bloqueio de ecrã de segurança.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Desbloqueio por impressão digital</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">Desbloqueio por impressão digital para o trabalho</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Configure o Desbloqueio por impressão digital</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">Permita Desbloqueio por impres. digital</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">O Desbloqueio por impressão digital cria um modelo único da sua impressão digital para validar a identidade. Para criar este modelo de impressão digital durante a configuração, é necessário captar imagens da impressão digital de posições diferentes.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">O Desbloqueio por impressão digital cria um modelo único da impressão digital da criança para validar a respetiva identidade. Para criar este modelo de impressão digital durante a configuração, é necessário tirar fotos da impressão digital da criança de posições diferentes.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">Visite um fornecedor de serviços de reparação ou g.co/pixel/fingerprintunlock.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">Usar Desbloqueio por impressão digital</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">Padrão • Impressão digital</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">PIN • Impressão digital</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">Palavra-passe • Impressão digital</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">Continuar sem Desbloqueio por impressão digital</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"Um padrão protege o seu telemóvel em caso de perda ou roubo.
+
+Isto também elimina o modelo e as imagens de impressão digital armazenados no seu dispositivo. Não poderá utilizar a sua impressão digital para autenticação em apps."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"Um padrão protege o seu telemóvel em caso de perda ou roubo.
+
+Isto elimina o modelo e as imagens de impressão digital armazenados no seu dispositivo. O seu modelo de rosto também será eliminado de forma permanente e segura. Não poderá utilizar o seu rosto ou impressão digital para autenticação em apps."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"Um PIN protege o seu telemóvel em caso de perda ou roubo.
+
+Isto também elimina o modelo e as imagens de impressão digital armazenados no seu dispositivo. Não poderá utilizar a sua impressão digital para autenticação em apps."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"Um PIN protege o seu telemóvel em caso de perda ou roubo.
+
+Isto elimina o modelo e as imagens de impressão digital armazenados no seu dispositivo. O seu modelo de rosto também será eliminado de forma permanente e segura. Não poderá utilizar o seu rosto ou impressão digital para autenticação em apps."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"Uma palavra-passe protege o seu telemóvel em caso de perda ou roubo.
+
+Isto também elimina o modelo e as imagens de impressão digital armazenados no seu dispositivo. Não poderá utilizar a sua impressão digital para autenticação em apps."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"Uma palavra-passe protege o seu telemóvel em caso de perda ou roubo.
+
+Isto elimina o modelo e as imagens de impressão digital armazenados no seu dispositivo. O seu modelo de rosto também será eliminado de forma permanente e segura. Não poderá utilizar o seu rosto ou impressão digital para autenticação em apps."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"As funcionalidades de proteção do dispositivo não funcionam sem o bloqueio de ecrã.
+
+Isto também elimina o modelo e as imagens de impressão digital armazenados no seu dispositivo. Não poderá utilizar a sua impressão digital para autenticação em apps."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"As funcionalidades de proteção do dispositivo não funcionam sem o bloqueio de ecrã.
+
+Isto elimina o modelo e as imagens de impressão digital armazenados no seu dispositivo. O seu modelo de rosto também será eliminado de forma permanente e segura. Não poderá utilizar o seu rosto ou impressão digital para autenticação em apps."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">O Desbloqueio por impressão digital melhora à medida que o usa para desbloquear o seu telemóvel ou validar a sua identidade nas apps</string>
+</resources>

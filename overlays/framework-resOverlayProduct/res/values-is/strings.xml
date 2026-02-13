@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- [CHAR_LIMIT=NONE] [BACKUP_MESSAGE_ID: 5444908404021316250] Battery saver: Feature description, with a "learn more" link. -->
+    <string name="battery_saver_description_with_learn_more">"Til að auka rafhlöðuendingu gerir Rafhlöðusparnaður eftirfarandi:
+
+• Kveikir á dökku þema
+• Slekkur á eða takmarkar bakgrunnsvirkni, tiltekin myndáhrif og aðra eiginleika eins og „Ok Google“
+• Fínstillir nettengingar
+
+"<annotation id="url">Frekari upplýsingar</annotation></string>
+</resources>

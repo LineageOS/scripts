@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Telefonni qulfdan chiqarish uchun yuzingizdan foydalaning</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Telefonni qulfdan chiqarish uchun yuzingizdan foydalaning.
+
+Eslatma:
+Bir vaqtda faqat bitta yuz sozlanadi. Boshqa yuz kiritish uchun joriysini oʻchirish lozim.
+
+Telefon qulfi unga tasodifan qaralganda yechilishi mumkin.
+
+Begonalar telefoningizni yumilmagan koʻzlaringizga qaratish orqali ham qulfdan chiqarishi mumkin.
+
+Telefon farzandingiz yoki sizga oʻxshagan yaqinlaringiz tomonidan ham qulfdan chiqarilishi mumkin."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Telefonni qulfdan chiqarish uchun yuzingizdan foydalaning.
+
+Eslatma:
+Bir vaqtda faqat bitta yuz sozlanadi. Boshqa yuz kiritish uchun joriysini oʻchirish lozim.
+
+Telefon qulfi unga tasodifan qaralganda yechilishi mumkin.
+
+Begonalar telefoningizni yumilmagan koʻzlaringizga qaratish orqali ham qulfdan chiqarishi mumkin.
+
+Telefon farzandingiz yoki sizga oʻxshagan yaqinlaringiz tomonidan ham qulfdan chiqarilishi mumkin."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Yuz bilan ochish qanday sozlanadi</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">Keyingi ekranda telefonni koʻz balandligida tuting</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Agar odatda koʻzoynak taqsangiz, sozlash davomida uni taqishingiz mumkin</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Joriy yuz modelini oʻchirish va yuz bilan ochishni qayta sozlash.
+
+Yuz modelingiz butunlay va xavfsiz oʻchirib tashlandi.
+
+Oʻchirib tashlangandan keyin telefoningiz qulfini ochish uchun PIN kod, grafik kalit yoki parol kiritishingiz lozim."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Joriy yuz modelini oʻchirish va yuz bilan ochishni qayta sozlash.
+
+Yuz modelingiz butunlay va xavfsiz oʻchirib tashlandi.
+
+Oʻchirib tashlangandan keyin telefoningiz qulfini ochish uchun barmoq izi, PIN kod, grafik kalit yoki parol kiritishingiz lozim."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">Telefon qulfini yechish uchun ekranga koʻzlaringizni ochib qarang. Telefon ochilishini osonlashtirish uchun quyosh koʻzoynaklaringizni yechib turing.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Endi telefoningizni olib, uni qulfini ochish uchun yuzingizdan foydalanishingiz mumkin</string>
+</resources>

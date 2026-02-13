@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel 顯示圖片挑選器</string>
+
+    <string name="desc_ProfileIcons1">淺綠色背景上有兩個深綠色半圓的有趣插圖</string>
+
+    <string name="desc_ProfileIcons10">黃色背景上有橙色蝴蝶的有趣插圖</string>
+
+    <string name="desc_ProfileIcons11">深灰色背景上有圓滑邊緣的黑色鼻子圖形</string>
+
+    <string name="desc_ProfileIcons12">淺灰色背景上有圓滑邊緣的黑色幸運草圖形</string>
+
+    <string name="desc_ProfileIcons13">深紫色背景上有淺紫色波浪狀圓形</string>
+
+    <string name="desc_ProfileIcons14">橙色背景上有圓滑邊緣的淺藍色幸運草圖形</string>
+
+    <string name="desc_ProfileIcons15">深綠色背景上有圓滑邊緣的淺綠色六邊形</string>
+
+    <string name="desc_ProfileIcons16">淺灰色背景上有圓滑邊緣的黑色鑽石圖形</string>
+
+    <string name="desc_ProfileIcons17">黃色背景上有橙色葉子的有趣插圖</string>
+
+    <string name="desc_ProfileIcons18">蜜桃色背景上有行星土星的有趣插圖</string>
+
+    <string name="desc_ProfileIcons19">在黑色背景上，由白色及橙色星星和圓點構成滿天星斗的有趣插圖</string>
+
+    <string name="desc_ProfileIcons2">黑白交錯圓柱形狀的抽象插圖</string>
+
+    <string name="desc_ProfileIcons20">黃色背景上有一隻狗，狗兒有著藍色耳朵和白色臉孔的有趣插圖</string>
+
+    <string name="desc_ProfileIcons21">紫色背景上有白鴿銜著橄欖枝飛翔的有趣插圖</string>
+
+    <string name="desc_ProfileIcons22">藍色背景上有一隻狗，狗兒有著黑色耳朵和白色臉孔的有趣插圖</string>
+
+    <string name="desc_ProfileIcons23">奶油色背景上由粉色花朵及綠葉構成的有趣插圖</string>
+
+    <string name="desc_ProfileIcons24">紅色背景上有六個藍色圓柱體的抽象插圖</string>
+
+    <string name="desc_ProfileIcons3">深藍色背景上有淺藍色幸運草圖形的抽象插圖</string>
+
+    <string name="desc_ProfileIcons4">由兩個粉紅色立體三角形構成的抽象插圖</string>
+
+    <string name="desc_ProfileIcons5">黃色背景上有藍綠色分層的抽象插圖</string>
+
+    <string name="desc_ProfileIcons6">綠色背景上有紫色岩石的抽象插圖</string>
+
+    <string name="desc_ProfileIcons7">橙色背景上有五朵白色幾何花朵的有趣插圖</string>
+
+    <string name="desc_ProfileIcons8">粉色背景上有三顆藍莓的有趣插圖</string>
+
+    <string name="desc_ProfileIcons9">綠色背景上有檸檬與黑色葉子的有趣插圖</string>
+</resources>

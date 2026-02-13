@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="branded_monitoring_description_app_personal">Google 正在透過伺服器傳送資料，藉此建立安全連線</string>
+
+    <string name="branded_vpn_footer">由 Google 提供安全防護機制的連線</string>
+</resources>

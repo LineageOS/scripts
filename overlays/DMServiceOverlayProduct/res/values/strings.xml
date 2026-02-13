@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="config_devinfo_language">English</string>
+
+    <string name="config_devinfo_manufacturer">GOOGLE</string>
+
+    <string name="config_omadm_metrics_app_package">com.google.android.apps.carrier.log</string>
+
+    <string name="config_omadm_metrics_class_name">com.google.android.apps.carrier.log.LogDataReceiver</string>
+
+    <string name="config_omadm_metrics_extra_log_bytes">com.google.android.apps.carrier.log.extra.LOG_BYTES</string>
+
+    <string name="config_omadm_metrics_extra_log_source">com.google.android.apps.carrier.log.extra.LOG_SOURCE</string>
+
+    <string name="config_omadm_metrics_intent_action">com.google.android.apps.carrier.log.action.LOG</string>
+</resources>

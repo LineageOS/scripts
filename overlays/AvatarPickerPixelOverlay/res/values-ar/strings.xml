@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">‏أداة اختيار الأفاتار في Google Pixel</string>
+
+    <string name="desc_ProfileIcons1">صورة توضيحية مرحة لنصفي دائرة باللون الأخضر الداكن على خلفية خضراء فاتحة</string>
+
+    <string name="desc_ProfileIcons10">صورة توضيحية مرحة لفراشة برتقالية على خلفية صفراء</string>
+
+    <string name="desc_ProfileIcons11">شكل أنف أسود مع حواف دائرية على خلفية رمادية داكنة</string>
+
+    <string name="desc_ProfileIcons12">شكل ورقة برسيم سوداء مع حواف دائرية على خلفية رمادية داكنة</string>
+
+    <string name="desc_ProfileIcons13">دائرة متموّجة بلون أرجواني فاتح على خلفية أرجوانية داكنة</string>
+
+    <string name="desc_ProfileIcons14">شكل ورقة برسيم بلون أزرق فاتح مع حواف دائرية على خلفية برتقالية</string>
+
+    <string name="desc_ProfileIcons15">مضلّع سداسي بلون أخضر فاتح مع حواف دائرية على خلفية خضراء داكنة</string>
+
+    <string name="desc_ProfileIcons16">شكل ماسة سوداء مع حواف دائرية على خلفية رمادية داكنة</string>
+
+    <string name="desc_ProfileIcons17">صورة توضيحية مرحة لورقة شجر برتقالية على خلفية صفراء</string>
+
+    <string name="desc_ProfileIcons18">صورة توضيحية مرحة لكوكب زُحل على خلفية خوخية فاتحة</string>
+
+    <string name="desc_ProfileIcons19">صورة توضيحية مرحة لنجوم ودوائر بيضاء وبرتقالية في نمط سماوي على خلفية سوداء</string>
+
+    <string name="desc_ProfileIcons2">صورة توضيحية تجريدية لأسطوانات متقاطعة بالأسود والأبيض</string>
+
+    <string name="desc_ProfileIcons20">صورة توضيحية مرحة لكلب بأذنَين باللون الأزرق ووجه باللون الأبيض على خلفية صفراء</string>
+
+    <string name="desc_ProfileIcons21">صورة توضيحية مرحة لحمامة بيضاء تطير مع غصن زيتون على خلفية أرجوانية</string>
+
+    <string name="desc_ProfileIcons22">صورة توضيحية مرحة لكلب بأذنَين باللون الأسود ووجه باللون الأبيض على خلفية زرقاء</string>
+
+    <string name="desc_ProfileIcons23">صورة توضيحية مرحة لزهرة وردية اللون وأوراق خضراء على خلفية كريمي</string>
+
+    <string name="desc_ProfileIcons24">صورة توضيحية تجريدية لست أسطوانات زرقاء على خلفية حمراء</string>
+
+    <string name="desc_ProfileIcons3">صورة توضيحية تجريدية لشكل ورقة برسيم بلون أزرق فاتح على خلفية زرقاء داكنة</string>
+
+    <string name="desc_ProfileIcons4">صورة توضيحية تجريدية لمثلّثَين ورديَّين بشكل ثلاثي الأبعاد</string>
+
+    <string name="desc_ProfileIcons5">صورة توضيحية تجريدية لطبقات بلون أزرق مخضر على خلفية صفراء</string>
+
+    <string name="desc_ProfileIcons6">صورة توضيحية تجريدية لصخور أرجوانية على خلفية خضراء</string>
+
+    <string name="desc_ProfileIcons7">صورة توضيحية مرحة لخمس زهور بيضاء بأشكال هندسية على خلفية برتقالية</string>
+
+    <string name="desc_ProfileIcons8">صورة توضيحية مرحة لثلاث ثمرات توت بري على خلفية وردية</string>
+
+    <string name="desc_ProfileIcons9">صورة توضيحية مرحة لثمرة ليمون مع ورق شجر أسود على خلفية خضراء</string>
+</resources>

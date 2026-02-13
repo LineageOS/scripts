@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <integer name="def_screen_off_timeout">30000</integer>
+
+    <!-- Default screen brightness, from 0 to 255.  102 is 40%. -->
+    <bool name="def_screen_brightness_automatic_mode">true</bool>
+
+    <string name="def_backup_transport">com.google.android.gms/.backup.BackupTransportService</string>
+
+    <!-- user interface sound effects -->
+    <string name="def_wireless_charging_started_sound"/>
+
+    <!-- Default setting for double tap to sleep (Settings.Secure.DOUBLE_TAP_TO_SLEEP) -->
+    <bool name="def_double_tap_to_sleep">true</bool>
+
+    <!-- Default for Settings.System.VIBRATE_WHEN_RINGING -->
+    <bool name="def_vibrate_when_ringing">true</bool>
+</resources>

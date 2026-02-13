@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Name for an app setting that lets the user authenticate for that app using biometrics (e.g. fingerprint or face). [CHAR LIMIT=30] -->
+    <string name="biometric_app_setting_name">ચહેરા કે ફિંગરપ્રિન્ટનો વપરાશ</string>
+
+    <!-- Name for an app setting that lets the user authenticate for that app using biometrics (e.g. fingerprint or face) or their screen lock credential (i.e. PIN, pattern, or password). [CHAR LIMIT=70] -->
+    <string name="biometric_or_screen_lock_app_setting_name">ચહેરા, ફિંગરપ્રિન્ટ કે સ્ક્રીન લૉકનો વપરાશ કરો</string>
+
+    <!-- Subtitle shown on the system-provided biometric dialog, asking the user to authenticate with a biometric (e.g. fingerprint or face). [CHAR LIMIT=70] -->
+    <string name="biometric_dialog_default_subtitle">આગળ વધવા માટે, તમારા ચહેરા કે ફિંગરપ્રિન્ટનો વપરાશ કરો</string>
+
+    <!-- Subtitle shown on the system-provided biometric dialog, asking the user to authenticate with a biometric (e.g. fingerprint or face) or their screen lock credential (i.e. PIN, pattern, or password). [CHAR LIMIT=90] -->
+    <string name="biometric_or_screen_lock_dialog_default_subtitle">આગળ વધવા માટે, તમારા ચહેરા, ફિંગરપ્રિન્ટ કે સ્ક્રીન લૉકનો વપરાશ કરો</string>
+
+    <!-- Notification name shown when the system requires the user to re-enroll their face. [CHAR LIMIT=NONE] -->
+    <string name="face_recalibrate_notification_name">ફેસ અનલૉક</string>
+
+    <!-- Notification title shown when the system requires the user to re-enroll their face. [CHAR LIMIT=NONE] -->
+    <string name="face_recalibrate_notification_title">કૃપા કરીને તમારા ચહેરાની ફરી નોંધણી કરાવો</string>
+
+    <!-- Notification content shown when the system requires the user to re-enroll their face. [CHAR LIMIT=NONE] -->
+    <string name="face_recalibrate_notification_content">જ્યાં સુધી તમે ફરી નોંધણી નહીં કરાવો, ત્યાં સુધી કદાચ ફેસ અનલૉકની સુવિધા કાર્ય કરશે નહીં</string>
+
+    <!-- Array containing custom messages shown during face acquisition from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="face_acquired_vendor"/>
+
+    <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="face_error_vendor">
+        <item>પ્રમાણપત્રની સમયસીમા સમાપ્ત થઈ</item>
+        <item>સેન્સર હંગામી રૂપે બંધ કર્યું છે</item>
+        <item>કેલિબ્રેશનમાં ભૂલ</item>
+        <item>ફેસ અનલૉકની સુવિધા ઉપલબ્ધ નથી. ફોન ખૂબ ગરમ થઈ ગયો છે.</item>
+        <item>ફેસ અનલૉક ફરી સેટઅપ કરવું જરૂરી છે</item>
+    </string-array>
+
+    <!-- Title for the harmful app warning dialog. [CHAR LIMIT=40] -->
+    <string name="harmful_app_warning_title">Play Protectની ચેતવણી</string>
+</resources>

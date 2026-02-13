@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Користете го вашиот лик за да го отклучувате телефонот</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Користете го вашиот лик за да го отклучувате телефонот.
+
+Имајте предвид:
+може да имате поставено само еден лик. За да додадете друг лик, избришете го моменталниот.
+
+Поглед кон телефонот може да го отклучи и кога немате таква намера.
+
+Некој друг може да го отклучи вашиот телефон ако го доближи до вашиот лик.
+
+Телефонот може да го отклучи некој што многу наликува на вас, на пример, идентичен близнак."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Користете го вашиот лик за да го отклучувате телефонот.
+
+Имајте предвид:
+може да имате поставено само еден лик. За да додадете друг лик, избришете го моменталниот.
+
+Поглед кон телефонот може да го отклучи и кога немате таква намера.
+
+Некој друг може да го отклучи вашиот телефон ако го доближи до вашиот лик, дури и ако очите ви се затворени.
+
+Телефонот може да го отклучи некој што многу наликува на вас, на пример, идентичен близнак."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Како да поставите „Отклучување со лик“</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">На следниот екран, држете го телефонот во висина на очите</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">Ако вообичаено носите очила, може да ги носите при поставувањето</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Избришете го моменталниот модел на лик за да поставите „Отклучување со лик“ повторно.
+
+Вашиот модел на лик ќе биде трајно и безбедно избришан.
+
+По бришењето, ќе ви треба PIN, шема или лозинка за да го отклучите телефонот."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Избришете го моменталниот модел на лик за да поставите „Отклучување со лик“ повторно.
+
+Вашиот модел на лик ќе биде трајно и безбедно избришан.
+
+По бришењето, ќе ви треба отпечаток, PIN, шема или лозинка за да го отклучите телефонот."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">За да го отклучите телефонот, очите мора да ви бидат отворени. За најдобри резултати, не носете очила за сонце кога го отклучувате телефонот.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Отсега ќе може да го подигнете вашиот телефон и да го отклучите со вашиот лик.</string>
+</resources>

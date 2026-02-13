@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Use your face to unlock your phone</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">"Use your face to unlock your phone.
+
+Keep in mind:
+You can only have one face set up at a time. To add another face, delete the current one.
+
+Looking at the phone can unlock it when you don’t intend to.
+
+Your phone can be unlocked by someone else if it’s held up to your face.
+
+Your phone can be unlocked by someone who looks a lot like you, like an identical sibling."</string>
+
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">"Use your face to unlock your phone.
+
+Keep in mind:
+You can only have one face set up at a time. To add another face, delete the current one.
+
+Looking at the phone can unlock it when you don’t intend to.
+
+Your phone can be unlocked by someone else if it’s held up to your face, even if your eyes are closed.
+
+Your phone can be unlocked by someone who looks a lot like you, like an identical sibling."</string>
+
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">How to set up Face Unlock</string>
+
+    <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message">On the next screen, hold your phone at eye level</string>
+
+    <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_glasses">If you normally wear eyeglasses, you can wear them during setup</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">"Delete your current face model to set up Face Unlock again.
+
+Your face model will be permanently and securely deleted.
+
+After deletion, you will need your PIN, pattern, or password to unlock your phone."</string>
+
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">"Delete your current face model to set up Face Unlock again.
+
+Your face model will be permanently and securely deleted.
+
+After deletion, you will need your fingerprint, PIN, pattern, or password to unlock your phone."</string>
+
+    <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">To unlock the phone, your eyes must be open. For best results, take off sunglasses when unlocking the phone.</string>
+
+    <string name="security_settings_face_enroll_finish_description">Now you can pick up your phone and use your face to unlock it</string>
+</resources>

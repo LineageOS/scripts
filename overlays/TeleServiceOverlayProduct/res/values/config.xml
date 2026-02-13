@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Flag indicating if hac is enabled -->
+    <bool name="hac_enabled">true</bool>
+
+    <!-- Class name for the default main Dialer activity [DO NOT TRANSLATE] -->
+    <string name="dialer_default_class">com.google.android.dialer.extensions.GoogleDialtactsActivity</string>
+
+    <!-- The package name for the platform carrier config app, bundled with system image. -->
+    <string name="platform_carrier_config_package">com.google.android.carrier</string>
+
+    <!-- The package name for the platform number verification supplier app. -->
+    <string name="platform_number_verification_package">com.google.android.gms</string>
+
+    <!-- Whether the device supports dialing emergency RTT calls when there's no SIM card installed
+    -->
+    <bool name="config_support_simless_emergency_rtt">true</bool>
+
+    <!-- The country list that shortcut view can be enabled. -->
+    <string-array name="config_countries_to_enable_shortcut_view">
+        <item>ca</item>
+        <item>us</item>
+        <item>de</item>
+        <item>fr</item>
+        <item>es</item>
+        <item>gb</item>
+        <item>au</item>
+        <item>in</item>
+        <item>jp</item>
+        <item>sg</item>
+        <item>tw</item>
+        <item>it</item>
+        <item>ie</item>
+        <item>ar</item>
+        <item>be</item>
+        <item>bg</item>
+        <item>br</item>
+        <item>cn</item>
+        <item>co</item>
+        <item>cz</item>
+        <item>dk</item>
+        <item>do</item>
+        <item>ge</item>
+        <item>gr</item>
+        <item>hr</item>
+        <item>hu</item>
+        <item>id</item>
+        <item>jo</item>
+        <item>mx</item>
+        <item>my</item>
+        <item>nl</item>
+        <item>no</item>
+        <item>ph</item>
+        <item>pl</item>
+        <item>pr</item>
+        <item>pt</item>
+        <item>ro</item>
+        <item>ru</item>
+        <item>se</item>
+        <item>th</item>
+        <item>uy</item>
+        <item>vn</item>
+        <item>za</item>
+    </string-array>
+
+    <!-- The package names which can request thermal mitigation. -->
+    <string-array name="thermal_mitigation_allowlisted_packages">
+        <item>com.google.android.connectivitythermalpowermanager</item>
+    </string-array>
+</resources>

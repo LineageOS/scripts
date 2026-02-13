@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel का अवतार पिकर</string>
+
+    <string name="desc_ProfileIcons1">हल्के हरे रंग के बैकग्राउंड पर, गहरे हरे रंग के दो सेमी-सर्कल वाली मज़ेदार इमेज</string>
+
+    <string name="desc_ProfileIcons10">पीले रंग के बैकग्राउंड पर, नारंगी रंग की तितली वाली मज़ेदार इमेज</string>
+
+    <string name="desc_ProfileIcons11">गहरे स्लेटी रंग के बैकग्राउंड पर, गोल किनारे वाली काले रंग की नाक का आकार</string>
+
+    <string name="desc_ProfileIcons12">हल्के स्लेटी रंग के बैकग्राउंड पर, गोल किनारे वाले काले रंग के क्लोवर का आकार</string>
+
+    <string name="desc_ProfileIcons13">गहरे बैंगनी रंग के बैकग्राउंड पर, हल्के बैंगनी रंग का सर्कल, जिसके बॉर्डर में बहुत सारे कर्व हैं</string>
+
+    <string name="desc_ProfileIcons14">नारंगी रंग के बैकग्राउंड पर, गोल किनारे वाले हल्के नीले रंग के क्लोवर का आकार</string>
+
+    <string name="desc_ProfileIcons15">गहरे हरे रंग के बैकग्राउंड पर, गोल किनारे वाला हल्के हरे रंग का हेक्सागॉन</string>
+
+    <string name="desc_ProfileIcons16">हल्के स्लेटी रंग के बैकग्राउंड पर, गोल किनारे वाला काले रंग का डायमंड का आकार</string>
+
+    <string name="desc_ProfileIcons17">पीले रंग के बैकग्राउंड पर, नारंगी रंग के पत्ते वाली मज़ेदार इमेज</string>
+
+    <string name="desc_ProfileIcons18">पीच (पीला-गुलाबी) रंग के बैकग्राउंड पर, शनि ग्रह की मज़ेदार इमेज</string>
+
+    <string name="desc_ProfileIcons19">काले रंग के बैकग्राउंड पर चांद-तारों वाले पैटर्न में, सफ़ेद और नारंगी रंग के तारों और सर्कल की मज़ेदार इमेज</string>
+
+    <string name="desc_ProfileIcons2">काले और सफ़ेद रंग के दो सिलेंडर की एक ऐब्स्ट्रैक्ट इमेज, जो आपस में एक-दूसरे को काटते हों</string>
+
+    <string name="desc_ProfileIcons20">पीले रंग के बैकग्राउंड पर, नीले रंग के कान और सफ़ेद रंग के चेहरे वाले कुत्ते की मज़ेदार इमेज</string>
+
+    <string name="desc_ProfileIcons21">बैंगनी बैकग्राउंड पर, ऑलिव रंग की छोटी टहनी को मुंह में रखकर उड़ रहे सफ़ेद कबूतर की मज़ेदार इमेज</string>
+
+    <string name="desc_ProfileIcons22">नीले रंग के बैकग्राउंड पर, काले रंग के कान और सफ़ेद रंग के चेहरे वाले कुत्ते की मज़ेदार इमेज</string>
+
+    <string name="desc_ProfileIcons23">क्रीम बैकग्राउंड पर, हरे रंग के पत्तों वाले गुलाबी रंग के फूल की मज़ेदार इमेज</string>
+
+    <string name="desc_ProfileIcons24">लाल रंग के बैकग्राउंड पर, नीले रंग के छह सिलेंडर वाली ऐब्स्ट्रैक्ट इमेज</string>
+
+    <string name="desc_ProfileIcons3">गहरे नीले रंग के बैकग्राउंड पर, हल्के नीले रंग के क्लोवर के आकार वाली ऐब्स्ट्रैक्ट इमेज</string>
+
+    <string name="desc_ProfileIcons4">थ्री-डाइमेंशन वाले दो गुलाबी ट्रायएंगल की ऐब्स्ट्रैक्ट इमेज</string>
+
+    <string name="desc_ProfileIcons5">पीले रंग के बैकग्राउंड पर, समुद्री हरे रंग की लेयर वाली ऐब्स्ट्रैक्ट इमेज</string>
+
+    <string name="desc_ProfileIcons6">हरे रंग के बैकग्राउंड पर, बैंगनी रंग के पत्थरों वाली ऐब्स्ट्रैक्ट इमेज</string>
+
+    <string name="desc_ProfileIcons7">नारंगी रंग के बैकग्राउंड पर, सफ़ेद रंग के पांच जियोमेट्रिक फूलों वाली मज़ेदार इमेज</string>
+
+    <string name="desc_ProfileIcons8">गुलाबी रंग के बैकग्राउंड पर, तीन ब्लूबेरी वाली मज़ेदार इमेज</string>
+
+    <string name="desc_ProfileIcons9">हरे रंग के बैकग्राउंड पर, काले रंग के पत्तों के साथ रखे हुए नींबू वाली मज़ेदार इमेज</string>
+</resources>

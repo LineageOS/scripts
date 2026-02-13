@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- [CHAR_LIMIT=NONE] [BACKUP_MESSAGE_ID: 5444908404021316250] Battery saver: Feature description, with a "learn more" link. -->
+    <string name="battery_saver_description_with_learn_more">"Για την επέκταση της διάρκειας ζωής της μπαταρίας, η Εξοικονόμηση μπαταρίας:
+
+• Ενεργοποιεί το Σκούρο θέμα.
+• Απενεργοποιεί ή περιορίζει τη δραστηριότητα στο παρασκήνιο, ορισμένα οπτικά εφέ και άλλες λειτουργίες, όπως την εντολή Ok Google.
+• Βελτιστοποιεί τις συνδέσεις δικτύου.
+
+"<annotation id="url">Μάθετε περισσότερα</annotation></string>
+</resources>

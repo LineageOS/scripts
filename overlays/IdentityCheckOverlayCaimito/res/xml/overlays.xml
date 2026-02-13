@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<overlay>
+    <item target="string/identity_check_setup_watch_description" value="@string/identity_check_setup_watch_description_caimito" />
+    <item target="bool/identity_check_watch_supported" value="@bool/identity_check_watch_supported_caimito" />
+</overlay>

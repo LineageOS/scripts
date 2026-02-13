@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">지문 잠금 해제를 사용하면 지문 모델을 업데이트하는 데 이미지가 활용됩니다. 지문 이미지와 모델은 휴대전화에 안전하게 저장되며 외부로 전송되지 않습니다. 모든 처리는 휴대전화 내에서 안전하게 이뤄집니다.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">자녀가 지문 잠금 해제를 사용하면 자녀의 지문 모델을 업데이트하는 데 이미지가 활용됩니다. 자녀의 지문 이미지와 모델은 휴대전화에 안전하게 저장되며 외부로 전송되지 않습니다. 모든 처리는 휴대전화 내에서 안전하게 이뤄집니다.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">언제든지 설정에서 지문 이미지와 모델을 삭제하거나 지문 잠금 해제를 사용 중지할 수 있습니다. 지문 이미지와 모델은 삭제하기 전까지 휴대전화에 저장됩니다.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">부모와 자녀가 언제든지 설정에서 자녀의 지문 이미지와 모델을 삭제하거나 지문 잠금 해제를 사용 중지할 수 있습니다. 지문 이미지와 모델은 삭제하기 전까지 휴대전화에 저장됩니다.</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title">지문 잠금 해제를 사용하면 지문을 사용하여 휴대전화를 잠금 해제할 수 있습니다. 이 옵션을 사용하려면 보안을 위해 백업 화면 잠금이 필요합니다.</string>
+
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">지문 잠금 해제</string>
+
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">직장용 지문 잠금 해제</string>
+
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">지문 잠금 해제 설정</string>
+
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">지문 잠금 해제 허용</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">지문 잠금 해제를 사용하면 본인 인증을 위한 고유한 지문 모델이 생성됩니다. 설정 단계에서 지문 모델을 만들기 위해 다양한 위치에서 지문 이미지를 촬영합니다.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">지문 잠금 해제를 사용하면 자녀의 본인 인증을 위한 고유한 지문 모델이 생성됩니다. 설정 중 지문 모델을 만들기 위해 다양한 위치에서 자녀의 지문 이미지를 촬영합니다.</string>
+
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">수리업체 또는 g.co/pixel/fingerprintunlock을 방문하세요.</string>
+
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
+    <string name="suggested_fingerprint_lock_settings_title">지문 잠금 해제 사용</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pattern">패턴 • 지문</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_pin">PIN • 지문</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for fingerprint [CHAR LIMIT=45]-->
+    <string name="fingerprint_unlock_set_unlock_password">비밀번호 • 지문</string>
+
+    <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
+    <string name="fingerprint_unlock_skip_fingerprint">지문 잠금 해제 없이 계속</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"분실하거나 도난당한 경우 패턴으로 휴대전화를 보호합니다.
+
+또한 기기에 저장된 지문 이미지와 모델이 삭제됩니다. 앱 내에서 지문 인증을 사용할 수 없게 됩니다."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"분실하거나 도난당한 경우 패턴으로 휴대전화를 보호합니다.
+
+기기에 저장된 지문 이미지와 모델이 삭제됩니다. 또한 얼굴 모델이 영구적으로 안전하게 삭제됩니다. 앱 내에서 얼굴 또는 지문 인증을 사용할 수 없게 됩니다."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"분실하거나 도난당한 경우 PIN으로 휴대전화를 보호합니다.
+
+또한 기기에 저장된 지문 이미지와 모델이 삭제됩니다. 앱 내에서 지문 인증을 사용할 수 없게 됩니다."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"분실하거나 도난당한 경우 PIN으로 휴대전화를 보호합니다.
+
+기기에 저장된 지문 이미지와 모델이 삭제됩니다. 또한 얼굴 모델이 영구적으로 안전하게 삭제됩니다. 앱 내에서 얼굴 또는 지문 인증을 사용할 수 없게 됩니다."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"분실하거나 도난당한 경우 비밀번호로 휴대전화를 보호합니다.
+
+또한 기기에 저장된 지문 이미지와 모델이 삭제됩니다. 앱 내에서 지문 인증을 사용할 수 없게 됩니다."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"분실하거나 도난당한 경우 비밀번호로 휴대전화를 보호합니다.
+
+기기에 저장된 지문 이미지와 모델이 삭제됩니다. 또한 얼굴 모델이 영구적으로 안전하게 삭제됩니다. 앱 내에서 얼굴 또는 지문 인증을 사용할 수 없게 됩니다."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"기기 보호 기능은 화면 잠금 없이 작동하지 않습니다.
+
+또한 기기에 저장된 지문 이미지와 모델이 삭제됩니다. 앱 내에서 지문 인증을 사용할 수 없게 됩니다."</string>
+
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"기기 보호 기능은 화면 잠금 없이 작동하지 않습니다.
+
+기기에 저장된 지문 이미지와 모델이 삭제됩니다. 또한 얼굴 모델이 영구적으로 안전하게 삭제됩니다. 앱 내에서 얼굴 또는 지문 인증을 사용할 수 없게 됩니다."</string>
+
+    <string name="security_settings_fingerprint_enroll_finish_message">지문 잠금 해제는 휴대전화를 잠금 해제하거나 앱에서 본인 인증을 하기 위해 더 많이 사용할수록 개선됩니다.</string>
+</resources>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Control whether status bar should distinguish HSPA data icon form UMTS
+    data icon on devices -->
+    <bool name="config_hspa_data_distinguishable">true</bool>
+
+    <!-- Edit User avatar explicit package name -->
+    <string name="config_avatar_picker_package">com.google.android.avatarpicker</string>
+
+    <!-- List of packages that should be allowlisted for slice uri access. Do not translate -->
+    <string-array name="slice_allowlist_package_names">
+        <item>com.google.android.gms</item>
+        <item>com.google.android.googlequicksearchbox</item>
+    </string-array>
+
+    <!-- List of packages that should be allowlisted for slice uri access for debugging purpose. Do not translate -->
+    <string-array name="slice_allowlist_package_names_for_dev">
+        <item>com.google.android.apps.search.assistant.surfaces.voice.devapp</item>
+    </string-array>
+
+    <!-- List of a11y components on the device allowed to be enabled by Settings Slices -->
+    <string-array name="config_settings_slices_accessibility_components">
+        <item>com.google.android.marvin.talkback/com.android.switchaccess.SwitchAccessService</item>
+        <item>com.google.android.marvin.talkback/com.google.android.marvin.talkback.TalkBackService</item>
+        <item>com.google.android.marvin.talkback/com.google.android.accessibility.selecttospeak.SelectToSpeakService</item>
+        <item>com.google.android.marvin.talkback/com.google.android.accessibility.accessibilitymenu.AccessibilityMenuService</item>
+    </string-array>
+
+    <!-- List of packages that should be hidden for MVNO. Do not translate -->
+    <string-array name="datausage_hiding_carrier_service_package_names">
+        <item>com.verizon.mips.services</item>
+        <item>com.verizon.llkagent</item>
+        <item>com.verizon.obdm</item>
+        <item>com.verizon.obdm_permissions</item>
+        <item>com.verizon.services</item>
+        <item>com.vzw.apnlib</item>
+    </string-array>
+
+    <!-- List of MVNO. Do not translate -->
+    <integer-array name="datausage_hiding_carrier_service_carrier_id">
+        <item>1802</item>
+        <item>2032</item>
+        <item>2126</item>
+        <item>2146</item>
+        <item>10008</item>
+    </integer-array>
+
+    <!-- Whether to display pSIM conversion menu in Settings.-->
+    <bool name="config_psim_conversion_menu_enabled">true</bool>
+
+    <!-- Array of carrier id to allow the pSIM conversion-->
+    <integer-array name="config_psim_conversion_menu_enabled_carrier">
+        <item>1</item>
+        <item>3</item>
+        <item>16</item>
+        <item>576</item>
+        <item>1404</item>
+        <item>2020</item>
+        <item>2021</item>
+        <item>2122</item>
+    </integer-array>
+
+    <!-- Array of carrier id that uses reusable activation code-->
+    <integer-array name="config_carrier_use_rac">
+        <item>2397</item>
+        <item>25</item>
+        <item>28</item>
+        <item>19</item>
+        <item>22</item>
+        <item>29</item>
+        <item>20</item>
+        <item>23</item>
+        <item>1452</item>
+    </integer-array>
+
+    <!-- Array of carrier IDs for which the Wi-Fi scorer toggle should be OFF by default. -->
+    <integer-array name="config_carrier_for_wifi_scorer_toggle_off">
+        <item>1839</item>
+    </integer-array>
+
+    <!-- Array of carrier IDs for which the mobile network toggle should be disabled/hidden by default. -->
+    <integer-array name="config_carrier_for_mobile_network_toggle_disable">
+        <item>19</item>
+        <item>25</item>
+        <item>28</item>
+    </integer-array>
+</resources>

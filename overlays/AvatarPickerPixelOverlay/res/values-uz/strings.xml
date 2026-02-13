@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel Avatar tanlagich</string>
+
+    <string name="desc_ProfileIcons1">Ochiq yashil fonda ikkita toʻq yashil yarim doira tasvirlangan rasm</string>
+
+    <string name="desc_ProfileIcons10">Sariq fonda apelsinrang kapalak tasvirlangan rasm</string>
+
+    <string name="desc_ProfileIcons11">Toʻq kulrang fonda qirralari yumaloq burun shaklidagi qora obyekt</string>
+
+    <string name="desc_ProfileIcons12">Och kulrang fonda qirralari yumaloq qora beda shaklidagi obyekt</string>
+
+    <string name="desc_ProfileIcons13">Toʻq siyohrang fonda och siyohrang toʻlqinli doira</string>
+
+    <string name="desc_ProfileIcons14">Apelsinrang fonda chetlari yumaloq och koʻk beda shaklidagi obyekt</string>
+
+    <string name="desc_ProfileIcons15">Toʻq yashil fonda qirralari yumaloq och yashil oltiburchak</string>
+
+    <string name="desc_ProfileIcons16">Och kulrang fonda qirralari yumaloq qora olmos shaklidagi obyekt</string>
+
+    <string name="desc_ProfileIcons17">Sariq fonda apelsin bargi tasvirlangan rasm</string>
+
+    <string name="desc_ProfileIcons18">Shaftoli fonida Saturn sayyorasi tasvirlangan rasm</string>
+
+    <string name="desc_ProfileIcons19">Qora fonda samo tasvirli oq va apelsinrang yulduzlar va doiralar tasvirlangan rasm.</string>
+
+    <string name="desc_ProfileIcons2">Qora va oq kesishgan silindrlar tasvirlangan mavhum rasm</string>
+
+    <string name="desc_ProfileIcons20">Sariq fonda koʻk quloqli va oq tumshuqli it tasvirlangan rasm</string>
+
+    <string name="desc_ProfileIcons21">Binafsharang fonda zaytun novdasi bilan uchayotgan oq kaptar tasvirlangan rasm</string>
+
+    <string name="desc_ProfileIcons22">Koʻk fonda qora quloqli va oq tumshuqli it tasvirlangan rasm</string>
+
+    <string name="desc_ProfileIcons23">Krem fonida yashil barglari bor pushti gul tasvirlangan mavhum rasm</string>
+
+    <string name="desc_ProfileIcons24">Qizil fonda oltita koʻk silindr tasvirlangan mavhum rasm</string>
+
+    <string name="desc_ProfileIcons3">Toʻq koʻk fonda koʻk beda shaklidagi obyekt tasvirlangan mavhum rasm</string>
+
+    <string name="desc_ProfileIcons4">Ikkita pushti uch oʻlchamli uchburchak tasvirlangan mavhum rasm</string>
+
+    <string name="desc_ProfileIcons5">Sariq fonda moviy qatlamlar tasvirlangan mavhum rasm</string>
+
+    <string name="desc_ProfileIcons6">Yashil fonda binafsharang toshlar tasvirlangan mavhum rasm</string>
+
+    <string name="desc_ProfileIcons7">Apelsinrang fonda geometrik shakllardan tashkil topgan beshta oq gul tasvirlangan mavhum rasm</string>
+
+    <string name="desc_ProfileIcons8">Pushti fonda uchta rezavor tasvirlangan mavhum rasm</string>
+
+    <string name="desc_ProfileIcons9">Yashil fonda qora bargli limon tasvirlangan rasm</string>
+</resources>

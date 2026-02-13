@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Google Pixel 顯示圖片選擇器</string>
+
+    <string name="desc_ProfileIcons1">淺綠色背景配兩個深綠色半圓形的有趣插圖</string>
+
+    <string name="desc_ProfileIcons10">黃色背景配一隻橙色蝴蝶的有趣插圖</string>
+
+    <string name="desc_ProfileIcons11">深灰色背景配黑色圓角鼻子形狀</string>
+
+    <string name="desc_ProfileIcons12">淺灰色背景配黑色圓角三葉草形狀</string>
+
+    <string name="desc_ProfileIcons13">深紫色背景配淺紫色波浪圓形</string>
+
+    <string name="desc_ProfileIcons14">橙色背景配淺藍色圓角三葉草形狀</string>
+
+    <string name="desc_ProfileIcons15">深綠色背景配淺綠色圓角六邊形</string>
+
+    <string name="desc_ProfileIcons16">淺灰色背景配黑色圓角菱形</string>
+
+    <string name="desc_ProfileIcons17">黃色背景配一塊橙色樹葉的有趣插圖</string>
+
+    <string name="desc_ProfileIcons18">桃色背景配土星的有趣插圖</string>
+
+    <string name="desc_ProfileIcons19">黑色背景配星陣的有趣插圖，星陣由白色和橙色的星星及圓形組成</string>
+
+    <string name="desc_ProfileIcons2">黑色和白色圓柱體互相交錯的抽象插圖</string>
+
+    <string name="desc_ProfileIcons20">黃色背景配一隻藍耳白臉小狗的有趣插圖</string>
+
+    <string name="desc_ProfileIcons21">紫色背景配一隻帶著橄欖枝飛翔的鴿子的有趣插圖</string>
+
+    <string name="desc_ProfileIcons22">藍色背景配一隻黑耳白臉小狗的有趣插圖</string>
+
+    <string name="desc_ProfileIcons23">米黃色背景配一枝帶綠葉的粉紅色花的有趣插圖</string>
+
+    <string name="desc_ProfileIcons24">紅色背景配六個藍色圓柱體的抽象插圖</string>
+
+    <string name="desc_ProfileIcons3">深藍色背景配淺藍色圓角三葉草形狀的抽象插圖</string>
+
+    <string name="desc_ProfileIcons4">兩個粉紅色立體三角形的抽象插圖</string>
+
+    <string name="desc_ProfileIcons5">黃色背景配多層深藍綠色的抽象插圖</string>
+
+    <string name="desc_ProfileIcons6">綠色背景配紫色岩石的抽象插圖</string>
+
+    <string name="desc_ProfileIcons7">橙色背景配五枝白色幾何花朵的有趣插圖</string>
+
+    <string name="desc_ProfileIcons8">粉紅色背景配三顆藍莓的有趣插圖</string>
+
+    <string name="desc_ProfileIcons9">綠色背景配一個帶黑葉的檸檬的有趣插圖</string>
+</resources>

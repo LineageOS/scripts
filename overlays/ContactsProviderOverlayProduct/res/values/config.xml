@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Package name for the contacts metadata syncadapter [DO NOT TRANSLATE] -->
+    <string name="metadata_sync_pacakge">com.google.android.gms</string>
+</resources>
