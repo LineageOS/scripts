@@ -3,8 +3,7 @@
 
 from __future__ import annotations
 
-from os import path
-from typing import Dict, Optional
+from typing import Dict
 
 from lxml import etree
 
