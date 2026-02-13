@@ -288,10 +288,6 @@ def map_packages():
     return package_path_map, rro_overlays_map
 
 
-target_package_map = {
-    'com.android.systemui': 'com.android.systemui.res',
-}
-
 target_package_name_map = {
     'com.google.android.apps.nexuslauncher': 'com.android.launcher3',
     'com.google.android.avatarpicker': 'com.android.avatarpicker',
@@ -316,12 +312,6 @@ target_package_name_map = {
 def get_target_packages(target_package: str):
     package_path_map, _ = map_packages()
     new_target_package = target_package
-
-    # Multiple apps match the com.android.systemui package name
-    # and the one we're interested in doesn't actually have any
-    # resource dirs. Redirect it to the .res package.
-    if target_package in target_package_map:
-        target_package = target_package_map[target_package]
 
     # Some apps have equivalents in AOSP with a different package name
     if (
