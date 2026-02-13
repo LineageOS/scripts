@@ -8,16 +8,32 @@ import os
 import shutil
 from argparse import ArgumentParser
 from os import path
+from tempfile import TemporaryDirectory
 from typing import List, cast
 
 from rro.process_rro import (
-    generate_rro,
+    process_rro,
     simplify_rro_name,
 )
 from rro.target_package import (
     append_extra_locations,
 )
-from utils.utils import Color, color_print
+from utils.utils import Color, color_print, run_cmd
+
+
+def extract_apk(apk_path: str, tmp_dir: str):
+    run_cmd(
+        [
+            'apktool',
+            'd',
+            apk_path,
+            '-f',
+            '--no-src',
+            '--keep-broken-res',
+            '-o',
+            tmp_dir,
+        ]
+    )
 
 
 def get_apks(overlays_path: str):
@@ -29,6 +45,19 @@ def get_apks(overlays_path: str):
 
             apk_path = path.join(dir_path, file_name)
             yield apk_path
+
+
+def find_apk_partition(apk_path: str):
+    apk_path_parts = apk_path.split('/')
+
+    partition = None
+    try:
+        overlay_index = apk_path_parts.index('overlay')
+        partition = apk_path_parts[overlay_index - 1]
+    except (ValueError, IndexError):
+        pass
+
+    return partition
 
 
 if __name__ == '__main__':
@@ -73,7 +102,6 @@ if __name__ == '__main__':
     )
 
     args = parser.parse_args()
-    keep_packages = set(cast(List[str], args.keep_package))
     exclude_overlays = set(cast(List[str], args.exclude_overlay))
     exclude_packages = set(cast(List[str], args.exclude_package))
 
@@ -100,15 +128,24 @@ if __name__ == '__main__':
     for apk_path, rro_name in zip(apk_paths, rro_names):
         rro_name = simplify_rro_name(rro_name)
         output_path = path.join(overlays_path, rro_name)
+        partition = find_apk_partition(apk_path)
+
         try:
-            generate_rro(
-                apk_path,
-                output_path,
-                rro_name,
-                keep_packages=keep_packages,
-                exclude_overlays=exclude_overlays,
-                exclude_packages=exclude_packages,
-            )
+            with TemporaryDirectory() as tmp_dir:
+                extract_apk(apk_path, tmp_dir)
+
+                shutil.rmtree(output_path, ignore_errors=True)
+                os.makedirs(output_path, exist_ok=True)
+
+                process_rro(
+                    tmp_dir,
+                    output_path,
+                    rro_name,
+                    check_matches_aosp=True,
+                    exclude_overlays=exclude_overlays,
+                    exclude_packages=exclude_packages,
+                    partition=partition,
+                )
         except ValueError as e:
             shutil.rmtree(output_path, ignore_errors=True)
             color_print(e, color=Color.RED)
