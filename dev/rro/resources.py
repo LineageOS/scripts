@@ -541,10 +541,23 @@ def find_target_package_resources(
         matching_resources = 0
         if len(target_packages) != 1:
             for resource in overlay_resources:
-                if resource.keys in package_resources:
+                package_resource = get_package_resource(
+                    package_resources,
+                    resource,
+                )
+                if package_resource is not None:
                     matching_resources += 1
+                    continue
 
-        if matching_resources >= best_matching_resources:
+                unqualified_resource = get_unqualified_package_resource(
+                    package_resources,
+                    resource,
+                )
+                if unqualified_resource is not None:
+                    matching_resources += 1
+                    continue
+
+        if matching_resources > best_matching_resources:
             best_matching_resources = matching_resources
             best_module_name = module_name
             best_resources = package_resources
