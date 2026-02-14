@@ -7,10 +7,13 @@ from __future__ import annotations
 import os
 import shutil
 from argparse import ArgumentParser
+from contextlib import ExitStack
 from os import path
+from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import List, cast
+from typing import List, Optional, cast
 
+from apk.apk_extract import extract_apks
 from rro.process_rro import (
     process_rro,
     simplify_rro_name,
@@ -18,37 +21,22 @@ from rro.process_rro import (
 from rro.target_package import (
     append_extra_locations,
 )
-from utils.utils import Color, color_print, run_cmd
+from utils.utils import Color, color_print
 
 
-def extract_apk(apk_path: str, tmp_dir: str):
-    run_cmd(
-        [
-            'apktool',
-            'd',
-            apk_path,
-            '-f',
-            '--no-src',
-            '--keep-broken-res',
-            '-o',
-            tmp_dir,
-        ]
-    )
-
-
-def get_apks(overlays_path: str):
+def get_apks(overlays_path: Path):
     for dir_path, _, file_names in os.walk(overlays_path):
         for file_name in file_names:
             _, ext = path.splitext(file_name)
             if ext != '.apk':
                 continue
 
-            apk_path = path.join(dir_path, file_name)
+            apk_path = Path(dir_path, file_name)
             yield apk_path
 
 
-def find_apk_partition(apk_path: str):
-    apk_path_parts = apk_path.split('/')
+def find_apk_partition(apk_path: Path):
+    apk_path_parts = apk_path.parts
 
     partition = None
     try:
@@ -68,11 +56,6 @@ if __name__ == '__main__':
 
     parser.add_argument('apk_path')
     parser.add_argument('extra_package_locations', nargs='*')
-    parser.add_argument(
-        '-n',
-        '--name',
-        help='Name of overlay',
-    )
     parser.add_argument(
         '-o',
         '--overlays',
@@ -100,6 +83,12 @@ if __name__ == '__main__':
         default=[],
         action='append',
     )
+    parser.add_argument(
+        '-f',
+        '--framework',
+        help='Path to framework-res.apk',
+        type=Path,
+    )
 
     args = parser.parse_args()
     exclude_overlays = set(cast(List[str], args.exclude_overlay))
@@ -107,45 +96,62 @@ if __name__ == '__main__':
 
     append_extra_locations(args.extra_package_locations)
 
-    overlays_path: str = args.overlays
-    rro_names = []
+    overlays_path = Path(args.overlays)
 
-    if path.isdir(args.apk_path):
-        apk_paths = list(get_apks(args.apk_path))
-        if args.name is not None:
-            rro_names = [args.name]
-    elif path.isfile(args.apk_path):
-        apk_paths = [args.apk_path]
+    apk_path_arg = Path(args.apk_path)
+    if apk_path_arg.is_dir():
+        apk_paths = list(get_apks(apk_path_arg))
+    elif apk_path_arg.is_file():
+        apk_paths = [apk_path_arg]
     else:
-        raise ValueError(f'Invalid file: {args.apk_path}')
+        raise ValueError(f'Invalid file: {apk_path_arg}')
 
-    if not rro_names:
+    with ExitStack() as stack:
+        output_paths: List[Path] = []
+        tmp_output_paths: List[Path] = []
+        rro_names: List[str] = []
+        partitions: List[Optional[str]] = []
+
         for apk_path in apk_paths:
+            partition = find_apk_partition(apk_path)
+            partitions.append(partition)
+
+            tmp_output_path = Path(stack.enter_context(TemporaryDirectory()))
+            tmp_output_paths.append(tmp_output_path)
+
             apk_name = path.basename(apk_path)
             rro_name, ext = path.splitext(apk_name)
+            rro_name = simplify_rro_name(rro_name)
             rro_names.append(rro_name)
 
-    for apk_path, rro_name in zip(apk_paths, rro_names):
-        rro_name = simplify_rro_name(rro_name)
-        output_path = path.join(overlays_path, rro_name)
-        partition = find_apk_partition(apk_path)
+            output_path = Path(overlays_path, rro_name)
+            output_paths.append(output_path)
 
-        try:
-            with TemporaryDirectory() as tmp_dir:
-                extract_apk(apk_path, tmp_dir)
+        extract_apks(
+            apk_paths,
+            tmp_output_paths,
+            args.framework,
+        )
 
-                shutil.rmtree(output_path, ignore_errors=True)
-                os.makedirs(output_path, exist_ok=True)
+        for tmp_dir, rro_name, partition in zip(
+            tmp_output_paths,
+            rro_names,
+            partitions,
+        ):
+            apk_output_path = Path(overlays_path, rro_name)
+            shutil.rmtree(apk_output_path, ignore_errors=True)
+            os.makedirs(apk_output_path, exist_ok=True)
 
+            try:
                 process_rro(
-                    tmp_dir,
-                    output_path,
+                    str(tmp_dir),
+                    str(apk_output_path),
                     rro_name,
                     check_matches_aosp=True,
                     exclude_overlays=exclude_overlays,
                     exclude_packages=exclude_packages,
                     partition=partition,
                 )
-        except ValueError as e:
-            shutil.rmtree(output_path, ignore_errors=True)
-            color_print(e, color=Color.RED)
+            except ValueError as e:
+                shutil.rmtree(apk_output_path, ignore_errors=True)
+                color_print(e, color=Color.RED)
