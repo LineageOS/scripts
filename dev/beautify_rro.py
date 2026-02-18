@@ -105,7 +105,7 @@ if __name__ == '__main__':
 
                 manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
                 manifest_path = path.join(dir_path, manifest)
-                package, target_package, overlay_attrs = parse_overlay_manifest(
+                _, _, overlay_attrs = parse_overlay_manifest(
                     manifest_path,
                 )
                 module_partition = get_module_partition(statement)
