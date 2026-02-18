@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ff7ceae_6cf59514",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19979
+      },
+      "writtenOn": "2026-02-18T17:26:25Z",
+      "side": 1,
+      "message": "Or adapt this to the latest changes in dev tools that will replace the need for apktool",
+      "revId": "8865802b3ac60222e7b7df133683b7e5e18ad903",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1d72dc8_d7f25a11",
