@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1d72dc8_d7f25a11",
+        "filename": "dev/generate_euicc.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 15346
+      },
+      "writtenOn": "2026-02-18T17:03:26Z",
+      "side": 1,
+      "message": "Can we use apktools from android_prebuilts_extract-tools instead of assuming user has it installed in their PATH?",
+      "revId": "8865802b3ac60222e7b7df133683b7e5e18ad903",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
