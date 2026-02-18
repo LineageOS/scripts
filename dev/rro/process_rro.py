@@ -420,7 +420,8 @@ RRO_PACKAGE_SIMPLIFY_REGEX = re.compile(
 
 
 def simplify_rro_name(rro_name: str):
-    # TODO: use dashes if package has dashes?
+    rro_name = rro_name.replace('framework-res', 'FrameworkRes')
+
     return RRO_NAME_SIMPLIFY_REGEX.sub(
         lambda m: f'Overlay{m.group(1).capitalize()}',
         rro_name,
