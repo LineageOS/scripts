@@ -19,6 +19,7 @@ from typing import (
     Union,
 )
 
+import lxml
 from lxml import etree
 
 from rro.manifest import NAMESPACE
@@ -966,8 +967,11 @@ def raw_resources_need_aapt_raw(raw_resources: Set[RawResource]):
         if not raw_resource.file_name.endswith('.xml'):
             continue
 
-        if xml_attrib_matches(raw_resource.data, attrib_needs_aapt_raw):
-            return raw_resource
+        try:
+            if xml_attrib_matches(raw_resource.data, attrib_needs_aapt_raw):
+                return raw_resource
+        except lxml.etree.XMLSyntaxError:
+            pass
 
     return None
 
