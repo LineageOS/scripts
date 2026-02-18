@@ -2,22 +2,28 @@
 # SPDX-License-Identifier: Apache-2.0
 
 
+import codecs
+import struct
 from typing import Sequence
+
+_U8 = struct.Struct('<B')
+_U16 = struct.Struct('<H')
 
 
 def read_varlen(data: memoryview, offset: int, unit_size: int):
     assert unit_size in (1, 2), unit_size
 
+    unpack = _U8.unpack_from if unit_size == 1 else _U16.unpack_from
     unit_bits = unit_size * 8
     high_bit_mask = 1 << (unit_bits - 1)
 
-    first = int.from_bytes(data[offset : offset + unit_size], 'little')
+    first = unpack(data, offset)[0]
     offset += unit_size
 
     if (first & high_bit_mask) == 0:
         return first, offset
 
-    second = int.from_bytes(data[offset : offset + unit_size], 'little')
+    second = unpack(data, offset)[0]
     offset += unit_size
 
     value = ((first & ~high_bit_mask) << unit_bits) | second
@@ -38,9 +44,9 @@ def read_utf8_string(
     )
 
     string_end = offset + byte_length
-    raw_bytes = data[offset:string_end].tobytes()
+    raw_bytes = data[offset:string_end]
 
-    return raw_bytes.decode('utf-8')
+    return codecs.decode(raw_bytes, 'utf-8')
 
 
 def read_utf16_string(
@@ -55,9 +61,9 @@ def read_utf16_string(
 
     byte_length = length_in_code_units * 2
     string_end = offset + byte_length
-    raw_bytes = data[offset:string_end].tobytes()
+    raw_bytes = data[offset:string_end]
 
-    return raw_bytes.decode('utf-16le')
+    return codecs.decode(raw_bytes, 'utf-16le')
 
 
 def u16_array_to_str(arr: Sequence[int]) -> str:
