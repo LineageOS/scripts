@@ -729,7 +729,7 @@ def overlay_resources_fixup_tag(
     overlay_resources: Set[Resource],
     package_resources: resources_dict,
 ):
-    wrong_tag_resources: Set[Tuple[str, str, str]] = set()
+    wrong_tag_resources: Set[Tuple[str, str]] = set()
 
     def fixup_resource_tag(resource: Resource):
         if not isinstance(resource, XMLResource):
@@ -747,17 +747,18 @@ def overlay_resources_fixup_tag(
         if resource.tag == package_resource.tag:
             return
 
+        new_resource = resource.copy(
+            tag=package_resource.tag,
+        )
+
         wrong_tag_resources.add(
             (
                 resource.reference_name,
-                resource.tag,
-                package_resource.tag,
+                new_resource.reference_name,
             )
         )
 
-        return resource, resource.copy(
-            tag=package_resource.tag,
-        )
+        return resource, new_resource
 
     overlay_resources_process(overlay_resources, fixup_resource_tag)
 
