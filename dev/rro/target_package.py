@@ -67,7 +67,10 @@ def resolve_manifest_filegroups(
     return resolved_manifests
 
 
-def get_app_manifests(app_module: AppModule):
+def get_app_manifests(
+    app_module: AppModule,
+    filegroups_map: Dict[str, FilegroupModule],
+):
     manifests: List[str] = []
 
     manifest = app_module.get('manifest', 'AndroidManifest.xml')
@@ -76,7 +79,7 @@ def get_app_manifests(app_module: AppModule):
     additional_manifests = app_module.get('additional_manifests', [])
     manifests.extend(additional_manifests)
 
-    return manifests
+    return resolve_manifest_filegroups(manifests, filegroups_map)
 
 
 def get_app_resources(
@@ -121,16 +124,8 @@ def get_app_resources(
             resource_dirs.append(resource_dir)
 
 
-def get_app_package_name(
-    android_bp_dir_path: str,
-    app_module: AppModule,
-    filegroups_map: Dict[str, FilegroupModule],
-):
-    manifests = get_app_manifests(app_module)
-    resolved_manifests = resolve_manifest_filegroups(manifests, filegroups_map)
-    for manifest_path in get_existing_paths_rel(
-        android_bp_dir_path, resolved_manifests
-    ):
+def get_app_package_name(android_bp_dir_path: str, manifests: List[str]):
+    for manifest_path in get_existing_paths_rel(android_bp_dir_path, manifests):
         package_name = parse_package_manifest(manifest_path)
         if package_name is not None:
             return package_name
@@ -229,10 +224,11 @@ def map_packages():
 
         name = app_module['name']
 
+        manifests = get_app_manifests(app_module, filegroups_map)
+
         package_name = get_app_package_name(
             android_bp_dir_path,
-            app_module,
-            filegroups_map,
+            manifests,
         )
 
         resource_dirs: List[str] = []
