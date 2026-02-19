@@ -76,7 +76,13 @@ def p_value(p):
     | object
     | function_call
     | IDENT"""
-    if p[1] == 'true':
+    if len(p) == 4:
+        p[0] = {
+            'kind': 'add',
+            'lhs': p[1],
+            'rhs': p[3],
+        }
+    elif p[1] == 'true':
         p[0] = True
     elif p[1] == 'false':
         p[0] = False
