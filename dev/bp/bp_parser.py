@@ -86,7 +86,11 @@ def p_value(p):
 
 def p_function_call(p):
     """function_call : IDENT LPAREN items_opt RPAREN"""
-    p[0] = {'function': p[1], 'args': p[3]}
+    p[0] = {
+        'kind': 'call',
+        'name': p[1],
+        'args': p[3],
+    }
 
 
 def p_array(p):
