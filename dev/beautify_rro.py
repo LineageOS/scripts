@@ -139,11 +139,19 @@ if __name__ == '__main__':
         resources_dir = statement.get('resource_dirs', ['res'])[0]
         partition = get_module_partition(statement)
 
+        manifest_path = path.join(dir_path, manifest)
+        package, target_package, overlay_attrs = parse_overlay_manifest(
+            manifest_path,
+        )
+
         try:
             process_rro(
                 dir_path,
                 dir_path,
                 module_name,
+                package,
+                target_package,
+                overlay_attrs,
                 manifest,
                 resources_dir,
                 all_packages_resources_map=all_packages_resources_map,
