@@ -8,7 +8,7 @@ import re
 import shutil
 from os import path
 from pathlib import Path
-from typing import Dict, Optional, Set, Tuple, TypedDict
+from typing import Dict, NotRequired, Optional, Set, Tuple, TypedDict
 
 from bp.bp_utils import ANDROID_BP_NAME, get_partition_specific
 from rro.manifest import (
@@ -383,27 +383,53 @@ def process_rro(
 RRO_NAME_SIMPLIFY_REGEX = re.compile(
     r'__[^_]+__auto_generated_rro_(vendor|product)$'
 )
+RRO_NAME_CHR_SIMPLIFY_REGEX = re.compile(
+    r'__[^_]+__auto_generated_characteristics_rro$'
+)
 RRO_PACKAGE_SIMPLIFY_REGEX = re.compile(
     r'\.auto_generated_rro_(vendor|product)__$'
 )
+RRO_PACKAGE_CHR_SIMPLIFY_REGEX = re.compile(
+    r'\.auto_generated_characteristics_rro'
+)
 
 
-def simplify_rro_name(rro_name: str):
+def simplify_rro_name(rro_name: str, device: Optional[str]):
+    if device is None:
+        suffix = ''
+    else:
+        suffix = device.capitalize()
+
     original_rro_name = rro_name
     rro_name = rro_name.replace('framework-res', 'FrameworkRes')
     rro_name = RRO_NAME_SIMPLIFY_REGEX.sub(
-        lambda m: f'Overlay{m.group(1).capitalize()}',
+        lambda m: f'Overlay{m.group(1).capitalize()}{suffix}',
         rro_name,
     )
+    rro_name = RRO_NAME_CHR_SIMPLIFY_REGEX.sub(
+        f'Overlay{suffix}',
+        rro_name,
+    )
+
     return rro_name, original_rro_name
 
 
-def simplify_rro_package(rro_package: str):
+def simplify_rro_package(rro_package: str, device: Optional[str]):
+    if device is None:
+        suffix = ''
+    else:
+        suffix = f'.{device}'
+
     original_rro_package = rro_package
     rro_package = RRO_PACKAGE_SIMPLIFY_REGEX.sub(
-        r'.overlay.\1',
+        rf'.overlay.\1{suffix}',
         rro_package,
     )
+    rro_package = RRO_PACKAGE_CHR_SIMPLIFY_REGEX.sub(
+        rf'.overlay{suffix}',
+        rro_package,
+    )
+
     return rro_package, original_rro_package
 
 
@@ -414,6 +440,7 @@ class RROMeta(TypedDict):
     original_rro_name: str
     original_package: str
     original_target_package: str
+    device: NotRequired[str]
 
 
 def write_rro_meta(
@@ -421,12 +448,16 @@ def write_rro_meta(
     rro_name: str,
     package: str,
     target_package: str,
+    device: Optional[str],
 ):
     meta: RROMeta = {
         'original_rro_name': rro_name,
         'original_package': package,
         'original_target_package': target_package,
     }
+
+    if device is not None:
+        meta['device'] = device
 
     rro_meta_path = Path(output_path, RRO_META_NAME)
     with open(rro_meta_path, 'w') as o:
