@@ -141,7 +141,6 @@ def parse_rro(
     ] = None,
     remove_shadowed_resources: bool = False,
     remove_missing_resources: bool = False,
-    check_matches_aosp: bool = False,
     remove_resources: Optional[Set[Tuple[str | None, str]]] = None,
     keep_packages: Optional[Set[str]] = None,
 ):
@@ -264,15 +263,6 @@ def parse_rro(
         overlay_resources,
     )
 
-    if check_matches_aosp:
-        check_rro_matches_aosp(
-            rro_name,
-            package,
-            target_package,
-            resources,
-            raw_resources,
-        )
-
     grouped_resources = overlay_resources_group_by_rel_path(resources)
 
     overlay_raw_resource_needs_aapt_flag = raw_resources_need_aapt_raw(
@@ -318,7 +308,7 @@ def process_rro(
     partition: Optional[str] = None,
 ):
     (
-        _,
+        resources,
         raw_resources,
         grouped_resources,
         aapt_raw,
@@ -332,10 +322,18 @@ def process_rro(
         all_packages_resources_map,
         remove_shadowed_resources=remove_shadowed_resources,
         remove_missing_resources=remove_missing_resources,
-        check_matches_aosp=check_matches_aosp,
         remove_resources=remove_resources,
         keep_packages=keep_packages,
     )
+
+    if check_matches_aosp:
+        check_rro_matches_aosp(
+            rro_name,
+            package,
+            target_package,
+            resources,
+            raw_resources,
+        )
 
     # Preserve existing res/values/*.xml headers BEFORE we delete res/
     preserved_prefixes: Dict[str, bytes] = {}
