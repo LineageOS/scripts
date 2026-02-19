@@ -3,10 +3,12 @@
 
 from __future__ import annotations
 
+import json
 import re
 import shutil
 from os import path
-from typing import Dict, Optional, Set, Tuple
+from pathlib import Path
+from typing import Dict, Optional, Set, Tuple, TypedDict
 
 from bp.bp_utils import ANDROID_BP_NAME, get_partition_specific
 from rro.manifest import (
@@ -387,16 +389,46 @@ RRO_PACKAGE_SIMPLIFY_REGEX = re.compile(
 
 
 def simplify_rro_name(rro_name: str):
+    original_rro_name = rro_name
     rro_name = rro_name.replace('framework-res', 'FrameworkRes')
-
-    return RRO_NAME_SIMPLIFY_REGEX.sub(
+    rro_name = RRO_NAME_SIMPLIFY_REGEX.sub(
         lambda m: f'Overlay{m.group(1).capitalize()}',
         rro_name,
     )
+    return rro_name, original_rro_name
 
 
 def simplify_rro_package(rro_package: str):
-    return RRO_PACKAGE_SIMPLIFY_REGEX.sub(
+    original_rro_package = rro_package
+    rro_package = RRO_PACKAGE_SIMPLIFY_REGEX.sub(
         r'.overlay.\1',
         rro_package,
     )
+    return rro_package, original_rro_package
+
+
+RRO_META_NAME = '.rro-meta.json'
+
+
+class RROMeta(TypedDict):
+    original_rro_name: str
+    original_package: str
+    original_target_package: str
+
+
+def write_rro_meta(
+    output_path: Path,
+    rro_name: str,
+    package: str,
+    target_package: str,
+):
+    meta: RROMeta = {
+        'original_rro_name': rro_name,
+        'original_package': package,
+        'original_target_package': target_package,
+    }
+
+    rro_meta_path = Path(output_path, RRO_META_NAME)
+    with open(rro_meta_path, 'w') as o:
+        json.dump(meta, o, indent=4, sort_keys=True)
+        o.write('\n')
