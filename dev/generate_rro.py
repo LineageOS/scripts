@@ -102,6 +102,11 @@ if __name__ == '__main__':
         type=Path,
     )
     parser.add_argument(
+        '-d',
+        '--device',
+        help='Device name to be added to auto-generated RROs',
+    )
+    parser.add_argument(
         '--apktool',
         help='Use apktool',
         action='store_true',
@@ -139,7 +144,10 @@ if __name__ == '__main__':
 
             apk_name = path.basename(apk_path)
             rro_name, ext = path.splitext(apk_name)
-            rro_name, original_rro_name = simplify_rro_name(rro_name)
+            rro_name, original_rro_name = simplify_rro_name(
+                rro_name,
+                args.device,
+            )
             rro_names.append(rro_name)
             original_rro_names.append(original_rro_name)
 
@@ -168,7 +176,10 @@ if __name__ == '__main__':
                 manifest_path,
             )
 
-            package, original_package = simplify_rro_package(package)
+            package, original_package = simplify_rro_package(
+                package,
+                args.device,
+            )
             if package in exclude_overlays:
                 color_print(f'{package}: Excluded', color=Color.YELLOW)
                 continue
@@ -213,6 +224,7 @@ if __name__ == '__main__':
                     original_rro_name,
                     original_package,
                     orignal_target_package,
+                    args.device,
                 )
             except ValueError as e:
                 shutil.rmtree(apk_output_path, ignore_errors=True)
