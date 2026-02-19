@@ -36,6 +36,7 @@ from rro.resources import (
 )
 from rro.target_package import (
     find_overlay_android_bp_path_by_name,
+    fixup_target_package,
     get_target_packages,
 )
 from utils.utils import Color, color_print
@@ -169,6 +170,10 @@ def parse_rro(
     package, target_package, overlay_attrs = parse_overlay_manifest(
         manifest_path,
     )
+
+    if target_package in exclude_packages:
+        raise ValueError(f'{package}: Excluded by {target_package}')
+    target_package = fixup_target_package(target_package)
     if target_package in exclude_packages:
         raise ValueError(f'{package}: Excluded by {target_package}')
 
@@ -185,9 +190,7 @@ def parse_rro(
     if not overlay_resources:
         raise ValueError(f'{package}: No resources in overlay')
 
-    target_packages, target_package = get_target_packages(target_package)
-    if target_package in exclude_packages:
-        raise ValueError(f'{package}: Excluded by {target_package}')
+    target_packages = get_target_packages(target_package)
 
     package_resources, module_name = find_target_package_resources(
         target_packages,
