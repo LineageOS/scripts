@@ -14,12 +14,15 @@ from tempfile import TemporaryDirectory
 from typing import List, Optional, cast
 
 from apk.apk_extract import extract_apks
+from rro.manifest import ANDROID_MANIFEST_NAME, parse_overlay_manifest
 from rro.process_rro import (
     process_rro,
     simplify_rro_name,
+    simplify_rro_package,
 )
 from rro.target_package import (
     append_extra_locations,
+    fixup_target_package,
 )
 from utils.utils import Color, color_print, run_cmd
 
@@ -163,6 +166,33 @@ if __name__ == '__main__':
             if args.apktool:
                 extract_apk(apk_path, tmp_dir)
 
+            manifest_path = path.join(tmp_dir, ANDROID_MANIFEST_NAME)
+            package, target_package, overlay_attrs = parse_overlay_manifest(
+                manifest_path,
+            )
+
+            if package in exclude_overlays:
+                color_print(f'{package}: Excluded', color=Color.YELLOW)
+                continue
+            package = simplify_rro_package(package)
+            if package in exclude_overlays:
+                color_print(f'{package}: Excluded', color=Color.YELLOW)
+                continue
+
+            if target_package in exclude_packages:
+                color_print(
+                    f'{package}: Excluded by {target_package}',
+                    color=Color.YELLOW,
+                )
+                continue
+            target_package = fixup_target_package(target_package)
+            if target_package in exclude_packages:
+                color_print(
+                    f'{package}: Excluded by {target_package}',
+                    color=Color.YELLOW,
+                )
+                continue
+
             apk_output_path = Path(overlays_path, rro_name)
             shutil.rmtree(apk_output_path, ignore_errors=True)
             os.makedirs(apk_output_path, exist_ok=True)
@@ -172,9 +202,10 @@ if __name__ == '__main__':
                     str(tmp_dir),
                     str(apk_output_path),
                     rro_name,
+                    package,
+                    target_package,
+                    overlay_attrs,
                     check_matches_aosp=True,
-                    exclude_overlays=exclude_overlays,
-                    exclude_packages=exclude_packages,
                     partition=partition,
                 )
             except ValueError as e:
