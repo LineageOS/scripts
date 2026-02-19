@@ -216,10 +216,9 @@ def parse_rro(
             overlay_resources,
             package_resources,
         )
-        for resource, wrong_type, correct_type in sorted(wrong_tag_resources):
+        for old_resource, new_resource in sorted(wrong_tag_resources):
             color_print(
-                f'{package}: {resource} has wrong type {wrong_type}, '
-                f'expected {correct_type}, corrected automatically',
+                f'{package}: {old_resource} -> {new_resource}',
                 color=Color.YELLOW,
             )
 
