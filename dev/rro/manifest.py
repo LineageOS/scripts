@@ -32,8 +32,12 @@ def namespace_attr(attr: str):
 def parse_package_manifest(manifest_path: str):
     tree = etree.parse(manifest_path)
     root = tree.getroot()
+    package_name = root.attrib.get(PACKAGE_KEY)
+    if package_name is None:
+        return None
 
-    return root.attrib.get(PACKAGE_KEY)
+    assert isinstance(package_name, str)
+    return package_name
 
 
 def parse_overlay_manifest(manifest_path: str):
