@@ -305,19 +305,17 @@ target_package_name_map = {
 }
 
 
+def fixup_target_package(target_package: str):
+    if target_package in target_package_name_map:
+        return target_package_name_map[target_package]
+
+    return target_package
+
+
 def get_target_packages(target_package: str):
     package_path_map, _ = map_packages()
-    new_target_package = target_package
 
-    # Some apps have equivalents in AOSP with a different package name
-    if (
-        target_package not in package_path_map
-        and target_package in target_package_name_map
-    ):
-        target_package = target_package_name_map[target_package]
-        new_target_package = target_package
-
-    return package_path_map.get(target_package, []), new_target_package
+    return package_path_map.get(target_package, [])
 
 
 def find_overlay_android_bp_path_by_name(name: str):
