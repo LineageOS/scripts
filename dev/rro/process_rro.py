@@ -36,7 +36,6 @@ from rro.resources import (
 )
 from rro.target_package import (
     find_overlay_android_bp_path_by_name,
-    fixup_target_package,
     get_target_packages,
 )
 from utils.utils import Color, color_print
@@ -99,10 +98,12 @@ def check_rro_matches_aosp(
     if aosp_rro_android_bp_path is None:
         return
 
+    manifest_path = path.join(aosp_rro_android_bp_path, ANDROID_MANIFEST_NAME)
+    aosp_package, aosp_target_package, _ = parse_overlay_manifest(
+        manifest_path,
+    )
+
     (
-        aosp_package,
-        aosp_target_package,
-        _,
         aosp_resources,
         aosp_raw_resources,
         _,
@@ -110,6 +111,8 @@ def check_rro_matches_aosp(
     ) = parse_rro(
         aosp_rro_android_bp_path,
         rro_name,
+        package,
+        target_package,
     )
 
     if package != aosp_package or target_package != aosp_target_package:
@@ -138,6 +141,8 @@ def check_rro_matches_aosp(
 def parse_rro(
     overlay_path: str,
     rro_name: str,
+    package: str,
+    target_package: str,
     manifest_name: str = ANDROID_MANIFEST_NAME,
     resources_dir: str = RESOURCES_DIR,
     all_packages_resources_map: Optional[
@@ -151,8 +156,6 @@ def parse_rro(
     check_matches_aosp: bool = False,
     remove_resources: Optional[Set[Tuple[str | None, str]]] = None,
     keep_packages: Optional[Set[str]] = None,
-    exclude_overlays: Optional[Set[str]] = None,
-    exclude_packages: Optional[Set[str]] = None,
 ):
     if all_packages_resources_map is None:
         all_packages_resources_map = {}
@@ -160,28 +163,8 @@ def parse_rro(
         remove_resources = set()
     if keep_packages is None:
         keep_packages = set()
-    if exclude_overlays is None:
-        exclude_overlays = set()
-    if exclude_packages is None:
-        exclude_packages = set()
 
     manifest_path = path.join(overlay_path, manifest_name)
-
-    package, target_package, overlay_attrs = parse_overlay_manifest(
-        manifest_path,
-    )
-
-    if target_package in exclude_packages:
-        raise ValueError(f'{package}: Excluded by {target_package}')
-    target_package = fixup_target_package(target_package)
-    if target_package in exclude_packages:
-        raise ValueError(f'{package}: Excluded by {target_package}')
-
-    if package in exclude_overlays:
-        raise ValueError(f'{package}: Excluded')
-    package = simplify_rro_package(package)
-    if package in exclude_overlays:
-        raise ValueError(f'{package}: Excluded')
 
     overlay_resources = parse_overlay_resources(
         overlay_path,
@@ -317,9 +300,6 @@ def parse_rro(
         )
 
     return (
-        package,
-        target_package,
-        overlay_attrs,
         resources,
         raw_resources,
         grouped_resources,
@@ -331,6 +311,9 @@ def process_rro(
     input_path: str,
     output_path: str,
     rro_name: str,
+    package: str,
+    target_package: str,
+    overlay_attrs: Dict[str, str],
     manifest_name: str = ANDROID_MANIFEST_NAME,
     resources_dir: str = RESOURCES_DIR,
     all_packages_resources_map: Optional[
@@ -345,14 +328,9 @@ def process_rro(
     check_matches_aosp: bool = False,
     remove_resources: Optional[Set[Tuple[str | None, str]]] = None,
     keep_packages: Optional[Set[str]] = None,
-    exclude_overlays: Optional[Set[str]] = None,
-    exclude_packages: Optional[Set[str]] = None,
     partition: Optional[str] = None,
 ):
     (
-        package,
-        target_package,
-        overlay_attrs,
         _,
         raw_resources,
         grouped_resources,
@@ -360,6 +338,8 @@ def process_rro(
     ) = parse_rro(
         input_path,
         rro_name,
+        package,
+        target_package,
         manifest_name,
         resources_dir,
         all_packages_resources_map,
@@ -368,8 +348,6 @@ def process_rro(
         check_matches_aosp=check_matches_aosp,
         remove_resources=remove_resources,
         keep_packages=keep_packages,
-        exclude_overlays=exclude_overlays,
-        exclude_packages=exclude_packages,
     )
 
     # Preserve existing res/values/*.xml headers BEFORE we delete res/
