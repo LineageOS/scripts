@@ -19,6 +19,7 @@ from rro.process_rro import (
     process_rro,
     simplify_rro_name,
     simplify_rro_package,
+    write_rro_meta,
 )
 from rro.target_package import (
     append_extra_locations,
@@ -126,6 +127,7 @@ if __name__ == '__main__':
         output_paths: List[Path] = []
         tmp_output_paths: List[Path] = []
         rro_names: List[str] = []
+        original_rro_names: List[str] = []
         partitions: List[Optional[str]] = []
 
         for apk_path in apk_paths:
@@ -137,8 +139,9 @@ if __name__ == '__main__':
 
             apk_name = path.basename(apk_path)
             rro_name, ext = path.splitext(apk_name)
-            rro_name = simplify_rro_name(rro_name)
+            rro_name, original_rro_name = simplify_rro_name(rro_name)
             rro_names.append(rro_name)
+            original_rro_names.append(original_rro_name)
 
             output_path = Path(overlays_path, rro_name)
             output_paths.append(output_path)
@@ -150,10 +153,11 @@ if __name__ == '__main__':
                 args.framework,
             )
 
-        for apk_path, tmp_dir, rro_name, partition in zip(
+        for apk_path, tmp_dir, rro_name, original_rro_name, partition in zip(
             apk_paths,
             tmp_output_paths,
             rro_names,
+            original_rro_names,
             partitions,
         ):
             if args.apktool:
@@ -164,24 +168,27 @@ if __name__ == '__main__':
                 manifest_path,
             )
 
+            package, original_package = simplify_rro_package(package)
             if package in exclude_overlays:
                 color_print(f'{package}: Excluded', color=Color.YELLOW)
                 continue
-            package = simplify_rro_package(package)
-            if package in exclude_overlays:
-                color_print(f'{package}: Excluded', color=Color.YELLOW)
+            if original_package in exclude_overlays:
+                color_print(f'{original_package}: Excluded', color=Color.YELLOW)
                 continue
 
+            target_package, orignal_target_package = fixup_target_package(
+                target_package,
+            )
             if target_package in exclude_packages:
                 color_print(
                     f'{package}: Excluded by {target_package}',
                     color=Color.YELLOW,
                 )
                 continue
-            target_package = fixup_target_package(target_package)
-            if target_package in exclude_packages:
+
+            if orignal_target_package in exclude_packages:
                 color_print(
-                    f'{package}: Excluded by {target_package}',
+                    f'{package}: Excluded by {orignal_target_package}',
                     color=Color.YELLOW,
                 )
                 continue
@@ -200,6 +207,12 @@ if __name__ == '__main__':
                     overlay_attrs,
                     check_matches_aosp=True,
                     partition=partition,
+                )
+                write_rro_meta(
+                    apk_output_path,
+                    original_rro_name,
+                    original_package,
+                    orignal_target_package,
                 )
             except ValueError as e:
                 shutil.rmtree(apk_output_path, ignore_errors=True)
