@@ -8,7 +8,6 @@ import os
 import shutil
 from argparse import ArgumentParser
 from contextlib import ExitStack
-from os import path
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import List, Optional, cast
@@ -48,8 +47,7 @@ def extract_apk(apk_path: Path, tmp_dir: Path):
 def get_apks(overlays_path: Path):
     for dir_path, _, file_names in os.walk(overlays_path):
         for file_name in file_names:
-            _, ext = path.splitext(file_name)
-            if ext != '.apk':
+            if Path(file_name).suffix != '.apk':
                 continue
 
             apk_path = Path(dir_path, file_name)
@@ -151,10 +149,8 @@ if __name__ == '__main__':
             tmp_output_path = Path(stack.enter_context(TemporaryDirectory()))
             tmp_output_paths.append(tmp_output_path)
 
-            apk_name = path.basename(apk_path)
-            rro_name, ext = path.splitext(apk_name)
             rro_name, original_rro_name = simplify_rro_name(
-                rro_name,
+                apk_path.stem,
                 args.device,
             )
             rro_names.append(rro_name)
@@ -180,9 +176,9 @@ if __name__ == '__main__':
             if args.apktool:
                 extract_apk(apk_path, tmp_dir)
 
-            manifest_path = path.join(tmp_dir, ANDROID_MANIFEST_NAME)
+            manifest_path = Path(tmp_dir, ANDROID_MANIFEST_NAME)
             package, target_package, overlay_attrs = parse_overlay_manifest(
-                manifest_path,
+                str(manifest_path),
             )
 
             package, original_package = simplify_rro_package(
@@ -215,7 +211,7 @@ if __name__ == '__main__':
 
             apk_output_path = Path(overlays_path, rro_name)
             shutil.rmtree(apk_output_path, ignore_errors=True)
-            os.makedirs(apk_output_path, exist_ok=True)
+            apk_output_path.mkdir(parents=True, exist_ok=True)
 
             try:
                 overlay_resources = parse_rro(
