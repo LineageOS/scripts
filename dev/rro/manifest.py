@@ -45,7 +45,7 @@ def parse_overlay_manifest(manifest_path: str):
     root = tree.getroot()
 
     package = root.attrib.get(PACKAGE_KEY)
-    assert package is not None
+    assert isinstance(package, str)
 
     overlay_elem = root.find(OVERLAY_TAG)
     assert overlay_elem is not None
