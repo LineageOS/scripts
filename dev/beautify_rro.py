@@ -7,6 +7,7 @@ from __future__ import annotations
 import shutil
 from argparse import ArgumentParser
 from os import path
+from pathlib import Path
 from typing import Dict, List, Set, Tuple, cast
 
 from bp.bp_module import BpModule, RROModule
@@ -167,6 +168,9 @@ if __name__ == '__main__':
                     dir_path,
                     extra_paths=[manifest],
                 )
+
+            shutil.rmtree(dir_path, ignore_errors=True)
+            Path(dir_path).mkdir(parents=True, exist_ok=True)
 
             write_rro(
                 overlay_resources,
