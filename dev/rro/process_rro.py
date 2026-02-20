@@ -30,7 +30,6 @@ from rro.resources import (
     overlay_resources_remove_missing,
     parse_overlay_resources,
     raw_resources_need_aapt_raw,
-    read_xml_resources_prefix,
     resources_reference_name_sorted,
     write_grouped_resources,
     write_overlay_raw_resources,
@@ -271,7 +270,7 @@ def write_rro(
     package: str,
     target_package: str,
     overlay_attrs: Dict[str, str],
-    maintain_copyrights: bool = False,
+    preserved_prefixes: Optional[Dict[str, bytes]] = None,
     partition: Optional[str] = None,
 ):
     resources, raw_resources = overlay_resource_split_by_type(
@@ -291,14 +290,6 @@ def write_rro(
             color=Color.YELLOW,
         )
 
-    # Preserve existing res/values/*.xml headers BEFORE we delete res/
-    preserved_prefixes: Dict[str, bytes] = {}
-    if maintain_copyrights:
-        preserved_prefixes = read_xml_resources_prefix(
-            grouped_resources,
-            output_path,
-        )
-
     res_dir = path.join(output_path, RESOURCES_DIR)
     shutil.rmtree(res_dir, ignore_errors=True)
 
@@ -315,13 +306,13 @@ def write_rro(
         RESOURCES_DIR,
     )
 
-    rro_manifest_path = path.join(output_path, ANDROID_MANIFEST_NAME)
     write_manifest(
-        rro_manifest_path,
+        output_path,
+        ANDROID_MANIFEST_NAME,
         package,
         target_package,
         overlay_attrs,
-        maintain_copyrights=maintain_copyrights,
+        preserved_prefixes=preserved_prefixes,
     )
 
     android_bp_path = path.join(output_path, ANDROID_BP_NAME)
