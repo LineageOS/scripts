@@ -1033,8 +1033,11 @@ def write_grouped_resources(
     grouped_resources: resources_grouped_dict,
     output_path: str,
     resources_dir: str,
-    preserved_prefixes: Dict[str, bytes],
+    preserved_prefixes: Optional[Dict[str, bytes]],
 ):
+    if preserved_prefixes is None:
+        preserved_prefixes = {}
+
     for rel_path, resources in grouped_resources.items():
         xml_path = path.join(output_path, resources_dir, rel_path)
         preserved = preserved_prefixes.get(xml_path)
@@ -1060,12 +1063,27 @@ def write_overlay_raw_resources(
 
 
 def read_xml_resources_prefix(
-    grouped_resources: resources_grouped_dict,
+    overlay_resources: Set[Resource],
     output_path: str,
+    extra_paths: List[str],
 ):
+    rel_xml_paths: Set[str] = set()
+
+    for resource in overlay_resources:
+        if not isinstance(resource, XMLResource):
+            continue
+
+        rel_xml_paths.add(resource.rel_path)
+
+    rel_xml_paths.update(extra_paths)
+
     preserved_prefixes: Dict[str, bytes] = {}
-    for rel_xml_path in grouped_resources.keys():
+    for rel_xml_path in rel_xml_paths:
+        if rel_xml_path in preserved_prefixes:
+            continue
+
         existing_xml_path = path.join(output_path, rel_xml_path)
+
         preserved = xml_read_prefix_before_tag(existing_xml_path, 'resources')
         if not preserved:
             continue
