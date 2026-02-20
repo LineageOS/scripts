@@ -112,7 +112,6 @@ def check_rro_matches_aosp(
         _,
     ) = parse_rro(
         aosp_rro_android_bp_path,
-        rro_name,
         package,
         target_package,
     )
@@ -142,7 +141,6 @@ def check_rro_matches_aosp(
 
 def parse_rro(
     overlay_path: str,
-    rro_name: str,
     package: str,
     target_package: str,
     manifest_name: str = ANDROID_MANIFEST_NAME,
@@ -150,7 +148,7 @@ def parse_rro(
     all_packages_resources_map: Optional[
         Dict[
             str,
-            Dict[Tuple[str, ...], Tuple[str, str]],
+            Dict[Tuple[str, ...], str],
         ]
     ] = None,
     remove_shadowed_resources: bool = False,
@@ -242,13 +240,10 @@ def parse_rro(
             overlay_resources,
             package_resources_map,
             package,
-            rro_name,
         )
-        for resource, shadower_rro_name, shadower_package in sorted(
-            set(shadowed_resources)
-        ):
+        for resource, shadower_package in sorted(set(shadowed_resources)):
             color_print(
-                f'{package}: {resource} shadowed in {shadower_rro_name} ({shadower_package})',
+                f'{package}: {resource} shadowed in {shadower_package}',
                 color=Color.YELLOW,
             )
 
@@ -310,7 +305,7 @@ def process_rro(
     all_packages_resources_map: Optional[
         Dict[
             str,
-            Dict[Tuple[str, ...], Tuple[str, str]],
+            Dict[Tuple[str, ...], str],
         ]
     ] = None,
     maintain_copyrights: bool = False,
@@ -328,7 +323,6 @@ def process_rro(
         aapt_raw,
     ) = parse_rro(
         input_path,
-        rro_name,
         package,
         target_package,
         manifest_name,
