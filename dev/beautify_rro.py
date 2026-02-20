@@ -17,7 +17,7 @@ from bp.bp_utils import (
     partition_to_priority,
 )
 from rro.manifest import ANDROID_MANIFEST_NAME, parse_overlay_manifest
-from rro.process_rro import process_rro
+from rro.process_rro import parse_rro, write_rro
 from rro.target_package import append_extra_locations
 from utils.utils import Color, color_print, get_dirs_with_file
 
@@ -145,8 +145,20 @@ if __name__ == '__main__':
         )
 
         try:
-            process_rro(
+            overlay_resources = parse_rro(
                 dir_path,
+                package,
+                target_package,
+                manifest,
+                resources_dir,
+                all_packages_resources_map=all_packages_resources_map,
+                remove_shadowed_resources=True,
+                remove_missing_resources=True,
+                remove_resources=remove_resources,
+                keep_packages=keep_packages,
+            )
+            write_rro(
+                overlay_resources,
                 dir_path,
                 module_name,
                 package,
@@ -154,12 +166,7 @@ if __name__ == '__main__':
                 overlay_attrs,
                 manifest,
                 resources_dir,
-                all_packages_resources_map=all_packages_resources_map,
                 maintain_copyrights=args.maintain_copyrights,
-                remove_shadowed_resources=True,
-                remove_missing_resources=True,
-                remove_resources=remove_resources,
-                keep_packages=keep_packages,
                 partition=partition,
             )
         except ValueError as e:
