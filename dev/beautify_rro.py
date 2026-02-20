@@ -132,7 +132,7 @@ if __name__ == '__main__':
         )
     ]
 
-    all_packages_resources_map: Dict[str, Dict[Tuple[str, ...], Tuple[str, str]]] = {}
+    all_packages_resources_map: Dict[str, Dict[Tuple[str, ...], str]] = {}
     for dir_path, statement in sorted_rros:
         module_name = statement['name']
         manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
