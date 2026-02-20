@@ -18,8 +18,7 @@ from rro.manifest import (
 )
 from rro.resources import (
     RESOURCES_DIR,
-    RawResource,
-    XMLResource,
+    Resource,
     find_target_package_resources,
     overlay_resource_fixup_from_package,
     overlay_resource_remove_identical,
@@ -77,8 +76,7 @@ def check_rro_matches_aosp(
     rro_name: str,
     package: str,
     target_package: str,
-    resources: Set[XMLResource],
-    raw_resources: Set[RawResource],
+    resources: Set[Resource],
 ):
     aosp_rro_android_bp_path = find_overlay_android_bp_path_by_name(
         rro_name,
@@ -91,12 +89,7 @@ def check_rro_matches_aosp(
         manifest_path,
     )
 
-    (
-        aosp_resources,
-        aosp_raw_resources,
-        _,
-        _,
-    ) = parse_rro(
+    aosp_resources = parse_rro(
         aosp_rro_android_bp_path,
         package,
         target_package,
@@ -105,7 +98,7 @@ def check_rro_matches_aosp(
     if package != aosp_package or target_package != aosp_target_package:
         return
 
-    if resources == aosp_resources and raw_resources == aosp_raw_resources:
+    if resources == aosp_resources:
         raise ValueError(f'Overlay {rro_name} identical to AOSP')
 
     color_print(
@@ -254,29 +247,7 @@ def parse_rro(
             package_resources,
         )
 
-    resources, raw_resources = overlay_resource_split_by_type(
-        overlay_resources,
-    )
-
-    grouped_resources = overlay_resources_group_by_rel_path(resources)
-
-    overlay_raw_resource_needs_aapt_flag = raw_resources_need_aapt_raw(
-        raw_resources,
-    )
-    aapt_raw = overlay_raw_resource_needs_aapt_flag is not None
-    if overlay_raw_resource_needs_aapt_flag is not None:
-        rel_path = overlay_raw_resource_needs_aapt_flag.rel_path
-        color_print(
-            f'{package}: Raw resource {rel_path} needs raw aapt flag',
-            color=Color.YELLOW,
-        )
-
-    return (
-        resources,
-        raw_resources,
-        grouped_resources,
-        aapt_raw,
-    )
+    return overlay_resources
 
 
 def process_rro(
@@ -302,12 +273,7 @@ def process_rro(
     keep_packages: Optional[Set[str]] = None,
     partition: Optional[str] = None,
 ):
-    (
-        resources,
-        raw_resources,
-        grouped_resources,
-        aapt_raw,
-    ) = parse_rro(
+    overlay_resources = parse_rro(
         input_path,
         package,
         target_package,
@@ -325,8 +291,24 @@ def process_rro(
             rro_name,
             package,
             target_package,
-            resources,
-            raw_resources,
+            overlay_resources,
+        )
+
+    resources, raw_resources = overlay_resource_split_by_type(
+        overlay_resources,
+    )
+
+    grouped_resources = overlay_resources_group_by_rel_path(resources)
+
+    overlay_raw_resource_needs_aapt_flag = raw_resources_need_aapt_raw(
+        raw_resources,
+    )
+    aapt_raw = overlay_raw_resource_needs_aapt_flag is not None
+    if overlay_raw_resource_needs_aapt_flag is not None:
+        rel_path = overlay_raw_resource_needs_aapt_flag.rel_path
+        color_print(
+            f'{package}: Raw resource {rel_path} needs raw aapt flag',
+            color=Color.YELLOW,
         )
 
     # Preserve existing res/values/*.xml headers BEFORE we delete res/
