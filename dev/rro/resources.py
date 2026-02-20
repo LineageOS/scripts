@@ -858,21 +858,20 @@ def overlay_resource_fixup_from_package(
 
 def overlay_resource_remove_shadowed(
     overlay_resources: Set[Resource],
-    package_resources_map: Dict[Tuple[str, ...], Tuple[str, str]],
-    rro_name: str,
+    package_resources_map: Dict[Tuple[str, ...], str],
     package: str,
 ):
-    shadowed_resources: Set[Tuple[str, str, str]] = set()
+    shadowed_resources: Set[Tuple[str, str]] = set()
 
     def remove_shadowed_resource(resource: Resource):
         if resource.keys not in package_resources_map:
-            package_resources_map[resource.keys] = (rro_name, package)
+            package_resources_map[resource.keys] = package
             return
 
         shadowed_resources.add(
             (
                 resource.reference_name,
-                *package_resources_map[resource.keys],
+                package_resources_map[resource.keys],
             )
         )
         return True
