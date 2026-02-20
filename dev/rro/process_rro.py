@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import json
 import re
-import shutil
 from os import path
 from pathlib import Path
 from typing import Dict, NotRequired, Optional, Set, Tuple, TypedDict
@@ -289,9 +288,6 @@ def write_rro(
             f'{package}: Raw resource {rel_path} needs raw aapt flag',
             color=Color.YELLOW,
         )
-
-    res_dir = path.join(output_path, RESOURCES_DIR)
-    shutil.rmtree(res_dir, ignore_errors=True)
 
     write_grouped_resources(
         grouped_resources,
