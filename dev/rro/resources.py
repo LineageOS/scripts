@@ -152,6 +152,9 @@ class RawResource(Resource):
             )
         )
 
+    def __repr__(self):
+        return f'{self.rel_dir_path}/{self.file_name}'
+
 
 class XMLResource(Resource):
     def __init__(
