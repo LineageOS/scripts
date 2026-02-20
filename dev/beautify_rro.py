@@ -18,6 +18,7 @@ from bp.bp_utils import (
 )
 from rro.manifest import ANDROID_MANIFEST_NAME, parse_overlay_manifest
 from rro.process_rro import parse_rro, write_rro
+from rro.resources import read_xml_resources_prefix
 from rro.target_package import append_extra_locations
 from utils.utils import Color, color_print, get_dirs_with_file
 
@@ -157,6 +158,16 @@ if __name__ == '__main__':
                 remove_resources=remove_resources,
                 keep_packages=keep_packages,
             )
+
+            # Preserve existing res/values/*.xml headers BEFORE we delete res/
+            preserved_prefixes: Dict[str, bytes] = {}
+            if args.maintain_copyrights:
+                preserved_prefixes = read_xml_resources_prefix(
+                    overlay_resources,
+                    dir_path,
+                    extra_paths=[manifest],
+                )
+
             write_rro(
                 overlay_resources,
                 dir_path,
@@ -164,7 +175,7 @@ if __name__ == '__main__':
                 package,
                 target_package,
                 overlay_attrs,
-                maintain_copyrights=args.maintain_copyrights,
+                preserved_prefixes=preserved_prefixes,
                 partition=partition,
             )
         except ValueError as e:
