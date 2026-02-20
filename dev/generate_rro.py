@@ -16,9 +16,11 @@ from typing import List, Optional, cast
 from apk.apk_extract import extract_apks
 from rro.manifest import ANDROID_MANIFEST_NAME, parse_overlay_manifest
 from rro.process_rro import (
-    process_rro,
+    check_rro_matches_aosp,
+    parse_rro,
     simplify_rro_name,
     simplify_rro_package,
+    write_rro,
     write_rro_meta,
 )
 from rro.target_package import (
@@ -209,14 +211,24 @@ if __name__ == '__main__':
             os.makedirs(apk_output_path, exist_ok=True)
 
             try:
-                process_rro(
+                overlay_resources = parse_rro(
                     str(tmp_dir),
+                    package,
+                    target_package,
+                )
+                check_rro_matches_aosp(
+                    rro_name,
+                    package,
+                    target_package,
+                    overlay_resources,
+                )
+                write_rro(
+                    overlay_resources,
                     str(apk_output_path),
                     rro_name,
                     package,
                     target_package,
                     overlay_attrs,
-                    check_matches_aosp=True,
                     partition=partition,
                 )
                 write_rro_meta(
