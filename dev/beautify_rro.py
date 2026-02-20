@@ -96,7 +96,7 @@ if __name__ == '__main__':
 
                 statement = cast(RROModule, statement)
 
-                module_name = statement.get('name', '')
+                module_name = statement['name']
                 dir_name = path.basename(dir_path)
 
                 if ignore_packages and (
