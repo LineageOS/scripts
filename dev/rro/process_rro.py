@@ -264,8 +264,8 @@ def parse_rro(
     return overlay_resources
 
 
-def process_rro(
-    input_path: str,
+def write_rro(
+    overlay_resources: Set[Resource],
     output_path: str,
     rro_name: str,
     package: str,
@@ -273,41 +273,9 @@ def process_rro(
     overlay_attrs: Dict[str, str],
     manifest_name: str = ANDROID_MANIFEST_NAME,
     resources_dir: str = RESOURCES_DIR,
-    all_packages_resources_map: Optional[
-        Dict[
-            str,
-            Dict[Tuple[str, ...], str],
-        ]
-    ] = None,
     maintain_copyrights: bool = False,
-    remove_shadowed_resources: bool = False,
-    remove_missing_resources: bool = False,
-    check_matches_aosp: bool = False,
-    remove_resources: Optional[Set[Tuple[str | None, str]]] = None,
-    keep_packages: Optional[Set[str]] = None,
     partition: Optional[str] = None,
 ):
-    overlay_resources = parse_rro(
-        input_path,
-        package,
-        target_package,
-        manifest_name,
-        resources_dir,
-        all_packages_resources_map,
-        remove_shadowed_resources=remove_shadowed_resources,
-        remove_missing_resources=remove_missing_resources,
-        remove_resources=remove_resources,
-        keep_packages=keep_packages,
-    )
-
-    if check_matches_aosp:
-        check_rro_matches_aosp(
-            rro_name,
-            package,
-            target_package,
-            overlay_resources,
-        )
-
     resources, raw_resources = overlay_resource_split_by_type(
         overlay_resources,
     )
