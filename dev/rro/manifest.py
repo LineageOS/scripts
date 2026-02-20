@@ -3,11 +3,12 @@
 
 from __future__ import annotations
 
-from typing import Dict
+from pathlib import Path
+from typing import Dict, Optional
 
 from lxml import etree
 
-from utils.xml_utils import XML_COMMENT, xml_read_prefix_before_tag
+from utils.xml_utils import XML_COMMENT
 
 NAMESPACE_NAME = 'android'
 NAMESPACE = 'http://schemas.android.com/apk/res/android'
@@ -67,14 +68,15 @@ def parse_overlay_manifest(manifest_path: str):
 
 def write_manifest(
     output_path: str,
+    manifest_name: str,
     package: str,
     target_package: str,
     overlay_attrs: Dict[str, str],
-    maintain_copyrights: bool = False,
+    preserved_prefixes: Optional[Dict[str, bytes]],
 ):
     prefix = None
-    if maintain_copyrights:
-        prefix = xml_read_prefix_before_tag(output_path, 'manifest')
+    if preserved_prefixes:
+        prefix = preserved_prefixes.get(manifest_name)
 
     body_lines: list[str] = []
     body_lines.append(f'<manifest xmlns:{NAMESPACE_NAME}="{NAMESPACE}"\n')
@@ -92,7 +94,8 @@ def write_manifest(
     body_lines.append('</manifest>\n')
     body = ''.join(body_lines).encode('utf-8')
 
-    with open(output_path, 'wb') as o:
+    manifest_path = Path(output_path, manifest_name)
+    with open(manifest_path, 'wb') as o:
         if prefix is not None:
             o.write(prefix)
         else:
