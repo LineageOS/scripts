@@ -164,8 +164,6 @@ if __name__ == '__main__':
                 package,
                 target_package,
                 overlay_attrs,
-                manifest,
-                resources_dir,
                 maintain_copyrights=args.maintain_copyrights,
                 partition=partition,
             )
