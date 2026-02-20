@@ -222,9 +222,9 @@ class XMLResource(Resource):
         )
 
     def __repr__(self):
-        s = '\n'
-        s += f'{self.rel_dir_path}/{self.file_name}:\n'
-        s += f'{xml_element_canonical_str(self.element)}\n'
+        s = f'{self.rel_dir_path}/{self.file_name}:\n'
+        s += etree.tostring(self.element, encoding='unicode')
+        s += '\n'
         return s
 
     def __eq__(self, other: object):
