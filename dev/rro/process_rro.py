@@ -271,8 +271,6 @@ def write_rro(
     package: str,
     target_package: str,
     overlay_attrs: Dict[str, str],
-    manifest_name: str = ANDROID_MANIFEST_NAME,
-    resources_dir: str = RESOURCES_DIR,
     maintain_copyrights: bool = False,
     partition: Optional[str] = None,
 ):
@@ -301,23 +299,23 @@ def write_rro(
             output_path,
         )
 
-    res_dir = path.join(output_path, resources_dir)
+    res_dir = path.join(output_path, RESOURCES_DIR)
     shutil.rmtree(res_dir, ignore_errors=True)
 
     write_grouped_resources(
         grouped_resources,
         output_path,
-        resources_dir,
+        RESOURCES_DIR,
         preserved_prefixes,
     )
 
     write_overlay_raw_resources(
         raw_resources,
         output_path,
-        resources_dir,
+        RESOURCES_DIR,
     )
 
-    rro_manifest_path = path.join(output_path, manifest_name)
+    rro_manifest_path = path.join(output_path, ANDROID_MANIFEST_NAME)
     write_manifest(
         rro_manifest_path,
         package,
