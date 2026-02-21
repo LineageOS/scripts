@@ -403,3 +403,9 @@ def write_rro_meta(
     with open(rro_meta_path, 'w') as o:
         json.dump(meta, o, indent=4, sort_keys=True)
         o.write('\n')
+
+
+def read_rro_meta(overlay_path: Path) -> RROMeta:
+    rro_meta_path = Path(overlay_path, RRO_META_NAME)
+    with open(rro_meta_path, 'r') as i:
+        return json.load(i)
