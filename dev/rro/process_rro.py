@@ -320,7 +320,11 @@ RRO_PACKAGE_CHR_SIMPLIFY_REGEX = re.compile(
 )
 
 
-def simplify_rro_name(rro_name: str, device: Optional[str]):
+def simplify_rro_name(
+    rro_name: str,
+    device: Optional[str],
+    replaced_device: Optional[str] = None,
+):
     if device is None:
         suffix = ''
     else:
@@ -336,11 +340,20 @@ def simplify_rro_name(rro_name: str, device: Optional[str]):
         f'Overlay{suffix}',
         rro_name,
     )
+    if replaced_device is not None and device is not None:
+        rro_name = rro_name.replace(
+            replaced_device.capitalize(),
+            device.capitalize(),
+        )
 
     return rro_name, original_rro_name
 
 
-def simplify_rro_package(rro_package: str, device: Optional[str]):
+def simplify_rro_package(
+    rro_package: str,
+    device: Optional[str],
+    replaced_device: Optional[str] = None,
+):
     if device is None:
         suffix = ''
     else:
@@ -355,6 +368,11 @@ def simplify_rro_package(rro_package: str, device: Optional[str]):
         rf'.overlay{suffix}',
         rro_package,
     )
+    if replaced_device is not None and device is not None:
+        rro_package = rro_package.replace(
+            replaced_device,
+            device,
+        )
 
     return rro_package, original_rro_package
 
