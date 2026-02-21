@@ -150,8 +150,14 @@ def commonize_package_overlays(
     assert rro_meta is not None
     assert overlay_data is not None
 
+    reference_device = rro_meta.get('device')
+
     package = rro_meta['original_package']
-    package, original_package = simplify_rro_package(package, device)
+    package, original_package = simplify_rro_package(
+        package,
+        device,
+        reference_device,
+    )
 
     target_package = rro_meta['original_target_package']
     target_package, orignal_target_package = fixup_target_package(
@@ -159,7 +165,11 @@ def commonize_package_overlays(
     )
 
     rro_name = rro_meta['original_rro_name']
-    rro_name, original_rro_name = simplify_rro_name(rro_name, device)
+    rro_name, original_rro_name = simplify_rro_name(
+        rro_name,
+        device,
+        reference_device,
+    )
 
     overlay_output_path = Path(output_path, rro_name)
     overlay_output_path.mkdir(parents=True, exist_ok=True)
