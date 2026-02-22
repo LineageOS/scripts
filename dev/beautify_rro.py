@@ -190,36 +190,26 @@ def beautify_rro_main():
         Dict[Tuple[str, ...], str],
     ] = {}
     for overlay_data in overlays_data:
-        module_name = overlay_data.name
-        dir_path = overlay_data.path
-        package = overlay_data.package
-        target_package = overlay_data.target_package
-        manifest = overlay_data.manifest
-        resources_dir = overlay_data.resources_dir
-        overlay_attrs = overlay_data.attrs
-        target_package = overlay_data.target_package
-        partition = overlay_data.partition
-
         target_package_remove_resources = filter_resource_entries(
             remove_resources,
-            target_package,
+            overlay_data.target_package,
         )
         target_package_keep_resources = filter_resource_entries(
             keep_resources,
-            target_package,
+            overlay_data.target_package,
         )
 
-        overlay_attrs_key = tuple(sorted(overlay_attrs.items()))
+        overlay_attrs_key = tuple(sorted(overlay_data.attrs.items()))
         package_resources_map = all_packages_resources_map.setdefault(
-            (target_package, overlay_attrs_key), {}
+            (overlay_data.target_package, overlay_attrs_key), {}
         )
         try:
             overlay_resources = parse_rro(
-                dir_path,
-                package,
-                target_package,
-                manifest,
-                resources_dir,
+                overlay_data.path,
+                overlay_data.package,
+                overlay_data.target_package,
+                overlay_data.manifest,
+                overlay_data.resources_dir,
                 package_resources_map=package_resources_map,
                 remove_shadowed_resources=True,
                 remove_missing_resources=True,
@@ -233,25 +223,25 @@ def beautify_rro_main():
             if args.maintain_copyrights:
                 preserved_prefixes = read_xml_resources_prefix(
                     overlay_resources,
-                    dir_path,
-                    extra_paths=[manifest],
+                    overlay_data.path,
+                    extra_paths=[overlay_data.manifest],
                 )
 
-            shutil.rmtree(dir_path, ignore_errors=True)
-            Path(dir_path).mkdir(parents=True, exist_ok=True)
+            shutil.rmtree(overlay_data.path, ignore_errors=True)
+            Path(overlay_data.path).mkdir(parents=True, exist_ok=True)
 
             write_rro(
                 overlay_resources,
-                dir_path,
-                module_name,
-                package,
-                target_package,
-                overlay_attrs,
+                overlay_data.path,
+                overlay_data.name,
+                overlay_data.package,
+                overlay_data.target_package,
+                overlay_data.attrs,
                 preserved_prefixes=preserved_prefixes,
-                partition=partition,
+                partition=overlay_data.partition,
             )
         except ValueError as e:
-            shutil.rmtree(dir_path, ignore_errors=True)
+            shutil.rmtree(overlay_data.path, ignore_errors=True)
             color_print(e, color=Color.RED)
 
 
