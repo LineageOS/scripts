@@ -7,7 +7,7 @@ import json
 import re
 from os import path
 from pathlib import Path
-from typing import Dict, NotRequired, Optional, Set, Tuple, TypedDict
+from typing import Dict, FrozenSet, NotRequired, Optional, Set, Tuple, TypedDict
 
 from bp.bp_utils import ANDROID_BP_NAME, get_partition_specific
 from rro.manifest import (
@@ -130,18 +130,18 @@ def parse_rro(
     ] = None,
     remove_shadowed_resources: bool = False,
     remove_missing_resources: bool = False,
-    remove_resources: Optional[Set[Tuple[str | None, str]]] = None,
+    remove_resources: Optional[FrozenSet[str]] = None,
     keep_packages: Optional[Set[str]] = None,
-    keep_resources: Optional[Set[Tuple[str | None, str]]] = None,
+    keep_resources: Optional[FrozenSet[str]] = None,
 ):
     if all_packages_resources_map is None:
         all_packages_resources_map = {}
     if remove_resources is None:
-        remove_resources = set()
+        remove_resources = frozenset()
     if keep_packages is None:
         keep_packages = set()
     if keep_resources is None:
-        keep_resources = set()
+        keep_resources = frozenset()
 
     manifest_path = path.join(overlay_path, manifest_name)
 
@@ -180,7 +180,6 @@ def parse_rro(
     removed_resources = overlay_resources_remove(
         overlay_resources,
         remove_resources,
-        target_package,
     )
     for resource in resources_reference_name_sorted(removed_resources):
         color_print(
@@ -205,7 +204,6 @@ def parse_rro(
             package_resources,
             manifest_path,
             keep_resources,
-            target_package,
         )
         for resource in resources_reference_name_sorted(missing_resources):
             color_print(
