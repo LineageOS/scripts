@@ -136,20 +136,15 @@ def parse_rro(
     target_package: str,
     manifest_name: str = ANDROID_MANIFEST_NAME,
     resources_dir: str = RESOURCES_DIR,
-    all_packages_resources_map: Optional[
-        Dict[
-            str,
-            Dict[Tuple[str, ...], str],
-        ]
-    ] = None,
+    package_resources_map: Optional[Dict[Tuple[str, ...], str]] = None,
     remove_shadowed_resources: bool = False,
     remove_missing_resources: bool = False,
     remove_resources: Optional[FrozenSet[str]] = None,
     keep_packages: Optional[Set[str]] = None,
     keep_resources: Optional[FrozenSet[str]] = None,
 ):
-    if all_packages_resources_map is None:
-        all_packages_resources_map = {}
+    if package_resources_map is None:
+        package_resources_map = {}
     if remove_resources is None:
         remove_resources = frozenset()
     if keep_packages is None:
@@ -231,10 +226,6 @@ def parse_rro(
             )
 
     if remove_shadowed_resources:
-        package_resources_map = all_packages_resources_map.setdefault(
-            target_package,
-            {},
-        )
         shadowed_resources = overlay_resource_remove_shadowed(
             overlay_resources,
             package_resources_map,
