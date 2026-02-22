@@ -680,8 +680,8 @@ def overlay_resources_process(
     return removed_resources, added_resources
 
 
-def is_resource_removed(
-    remove_resources: Set[Tuple[str | None, str]],
+def is_resource_in_entries(
+    resources: Set[Tuple[str | None, str]],
     resource: Resource,
     target_package: str,
 ):
@@ -701,7 +701,7 @@ def is_resource_removed(
         assert False
 
     for entry in possible_entries:
-        if entry in remove_resources:
+        if entry in resources:
             return True
 
     return False
@@ -713,7 +713,7 @@ def overlay_resources_remove(
     target_package: str,
 ):
     def remove_resource(resource: Resource):
-        if is_resource_removed(
+        if is_resource_in_entries(
             remove_resources,
             resource,
             target_package,
