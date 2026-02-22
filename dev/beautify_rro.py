@@ -67,6 +67,14 @@ def beautify_rro():
         action='append',
     )
     parser.add_argument(
+        '-s',
+        '--keep-resource',
+        help='Keep a resource by name, '
+        'even if it is not found in the base package and not referenced',
+        default=[],
+        action='append',
+    )
+    parser.add_argument(
         '-k',
         '--keep-package',
         help='Keep overlays targeting a package even if it is not found',
@@ -78,8 +86,10 @@ def beautify_rro():
     ignore_packages = cast(str, args.ignore_packages)
     remove_resources_raw = cast(List[str], args.remove_resource)
     keep_packages = set(cast(List[str], args.keep_package))
+    keep_resources_raw = cast(List[str], args.keep_resource)
 
     remove_resources = parse_resource_entries(remove_resources_raw)
+    keep_resources = parse_resource_entries(keep_resources_raw)
 
     append_extra_locations(args.extra_package_locations)
 
@@ -166,6 +176,7 @@ def beautify_rro():
                 remove_missing_resources=True,
                 remove_resources=remove_resources,
                 keep_packages=keep_packages,
+                keep_resources=keep_resources,
             )
 
             # Preserve existing res/values/*.xml headers BEFORE we delete res/
