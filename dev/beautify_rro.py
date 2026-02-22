@@ -23,7 +23,8 @@ from rro.resources import read_xml_resources_prefix
 from rro.target_package import append_extra_locations
 from utils.utils import Color, color_print, get_dirs_with_file
 
-if __name__ == '__main__':
+
+def beautify_rro():
     parser = ArgumentParser(
         prog='beautify_rro',
         description='Beautify RROs',
@@ -185,3 +186,7 @@ if __name__ == '__main__':
         except ValueError as e:
             shutil.rmtree(dir_path, ignore_errors=True)
             color_print(e, color=Color.RED)
+
+
+if __name__ == '__main__':
+    beautify_rro()
