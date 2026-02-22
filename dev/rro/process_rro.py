@@ -146,6 +146,7 @@ def parse_rro(
     remove_missing_resources: bool = False,
     remove_resources: Optional[Set[Tuple[str | None, str]]] = None,
     keep_packages: Optional[Set[str]] = None,
+    keep_resources: Optional[Set[Tuple[str | None, str]]] = None,
 ):
     if all_packages_resources_map is None:
         all_packages_resources_map = {}
@@ -153,6 +154,8 @@ def parse_rro(
         remove_resources = set()
     if keep_packages is None:
         keep_packages = set()
+    if keep_resources is None:
+        keep_resources = set()
 
     manifest_path = path.join(overlay_path, manifest_name)
 
@@ -211,15 +214,22 @@ def parse_rro(
             )
 
     if package_resources is not None and remove_missing_resources:
-        missing_resources = overlay_resources_remove_missing(
+        missing_resources, kept_resources = overlay_resources_remove_missing(
             overlay_resources,
             package_resources,
             manifest_path,
+            keep_resources,
+            target_package,
         )
         for resource in resources_reference_name_sorted(missing_resources):
             color_print(
                 f'{package}: {resource} not found in {target_package}',
                 color=Color.RED,
+            )
+        for resource in resources_reference_name_sorted(kept_resources):
+            color_print(
+                f'{package}: {resource} kept',
+                color=Color.GREEN,
             )
 
     if remove_shadowed_resources:

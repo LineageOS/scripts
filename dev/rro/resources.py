@@ -772,11 +772,18 @@ def overlay_resources_remove_missing(
     overlay_resources: Set[Resource],
     package_resources: resources_dict,
     manifest_path: str,
+    keep_resources: Set[Tuple[str | None, str]],
+    target_package: str,
 ):
     manifest_tree = etree.parse(manifest_path)
     manifest_root = manifest_tree.getroot()
 
+    kept_resources: Set[Resource] = set()
     def remove_missing_resource(resource: Resource):
+        if is_resource_in_entries(keep_resources, resource, target_package):
+            kept_resources.add(resource)
+            return
+
         package_resource = get_package_resource(
             package_resources,
             resource,
@@ -812,7 +819,7 @@ def overlay_resources_remove_missing(
         remove_missing_resource,
     )
 
-    return removed_resources
+    return removed_resources, kept_resources
 
 
 def overlay_resource_fixup_from_package(
