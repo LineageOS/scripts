@@ -73,8 +73,19 @@ if __name__ == '__main__':
         description='Generate RROs',
     )
 
-    parser.add_argument('apk_path')
-    parser.add_argument('extra_package_locations', nargs='*')
+    parser.add_argument(
+        'apk_path',
+        nargs='?',
+    )
+    parser.add_argument(
+        'extra_package_locations',
+        nargs='*',
+    )
+    parser.add_argument(
+        '--dump',
+        help='Path to dump where to find overlays and frameworks automatically',
+        type=Path,
+    )
     parser.add_argument(
         '-o',
         '--overlays',
@@ -120,13 +131,32 @@ if __name__ == '__main__':
 
     overlays_path = Path(args.overlays)
 
-    apk_path_arg = Path(args.apk_path)
-    if apk_path_arg.is_dir():
-        apk_paths = list(get_apks(apk_path_arg))
-    elif apk_path_arg.is_file():
-        apk_paths = [apk_path_arg]
+    framework_path: Optional[Path] = None
+    if args.framework is not None:
+        framework_path = args.framework
+
+    apk_paths: List[Path] = []
+    if args.dump:
+        framework_path = Path(args.dump, 'system/framework/framework-res.apk')
+
+        product_overlay_path = Path(args.dump, 'product/overlay')
+        apk_paths += get_apks(product_overlay_path)
+
+        vendor_overlay_path = Path(args.dump, 'vendor/overlay')
+        apk_paths += get_apks(vendor_overlay_path)
+    elif args.apk_path is not None:
+        apk_path_arg = Path(args.apk_path)
+        if apk_path_arg.is_dir():
+            apk_paths += get_apks(apk_path_arg)
+        elif apk_path_arg.is_file():
+            apk_paths.append(apk_path_arg)
+        else:
+            raise ValueError(f'Invalid file: {apk_path_arg}')
     else:
-        raise ValueError(f'Invalid file: {apk_path_arg}')
+        raise ValueError('No input files provided')
+
+    if framework_path is None and not args.apktool:
+        raise ValueError('No framework-res.apk provided')
 
     with ExitStack() as stack:
         output_paths: List[Path] = []
@@ -153,10 +183,11 @@ if __name__ == '__main__':
             output_paths.append(output_path)
 
         if not args.apktool:
+            assert framework_path is not None
             extract_apks(
                 apk_paths,
                 tmp_output_paths,
-                args.framework,
+                framework_path,
             )
 
         for apk_path, tmp_dir, rro_name, original_rro_name, partition in zip(
