@@ -40,57 +40,19 @@ class OverlayData:
 
 def commonize_package_overlays(
     common_package: str,
-    overlay_paths: List[Path],
+    overlays_data: List[OverlayData],
     device: str,
     output_path: Path,
 ):
-    overlays_data: List[OverlayData] = []
-
     print(f'{common_package}: commonizing')
 
     common_overlay_resources = None
-    for overlay_path in overlay_paths:
-        print(f'{common_package}: parsing {overlay_path}')
-
-        android_bp_path = Path(overlay_path, ANDROID_BP_NAME)
-        statements = bp_parser.parse(android_bp_path.read_text())  # type: ignore
-        statements = cast(List[BpModule], statements)
-        assert len(statements) == 1
-
-        statement = statements[0]
-        module_name = statement['name']
-        module_partition = get_module_partition(statement)
-
-        manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
-        resources_dir = statement.get('resource_dirs', ['res'])[0]
-
-        manifest_path = Path(overlay_path, manifest)
-        package, target_package, overlay_attrs = parse_overlay_manifest(
-            str(manifest_path),
-        )
-
-        overlay_resources = parse_rro(
-            str(overlay_path),
-            package,
-            target_package,
-            manifest_name=manifest,
-            resources_dir=resources_dir,
-        )
-
+    common_overlays_data: List[OverlayData] = []
+    for overlay_data in overlays_data:
         if common_overlay_resources is None:
-            common_overlay_resources = overlay_resources.copy()
+            common_overlay_resources = overlay_data.resources.copy()
         else:
-            common_overlay_resources &= overlay_resources
-
-        overlay_data = OverlayData(
-            path=overlay_path,
-            name=module_name,
-            package=package,
-            target_package=target_package,
-            partition=module_partition,
-            attrs=overlay_attrs,
-            resources=overlay_resources,
-        )
+            common_overlay_resources &= overlay_data.resources
 
         color_print(
             f'{common_package}: {overlay_data.path} has '
@@ -98,7 +60,7 @@ def commonize_package_overlays(
             color=Color.GREEN,
         )
 
-        overlays_data.append(overlay_data)
+        common_overlays_data.append(overlay_data)
 
     assert common_overlay_resources is not None
 
@@ -117,7 +79,7 @@ def commonize_package_overlays(
 
     rro_meta = None
     overlay_data = None
-    for overlay_data in overlays_data:
+    for overlay_data in common_overlays_data:
         overlay_data.resources -= common_overlay_resources
 
         color_print(
@@ -234,7 +196,7 @@ def commonize_overlays():
             # overlay attributes
             Tuple[Tuple[str, str], ...],
         ],
-        List[Path],
+        List[OverlayData],
     ] = {}
     for overlays_path in args.overlays:
         assert isinstance(overlays_path, Path)
@@ -251,29 +213,51 @@ def commonize_overlays():
             assert len(statements) == 1
 
             statement = statements[0]
+            module_name = statement['name']
+            module_partition = get_module_partition(statement)
+
             manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
+            resources_dir = statement.get('resource_dirs', ['res'])[0]
 
             manifest_path = Path(overlay_path, manifest)
-            _, _, overlay_attrs = parse_overlay_manifest(
+            package, target_package, overlay_attrs = parse_overlay_manifest(
                 str(manifest_path),
             )
 
             rro_meta = read_rro_meta(overlay_path)
-            package = rro_meta['original_package']
+            original_package = rro_meta['original_package']
 
             overlay_attrs_key = tuple(sorted(overlay_attrs.items()))
-            overlay_paths = overlays_map.setdefault(
-                (package, overlay_attrs_key), []
+            overlays_data = overlays_map.setdefault(
+                (original_package, overlay_attrs_key), []
             )
-            overlay_paths.append(overlay_path)
 
-    for (package, _), overlay_paths in overlays_map.items():
-        if len(overlay_paths) == 1:
+            overlay_resources = parse_rro(
+                str(overlay_path),
+                package,
+                target_package,
+                manifest_name=manifest,
+                resources_dir=resources_dir,
+            )
+
+            overlay_data = OverlayData(
+                path=overlay_path,
+                name=module_name,
+                package=package,
+                target_package=target_package,
+                partition=module_partition,
+                attrs=overlay_attrs,
+                resources=overlay_resources,
+            )
+            overlays_data.append(overlay_data)
+
+    for (package, _), overlays_data in overlays_map.items():
+        if len(overlays_data) == 1:
             continue
 
         commonize_package_overlays(
             package,
-            overlay_paths,
+            overlays_data,
             args.device,
             args.output,
         )
