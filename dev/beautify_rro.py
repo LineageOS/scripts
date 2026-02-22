@@ -24,6 +24,22 @@ from rro.target_package import append_extra_locations
 from utils.utils import Color, color_print, get_dirs_with_file
 
 
+def parse_resource_entries(resource_entries_raw: List[str]):
+    resource_entries: Set[Tuple[None | str, str]] = set()
+
+    for resource_entry_raw in resource_entries_raw:
+        resource_entry_parts = resource_entry_raw.split(':')
+        assert len(resource_entry_parts) <= 2, resource_entry_raw
+
+        if len(resource_entry_parts) == 1:
+            resource_entries.add((None, resource_entry_raw))
+        elif len(resource_entry_parts) == 2:
+            target_package, resource_entry_raw = resource_entry_raw.split(':')
+            resource_entries.add((target_package, resource_entry_raw))
+
+    return resource_entries
+
+
 def beautify_rro():
     parser = ArgumentParser(
         prog='beautify_rro',
@@ -60,19 +76,10 @@ def beautify_rro():
 
     args = parser.parse_args()
     ignore_packages = cast(str, args.ignore_packages)
-    remove_resources_raw = set(cast(List[str], args.remove_resource))
+    remove_resources_raw = cast(List[str], args.remove_resource)
     keep_packages = set(cast(List[str], args.keep_package))
 
-    remove_resources: Set[Tuple[None | str, str]] = set()
-    for remove_resource in remove_resources_raw:
-        remove_resource_parts = remove_resource.split(':')
-        assert len(remove_resource_parts) <= 2, remove_resource
-
-        if len(remove_resource_parts) == 1:
-            remove_resources.add((None, remove_resource))
-        elif len(remove_resource_parts) == 2:
-            target_package, remove_resource = remove_resource.split(':')
-            remove_resources.add((target_package, remove_resource))
+    remove_resources = parse_resource_entries(remove_resources_raw)
 
     append_extra_locations(args.extra_package_locations)
 
