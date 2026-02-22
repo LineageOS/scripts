@@ -40,6 +40,17 @@ def parse_resource_entries(resource_entries_raw: List[str]):
     return resource_entries
 
 
+def filter_resource_entries(
+    resource_entries: Set[Tuple[None | str, str]],
+    target_package: str,
+):
+    return frozenset(
+        resource_name
+        for package, resource_name in resource_entries
+        if package is None or package == target_package
+    )
+
+
 def beautify_rro_main():
     parser = ArgumentParser(
         prog='beautify_rro',
@@ -164,6 +175,15 @@ def beautify_rro_main():
             manifest_path,
         )
 
+        target_package_remove_resources = filter_resource_entries(
+            remove_resources,
+            target_package,
+        )
+        target_package_keep_resources = filter_resource_entries(
+            keep_resources,
+            target_package,
+        )
+
         try:
             overlay_resources = parse_rro(
                 dir_path,
@@ -174,9 +194,9 @@ def beautify_rro_main():
                 all_packages_resources_map=all_packages_resources_map,
                 remove_shadowed_resources=True,
                 remove_missing_resources=True,
-                remove_resources=remove_resources,
+                remove_resources=target_package_remove_resources,
                 keep_packages=keep_packages,
-                keep_resources=keep_resources,
+                keep_resources=target_package_keep_resources,
             )
 
             # Preserve existing res/values/*.xml headers BEFORE we delete res/
