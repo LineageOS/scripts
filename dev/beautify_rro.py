@@ -125,8 +125,8 @@ def beautify_rro_main():
 
     overlays_data: List[OverlayData] = []
 
-    for dir_path in get_dirs_with_file(args.overlay_path, ANDROID_BP_NAME):
-        android_bp_path = path.join(dir_path, ANDROID_BP_NAME)
+    for overlay_dir in get_dirs_with_file(args.overlay_path, ANDROID_BP_NAME):
+        android_bp_path = path.join(overlay_dir, ANDROID_BP_NAME)
 
         with open(android_bp_path, 'r') as android_bp:
             for statement in bp_parser.parse(android_bp.read()):  # type: ignore
@@ -138,7 +138,7 @@ def beautify_rro_main():
                 statement = cast(RROModule, statement)
 
                 module_name = statement['name']
-                dir_name = path.basename(dir_path)
+                dir_name = path.basename(overlay_dir)
 
                 if ignore_packages and (
                     (module_name and module_name in ignore_packages)
@@ -149,7 +149,7 @@ def beautify_rro_main():
                 manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
                 resources_dir = statement.get('resource_dirs', ['res'])[0]
 
-                manifest_path = path.join(dir_path, manifest)
+                manifest_path = path.join(overlay_dir, manifest)
                 package, target_package, overlay_attrs = parse_overlay_manifest(
                     manifest_path,
                 )
@@ -158,7 +158,7 @@ def beautify_rro_main():
 
                 overlay_data = OverlayData(
                     name=module_name,
-                    path=dir_path,
+                    path=overlay_dir,
                     partition=module_partition,
                     manifest=manifest,
                     resources_dir=resources_dir,
