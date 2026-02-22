@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import (
     Callable,
     Dict,
+    FrozenSet,
     List,
     Literal,
     Optional,
@@ -681,43 +682,29 @@ def overlay_resources_process(
 
 
 def is_resource_in_entries(
-    resource_entries: Set[Tuple[str | None, str]],
+    resource_entries: FrozenSet[str],
     resource: Resource,
-    target_package: str,
 ):
     if isinstance(resource, RawResource):
-        possible_entries: List[Tuple[str | None, str]] = [
-            (None, resource.file_name),
-            (None, resource.rel_path),
-            (target_package, resource.file_name),
-            (target_package, resource.rel_path),
-        ]
+        if resource.file_name in resource_entries:
+            return True
+        if resource.rel_path in resource_entries:
+            return True
     elif isinstance(resource, XMLResource):
-        possible_entries: List[Tuple[str | None, str]] = [
-            (None, resource.name),
-            (target_package, resource.name),
-        ]
+        if resource.name in resource_entries:
+            return True
     else:
         assert False
-
-    for entry in possible_entries:
-        if entry in resource_entries:
-            return True
 
     return False
 
 
 def overlay_resources_remove(
     overlay_resources: Set[Resource],
-    remove_resources: Set[Tuple[str | None, str]],
-    target_package: str,
+    remove_resources: FrozenSet[str],
 ):
     def remove_resource(resource: Resource):
-        if is_resource_in_entries(
-            remove_resources,
-            resource,
-            target_package,
-        ):
+        if is_resource_in_entries(remove_resources, resource):
             return True
 
     removed_resources, _ = overlay_resources_process(
@@ -772,8 +759,7 @@ def overlay_resources_remove_missing(
     overlay_resources: Set[Resource],
     package_resources: resources_dict,
     manifest_path: str,
-    keep_resources: Set[Tuple[str | None, str]],
-    target_package: str,
+    keep_resources: FrozenSet[str],
 ):
     manifest_tree = etree.parse(manifest_path)
     manifest_root = manifest_tree.getroot()
@@ -781,7 +767,7 @@ def overlay_resources_remove_missing(
     kept_resources: Set[Resource] = set()
 
     def remove_missing_resource(resource: Resource):
-        if is_resource_in_entries(keep_resources, resource, target_package):
+        if is_resource_in_entries(keep_resources, resource):
             kept_resources.add(resource)
             return
 
