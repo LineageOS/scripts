@@ -6,6 +6,7 @@ from __future__ import annotations
 import functools
 import os
 from abc import ABC, abstractmethod
+from fnmatch import fnmatch
 from os import path
 from pathlib import Path
 from typing import (
@@ -681,6 +682,19 @@ def overlay_resources_process(
     return removed_resources, added_resources
 
 
+def is_resource_entry_wildcard(resource_entry: str):
+    return any(c in resource_entry for c in '*?[')
+
+
+@functools.cache
+def resource_entries_wildcards(resource_entries: FrozenSet[str]):
+    return (
+        resource_entry
+        for resource_entry in resource_entries
+        if is_resource_entry_wildcard(resource_entry)
+    )
+
+
 def is_resource_in_entries(
     resource_entries: FrozenSet[str],
     resource: Resource,
@@ -690,9 +704,20 @@ def is_resource_in_entries(
             return True
         if resource.rel_path in resource_entries:
             return True
+
+        for pattern in resource_entries_wildcards(resource_entries):
+            if fnmatch(resource.file_name, pattern):
+                return True
+            if fnmatch(resource.rel_path, pattern):
+                return True
+
     elif isinstance(resource, XMLResource):
         if resource.name in resource_entries:
             return True
+
+        for pattern in resource_entries_wildcards(resource_entries):
+            if fnmatch(resource.name, pattern):
+                return True
     else:
         assert False
 
