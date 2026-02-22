@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import shutil
 from argparse import ArgumentParser
+from dataclasses import dataclass
 from os import path
 from pathlib import Path
 from typing import Dict, List, Set, Tuple, cast
@@ -22,6 +23,14 @@ from rro.process_rro import parse_rro, write_rro
 from rro.resources import read_xml_resources_prefix
 from rro.target_package import append_extra_locations
 from utils.utils import Color, color_print, get_dirs_with_file
+
+
+@dataclass
+class OverlayData:
+    path: str
+    module_priority: int
+    partition_priority: int
+    statement: RROModule
 
 
 def parse_resource_entries(resource_entries_raw: List[str]):
@@ -111,7 +120,7 @@ def beautify_rro():
         )
     )
 
-    rros: List[Tuple[int, int, str, RROModule]] = []
+    overlays_data: List[OverlayData] = []
 
     for dir_path in get_dirs_with_file(args.overlay_path, ANDROID_BP_NAME):
         android_bp_path = path.join(dir_path, ANDROID_BP_NAME)
@@ -143,25 +152,23 @@ def beautify_rro():
                 partition_priority = partition_to_priority(module_partition)
                 module_priority = int(overlay_attrs.get('priority', 0))
 
-                rros.append(
-                    (
-                        partition_priority,
-                        module_priority,
-                        dir_path,
-                        statement,
-                    )
+                overlay_data = OverlayData(
+                    path=dir_path,
+                    module_priority=module_priority,
+                    partition_priority=partition_priority,
+                    statement=statement,
                 )
+                overlays_data.append(overlay_data)
 
     # Sort RROs in reverse order of priority so we can keep track of what
     # resources have been found, and remove duplicates
-    sorted_rros = [
-        (d, s)
-        for *_, d, s in sorted(
-            rros,
-            key=lambda v: v[:3],
-            reverse=True,
+    overlays_data.sort(
+        key=lambda o: (
+            o.partition_priority,
+            o.module_priority,
+            o.path,
         )
-    ]
+    )
 
     all_packages_resources_map: Dict[
         Tuple[
@@ -172,7 +179,9 @@ def beautify_rro():
         ],
         Dict[Tuple[str, ...], str],
     ] = {}
-    for dir_path, statement in sorted_rros:
+    for overlay_data in overlays_data:
+        dir_path = overlay_data.path
+        statement = overlay_data.statement
         module_name = statement['name']
         manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
         resources_dir = statement.get('resource_dirs', ['res'])[0]
