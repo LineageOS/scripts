@@ -231,12 +231,15 @@ def commonize_overlays():
     for overlays_path in args.overlays:
         assert isinstance(overlays_path, Path)
 
-        for dir_path in get_dirs_with_file(str(overlays_path), ANDROID_BP_NAME):
-            dir_path = Path(dir_path)
-            rro_meta = read_rro_meta(dir_path)
+        for overlay_dir in get_dirs_with_file(
+            str(overlays_path),
+            ANDROID_BP_NAME,
+        ):
+            overlay_path = Path(overlay_dir)
+            rro_meta = read_rro_meta(overlay_path)
             package = rro_meta['original_package']
             overlay_paths = overlays_map.setdefault(package, [])
-            overlay_paths.append(dir_path)
+            overlay_paths.append(overlay_path)
 
     for package, overlay_paths in overlays_map.items():
         if len(overlay_paths) == 1:
