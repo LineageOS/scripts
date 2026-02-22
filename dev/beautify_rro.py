@@ -184,6 +184,9 @@ def beautify_rro():
             target_package,
         )
 
+        package_resources_map = all_packages_resources_map.setdefault(
+            target_package, {}
+        )
         try:
             overlay_resources = parse_rro(
                 dir_path,
@@ -191,7 +194,7 @@ def beautify_rro():
                 target_package,
                 manifest,
                 resources_dir,
-                all_packages_resources_map=all_packages_resources_map,
+                package_resources_map=package_resources_map,
                 remove_shadowed_resources=True,
                 remove_missing_resources=True,
                 remove_resources=target_package_remove_resources,
