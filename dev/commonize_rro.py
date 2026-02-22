@@ -8,7 +8,7 @@ import shutil
 from argparse import ArgumentParser
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List, Set, cast
+from typing import Dict, List, Set, Tuple, cast
 
 from bp.bp_module import BpModule
 from bp.bp_parser import bp_parser  # type: ignore
@@ -227,7 +227,15 @@ def commonize_overlays():
     assert isinstance(args.output, Path)
     args.output.mkdir(parents=True, exist_ok=True)
 
-    overlays_map: Dict[str, List[Path]] = {}
+    overlays_map: Dict[
+        Tuple[
+            # package name
+            str,
+            # overlay attributes
+            Tuple[Tuple[str, str], ...],
+        ],
+        List[Path],
+    ] = {}
     for overlays_path in args.overlays:
         assert isinstance(overlays_path, Path)
 
@@ -236,12 +244,30 @@ def commonize_overlays():
             ANDROID_BP_NAME,
         ):
             overlay_path = Path(overlay_dir)
+
+            android_bp_path = Path(overlay_path, ANDROID_BP_NAME)
+            statements = bp_parser.parse(android_bp_path.read_text())  # type: ignore
+            statements = cast(List[BpModule], statements)
+            assert len(statements) == 1
+
+            statement = statements[0]
+            manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
+
+            manifest_path = Path(overlay_path, manifest)
+            _, _, overlay_attrs = parse_overlay_manifest(
+                str(manifest_path),
+            )
+
             rro_meta = read_rro_meta(overlay_path)
             package = rro_meta['original_package']
-            overlay_paths = overlays_map.setdefault(package, [])
+
+            overlay_attrs_key = tuple(sorted(overlay_attrs.items()))
+            overlay_paths = overlays_map.setdefault(
+                (package, overlay_attrs_key), []
+            )
             overlay_paths.append(overlay_path)
 
-    for package, overlay_paths in overlays_map.items():
+    for (package, _), overlay_paths in overlays_map.items():
         if len(overlay_paths) == 1:
             continue
 
