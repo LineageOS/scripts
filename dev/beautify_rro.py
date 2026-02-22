@@ -28,7 +28,7 @@ from utils.utils import Color, color_print, get_dirs_with_file
 @dataclass
 class OverlayData:
     name: str
-    path: str
+    path: Path
     partition: str
     manifest: str
     resources_dir: str
@@ -126,7 +126,8 @@ def beautify_rro_main():
     overlays_data: List[OverlayData] = []
 
     for overlay_dir in get_dirs_with_file(args.overlay_path, ANDROID_BP_NAME):
-        android_bp_path = Path(overlay_dir, ANDROID_BP_NAME)
+        overlay_path = Path(overlay_dir)
+        android_bp_path = Path(overlay_path, ANDROID_BP_NAME)
         android_bp_data = android_bp_path.read_text()
 
         for statement in bp_parser.parse(android_bp_data):  # type: ignore
@@ -158,7 +159,7 @@ def beautify_rro_main():
 
             overlay_data = OverlayData(
                 name=module_name,
-                path=overlay_dir,
+                path=overlay_path,
                 partition=module_partition,
                 manifest=manifest,
                 resources_dir=resources_dir,
@@ -205,7 +206,7 @@ def beautify_rro_main():
         )
         try:
             overlay_resources = parse_rro(
-                overlay_data.path,
+                str(overlay_data.path),
                 overlay_data.package,
                 overlay_data.target_package,
                 overlay_data.manifest,
@@ -223,7 +224,7 @@ def beautify_rro_main():
             if args.maintain_copyrights:
                 preserved_prefixes = read_xml_resources_prefix(
                     overlay_resources,
-                    overlay_data.path,
+                    str(overlay_data.path),
                     extra_paths=[overlay_data.manifest],
                 )
 
@@ -232,7 +233,7 @@ def beautify_rro_main():
 
             write_rro(
                 overlay_resources,
-                overlay_data.path,
+                str(overlay_data.path),
                 overlay_data.name,
                 overlay_data.package,
                 overlay_data.target_package,
