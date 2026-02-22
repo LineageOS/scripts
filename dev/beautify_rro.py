@@ -163,7 +163,15 @@ def beautify_rro():
         )
     ]
 
-    all_packages_resources_map: Dict[str, Dict[Tuple[str, ...], str]] = {}
+    all_packages_resources_map: Dict[
+        Tuple[
+            # package name
+            str,
+            # overlay attributes
+            Tuple[Tuple[str, str], ...],
+        ],
+        Dict[Tuple[str, ...], str],
+    ] = {}
     for dir_path, statement in sorted_rros:
         module_name = statement['name']
         manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
@@ -184,8 +192,9 @@ def beautify_rro():
             target_package,
         )
 
+        overlay_attrs_key = tuple(sorted(overlay_attrs.items()))
         package_resources_map = all_packages_resources_map.setdefault(
-            target_package, {}
+            (target_package, overlay_attrs_key), {}
         )
         try:
             overlay_resources = parse_rro(
