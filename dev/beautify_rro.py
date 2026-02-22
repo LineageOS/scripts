@@ -113,12 +113,9 @@ def beautify_rro():
 
     append_extra_locations(args.extra_package_locations)
 
-    ignore_packages = set(
-        filter(
-            lambda s: s,
-            map(lambda s: s.strip(), ignore_packages.split(',')),
-        )
-    )
+    ignore_packages = {
+        s.strip() for s in ignore_packages.split(',') if s.strip()
+    }
 
     overlays_data: List[OverlayData] = []
 
