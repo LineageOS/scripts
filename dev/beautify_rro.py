@@ -28,8 +28,8 @@ from utils.utils import Color, color_print, get_dirs_with_file
 @dataclass
 class OverlayData:
     path: str
+    partition: str
     module_priority: int
-    partition_priority: int
     statement: RROModule
 
 
@@ -146,13 +146,12 @@ def beautify_rro():
                     manifest_path,
                 )
                 module_partition = get_module_partition(statement)
-                partition_priority = partition_to_priority(module_partition)
                 module_priority = int(overlay_attrs.get('priority', 0))
 
                 overlay_data = OverlayData(
                     path=dir_path,
+                    partition=module_partition,
                     module_priority=module_priority,
-                    partition_priority=partition_priority,
                     statement=statement,
                 )
                 overlays_data.append(overlay_data)
@@ -161,7 +160,7 @@ def beautify_rro():
     # resources have been found, and remove duplicates
     overlays_data.sort(
         key=lambda o: (
-            o.partition_priority,
+            partition_to_priority(o.partition),
             o.module_priority,
             o.path,
         )
