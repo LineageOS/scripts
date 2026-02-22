@@ -27,10 +27,16 @@ from utils.utils import Color, color_print, get_dirs_with_file
 
 @dataclass
 class OverlayData:
+    name: str
     path: str
     partition: str
+    manifest: str
+    resources_dir: str
     module_priority: int
     statement: RROModule
+    package: str
+    target_package: str
+    attrs: Dict[str, str]
 
 
 def parse_resource_entries(resource_entries_raw: List[str]):
@@ -141,18 +147,26 @@ def beautify_rro_main():
                     continue
 
                 manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
+                resources_dir = statement.get('resource_dirs', ['res'])[0]
+
                 manifest_path = path.join(dir_path, manifest)
-                _, _, overlay_attrs = parse_overlay_manifest(
+                package, target_package, overlay_attrs = parse_overlay_manifest(
                     manifest_path,
                 )
                 module_partition = get_module_partition(statement)
                 module_priority = int(overlay_attrs.get('priority', 0))
 
                 overlay_data = OverlayData(
+                    name=module_name,
                     path=dir_path,
                     partition=module_partition,
+                    manifest=manifest,
+                    resources_dir=resources_dir,
                     module_priority=module_priority,
                     statement=statement,
+                    package=package,
+                    target_package=target_package,
+                    attrs=overlay_attrs,
                 )
                 overlays_data.append(overlay_data)
 
@@ -176,17 +190,15 @@ def beautify_rro_main():
         Dict[Tuple[str, ...], str],
     ] = {}
     for overlay_data in overlays_data:
+        module_name = overlay_data.name
         dir_path = overlay_data.path
-        statement = overlay_data.statement
-        module_name = statement['name']
-        manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
-        resources_dir = statement.get('resource_dirs', ['res'])[0]
-        partition = get_module_partition(statement)
-
-        manifest_path = path.join(dir_path, manifest)
-        package, target_package, overlay_attrs = parse_overlay_manifest(
-            manifest_path,
-        )
+        package = overlay_data.package
+        target_package = overlay_data.target_package
+        manifest = overlay_data.manifest
+        resources_dir = overlay_data.resources_dir
+        overlay_attrs = overlay_data.attrs
+        target_package = overlay_data.target_package
+        partition = overlay_data.partition
 
         target_package_remove_resources = filter_resource_entries(
             remove_resources,
