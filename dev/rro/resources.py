@@ -357,12 +357,6 @@ def parse_xml_resources(
             comments.append(node)
             continue
 
-        if 'type' in node.attrib:
-            tag = node.attrib['type']
-            assert isinstance(tag, str)
-            node.tag = tag
-            del node.attrib['type']
-
         tag = node.tag
         if (
             tag == 'java-symbol'
