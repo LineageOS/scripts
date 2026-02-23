@@ -13,7 +13,7 @@ from pathlib import Path
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         sys.exit(
-            f"usage: {sys.argv[0]} [url|https://unicode.org/Public/emoji/15.0/emoji-test.txt]"
+            f"usage: {sys.argv[0]} [url|https://unicode.org/Public/17.0.0/emoji/emoji-test.txt]"
         )
 
     url = sys.argv[1]
