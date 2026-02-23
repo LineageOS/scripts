@@ -183,6 +183,9 @@ def resource_to_xml_str(
         ):
             type_name = 'item'
             type_str = ' type="dimen"'
+            if resource.data_type == Res_value.TYPE_FLOAT:
+                type_str += ' format="float"'
+
         if type_name == 'raw':
             type_name = 'item'
             type_str = ' type="raw"'
