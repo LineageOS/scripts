@@ -187,12 +187,23 @@ class XMLResource(Resource):
         index: Optional[int] = None,
         file_name: Optional[str] = None,
         tag: Optional[str] = None,
+        attrib: Optional[Dict[str | bytes, str | bytes]] = None,
         comments: Optional[List[Comment]] = None,
     ):
         element = None
-        if tag is not None:
+        if tag is not None or attrib is not None:
             element = etree.fromstring(etree.tostring(self.element))
+
+        if tag is not None:
+            assert element is not None
             element.tag = tag
+
+        if attrib is not None:
+            assert element is not None
+            element.attrib.clear()
+
+            for k, v in attrib.items():
+                element.attrib[k] = v
 
         return XMLResource(
             index if index is not None else self.index,
@@ -813,11 +824,33 @@ def overlay_resources_fixup_tag(
 
         assert isinstance(package_resource, XMLResource)
 
-        if resource.tag == package_resource.tag:
+        attrib = dict(resource.element.attrib)
+
+        def assign_attrib(name: str):
+            package_attrib = package_resource.element.attrib.get(name)
+            if resource.element.attrib.get(name) == package_attrib:
+                return False
+
+            if package_attrib is None:
+                attrib.pop(name)
+            else:
+                attrib[name] = package_attrib
+
+            return True
+
+        tag = None
+        if resource.tag != package_resource.tag:
+            tag = package_resource.tag
+
+        type_set = assign_attrib('type')
+        format_set = assign_attrib('format')
+
+        if tag is None and not type_set and not format_set:
             return
 
         new_resource = resource.copy(
-            tag=package_resource.tag,
+            tag=tag,
+            attrib=attrib,
         )
 
         wrong_tag_resources.add(
