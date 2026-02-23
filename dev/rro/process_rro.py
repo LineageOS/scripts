@@ -426,3 +426,16 @@ def read_rro_meta(overlay_path: Path) -> RROMeta:
     rro_meta_path = Path(overlay_path, RRO_META_NAME)
     with open(rro_meta_path, 'r') as i:
         return json.load(i)
+
+
+def overlay_attrs_key(
+    overlay_attrs: Dict[str, str],
+    with_priority: bool = False,
+):
+    return tuple(
+        sorted(
+            (k, v)
+            for k, v in overlay_attrs.items()
+            if with_priority or k != 'priority'
+        )
+    )

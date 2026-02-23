@@ -19,7 +19,7 @@ from bp.bp_utils import (
     partition_to_priority,
 )
 from rro.manifest import ANDROID_MANIFEST_NAME, parse_overlay_manifest
-from rro.process_rro import parse_rro, write_rro
+from rro.process_rro import overlay_attrs_key, parse_rro, write_rro
 from rro.resources import read_xml_resources_prefix
 from rro.target_package import append_extra_locations
 from utils.utils import Color, color_print, get_dirs_with_file
@@ -200,9 +200,12 @@ def beautify_rro():
             overlay_data.target_package,
         )
 
-        overlay_attrs_key = tuple(sorted(overlay_data.attrs.items()))
         package_resources_map = all_packages_resources_map.setdefault(
-            (overlay_data.target_package, overlay_attrs_key), {}
+            (
+                overlay_data.target_package,
+                overlay_attrs_key(overlay_data.attrs),
+            ),
+            {},
         )
         try:
             overlay_resources = parse_rro(
