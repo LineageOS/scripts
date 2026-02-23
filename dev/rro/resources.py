@@ -614,6 +614,65 @@ def get_referencing_resource(
     return None
 
 
+def get_resource_element_references(
+    element: Element,
+    referenced_resources: Optional[Set[str]] = None,
+):
+    if referenced_resources is None:
+        referenced_resources = set()
+
+    if element.text is not None:
+        element_text = element.text.strip()
+        if element_text.startswith('@'):
+            referenced_resources.add(element_text)
+
+    if element.tail is not None:
+        element_tail = element.tail.strip()
+        if element_tail.startswith('@'):
+            referenced_resources.add(element_tail)
+
+    for attrib in element.attrib.values():
+        assert isinstance(attrib, str)
+        if attrib.startswith('@'):
+            referenced_resources.add(attrib)
+
+    for child_element in element:
+        get_resource_element_references(child_element, referenced_resources)
+
+    return referenced_resources
+
+
+def remove_resources_referenced(
+    resources: Set[Resource],
+    removed_resources: Set[Resource],
+):
+    graph: Dict[str, Set[str]] = {}
+    for r in resources | removed_resources:
+        name = r.reference_name
+
+        refs: Set[str] = set()
+        if isinstance(r, XMLResource):
+            refs = get_resource_element_references(r.element)
+
+        graph.setdefault(name, set()).update(refs)
+
+        for ref in refs:
+            graph.setdefault(ref, set()).add(name)
+
+    removed_names = {r.reference_name for r in removed_resources}
+    affected = set(removed_names)
+    queue = list(removed_names)
+
+    while queue:
+        name = queue.pop()
+        for neighbor in graph.get(name, ()):
+            if neighbor not in affected:
+                affected.add(neighbor)
+                queue.append(neighbor)
+
+    return {r for r in resources if r.reference_name not in affected}
+
+
 def get_unqualified_package_resource(
     package_resources: resources_dict,
     resource: Resource,
