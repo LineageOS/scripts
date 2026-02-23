@@ -182,9 +182,10 @@ def resource_to_xml_str(
             and resource.data_type != Res_value.TYPE_DIMENSION
         ):
             type_name = 'item'
-            type_str = ' type="dimen"'
+            type_str = ''
             if resource.data_type == Res_value.TYPE_FLOAT:
                 type_str += ' format="float"'
+            type_str += ' type="dimen"'
 
         if type_name == 'raw':
             type_name = 'item'
@@ -224,8 +225,8 @@ def resource_to_xml_str(
     resource_str += indent
     resource_str += (
         f'<{type_name}'
-        f'{type_str}'
         f' name="{resource.key_name}"'
+        f'{type_str}'
         f'{parent_str}'
         f'{end_inline_str}'
         f'>'
