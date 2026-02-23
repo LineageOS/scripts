@@ -22,7 +22,7 @@ from rro.process_rro import (
     write_rro,
     write_rro_meta,
 )
-from rro.resources import Resource
+from rro.resources import Resource, remove_resources_referenced
 from rro.target_package import fixup_target_package
 from utils.utils import Color, color_print, get_dirs_with_file
 
@@ -70,6 +70,12 @@ def commonize_package_overlays(
             color=Color.YELLOW,
         )
         return
+
+    for overlay_data in overlays_data:
+        common_overlay_resources &= remove_resources_referenced(
+            common_overlay_resources,
+            overlay_data.resources - common_overlay_resources,
+        )
 
     color_print(
         f'{common_package}: has '
