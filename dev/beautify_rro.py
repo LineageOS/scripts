@@ -66,6 +66,80 @@ def filter_resource_entries(
     )
 
 
+def beautify_overlay(
+    overlay_data: OverlayData,
+    all_packages_resources_map: Dict[
+        Tuple[
+            # target package name
+            str,
+            # overlay attributes
+            Tuple[Tuple[str, str], ...],
+        ],
+        Dict[Tuple[str, ...], str],
+    ],
+    remove_resources: Set[Tuple[None | str, str]],
+    keep_packages: Set[str],
+    keep_resources: Set[Tuple[None | str, str]],
+    maintain_copyrights: bool,
+):
+    target_package_remove_resources = filter_resource_entries(
+        remove_resources,
+        overlay_data.target_package,
+    )
+    target_package_keep_resources = filter_resource_entries(
+        keep_resources,
+        overlay_data.target_package,
+    )
+
+    package_resources_map = all_packages_resources_map.setdefault(
+        (
+            overlay_data.target_package,
+            overlay_attrs_key(overlay_data.attrs),
+        ),
+        {},
+    )
+    try:
+        overlay_resources = parse_rro(
+            str(overlay_data.path),
+            overlay_data.package,
+            overlay_data.target_package,
+            overlay_data.manifest,
+            overlay_data.resources_dir,
+            package_resources_map=package_resources_map,
+            remove_shadowed_resources=True,
+            remove_missing_resources=True,
+            remove_resources=target_package_remove_resources,
+            keep_packages=keep_packages,
+            keep_resources=target_package_keep_resources,
+        )
+
+        # Preserve existing res/values/*.xml headers BEFORE we delete res/
+        preserved_prefixes: Dict[str, bytes] = {}
+        if maintain_copyrights:
+            preserved_prefixes = read_xml_resources_prefix(
+                overlay_resources,
+                str(overlay_data.path),
+                extra_paths=[overlay_data.manifest],
+            )
+
+        shutil.rmtree(overlay_data.path, ignore_errors=True)
+        Path(overlay_data.path).mkdir(parents=True, exist_ok=True)
+
+        write_rro(
+            overlay_resources,
+            str(overlay_data.path),
+            overlay_data.name,
+            overlay_data.package,
+            overlay_data.target_package,
+            overlay_data.attrs,
+            preserved_prefixes=preserved_prefixes,
+            partition=overlay_data.partition,
+        )
+    except ValueError as e:
+        shutil.rmtree(overlay_data.path, ignore_errors=True)
+        color_print(e, color=Color.RED)
+
+
 def beautify_rro_main():
     parser = ArgumentParser(
         prog='beautify_rro',
@@ -191,62 +265,14 @@ def beautify_rro_main():
         Dict[Tuple[str, ...], str],
     ] = {}
     for overlay_data in overlays_data:
-        target_package_remove_resources = filter_resource_entries(
-            remove_resources,
-            overlay_data.target_package,
+        beautify_overlay(
+            overlay_data,
+            all_packages_resources_map=all_packages_resources_map,
+            remove_resources=remove_resources,
+            keep_resources=keep_resources,
+            keep_packages=keep_packages,
+            maintain_copyrights=args.maintain_copyrights,
         )
-        target_package_keep_resources = filter_resource_entries(
-            keep_resources,
-            overlay_data.target_package,
-        )
-
-        package_resources_map = all_packages_resources_map.setdefault(
-            (
-                overlay_data.target_package,
-                overlay_attrs_key(overlay_data.attrs),
-            ),
-            {},
-        )
-        try:
-            overlay_resources = parse_rro(
-                str(overlay_data.path),
-                overlay_data.package,
-                overlay_data.target_package,
-                overlay_data.manifest,
-                overlay_data.resources_dir,
-                package_resources_map=package_resources_map,
-                remove_shadowed_resources=True,
-                remove_missing_resources=True,
-                remove_resources=target_package_remove_resources,
-                keep_packages=keep_packages,
-                keep_resources=target_package_keep_resources,
-            )
-
-            # Preserve existing res/values/*.xml headers BEFORE we delete res/
-            preserved_prefixes: Dict[str, bytes] = {}
-            if args.maintain_copyrights:
-                preserved_prefixes = read_xml_resources_prefix(
-                    overlay_resources,
-                    str(overlay_data.path),
-                    extra_paths=[overlay_data.manifest],
-                )
-
-            shutil.rmtree(overlay_data.path, ignore_errors=True)
-            Path(overlay_data.path).mkdir(parents=True, exist_ok=True)
-
-            write_rro(
-                overlay_resources,
-                str(overlay_data.path),
-                overlay_data.name,
-                overlay_data.package,
-                overlay_data.target_package,
-                overlay_data.attrs,
-                preserved_prefixes=preserved_prefixes,
-                partition=overlay_data.partition,
-            )
-        except ValueError as e:
-            shutil.rmtree(overlay_data.path, ignore_errors=True)
-            color_print(e, color=Color.RED)
 
 
 if __name__ == '__main__':
