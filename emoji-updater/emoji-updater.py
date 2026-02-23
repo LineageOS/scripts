@@ -11,12 +11,13 @@ import sys
 from pathlib import Path
 
 if __name__ == "__main__":
+    DEFAULT_URL = "https://unicode.org/Public/17.0.0/emoji/emoji-test.txt"
     if len(sys.argv) < 2:
-        sys.exit(
-            f"usage: {sys.argv[0]} [url|https://unicode.org/Public/emoji/15.0/emoji-test.txt]"
-        )
-
-    url = sys.argv[1]
+        print(f"usage: {sys.argv[0]} [url|{DEFAULT_URL}]")
+        print("No URL provided. Using default Unicode emoji-test.txt.")
+        url = DEFAULT_URL
+    else:
+        url = sys.argv[1]
     req = requests.get(url=url)
 
     group_name = ""
