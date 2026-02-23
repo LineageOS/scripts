@@ -15,6 +15,7 @@ from bp.bp_parser import bp_parser  # type: ignore
 from bp.bp_utils import ANDROID_BP_NAME, get_module_partition
 from rro.manifest import ANDROID_MANIFEST_NAME, parse_overlay_manifest
 from rro.process_rro import (
+    overlay_attrs_key,
     parse_rro,
     read_rro_meta,
     simplify_rro_name,
@@ -233,9 +234,15 @@ def commonize_overlays():
             rro_meta = read_rro_meta(overlay_path)
             original_package = rro_meta['original_package']
 
-            overlay_attrs_key = tuple(sorted(overlay_attrs.items()))
             overlays_data = overlays_map.setdefault(
-                (original_package, overlay_attrs_key), []
+                (
+                    original_package,
+                    overlay_attrs_key(
+                        overlay_attrs,
+                        with_priority=True,
+                    ),
+                ),
+                [],
             )
 
             overlay_resources = parse_rro(
