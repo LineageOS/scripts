@@ -220,9 +220,11 @@ def commonize_overlays():
             module_partition = get_module_partition(statement)
 
             manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
-            resources_dir = statement.get('resource_dirs', ['res'])[0]
-
             manifest_path = Path(overlay_path, manifest)
+
+            resources_dir = statement.get('resource_dirs', ['res'])[0]
+            resources_path = Path(overlay_path, resources_dir)
+
             package, target_package, overlay_attrs = parse_overlay_manifest(
                 str(manifest_path),
             )
@@ -242,11 +244,10 @@ def commonize_overlays():
             )
 
             overlay_resources = parse_rro(
-                str(overlay_path),
                 package,
                 target_package,
                 manifest_path=str(manifest_path),
-                resources_dir=resources_dir,
+                resources_path=str(resources_path),
             )
 
             overlay_data = OverlayData(
