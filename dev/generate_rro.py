@@ -22,7 +22,7 @@ from rro.process_rro import (
     write_rro,
     write_rro_meta,
 )
-from rro.resources import RESOURCES_DIR
+from rro.resources import RESOURCES_DIR, parse_overlay_resources
 from rro.target_package import (
     append_extra_locations,
     fixup_target_package,
@@ -241,11 +241,12 @@ def generate_rro_main():
             apk_output_path.mkdir(parents=True, exist_ok=True)
 
             try:
-                overlay_resources = parse_rro(
+                overlay_resources = parse_overlay_resources(str(resources_path))
+                parse_rro(
                     package,
                     target_package,
                     manifest_path=str(manifest_path),
-                    resources_path=str(resources_path),
+                    resources=overlay_resources,
                 )
                 check_rro_matches_aosp(
                     rro_name,
