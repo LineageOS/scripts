@@ -19,8 +19,9 @@ from bp.bp_utils import (
 )
 from rro.manifest import ANDROID_MANIFEST_NAME, parse_overlay_manifest
 from rro.process_rro import (
+    fixup_rro_resources,
     get_rro_target_package_resources,
-    parse_rro,
+    remove_rro_resources,
     write_rro,
 )
 from rro.resources import (
@@ -99,15 +100,24 @@ def beautify_overlay(
             target_package=overlay_data.target_package,
             resources=overlay_resources,
         )
-        parse_rro(
-            overlay_data.package,
-            overlay_data.target_package,
+        if (
+            package_resources is None
+            and overlay_data.target_package not in keep_packages
+        ):
+            raise ValueError(f'{overlay_data.package}: No resources in overlay')
+
+        fixup_rro_resources(
+            package=overlay_data.package,
+            resources=overlay_resources,
+            package_resources=package_resources,
+        )
+        remove_rro_resources(
+            package=overlay_data.package,
+            target_package=overlay_data.target_package,
             manifest_path=str(overlay_data.manifest_path),
             resources=overlay_resources,
             package_resources=package_resources,
-            remove_missing_resources=True,
             remove_resources=target_package_remove_resources,
-            keep_packages=keep_packages,
             keep_resources=target_package_keep_resources,
         )
 
