@@ -212,14 +212,9 @@ def remove_rro_resources(
     manifest_path: str,
     resources: Set[Resource],
     package_resources: Optional[Dict[Tuple[str, ...], Resource]],
-    remove_resources: Optional[FrozenSet[str]] = None,
-    keep_resources: Optional[FrozenSet[str]] = None,
+    remove_resources: FrozenSet[str],
+    keep_resources: FrozenSet[str],
 ):
-    if remove_resources is None:
-        remove_resources = frozenset()
-    if keep_resources is None:
-        keep_resources = frozenset()
-
     removed_resources = overlay_resources_remove(
         resources,
         remove_resources,
