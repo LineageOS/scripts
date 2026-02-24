@@ -11,7 +11,7 @@ from os import path
 from pathlib import Path
 from typing import Dict, List, Set, Tuple, cast
 
-from bp.bp_module import RROModule, parse_bp_rro_module
+from bp.bp_module import parse_bp_rro_module
 from bp.bp_utils import (
     ANDROID_BP_NAME,
     get_module_partition,
@@ -42,7 +42,6 @@ class OverlayData:
     manifest_path: Path
     resources_path: Path
     module_priority: int
-    statement: RROModule
     package: str
     target_package: str
     attrs: Dict[str, str]
@@ -244,7 +243,6 @@ def beautify_rro_main():
             manifest_path=manifest_path,
             resources_path=resources_path,
             module_priority=module_priority,
-            statement=statement,
             package=package,
             target_package=target_package,
             attrs=overlay_attrs,
