@@ -129,12 +129,10 @@ def check_rro_matches_aosp(
         target_package=aosp_target_package,
         resources=aosp_resources,
     )
-    parse_rro(
-        package,
-        target_package,
-        str(manifest_path),
-        aosp_resources,
-        aosp_package_resources,
+    fixup_rro_resources(
+        package=aosp_package,
+        resources=aosp_resources,
+        package_resources=aosp_package_resources,
     )
 
     if resources == aosp_resources:
@@ -157,50 +155,43 @@ def check_rro_matches_aosp(
     print()
 
 
-def parse_rro(
+def fixup_rro_resources(
+    package: str,
+    resources: Set[Resource],
+    package_resources: Optional[Dict[Tuple[str, ...], Resource]],
+):
+    if package_resources is None:
+        return
+
+    wrong_tag_resources = overlay_resources_fixup_tag(
+        resources,
+        package_resources,
+    )
+    for old_resource, new_resource in sorted(wrong_tag_resources):
+        color_print(
+            f'{package}: {old_resource} -> {new_resource}',
+            color=Color.YELLOW,
+        )
+
+    overlay_resource_fixup_from_package(
+        resources,
+        package_resources,
+    )
+
+
+def remove_rro_resources(
     package: str,
     target_package: str,
     manifest_path: str,
     resources: Set[Resource],
     package_resources: Optional[Dict[Tuple[str, ...], Resource]],
-    remove_missing_resources: bool = False,
     remove_resources: Optional[FrozenSet[str]] = None,
-    keep_packages: Optional[Set[str]] = None,
     keep_resources: Optional[FrozenSet[str]] = None,
 ):
     if remove_resources is None:
         remove_resources = frozenset()
-    if keep_packages is None:
-        keep_packages = set()
     if keep_resources is None:
         keep_resources = frozenset()
-
-    if not resources:
-        raise ValueError(f'{package}: No resources in overlay')
-
-    if (
-        remove_missing_resources
-        and package_resources is None
-        and target_package not in keep_packages
-    ):
-        raise ValueError(f'Unknown package name: {target_package}')
-
-    if package_resources is not None:
-        wrong_tag_resources = overlay_resources_fixup_tag(
-            resources,
-            package_resources,
-        )
-        for old_resource, new_resource in sorted(wrong_tag_resources):
-            color_print(
-                f'{package}: {old_resource} -> {new_resource}',
-                color=Color.YELLOW,
-            )
-
-    if package_resources is not None:
-        overlay_resource_fixup_from_package(
-            resources,
-            package_resources,
-        )
 
     removed_resources = overlay_resources_remove(
         resources,
@@ -212,7 +203,7 @@ def parse_rro(
             color=Color.YELLOW,
         )
 
-    if package_resources is not None and remove_missing_resources:
+    if package_resources is not None:
         missing_resources, kept_resources = overlay_resources_remove_missing(
             resources,
             package_resources,
