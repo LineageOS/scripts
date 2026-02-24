@@ -83,15 +83,17 @@ def check_rro_matches_aosp(
         return
 
     manifest_path = Path(aosp_rro_android_bp_dir, ANDROID_MANIFEST_NAME)
+    resources_path = Path(aosp_rro_android_bp_dir, RESOURCES_DIR)
+
     aosp_package, aosp_target_package, _ = parse_overlay_manifest(
         str(manifest_path),
     )
 
     aosp_resources = parse_rro(
-        aosp_rro_android_bp_dir,
         package,
         target_package,
         str(manifest_path),
+        str(resources_path),
     )
 
     if package != aosp_package or target_package != aosp_target_package:
@@ -118,11 +120,10 @@ def check_rro_matches_aosp(
 
 
 def parse_rro(
-    overlay_path: str,
     package: str,
     target_package: str,
     manifest_path: str,
-    resources_dir: str = RESOURCES_DIR,
+    resources_path: str,
     package_resources_map: Optional[Dict[Tuple[str, ...], str]] = None,
     remove_shadowed_resources: bool = False,
     remove_identical_resources: bool = False,
@@ -141,8 +142,7 @@ def parse_rro(
         keep_resources = frozenset()
 
     overlay_resources = parse_overlay_resources(
-        overlay_path,
-        resources_dir,
+        resources_path,
     )
     if not overlay_resources:
         raise ValueError(f'{package}: No resources in overlay')
