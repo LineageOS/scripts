@@ -63,10 +63,10 @@ class Resource(ABC):
     def __init__(
         self,
         rel_dir_path: str,
-        file_name: str,
+        name: str,
     ):
         self.rel_dir_path = rel_dir_path
-        self.file_name = file_name
+        self.name = name
 
     @abstractmethod
     def copy(self, rel_dir_path: Optional[str] = None) -> Resource: ...
@@ -100,10 +100,10 @@ class RawResource(Resource):
     def __init__(
         self,
         rel_dir_path: str,
-        file_name: str,
+        name: str,
         data: bytes,
     ):
-        super().__init__(rel_dir_path, file_name)
+        super().__init__(rel_dir_path, name)
 
         self.data = data
 
@@ -113,26 +113,26 @@ class RawResource(Resource):
     ):
         return RawResource(
             rel_dir_path if rel_dir_path is not None else self.rel_dir_path,
-            self.file_name,
+            self.name,
             self.data,
         )
 
     @property
     def reference_name(self):
         resource_type = strip_rel_dir_qualifiers(self.rel_dir_path)
-        resource_name = path.splitext(self.file_name)[0]
+        resource_name = path.splitext(self.name)[0]
 
         return f'@{resource_type}/{resource_name}'
 
     @property
     def rel_path(self):
-        return path.join(self.rel_dir_path, self.file_name)
+        return path.join(self.rel_dir_path, self.name)
 
     @property
     def keys(self):
         return (
             self.rel_dir_path,
-            self.file_name,
+            self.name,
         )
 
     def __eq__(self, other: object):
@@ -141,7 +141,7 @@ class RawResource(Resource):
 
         return (
             self.rel_dir_path == other.rel_dir_path
-            and self.file_name == other.file_name
+            and self.name == other.name
             and self.data == other.data
         )
 
@@ -149,13 +149,13 @@ class RawResource(Resource):
         return hash(
             (
                 self.rel_dir_path,
-                self.file_name,
+                self.name,
                 self.data,
             )
         )
 
     def __repr__(self):
-        return f'{self.rel_dir_path}/{self.file_name}'
+        return f'{self.rel_dir_path}/{self.name}'
 
 
 class XMLResource(Resource):
@@ -171,11 +171,11 @@ class XMLResource(Resource):
         product: str,
         feature_flag: str,
     ):
-        super().__init__(rel_dir_path, file_name)
+        super().__init__(rel_dir_path, name)
 
         self.index = index
         self.tag = tag
-        self.name = name
+        self.file_name = file_name
         self.element = element
         self.comments = comments
         self.product = product
@@ -757,13 +757,13 @@ def is_resource_in_entries(
         return False
 
     if isinstance(resource, RawResource):
-        if resource.file_name in resource_entries:
+        if resource.name in resource_entries:
             return True
         if resource.rel_path in resource_entries:
             return True
 
         for pattern in resource_entries_wildcards(resource_entries):
-            if fnmatch(resource.file_name, pattern):
+            if fnmatch(resource.name, pattern):
                 return True
             if fnmatch(resource.rel_path, pattern):
                 return True
@@ -1036,7 +1036,7 @@ def attrib_needs_aapt_raw(
 
 def raw_resources_need_aapt_raw(raw_resources: Set[RawResource]):
     for raw_resource in raw_resources:
-        if not raw_resource.file_name.endswith('.xml'):
+        if not raw_resource.name.endswith('.xml'):
             continue
 
         try:
