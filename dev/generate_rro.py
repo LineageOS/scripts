@@ -22,6 +22,7 @@ from rro.process_rro import (
     write_rro,
     write_rro_meta,
 )
+from rro.resources import RESOURCES_DIR
 from rro.target_package import (
     append_extra_locations,
     fixup_target_package,
@@ -201,6 +202,8 @@ def generate_rro_main():
                 extract_apk(apk_path, tmp_dir)
 
             manifest_path = Path(tmp_dir, ANDROID_MANIFEST_NAME)
+            resources_path = Path(tmp_dir, RESOURCES_DIR)
+
             package, target_package, overlay_attrs = parse_overlay_manifest(
                 str(manifest_path),
             )
@@ -239,10 +242,10 @@ def generate_rro_main():
 
             try:
                 overlay_resources = parse_rro(
-                    str(tmp_dir),
                     package,
                     target_package,
                     manifest_path=str(manifest_path),
+                    resources_path=str(resources_path),
                 )
                 check_rro_matches_aosp(
                     rro_name,
