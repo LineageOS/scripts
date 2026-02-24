@@ -5,12 +5,26 @@ from __future__ import annotations
 
 import json
 import re
+from dataclasses import dataclass
 from os import path
 from pathlib import Path
-from typing import Dict, FrozenSet, NotRequired, Optional, Set, Tuple, TypedDict
+from typing import (
+    Dict,
+    FrozenSet,
+    List,
+    NotRequired,
+    Optional,
+    Set,
+    Tuple,
+    TypedDict,
+)
 
 from bp.bp_module import parse_bp_rro_module
-from bp.bp_utils import ANDROID_BP_NAME, get_partition_specific
+from bp.bp_utils import (
+    ANDROID_BP_NAME,
+    get_partition_specific,
+    partition_to_priority,
+)
 from rro.manifest import (
     ANDROID_MANIFEST_NAME,
     parse_overlay_manifest,
@@ -20,6 +34,7 @@ from rro.resources import (
     RESOURCES_DIR,
     Resource,
     find_target_package_resources,
+    is_resource_in_entries,
     overlay_resource_fixup_from_package,
     overlay_resource_split_by_type,
     overlay_resources_fixup_tag,
@@ -415,3 +430,102 @@ def overlay_attrs_key(
             if with_priority or k != 'priority'
         )
     )
+
+
+@dataclass
+class OverlayPriorityData:
+    package: str
+    target_package: str
+    partition: str
+    priority: int
+    resources: Set[Resource]
+    prefer_resources: FrozenSet[str]
+    attrs: Dict[str, str]
+
+
+def resource_sort_key(ro: Tuple[Resource, OverlayPriorityData]):
+    return (
+        # Preferred resources first
+        is_resource_in_entries(ro[1].prefer_resources, ro[0]),
+        # Partition priority
+        partition_to_priority(ro[1].partition),
+        # Overlay priority
+        ro[1].priority,
+    )
+
+
+def remove_rros_shadowed_resources(overlays: List[OverlayPriorityData]):
+    undetermined_resource_priorities: List[Tuple[str, List[str]]] = []
+    resource_map: Dict[
+        # resource keys
+        Tuple[
+            # target package
+            str,
+            # overlay attrs
+            Tuple[Tuple[str, str], ...],
+            # resource keys
+            Tuple[str, ...],
+        ],
+        List[
+            Tuple[
+                Resource,
+                OverlayPriorityData,
+            ],
+        ],
+    ] = {}
+
+    for overlay in overlays:
+        for resource in overlay.resources:
+            resource_map.setdefault(
+                (
+                    overlay.target_package,
+                    overlay_attrs_key(overlay.attrs),
+                    resource.keys,
+                ),
+                [],
+            ).append(
+                (
+                    resource,
+                    overlay,
+                )
+            )
+
+    for resources in resource_map.values():
+        if len(resources) < 2:
+            continue
+
+        resources.sort(key=resource_sort_key, reverse=True)
+
+        preferred_resource = resources[0]
+        preferred_resource_sort_key = resource_sort_key(preferred_resource)
+
+        packages: List[str] = []
+        for ro in resources:
+            if resource_sort_key(ro) != preferred_resource_sort_key:
+                break
+
+            packages.append(ro[1].package)
+        packages.sort()
+
+        if len(packages) > 1:
+            undetermined_resource_priorities.append(
+                (
+                    preferred_resource[0].reference_name,
+                    packages,
+                )
+            )
+
+        shadowed_resources = resources[1:]
+        shadowed_resources.sort(key=lambda ro: ro[1].package)
+
+        for resource, overlay in shadowed_resources:
+            color_print(
+                f'{overlay.package}: {resource.reference_name} shadowed in '
+                f'{preferred_resource[1].package}',
+                color=Color.YELLOW,
+            )
+
+        for resource, overlay in shadowed_resources:
+            overlay.resources.remove(resource)
+
+    return undetermined_resource_priorities
