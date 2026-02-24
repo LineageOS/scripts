@@ -19,7 +19,11 @@ from bp.bp_utils import (
 )
 from rro.manifest import ANDROID_MANIFEST_NAME, parse_overlay_manifest
 from rro.process_rro import parse_rro, write_rro
-from rro.resources import RESOURCES_DIR, read_xml_resources_prefix
+from rro.resources import (
+    RESOURCES_DIR,
+    parse_overlay_resources,
+    read_xml_resources_prefix,
+)
 from rro.target_package import append_extra_locations
 from utils.utils import Color, color_print, get_dirs_with_file
 
@@ -83,11 +87,14 @@ def beautify_overlay(
     )
 
     try:
-        overlay_resources = parse_rro(
+        overlay_resources = parse_overlay_resources(
+            str(overlay_data.resources_path),
+        )
+        parse_rro(
             overlay_data.package,
             overlay_data.target_package,
             manifest_path=str(overlay_data.manifest_path),
-            resources_path=str(overlay_data.resources_path),
+            resources=overlay_resources,
             remove_missing_resources=True,
             remove_resources=target_package_remove_resources,
             keep_packages=keep_packages,
