@@ -73,8 +73,11 @@ def get_rro_target_package_resources(
     package: str,
     target_package: str,
     resources: Set[Resource],
+    allow_missing: bool,
 ):
     target_packages = get_target_packages(target_package)
+    if not target_packages and not allow_missing:
+        raise ValueError(f'{package}: Unknown package name {target_package}')
 
     package_resources, module_name = find_target_package_resources(
         target_packages,
@@ -128,6 +131,7 @@ def check_rro_matches_aosp(
         package=aosp_package,
         target_package=aosp_target_package,
         resources=aosp_resources,
+        allow_missing=True,
     )
     fixup_rro_resources(
         package=aosp_package,
