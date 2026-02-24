@@ -963,65 +963,6 @@ def overlay_resource_fixup_from_package(
     )
 
 
-def overlay_resource_remove_shadowed(
-    overlay_resources: Set[Resource],
-    package_resources_map: Dict[Tuple[str, ...], str],
-    package: str,
-):
-    shadowed_resources: Set[Tuple[str, str]] = set()
-
-    def remove_shadowed_resource(resource: Resource):
-        if resource.keys not in package_resources_map:
-            package_resources_map[resource.keys] = package
-            return
-
-        shadowed_resources.add(
-            (
-                resource.reference_name,
-                package_resources_map[resource.keys],
-            )
-        )
-        return True
-
-    overlay_resources_process(
-        overlay_resources,
-        remove_shadowed_resource,
-    )
-
-    return shadowed_resources
-
-
-def overlay_resource_remove_identical(
-    overlay_resources: Set[Resource],
-    package_resources: resources_dict,
-):
-    def remove_identical_resource(resource: Resource):
-        package_resource = get_package_resource(
-            package_resources,
-            resource,
-        )
-        if package_resource is None:
-            package_resource = get_unqualified_package_resource(
-                package_resources,
-                resource,
-            )
-
-        if package_resource is None:
-            return
-
-        if resource != package_resource:
-            return
-
-        return True
-
-    removed_resources, _ = overlay_resources_process(
-        overlay_resources,
-        remove_identical_resource,
-    )
-
-    return removed_resources
-
-
 def overlay_resource_split_by_type(
     overlay_resources: Set[Resource],
 ):
