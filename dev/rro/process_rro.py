@@ -76,19 +76,19 @@ def check_rro_matches_aosp(
     target_package: str,
     resources: Set[Resource],
 ):
-    aosp_rro_android_bp_path = find_overlay_android_bp_path_by_name(
+    aosp_rro_android_bp_dir = find_overlay_android_bp_path_by_name(
         rro_name,
     )
-    if aosp_rro_android_bp_path is None:
+    if aosp_rro_android_bp_dir is None:
         return
 
-    manifest_path = path.join(aosp_rro_android_bp_path, ANDROID_MANIFEST_NAME)
+    manifest_path = path.join(aosp_rro_android_bp_dir, ANDROID_MANIFEST_NAME)
     aosp_package, aosp_target_package, _ = parse_overlay_manifest(
         manifest_path,
     )
 
     aosp_resources = parse_rro(
-        aosp_rro_android_bp_path,
+        aosp_rro_android_bp_dir,
         package,
         target_package,
     )
@@ -101,7 +101,7 @@ def check_rro_matches_aosp(
 
     color_print(
         f'Overlay {rro_name} already exists in AOSP but is not '
-        f'identical at {aosp_rro_android_bp_path}',
+        f'identical at {aosp_rro_android_bp_dir}',
         color=Color.YELLOW,
     )
 
