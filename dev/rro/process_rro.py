@@ -7,7 +7,7 @@ import json
 import re
 from os import path
 from pathlib import Path
-from typing import Dict, FrozenSet, NotRequired, Optional, Set, TypedDict
+from typing import Dict, FrozenSet, NotRequired, Optional, Set, Tuple, TypedDict
 
 from bp.bp_module import parse_bp_rro_module
 from bp.bp_utils import ANDROID_BP_NAME, get_partition_specific
@@ -69,6 +69,32 @@ runtime_resource_overlay {{
         )
 
 
+def get_rro_target_package_resources(
+    package: str,
+    target_package: str,
+    resources: Set[Resource],
+):
+    target_packages = get_target_packages(target_package)
+
+    package_resources, module_name = find_target_package_resources(
+        target_packages,
+        resources,
+    )
+
+    if len(target_packages) > 1:
+        color_print(
+            f'{package}: found multiple matches for {target_package}:',
+            color=Color.YELLOW,
+        )
+        print(', '.join(t[1] for t in target_packages))
+        color_print(
+            f'{package}: picked {module_name}',
+            color=Color.GREEN,
+        )
+
+    return package_resources
+
+
 def check_rro_matches_aosp(
     rro_name: str,
     package: str,
@@ -98,11 +124,17 @@ def check_rro_matches_aosp(
         return
 
     aosp_resources = parse_overlay_resources(str(resources_path))
+    aosp_package_resources = get_rro_target_package_resources(
+        package=aosp_package,
+        target_package=aosp_target_package,
+        resources=aosp_resources,
+    )
     parse_rro(
         package,
         target_package,
         str(manifest_path),
         aosp_resources,
+        aosp_package_resources,
     )
 
     if resources == aosp_resources:
@@ -130,6 +162,7 @@ def parse_rro(
     target_package: str,
     manifest_path: str,
     resources: Set[Resource],
+    package_resources: Optional[Dict[Tuple[str, ...], Resource]],
     remove_missing_resources: bool = False,
     remove_resources: Optional[FrozenSet[str]] = None,
     keep_packages: Optional[Set[str]] = None,
@@ -144,24 +177,6 @@ def parse_rro(
 
     if not resources:
         raise ValueError(f'{package}: No resources in overlay')
-
-    target_packages = get_target_packages(target_package)
-
-    package_resources, module_name = find_target_package_resources(
-        target_packages,
-        resources,
-    )
-
-    if len(target_packages) > 1:
-        color_print(
-            f'{package}: found multiple matches for {target_package}:',
-            color=Color.YELLOW,
-        )
-        print(', '.join(t[1] for t in target_packages))
-        color_print(
-            f'{package}: picked {module_name}',
-            color=Color.GREEN,
-        )
 
     if (
         remove_missing_resources
