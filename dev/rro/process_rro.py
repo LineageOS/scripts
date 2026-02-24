@@ -124,6 +124,7 @@ def parse_rro(
     resources_dir: str = RESOURCES_DIR,
     package_resources_map: Optional[Dict[Tuple[str, ...], str]] = None,
     remove_shadowed_resources: bool = False,
+    remove_identical_resources: bool = False,
     remove_missing_resources: bool = False,
     remove_resources: Optional[FrozenSet[str]] = None,
     keep_packages: Optional[Set[str]] = None,
@@ -223,7 +224,11 @@ def parse_rro(
                 color=Color.YELLOW,
             )
 
-    if package_resources is not None and remove_shadowed_resources:
+    if (
+        package_resources is not None
+        and remove_shadowed_resources
+        and remove_identical_resources
+    ):
         identical_resources = overlay_resource_remove_identical(
             overlay_resources,
             package_resources,
