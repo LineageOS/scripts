@@ -77,6 +77,7 @@ def beautify_overlay(
         ],
         Dict[Tuple[str, ...], str],
     ],
+    remove_identical_resources: bool,
     remove_resources: Set[Tuple[None | str, str]],
     keep_packages: Set[str],
     keep_resources: Set[Tuple[None | str, str]],
@@ -107,6 +108,7 @@ def beautify_overlay(
             overlay_data.resources_dir,
             package_resources_map=package_resources_map,
             remove_shadowed_resources=True,
+            remove_identical_resources=remove_identical_resources,
             remove_missing_resources=True,
             remove_resources=target_package_remove_resources,
             keep_packages=keep_packages,
@@ -157,6 +159,12 @@ def beautify_rro_main():
         '--ignore-packages',
         default='',
         help='Comma-separated list of overlay folder names or Android.bp module names to ignore',
+    )
+    parser.add_argument(
+        '--remove-identical',
+        help='Remove resources identical to AOSP '
+        '(do not use for overlays that have been commonized)',
+        action='store_true',
     )
     parser.add_argument(
         '-r',
@@ -268,6 +276,7 @@ def beautify_rro_main():
         beautify_overlay(
             overlay_data,
             all_packages_resources_map=all_packages_resources_map,
+            remove_identical_resources=args.remove_identical,
             remove_resources=remove_resources,
             keep_resources=keep_resources,
             keep_packages=keep_packages,
