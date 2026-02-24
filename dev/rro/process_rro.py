@@ -173,16 +173,6 @@ def parse_rro(
     ):
         raise ValueError(f'Unknown package name: {target_package}')
 
-    removed_resources = overlay_resources_remove(
-        overlay_resources,
-        remove_resources,
-    )
-    for resource in resources_reference_name_sorted(removed_resources):
-        color_print(
-            f'{package}: {resource} removed in {target_package}',
-            color=Color.YELLOW,
-        )
-
     if package_resources is not None:
         wrong_tag_resources = overlay_resources_fixup_tag(
             overlay_resources,
@@ -193,6 +183,16 @@ def parse_rro(
                 f'{package}: {old_resource} -> {new_resource}',
                 color=Color.YELLOW,
             )
+
+    removed_resources = overlay_resources_remove(
+        overlay_resources,
+        remove_resources,
+    )
+    for resource in resources_reference_name_sorted(removed_resources):
+        color_print(
+            f'{package}: {resource} removed in {target_package}',
+            color=Color.YELLOW,
+        )
 
     if package_resources is not None and remove_missing_resources:
         missing_resources, kept_resources = overlay_resources_remove_missing(
