@@ -67,7 +67,7 @@ def find_apk_partition(apk_path: Path):
     return partition
 
 
-if __name__ == '__main__':
+def generate_rro_main():
     parser = ArgumentParser(
         prog='generate_rro',
         description='Generate RROs',
@@ -268,3 +268,7 @@ if __name__ == '__main__':
             except ValueError as e:
                 shutil.rmtree(apk_output_path, ignore_errors=True)
                 color_print(e, color=Color.RED)
+
+
+if __name__ == '__main__':
+    generate_rro_main()
