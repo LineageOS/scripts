@@ -15,14 +15,15 @@ from bp.bp_module import parse_bp_rro_module
 from bp.bp_utils import (
     ANDROID_BP_NAME,
     get_module_partition,
-    partition_to_priority,
 )
 from rro.manifest import ANDROID_MANIFEST_NAME, parse_overlay_manifest
 from rro.process_rro import (
+    OverlayPriorityData,
     fixup_rro_resources,
     get_rro_resources,
     get_rro_target_package_resources,
     remove_rro_resources,
+    remove_rros_shadowed_resources,
     write_rro,
 )
 from rro.resources import (
@@ -49,12 +50,18 @@ class OverlayData:
     package_resources: Optional[Dict[Tuple[str, ...], Resource]]
 
 
-def parse_resource_entries(resource_entries_raw: List[str]):
+def parse_resource_entries(
+    resource_entries_raw: List[str],
+    allow_empty_package: bool = True,
+):
     resource_entries: Set[Tuple[None | str, str]] = set()
 
     for resource_entry_raw in resource_entries_raw:
         resource_entry_parts = resource_entry_raw.split(':')
         assert len(resource_entry_parts) <= 2, resource_entry_raw
+
+        if not allow_empty_package and len(resource_entry_parts) != 2:
+            raise ValueError(f'Invalid entry: {resource_entry_raw}')
 
         if len(resource_entry_parts) == 1:
             resource_entries.add((None, resource_entry_raw))
@@ -74,6 +81,40 @@ def filter_resource_entries(
         for package, resource_name in resource_entries
         if package is None or package == target_package
     )
+
+
+def remove_shadowed_resources(
+    overlays_data: List[OverlayData],
+    prefer_resources: Set[Tuple[Optional[str], str]],
+):
+    undetermined_resource_priorities = remove_rros_shadowed_resources(
+        [
+            OverlayPriorityData(
+                package=o.package,
+                target_package=o.target_package,
+                partition=o.partition,
+                priority=o.module_priority,
+                resources=o.resources,
+                prefer_resources=filter_resource_entries(
+                    prefer_resources,
+                    o.package,
+                ),
+                attrs=o.attrs,
+            )
+            for o in overlays_data
+        ]
+    )
+
+    for undetermined_resource_priority in undetermined_resource_priorities:
+        color_print(
+            f'Resource {undetermined_resource_priority[0]} has '
+            'undetermined priority between packages: '
+            f'{", ".join(undetermined_resource_priority[1])}',
+            color=Color.RED,
+        )
+
+    if undetermined_resource_priorities:
+        raise ValueError('An undetermined priority has been found')
 
 
 def write_beautified_overlay(
@@ -154,6 +195,14 @@ def beautify_rro_main():
         action='store_true',
     )
     parser.add_argument(
+        '-p',
+        '--prefer-resource',
+        help='Prefer a resource from a specific package when more than one has '
+        'the same partition and priority (eg: android:config_defaultAssistant)',
+        default=[],
+        action='append',
+    )
+    parser.add_argument(
         '-r',
         '--remove-resource',
         help='Remove a resource by name '
@@ -182,9 +231,11 @@ def beautify_rro_main():
     remove_resources_raw = cast(List[str], args.remove_resource)
     keep_packages = set(cast(List[str], args.keep_package))
     keep_resources_raw = cast(List[str], args.keep_resource)
+    prefer_resources_raw = cast(List[str], args.prefer_resource)
 
     remove_resources = parse_resource_entries(remove_resources_raw)
     keep_resources = parse_resource_entries(keep_resources_raw)
+    prefer_resources = parse_resource_entries(prefer_resources_raw)
 
     append_extra_locations(args.extra_package_locations)
 
@@ -258,15 +309,7 @@ def beautify_rro_main():
         )
         overlays_data.append(overlay_data)
 
-    # Sort RROs in reverse order of priority so we can keep track of what
-    # resources have been found, and remove duplicates
-    overlays_data.sort(
-        key=lambda o: (
-            partition_to_priority(o.partition),
-            o.module_priority,
-            o.path,
-        )
-    )
+    remove_shadowed_resources(overlays_data, prefer_resources)
 
     for overlay_data in overlays_data:
         write_beautified_overlay(
