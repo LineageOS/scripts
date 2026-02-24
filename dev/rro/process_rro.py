@@ -69,6 +69,14 @@ runtime_resource_overlay {{
         )
 
 
+def get_rro_resources(package: str, resources_path: str):
+    resources = parse_overlay_resources(resources_path)
+    if not resources:
+        raise ValueError(f'{package}: No resources in overlay')
+
+    return resources
+
+
 def get_rro_target_package_resources(
     package: str,
     target_package: str,

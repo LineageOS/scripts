@@ -15,13 +15,14 @@ from rro.manifest import ANDROID_MANIFEST_NAME, parse_overlay_manifest
 from rro.process_rro import (
     check_rro_matches_aosp,
     fixup_rro_resources,
+    get_rro_resources,
     get_rro_target_package_resources,
     simplify_rro_name,
     simplify_rro_package,
     write_rro,
     write_rro_meta,
 )
-from rro.resources import RESOURCES_DIR, parse_overlay_resources
+from rro.resources import RESOURCES_DIR
 from rro.target_package import (
     append_extra_locations,
     fixup_target_package,
@@ -235,7 +236,7 @@ def generate_rro_main():
         apk_output_path.mkdir(parents=True, exist_ok=True)
 
         try:
-            overlay_resources = parse_overlay_resources(str(resources_path))
+            overlay_resources = get_rro_resources(package, str(resources_path))
             package_resources = get_rro_target_package_resources(
                 package=package,
                 target_package=target_package,
