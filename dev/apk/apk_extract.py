@@ -124,8 +124,7 @@ def extract_apk(
     reference_resources: Optional[ARSCResourcesMap] = None,
 ):
     with zipfile.ZipFile(apk_path, 'r') as z:
-        if 'resources.arsc' not in z.namelist():
-            assert False
+        assert 'resources.arsc' in z.namelist()
 
         arsc = z.read('resources.arsc')
         strings, styles, resources, flags = arsc_parse(arsc)
