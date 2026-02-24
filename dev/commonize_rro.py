@@ -14,6 +14,7 @@ from bp.bp_module import parse_bp_rro_module
 from bp.bp_utils import ANDROID_BP_NAME, get_module_partition
 from rro.manifest import ANDROID_MANIFEST_NAME, parse_overlay_manifest
 from rro.process_rro import (
+    get_rro_resources,
     overlay_attrs_key,
     read_rro_meta,
     simplify_rro_name,
@@ -24,7 +25,6 @@ from rro.process_rro import (
 from rro.resources import (
     RESOURCES_DIR,
     Resource,
-    parse_overlay_resources,
     remove_resources_referenced,
 )
 from rro.target_package import fixup_target_package
@@ -247,7 +247,7 @@ def commonize_overlays():
                 [],
             )
 
-            overlay_resources = parse_overlay_resources(str(resources_path))
+            overlay_resources = get_rro_resources(package, str(resources_path))
             overlay_data = OverlayData(
                 path=overlay_path,
                 name=module_name,
