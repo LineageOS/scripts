@@ -242,6 +242,7 @@ def generate_rro_main():
                     str(tmp_dir),
                     package,
                     target_package,
+                    manifest_path=str(manifest_path),
                 )
                 check_rro_matches_aosp(
                     rro_name,

@@ -245,7 +245,7 @@ def commonize_overlays():
                 str(overlay_path),
                 package,
                 target_package,
-                manifest_name=manifest,
+                manifest_path=str(manifest_path),
                 resources_dir=resources_dir,
             )
 

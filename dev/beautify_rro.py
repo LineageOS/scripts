@@ -29,7 +29,8 @@ class OverlayData:
     name: str
     path: Path
     partition: str
-    manifest: str
+    manifest_name: str
+    manifest_path: Path
     resources_dir: str
     module_priority: int
     statement: RROModule
@@ -103,7 +104,7 @@ def beautify_overlay(
             str(overlay_data.path),
             overlay_data.package,
             overlay_data.target_package,
-            manifest_name=overlay_data.manifest,
+            manifest_path=str(overlay_data.manifest_path),
             resources_dir=overlay_data.resources_dir,
             package_resources_map=package_resources_map,
             remove_shadowed_resources=True,
@@ -120,7 +121,7 @@ def beautify_overlay(
             preserved_prefixes = read_xml_resources_prefix(
                 overlay_resources,
                 str(overlay_data.path),
-                extra_paths=[overlay_data.manifest],
+                extra_paths=[overlay_data.manifest_name],
             )
 
         shutil.rmtree(overlay_data.path, ignore_errors=True)
@@ -224,9 +225,9 @@ def beautify_rro_main():
         manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
         resources_dir = statement.get('resource_dirs', ['res'])[0]
 
-        manifest_path = path.join(overlay_dir, manifest)
+        manifest_path = Path(overlay_dir, manifest)
         package, target_package, overlay_attrs = parse_overlay_manifest(
-            manifest_path,
+            str(manifest_path),
         )
         module_partition = get_module_partition(statement)
         module_priority = int(overlay_attrs.get('priority', 0))
@@ -235,7 +236,8 @@ def beautify_rro_main():
             name=module_name,
             path=overlay_path,
             partition=module_partition,
-            manifest=manifest,
+            manifest_name=manifest,
+            manifest_path=manifest_path,
             resources_dir=resources_dir,
             module_priority=module_priority,
             statement=statement,
