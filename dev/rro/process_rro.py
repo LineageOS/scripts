@@ -94,11 +94,12 @@ def check_rro_matches_aosp(
         str(manifest_path),
     )
 
-    aosp_resources = parse_rro(
+    aosp_resources = parse_overlay_resources(str(resources_path))
+    parse_rro(
         package,
         target_package,
         str(manifest_path),
-        str(resources_path),
+        aosp_resources,
     )
 
     if package != aosp_package or target_package != aosp_target_package:
@@ -128,7 +129,7 @@ def parse_rro(
     package: str,
     target_package: str,
     manifest_path: str,
-    resources_path: str,
+    resources: Set[Resource],
     remove_missing_resources: bool = False,
     remove_resources: Optional[FrozenSet[str]] = None,
     keep_packages: Optional[Set[str]] = None,
@@ -141,7 +142,6 @@ def parse_rro(
     if keep_resources is None:
         keep_resources = frozenset()
 
-    resources = parse_overlay_resources(resources_path)
     if not resources:
         raise ValueError(f'{package}: No resources in overlay')
 
@@ -217,8 +217,6 @@ def parse_rro(
 
     if not resources:
         raise ValueError(f'{package}: No resources left in overlay')
-
-    return resources
 
 
 def write_rro(
