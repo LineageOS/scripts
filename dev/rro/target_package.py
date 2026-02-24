@@ -16,6 +16,7 @@ from bp.bp_module import (
 from bp.bp_parser import bp_parser  # type: ignore
 from bp.bp_utils import ANDROID_BP_NAME, bp_extend_defaults
 from rro.manifest import ANDROID_MANIFEST_NAME, parse_package_manifest
+from rro.resources import RESOURCES_DIR
 from utils.utils import (
     Color,
     android_root,
@@ -114,7 +115,7 @@ def get_app_resources(
                 resource_dirs,
             )
 
-    local_resource_dirs = app_module.get('resource_dirs', ['res'])
+    local_resource_dirs = app_module.get('resource_dirs', [RESOURCES_DIR])
     local_resource_dirs = get_existing_paths_rel(
         android_bp_dir_path,
         local_resource_dirs,

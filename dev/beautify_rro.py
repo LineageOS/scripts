@@ -19,7 +19,7 @@ from bp.bp_utils import (
 )
 from rro.manifest import ANDROID_MANIFEST_NAME, parse_overlay_manifest
 from rro.process_rro import overlay_attrs_key, parse_rro, write_rro
-from rro.resources import read_xml_resources_prefix
+from rro.resources import RESOURCES_DIR, read_xml_resources_prefix
 from rro.target_package import append_extra_locations
 from utils.utils import Color, color_print, get_dirs_with_file
 
@@ -224,7 +224,7 @@ def beautify_rro_main():
         manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
         manifest_path = Path(overlay_dir, manifest)
 
-        resources_dir = statement.get('resource_dirs', ['res'])[0]
+        resources_dir = statement.get('resource_dirs', [RESOURCES_DIR])[0]
         resources_path = Path(overlay_path, resources_dir)
 
         package, target_package, overlay_attrs = parse_overlay_manifest(

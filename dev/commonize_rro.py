@@ -22,7 +22,7 @@ from rro.process_rro import (
     write_rro,
     write_rro_meta,
 )
-from rro.resources import Resource, remove_resources_referenced
+from rro.resources import RESOURCES_DIR, Resource, remove_resources_referenced
 from rro.target_package import fixup_target_package
 from utils.utils import Color, color_print, get_dirs_with_file
 
@@ -222,7 +222,7 @@ def commonize_overlays():
             manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
             manifest_path = Path(overlay_path, manifest)
 
-            resources_dir = statement.get('resource_dirs', ['res'])[0]
+            resources_dir = statement.get('resource_dirs', [RESOURCES_DIR])[0]
             resources_path = Path(overlay_path, resources_dir)
 
             package, target_package, overlay_attrs = parse_overlay_manifest(
