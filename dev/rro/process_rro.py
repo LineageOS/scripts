@@ -36,6 +36,7 @@ from rro.resources import (
     find_target_package_resources,
     is_resource_in_entries,
     overlay_resource_fixup_from_package,
+    overlay_resource_remove_identical,
     overlay_resource_split_by_type,
     overlay_resources_fixup_tag,
     overlay_resources_group_by_rel_path,
@@ -214,6 +215,7 @@ def remove_rro_resources(
     package_resources: Optional[Dict[Tuple[str, ...], Resource]],
     remove_resources: FrozenSet[str],
     keep_resources: FrozenSet[str],
+    remove_identical_resources: bool,
 ):
     removed_resources = overlay_resources_remove(
         resources,
@@ -247,6 +249,18 @@ def remove_rro_resources(
             f'{package}: {resource} kept',
             color=Color.GREEN,
         )
+
+    if remove_identical_resources:
+        identical_resources = overlay_resource_remove_identical(
+            resources,
+            package_resources,
+        )
+
+        for resource in resources_reference_name_sorted(identical_resources):
+            color_print(
+                f'{package}: {resource} identical in {target_package}',
+                color=Color.YELLOW,
+            )
 
     if not resources:
         raise ValueError(f'{package}: No resources left in overlay')
