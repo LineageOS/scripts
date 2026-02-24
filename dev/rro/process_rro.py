@@ -9,6 +9,7 @@ from os import path
 from pathlib import Path
 from typing import Dict, FrozenSet, NotRequired, Optional, Set, Tuple, TypedDict
 
+from bp.bp_module import parse_bp_rro_module
 from bp.bp_utils import ANDROID_BP_NAME, get_partition_specific
 from rro.manifest import (
     ANDROID_MANIFEST_NAME,
@@ -82,8 +83,14 @@ def check_rro_matches_aosp(
     if aosp_rro_android_bp_dir is None:
         return
 
-    manifest_path = Path(aosp_rro_android_bp_dir, ANDROID_MANIFEST_NAME)
-    resources_path = Path(aosp_rro_android_bp_dir, RESOURCES_DIR)
+    android_bp_path = Path(aosp_rro_android_bp_dir, ANDROID_BP_NAME)
+    statement = parse_bp_rro_module(android_bp_path)
+
+    manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
+    manifest_path = Path(aosp_rro_android_bp_dir, manifest)
+
+    resources_dir = statement.get('resource_dirs', [RESOURCES_DIR])[0]
+    resources_path = Path(aosp_rro_android_bp_dir, resources_dir)
 
     aosp_package, aosp_target_package, _ = parse_overlay_manifest(
         str(manifest_path),
