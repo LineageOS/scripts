@@ -94,6 +94,9 @@ def check_rro_matches_aosp(
         str(manifest_path),
     )
 
+    if package != aosp_package or target_package != aosp_target_package:
+        return
+
     aosp_resources = parse_overlay_resources(str(resources_path))
     parse_rro(
         package,
@@ -101,9 +104,6 @@ def check_rro_matches_aosp(
         str(manifest_path),
         aosp_resources,
     )
-
-    if package != aosp_package or target_package != aosp_target_package:
-        return
 
     if resources == aosp_resources:
         raise ValueError(f'Overlay {rro_name} identical to AOSP')
