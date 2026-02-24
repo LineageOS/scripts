@@ -76,7 +76,7 @@ def filter_resource_entries(
     )
 
 
-def beautify_overlay(
+def write_beautified_overlay(
     overlay_data: OverlayData,
     remove_resources: Set[Tuple[None | str, str]],
     keep_resources: Set[Tuple[None | str, str]],
@@ -269,7 +269,7 @@ def beautify_rro_main():
     )
 
     for overlay_data in overlays_data:
-        beautify_overlay(
+        write_beautified_overlay(
             overlay_data,
             remove_resources=remove_resources,
             keep_resources=keep_resources,
