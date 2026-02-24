@@ -31,7 +31,7 @@ class OverlayData:
     partition: str
     manifest_name: str
     manifest_path: Path
-    resources_dir: str
+    resources_path: Path
     module_priority: int
     statement: RROModule
     package: str
@@ -101,11 +101,10 @@ def beautify_overlay(
     )
     try:
         overlay_resources = parse_rro(
-            str(overlay_data.path),
             overlay_data.package,
             overlay_data.target_package,
             manifest_path=str(overlay_data.manifest_path),
-            resources_dir=overlay_data.resources_dir,
+            resources_path=str(overlay_data.resources_path),
             package_resources_map=package_resources_map,
             remove_shadowed_resources=True,
             remove_identical_resources=remove_identical_resources,
@@ -223,9 +222,11 @@ def beautify_rro_main():
             continue
 
         manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
-        resources_dir = statement.get('resource_dirs', ['res'])[0]
-
         manifest_path = Path(overlay_dir, manifest)
+
+        resources_dir = statement.get('resource_dirs', ['res'])[0]
+        resources_path = Path(overlay_path, resources_dir)
+
         package, target_package, overlay_attrs = parse_overlay_manifest(
             str(manifest_path),
         )
@@ -238,7 +239,7 @@ def beautify_rro_main():
             partition=module_partition,
             manifest_name=manifest,
             manifest_path=manifest_path,
-            resources_dir=resources_dir,
+            resources_path=resources_path,
             module_priority=module_priority,
             statement=statement,
             package=package,
