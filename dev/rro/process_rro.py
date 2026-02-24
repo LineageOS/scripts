@@ -7,7 +7,7 @@ import json
 import re
 from os import path
 from pathlib import Path
-from typing import Dict, FrozenSet, NotRequired, Optional, Set, Tuple, TypedDict
+from typing import Dict, FrozenSet, NotRequired, Optional, Set, TypedDict
 
 from bp.bp_module import parse_bp_rro_module
 from bp.bp_utils import ANDROID_BP_NAME, get_partition_specific
@@ -21,8 +21,6 @@ from rro.resources import (
     Resource,
     find_target_package_resources,
     overlay_resource_fixup_from_package,
-    overlay_resource_remove_identical,
-    overlay_resource_remove_shadowed,
     overlay_resource_split_by_type,
     overlay_resources_fixup_tag,
     overlay_resources_group_by_rel_path,
@@ -131,16 +129,11 @@ def parse_rro(
     target_package: str,
     manifest_path: str,
     resources_path: str,
-    package_resources_map: Optional[Dict[Tuple[str, ...], str]] = None,
-    remove_shadowed_resources: bool = False,
-    remove_identical_resources: bool = False,
     remove_missing_resources: bool = False,
     remove_resources: Optional[FrozenSet[str]] = None,
     keep_packages: Optional[Set[str]] = None,
     keep_resources: Optional[FrozenSet[str]] = None,
 ):
-    if package_resources_map is None:
-        package_resources_map = {}
     if remove_resources is None:
         remove_resources = frozenset()
     if keep_packages is None:
@@ -222,34 +215,6 @@ def parse_rro(
             color_print(
                 f'{package}: {resource} kept',
                 color=Color.GREEN,
-            )
-
-    if remove_shadowed_resources:
-        shadowed_resources = overlay_resource_remove_shadowed(
-            overlay_resources,
-            package_resources_map,
-            package,
-        )
-        for resource, shadower_package in sorted(shadowed_resources):
-            color_print(
-                f'{package}: {resource} shadowed in {shadower_package}',
-                color=Color.YELLOW,
-            )
-
-    if (
-        package_resources is not None
-        and remove_shadowed_resources
-        and remove_identical_resources
-    ):
-        identical_resources = overlay_resource_remove_identical(
-            overlay_resources,
-            package_resources,
-        )
-
-        for resource in resources_reference_name_sorted(identical_resources):
-            color_print(
-                f'{package}: {resource} identical in {target_package}',
-                color=Color.YELLOW,
             )
 
     if not overlay_resources:

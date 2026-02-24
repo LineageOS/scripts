@@ -18,7 +18,7 @@ from bp.bp_utils import (
     partition_to_priority,
 )
 from rro.manifest import ANDROID_MANIFEST_NAME, parse_overlay_manifest
-from rro.process_rro import overlay_attrs_key, parse_rro, write_rro
+from rro.process_rro import parse_rro, write_rro
 from rro.resources import RESOURCES_DIR, read_xml_resources_prefix
 from rro.target_package import append_extra_locations
 from utils.utils import Color, color_print, get_dirs_with_file
@@ -68,16 +68,6 @@ def filter_resource_entries(
 
 def beautify_overlay(
     overlay_data: OverlayData,
-    all_packages_resources_map: Dict[
-        Tuple[
-            # target package name
-            str,
-            # overlay attributes
-            Tuple[Tuple[str, str], ...],
-        ],
-        Dict[Tuple[str, ...], str],
-    ],
-    remove_identical_resources: bool,
     remove_resources: Set[Tuple[None | str, str]],
     keep_packages: Set[str],
     keep_resources: Set[Tuple[None | str, str]],
@@ -92,22 +82,12 @@ def beautify_overlay(
         overlay_data.target_package,
     )
 
-    package_resources_map = all_packages_resources_map.setdefault(
-        (
-            overlay_data.target_package,
-            overlay_attrs_key(overlay_data.attrs),
-        ),
-        {},
-    )
     try:
         overlay_resources = parse_rro(
             overlay_data.package,
             overlay_data.target_package,
             manifest_path=str(overlay_data.manifest_path),
             resources_path=str(overlay_data.resources_path),
-            package_resources_map=package_resources_map,
-            remove_shadowed_resources=True,
-            remove_identical_resources=remove_identical_resources,
             remove_missing_resources=True,
             remove_resources=target_package_remove_resources,
             keep_packages=keep_packages,
@@ -258,20 +238,9 @@ def beautify_rro_main():
         )
     )
 
-    all_packages_resources_map: Dict[
-        Tuple[
-            # target package name
-            str,
-            # overlay attributes
-            Tuple[Tuple[str, str], ...],
-        ],
-        Dict[Tuple[str, ...], str],
-    ] = {}
     for overlay_data in overlays_data:
         beautify_overlay(
             overlay_data,
-            all_packages_resources_map=all_packages_resources_map,
-            remove_identical_resources=args.remove_identical,
             remove_resources=remove_resources,
             keep_resources=keep_resources,
             keep_packages=keep_packages,
