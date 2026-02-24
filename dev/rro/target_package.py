@@ -15,7 +15,7 @@ from bp.bp_module import (
 )
 from bp.bp_parser import bp_parser  # type: ignore
 from bp.bp_utils import ANDROID_BP_NAME, bp_extend_defaults
-from rro.manifest import parse_package_manifest
+from rro.manifest import ANDROID_MANIFEST_NAME, parse_package_manifest
 from utils.utils import (
     Color,
     android_root,
@@ -73,7 +73,7 @@ def get_app_manifests(
 ):
     manifests: List[str] = []
 
-    manifest = app_module.get('manifest', 'AndroidManifest.xml')
+    manifest = app_module.get('manifest', ANDROID_MANIFEST_NAME)
     manifests.append(manifest)
 
     additional_manifests = app_module.get('additional_manifests', [])
