@@ -225,23 +225,28 @@ def remove_rro_resources(
             color=Color.YELLOW,
         )
 
-    if package_resources is not None:
-        missing_resources, kept_resources = overlay_resources_remove_missing(
-            resources,
-            package_resources,
-            manifest_path,
-            keep_resources,
+    if not resources:
+        raise ValueError(f'{package}: No resources left in overlay')
+
+    if package_resources is None:
+        return
+
+    missing_resources, kept_resources = overlay_resources_remove_missing(
+        resources,
+        package_resources,
+        manifest_path,
+        keep_resources,
+    )
+    for resource in resources_reference_name_sorted(missing_resources):
+        color_print(
+            f'{package}: {resource} not found in {target_package}',
+            color=Color.RED,
         )
-        for resource in resources_reference_name_sorted(missing_resources):
-            color_print(
-                f'{package}: {resource} not found in {target_package}',
-                color=Color.RED,
-            )
-        for resource in resources_reference_name_sorted(kept_resources):
-            color_print(
-                f'{package}: {resource} kept',
-                color=Color.GREEN,
-            )
+    for resource in resources_reference_name_sorted(kept_resources):
+        color_print(
+            f'{package}: {resource} kept',
+            color=Color.GREEN,
+        )
 
     if not resources:
         raise ValueError(f'{package}: No resources left in overlay')
