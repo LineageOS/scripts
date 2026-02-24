@@ -9,7 +9,7 @@ from argparse import ArgumentParser
 from dataclasses import dataclass
 from os import path
 from pathlib import Path
-from typing import Dict, List, Set, Tuple, cast
+from typing import Dict, List, Optional, Set, Tuple, cast
 
 from bp.bp_module import parse_bp_rro_module
 from bp.bp_utils import (
@@ -27,6 +27,7 @@ from rro.process_rro import (
 )
 from rro.resources import (
     RESOURCES_DIR,
+    Resource,
     read_xml_resources_prefix,
 )
 from rro.target_package import append_extra_locations
@@ -40,11 +41,12 @@ class OverlayData:
     partition: str
     manifest_name: str
     manifest_path: Path
-    resources_path: Path
     module_priority: int
     package: str
     target_package: str
     attrs: Dict[str, str]
+    resources: Set[Resource]
+    package_resources: Optional[Dict[Tuple[str, ...], Resource]]
 
 
 def parse_resource_entries(resource_entries_raw: List[str]):
@@ -79,7 +81,6 @@ def beautify_overlay(
     remove_resources: Set[Tuple[None | str, str]],
     keep_resources: Set[Tuple[None | str, str]],
     maintain_copyrights: bool,
-    allow_missing: bool,
 ):
     target_package_remove_resources = filter_resource_entries(
         remove_resources,
@@ -91,27 +92,12 @@ def beautify_overlay(
     )
 
     try:
-        overlay_resources = get_rro_resources(
-            overlay_data.package,
-            str(overlay_data.resources_path),
-        )
-        package_resources = get_rro_target_package_resources(
-            package=overlay_data.package,
-            target_package=overlay_data.target_package,
-            resources=overlay_resources,
-            allow_missing=allow_missing,
-        )
-        fixup_rro_resources(
-            package=overlay_data.package,
-            resources=overlay_resources,
-            package_resources=package_resources,
-        )
         remove_rro_resources(
             package=overlay_data.package,
             target_package=overlay_data.target_package,
             manifest_path=str(overlay_data.manifest_path),
-            resources=overlay_resources,
-            package_resources=package_resources,
+            resources=overlay_data.resources,
+            package_resources=overlay_data.package_resources,
             remove_resources=target_package_remove_resources,
             keep_resources=target_package_keep_resources,
         )
@@ -120,7 +106,7 @@ def beautify_overlay(
         preserved_prefixes: Dict[str, bytes] = {}
         if maintain_copyrights:
             preserved_prefixes = read_xml_resources_prefix(
-                overlay_resources,
+                overlay_data.resources,
                 str(overlay_data.path),
                 extra_paths=[overlay_data.manifest_name],
             )
@@ -129,7 +115,7 @@ def beautify_overlay(
         Path(overlay_data.path).mkdir(parents=True, exist_ok=True)
 
         write_rro(
-            overlay_resources,
+            overlay_data.resources,
             str(overlay_data.path),
             overlay_data.name,
             overlay_data.package,
@@ -235,17 +221,40 @@ def beautify_rro_main():
         module_partition = get_module_partition(statement)
         module_priority = int(overlay_attrs.get('priority', 0))
 
+        try:
+            resources = get_rro_resources(
+                package,
+                str(resources_path),
+            )
+            package_resources = get_rro_target_package_resources(
+                package=package,
+                target_package=target_package,
+                resources=resources,
+                allow_missing=target_package in keep_packages,
+            )
+        except ValueError as e:
+            shutil.rmtree(overlay_path, ignore_errors=True)
+            color_print(e, color=Color.RED)
+            continue
+
+        fixup_rro_resources(
+            package=package,
+            resources=resources,
+            package_resources=package_resources,
+        )
+
         overlay_data = OverlayData(
             name=module_name,
             path=overlay_path,
             partition=module_partition,
             manifest_name=manifest,
             manifest_path=manifest_path,
-            resources_path=resources_path,
             module_priority=module_priority,
             package=package,
             target_package=target_package,
             attrs=overlay_attrs,
+            resources=resources,
+            package_resources=package_resources,
         )
         overlays_data.append(overlay_data)
 
@@ -260,13 +269,11 @@ def beautify_rro_main():
     )
 
     for overlay_data in overlays_data:
-        allow_missing = overlay_data.target_package in keep_packages
         beautify_overlay(
             overlay_data,
             remove_resources=remove_resources,
             keep_resources=keep_resources,
             maintain_copyrights=args.maintain_copyrights,
-            allow_missing=allow_missing,
         )
 
 
