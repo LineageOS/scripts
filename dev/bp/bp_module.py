@@ -1,4 +1,7 @@
-from typing import List, NotRequired, TypedDict
+from pathlib import Path
+from typing import List, NotRequired, TypedDict, cast
+
+from bp.bp_parser import bp_parser  # type: ignore
 
 
 class BpModule(TypedDict):
@@ -25,3 +28,19 @@ class AppModule(BpModule):
 class RROModule(BpModule):
     manifest: NotRequired[str]
     resource_dirs: NotRequired[List[str]]
+
+
+def parse_bp_rro_module(android_bp_path: Path):
+    statements = bp_parser.parse(android_bp_path.read_text())  # type: ignore
+    statements = cast(List[BpModule], statements)
+
+    statements = list(
+        filter(
+            lambda s: s['module'] == 'runtime_resource_overlay',
+            statements,
+        )
+    )
+
+    assert len(statements) == 1
+
+    return cast(RROModule, statements[0])

@@ -8,10 +8,9 @@ import shutil
 from argparse import ArgumentParser
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List, Set, Tuple, cast
+from typing import Dict, List, Set, Tuple
 
-from bp.bp_module import BpModule
-from bp.bp_parser import bp_parser  # type: ignore
+from bp.bp_module import parse_bp_rro_module
 from bp.bp_utils import ANDROID_BP_NAME, get_module_partition
 from rro.manifest import ANDROID_MANIFEST_NAME, parse_overlay_manifest
 from rro.process_rro import (
@@ -215,11 +214,8 @@ def commonize_overlays():
             overlay_path = Path(overlay_dir)
 
             android_bp_path = Path(overlay_path, ANDROID_BP_NAME)
-            statements = bp_parser.parse(android_bp_path.read_text())  # type: ignore
-            statements = cast(List[BpModule], statements)
-            assert len(statements) == 1
+            statement = parse_bp_rro_module(android_bp_path)
 
-            statement = statements[0]
             module_name = statement['name']
             module_partition = get_module_partition(statement)
 
