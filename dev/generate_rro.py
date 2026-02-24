@@ -240,6 +240,7 @@ def generate_rro_main():
                 package=package,
                 target_package=target_package,
                 resources=overlay_resources,
+                allow_missing=True,
             )
             fixup_rro_resources(
                 package=package,

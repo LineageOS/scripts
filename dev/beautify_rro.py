@@ -78,9 +78,9 @@ def filter_resource_entries(
 def beautify_overlay(
     overlay_data: OverlayData,
     remove_resources: Set[Tuple[None | str, str]],
-    keep_packages: Set[str],
     keep_resources: Set[Tuple[None | str, str]],
     maintain_copyrights: bool,
+    allow_missing: bool,
 ):
     target_package_remove_resources = filter_resource_entries(
         remove_resources,
@@ -99,13 +99,8 @@ def beautify_overlay(
             package=overlay_data.package,
             target_package=overlay_data.target_package,
             resources=overlay_resources,
+            allow_missing=allow_missing,
         )
-        if (
-            package_resources is None
-            and overlay_data.target_package not in keep_packages
-        ):
-            raise ValueError(f'{overlay_data.package}: No resources in overlay')
-
         fixup_rro_resources(
             package=overlay_data.package,
             resources=overlay_resources,
@@ -266,12 +261,13 @@ def beautify_rro_main():
     )
 
     for overlay_data in overlays_data:
+        allow_missing = overlay_data.target_package in keep_packages
         beautify_overlay(
             overlay_data,
             remove_resources=remove_resources,
             keep_resources=keep_resources,
-            keep_packages=keep_packages,
             maintain_copyrights=args.maintain_copyrights,
+            allow_missing=allow_missing,
         )
 
 
