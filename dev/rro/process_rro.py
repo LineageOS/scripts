@@ -217,7 +217,7 @@ def parse_rro(
             package_resources_map,
             package,
         )
-        for resource, shadower_package in sorted(set(shadowed_resources)):
+        for resource, shadower_package in sorted(shadowed_resources):
             color_print(
                 f'{package}: {resource} shadowed in {shadower_package}',
                 color=Color.YELLOW,
