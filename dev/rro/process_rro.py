@@ -184,6 +184,12 @@ def parse_rro(
                 color=Color.YELLOW,
             )
 
+    if package_resources is not None:
+        overlay_resource_fixup_from_package(
+            overlay_resources,
+            package_resources,
+        )
+
     removed_resources = overlay_resources_remove(
         overlay_resources,
         remove_resources,
@@ -242,12 +248,6 @@ def parse_rro(
 
     if not overlay_resources:
         raise ValueError(f'{package}: No resources left in overlay')
-
-    if package_resources is not None:
-        overlay_resource_fixup_from_package(
-            overlay_resources,
-            package_resources,
-        )
 
     return overlay_resources
 
