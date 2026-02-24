@@ -499,14 +499,8 @@ def parse_package_resources_dir(
                 resources[resource.keys] = resource
 
 
-def parse_overlay_resources(
-    resources_path: str,
-    remove_resources: Optional[Set[str]] = None,
-) -> Set[Resource]:
+def parse_overlay_resources(resources_path: str) -> Set[Resource]:
     resources: Dict[Tuple[str, ...], Resource] = {}
-
-    if remove_resources is None:
-        remove_resources = set()
 
     if not path.exists(resources_path):
         return set()
