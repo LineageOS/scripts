@@ -7,9 +7,7 @@ from __future__ import annotations
 import os
 import shutil
 from argparse import ArgumentParser
-from contextlib import ExitStack
 from pathlib import Path
-from tempfile import TemporaryDirectory
 from typing import List, Optional, cast
 
 from apk.apk_extract import extract_apks
@@ -160,126 +158,121 @@ def generate_rro_main():
     if framework_path is None and not args.apktool:
         raise ValueError('No framework-res.apk provided')
 
-    with ExitStack() as stack:
-        output_paths: List[Path] = []
-        tmp_output_paths: List[Path] = []
-        rro_names: List[str] = []
-        original_rro_names: List[str] = []
-        partitions: List[Optional[str]] = []
+    output_paths: List[Path] = []
+    rro_names: List[str] = []
+    original_rro_names: List[str] = []
+    partitions: List[Optional[str]] = []
 
-        for apk_path in apk_paths:
-            partition = find_apk_partition(apk_path)
-            partitions.append(partition)
+    for apk_path in apk_paths:
+        partition = find_apk_partition(apk_path)
+        partitions.append(partition)
 
-            tmp_output_path = Path(stack.enter_context(TemporaryDirectory()))
-            tmp_output_paths.append(tmp_output_path)
+        rro_name, original_rro_name = simplify_rro_name(
+            apk_path.stem,
+            args.device,
+        )
+        rro_names.append(rro_name)
+        original_rro_names.append(original_rro_name)
 
-            rro_name, original_rro_name = simplify_rro_name(
-                apk_path.stem,
-                args.device,
-            )
-            rro_names.append(rro_name)
-            original_rro_names.append(original_rro_name)
+        output_path = Path(overlays_path, rro_name)
+        output_paths.append(output_path)
 
-            output_path = Path(overlays_path, rro_name)
-            output_paths.append(output_path)
-
-        if not args.apktool:
-            assert framework_path is not None
-            extract_apks(
-                apk_paths,
-                tmp_output_paths,
-                framework_path,
-            )
-
-        for apk_path, tmp_dir, rro_name, original_rro_name, partition in zip(
+    if not args.apktool:
+        assert framework_path is not None
+        extract_apks(
             apk_paths,
-            tmp_output_paths,
-            rro_names,
-            original_rro_names,
-            partitions,
-        ):
-            if args.apktool:
-                extract_apk(apk_path, tmp_dir)
+            output_paths,
+            framework_path,
+        )
 
-            manifest_path = Path(tmp_dir, ANDROID_MANIFEST_NAME)
-            resources_path = Path(tmp_dir, RESOURCES_DIR)
+    for apk_path, output_path, rro_name, original_rro_name, partition in zip(
+        apk_paths,
+        output_paths,
+        rro_names,
+        original_rro_names,
+        partitions,
+    ):
+        if args.apktool:
+            extract_apk(apk_path, output_path)
 
-            package, target_package, overlay_attrs = parse_overlay_manifest(
-                str(manifest_path),
+        manifest_path = Path(output_path, ANDROID_MANIFEST_NAME)
+        resources_path = Path(output_path, RESOURCES_DIR)
+
+        package, target_package, overlay_attrs = parse_overlay_manifest(
+            str(manifest_path),
+        )
+
+        package, original_package = simplify_rro_package(
+            package,
+            args.device,
+        )
+        if package in exclude_overlays:
+            color_print(f'{package}: Excluded', color=Color.YELLOW)
+            continue
+        if original_package in exclude_overlays:
+            color_print(f'{original_package}: Excluded', color=Color.YELLOW)
+            continue
+
+        target_package, orignal_target_package = fixup_target_package(
+            target_package,
+        )
+        if target_package in exclude_packages:
+            color_print(
+                f'{package}: Excluded by {target_package}',
+                color=Color.YELLOW,
             )
+            continue
 
-            package, original_package = simplify_rro_package(
+        if orignal_target_package in exclude_packages:
+            color_print(
+                f'{package}: Excluded by {orignal_target_package}',
+                color=Color.YELLOW,
+            )
+            continue
+
+        apk_output_path = Path(overlays_path, rro_name)
+        shutil.rmtree(apk_output_path, ignore_errors=True)
+        apk_output_path.mkdir(parents=True, exist_ok=True)
+
+        try:
+            overlay_resources = parse_overlay_resources(str(resources_path))
+            package_resources = get_rro_target_package_resources(
+                package=package,
+                target_package=target_package,
+                resources=overlay_resources,
+            )
+            parse_rro(
                 package,
+                target_package,
+                manifest_path=str(manifest_path),
+                resources=overlay_resources,
+                package_resources=package_resources,
+            )
+            check_rro_matches_aosp(
+                rro_name,
+                package,
+                target_package,
+                overlay_resources,
+            )
+            write_rro(
+                overlay_resources,
+                str(apk_output_path),
+                rro_name,
+                package,
+                target_package,
+                overlay_attrs,
+                partition=partition,
+            )
+            write_rro_meta(
+                apk_output_path,
+                original_rro_name,
+                original_package,
+                orignal_target_package,
                 args.device,
             )
-            if package in exclude_overlays:
-                color_print(f'{package}: Excluded', color=Color.YELLOW)
-                continue
-            if original_package in exclude_overlays:
-                color_print(f'{original_package}: Excluded', color=Color.YELLOW)
-                continue
-
-            target_package, orignal_target_package = fixup_target_package(
-                target_package,
-            )
-            if target_package in exclude_packages:
-                color_print(
-                    f'{package}: Excluded by {target_package}',
-                    color=Color.YELLOW,
-                )
-                continue
-
-            if orignal_target_package in exclude_packages:
-                color_print(
-                    f'{package}: Excluded by {orignal_target_package}',
-                    color=Color.YELLOW,
-                )
-                continue
-
-            apk_output_path = Path(overlays_path, rro_name)
+        except ValueError as e:
             shutil.rmtree(apk_output_path, ignore_errors=True)
-            apk_output_path.mkdir(parents=True, exist_ok=True)
-
-            try:
-                overlay_resources = parse_overlay_resources(str(resources_path))
-                package_resources = get_rro_target_package_resources(
-                    package=package,
-                    target_package=target_package,
-                    resources=overlay_resources,
-                )
-                parse_rro(
-                    package,
-                    target_package,
-                    manifest_path=str(manifest_path),
-                    resources=overlay_resources,
-                    package_resources=package_resources,
-                )
-                check_rro_matches_aosp(
-                    rro_name,
-                    package,
-                    target_package,
-                    overlay_resources,
-                )
-                write_rro(
-                    overlay_resources,
-                    str(apk_output_path),
-                    rro_name,
-                    package,
-                    target_package,
-                    overlay_attrs,
-                    partition=partition,
-                )
-                write_rro_meta(
-                    apk_output_path,
-                    original_rro_name,
-                    original_package,
-                    orignal_target_package,
-                    args.device,
-                )
-            except ValueError as e:
-                shutil.rmtree(apk_output_path, ignore_errors=True)
-                color_print(e, color=Color.RED)
+            color_print(e, color=Color.RED)
 
 
 if __name__ == '__main__':
