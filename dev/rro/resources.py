@@ -957,6 +957,37 @@ def overlay_resource_fixup_from_package(
     )
 
 
+def overlay_resource_remove_identical(
+    overlay_resources: Set[Resource],
+    package_resources: resources_dict,
+):
+    def remove_identical_resource(resource: Resource):
+        package_resource = get_package_resource(
+            package_resources,
+            resource,
+        )
+        if package_resource is None:
+            package_resource = get_unqualified_package_resource(
+                package_resources,
+                resource,
+            )
+
+        if package_resource is None:
+            return
+
+        if resource != package_resource:
+            return
+
+        return True
+
+    removed_resources, _ = overlay_resources_process(
+        overlay_resources,
+        remove_identical_resource,
+    )
+
+    return removed_resources
+
+
 def overlay_resource_split_by_type(
     overlay_resources: Set[Resource],
 ):

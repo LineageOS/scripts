@@ -122,6 +122,7 @@ def write_beautified_overlay(
     remove_resources: Set[Tuple[None | str, str]],
     keep_resources: Set[Tuple[None | str, str]],
     maintain_copyrights: bool,
+    remove_identical_resources: bool,
 ):
     target_package_remove_resources = filter_resource_entries(
         remove_resources,
@@ -141,6 +142,7 @@ def write_beautified_overlay(
             package_resources=overlay_data.package_resources,
             remove_resources=target_package_remove_resources,
             keep_resources=target_package_keep_resources,
+            remove_identical_resources=remove_identical_resources,
         )
 
         # Preserve existing res/values/*.xml headers BEFORE we delete res/
@@ -317,6 +319,7 @@ def beautify_rro_main():
             remove_resources=remove_resources,
             keep_resources=keep_resources,
             maintain_copyrights=args.maintain_copyrights,
+            remove_identical_resources=args.remove_identical,
         )
 
 
