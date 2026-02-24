@@ -11,8 +11,7 @@ from os import path
 from pathlib import Path
 from typing import Dict, List, Set, Tuple, cast
 
-from bp.bp_module import BpModule, RROModule
-from bp.bp_parser import bp_parser  # type: ignore
+from bp.bp_module import RROModule, parse_bp_rro_module
 from bp.bp_utils import (
     ANDROID_BP_NAME,
     get_module_partition,
@@ -209,49 +208,42 @@ def beautify_rro_main():
 
     for overlay_dir in get_dirs_with_file(args.overlay_path, ANDROID_BP_NAME):
         overlay_path = Path(overlay_dir)
+
         android_bp_path = Path(overlay_path, ANDROID_BP_NAME)
-        android_bp_data = android_bp_path.read_text()
+        statement = parse_bp_rro_module(android_bp_path)
 
-        for statement in bp_parser.parse(android_bp_data):  # type: ignore
-            statement = cast(BpModule, statement)
+        module_name = statement['name']
+        dir_name = path.basename(overlay_dir)
 
-            if statement['module'] != 'runtime_resource_overlay':
-                continue
+        if ignore_packages and (
+            (module_name and module_name in ignore_packages)
+            or (dir_name and dir_name in ignore_packages)
+        ):
+            continue
 
-            statement = cast(RROModule, statement)
+        manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
+        resources_dir = statement.get('resource_dirs', ['res'])[0]
 
-            module_name = statement['name']
-            dir_name = path.basename(overlay_dir)
+        manifest_path = path.join(overlay_dir, manifest)
+        package, target_package, overlay_attrs = parse_overlay_manifest(
+            manifest_path,
+        )
+        module_partition = get_module_partition(statement)
+        module_priority = int(overlay_attrs.get('priority', 0))
 
-            if ignore_packages and (
-                (module_name and module_name in ignore_packages)
-                or (dir_name and dir_name in ignore_packages)
-            ):
-                continue
-
-            manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
-            resources_dir = statement.get('resource_dirs', ['res'])[0]
-
-            manifest_path = path.join(overlay_dir, manifest)
-            package, target_package, overlay_attrs = parse_overlay_manifest(
-                manifest_path,
-            )
-            module_partition = get_module_partition(statement)
-            module_priority = int(overlay_attrs.get('priority', 0))
-
-            overlay_data = OverlayData(
-                name=module_name,
-                path=overlay_path,
-                partition=module_partition,
-                manifest=manifest,
-                resources_dir=resources_dir,
-                module_priority=module_priority,
-                statement=statement,
-                package=package,
-                target_package=target_package,
-                attrs=overlay_attrs,
-            )
-            overlays_data.append(overlay_data)
+        overlay_data = OverlayData(
+            name=module_name,
+            path=overlay_path,
+            partition=module_partition,
+            manifest=manifest,
+            resources_dir=resources_dir,
+            module_priority=module_priority,
+            statement=statement,
+            package=package,
+            target_package=target_package,
+            attrs=overlay_attrs,
+        )
+        overlays_data.append(overlay_data)
 
     # Sort RROs in reverse order of priority so we can keep track of what
     # resources have been found, and remove duplicates
