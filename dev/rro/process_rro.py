@@ -141,17 +141,15 @@ def parse_rro(
     if keep_resources is None:
         keep_resources = frozenset()
 
-    overlay_resources = parse_overlay_resources(
-        resources_path,
-    )
-    if not overlay_resources:
+    resources = parse_overlay_resources(resources_path)
+    if not resources:
         raise ValueError(f'{package}: No resources in overlay')
 
     target_packages = get_target_packages(target_package)
 
     package_resources, module_name = find_target_package_resources(
         target_packages,
-        overlay_resources,
+        resources,
     )
 
     if len(target_packages) > 1:
@@ -174,7 +172,7 @@ def parse_rro(
 
     if package_resources is not None:
         wrong_tag_resources = overlay_resources_fixup_tag(
-            overlay_resources,
+            resources,
             package_resources,
         )
         for old_resource, new_resource in sorted(wrong_tag_resources):
@@ -185,12 +183,12 @@ def parse_rro(
 
     if package_resources is not None:
         overlay_resource_fixup_from_package(
-            overlay_resources,
+            resources,
             package_resources,
         )
 
     removed_resources = overlay_resources_remove(
-        overlay_resources,
+        resources,
         remove_resources,
     )
     for resource in resources_reference_name_sorted(removed_resources):
@@ -201,7 +199,7 @@ def parse_rro(
 
     if package_resources is not None and remove_missing_resources:
         missing_resources, kept_resources = overlay_resources_remove_missing(
-            overlay_resources,
+            resources,
             package_resources,
             manifest_path,
             keep_resources,
@@ -217,10 +215,10 @@ def parse_rro(
                 color=Color.GREEN,
             )
 
-    if not overlay_resources:
+    if not resources:
         raise ValueError(f'{package}: No resources left in overlay')
 
-    return overlay_resources
+    return resources
 
 
 def write_rro(
