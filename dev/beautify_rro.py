@@ -18,7 +18,11 @@ from bp.bp_utils import (
     partition_to_priority,
 )
 from rro.manifest import ANDROID_MANIFEST_NAME, parse_overlay_manifest
-from rro.process_rro import parse_rro, write_rro
+from rro.process_rro import (
+    get_rro_target_package_resources,
+    parse_rro,
+    write_rro,
+)
 from rro.resources import (
     RESOURCES_DIR,
     parse_overlay_resources,
@@ -90,11 +94,17 @@ def beautify_overlay(
         overlay_resources = parse_overlay_resources(
             str(overlay_data.resources_path),
         )
+        package_resources = get_rro_target_package_resources(
+            package=overlay_data.package,
+            target_package=overlay_data.target_package,
+            resources=overlay_resources,
+        )
         parse_rro(
             overlay_data.package,
             overlay_data.target_package,
             manifest_path=str(overlay_data.manifest_path),
             resources=overlay_resources,
+            package_resources=package_resources,
             remove_missing_resources=True,
             remove_resources=target_package_remove_resources,
             keep_packages=keep_packages,
