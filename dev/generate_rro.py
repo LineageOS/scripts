@@ -232,8 +232,6 @@ def generate_rro_main():
             continue
 
         apk_output_path = Path(overlays_path, rro_name)
-        shutil.rmtree(apk_output_path, ignore_errors=True)
-        apk_output_path.mkdir(parents=True, exist_ok=True)
 
         try:
             overlay_resources = get_rro_resources(package, str(resources_path))
@@ -254,6 +252,10 @@ def generate_rro_main():
                 target_package,
                 overlay_resources,
             )
+
+            shutil.rmtree(apk_output_path, ignore_errors=True)
+            apk_output_path.mkdir(parents=True, exist_ok=True)
+
             write_rro(
                 overlay_resources,
                 str(apk_output_path),
