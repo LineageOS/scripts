@@ -22,7 +22,12 @@ from rro.process_rro import (
     write_rro,
     write_rro_meta,
 )
-from rro.resources import RESOURCES_DIR, Resource, remove_resources_referenced
+from rro.resources import (
+    RESOURCES_DIR,
+    Resource,
+    parse_overlay_resources,
+    remove_resources_referenced,
+)
 from rro.target_package import fixup_target_package
 from utils.utils import Color, color_print, get_dirs_with_file
 
@@ -243,11 +248,12 @@ def commonize_overlays():
                 [],
             )
 
-            overlay_resources = parse_rro(
+            overlay_resources = parse_overlay_resources(str(resources_path))
+            parse_rro(
                 package,
                 target_package,
                 manifest_path=str(manifest_path),
-                resources_path=str(resources_path),
+                resources=overlay_resources,
             )
 
             overlay_data = OverlayData(
