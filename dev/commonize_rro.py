@@ -8,7 +8,7 @@ import shutil
 from argparse import ArgumentParser
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List, Set, Tuple
+from typing import Dict, List, Tuple
 
 from bp.bp_module import parse_bp_rro_module
 from bp.bp_utils import ANDROID_BP_NAME, get_module_partition
@@ -24,8 +24,8 @@ from rro.process_rro import (
 )
 from rro.resources import (
     RESOURCES_DIR,
-    Resource,
-    remove_resources_referenced,
+    ResourceMap,
+    keep_referenced_resources_from_removal,
 )
 from rro.target_package import fixup_target_package
 from utils.utils import Color, color_print, get_dirs_with_file
@@ -39,7 +39,7 @@ class OverlayData:
     target_package: str
     partition: str
     attrs: Dict[str, str]
-    resources: Set[Resource]
+    resources: ResourceMap
 
 
 def commonize_package_overlays(
@@ -76,9 +76,9 @@ def commonize_package_overlays(
         return
 
     for overlay_data in overlays_data:
-        common_overlay_resources &= remove_resources_referenced(
-            common_overlay_resources,
-            overlay_data.resources - common_overlay_resources,
+        keep_referenced_resources_from_removal(
+            resources_to_remove=common_overlay_resources,
+            all_resources=overlay_data.resources,
         )
 
     color_print(
