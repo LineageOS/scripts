@@ -60,6 +60,9 @@ def strip_rel_dir_qualifiers(rel_dir_path: str):
 
 
 class Resource(ABC):
+    rel_path: str
+    reference_name: str
+
     def __init__(
         self,
         rel_dir_path: str,
@@ -73,15 +76,7 @@ class Resource(ABC):
 
     @property
     @abstractmethod
-    def rel_path(self) -> str: ...
-
-    @property
-    @abstractmethod
     def keys(self) -> Tuple[str, ...]: ...
-
-    @property
-    @abstractmethod
-    def reference_name(self) -> str: ...
 
     @abstractmethod
     def __eq__(self, other: object) -> bool: ...
@@ -106,6 +101,17 @@ class RawResource(Resource):
         super().__init__(rel_dir_path, name)
 
         self.data = data
+        self.__hash_keys = (
+            self.rel_dir_path,
+            self.name,
+            len(self.data),
+        )
+        self.__hash = hash(self.__hash_keys)
+        self.rel_path = f'{self.rel_dir_path}/{self.name}'
+
+        resource_type = strip_rel_dir_qualifiers(self.rel_dir_path)
+        resource_name = path.splitext(self.name)[0]
+        self.reference_name = f'@{resource_type}/{resource_name}'
 
     def copy(
         self,
@@ -118,17 +124,6 @@ class RawResource(Resource):
         )
 
     @property
-    def reference_name(self):
-        resource_type = strip_rel_dir_qualifiers(self.rel_dir_path)
-        resource_name = path.splitext(self.name)[0]
-
-        return f'@{resource_type}/{resource_name}'
-
-    @property
-    def rel_path(self):
-        return path.join(self.rel_dir_path, self.name)
-
-    @property
     def keys(self):
         return (
             self.rel_dir_path,
@@ -139,20 +134,13 @@ class RawResource(Resource):
         if not isinstance(other, RawResource):
             return False
 
-        return (
-            self.rel_dir_path == other.rel_dir_path
-            and self.name == other.name
-            and self.data == other.data
-        )
+        if self.__hash_keys != other.__hash_keys:
+            return False
+
+        return self.data == other.data
 
     def __hash__(self) -> int:
-        return hash(
-            (
-                self.rel_dir_path,
-                self.name,
-                self.data,
-            )
-        )
+        return self.__hash
 
     def __repr__(self):
         return f'{self.rel_dir_path}/{self.name}'
@@ -180,6 +168,18 @@ class XMLResource(Resource):
         self.comments = comments
         self.product = product
         self.feature_flag = feature_flag
+        self.reference_name = f'@{self.tag}/{self.name}'
+        self.__element_str = xml_element_canonical_str(self.element)
+        self.__hash_keys = (
+            self.rel_dir_path,
+            self.tag,
+            self.name,
+            self.product,
+            self.feature_flag,
+            self.__element_str,
+        )
+        self.__hash = hash(self.__hash_keys)
+        self.rel_path = f'{self.rel_dir_path}/{self.file_name}'
 
     def copy(
         self,
@@ -218,14 +218,6 @@ class XMLResource(Resource):
         )
 
     @property
-    def reference_name(self):
-        return f'@{self.tag}/{self.name}'
-
-    @property
-    def rel_path(self):
-        return path.join(self.rel_dir_path, self.file_name)
-
-    @property
     def keys(self):
         return (
             self.rel_dir_path,
@@ -244,26 +236,10 @@ class XMLResource(Resource):
         if not isinstance(other, XMLResource):
             return False
 
-        return (
-            self.rel_dir_path == other.rel_dir_path
-            and self.tag == other.tag
-            and self.name == other.name
-            and self.product == other.product
-            and self.feature_flag == other.feature_flag
-            and xml_element_canonical_str(self.element)
-            == xml_element_canonical_str(other.element)
-        )
+        return self.__hash_keys == other.__hash_keys
 
     def __hash__(self) -> int:
-        return hash(
-            (
-                self.rel_dir_path,
-                self.keys,
-                self.tag,
-                self.name,
-                xml_element_canonical_str(self.element),
-            )
-        )
+        return self.__hash
 
 
 resources_dict = Dict[Tuple[str, ...], Resource]
