@@ -28,7 +28,7 @@ from rro.process_rro import (
 )
 from rro.resources import (
     RESOURCES_DIR,
-    Resource,
+    ResourceMap,
     read_xml_resources_prefix,
 )
 from rro.target_package import append_extra_locations
@@ -46,8 +46,8 @@ class OverlayData:
     package: str
     target_package: str
     attrs: Dict[str, str]
-    resources: Set[Resource]
-    package_resources: Optional[Dict[Tuple[str, ...], Resource]]
+    resources: ResourceMap
+    package_resources: Optional[ResourceMap]
 
 
 def parse_resource_entries(
