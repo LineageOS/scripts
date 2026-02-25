@@ -682,18 +682,6 @@ def get_package_resource(
     return package_resources.get(resource.keys)
 
 
-def overlay_resources_remove_add(
-    overlay_resources: Set[Resource],
-    removed_resources: Set[Resource],
-    added_resources: Set[Resource],
-):
-    for resource in removed_resources:
-        overlay_resources.remove(resource)
-
-    for resource in added_resources:
-        overlay_resources.add(resource)
-
-
 def overlay_resources_process(
     overlay_resources: Set[Resource],
     fn: Callable[
