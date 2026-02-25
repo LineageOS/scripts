@@ -14,7 +14,6 @@ from typing import (
     List,
     NotRequired,
     Optional,
-    Set,
     Tuple,
     TypedDict,
 )
@@ -33,13 +32,12 @@ from rro.manifest import (
 from rro.resources import (
     RESOURCES_DIR,
     Resource,
+    ResourceMap,
     find_target_package_resources,
     is_resource_in_entries,
     overlay_resource_fixup_from_package,
     overlay_resource_remove_identical,
-    overlay_resource_split_by_type,
     overlay_resources_fixup_tag,
-    overlay_resources_group_by_rel_path,
     overlay_resources_remove,
     overlay_resources_remove_missing,
     parse_overlay_resources,
@@ -96,7 +94,7 @@ def get_rro_resources(package: str, resources_path: str):
 def get_rro_target_package_resources(
     package: str,
     target_package: str,
-    resources: Set[Resource],
+    resources: ResourceMap,
     allow_missing: bool,
 ):
     target_packages = get_target_packages(target_package)
@@ -126,7 +124,7 @@ def check_rro_matches_aosp(
     rro_name: str,
     package: str,
     target_package: str,
-    resources: Set[Resource],
+    resources: ResourceMap,
 ):
     aosp_rro_android_bp_dir = find_overlay_android_bp_path_by_name(
         rro_name,
@@ -185,8 +183,8 @@ def check_rro_matches_aosp(
 
 def fixup_rro_resources(
     package: str,
-    resources: Set[Resource],
-    package_resources: Optional[Dict[Tuple[str, ...], Resource]],
+    resources: ResourceMap,
+    package_resources: Optional[ResourceMap],
 ):
     if package_resources is None:
         return
@@ -211,8 +209,8 @@ def remove_rro_resources(
     package: str,
     target_package: str,
     manifest_path: str,
-    resources: Set[Resource],
-    package_resources: Optional[Dict[Tuple[str, ...], Resource]],
+    resources: ResourceMap,
+    package_resources: Optional[ResourceMap],
     remove_resources: FrozenSet[str],
     keep_resources: FrozenSet[str],
     remove_identical_resources: bool,
@@ -267,7 +265,7 @@ def remove_rro_resources(
 
 
 def write_rro(
-    overlay_resources: Set[Resource],
+    overlay_resources: ResourceMap,
     output_path: str,
     rro_name: str,
     package: str,
@@ -276,14 +274,8 @@ def write_rro(
     preserved_prefixes: Optional[Dict[str, bytes]] = None,
     partition: Optional[str] = None,
 ):
-    resources, raw_resources = overlay_resource_split_by_type(
-        overlay_resources,
-    )
-
-    grouped_resources = overlay_resources_group_by_rel_path(resources)
-
     overlay_raw_resource_needs_aapt_flag = raw_resources_need_aapt_raw(
-        raw_resources,
+        overlay_resources,
     )
     aapt_raw = overlay_raw_resource_needs_aapt_flag is not None
     if overlay_raw_resource_needs_aapt_flag is not None:
@@ -294,14 +286,14 @@ def write_rro(
         )
 
     write_grouped_resources(
-        grouped_resources,
+        overlay_resources,
         output_path,
         RESOURCES_DIR,
         preserved_prefixes,
     )
 
     write_overlay_raw_resources(
-        raw_resources,
+        overlay_resources,
         output_path,
         RESOURCES_DIR,
     )
@@ -452,7 +444,7 @@ class OverlayPriorityData:
     target_package: str
     partition: str
     priority: int
-    resources: Set[Resource]
+    resources: ResourceMap
     prefer_resources: FrozenSet[str]
     attrs: Dict[str, str]
 
