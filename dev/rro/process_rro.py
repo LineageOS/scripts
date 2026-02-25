@@ -530,15 +530,6 @@ def remove_rros_shadowed_resources(overlays: List[OverlayPriorityData]):
             )
 
         shadowed_resources = resources[1:]
-        shadowed_resources.sort(key=lambda ro: ro[1].package)
-
-        for resource, overlay in shadowed_resources:
-            color_print(
-                f'{overlay.package}: {resource.reference_name} shadowed in '
-                f'{preferred_resource[1].package}',
-                color=Color.YELLOW,
-            )
-
         for resource, overlay in shadowed_resources:
             overlay.resources.remove(resource)
 
