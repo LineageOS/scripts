@@ -36,12 +36,12 @@ from rro.resources import (
     find_target_package_resources,
     is_resource_in_entries,
     overlay_resource_fixup_from_package,
-    overlay_resource_remove_identical,
     overlay_resources_fixup_tag,
     overlay_resources_remove,
     overlay_resources_remove_missing,
     parse_overlay_resources,
     raw_resources_need_aapt_raw,
+    remove_identical_resource,
     resources_reference_name_sorted,
     write_grouped_resources,
     write_overlay_raw_resources,
@@ -213,7 +213,6 @@ def remove_rro_resources(
     package_resources: Optional[ResourceMap],
     remove_resources: FrozenSet[str],
     keep_resources: FrozenSet[str],
-    remove_identical_resources: bool,
 ):
     removed_resources = overlay_resources_remove(
         resources,
@@ -247,18 +246,6 @@ def remove_rro_resources(
             f'{package}: {resource} kept',
             color=Color.GREEN,
         )
-
-    if remove_identical_resources:
-        identical_resources = overlay_resource_remove_identical(
-            resources,
-            package_resources,
-        )
-
-        for resource in resources_reference_name_sorted(identical_resources):
-            color_print(
-                f'{package}: {resource} identical in {target_package}',
-                color=Color.YELLOW,
-            )
 
     if not resources:
         raise ValueError(f'{package}: No resources left in overlay')
@@ -445,8 +432,10 @@ class OverlayPriorityData:
     partition: str
     priority: int
     resources: ResourceMap
+    package_resources: Optional[ResourceMap]
     prefer_resources: FrozenSet[str]
     attrs: Dict[str, str]
+    immutable: bool
 
 
 def resource_sort_key(ro: Tuple[Resource, OverlayPriorityData]):
@@ -460,7 +449,10 @@ def resource_sort_key(ro: Tuple[Resource, OverlayPriorityData]):
     )
 
 
-def remove_rros_shadowed_resources(overlays: List[OverlayPriorityData]):
+def remove_rros_shadowed_resources(
+    overlays: List[OverlayPriorityData],
+    remove_identical: bool,
+):
     undetermined_resource_priorities: List[Tuple[str, List[str]]] = []
     resource_map: Dict[
         # resource keys
@@ -504,6 +496,7 @@ def remove_rros_shadowed_resources(overlays: List[OverlayPriorityData]):
 
         preferred_resource_overlay = resources[0]
         preferred_resource = resources[0][0]
+        preferred_overlay = resources[0][1]
         preferred_resource_sort_key = resource_sort_key(
             preferred_resource_overlay,
         )
@@ -524,8 +517,25 @@ def remove_rros_shadowed_resources(overlays: List[OverlayPriorityData]):
                 )
             )
 
+        # If we shadowed an immutable resource, do not check if the
+        # preferred resource is identical to AOSP, as we cannot remove
+        # it because the immutable shadowed resource would take priority
+        shadowed_immutable = False
         shadowed_resources = resources[1:]
         for resource, overlay in shadowed_resources:
+            if overlay.immutable:
+                shadowed_immutable = True
+                continue
+
             overlay.resources.remove(resource)
+
+        if shadowed_immutable or not remove_identical:
+            continue
+
+        remove_identical_resource(
+            preferred_resource,
+            preferred_overlay.resources,
+            preferred_overlay.package_resources,
+        )
 
     return undetermined_resource_priorities

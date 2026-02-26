@@ -1183,32 +1183,28 @@ def overlay_resource_fixup_from_package(
     )
 
 
-def overlay_resource_remove_identical(
-    overlay_resources: ResourceMap,
-    package_resources: ResourceMap,
+def remove_identical_resource(
+    resource: Resource,
+    resources: ResourceMap,
+    package_resources: Optional[ResourceMap],
 ):
-    def remove_identical_resource(resource: Resource):
-        package_resource = package_resources.by_keys(resource.keys)
-        if package_resource is None:
-            resource_unqualified_keys = resource_to_unqualified_keys(resource)
-            package_resource = package_resources.by_keys(
-                resource_unqualified_keys,
-            )
+    if package_resources is None:
+        return
 
-        if package_resource is None:
-            return
+    package_resource = package_resources.by_keys(resource.keys)
+    if package_resource is None:
+        resource_unqualified_keys = resource_to_unqualified_keys(resource)
+        package_resource = package_resources.by_keys(
+            resource_unqualified_keys,
+        )
 
-        if resource != package_resource:
-            return
+    if package_resource is None:
+        return
 
-        return True
+    if resource != package_resource:
+        return
 
-    removed_resources, _ = overlay_resources_process(
-        overlay_resources,
-        remove_identical_resource,
-    )
-
-    return removed_resources
+    resources.remove(resource)
 
 
 def attrib_needs_aapt_raw(
