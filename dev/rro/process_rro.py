@@ -438,14 +438,24 @@ class OverlayPriorityData:
     immutable: bool
 
 
+def resource_equality_key(ro: Tuple[Resource, OverlayPriorityData]):
+    return (
+        is_resource_in_entries(ro[1].prefer_resources, ro[0]),
+        partition_to_priority(ro[1].partition),
+        ro[1].priority,
+    )
+
+
 def resource_sort_key(ro: Tuple[Resource, OverlayPriorityData]):
     return (
         # Preferred resources first
-        is_resource_in_entries(ro[1].prefer_resources, ro[0]),
+        not is_resource_in_entries(ro[1].prefer_resources, ro[0]),
         # Partition priority
-        partition_to_priority(ro[1].partition),
+        -partition_to_priority(ro[1].partition),
         # Overlay priority
-        ro[1].priority,
+        -ro[1].priority,
+        # Package name
+        ro[1].package,
     )
 
 
@@ -453,7 +463,7 @@ def remove_rros_shadowed_resources(
     overlays: List[OverlayPriorityData],
     remove_identical: bool,
 ):
-    undetermined_resource_priorities: List[Tuple[str, List[str]]] = []
+    undetermined_resource_priorities: Dict[Tuple[str, str], List[str]] = {}
     resource_map: Dict[
         # resource keys
         Tuple[
@@ -471,6 +481,25 @@ def remove_rros_shadowed_resources(
             ],
         ],
     ] = {}
+
+    def add_undetermined(
+        resources: List[
+            Tuple[
+                Resource,
+                OverlayPriorityData,
+            ],
+        ],
+    ):
+        if len(resources) < 2:
+            return
+
+        undetermined_resource_priorities.setdefault(
+            (
+                resources[0][0].rel_path,
+                resources[0][0].reference_name,
+            ),
+            [],
+        ).extend(r[1].package for r in resources)
 
     for overlay in overlays:
         for resource in overlay.resources:
@@ -492,30 +521,39 @@ def remove_rros_shadowed_resources(
         if len(resources) < 2:
             continue
 
-        resources.sort(key=resource_sort_key, reverse=True)
+        resources.sort(key=resource_sort_key)
 
         preferred_resource_overlay = resources[0]
         preferred_resource = resources[0][0]
         preferred_overlay = resources[0][1]
-        preferred_resource_sort_key = resource_sort_key(
+        preferred_resource_equality_key = resource_equality_key(
             preferred_resource_overlay,
         )
 
-        preferred_packages: List[str] = []
+        num_equal_preferred_resources = 0
+        preferred_resources: List[
+            Tuple[
+                Resource,
+                OverlayPriorityData,
+            ],
+        ] = []
         for ro in resources:
-            if resource_sort_key(ro) != preferred_resource_sort_key:
+            if resource_equality_key(ro) != preferred_resource_equality_key:
                 break
 
-            preferred_packages.append(ro[1].package)
-        preferred_packages.sort()
+            if ro[0] == preferred_resource:
+                num_equal_preferred_resources += 1
 
-        if len(preferred_packages) > 1:
-            undetermined_resource_priorities.append(
-                (
-                    preferred_resource.reference_name,
-                    preferred_packages,
-                )
-            )
+            preferred_resources.append(ro)
+
+        # If all undetermined priority resources are equal then keep
+        # the one in the first overlay (alphabetically)
+        if (
+            num_equal_preferred_resources != len(preferred_resources)
+            and len(preferred_resources) > 1
+        ):
+            add_undetermined(preferred_resources)
+            continue
 
         # If we shadowed an immutable resource, do not check if the
         # preferred resource is identical to AOSP, as we cannot remove

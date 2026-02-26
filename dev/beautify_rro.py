@@ -111,11 +111,15 @@ def remove_shadowed_resources(
         remove_identical=remove_identical,
     )
 
-    for undetermined_resource_priority in undetermined_resource_priorities:
+    sorted_undetermined = sorted(
+        undetermined_resource_priorities.items(),
+        key=lambda v: v[0],
+    )
+    for (rel_path, reference_name), packages in sorted_undetermined:
         color_print(
-            f'Resource {undetermined_resource_priority[0]} has '
+            f'Resource {rel_path}: {reference_name} has '
             'undetermined priority between packages: '
-            f'{", ".join(undetermined_resource_priority[1])}',
+            f'{", ".join(packages)}',
             color=Color.RED,
         )
 
