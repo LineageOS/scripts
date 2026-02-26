@@ -123,9 +123,6 @@ def remove_shadowed_resources(
             color=Color.RED,
         )
 
-    if undetermined_resource_priorities:
-        raise ValueError('An undetermined priority has been found')
-
 
 def write_beautified_overlay(
     overlay_data: OverlayData,
