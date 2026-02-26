@@ -228,7 +228,8 @@ def beautify_rro_main():
     parser.add_argument(
         '-k',
         '--keep-package',
-        help='Keep overlays targeting a package even if it is not found',
+        help='Keep an overlay even if a target package is not found, '
+        '(including its resources)',
         default=[],
         action='append',
     )

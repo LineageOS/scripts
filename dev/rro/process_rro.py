@@ -98,13 +98,13 @@ def get_rro_target_package_resources(
     allow_missing: bool,
 ):
     target_packages = get_target_packages(target_package)
-    if not target_packages and not allow_missing:
-        raise ValueError(f'{package}: Unknown package name {target_package}')
-
     package_resources, module_name = find_target_package_resources(
         target_packages,
         resources,
     )
+
+    if not package_resources and not allow_missing:
+        raise ValueError(f'{package}: Unknown package name {target_package}')
 
     if len(target_packages) > 1:
         color_print(
