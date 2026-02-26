@@ -550,7 +550,6 @@ def remove_rros_shadowed_resources(
             and len(preferred_resources) > 1
         ):
             add_undetermined(preferred_resources)
-            continue
 
         # If we shadowed an immutable resource, do not check if the
         # preferred resource is identical to AOSP, as we cannot remove
