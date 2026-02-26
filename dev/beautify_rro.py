@@ -7,6 +7,7 @@ from __future__ import annotations
 import shutil
 from argparse import ArgumentParser
 from dataclasses import dataclass
+from itertools import chain
 from os import path
 from pathlib import Path
 from typing import Dict, List, Optional, Set, Tuple, cast
@@ -48,6 +49,7 @@ class OverlayData:
     attrs: Dict[str, str]
     resources: ResourceMap
     package_resources: Optional[ResourceMap]
+    immutable: bool
 
 
 def parse_resource_entries(
@@ -86,6 +88,7 @@ def filter_resource_entries(
 def remove_shadowed_resources(
     overlays_data: List[OverlayData],
     prefer_resources: Set[Tuple[Optional[str], str]],
+    remove_identical: bool,
 ):
     undetermined_resource_priorities = remove_rros_shadowed_resources(
         [
@@ -95,14 +98,17 @@ def remove_shadowed_resources(
                 partition=o.partition,
                 priority=o.module_priority,
                 resources=o.resources,
+                package_resources=o.package_resources,
                 prefer_resources=filter_resource_entries(
                     prefer_resources,
                     o.package,
                 ),
                 attrs=o.attrs,
+                immutable=o.immutable,
             )
             for o in overlays_data
-        ]
+        ],
+        remove_identical=remove_identical,
     )
 
     for undetermined_resource_priority in undetermined_resource_priorities:
@@ -122,7 +128,6 @@ def write_beautified_overlay(
     remove_resources: Set[Tuple[None | str, str]],
     keep_resources: Set[Tuple[None | str, str]],
     maintain_copyrights: bool,
-    remove_identical_resources: bool,
 ):
     target_package_remove_resources = filter_resource_entries(
         remove_resources,
@@ -142,7 +147,6 @@ def write_beautified_overlay(
             package_resources=overlay_data.package_resources,
             remove_resources=target_package_remove_resources,
             keep_resources=target_package_keep_resources,
-            remove_identical_resources=remove_identical_resources,
         )
 
         # Preserve existing res/values/*.xml headers BEFORE we delete res/
@@ -227,6 +231,13 @@ def beautify_rro_main():
         default=[],
         action='append',
     )
+    parser.add_argument(
+        '-c',
+        '--common',
+        help='Path to common resources',
+        default=[],
+        action='append',
+    )
 
     args = parser.parse_args()
     ignore_packages = cast(str, args.ignore_packages)
@@ -239,6 +250,8 @@ def beautify_rro_main():
     keep_resources = parse_resource_entries(keep_resources_raw)
     prefer_resources = parse_resource_entries(prefer_resources_raw)
 
+    common_paths: List[str] = args.common
+
     append_extra_locations(args.extra_package_locations)
 
     ignore_packages = {
@@ -247,7 +260,7 @@ def beautify_rro_main():
 
     overlays_data: List[OverlayData] = []
 
-    for overlay_dir in get_dirs_with_file(args.overlay_path, ANDROID_BP_NAME):
+    def parse_overlay(overlay_dir: str, immutable: bool):
         overlay_path = Path(overlay_dir)
 
         android_bp_path = Path(overlay_path, ANDROID_BP_NAME)
@@ -260,7 +273,7 @@ def beautify_rro_main():
             (module_name and module_name in ignore_packages)
             or (dir_name and dir_name in ignore_packages)
         ):
-            continue
+            return
 
         manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
         manifest_path = Path(overlay_dir, manifest)
@@ -288,7 +301,7 @@ def beautify_rro_main():
         except ValueError as e:
             shutil.rmtree(overlay_path, ignore_errors=True)
             color_print(e, color=Color.RED)
-            continue
+            return
 
         fixup_rro_resources(
             package=package,
@@ -308,10 +321,23 @@ def beautify_rro_main():
             attrs=overlay_attrs,
             resources=resources,
             package_resources=package_resources,
+            immutable=immutable,
         )
         overlays_data.append(overlay_data)
 
-    remove_shadowed_resources(overlays_data, prefer_resources)
+    for overlay_dir in get_dirs_with_file(args.overlay_path, ANDROID_BP_NAME):
+        parse_overlay(overlay_dir, immutable=False)
+
+    for overlay_dir in chain(
+        *(get_dirs_with_file(c, ANDROID_BP_NAME) for c in common_paths)
+    ):
+        parse_overlay(overlay_dir, immutable=True)
+
+    remove_shadowed_resources(
+        overlays_data,
+        prefer_resources,
+        remove_identical=args.remove_identical,
+    )
 
     for overlay_data in overlays_data:
         write_beautified_overlay(
@@ -319,7 +345,6 @@ def beautify_rro_main():
             remove_resources=remove_resources,
             keep_resources=keep_resources,
             maintain_copyrights=args.maintain_copyrights,
-            remove_identical_resources=args.remove_identical,
         )
 
 
