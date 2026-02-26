@@ -218,11 +218,6 @@ def remove_rro_resources(
         resources,
         remove_resources,
     )
-    for resource in resources_reference_name_sorted(removed_resources):
-        color_print(
-            f'{package}: {resource} removed in {target_package}',
-            color=Color.YELLOW,
-        )
 
     if not resources:
         raise ValueError(f'{package}: No resources left in overlay')
