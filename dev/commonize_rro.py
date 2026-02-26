@@ -28,7 +28,7 @@ from rro.resources import (
     keep_referenced_resources_from_removal,
 )
 from rro.target_package import fixup_target_package
-from utils.utils import Color, color_print, get_dirs_with_file
+from utils.utils import get_dirs_with_file
 
 
 @dataclass
@@ -48,8 +48,6 @@ def commonize_package_overlays(
     device: str,
     output_path: Path,
 ):
-    print(f'{common_package}: commonizing')
-
     common_overlay_resources = None
     common_overlays_data: List[OverlayData] = []
     for overlay_data in overlays_data:
@@ -58,21 +56,11 @@ def commonize_package_overlays(
         else:
             common_overlay_resources &= overlay_data.resources
 
-        color_print(
-            f'{common_package}: {overlay_data.path} has '
-            f'{len(overlay_data.resources)} resources',
-            color=Color.GREEN,
-        )
-
         common_overlays_data.append(overlay_data)
 
     assert common_overlay_resources is not None
 
     if not common_overlay_resources:
-        color_print(
-            f'{common_package}: has no common resources',
-            color=Color.YELLOW,
-        )
         return
 
     for overlay_data in overlays_data:
@@ -81,22 +69,10 @@ def commonize_package_overlays(
             all_resources=overlay_data.resources,
         )
 
-    color_print(
-        f'{common_package}: has '
-        f'{len(common_overlay_resources)} common resources',
-        color=Color.GREEN,
-    )
-
     rro_meta = None
     overlay_data = None
     for overlay_data in common_overlays_data:
         overlay_data.resources -= common_overlay_resources
-
-        color_print(
-            f'{common_package}: {overlay_data.path} has '
-            f'{len(overlay_data.resources)} resources left',
-            color=Color.GREEN,
-        )
 
         rro_meta = read_rro_meta(overlay_data.path)
 
