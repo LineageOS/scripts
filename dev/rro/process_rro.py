@@ -502,8 +502,11 @@ def remove_rros_shadowed_resources(overlays: List[OverlayPriorityData]):
 
         resources.sort(key=resource_sort_key, reverse=True)
 
-        preferred_resource = resources[0]
-        preferred_resource_sort_key = resource_sort_key(preferred_resource)
+        preferred_resource_overlay = resources[0]
+        preferred_resource = resources[0][0]
+        preferred_resource_sort_key = resource_sort_key(
+            preferred_resource_overlay,
+        )
 
         preferred_packages: List[str] = []
         for ro in resources:
@@ -516,7 +519,7 @@ def remove_rros_shadowed_resources(overlays: List[OverlayPriorityData]):
         if len(preferred_packages) > 1:
             undetermined_resource_priorities.append(
                 (
-                    preferred_resource[0].reference_name,
+                    preferred_resource.reference_name,
                     preferred_packages,
                 )
             )
