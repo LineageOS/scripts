@@ -779,7 +779,7 @@ def parse_overlay_resources(resources_path: str):
 
 
 @functools.cache
-def get_target_package_resources(res_dirs: Tuple[str]):
+def get_target_package_resources(res_dirs: List[str]):
     return parse_resources(
         res_dirs,
         parse_all_values=False,
@@ -787,13 +787,13 @@ def get_target_package_resources(res_dirs: Tuple[str]):
 
 
 def find_target_package_resources(
-    target_packages: List[Tuple[str, str, Tuple[str, ...]]],
+    target_packages: List[Tuple[str, str, List[str]]],
     overlay_resources: ResourceMap,
 ):
     if len(target_packages) == 1:
         _, module_name, resource_dirs = target_packages[0]
         package_resources = get_target_package_resources(
-            resource_dirs,
+            tuple(resource_dirs),
         )
         return package_resources, module_name
 
@@ -803,7 +803,7 @@ def find_target_package_resources(
 
     for _, module_name, resource_dirs in target_packages:
         package_resources = get_target_package_resources(
-            resource_dirs,
+            tuple(resource_dirs),
         )
 
         matching_resources = 0
