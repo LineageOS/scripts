@@ -797,7 +797,7 @@ def find_target_package_resources(
         )
         return package_resources, module_name
 
-    best_matching_resources = 0
+    best_matching_resources = None
     best_module_name = None
     best_resources = None
 
@@ -814,7 +814,10 @@ def find_target_package_resources(
             if package_resource is not None:
                 matching_resources += 1
 
-        if matching_resources > best_matching_resources:
+        if (
+            best_matching_resources is None
+            or matching_resources > best_matching_resources
+        ):
             best_matching_resources = matching_resources
             best_module_name = module_name
             best_resources = package_resources
