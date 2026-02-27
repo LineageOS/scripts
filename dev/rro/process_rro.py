@@ -47,6 +47,7 @@ from rro.resources import (
     write_overlay_raw_resources,
 )
 from rro.target_package import (
+    PackageMap,
     find_overlay_android_bp_path_by_name,
     get_target_packages,
 )
@@ -92,12 +93,13 @@ def get_rro_resources(package: str, resources_path: str):
 
 
 def get_rro_target_package_resources(
+    package_map: PackageMap,
     package: str,
     target_package: str,
     resources: ResourceMap,
     allow_missing: bool,
 ):
-    target_packages = get_target_packages(target_package)
+    target_packages = get_target_packages(package_map, target_package)
     if not target_packages and not allow_missing:
         raise ValueError(f'{package}: Unknown package name {target_package}')
 
@@ -121,12 +123,14 @@ def get_rro_target_package_resources(
 
 
 def check_rro_matches_aosp(
+    package_map: PackageMap,
     rro_name: str,
     package: str,
     target_package: str,
     resources: ResourceMap,
 ):
     aosp_rro_android_bp_dir = find_overlay_android_bp_path_by_name(
+        package_map,
         rro_name,
     )
     if aosp_rro_android_bp_dir is None:
@@ -150,6 +154,7 @@ def check_rro_matches_aosp(
 
     aosp_resources = parse_overlay_resources(str(resources_path))
     aosp_package_resources = get_rro_target_package_resources(
+        package_map=package_map,
         package=aosp_package,
         target_package=aosp_target_package,
         resources=aosp_resources,

@@ -32,7 +32,11 @@ from rro.resources import (
     ResourceMap,
     read_xml_resources_prefix,
 )
-from rro.target_package import append_extra_locations
+from rro.target_package import (
+    append_extra_locations,
+    map_packages,
+    read_package_map,
+)
 from utils.utils import Color, color_print, get_dirs_with_file
 
 
@@ -239,6 +243,12 @@ def beautify_rro_main():
         default=[],
         action='append',
     )
+    parser.add_argument(
+        '-m',
+        '--package-map',
+        help='Path to cached package map',
+        type=Path,
+    )
 
     args = parser.parse_args()
     ignore_packages = cast(str, args.ignore_packages)
@@ -254,6 +264,11 @@ def beautify_rro_main():
     common_paths: List[str] = args.common
 
     append_extra_locations(args.extra_package_locations)
+
+    if args.package_map is not None:
+        package_map = read_package_map(args.package_map)
+    else:
+        package_map = map_packages()
 
     ignore_packages = {
         s.strip() for s in ignore_packages.split(',') if s.strip()
@@ -294,6 +309,7 @@ def beautify_rro_main():
                 str(resources_path),
             )
             package_resources = get_rro_target_package_resources(
+                package_map=package_map,
                 package=package,
                 target_package=target_package,
                 resources=resources,
