@@ -3,8 +3,10 @@
 
 from __future__ import annotations
 
-import functools
+import json
+from dataclasses import asdict, dataclass
 from os import path
+from pathlib import Path
 from typing import Dict, List, Set, Tuple, cast
 
 from bp.bp_module import (
@@ -134,15 +136,45 @@ def get_app_package_name(android_bp_dir_path: str, manifests: List[str]):
     return None
 
 
-@functools.cache
+@dataclass
+class PackageMap:
+    packages: Dict[
+        # package name
+        str,
+        # targets
+        List[
+            Tuple[
+                # root directory
+                str,
+                # target name
+                str,
+                # resource directories
+                List[str],
+            ],
+        ],
+    ]
+    rros: Dict[
+        # target name
+        str,
+        Tuple[
+            str,
+            BpModule,
+        ],
+    ]
+
+
 def map_packages():
     soong_config_module_types = set(['java_defaults'])
     defaults_map: Dict[str, BpModule] = {}
     android_apps_map: Dict[str, Tuple[str, AppModule]] = {}
     android_libraries_map: Dict[str, Tuple[str, AppModule]] = {}
     filegroups_map: Dict[str, FilegroupModule] = {}
-    rro_overlays_map: Dict[str, Tuple[str, BpModule]] = {}
     missing_libs: Set[str] = set()
+
+    package_map = PackageMap(
+        packages={},
+        rros={},
+    )
 
     for parent_path in PACKAGE_LOCATIONS:
         packages_path = path.join(android_root, parent_path)
@@ -206,13 +238,21 @@ def map_packages():
                     )
 
                 if statement['module'] == 'runtime_resource_overlay':
-                    rro_overlays_map[name] = (
+                    package_map.rros[name] = (
                         android_bp_dir_path,
                         statement,
                     )
 
-    package_path_set: Set[Tuple[str, str, Tuple[str, ...]]] = set()
-    package_path_map: Dict[str, List[Tuple[str, str, Tuple[str, ...]]]] = {}
+    package_set: Set[
+        Tuple[
+            # root directory
+            str,
+            # target name
+            str,
+            # resource directories
+            Tuple[str, ...],
+        ]
+    ] = set()
     for android_bp_dir_path, app_module in android_apps_map.values():
         defaults = app_module.get('defaults', [])
 
@@ -269,20 +309,20 @@ def map_packages():
             package_name,
             tuple(resource_dirs),
         )
-        if package_path_set_entry in package_path_set:
+        if package_path_set_entry in package_set:
             continue
 
-        package_path_set.add(package_path_set_entry)
+        package_set.add(package_path_set_entry)
 
-        package_path_map.setdefault(package_name, []).append(
+        package_map.packages.setdefault(package_name, []).append(
             (
                 android_bp_dir_path,
                 name,
-                tuple(resource_dirs),
+                resource_dirs,
             )
         )
 
-    return package_path_map, rro_overlays_map
+    return package_map
 
 
 target_package_name_map = {
@@ -313,16 +353,31 @@ def fixup_target_package(target_package: str):
     return target_package, target_package
 
 
-def get_target_packages(target_package: str):
-    package_path_map, _ = map_packages()
-
-    return package_path_map.get(target_package, [])
+def get_target_packages(package_map: PackageMap, target_package: str):
+    return package_map.packages.get(target_package, [])
 
 
-def find_overlay_android_bp_path_by_name(name: str):
-    _, rro_overlays_map = map_packages()
-
-    if name in rro_overlays_map:
-        return rro_overlays_map[name][0]
+def find_overlay_android_bp_path_by_name(package_map: PackageMap, name: str):
+    if name in package_map.rros:
+        return package_map.rros[name][0]
 
     return None
+
+
+def write_package_map(output_path: Path):
+    package_map = map_packages()
+
+    with output_path.open('w', encoding='utf-8') as f:
+        json.dump(
+            asdict(package_map),
+            f,
+            indent=4,
+            ensure_ascii=False,
+        )
+
+
+def read_package_map(input_path: Path):
+    with input_path.open('r', encoding='utf-8') as f:
+        data = json.load(f)
+
+    return PackageMap(**data)
