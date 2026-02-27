@@ -24,8 +24,11 @@ from rro.process_rro import (
 )
 from rro.resources import RESOURCES_DIR
 from rro.target_package import (
+    PackageMap,
     append_extra_locations,
     fixup_target_package,
+    map_packages,
+    read_package_map,
 )
 from utils.utils import Color, color_print, run_cmd
 
@@ -69,6 +72,7 @@ def find_apk_partition(apk_path: Path):
 
 
 def generate_rro(
+    package_map: PackageMap,
     rro_name: str,
     original_rro_name: str,
     package: str,
@@ -101,6 +105,7 @@ def generate_rro(
 
     overlay_resources = get_rro_resources(package, str(resources_path))
     package_resources = get_rro_target_package_resources(
+        package_map=package_map,
         package=package,
         target_package=target_package,
         resources=overlay_resources,
@@ -112,6 +117,7 @@ def generate_rro(
         package_resources=package_resources,
     )
     check_rro_matches_aosp(
+        package_map,
         rro_name,
         package,
         target_package,
@@ -194,12 +200,23 @@ def generate_rro_main():
         help='Use apktool',
         action='store_true',
     )
+    parser.add_argument(
+        '-m',
+        '--package-map',
+        help='Path to cached package map',
+        type=Path,
+    )
 
     args = parser.parse_args()
     exclude_overlays = set(cast(List[str], args.exclude_overlay))
     exclude_packages = set(cast(List[str], args.exclude_package))
 
     append_extra_locations(args.extra_package_locations)
+
+    if args.package_map is not None:
+        package_map = read_package_map(args.package_map)
+    else:
+        package_map = map_packages()
 
     overlays_path = Path(args.overlays)
 
@@ -278,6 +295,7 @@ def generate_rro_main():
 
         try:
             generate_rro(
+                package_map=package_map,
                 rro_name=rro_name,
                 original_rro_name=original_rro_name,
                 package=package,
