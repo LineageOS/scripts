@@ -6,6 +6,7 @@ from __future__ import annotations
 import functools
 import os
 from abc import ABC, abstractmethod
+from enum import Enum, auto
 from fnmatch import fnmatch
 from os import path
 from pathlib import Path
@@ -13,16 +14,14 @@ from typing import (
     Callable,
     Dict,
     FrozenSet,
-    Generic,
     Iterable,
     List,
     Literal,
     Optional,
     Set,
     Tuple,
-    TypeVar,
+    TypeGuard,
     Union,
-    cast,
 )
 
 from lxml import etree
@@ -59,6 +58,11 @@ def strip_rel_dir_qualifiers(rel_dir_path: str):
     return str(stripped_rel_dir_path)
 
 
+class ResourceType(Enum):
+    XML = auto()
+    RAW = auto()
+
+
 class Resource(ABC):
     rel_path: str
     reference_name: str
@@ -67,9 +71,11 @@ class Resource(ABC):
         self,
         rel_dir_path: str,
         name: str,
+        resource_type: ResourceType,
     ):
         self.rel_dir_path = rel_dir_path
         self.name = name
+        self.type = resource_type
 
     @abstractmethod
     def copy(self, rel_dir_path: Optional[str] = None) -> Resource: ...
@@ -98,7 +104,7 @@ class RawResource(Resource):
         name: str,
         data: bytes,
     ):
-        super().__init__(rel_dir_path, name)
+        super().__init__(rel_dir_path, name, ResourceType.RAW)
 
         self.data = data
         self.__hash_keys = (
@@ -159,7 +165,7 @@ class XMLResource(Resource):
         product: str,
         feature_flag: str,
     ):
-        super().__init__(rel_dir_path, name)
+        super().__init__(rel_dir_path, name, ResourceType.XML)
 
         self.index = index
         self.tag = tag
@@ -242,33 +248,66 @@ class XMLResource(Resource):
         return self.__hash
 
 
-R = TypeVar('R', bound='Resource')
+def is_xml_resource(r: Resource) -> TypeGuard[XMLResource]:
+    return r.type is ResourceType.XML
 
 
-class ResourceMapTyped(Generic[R]):
+def is_raw_resource(r: Resource) -> TypeGuard[RawResource]:
+    return r.type is ResourceType.RAW
+
+
+def is_by_rel_path_raw_resources(
+    resources: Set[Resource],
+) -> TypeGuard[Set[RawResource]]:
+    if not len(resources):
+        return True
+
+    # Raw resources shouldn't be able to appear multiple times for the same
+    # relative path, use that to optimize the check
+    if len(resources) == 1 and is_raw_resource(next(iter(resources))):
+        return True
+
+    return False
+
+
+def is_by_rel_path_xml_resources(
+    resources: Set[Resource],
+) -> TypeGuard[Set[XMLResource]]:
+    if not len(resources):
+        return True
+
+    if not is_by_rel_path_raw_resources(resources):
+        return True
+
+    return False
+
+
+resource_str_map = Dict[str, Set[Resource]]
+
+
+class ResourceMap:
     def __init__(
         self,
-        resources: Optional[Iterable[R]] = None,
-        by_keys: Optional[Dict[Tuple[str, ...], R]] = None,
-        by_name: Optional[Dict[str, Set[R]]] = None,
-        by_reference_name: Optional[Dict[str, Set[R]]] = None,
-        by_rel_path: Optional[Dict[str, Set[R]]] = None,
+        resources: Optional[Iterable[Resource]] = None,
+        # Avoid adding indexes for queries which will never be used
+        by_keys: Optional[Dict[Tuple[str, ...], Resource]] = None,
+        by_name: Optional[resource_str_map] = None,
+        by_reference_name: Optional[resource_str_map] = None,
+        by_rel_path: Optional[resource_str_map] = None,
     ):
-        self.__all: Set[R] = set()
-
+        self.__all: Set[Resource] = set()
         self.__by_keys = by_keys
         self.__by_name = by_name
         self.__by_reference_name = by_reference_name
         self.__by_rel_path = by_rel_path
 
         if resources:
-            self.__add_many(resources)
+            self.add_many(resources)
 
     def __eq__(self, other: object):
-        if not isinstance(other, ResourceMapTyped):
+        if not isinstance(other, ResourceMap):
             return NotImplemented
 
-        other = cast(ResourceMapTyped[R], other)
         return self.__all == other.__all
 
     def __iter__(self):
@@ -277,40 +316,59 @@ class ResourceMapTyped(Generic[R]):
     def __len__(self):
         return len(self.__all)
 
-    def __contains__(self, resource: R):
+    def __contains__(self, resource: Resource):
         return resource in self.__all
 
-    def __and__(self, other: ResourceMapTyped[R]):
+    def __and__(self, other: ResourceMap):
         return ResourceMap(self.__all & other.__all)
 
-    def __iand__(self, other: ResourceMapTyped[R]):
+    def __iand__(self, other: ResourceMap):
         removed = self.__all - other.__all
         self.__discard_many(removed)
         return self
 
-    def __sub__(self, other: ResourceMapTyped[R]):
+    def __sub__(self, other: ResourceMap):
         return ResourceMap(self.__all - other.__all)
 
-    def __or__(self, other: ResourceMapTyped[R]):
+    def __isub__(self, other: ResourceMap):
+        self.__discard_many(self.__all & other.__all)
+        return self
+
+    def __or__(self, other: ResourceMap):
         return ResourceMap(self.__all | other.__all)
+
+    def __ior__(self, other: ResourceMap):
+        self.add_many(other.__all)
+        return self
+
+    def copy(self):
+        return ResourceMap(
+            self.__all,
+            by_keys={} if self.__by_keys is not None else None,
+            by_name={} if self.__by_name is not None else None,
+            by_reference_name={}
+            if self.__by_reference_name is not None
+            else None,
+            by_rel_path={} if self.__by_rel_path is not None else None,
+        )
 
     def __index_add(
         self,
-        index: Optional[Dict[str, Set[R]]],
+        index: Optional[resource_str_map],
         key: str,
-        resource: R,
+        resource: Resource,
     ):
         if index is None:
             return
 
-        s: Optional[Set[R]] = index.get(key, None)
+        s: Optional[Set[Resource]] = index.get(key, None)
         if s is None:
             s = set()
             index[key] = s
 
         s.add(resource)
 
-    def add(self, resource: R):
+    def add(self, resource: Resource):
         self.__all.add(resource)
         if self.__by_keys is not None:
             self.__by_keys[resource.keys] = resource
@@ -330,15 +388,15 @@ class ResourceMapTyped(Generic[R]):
             resource,
         )
 
-    def __add_many(self, resources: Iterable[R]):
+    def add_many(self, resources: Iterable[Resource]):
         for resource in resources:
             self.add(resource)
 
     def __index_remove(
         self,
-        index: Optional[Dict[str, Set[R]]],
+        index: Optional[resource_str_map],
         key: str,
-        resource: R,
+        resource: Resource,
         missing_ok: bool,
     ):
         if index is None:
@@ -358,7 +416,7 @@ class ResourceMapTyped(Generic[R]):
         if not s:
             del index[key]
 
-    def __remove(self, resource: R, missing_ok: bool):
+    def __remove(self, resource: Resource, missing_ok: bool):
         if missing_ok:
             self.__all.discard(resource)
         else:
@@ -389,17 +447,17 @@ class ResourceMapTyped(Generic[R]):
             missing_ok,
         )
 
-    def remove(self, resource: R):
+    def remove(self, resource: Resource):
         self.__remove(resource, missing_ok=False)
 
-    def discard(self, resource: R):
+    def discard(self, resource: Resource):
         self.__remove(resource, missing_ok=True)
 
-    def __discard_many(self, resources: Iterable[R]):
+    def __discard_many(self, resources: Iterable[Resource]):
         for r in resources:
             self.discard(r)
 
-    def all(self) -> Set[R]:
+    def all(self) -> Set[Resource]:
         return self.__all
 
     def by_rel_path(self):
@@ -418,122 +476,13 @@ class ResourceMapTyped(Generic[R]):
         assert self.__by_reference_name is not None
         return self.__by_reference_name.get(reference_name, set())
 
-    def one_by_name(self, name: str) -> Optional[R]:
+    def one_by_name(self, name: str) -> Optional[Resource]:
         assert self.__by_name is not None
         s = self.__by_name.get(name)
         if s is None:
             return None
 
         return next(iter(s))
-
-
-class ResourceMap:
-    def __init__(
-        self,
-        resources: Optional[Iterable[Resource]] = None,
-    ):
-        self.__all: ResourceMapTyped[Resource] = ResourceMapTyped(
-            by_keys={},
-            by_name={},
-            by_reference_name={},
-        )
-        self.__xml: ResourceMapTyped[XMLResource] = ResourceMapTyped(
-            by_rel_path={},
-        )
-        self.__raw: ResourceMapTyped[RawResource] = ResourceMapTyped()
-
-        if resources:
-            self.add_many(resources)
-
-    def __eq__(self, other: object):
-        if not isinstance(other, ResourceMap):
-            return NotImplemented
-
-        return self.__all == other.__all
-
-    def __iter__(self):
-        return iter(self.__all)
-
-    def __len__(self):
-        return len(self.__all)
-
-    def __contains__(self, item: Resource):
-        return item in self.__all
-
-    def __and__(self, other: ResourceMap):
-        return ResourceMap(self.__all & other.__all)
-
-    def __iand__(self, other: ResourceMap):
-        removed = self.__all - other.__all
-        self.__discard_many(removed)
-        return self
-
-    def __sub__(self, other: ResourceMap):
-        return ResourceMap(self.__all - other.__all)
-
-    def __isub__(self, other: ResourceMap):
-        self.__discard_many(self.__all & other.__all)
-        return self
-
-    def __or__(self, other: ResourceMap):
-        return ResourceMap(self.__all | other.__all)
-
-    def __ior__(self, other: ResourceMap):
-        self.add_many(other.__all)
-        return self
-
-    def copy(self):
-        return ResourceMap(self.__all)
-
-    def all(self):
-        return self.__all
-
-    def raw(self):
-        return self.__raw
-
-    def xml(self):
-        return self.__xml
-
-    def add(self, resource: Resource):
-        self.__all.add(resource)
-        if isinstance(resource, XMLResource):
-            self.__xml.add(resource)
-        elif isinstance(resource, RawResource):
-            self.__raw.add(resource)
-
-    def add_many(self, resources: Iterable[Resource]):
-        for resource in resources:
-            self.add(resource)
-
-    def discard(self, resource: Resource):
-        self.__all.discard(resource)
-        if isinstance(resource, XMLResource):
-            self.__xml.discard(resource)
-        elif isinstance(resource, RawResource):
-            self.__raw.discard(resource)
-
-    def remove(self, resource: Resource):
-        self.__all.remove(resource)
-        if isinstance(resource, XMLResource):
-            self.__xml.remove(resource)
-        elif isinstance(resource, RawResource):
-            self.__raw.remove(resource)
-
-    def __discard_many(self, resources: Iterable[Resource]):
-        for r in resources:
-            self.discard(r)
-
-    def by_keys(self, keys: Tuple[str, ...]):
-        return self.__all.by_keys(keys)
-
-    def by_name(self, name: str):
-        return self.__all.by_name(name)
-
-    def by_reference_name(self, reference_name: str):
-        return self.__all.by_reference_name(reference_name)
-
-    def one_by_name(self, name: str):
-        return self.__all.one_by_name(name)
 
 
 def resource_needs_quotes(s: str) -> bool:
@@ -758,9 +707,7 @@ def parse_package_resources_dir(
     return resources
 
 
-def parse_resources(resources_paths: Iterable[str]):
-    resource_map = ResourceMap()
-
+def parse_resources(resource_map: ResourceMap, resources_paths: Iterable[str]):
     for resource_path in resources_paths:
         resources = parse_package_resources_dir(resource_path)
         resource_map.add_many(resources)
@@ -770,6 +717,10 @@ def parse_resources(resources_paths: Iterable[str]):
 
 def parse_overlay_resources(resources_path: str):
     return parse_resources(
+        ResourceMap(
+            by_reference_name={},
+            by_rel_path={},
+        ),
         [resources_path],
     )
 
@@ -777,6 +728,10 @@ def parse_overlay_resources(resources_path: str):
 @functools.cache
 def get_target_package_resources(res_dirs: Tuple[str, ...]):
     return parse_resources(
+        ResourceMap(
+            by_keys={},
+            by_name={},
+        ),
         res_dirs,
     )
 
@@ -846,7 +801,7 @@ def get_referencing_resource(
     reference_name: str,
 ):
     for resource in overlay_resources:
-        if not isinstance(resource, XMLResource):
+        if not is_xml_resource(resource):
             continue
 
         if is_referenced_resource_element(
@@ -892,7 +847,10 @@ def keep_referenced_resources_from_removal(
 ):
     keep_resources: Set[Resource] = set()
 
-    for resource in all_resources.xml():
+    for resource in all_resources:
+        if not is_xml_resource(resource):
+            continue
+
         refs = get_resource_element_references(resource.element)
         resource_in = resource in resources_to_remove
 
@@ -980,7 +938,7 @@ def is_resource_in_entries(
     if not resource_entries:
         return False
 
-    if isinstance(resource, RawResource):
+    if is_raw_resource(resource):
         if resource.name in resource_entries:
             return True
         if resource.rel_path in resource_entries:
@@ -992,7 +950,7 @@ def is_resource_in_entries(
             if fnmatch(resource.rel_path, pattern):
                 return True
 
-    elif isinstance(resource, XMLResource):
+    elif is_xml_resource(resource):
         if resource.name in resource_entries:
             return True
 
@@ -1028,7 +986,7 @@ def overlay_resources_fixup_tag(
     wrong_tag_resources: Set[Tuple[str, str]] = set()
 
     def fixup_resource_tag(resource: Resource):
-        if not isinstance(resource, XMLResource):
+        if not is_xml_resource(resource):
             return
 
         package_resource = package_resources.one_by_name(
@@ -1127,7 +1085,7 @@ def overlay_resources_remove_missing(
 
 
 def package_resource_sort_key(resource: Resource):
-    assert isinstance(resource, XMLResource)
+    assert is_xml_resource(resource)
 
     return (
         not resource.comments,
@@ -1143,7 +1101,7 @@ def overlay_resource_fixup_from_package(
     package_resources: ResourceMap,
 ):
     def fixup_resource_from_package(resource: Resource):
-        if not isinstance(resource, XMLResource):
+        if not is_xml_resource(resource):
             return
 
         # Let the logic below place it at the end if a package resource is not
@@ -1214,16 +1172,15 @@ def attrib_needs_aapt_raw(
         assert False
 
 
-def raw_resources_need_aapt_raw(resources: ResourceMap):
-    for resource in resources.raw():
-        if not resource.name.endswith('.xml'):
-            continue
+def raw_resource_need_aapt_raw(resource: RawResource):
+    if not resource.name.endswith('.xml'):
+        return False
 
-        try:
-            if xml_attrib_matches(resource.data, attrib_needs_aapt_raw):
-                return resource
-        except etree.XMLSyntaxError:
-            pass
+    try:
+        if xml_attrib_matches(resource.data, attrib_needs_aapt_raw):
+            return True
+    except etree.XMLSyntaxError:
+        pass
 
     return None
 
@@ -1282,7 +1239,7 @@ def write_xml_resources(
         o.write(xml_body)
 
 
-def write_grouped_resources(
+def write_resources(
     overlay_resources: ResourceMap,
     output_path: str,
     resources_dir: str,
@@ -1291,11 +1248,17 @@ def write_grouped_resources(
     if preserved_prefixes is None:
         preserved_prefixes = {}
 
-    for rel_path, resources in overlay_resources.xml().by_rel_path():
+    aapt_raw_resource = None
+    for rel_path, resources in overlay_resources.by_rel_path():
         xml_path = path.join(output_path, resources_dir, rel_path)
         preserved = preserved_prefixes.get(xml_path)
+
+        xml_resources = filter(lambda r: is_xml_resource(r), resources)
+        raw_resources = filter(lambda r: is_raw_resource(r), resources)
+
         sorted_resources = sorted(
-            resources, key=lambda r: (r.index == -1, r.index, r.name)
+            xml_resources,
+            key=lambda r: (r.index == -1, r.index, r.name),
         )
 
         write_xml_resources(
@@ -1304,18 +1267,26 @@ def write_grouped_resources(
             preserved_prefix=preserved,
         )
 
+        for resource in raw_resources:
+            if aapt_raw_resource is None and raw_resource_need_aapt_raw(
+                resource
+            ):
+                aapt_raw_resource = resource
+            write_raw_resource(resource, output_path, resources_dir)
 
-def write_overlay_raw_resources(
-    overlay_resources: ResourceMap,
+    return aapt_raw_resource
+
+
+def write_raw_resource(
+    resource: RawResource,
     output_path: str,
     resources_dir: str,
 ):
-    for raw_resource in overlay_resources.raw():
-        raw_path = path.join(output_path, resources_dir, raw_resource.rel_path)
-        raw_dir_path = path.dirname(raw_path)
-        os.makedirs(raw_dir_path, exist_ok=True)
-        with open(raw_path, 'wb') as raw:
-            raw.write(raw_resource.data)
+    raw_path = path.join(output_path, resources_dir, resource.rel_path)
+    raw_dir_path = path.dirname(raw_path)
+    os.makedirs(raw_dir_path, exist_ok=True)
+    with open(raw_path, 'wb') as raw:
+        raw.write(resource.data)
 
 
 def read_xml_resources_prefix(
@@ -1325,8 +1296,11 @@ def read_xml_resources_prefix(
 ):
     rel_xml_paths: Set[str] = set()
 
-    for resource in overlay_resources.xml():
-        rel_xml_paths.add(resource.rel_path)
+    for rel_path, resources in overlay_resources.by_rel_path():
+        if not is_by_rel_path_xml_resources(resources):
+            continue
+
+        rel_xml_paths.add(rel_path)
 
     rel_xml_paths.update(extra_paths)
 
