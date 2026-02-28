@@ -443,7 +443,7 @@ class ResourceMap:
         self.__raw: ResourceMapTyped[RawResource] = ResourceMapTyped()
 
         if resources:
-            self.__add_many(resources)
+            self.add_many(resources)
 
     def __eq__(self, other: object):
         if not isinstance(other, ResourceMap):
@@ -479,7 +479,7 @@ class ResourceMap:
         return ResourceMap(self.__all | other.__all)
 
     def __ior__(self, other: ResourceMap):
-        self.__add_many(other.__all)
+        self.add_many(other.__all)
         return self
 
     def copy(self):
@@ -501,7 +501,7 @@ class ResourceMap:
         elif isinstance(resource, RawResource):
             self.__raw.add(resource)
 
-    def __add_many(self, resources: Iterable[Resource]):
+    def add_many(self, resources: Iterable[Resource]):
         for resource in resources:
             self.add(resource)
 
