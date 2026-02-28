@@ -40,11 +40,9 @@ from rro.resources import (
     overlay_resources_remove,
     overlay_resources_remove_missing,
     parse_overlay_resources,
-    raw_resources_need_aapt_raw,
     remove_identical_resource,
     resources_reference_name_sorted,
-    write_grouped_resources,
-    write_overlay_raw_resources,
+    write_resources,
 )
 from rro.target_package import (
     PackageMap,
@@ -261,28 +259,11 @@ def write_rro(
     preserved_prefixes: Optional[Dict[str, bytes]] = None,
     partition: Optional[str] = None,
 ):
-    overlay_raw_resource_needs_aapt_flag = raw_resources_need_aapt_raw(
-        overlay_resources,
-    )
-    aapt_raw = overlay_raw_resource_needs_aapt_flag is not None
-    if overlay_raw_resource_needs_aapt_flag is not None:
-        rel_path = overlay_raw_resource_needs_aapt_flag.rel_path
-        color_print(
-            f'{package}: Raw resource {rel_path} needs raw aapt flag',
-            color=Color.YELLOW,
-        )
-
-    write_grouped_resources(
+    aapt_raw_resource = write_resources(
         overlay_resources,
         output_path,
         RESOURCES_DIR,
         preserved_prefixes,
-    )
-
-    write_overlay_raw_resources(
-        overlay_resources,
-        output_path,
-        RESOURCES_DIR,
     )
 
     write_manifest(
@@ -293,6 +274,15 @@ def write_rro(
         overlay_attrs,
         preserved_prefixes=preserved_prefixes,
     )
+
+    aapt_raw = False
+    if aapt_raw_resource is not None:
+        aapt_raw = True
+        rel_path = aapt_raw_resource.rel_path
+        color_print(
+            f'{package}: Raw resource {rel_path} needs raw aapt flag',
+            color=Color.YELLOW,
+        )
 
     android_bp_path = path.join(output_path, ANDROID_BP_NAME)
     write_rro_android_bp(
