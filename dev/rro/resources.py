@@ -1128,7 +1128,7 @@ def package_resource_sort_key(resource: Resource):
     assert isinstance(resource, XMLResource)
 
     return (
-        bool(resource.comments),
+        not resource.comments,
         '-' in resource.rel_dir_path,
         bool(resource.product),
         resource.rel_dir_path,
