@@ -693,28 +693,30 @@ def parse_resources(resource_map: ResourceMap, resources_paths: Iterable[str]):
         resources = parse_package_resources_dir(resource_path)
         resource_map.add_many(resources)
 
-    return resource_map
-
 
 def parse_overlay_resources(resources_path: str):
-    return parse_resources(
-        ResourceMap(
-            by_reference_name={},
-            by_rel_path={},
-        ),
+    resource_map = ResourceMap(
+        by_reference_name={},
+        by_rel_path={},
+    )
+    parse_resources(
+        resource_map,
         [resources_path],
     )
+    return resource_map
 
 
 @functools.cache
 def get_target_package_resources(res_dirs: Tuple[str, ...]):
-    return parse_resources(
-        ResourceMap(
-            by_keys={},
-            by_name={},
-        ),
+    resource_map = ResourceMap(
+        by_keys={},
+        by_name={},
+    )
+    parse_resources(
+        resource_map,
         res_dirs,
     )
+    return resource_map
 
 
 def find_target_package_resources(
