@@ -610,7 +610,7 @@ def parse_xml_resources(
     rel_dir_path: str,
     file_name: str,
     data: bytes,
-    resource_map: ResourceMap,
+    resources: Set[Resource],
 ):
     root = etree.fromstring(data)
 
@@ -691,7 +691,7 @@ def parse_xml_resources(
         if node_has_space_after(node):
             comments = []
 
-        resource_map.add(resource)
+        resources.add(resource)
 
 
 def resources_reference_name_sorted(resources: Set[Resource]):
@@ -702,10 +702,12 @@ def sorted_scandir(dir_path: str):
     return sorted(os.scandir(dir_path), key=lambda e: e.path)
 
 
+@functools.cache
 def parse_package_resources_dir(
     res_dir: str,
-    resource_map: ResourceMap,
 ):
+    resources: Set[Resource] = set()
+
     for dir_file in sorted_scandir(res_dir):
         if not dir_file.is_dir():
             continue
@@ -743,7 +745,7 @@ def parse_package_resources_dir(
                     rel_dir_path,
                     file_name,
                     data,
-                    resource_map,
+                    resources,
                 )
             else:
                 resource = RawResource(
@@ -751,17 +753,17 @@ def parse_package_resources_dir(
                     file_name,
                     data,
                 )
-                resource_map.add(resource)
+                resources.add(resource)
+
+    return resources
 
 
 def parse_resources(resources_paths: Iterable[str]):
     resource_map = ResourceMap()
 
     for resource_path in resources_paths:
-        parse_package_resources_dir(
-            resource_path,
-            resource_map,
-        )
+        resources = parse_package_resources_dir(resource_path)
+        resource_map.add_many(resources)
 
     return resource_map
 
