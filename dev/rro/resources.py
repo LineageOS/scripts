@@ -775,7 +775,7 @@ def parse_overlay_resources(resources_path: str):
 
 
 @functools.cache
-def get_target_package_resources(res_dirs: List[str]):
+def get_target_package_resources(res_dirs: Tuple[str, ...]):
     return parse_resources(
         res_dirs,
     )
