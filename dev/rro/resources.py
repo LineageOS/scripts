@@ -1189,12 +1189,6 @@ def remove_identical_resource(
 
     package_resource = package_resources.by_keys(resource.keys)
     if package_resource is None:
-        resource_unqualified_keys = resource_to_unqualified_keys(resource)
-        package_resource = package_resources.by_keys(
-            resource_unqualified_keys,
-        )
-
-    if package_resource is None:
         return
 
     if resource != package_resource:
