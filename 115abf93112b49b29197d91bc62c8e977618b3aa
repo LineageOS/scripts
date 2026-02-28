@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b595fe62_18c242d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19252
+      },
+      "writtenOn": "2026-02-28T18:17:41Z",
+      "side": 1,
+      "message": "Everything seems to be working for me on rtwo, the current merged stuff for beautify rro\u0027s causes udfps to stop working, yet with this chain it\u0027s working\n\nCurrent merged chain deleted:\nconfig_biometric_sensors\nconfig_udfps_sensor_props\n\nThis chain those are still in my rtwo trees\n\nhttps://review.lineageos.org/c/LineageOS/android_device_motorola_sm8550-common/+/472948\nhttps://review.lineageos.org/c/LineageOS/android_device_motorola_rtwo/+/472947",
+      "revId": "115abf93112b49b29197d91bc62c8e977618b3aa",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
