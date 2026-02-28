@@ -909,13 +909,6 @@ def keep_referenced_resources_from_removal(
         resources_to_remove.remove(resource)
 
 
-def resource_to_unqualified_keys(resource: Resource):
-    rel_dir_path = resource.rel_dir_path
-    stripped_rel_dir_path = strip_rel_dir_qualifiers(rel_dir_path)
-    unqualified_resource = resource.copy(rel_dir_path=stripped_rel_dir_path)
-    return unqualified_resource.keys
-
-
 def overlay_resources_process(
     overlay_resources: ResourceMap,
     fn: Callable[
@@ -1188,12 +1181,6 @@ def remove_identical_resource(
         return
 
     package_resource = package_resources.by_keys(resource.keys)
-    if package_resource is None:
-        resource_unqualified_keys = resource_to_unqualified_keys(resource)
-        package_resource = package_resources.by_keys(
-            resource_unqualified_keys,
-        )
-
     if package_resource is None:
         return
 
