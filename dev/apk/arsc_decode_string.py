@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import itertools
+import re
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Set, Tuple, Union
 
@@ -124,26 +125,43 @@ def stringify_style_attr(value: str):
     return value
 
 
+ASCII_WHITESPACE = ' \t\n\r\f\v'
+NEEDS_QUOTES_PATTERN = re.compile(rf'[{re.escape(ASCII_WHITESPACE)}]{(2,)}')
+
+
+def str_needs_whitespace_quotes(s: str) -> bool:
+    if not s:
+        return False
+
+    return (
+        s[0] in ASCII_WHITESPACE
+        or s[-1] in ASCII_WHITESPACE
+        or bool(NEEDS_QUOTES_PATTERN.search(s))
+    )
+
+
 def stringify_str(value: str):
     value = value.replace('&', '&amp;')
     value = value.replace('<', '&lt;')
     # TODO: remove apktool compat
     # value = value.replace('>', '&gt;')
 
-    needs_quotes = (
-        value.startswith(' ')
-        or value.endswith(' ')
-        or value.count('  ')
-        or value.startswith('@')
-        or value.startswith('?')
-        or '\n' in value
-        or "'" in value
-    )
+    if not value:
+        return value
 
+    needs_quotes = str_needs_whitespace_quotes(value)
+
+    # These would ideally be escaped, but there are some edge cases where it
+    # causes issues, like @left or @dp in cutout strings
+    # value = value.replace('@', '\\@')
     value = value.replace('\\', '\\\\')
-    # value = value.replace('\n', '\\n')
+    value = value.replace('?', '\\?')
+    value = value.replace('\n', '\\n')
     value = value.replace('\t', '\\t')
     value = value.replace('"', '\\"')
+
+    if not needs_quotes:
+        value = value.replace("'", "\\'")
 
     if needs_quotes:
         return f'"{value}"'
