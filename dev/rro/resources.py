@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import functools
 import os
+import re
 from abc import ABC, abstractmethod
 from enum import Enum, auto
 from fnmatch import fnmatch
@@ -26,6 +27,7 @@ from typing import (
 
 from lxml import etree
 
+from apk.arsc_decode_string import ASCII_WHITESPACE, str_needs_whitespace_quotes
 from rro.manifest import NAMESPACE
 from utils.xml_utils import (
     XML_COMMENT_TEXT,
@@ -477,22 +479,6 @@ class ResourceMap:
         return next(iter(s))
 
 
-def resource_needs_quotes(s: str) -> bool:
-    if not s:
-        return False
-
-    if s != s.strip():
-        return True
-
-    if any(c in s for c in '\n\t'):
-        return True
-
-    if ' '.join(s.split()) != s:
-        return True
-
-    return False
-
-
 def node_has_space_after(node: Element):
     return node.tail is not None and node.tail.count('\n') > 1
 
@@ -531,20 +517,23 @@ def normalize_node_text_dimens_units(text: str):
     return left + core + right
 
 
+ANY_WS_PATTERN = re.compile(rf'[{re.escape(ASCII_WHITESPACE)}]+')
+
+
 def normalize_node_text_string(text: str):
     if len(text) >= 2 and text[0] == '"' and text[-1] == '"':
-        # Replace non-breaking spaces with normal spaces
-        text = text.replace('\u00a0', ' ')
-
         # Replace \' with '
         text = text.replace("\\'", "'")
 
-        if resource_needs_quotes(text):
-            return text
+        inner = text[1:-1]
+        if not str_needs_whitespace_quotes(inner):
+            # No whitespace issues, add \' back
+            inner = inner.replace("'", "\\'")
+            return inner
 
-        return text[1:-1]
+        return text
 
-    return ' '.join(text.split())
+    return ANY_WS_PATTERN.sub(' ', text).strip(ASCII_WHITESPACE)
 
 
 def parse_xml_resources(
