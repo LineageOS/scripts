@@ -705,7 +705,6 @@ def sorted_scandir(dir_path: str):
 def parse_package_resources_dir(
     res_dir: str,
     resource_map: ResourceMap,
-    parse_all_values: bool = False,
 ):
     for dir_file in sorted_scandir(res_dir):
         if not dir_file.is_dir():
@@ -718,9 +717,6 @@ def parse_package_resources_dir(
             continue
 
         is_values = dir_file.name.startswith('values')
-        if is_values and not parse_all_values and dir_file.name != 'values':
-            continue
-
         for resource_file in sorted_scandir(dir_file.path):
             if not resource_file.is_file():
                 continue
@@ -758,14 +754,13 @@ def parse_package_resources_dir(
                 resource_map.add(resource)
 
 
-def parse_resources(resources_paths: Iterable[str], parse_all_values: bool):
+def parse_resources(resources_paths: Iterable[str]):
     resource_map = ResourceMap()
 
     for resource_path in resources_paths:
         parse_package_resources_dir(
             resource_path,
             resource_map,
-            parse_all_values,
         )
 
     return resource_map
@@ -774,7 +769,6 @@ def parse_resources(resources_paths: Iterable[str], parse_all_values: bool):
 def parse_overlay_resources(resources_path: str):
     return parse_resources(
         [resources_path],
-        parse_all_values=True,
     )
 
 
@@ -782,7 +776,6 @@ def parse_overlay_resources(resources_path: str):
 def get_target_package_resources(res_dirs: List[str]):
     return parse_resources(
         res_dirs,
-        parse_all_values=False,
     )
 
 
