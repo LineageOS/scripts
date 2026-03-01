@@ -726,6 +726,7 @@ def sorted_scandir(dir_path: str):
 @functools.cache
 def parse_package_resources_dir(
     res_dir: str,
+    parse_all_values: bool = False,
 ):
     resources: Set[Resource] = set()
 
@@ -740,6 +741,9 @@ def parse_package_resources_dir(
             continue
 
         is_values = dir_file.name.startswith('values')
+        if is_values and not parse_all_values and dir_file.name != 'values':
+            continue
+
         for resource_file in sorted_scandir(dir_file.path):
             if not resource_file.is_file():
                 continue
@@ -779,9 +783,16 @@ def parse_package_resources_dir(
     return resources
 
 
-def parse_resources(resource_map: ResourceMap, resources_paths: Iterable[str]):
+def parse_resources(
+    resource_map: ResourceMap,
+    resources_paths: Iterable[str],
+    parse_all_values: bool,
+):
     for resource_path in resources_paths:
-        resources = parse_package_resources_dir(resource_path)
+        resources = parse_package_resources_dir(
+            resource_path,
+            parse_all_values,
+        )
         resource_map.add_many(resources)
 
 
@@ -790,16 +801,21 @@ def parse_overlay_resources(resources_path: str):
     parse_resources(
         resource_map,
         [resources_path],
+        parse_all_values=True,
     )
     return resource_map
 
 
 @functools.cache
-def get_target_package_resources(res_dirs: Tuple[str, ...]):
+def get_target_package_resources(
+    res_dirs: Tuple[str, ...],
+    parse_all_values: bool,
+):
     resource_map = ResourceMap()
     parse_resources(
         resource_map,
         res_dirs,
+        parse_all_values=parse_all_values,
     )
     return resource_map
 
@@ -807,11 +823,13 @@ def get_target_package_resources(res_dirs: Tuple[str, ...]):
 def find_target_package_resources(
     target_packages: List[Tuple[str, str, List[str]]],
     overlay_resources: ResourceMap,
+    parse_all_values: bool,
 ):
     if len(target_packages) == 1:
         _, module_name, resource_dirs = target_packages[0]
         package_resources = get_target_package_resources(
             tuple(resource_dirs),
+            parse_all_values=parse_all_values,
         )
         return package_resources, module_name
 
@@ -822,6 +840,7 @@ def find_target_package_resources(
     for _, module_name, resource_dirs in target_packages:
         package_resources = get_target_package_resources(
             tuple(resource_dirs),
+            parse_all_values=parse_all_values,
         )
 
         matching_resources = 0
