@@ -894,6 +894,7 @@ def overlay_resources_process(
             None,
         ],
     ],
+    keep_if_referenced: bool = False,
 ):
     removed_resources: Set[Resource] = set()
     added_resources: Set[Resource] = set()
@@ -910,6 +911,12 @@ def overlay_resources_process(
         remove_resource, add_resource = result
         removed_resources.add(remove_resource)
         added_resources.add(add_resource)
+
+    if keep_if_referenced:
+        keep_referenced_resources_from_removal(
+            removed_resources,
+            overlay_resources,
+        )
 
     for resource in removed_resources:
         overlay_resources.remove(resource)
@@ -1081,6 +1088,7 @@ def overlay_resources_remove_missing(
     removed_resources, _ = overlay_resources_process(
         overlay_resources,
         remove_missing_resource,
+        keep_if_referenced=True,
     )
 
     return removed_resources, kept_resources
@@ -1150,9 +1158,8 @@ def overlay_resource_fixup_from_package(
     )
 
 
-def remove_identical_resource(
+def is_identical_resource(
     resource: Resource,
-    resources: ResourceMap,
     package_resources: Optional[ResourceMap],
 ):
     if package_resources is None:
@@ -1162,10 +1169,7 @@ def remove_identical_resource(
     if package_resource is None:
         return
 
-    if resource != package_resource:
-        return
-
-    resources.remove(resource)
+    return resource == package_resource
 
 
 def attrib_needs_aapt_raw(
