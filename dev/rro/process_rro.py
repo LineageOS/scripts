@@ -98,6 +98,7 @@ def get_rro_target_package_resources(
     target_package: str,
     resources: ResourceMap,
     allow_missing: bool,
+    parse_all_values: bool,
 ):
     target_packages = get_target_packages(package_map, target_package)
     if not target_packages and not allow_missing:
@@ -106,6 +107,7 @@ def get_rro_target_package_resources(
     package_resources, module_name = find_target_package_resources(
         target_packages,
         resources,
+        parse_all_values,
     )
 
     if len(target_packages) > 1:
@@ -159,6 +161,7 @@ def check_rro_matches_aosp(
         target_package=aosp_target_package,
         resources=aosp_resources,
         allow_missing=True,
+        parse_all_values=False,
     )
     fixup_rro_resources(
         package=aosp_package,
