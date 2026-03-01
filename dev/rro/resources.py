@@ -288,20 +288,12 @@ resource_str_map = Dict[str, Set[Resource]]
 
 
 class ResourceMap:
-    def __init__(
-        self,
-        resources: Optional[Iterable[Resource]] = None,
-        # Avoid adding indexes for queries which will never be used
-        by_keys: Optional[Dict[Tuple[str, ...], Resource]] = None,
-        by_name: Optional[resource_str_map] = None,
-        by_reference_name: Optional[resource_str_map] = None,
-        by_rel_path: Optional[resource_str_map] = None,
-    ):
+    def __init__(self, resources: Optional[Iterable[Resource]] = None):
         self.__all: Set[Resource] = set()
-        self.__by_keys = by_keys
-        self.__by_name = by_name
-        self.__by_reference_name = by_reference_name
-        self.__by_rel_path = by_rel_path
+        self.__by_keys: Optional[Dict[Tuple[str, ...], Resource]] = None
+        self.__by_name: Optional[resource_str_map] = None
+        self.__by_reference_name: Optional[resource_str_map] = None
+        self.__by_rel_path: Optional[resource_str_map] = None
 
         if resources:
             self.add_many(resources)
@@ -344,15 +336,7 @@ class ResourceMap:
         return self
 
     def copy(self):
-        return ResourceMap(
-            self.__all,
-            by_keys={} if self.__by_keys is not None else None,
-            by_name={} if self.__by_name is not None else None,
-            by_reference_name={}
-            if self.__by_reference_name is not None
-            else None,
-            by_rel_path={} if self.__by_rel_path is not None else None,
-        )
+        return ResourceMap(self.__all)
 
     def __index_add(
         self,
@@ -369,6 +353,50 @@ class ResourceMap:
             index[key] = s
 
         s.add(resource)
+
+    def __init_by_keys(self):
+        if self.__by_keys is not None:
+            return
+
+        self.__by_keys = {}
+        for resource in self.__all:
+            self.__by_keys[resource.keys] = resource
+
+    def __init_by_name(self):
+        if self.__by_name is not None:
+            return
+
+        self.__by_name = {}
+        for resource in self.__all:
+            self.__index_add(
+                self.__by_name,
+                resource.name,
+                resource,
+            )
+
+    def __init_by_reference_name(self):
+        if self.__by_reference_name is not None:
+            return
+
+        self.__by_reference_name = {}
+        for resource in self.__all:
+            self.__index_add(
+                self.__by_reference_name,
+                resource.reference_name,
+                resource,
+            )
+
+    def __init_by_rel_path(self):
+        if self.__by_rel_path is not None:
+            return
+
+        self.__by_rel_path = {}
+        for resource in self.__all:
+            self.__index_add(
+                self.__by_rel_path,
+                resource.rel_path,
+                resource,
+            )
 
     def add(self, resource: Resource):
         self.__all.add(resource)
@@ -463,22 +491,27 @@ class ResourceMap:
         return self.__all
 
     def by_rel_path(self):
+        self.__init_by_rel_path()
         assert self.__by_rel_path is not None
         return self.__by_rel_path.items()
 
     def by_keys(self, keys: Tuple[str, ...]):
+        self.__init_by_keys()
         assert self.__by_keys is not None
         return self.__by_keys.get(keys)
 
     def by_name(self, name: str):
+        self.__init_by_name()
         assert self.__by_name is not None
         return self.__by_name.get(name, set())
 
     def by_reference_name(self, reference_name: str):
+        self.__init_by_reference_name()
         assert self.__by_reference_name is not None
         return self.__by_reference_name.get(reference_name, set())
 
     def one_by_name(self, name: str) -> Optional[Resource]:
+        self.__init_by_name()
         assert self.__by_name is not None
         s = self.__by_name.get(name)
         if s is None:
@@ -703,10 +736,7 @@ def parse_resources(resource_map: ResourceMap, resources_paths: Iterable[str]):
 
 
 def parse_overlay_resources(resources_path: str):
-    resource_map = ResourceMap(
-        by_reference_name={},
-        by_rel_path={},
-    )
+    resource_map = ResourceMap()
     parse_resources(
         resource_map,
         [resources_path],
@@ -716,10 +746,7 @@ def parse_overlay_resources(resources_path: str):
 
 @functools.cache
 def get_target_package_resources(res_dirs: Tuple[str, ...]):
-    resource_map = ResourceMap(
-        by_keys={},
-        by_name={},
-    )
+    resource_map = ResourceMap()
     parse_resources(
         resource_map,
         res_dirs,
