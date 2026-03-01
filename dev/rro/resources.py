@@ -277,7 +277,6 @@ resource_str_map = Dict[str, Set[Resource]]
 class ResourceMap:
     def __init__(self, resources: Optional[Iterable[Resource]] = None):
         self.__all: Set[Resource] = set()
-        self.__by_keys: Optional[Dict[Tuple[str, ...], Resource]] = None
         self.__by_name: Optional[resource_str_map] = None
         self.__by_reference_name: Optional[resource_str_map] = None
         self.__by_rel_path: Optional[resource_str_map] = None
@@ -299,33 +298,8 @@ class ResourceMap:
     def __len__(self):
         return len(self.__all)
 
-    def __contains__(self, resource: Resource):
-        return resource in self.__all
-
-    def __and__(self, other: ResourceMap):
-        return ResourceMap(self.__all & other.__all)
-
-    def __iand__(self, other: ResourceMap):
-        removed = self.__all - other.__all
-        self.__discard_many(removed)
-        return self
-
-    def __sub__(self, other: ResourceMap):
-        return ResourceMap(self.__all - other.__all)
-
-    def __isub__(self, other: ResourceMap):
-        self.__discard_many(self.__all & other.__all)
-        return self
-
-    def __or__(self, other: ResourceMap):
-        return ResourceMap(self.__all | other.__all)
-
-    def __ior__(self, other: ResourceMap):
-        self.add_many(other.__all)
-        return self
-
-    def copy(self):
-        return ResourceMap(self.__all)
+    def __contains__(self, item: Resource):
+        return item in self.__all
 
     def __index_add(
         self,
@@ -342,14 +316,6 @@ class ResourceMap:
             index[key] = s
 
         s.add(resource)
-
-    def __init_by_keys(self):
-        if self.__by_keys is not None:
-            return
-
-        self.__by_keys = {}
-        for resource in self.__all:
-            self.__by_keys[resource.keys] = resource
 
     def __init_by_name(self):
         if self.__by_name is not None:
@@ -424,8 +390,6 @@ class ResourceMap:
 
     def add(self, resource: Resource):
         self.__all.add(resource)
-        if self.__by_keys is not None:
-            self.__by_keys[resource.keys] = resource
         self.__add_resource_refs(resource)
         self.__index_add(
             self.__by_name,
@@ -477,12 +441,6 @@ class ResourceMap:
         else:
             self.__all.remove(resource)
 
-        if self.__by_keys is not None:
-            if missing_ok:
-                self.__by_keys.pop(resource.keys, None)
-            else:
-                self.__by_keys.pop(resource.keys)
-
         self.__index_remove(
             self.__by_name,
             resource.name,
@@ -508,10 +466,6 @@ class ResourceMap:
     def discard(self, resource: Resource):
         self.__remove(resource, missing_ok=True)
 
-    def __discard_many(self, resources: Iterable[Resource]):
-        for r in resources:
-            self.discard(r)
-
     def remove_many(self, resources: Iterable[Resource]):
         for r in resources:
             self.remove(r)
@@ -523,11 +477,6 @@ class ResourceMap:
         self.__init_by_rel_path()
         assert self.__by_rel_path is not None
         return self.__by_rel_path.items()
-
-    def by_keys(self, keys: Tuple[str, ...]):
-        self.__init_by_keys()
-        assert self.__by_keys is not None
-        return self.__by_keys.get(keys)
 
     def by_name(self, name: str):
         self.__init_by_name()
