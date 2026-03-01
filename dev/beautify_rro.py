@@ -103,6 +103,7 @@ def remove_shadowed_resources(
                 priority=o.module_priority,
                 resources=o.resources,
                 package_resources=o.package_resources,
+                removed_resources=set(),
                 prefer_resources=filter_resource_entries(
                     prefer_resources,
                     o.package,
