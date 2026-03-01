@@ -236,7 +236,7 @@ class XMLResource(Resource):
 
     def __repr__(self):
         s = f'{self.rel_dir_path}/{self.file_name}:\n'
-        s += etree.tostring(self.element, encoding='unicode')
+        s += etree.tostring(self.element, encoding='unicode').strip()
         s += '\n'
         return s
 
