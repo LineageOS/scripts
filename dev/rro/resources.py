@@ -281,6 +281,8 @@ class ResourceMap:
         self.__by_name: Optional[resource_str_map] = None
         self.__by_reference_name: Optional[resource_str_map] = None
         self.__by_rel_path: Optional[resource_str_map] = None
+        self.__references_to_resource: Optional[Dict[str, Set[str]]] = None
+        self.__resource_to_references: Optional[Dict[str, Set[str]]] = None
 
         if resources:
             self.add_many(resources)
@@ -385,10 +387,46 @@ class ResourceMap:
                 resource,
             )
 
+    def __init_ref_map(self):
+        if (
+            self.__resource_to_references is not None
+            and self.__references_to_resource is not None
+        ):
+            return
+
+        self.__resource_to_references = {}
+        self.__references_to_resource = {}
+        for resource in self.__all:
+            self.__add_resource_refs(resource)
+
+    def __add_resource_refs(self, resource: Resource):
+        if (
+            self.__resource_to_references is None
+            or self.__references_to_resource is None
+        ):
+            return
+
+        if not is_xml_resource(resource):
+            return
+
+        refs = get_resource_element_references(resource.element)
+
+        self.__resource_to_references.setdefault(
+            resource.reference_name,
+            set(),
+        ).update(refs)
+
+        for ref in refs:
+            self.__references_to_resource.setdefault(
+                ref,
+                set(),
+            ).add(resource.reference_name)
+
     def add(self, resource: Resource):
         self.__all.add(resource)
         if self.__by_keys is not None:
             self.__by_keys[resource.keys] = resource
+        self.__add_resource_refs(resource)
         self.__index_add(
             self.__by_name,
             resource.name,
@@ -509,6 +547,24 @@ class ResourceMap:
             return None
 
         return next(iter(s))
+
+    def __reference_names_to_resource(self, refs: Set[str]):
+        resources: Set[Resource] = set()
+        for ref in refs:
+            resources.update(self.by_reference_name(ref))
+        return resources
+
+    def resources_referenced_by(self, resource: Resource):
+        self.__init_ref_map()
+        assert self.__resource_to_references is not None
+        refs = self.__resource_to_references.get(resource.reference_name, set())
+        return self.__reference_names_to_resource(refs)
+
+    def resources_referencing(self, resource: Resource):
+        self.__init_ref_map()
+        assert self.__references_to_resource is not None
+        refs = self.__references_to_resource.get(resource.reference_name, set())
+        return self.__reference_names_to_resource(refs)
 
 
 def node_has_space_after(node: Element):
@@ -856,26 +912,25 @@ def keep_referenced_resources_from_removal(
 ):
     keep_resources: Set[Resource] = set()
 
-    for resource in all_resources:
+    for resource in resources_to_remove:
         if not is_xml_resource(resource):
             continue
 
-        refs = get_resource_element_references(resource.element)
-        resource_in = resource in resources_to_remove
+        # If there are any resources referenced by this resource which will not
+        # get removed, do not remove any of them
+        resource_referenced_by = all_resources.resources_referenced_by(resource)
+        referenced_in_remove = resource_referenced_by & resources_to_remove
+        if len(referenced_in_remove) != len(resource_referenced_by):
+            keep_resources.add(resource)
+            keep_resources.update(referenced_in_remove)
 
-        for ref in refs:
-            ref_resources = all_resources.by_reference_name(ref)
+        # If there are resources referencing this resource which will not get
+        # removed, do not remove this resource either
+        resources_referencing = all_resources.resources_referencing(resource)
+        if not resources_referencing <= resources_to_remove:
+            keep_resources.add(resource)
 
-            for ref_resource in ref_resources:
-                reference_in = ref_resource in resources_to_remove
-
-                if resource_in and not reference_in:
-                    keep_resources.add(resource)
-                elif not resource_in and reference_in:
-                    keep_resources.add(ref_resource)
-
-    for resource in keep_resources:
-        resources_to_remove.remove(resource)
+    resources_to_remove -= keep_resources
 
 
 def overlay_resources_process(
