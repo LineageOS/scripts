@@ -456,7 +456,16 @@ def remove_rros_shadowed_resources(
     overlays: List[OverlayPriorityData],
     remove_identical: bool,
 ):
-    undetermined_resource_priorities: Dict[Tuple[str, str], List[str]] = {}
+    undetermined_resource_priorities: Dict[
+        Tuple[
+            # relative path
+            str,
+            # reference name
+            str,
+        ],
+        # package names
+        List[str],
+    ] = {}
     resource_map: Dict[
         # resource keys
         Tuple[
