@@ -624,6 +624,14 @@ def normalize_node_text_string(text: str):
     return ANY_WS_PATTERN.sub(' ', text).strip(ASCII_WHITESPACE)
 
 
+SKIP_TAGS = {
+    'java-symbol',
+    'eat-comment',
+    'skip',
+    'public',
+}
+
+
 def parse_xml_resources(
     rel_dir_path: str,
     file_name: str,
@@ -653,12 +661,7 @@ def parse_xml_resources(
             continue
 
         tag = node.tag
-        if (
-            tag == 'java-symbol'
-            or tag == 'eat-comment'
-            or tag == 'skip'
-            or tag == 'public'
-        ):
+        if tag in SKIP_TAGS:
             comments = []
             continue
 
