@@ -178,13 +178,15 @@ def check_rro_matches_aosp(
     )
 
     print('Resources in RRO:')
-    for resource in resources - aosp_resources:
-        print(resource)
+    for resource in resources:
+        if resource not in aosp_resources:
+            print(resource)
     print()
 
     print('Resources in AOSP:')
-    for resource in aosp_resources - resources:
-        print(resource)
+    for resource in aosp_resources:
+        if resource not in resources:
+            print(resource)
     print()
 
 
