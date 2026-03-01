@@ -1235,20 +1235,6 @@ def overlay_resource_fixup_from_package(
     )
 
 
-def is_identical_resource(
-    resource: Resource,
-    package_resources: Optional[ResourceMap],
-):
-    if package_resources is None:
-        return
-
-    package_resource = package_resources.by_keys(resource.keys)
-    if package_resource is None:
-        return
-
-    return resource == package_resource
-
-
 def attrib_needs_aapt_raw(
     _attrib_key: str | bytes,
     attrib_value: str | bytes,

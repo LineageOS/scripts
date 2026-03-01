@@ -35,7 +35,6 @@ from rro.resources import (
     Resource,
     ResourceMap,
     find_target_package_resources,
-    is_identical_resource,
     is_resource_in_entries,
     keep_referenced_resources_from_removal,
     overlay_resource_fixup_from_package,
@@ -571,9 +570,9 @@ def remove_rros_shadowed_resources(
         if shadowed_immutable or not remove_identical:
             continue
 
-        if is_identical_resource(
-            preferred_resource,
-            preferred_overlay.package_resources,
+        if (
+            preferred_overlay.package_resources is not None
+            and preferred_resource in preferred_overlay.package_resources
         ):
             preferred_overlay.removed_resources.add(preferred_resource)
 
