@@ -1142,9 +1142,12 @@ def overlay_resources_remove_missing(
             kept_resources.add(resource)
             return
 
-        package_resource = package_resources.one_by_name(resource.name)
-        if package_resource is not None:
-            return
+        matching_package_resources = package_resources.by_name(
+            resource.name,
+        )
+        for package_resource in matching_package_resources:
+            if package_resource.is_default:
+                return
 
         referencing_resource = get_referencing_resource(
             overlay_resources,
