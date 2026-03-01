@@ -315,6 +315,7 @@ def beautify_rro_main():
                 target_package=target_package,
                 resources=resources,
                 allow_missing=target_package in keep_packages,
+                parse_all_values=True,
             )
         except ValueError as e:
             shutil.rmtree(overlay_path, ignore_errors=True)
