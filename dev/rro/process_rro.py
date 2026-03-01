@@ -14,6 +14,7 @@ from typing import (
     List,
     NotRequired,
     Optional,
+    Set,
     Tuple,
     TypedDict,
 )
@@ -34,13 +35,14 @@ from rro.resources import (
     Resource,
     ResourceMap,
     find_target_package_resources,
+    is_identical_resource,
     is_resource_in_entries,
+    keep_referenced_resources_from_removal,
     overlay_resource_fixup_from_package,
     overlay_resources_fixup_tag,
     overlay_resources_remove,
     overlay_resources_remove_missing,
     parse_overlay_resources,
-    remove_identical_resource,
     resources_reference_name_sorted,
     write_resources,
 )
@@ -423,6 +425,7 @@ class OverlayPriorityData:
     priority: int
     resources: ResourceMap
     package_resources: Optional[ResourceMap]
+    removed_resources: Set[Resource]
     prefer_resources: FrozenSet[str]
     attrs: Dict[str, str]
     immutable: bool
@@ -551,15 +554,23 @@ def remove_rros_shadowed_resources(
                 shadowed_immutable = True
                 continue
 
-            overlay.resources.remove(resource)
+            overlay.removed_resources.add(resource)
 
         if shadowed_immutable or not remove_identical:
             continue
 
-        remove_identical_resource(
+        if is_identical_resource(
             preferred_resource,
-            preferred_overlay.resources,
             preferred_overlay.package_resources,
+        ):
+            preferred_overlay.removed_resources.add(preferred_resource)
+
+    for overlay in overlays:
+        keep_referenced_resources_from_removal(
+            overlay.removed_resources,
+            overlay.resources,
         )
+
+        overlay.resources.remove_many(overlay.removed_resources)
 
     return undetermined_resource_priorities
