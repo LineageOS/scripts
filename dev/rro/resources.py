@@ -46,20 +46,6 @@ RESOURCES_TAG = 'resources'
 RESOURCES_DIR = 'res'
 
 
-@functools.cache
-def strip_rel_dir_qualifiers(rel_dir_path: str):
-    parts = Path(rel_dir_path).parts
-
-    if '-' not in parts[-1]:
-        return rel_dir_path
-
-    resource_type = parts[-1]
-    stripped_resource_type = resource_type.split('-')[0]
-    stripped_rel_dir_path = Path(*parts[:-1], stripped_resource_type)
-
-    return str(stripped_rel_dir_path)
-
-
 class ResourceType(Enum):
     XML = auto()
     RAW = auto()
@@ -76,6 +62,7 @@ class Resource(ABC):
         resource_type: ResourceType,
     ):
         self.rel_dir_path = rel_dir_path
+        self.is_default = '-' not in self.rel_dir_path
         self.name = name
         self.type = resource_type
 
@@ -117,7 +104,7 @@ class RawResource(Resource):
         self.__hash = hash(self.__hash_keys)
         self.rel_path = f'{self.rel_dir_path}/{self.name}'
 
-        resource_type = strip_rel_dir_qualifiers(self.rel_dir_path)
+        resource_type = rel_dir_path.split('-', maxsplit=1)[0]
         resource_name = path.splitext(self.name)[0]
         self.reference_name = f'@{resource_type}/{resource_name}'
 
@@ -1104,7 +1091,7 @@ def package_resource_sort_key(resource: Resource):
 
     return (
         not resource.comments,
-        '-' in resource.rel_dir_path,
+        not resource.is_default,
         bool(resource.product),
         resource.rel_dir_path,
         resource.name,
