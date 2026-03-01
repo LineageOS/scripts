@@ -1108,6 +1108,15 @@ def package_resource_sort_key(resource: Resource):
         bool(resource.product),
         resource.rel_dir_path,
         resource.name,
+        tuple(
+            (
+                # Longest length first
+                -len(r.text if r.text is not None else ''),
+                # Stable sort across text
+                r.text if r.text is not None else '',
+            )
+            for r in resource.comments
+        ),
     )
 
 
