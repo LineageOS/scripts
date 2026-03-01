@@ -52,9 +52,9 @@ def commonize_package_overlays(
     common_overlays_data: List[OverlayData] = []
     for overlay_data in overlays_data:
         if common_overlay_resources is None:
-            common_overlay_resources = overlay_data.resources.copy()
+            common_overlay_resources = overlay_data.resources.all().copy()
         else:
-            common_overlay_resources &= overlay_data.resources
+            common_overlay_resources &= overlay_data.resources.all()
 
         common_overlays_data.append(overlay_data)
 
@@ -72,7 +72,7 @@ def commonize_package_overlays(
     rro_meta = None
     overlay_data = None
     for overlay_data in common_overlays_data:
-        overlay_data.resources -= common_overlay_resources
+        overlay_data.resources.remove_many(common_overlay_resources)
 
         rro_meta = read_rro_meta(overlay_data.path)
 
@@ -128,7 +128,7 @@ def commonize_package_overlays(
     overlay_output_path.mkdir(parents=True, exist_ok=True)
 
     write_rro(
-        common_overlay_resources,
+        ResourceMap(common_overlay_resources),
         str(overlay_output_path),
         rro_name,
         package,

@@ -487,6 +487,10 @@ class ResourceMap:
         for r in resources:
             self.discard(r)
 
+    def remove_many(self, resources: Iterable[Resource]):
+        for r in resources:
+            self.remove(r)
+
     def all(self) -> Set[Resource]:
         return self.__all
 
@@ -860,7 +864,7 @@ def get_resource_element_references(
 
 
 def keep_referenced_resources_from_removal(
-    resources_to_remove: ResourceMap,
+    resources_to_remove: Set[Resource],
     all_resources: ResourceMap,
 ):
     keep_resources: Set[Resource] = set()
