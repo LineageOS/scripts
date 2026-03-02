@@ -329,7 +329,7 @@ class ResourceMap:
 
     def __init_by_name(self):
         if self.__by_name is not None:
-            return
+            return self.__by_name
 
         self.__by_name = {}
         for resource in self.__all:
@@ -339,9 +339,11 @@ class ResourceMap:
                 resource,
             )
 
+        return self.__by_name
+
     def __init_by_reference_name(self):
         if self.__by_reference_name is not None:
-            return
+            return self.__by_reference_name
 
         self.__by_reference_name = {}
         for resource in self.__all:
@@ -351,9 +353,11 @@ class ResourceMap:
                 resource,
             )
 
+        return self.__by_reference_name
+
     def __init_by_rel_path(self):
         if self.__by_rel_path is not None:
-            return
+            return self.__by_rel_path
 
         self.__by_rel_path = {}
         for resource in self.__all:
@@ -362,6 +366,8 @@ class ResourceMap:
                 resource.rel_path,
                 resource,
             )
+
+        return self.__by_rel_path
 
     def __init_ref_map(self):
         if (
@@ -484,24 +490,16 @@ class ResourceMap:
         return self.__all
 
     def by_rel_path(self):
-        self.__init_by_rel_path()
-        assert self.__by_rel_path is not None
-        return self.__by_rel_path.items()
+        return self.__init_by_rel_path().items()
 
     def by_name(self, name: str):
-        self.__init_by_name()
-        assert self.__by_name is not None
-        return self.__by_name.get(name, set())
+        return self.__init_by_name().get(name, set())
 
     def by_reference_name(self, reference_name: str):
-        self.__init_by_reference_name()
-        assert self.__by_reference_name is not None
-        return self.__by_reference_name.get(reference_name, set())
+        return self.__init_by_reference_name().get(reference_name, set())
 
     def one_by_name(self, name: str) -> Optional[Resource]:
-        self.__init_by_name()
-        assert self.__by_name is not None
-        s = self.__by_name.get(name)
+        s = self.__init_by_name().get(name)
         if s is None:
             return None
 
