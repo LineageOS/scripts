@@ -128,7 +128,10 @@ def commonize_package_overlays(
     overlay_output_path.mkdir(parents=True, exist_ok=True)
 
     write_rro(
-        ResourceMap(common_overlay_resources),
+        ResourceMap(
+            common_overlay_resources,
+            by_rel_path=True,
+        ),
         str(overlay_output_path),
         rro_name,
         package,
