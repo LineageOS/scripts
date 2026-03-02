@@ -7,6 +7,7 @@ import functools
 import os
 import re
 from abc import ABC, abstractmethod
+from collections import defaultdict
 from enum import Enum, auto
 from fnmatch import fnmatch
 from os import path
@@ -280,11 +281,27 @@ resource_str_map = Dict[str, Set[Resource]]
 
 
 class ResourceMap:
-    def __init__(self, resources: Optional[Iterable[Resource]] = None):
+    def __init__(
+        self,
+        resources: Optional[Iterable[Resource]] = None,
+        by_name: bool = False,
+        by_reference_name: bool = False,
+        by_rel_path: bool = False,
+    ):
         self.__all: Set[Resource] = set()
+
         self.__by_name: Optional[resource_str_map] = None
+        if by_name:
+            self.__by_name = defaultdict(set)
+
         self.__by_reference_name: Optional[resource_str_map] = None
+        if by_reference_name:
+            self.__by_reference_name = defaultdict(set)
+
         self.__by_rel_path: Optional[resource_str_map] = None
+        if by_rel_path:
+            self.__by_rel_path = defaultdict(set)
+
         self.__references_to_resource: Optional[Dict[str, Set[str]]] = None
         self.__resource_to_references: Optional[Dict[str, Set[str]]] = None
 
@@ -315,11 +332,7 @@ class ResourceMap:
         if index is None:
             return
 
-        s: Optional[Set[Resource]] = index.get(key, None)
-        if s is None:
-            s = set()
-            index[key] = s
-
+        s = index[key]
         s.add(resource)
 
         if index is self.__by_rel_path and isinstance(resource, RawResource):
@@ -331,7 +344,7 @@ class ResourceMap:
         if self.__by_name is not None:
             return self.__by_name
 
-        self.__by_name = {}
+        self.__by_name = defaultdict(set)
         for resource in self.__all:
             self.__index_add(
                 self.__by_name,
@@ -345,7 +358,7 @@ class ResourceMap:
         if self.__by_reference_name is not None:
             return self.__by_reference_name
 
-        self.__by_reference_name = {}
+        self.__by_reference_name = defaultdict(set)
         for resource in self.__all:
             self.__index_add(
                 self.__by_reference_name,
@@ -359,7 +372,7 @@ class ResourceMap:
         if self.__by_rel_path is not None:
             return self.__by_rel_path
 
-        self.__by_rel_path = {}
+        self.__by_rel_path = defaultdict(set)
         for resource in self.__all:
             self.__index_add(
                 self.__by_rel_path,
@@ -376,8 +389,8 @@ class ResourceMap:
         ):
             return
 
-        self.__resource_to_references = {}
-        self.__references_to_resource = {}
+        self.__resource_to_references = defaultdict(set)
+        self.__references_to_resource = defaultdict(set)
         for resource in self.__all:
             self.__add_resource_refs(resource)
 
@@ -393,16 +406,10 @@ class ResourceMap:
 
         refs = get_resource_element_references(resource.element)
 
-        self.__resource_to_references.setdefault(
-            resource.reference_name,
-            set(),
-        ).update(refs)
+        self.__resource_to_references[resource.reference_name].update(refs)
 
         for ref in refs:
-            self.__references_to_resource.setdefault(
-                ref,
-                set(),
-            ).add(resource.reference_name)
+            self.__references_to_resource[ref].add(resource.reference_name)
 
     def __add(self, resource: Resource):
         self.__add_resource_refs(resource)
@@ -497,14 +504,14 @@ class ResourceMap:
         return self.__init_by_rel_path().items()
 
     def by_name(self, name: str):
-        return self.__init_by_name().get(name, set())
+        return self.__init_by_name()[name]
 
     def by_reference_name(self, reference_name: str):
-        return self.__init_by_reference_name().get(reference_name, set())
+        return self.__init_by_reference_name()[reference_name]
 
     def one_by_name(self, name: str) -> Optional[Resource]:
-        s = self.__init_by_name().get(name)
-        if s is None:
+        s = self.__init_by_name()[name]
+        if not s:
             return None
 
         return next(iter(s))
@@ -518,13 +525,13 @@ class ResourceMap:
     def resources_referenced_by(self, resource: Resource):
         self.__init_ref_map()
         assert self.__resource_to_references is not None
-        refs = self.__resource_to_references.get(resource.reference_name, set())
+        refs = self.__resource_to_references[resource.reference_name]
         return self.__reference_names_to_resource(refs)
 
     def resources_referencing(self, resource: Resource):
         self.__init_ref_map()
         assert self.__references_to_resource is not None
-        refs = self.__references_to_resource.get(resource.reference_name, set())
+        refs = self.__references_to_resource[resource.reference_name]
         return self.__reference_names_to_resource(refs)
 
 
@@ -759,7 +766,10 @@ def parse_resources(
 
 
 def parse_overlay_resources(resources_path: str):
-    resource_map = ResourceMap()
+    resource_map = ResourceMap(
+        by_rel_path=True,
+        by_reference_name=True,
+    )
     parse_resources(
         resource_map,
         [resources_path],
@@ -773,7 +783,9 @@ def get_target_package_resources(
     res_dirs: Tuple[str, ...],
     parse_all_values: bool,
 ):
-    resource_map = ResourceMap()
+    resource_map = ResourceMap(
+        by_name=True,
+    )
     parse_resources(
         resource_map,
         res_dirs,
