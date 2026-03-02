@@ -603,19 +603,22 @@ def parse_xml_resources(
         return None
 
     comments: List[Comment] = []
+    prev_was_comment = False
     index = 0
     for node in root:
         if isinstance(node, Comment):
             # Last element was not a comment, don't stack them
             # Or it was a comment, but they were not stacked
-            last_node = node.getprevious()
-            if not isinstance(last_node, Comment) or node_has_space_after(
-                last_node
+            if (not prev_was_comment) or (
+                comments and node_has_space_after(comments[-1])
             ):
                 comments = []
 
             comments.append(node)
+            prev_was_comment = True
             continue
+
+        prev_was_comment = False
 
         tag = node.tag
         if tag in SKIP_TAGS:
