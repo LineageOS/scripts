@@ -40,10 +40,15 @@ Element = etree._Element  # type: ignore
 Comment = etree._Comment  # type: ignore
 
 TRANSLATABLE_KEY = 'translatable'
-FEATURE_FLAG_KEY = 'featureFlag'
+FEATURE_FLAG_KEY = f'{{{NAMESPACE}}}featureFlag'
 MSGID_KEY = 'msgid'
 RESOURCES_TAG = 'resources'
 RESOURCES_DIR = 'res'
+NAME_KEY = 'name'
+PRODUCT_KEY = 'product'
+DEFAULT_PRODUCT = 'default'
+DIMEN_TAG = 'dimen'
+STRING_TAG = 'string'
 
 
 class ResourceType(Enum):
@@ -617,25 +622,25 @@ def parse_xml_resources(
             comments = []
             continue
 
-        name = node.attrib.get('name', '')
+        name = node.attrib.get(NAME_KEY, '')
         if not name:
             raise ValueError('Node has no name')
 
-        product = node.attrib.get('product', '')
+        product = node.attrib.get(PRODUCT_KEY, '')
         # TODO: find out if this is really correct
-        if product == 'default':
+        if product == DEFAULT_PRODUCT:
             product = ''
 
-        feature_flag = node.attrib.get(f'{{{NAMESPACE}}}{FEATURE_FLAG_KEY}', '')
+        feature_flag = node.attrib.get(FEATURE_FLAG_KEY, '')
 
         if node.text is not None:
             # TODO: this is just a hack for wrong @*
             node.text = node.text.replace('@*', '@')
 
-            if tag == 'dimen':
+            if tag == DIMEN_TAG:
                 node.text = normalize_node_text_dimens_units(node.text)
 
-            if tag == 'string':
+            if tag == STRING_TAG:
                 node.text = normalize_node_text_string(node.text)
 
         # Overlays don't have translatable=false, remove it to fix
