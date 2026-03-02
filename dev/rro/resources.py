@@ -317,6 +317,11 @@ class ResourceMap:
 
         s.add(resource)
 
+        if index is self.__by_rel_path and isinstance(resource, RawResource):
+            # Enforce that the same raw resource does not appear multiple times
+            # for the same path, as other logic depends on this
+            assert len(s) == 1, resource
+
     def __init_by_name(self):
         if self.__by_name is not None:
             return
@@ -1283,26 +1288,31 @@ def write_resources(
         xml_path = path.join(output_path, resources_dir, rel_path)
         preserved = preserved_prefixes.get(xml_path)
 
-        xml_resources = filter(lambda r: is_xml_resource(r), resources)
-        raw_resources = filter(lambda r: is_raw_resource(r), resources)
+        if not resources:
+            continue
 
-        sorted_resources = sorted(
-            xml_resources,
-            key=lambda r: (r.index == -1, r.index, r.name),
-        )
+        if is_by_rel_path_raw_resources(resources):
+            assert len(resources) == 1
+            resource = next(iter(resources))
 
-        write_xml_resources(
-            xml_path,
-            sorted_resources,
-            preserved_prefix=preserved,
-        )
-
-        for resource in raw_resources:
             if aapt_raw_resource is None and raw_resource_need_aapt_raw(
                 resource
             ):
                 aapt_raw_resource = resource
             write_raw_resource(resource, output_path, resources_dir)
+        elif is_by_rel_path_xml_resources(resources):
+            sorted_resources = sorted(
+                resources,
+                key=lambda r: (r.index == -1, r.index, r.name),
+            )
+
+            write_xml_resources(
+                xml_path,
+                sorted_resources,
+                preserved_prefix=preserved,
+            )
+        else:
+            assert False
 
     return aapt_raw_resource
 
