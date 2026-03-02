@@ -292,8 +292,6 @@ def generate_rro_main():
             str(manifest_path),
         )
 
-        apk_output_path = Path(overlays_path, rro_name)
-
         try:
             generate_rro(
                 package_map=package_map,
@@ -303,14 +301,14 @@ def generate_rro_main():
                 target_package=target_package,
                 partition=partition,
                 resources_path=resources_path,
-                apk_output_path=apk_output_path,
+                apk_output_path=output_path,
                 overlay_attrs=overlay_attrs,
                 exclude_overlays=exclude_overlays,
                 exclude_packages=exclude_packages,
                 device=args.device,
             )
         except ValueError as e:
-            shutil.rmtree(apk_output_path, ignore_errors=True)
+            shutil.rmtree(output_path, ignore_errors=True)
             color_print(e, color=Color.RED)
 
 
