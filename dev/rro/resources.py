@@ -872,9 +872,6 @@ def keep_referenced_resources_from_removal(
     keep_resources: Set[Resource] = set()
 
     for resource in resources_to_remove:
-        if not is_xml_resource(resource):
-            continue
-
         # If there are any resources referenced by this resource which will not
         # get removed, do not remove any of them
         resource_referenced_by = all_resources.resources_referenced_by(resource)
