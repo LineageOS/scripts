@@ -837,23 +837,6 @@ def is_referenced_resource_element(
     return False
 
 
-def get_referencing_resource(
-    overlay_resources: ResourceMap,
-    reference_name: str,
-):
-    for resource in overlay_resources:
-        if not is_xml_resource(resource):
-            continue
-
-        if is_referenced_resource_element(
-            reference_name,
-            resource.element,
-        ):
-            return resource
-
-    return None
-
-
 def get_resource_element_references(
     element: Element,
     referenced_resources: Optional[Set[str]] = None,
@@ -1102,13 +1085,6 @@ def overlay_resources_remove_missing(
         for package_resource in matching_package_resources:
             if package_resource.is_default:
                 return
-
-        referencing_resource = get_referencing_resource(
-            overlay_resources,
-            resource.reference_name,
-        )
-        if referencing_resource is not None:
-            return
 
         is_manifest_referencing = is_referenced_resource_element(
             resource.reference_name,
