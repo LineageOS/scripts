@@ -404,8 +404,7 @@ class ResourceMap:
                 set(),
             ).add(resource.reference_name)
 
-    def add(self, resource: Resource):
-        self.__all.add(resource)
+    def __add(self, resource: Resource):
         self.__add_resource_refs(resource)
         self.__index_add(
             self.__by_name,
@@ -423,9 +422,14 @@ class ResourceMap:
             resource,
         )
 
+    def add(self, resource: Resource):
+        self.__all.add(resource)
+        self.__add(resource)
+
     def add_many(self, resources: Iterable[Resource]):
+        self.__all.update(resources)
         for resource in resources:
-            self.add(resource)
+            self.__add(resource)
 
     def __index_remove(
         self,
