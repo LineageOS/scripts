@@ -597,8 +597,6 @@ def parse_xml_resources(
     if root.tag != RESOURCES_TAG:
         return None
 
-    etree.cleanup_namespaces(root)
-
     comments: List[Comment] = []
     index = 0
     for node in root:
