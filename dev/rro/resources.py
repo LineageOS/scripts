@@ -287,6 +287,7 @@ class ResourceMap:
         by_name: bool = False,
         by_reference_name: bool = False,
         by_rel_path: bool = False,
+        by_references: bool = False,
     ):
         self.__all: Set[Resource] = set()
 
@@ -302,8 +303,11 @@ class ResourceMap:
         if by_rel_path:
             self.__by_rel_path = defaultdict(set)
 
-        self.__references_to_resource: Optional[Dict[str, Set[str]]] = None
-        self.__resource_to_references: Optional[Dict[str, Set[str]]] = None
+        self.__references_to_resource: Optional[Dict[str, Set[Resource]]] = None
+        self.__resource_to_references: Optional[Dict[Resource, Set[str]]] = None
+        if by_references:
+            self.__references_to_resource = defaultdict(set)
+            self.__resource_to_references = defaultdict(set)
 
         if resources:
             self.add_many(resources)
@@ -394,6 +398,25 @@ class ResourceMap:
         for resource in self.__all:
             self.__add_resource_refs(resource)
 
+    def __remove_resource_refs(self, resource: Resource):
+        if (
+            self.__resource_to_references is None
+            or self.__references_to_resource is None
+        ):
+            return
+
+        refs = self.__resource_to_references.pop(resource, None)
+        if refs is None:
+            return
+
+        for ref in refs:
+            s = self.__references_to_resource.get(ref)
+            if not s:
+                continue
+            s.discard(resource)
+            if not s:
+                del self.__references_to_resource[ref]
+
     def __add_resource_refs(self, resource: Resource):
         if (
             self.__resource_to_references is None
@@ -406,10 +429,10 @@ class ResourceMap:
 
         refs = get_resource_element_references(resource.element)
 
-        self.__resource_to_references[resource.reference_name].update(refs)
+        self.__resource_to_references[resource].update(refs)
 
         for ref in refs:
-            self.__references_to_resource[ref].add(resource.reference_name)
+            self.__references_to_resource[ref].add(resource)
 
     def __add(self, resource: Resource):
         self.__add_resource_refs(resource)
@@ -468,6 +491,8 @@ class ResourceMap:
         else:
             self.__all.remove(resource)
 
+        self.__remove_resource_refs(resource)
+
         self.__index_remove(
             self.__by_name,
             resource.name,
@@ -525,14 +550,13 @@ class ResourceMap:
     def resources_referenced_by(self, resource: Resource):
         self.__init_ref_map()
         assert self.__resource_to_references is not None
-        refs = self.__resource_to_references[resource.reference_name]
+        refs = self.__resource_to_references[resource]
         return self.__reference_names_to_resource(refs)
 
     def resources_referencing(self, resource: Resource):
         self.__init_ref_map()
         assert self.__references_to_resource is not None
-        refs = self.__references_to_resource[resource.reference_name]
-        return self.__reference_names_to_resource(refs)
+        return self.__references_to_resource[resource.reference_name]
 
 
 def node_has_space_after(node: Element):
@@ -769,6 +793,7 @@ def parse_overlay_resources(resources_path: str):
     resource_map = ResourceMap(
         by_rel_path=True,
         by_reference_name=True,
+        by_references=True,
     )
     parse_resources(
         resource_map,
