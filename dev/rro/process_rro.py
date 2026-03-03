@@ -30,11 +30,11 @@ from rro.manifest import (
     parse_overlay_manifest,
     write_manifest,
 )
+from rro.resource import dir_names_to_frozen_dict
 from rro.resources import (
     RESOURCES_DIR,
     Resource,
     ResourceMap,
-    dir_names_to_frozen_dict,
     find_target_package_resources,
     is_resource_in_entries,
     keep_referenced_resources_from_removal,

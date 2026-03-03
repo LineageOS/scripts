@@ -28,10 +28,10 @@ from rro.process_rro import (
     remove_rros_shadowed_resources,
     write_rro,
 )
+from rro.resource import dir_names_to_frozen_dict
 from rro.resources import (
     RESOURCES_DIR,
     ResourceMap,
-    dir_names_to_frozen_dict,
     read_xml_resources_prefix,
 )
 from rro.target_package import (
