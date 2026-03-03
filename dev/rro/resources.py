@@ -1026,6 +1026,39 @@ def overlay_resources_remove(
     return removed_resources
 
 
+def fixup_resource_attrib(
+    resource: XMLResource,
+    package_resource: XMLResource,
+):
+    attrib: Optional[Dict[str | bytes, str | bytes]] = None
+
+    def assign_attrib(name: str):
+        nonlocal attrib
+
+        package_attrib = package_resource.element.attrib.get(name)
+        if resource.element.attrib.get(name) == package_attrib:
+            return False
+
+        if attrib is None:
+            attrib = dict(resource.element.attrib)
+
+        if package_attrib is None:
+            attrib.pop(name)
+        else:
+            attrib[name] = package_attrib
+
+        return True
+
+    tag = None
+    if resource.tag != package_resource.tag:
+        tag = package_resource.tag
+
+    assign_attrib('type')
+    assign_attrib('format')
+
+    return tag, attrib
+
+
 def overlay_resources_fixup_tag(
     overlay_resources: ResourceMap,
     package_resources: ResourceMap,
@@ -1044,28 +1077,9 @@ def overlay_resources_fixup_tag(
 
         assert isinstance(package_resource, XMLResource)
 
-        attrib = dict(resource.element.attrib)
+        tag, attrib = fixup_resource_attrib(resource, package_resource)
 
-        def assign_attrib(name: str):
-            package_attrib = package_resource.element.attrib.get(name)
-            if resource.element.attrib.get(name) == package_attrib:
-                return False
-
-            if package_attrib is None:
-                attrib.pop(name)
-            else:
-                attrib[name] = package_attrib
-
-            return True
-
-        tag = None
-        if resource.tag != package_resource.tag:
-            tag = package_resource.tag
-
-        type_set = assign_attrib('type')
-        format_set = assign_attrib('format')
-
-        if tag is None and not type_set and not format_set:
+        if tag is None and attrib is None:
             return
 
         new_resource = resource.copy(
