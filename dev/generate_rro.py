@@ -104,7 +104,9 @@ def generate_rro(
     if orignal_target_package in exclude_packages:
         raise ValueError(f'{package}: Excluded by {orignal_target_package}')
 
-    resources = get_rro_resources(package, str(resources_path))
+    resources = get_rro_resources(
+        package, str(resources_path), track_index=False
+    )
     package_resources = get_rro_target_package_resources(
         package_map=package_map,
         package=package,
