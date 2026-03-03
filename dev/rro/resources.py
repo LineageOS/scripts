@@ -64,10 +64,11 @@ class Resource(ABC):
         self,
         dir_name: str,
         name: str,
+        is_default: bool,
         resource_type: ResourceType,
     ):
         self.dir_name = dir_name
-        self.is_default = '-' not in self.dir_name
+        self.is_default = is_default
         self.name = name
         self.type = resource_type
 
@@ -93,9 +94,10 @@ class RawResource(Resource):
         self,
         dir_name: str,
         name: str,
+        is_default: bool,
         data: Optional[bytes],
     ):
-        super().__init__(dir_name, name, ResourceType.RAW)
+        super().__init__(dir_name, name, is_default, ResourceType.RAW)
 
         self.data = data
         self.__hash_keys = (
@@ -139,6 +141,7 @@ class XMLResource(Resource):
         index: int,
         file_name: str,
         dir_name: str,
+        is_default: bool,
         tag: str,
         name: str,
         element: Element,
@@ -146,7 +149,7 @@ class XMLResource(Resource):
         product: str,
         feature_flag: str,
     ):
-        super().__init__(dir_name, name, ResourceType.XML)
+        super().__init__(dir_name, name, is_default, ResourceType.XML)
 
         self.index = index
         self.tag = tag
@@ -195,6 +198,7 @@ class XMLResource(Resource):
             index if index is not None else self.index,
             file_name if file_name is not None else self.file_name,
             self.dir_name,
+            self.is_default,
             tag if tag is not None else self.tag,
             self.name,
             element if element is not None else self.element,
@@ -594,6 +598,7 @@ PSEUDOLOCALES = (
 def parse_xml_resources(
     dir_name: str,
     file_name: str,
+    is_default: bool,
     data: bytes,
     resources: Set[Resource],
 ):
@@ -658,6 +663,7 @@ def parse_xml_resources(
             index,
             file_name,
             dir_name,
+            is_default,
             tag,
             name,
             node,
@@ -696,14 +702,17 @@ def parse_package_resources_dir(
             continue
 
         dir_name = dir_file.name
+        is_values = dir_name.startswith('values')
+        is_default = '-' not in dir_name
 
-        if dir_name.startswith('values-') and any(
-            locale in dir_name for locale in PSEUDOLOCALES
+        if (
+            is_values
+            and not is_default
+            and any(locale in dir_name for locale in PSEUDOLOCALES)
         ):
             continue
 
-        is_values = dir_name.startswith('values')
-        if is_values and not parse_all_values and dir_name != 'values':
+        if is_values and not parse_all_values and not is_default:
             continue
 
         for resource_file in sorted_scandir(dir_file.path):
@@ -734,6 +743,7 @@ def parse_package_resources_dir(
                 parse_xml_resources(
                     dir_name,
                     file_name,
+                    is_default,
                     data,
                     resources,
                 )
@@ -741,6 +751,7 @@ def parse_package_resources_dir(
                 resource = RawResource(
                     dir_name,
                     file_name,
+                    is_default,
                     data,
                 )
                 resources.add(resource)
