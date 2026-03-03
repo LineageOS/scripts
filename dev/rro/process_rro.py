@@ -49,6 +49,7 @@ from rro.target_package import (
     find_overlay_android_bp_path_by_name,
     get_target_packages,
 )
+from utils.frozendict import FrozenDict
 from utils.utils import Color, color_print
 
 
@@ -97,6 +98,7 @@ def get_rro_target_package_resources(
     resources: ResourceMap,
     allow_missing: bool,
     parse_all_values: bool,
+    dir_names: Optional[FrozenDict[str, FrozenSet[str]]],
 ):
     target_packages = get_target_packages(package_map, target_package)
     if not target_packages and not allow_missing:
@@ -106,6 +108,7 @@ def get_rro_target_package_resources(
         target_packages,
         resources,
         parse_all_values,
+        dir_names,
     )
 
     if len(target_packages) > 1:
@@ -160,6 +163,7 @@ def check_rro_matches_aosp(
         resources=aosp_resources,
         allow_missing=True,
         parse_all_values=False,
+        dir_names=None,
     )
     fixup_rro_resources(
         package=aosp_package,
