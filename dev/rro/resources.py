@@ -1232,43 +1232,24 @@ def overlay_resource_fixup_from_package(
         if not is_xml_resource(resource):
             return
 
-        # Let the logic below place it at the end if a package resource is not
-        # found
-        index = None
-        comments = None
-        res_dir = None
-        file_name = None
-        tag = None
-        attrib = None
-
-        package_resource = None
         matching_package_resources = package_resources.by_name(
             resource.name,
         )
-        if matching_package_resources:
-            matching_package_resources = sorted(
-                matching_package_resources,
-                key=package_resource_sort_key,
-            )
-            package_resource = matching_package_resources[0]
-
-        if package_resource is not None:
-            assert isinstance(package_resource, XMLResource)
-            tag, attrib = fixup_resource_attrib(resource, package_resource)
-            index = package_resource.index
-            comments = package_resource.comments
-            file_name = package_resource.file_name
-            res_dir = package_resource.res_dir
-
-        if (
-            tag is None
-            and attrib is None
-            and index is None
-            and comments is None
-            and file_name is None
-            and res_dir is None
-        ):
+        if not matching_package_resources:
             return
+
+        matching_package_resources = sorted(
+            matching_package_resources,
+            key=package_resource_sort_key,
+        )
+        package_resource = matching_package_resources[0]
+
+        assert isinstance(package_resource, XMLResource)
+        tag, attrib = fixup_resource_attrib(resource, package_resource)
+        index = package_resource.index
+        comments = package_resource.comments
+        file_name = package_resource.file_name
+        res_dir = package_resource.res_dir
 
         new_resource = resource.copy(
             tag=tag,
