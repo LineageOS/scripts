@@ -646,6 +646,7 @@ def parse_xml_resources(
     dir_name: str,
     file_name: str,
     is_default: bool,
+    track_index: bool,
     data: bytes,
     resources: Set[Resource],
     resource_names: Optional[FrozenSet[str]],
@@ -657,7 +658,10 @@ def parse_xml_resources(
 
     comments: List[Comment] = []
     prev_was_comment = False
-    index = 0
+    if track_index:
+        index = 0
+    else:
+        index = -1
     for node in root:
         if isinstance(node, Comment):
             # Last element was not a comment, don't stack them
@@ -724,7 +728,8 @@ def parse_xml_resources(
             product,
             feature_flag,
         )
-        index += 1
+        if track_index:
+            index += 1
 
         # Assign the same comment to entries following each other without a
         # newline
@@ -747,6 +752,7 @@ def parse_package_resources_dir(
     res_dir: str,
     parse_all_values: bool,
     read_raw_resources: bool,
+    track_index: bool,
     dir_names: Optional[FrozenDict[str, FrozenSet[str]]],
 ):
     resources: Set[Resource] = set()
@@ -806,6 +812,7 @@ def parse_package_resources_dir(
                     dir_name,
                     file_name,
                     is_default,
+                    track_index,
                     data,
                     resources,
                     resource_names=resource_names,
@@ -833,6 +840,7 @@ def parse_resources(
     resources_paths: Iterable[str],
     parse_all_values: bool,
     read_raw_resources: bool,
+    track_index: bool,
     dir_names: Optional[FrozenDict[str, FrozenSet[str]]],
 ):
     for resource_path in resources_paths:
@@ -840,6 +848,7 @@ def parse_resources(
             resource_path,
             parse_all_values,
             read_raw_resources,
+            track_index,
             dir_names,
         )
         resource_map.add_many(resources)
@@ -857,6 +866,7 @@ def parse_overlay_resources(resources_path: str):
         [resources_path],
         parse_all_values=True,
         read_raw_resources=True,
+        track_index=False,
         dir_names=None,
     )
     return resource_map
@@ -876,6 +886,7 @@ def get_target_package_resources(
         res_dirs,
         parse_all_values=parse_all_values,
         read_raw_resources=False,
+        track_index=True,
         dir_names=dir_names,
     )
     return resource_map
@@ -1216,9 +1227,9 @@ def overlay_resource_fixup_from_package(
 
         # Let the logic below place it at the end if a package resource is not
         # found
-        index = -1
+        index = None
         comments = None
-        file_name = resource.file_name
+        file_name = None
         tag = None
         attrib = None
 
@@ -1239,6 +1250,15 @@ def overlay_resource_fixup_from_package(
             index = package_resource.index
             comments = package_resource.comments
             file_name = package_resource.file_name
+
+        if (
+            tag is None
+            and attrib is None
+            and index is None
+            and comments is None
+            and file_name is None
+        ):
+            return
 
         new_resource = resource.copy(
             tag=tag,
