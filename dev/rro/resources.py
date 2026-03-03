@@ -722,17 +722,17 @@ def parse_xml_resources(
             del node.attrib[MSGID_KEY]
 
         resource = XMLResource(
-            index,
-            res_dir,
-            file_name,
-            dir_name,
-            is_default,
-            tag,
-            name,
-            node,
-            comments,
-            product,
-            feature_flag,
+            index=index,
+            res_dir=res_dir,
+            file_name=file_name,
+            dir_name=dir_name,
+            is_default=is_default,
+            tag=tag,
+            name=name,
+            element=node,
+            comments=comments,
+            product=product,
+            feature_flag=feature_flag,
         )
         if track_index:
             index += 1
@@ -755,7 +755,7 @@ def sorted_scandir(dir_path: str):
 
 @functools.cache
 def parse_package_resources_dir(
-    res_dir: str,
+    resources_path: str,
     parse_all_values: bool,
     read_raw_resources: bool,
     track_index: bool,
@@ -763,7 +763,7 @@ def parse_package_resources_dir(
 ):
     resources: Set[Resource] = set()
 
-    for dir_file in sorted_scandir(res_dir):
+    for dir_file in sorted_scandir(resources_path):
         if not dir_file.is_dir():
             continue
 
@@ -815,13 +815,13 @@ def parse_package_resources_dir(
             if is_values:
                 assert data is not None
                 parse_xml_resources(
-                    res_dir,
-                    dir_name,
-                    file_name,
-                    is_default,
-                    track_index,
-                    data,
-                    resources,
+                    res_dir=resources_path,
+                    dir_name=dir_name,
+                    file_name=file_name,
+                    is_default=is_default,
+                    track_index=track_index,
+                    data=data,
+                    resources=resources,
                     resource_names=resource_names,
                 )
             else:
@@ -832,10 +832,10 @@ def parse_package_resources_dir(
                     continue
 
                 resource = RawResource(
-                    dir_name,
-                    file_name,
-                    is_default,
-                    data,
+                    dir_name=dir_name,
+                    name=file_name,
+                    is_default=is_default,
+                    data=data,
                 )
                 resources.add(resource)
 
@@ -850,13 +850,13 @@ def parse_resources(
     track_index: bool,
     dir_names: Optional[FrozenDict[str, FrozenSet[str]]],
 ):
-    for resource_path in resources_paths:
+    for resources_path in resources_paths:
         resources = parse_package_resources_dir(
-            resource_path,
-            parse_all_values,
-            read_raw_resources,
-            track_index,
-            dir_names,
+            resources_path=resources_path,
+            parse_all_values=parse_all_values,
+            read_raw_resources=read_raw_resources,
+            track_index=track_index,
+            dir_names=dir_names,
         )
         resource_map.add_many(resources)
 
@@ -869,8 +869,8 @@ def parse_overlay_resources(resources_path: str):
         by_references=True,
     )
     parse_resources(
-        resource_map,
-        [resources_path],
+        resource_map=resource_map,
+        resources_paths=[resources_path],
         parse_all_values=True,
         read_raw_resources=True,
         track_index=False,
@@ -881,7 +881,7 @@ def parse_overlay_resources(resources_path: str):
 
 @functools.cache
 def get_target_package_resources(
-    res_dirs: Tuple[str, ...],
+    resources_paths: Tuple[str, ...],
     parse_all_values: bool,
     dir_names: FrozenDict[str, FrozenSet[str]],
 ):
@@ -889,8 +889,8 @@ def get_target_package_resources(
         by_name=True,
     )
     parse_resources(
-        resource_map,
-        res_dirs,
+        resource_map=resource_map,
+        resources_paths=resources_paths,
         parse_all_values=parse_all_values,
         read_raw_resources=False,
         track_index=True,
@@ -901,14 +901,14 @@ def get_target_package_resources(
 
 def find_target_package_resources(
     target_packages: List[Tuple[str, str, List[str]]],
-    overlay_resources: ResourceMap,
+    resources: ResourceMap,
     parse_all_values: bool,
     dir_names: Optional[FrozenDict[str, FrozenSet[str]]],
 ):
     if len(target_packages) == 1:
-        _, module_name, resource_dirs = target_packages[0]
+        _, module_name, resources_paths = target_packages[0]
         package_resources = get_target_package_resources(
-            tuple(resource_dirs),
+            resources_paths=tuple(resources_paths),
             parse_all_values=parse_all_values,
             dir_names=dir_names,
         )
@@ -918,15 +918,15 @@ def find_target_package_resources(
     best_module_name = None
     best_resources = None
 
-    for _, module_name, resource_dirs in target_packages:
+    for _, module_name, resources_paths in target_packages:
         package_resources = get_target_package_resources(
-            tuple(resource_dirs),
+            resources_paths=tuple(resources_paths),
             parse_all_values=parse_all_values,
             dir_names=dir_names,
         )
 
         matching_resources = 0
-        for resource in overlay_resources:
+        for resource in resources:
             package_resource = package_resources.one_by_name(
                 resource.name,
             )
@@ -1018,7 +1018,7 @@ def keep_referenced_resources_from_removal(
 
 
 def overlay_resources_process(
-    overlay_resources: ResourceMap,
+    resources: ResourceMap,
     fn: Callable[
         [Resource],
         Union[
@@ -1038,7 +1038,7 @@ def overlay_resources_process(
     removed_resources: Set[Resource] = set()
     added_resources: Set[Resource] = set()
 
-    for resource in overlay_resources:
+    for resource in resources:
         result = fn(resource)
         if result is None:
             continue
@@ -1054,14 +1054,14 @@ def overlay_resources_process(
     if keep_if_referenced:
         keep_referenced_resources_from_removal(
             removed_resources,
-            overlay_resources,
+            resources,
         )
 
     for resource in removed_resources:
-        overlay_resources.remove(resource)
+        resources.remove(resource)
 
     for resource in added_resources:
-        overlay_resources.add(resource)
+        resources.add(resource)
 
     return removed_resources, added_resources
 
@@ -1112,7 +1112,7 @@ def is_resource_in_entries(
 
 
 def overlay_resources_remove(
-    overlay_resources: ResourceMap,
+    resources: ResourceMap,
     remove_resources: FrozenSet[str],
 ):
     def remove_resource(resource: Resource):
@@ -1120,7 +1120,7 @@ def overlay_resources_remove(
             return True
 
     removed_resources, _ = overlay_resources_process(
-        overlay_resources,
+        resources,
         remove_resource,
     )
 
@@ -1161,7 +1161,7 @@ def fixup_resource_attrib(
 
 
 def overlay_resources_remove_missing(
-    overlay_resources: ResourceMap,
+    resources: ResourceMap,
     package_resources: ResourceMap,
     manifest_path: str,
     keep_resources: FrozenSet[str],
@@ -1193,7 +1193,7 @@ def overlay_resources_remove_missing(
         return True
 
     removed_resources, _ = overlay_resources_process(
-        overlay_resources,
+        resources,
         remove_missing_resource,
         keep_if_referenced=True,
     )
@@ -1223,7 +1223,7 @@ def package_resource_sort_key(resource: Resource):
 
 
 def overlay_resource_fixup_from_package(
-    overlay_resources: ResourceMap,
+    resources: ResourceMap,
     package_resources: ResourceMap,
 ):
     wrong_tag_resources: Set[Tuple[str, str]] = set()
@@ -1271,7 +1271,7 @@ def overlay_resource_fixup_from_package(
         return resource, new_resource
 
     overlay_resources_process(
-        overlay_resources,
+        resources,
         fixup_resource_from_package,
     )
 
@@ -1362,7 +1362,7 @@ def write_xml_resources(
 
 
 def write_resources(
-    overlay_resources: ResourceMap,
+    all_resources: ResourceMap,
     output_path: str,
     resources_dir: str,
     preserved_prefixes: Optional[Dict[str, bytes]],
@@ -1371,7 +1371,7 @@ def write_resources(
         preserved_prefixes = {}
 
     aapt_raw_resource = None
-    for rel_path, resources in overlay_resources.by_rel_path():
+    for rel_path, resources in all_resources.by_rel_path():
         xml_path = path.join(output_path, resources_dir, rel_path)
         preserved = preserved_prefixes.get(xml_path)
 
@@ -1418,13 +1418,13 @@ def write_raw_resource(
 
 
 def read_xml_resources_prefix(
-    overlay_resources: ResourceMap,
+    all_resources: ResourceMap,
     output_path: str,
     extra_paths: List[str],
 ):
     rel_xml_paths: Set[str] = set()
 
-    for rel_path, resources in overlay_resources.by_rel_path():
+    for rel_path, resources in all_resources.by_rel_path():
         if not is_by_rel_path_xml_resources(resources):
             continue
 
