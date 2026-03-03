@@ -282,7 +282,7 @@ resource_str_map = Dict[str, Set[Resource]]
 class ResourceMap:
     def __init__(
         self,
-        resources: Optional[Iterable[Resource]] = None,
+        resources: Optional[Set[Resource]] = None,
         by_name: bool = False,
         by_reference_name: bool = False,
         by_rel_path: bool = False,
@@ -326,34 +326,13 @@ class ResourceMap:
     def __contains__(self, item: Resource):
         return item in self.__all
 
-    def __index_add(
-        self,
-        index: Optional[resource_str_map],
-        key: str,
-        resource: Resource,
-    ):
-        if index is None:
-            return
-
-        s = index[key]
-        s.add(resource)
-
-        if index is self.__by_rel_path and isinstance(resource, RawResource):
-            # Enforce that the same raw resource does not appear multiple times
-            # for the same path, as other logic depends on this
-            assert len(s) == 1, resource
-
     def __init_by_name(self):
         if self.__by_name is not None:
             return self.__by_name
 
         self.__by_name = defaultdict(set)
         for resource in self.__all:
-            self.__index_add(
-                self.__by_name,
-                resource.name,
-                resource,
-            )
+            self.__by_name[resource.name].add(resource)
 
         return self.__by_name
 
@@ -363,11 +342,7 @@ class ResourceMap:
 
         self.__by_reference_name = defaultdict(set)
         for resource in self.__all:
-            self.__index_add(
-                self.__by_reference_name,
-                resource.reference_name,
-                resource,
-            )
+            self.__by_reference_name[resource.reference_name].add(resource)
 
         return self.__by_reference_name
 
@@ -377,11 +352,12 @@ class ResourceMap:
 
         self.__by_rel_path = defaultdict(set)
         for resource in self.__all:
-            self.__index_add(
-                self.__by_rel_path,
-                resource.rel_path,
-                resource,
-            )
+            self.__by_rel_path[resource.rel_path].add(resource)
+
+            if isinstance(resource, RawResource):
+                # Enforce that the same raw resource does not appear multiple times
+                # for the same path, as other logic depends on this
+                assert len(self.__by_rel_path[resource.rel_path]) == 1, resource
 
         return self.__by_rel_path
 
@@ -417,48 +393,66 @@ class ResourceMap:
                 del self.__references_to_resource[ref]
 
     def __add_resource_refs(self, resource: Resource):
-        if (
-            self.__resource_to_references is None
-            or self.__references_to_resource is None
-        ):
-            return
-
         if not is_xml_resource(resource):
             return
 
         refs = get_resource_element_references(resource.element)
+
+        assert self.__resource_to_references is not None
+        assert self.__references_to_resource is not None
 
         self.__resource_to_references[resource].update(refs)
 
         for ref in refs:
             self.__references_to_resource[ref].add(resource)
 
-    def __add(self, resource: Resource):
-        self.__add_resource_refs(resource)
-        self.__index_add(
-            self.__by_name,
-            resource.name,
-            resource,
-        )
-        self.__index_add(
-            self.__by_reference_name,
-            resource.reference_name,
-            resource,
-        )
-        self.__index_add(
-            self.__by_rel_path,
-            resource.rel_path,
-            resource,
-        )
-
     def add(self, resource: Resource):
         self.__all.add(resource)
-        self.__add(resource)
+        if (
+            self.__resource_to_references is not None
+            and self.__references_to_resource is not None
+        ):
+            self.__add_resource_refs(resource)
+        if self.__by_name is not None:
+            self.__by_name[resource.name].add(resource)
 
-    def add_many(self, resources: Iterable[Resource]):
+        if self.__by_reference_name is not None:
+            self.__by_reference_name[resource.reference_name].add(resource)
+
+        if self.__by_rel_path is not None:
+            self.__by_rel_path[resource.rel_path].add(resource)
+
+            if isinstance(resource, RawResource):
+                # Enforce that the same raw resource does not appear multiple times
+                # for the same path, as other logic depends on this
+                assert len(self.__by_rel_path[resource.rel_path]) == 1, resource
+
+    def add_many(self, resources: Set[Resource]):
         self.__all.update(resources)
+
+        do_refs = (
+            self.__resource_to_references is not None
+            and self.__references_to_resource is not None
+        )
+        by_name = self.__by_name
+        by_ref = self.__by_reference_name
+        by_path = self.__by_rel_path
+
         for resource in resources:
-            self.__add(resource)
+            if do_refs:
+                self.__add_resource_refs(resource)
+
+            if by_name is not None:
+                by_name[resource.name].add(resource)
+
+            if by_ref is not None:
+                by_ref[resource.reference_name].add(resource)
+
+            if by_path is not None:
+                s = by_path[resource.rel_path]
+                s.add(resource)
+                if isinstance(resource, RawResource):
+                    assert len(s) == 1, resource
 
     def __index_remove(
         self,
