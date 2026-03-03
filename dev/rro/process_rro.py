@@ -38,7 +38,6 @@ from rro.resources import (
     is_resource_in_entries,
     keep_referenced_resources_from_removal,
     overlay_resource_fixup_from_package,
-    overlay_resources_fixup_tag,
     overlay_resources_remove,
     overlay_resources_remove_missing,
     parse_overlay_resources,
@@ -198,7 +197,7 @@ def fixup_rro_resources(
     if package_resources is None:
         return
 
-    wrong_tag_resources = overlay_resources_fixup_tag(
+    wrong_tag_resources = overlay_resource_fixup_from_package(
         resources,
         package_resources,
     )
@@ -207,11 +206,6 @@ def fixup_rro_resources(
             f'{package}: {old_resource} -> {new_resource}',
             color=Color.YELLOW,
         )
-
-    overlay_resource_fixup_from_package(
-        resources,
-        package_resources,
-    )
 
 
 def remove_rro_resources(
