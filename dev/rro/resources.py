@@ -687,8 +687,8 @@ def sorted_scandir(dir_path: str):
 @functools.cache
 def parse_package_resources_dir(
     res_dir: str,
-    parse_all_values: bool = False,
-    read_raw_resources: bool = False,
+    parse_all_values: bool,
+    read_raw_resources: bool,
 ):
     resources: Set[Resource] = set()
 
