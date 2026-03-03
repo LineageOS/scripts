@@ -604,6 +604,12 @@ SKIP_TAGS = {
     'public',
 }
 
+PSEUDOLOCALES = (
+    'en-rXA',
+    'ar-rXB',
+    'en-rXC',
+)
+
 
 def parse_xml_resources(
     rel_dir_path: str,
@@ -709,9 +715,8 @@ def parse_package_resources_dir(
         if not dir_file.is_dir():
             continue
 
-        pseudolocales = ('en-rXA', 'ar-rXB', 'en-rXC')
         if dir_file.name.startswith('values-') and any(
-            locale in dir_file.name for locale in pseudolocales
+            locale in dir_file.name for locale in PSEUDOLOCALES
         ):
             continue
 
