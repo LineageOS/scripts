@@ -226,7 +226,7 @@ def commonize_overlays():
                 [],
             )
 
-            overlay_resources = get_rro_resources(package, str(resources_path))
+            resources = get_rro_resources(package, str(resources_path))
             overlay_data = OverlayData(
                 path=overlay_path,
                 name=module_name,
@@ -234,7 +234,7 @@ def commonize_overlays():
                 target_package=target_package,
                 partition=module_partition,
                 attrs=overlay_attrs,
-                resources=overlay_resources,
+                resources=resources,
             )
             overlays_data.append(overlay_data)
 

@@ -105,10 +105,10 @@ def get_rro_target_package_resources(
         raise ValueError(f'{package}: Unknown package name {target_package}')
 
     package_resources, module_name = find_target_package_resources(
-        target_packages,
-        resources,
-        parse_all_values,
-        dir_names,
+        target_packages=target_packages,
+        resources=resources,
+        parse_all_values=parse_all_values,
+        dir_names=dir_names,
     )
 
     if len(target_packages) > 1:
@@ -254,7 +254,7 @@ def remove_rro_resources(
 
 
 def write_rro(
-    overlay_resources: ResourceMap,
+    resources: ResourceMap,
     output_path: str,
     rro_name: str,
     package: str,
@@ -264,7 +264,7 @@ def write_rro(
     partition: Optional[str] = None,
 ):
     aapt_raw_resource = write_resources(
-        overlay_resources,
+        resources,
         output_path,
         RESOURCES_DIR,
         preserved_prefixes,

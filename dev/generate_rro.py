@@ -103,47 +103,47 @@ def generate_rro(
     if orignal_target_package in exclude_packages:
         raise ValueError(f'{package}: Excluded by {orignal_target_package}')
 
-    overlay_resources = get_rro_resources(package, str(resources_path))
+    resources = get_rro_resources(package, str(resources_path))
     package_resources = get_rro_target_package_resources(
         package_map=package_map,
         package=package,
         target_package=target_package,
-        resources=overlay_resources,
+        resources=resources,
         allow_missing=True,
         parse_all_values=False,
         dir_names=None,
     )
     fixup_rro_resources(
         package=package,
-        resources=overlay_resources,
+        resources=resources,
         package_resources=package_resources,
     )
     check_rro_matches_aosp(
-        package_map,
-        rro_name,
-        package,
-        target_package,
-        overlay_resources,
+        package_map=package_map,
+        rro_name=rro_name,
+        package=package,
+        target_package=target_package,
+        resources=resources,
     )
 
     shutil.rmtree(apk_output_path, ignore_errors=True)
     apk_output_path.mkdir(parents=True, exist_ok=True)
 
     write_rro(
-        overlay_resources,
-        str(apk_output_path),
-        rro_name,
-        package,
-        target_package,
-        overlay_attrs,
+        resources=resources,
+        output_path=str(apk_output_path),
+        rro_name=rro_name,
+        package=package,
+        target_package=target_package,
+        overlay_attrs=overlay_attrs,
         partition=partition,
     )
     write_rro_meta(
-        apk_output_path,
-        original_rro_name,
-        original_package,
-        orignal_target_package,
-        device,
+        output_path=apk_output_path,
+        rro_name=original_rro_name,
+        package=original_package,
+        target_package=orignal_target_package,
+        device=device,
     )
 
 
