@@ -62,12 +62,12 @@ class Resource(ABC):
 
     def __init__(
         self,
-        rel_dir_path: str,
+        dir_name: str,
         name: str,
         resource_type: ResourceType,
     ):
-        self.rel_dir_path = rel_dir_path
-        self.is_default = '-' not in self.rel_dir_path
+        self.dir_name = dir_name
+        self.is_default = '-' not in self.dir_name
         self.name = name
         self.type = resource_type
 
@@ -91,29 +91,29 @@ class Resource(ABC):
 class RawResource(Resource):
     def __init__(
         self,
-        rel_dir_path: str,
+        dir_name: str,
         name: str,
         data: Optional[bytes],
     ):
-        super().__init__(rel_dir_path, name, ResourceType.RAW)
+        super().__init__(dir_name, name, ResourceType.RAW)
 
         self.data = data
         self.__hash_keys = (
-            self.rel_dir_path,
+            self.dir_name,
             self.name,
             0 if self.data is None else len(self.data),
         )
         self.__hash = hash(self.__hash_keys)
-        self.rel_path = f'{self.rel_dir_path}/{self.name}'
+        self.rel_path = f'{self.dir_name}/{self.name}'
 
-        resource_type = rel_dir_path.split('-', maxsplit=1)[0]
+        resource_type = dir_name.split('-', maxsplit=1)[0]
         resource_name = path.splitext(self.name)[0]
         self.reference_name = f'@{resource_type}/{resource_name}'
 
     @property
     def keys(self):
         return (
-            self.rel_dir_path,
+            self.dir_name,
             self.name,
         )
 
@@ -130,7 +130,7 @@ class RawResource(Resource):
         return self.__hash
 
     def __repr__(self):
-        return f'{self.rel_dir_path}/{self.name}'
+        return f'{self.dir_name}/{self.name}'
 
 
 class XMLResource(Resource):
@@ -138,7 +138,7 @@ class XMLResource(Resource):
         self,
         index: int,
         file_name: str,
-        rel_dir_path: str,
+        dir_name: str,
         tag: str,
         name: str,
         element: Element,
@@ -146,7 +146,7 @@ class XMLResource(Resource):
         product: str,
         feature_flag: str,
     ):
-        super().__init__(rel_dir_path, name, ResourceType.XML)
+        super().__init__(dir_name, name, ResourceType.XML)
 
         self.index = index
         self.tag = tag
@@ -158,7 +158,7 @@ class XMLResource(Resource):
         self.reference_name = f'@{self.tag}/{self.name}'
         self.__element_str = xml_element_canonical_str(self.element)
         self.__hash_keys = (
-            self.rel_dir_path,
+            self.dir_name,
             self.tag,
             self.name,
             self.product,
@@ -166,11 +166,11 @@ class XMLResource(Resource):
             self.__element_str,
         )
         self.__hash = hash(self.__hash_keys)
-        self.rel_path = f'{self.rel_dir_path}/{self.file_name}'
+        self.rel_path = f'{self.dir_name}/{self.file_name}'
 
     def copy(
         self,
-        rel_dir_path: Optional[str] = None,
+        dir_name: Optional[str] = None,
         index: Optional[int] = None,
         file_name: Optional[str] = None,
         tag: Optional[str] = None,
@@ -195,7 +195,7 @@ class XMLResource(Resource):
         return XMLResource(
             index if index is not None else self.index,
             file_name if file_name is not None else self.file_name,
-            rel_dir_path if rel_dir_path is not None else self.rel_dir_path,
+            dir_name if dir_name is not None else self.dir_name,
             tag if tag is not None else self.tag,
             self.name,
             element if element is not None else self.element,
@@ -207,14 +207,14 @@ class XMLResource(Resource):
     @property
     def keys(self):
         return (
-            self.rel_dir_path,
+            self.dir_name,
             self.name,
             self.product,
             self.feature_flag,
         )
 
     def __repr__(self):
-        s = f'{self.rel_dir_path}/{self.file_name}:\n'
+        s = f'{self.dir_name}/{self.file_name}:\n'
         s += etree.tostring(self.element, encoding='unicode').strip()
         s += '\n'
         return s
@@ -1102,7 +1102,7 @@ def package_resource_sort_key(resource: Resource):
         not resource.comments,
         not resource.is_default,
         bool(resource.product),
-        resource.rel_dir_path,
+        resource.dir_name,
         resource.name,
         tuple(
             (
