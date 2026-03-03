@@ -33,6 +33,7 @@ from rro.resources import (
     read_xml_resources_prefix,
 )
 from rro.target_package import (
+    PackageMap,
     append_extra_locations,
     map_packages,
     read_package_map,
@@ -182,6 +183,81 @@ def write_beautified_overlay(
         color_print(e, color=Color.RED)
 
 
+def parse_overlay(
+    overlay_dir: str,
+    immutable: bool,
+    ignore_packages: Set[str],
+    keep_packages: Set[str],
+    package_map: PackageMap,
+    overlays_data: List[OverlayData],
+):
+    overlay_path = Path(overlay_dir)
+
+    android_bp_path = Path(overlay_path, ANDROID_BP_NAME)
+    statement = parse_bp_rro_module(android_bp_path)
+
+    module_name = statement['name']
+    dir_name = path.basename(overlay_dir)
+
+    if ignore_packages and (
+        (module_name and module_name in ignore_packages)
+        or (dir_name and dir_name in ignore_packages)
+    ):
+        return
+
+    manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
+    manifest_path = Path(overlay_dir, manifest)
+
+    resources_dir = statement.get('resource_dirs', [RESOURCES_DIR])[0]
+    resources_path = Path(overlay_path, resources_dir)
+
+    package, target_package, overlay_attrs = parse_overlay_manifest(
+        str(manifest_path),
+    )
+    module_partition = get_module_partition(statement)
+    module_priority = int(overlay_attrs.get('priority', 0))
+
+    try:
+        resources = get_rro_resources(
+            package,
+            str(resources_path),
+        )
+        package_resources = get_rro_target_package_resources(
+            package_map=package_map,
+            package=package,
+            target_package=target_package,
+            resources=resources,
+            allow_missing=target_package in keep_packages,
+            parse_all_values=True,
+        )
+    except ValueError as e:
+        shutil.rmtree(overlay_path, ignore_errors=True)
+        color_print(e, color=Color.RED)
+        return
+
+    fixup_rro_resources(
+        package=package,
+        resources=resources,
+        package_resources=package_resources,
+    )
+
+    overlay_data = OverlayData(
+        name=module_name,
+        path=overlay_path,
+        partition=module_partition,
+        manifest_name=manifest,
+        manifest_path=manifest_path,
+        module_priority=module_priority,
+        package=package,
+        target_package=target_package,
+        attrs=overlay_attrs,
+        resources=resources,
+        package_resources=package_resources,
+        immutable=immutable,
+    )
+    overlays_data.append(overlay_data)
+
+
 def beautify_rro_main():
     parser = ArgumentParser(
         prog='beautify_rro',
@@ -277,80 +353,27 @@ def beautify_rro_main():
 
     overlays_data: List[OverlayData] = []
 
-    def parse_overlay(overlay_dir: str, immutable: bool):
-        overlay_path = Path(overlay_dir)
-
-        android_bp_path = Path(overlay_path, ANDROID_BP_NAME)
-        statement = parse_bp_rro_module(android_bp_path)
-
-        module_name = statement['name']
-        dir_name = path.basename(overlay_dir)
-
-        if ignore_packages and (
-            (module_name and module_name in ignore_packages)
-            or (dir_name and dir_name in ignore_packages)
-        ):
-            return
-
-        manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
-        manifest_path = Path(overlay_dir, manifest)
-
-        resources_dir = statement.get('resource_dirs', [RESOURCES_DIR])[0]
-        resources_path = Path(overlay_path, resources_dir)
-
-        package, target_package, overlay_attrs = parse_overlay_manifest(
-            str(manifest_path),
-        )
-        module_partition = get_module_partition(statement)
-        module_priority = int(overlay_attrs.get('priority', 0))
-
-        try:
-            resources = get_rro_resources(
-                package,
-                str(resources_path),
-            )
-            package_resources = get_rro_target_package_resources(
-                package_map=package_map,
-                package=package,
-                target_package=target_package,
-                resources=resources,
-                allow_missing=target_package in keep_packages,
-                parse_all_values=True,
-            )
-        except ValueError as e:
-            shutil.rmtree(overlay_path, ignore_errors=True)
-            color_print(e, color=Color.RED)
-            return
-
-        fixup_rro_resources(
-            package=package,
-            resources=resources,
-            package_resources=package_resources,
-        )
-
-        overlay_data = OverlayData(
-            name=module_name,
-            path=overlay_path,
-            partition=module_partition,
-            manifest_name=manifest,
-            manifest_path=manifest_path,
-            module_priority=module_priority,
-            package=package,
-            target_package=target_package,
-            attrs=overlay_attrs,
-            resources=resources,
-            package_resources=package_resources,
-            immutable=immutable,
-        )
-        overlays_data.append(overlay_data)
-
     for overlay_dir in get_dirs_with_file(args.overlay_path, ANDROID_BP_NAME):
-        parse_overlay(overlay_dir, immutable=False)
+        parse_overlay(
+            overlay_dir,
+            immutable=False,
+            ignore_packages=ignore_packages,
+            keep_packages=keep_packages,
+            package_map=package_map,
+            overlays_data=overlays_data,
+        )
 
     for overlay_dir in chain(
         *(get_dirs_with_file(c, ANDROID_BP_NAME) for c in common_paths)
     ):
-        parse_overlay(overlay_dir, immutable=True)
+        parse_overlay(
+            overlay_dir,
+            immutable=True,
+            ignore_packages=ignore_packages,
+            keep_packages=keep_packages,
+            package_map=package_map,
+            overlays_data=overlays_data,
+        )
 
     remove_shadowed_resources(
         overlays_data,
