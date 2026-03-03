@@ -11,7 +11,6 @@ from collections import defaultdict
 from enum import Enum, auto
 from fnmatch import fnmatch
 from os import path
-from pathlib import Path
 from typing import (
     Callable,
     Dict,
@@ -97,7 +96,7 @@ class RawResource(Resource):
         self,
         rel_dir_path: str,
         name: str,
-        data: bytes,
+        data: Optional[bytes],
     ):
         super().__init__(rel_dir_path, name, ResourceType.RAW)
 
@@ -105,7 +104,7 @@ class RawResource(Resource):
         self.__hash_keys = (
             self.rel_dir_path,
             self.name,
-            len(self.data),
+            0 if self.data is None else len(self.data),
         )
         self.__hash = hash(self.__hash_keys)
         self.rel_path = f'{self.rel_dir_path}/{self.name}'
@@ -702,6 +701,7 @@ def sorted_scandir(dir_path: str):
 def parse_package_resources_dir(
     res_dir: str,
     parse_all_values: bool = False,
+    read_raw_resources: bool = False,
 ):
     resources: Set[Resource] = set()
 
@@ -738,9 +738,14 @@ def parse_package_resources_dir(
             rel_path = path.relpath(resource_file.path, res_dir)
             rel_dir_path = path.dirname(rel_path)
             file_name = path.basename(rel_path)
-            data = Path(resource_file.path).read_bytes()
+
+            data = None
+            if is_values or read_raw_resources:
+                with open(resource_file.path, 'rb') as f:
+                    data = f.read()
 
             if is_values:
+                assert data is not None
                 parse_xml_resources(
                     rel_dir_path,
                     file_name,
@@ -762,11 +767,13 @@ def parse_resources(
     resource_map: ResourceMap,
     resources_paths: Iterable[str],
     parse_all_values: bool,
+    read_raw_resources: bool,
 ):
     for resource_path in resources_paths:
         resources = parse_package_resources_dir(
             resource_path,
             parse_all_values,
+            read_raw_resources,
         )
         resource_map.add_many(resources)
 
@@ -781,6 +788,7 @@ def parse_overlay_resources(resources_path: str):
         resource_map,
         [resources_path],
         parse_all_values=True,
+        read_raw_resources=True,
     )
     return resource_map
 
@@ -797,6 +805,7 @@ def get_target_package_resources(
         resource_map,
         res_dirs,
         parse_all_values=parse_all_values,
+        read_raw_resources=False,
     )
     return resource_map
 
@@ -1203,6 +1212,7 @@ def raw_resource_need_aapt_raw(resource: RawResource):
         return False
 
     try:
+        assert resource.data is not None
         if xml_attrib_matches(resource.data, attrib_needs_aapt_raw):
             return True
     except etree.XMLSyntaxError:
@@ -1317,6 +1327,7 @@ def write_raw_resource(
     raw_dir_path = path.dirname(raw_path)
     os.makedirs(raw_dir_path, exist_ok=True)
     with open(raw_path, 'wb') as raw:
+        assert resource.data is not None
         raw.write(resource.data)
 
 
