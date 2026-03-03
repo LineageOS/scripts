@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import shutil
 from argparse import ArgumentParser
+from collections import defaultdict
 from dataclasses import dataclass
 from itertools import chain
 from os import path
@@ -30,10 +31,10 @@ from rro.process_rro import (
 from rro.resources import (
     RESOURCES_DIR,
     ResourceMap,
+    dir_names_to_frozen_dict,
     read_xml_resources_prefix,
 )
 from rro.target_package import (
-    PackageMap,
     append_extra_locations,
     map_packages,
     read_package_map,
@@ -55,6 +56,7 @@ class OverlayData:
     resources: ResourceMap
     package_resources: Optional[ResourceMap]
     immutable: bool
+    removed: bool
 
 
 def parse_resource_entries(
@@ -113,6 +115,7 @@ def remove_shadowed_resources(
                 immutable=o.immutable,
             )
             for o in overlays_data
+            if not o.removed
         ],
         remove_identical=remove_identical,
     )
@@ -187,8 +190,6 @@ def parse_overlay(
     overlay_dir: str,
     immutable: bool,
     ignore_packages: Set[str],
-    keep_packages: Set[str],
-    package_map: PackageMap,
     overlays_data: List[OverlayData],
 ):
     overlay_path = Path(overlay_dir)
@@ -222,24 +223,10 @@ def parse_overlay(
             package,
             str(resources_path),
         )
-        package_resources = get_rro_target_package_resources(
-            package_map=package_map,
-            package=package,
-            target_package=target_package,
-            resources=resources,
-            allow_missing=target_package in keep_packages,
-            parse_all_values=True,
-        )
     except ValueError as e:
         shutil.rmtree(overlay_path, ignore_errors=True)
         color_print(e, color=Color.RED)
         return
-
-    fixup_rro_resources(
-        package=package,
-        resources=resources,
-        package_resources=package_resources,
-    )
 
     overlay_data = OverlayData(
         name=module_name,
@@ -252,8 +239,9 @@ def parse_overlay(
         target_package=target_package,
         attrs=overlay_attrs,
         resources=resources,
-        package_resources=package_resources,
+        package_resources=None,
         immutable=immutable,
+        removed=False,
     )
     overlays_data.append(overlay_data)
 
@@ -358,8 +346,6 @@ def beautify_rro_main():
             overlay_dir,
             immutable=False,
             ignore_packages=ignore_packages,
-            keep_packages=keep_packages,
-            package_map=package_map,
             overlays_data=overlays_data,
         )
 
@@ -370,9 +356,51 @@ def beautify_rro_main():
             overlay_dir,
             immutable=True,
             ignore_packages=ignore_packages,
-            keep_packages=keep_packages,
-            package_map=package_map,
             overlays_data=overlays_data,
+        )
+
+    dir_names_map: Dict[
+        # target name
+        str,
+        Dict[
+            # relative paths
+            str,
+            # resource names
+            Set[str],
+        ],
+    ] = defaultdict(lambda: defaultdict(set))
+
+    for overlay_data in overlays_data:
+        dir_name_to_names = overlay_data.resources.dir_names_to_names().items()
+        for dir_name, names in dir_name_to_names:
+            dir_names_map[overlay_data.target_package][dir_name].update(names)
+
+    for overlay_data in overlays_data:
+        dir_names = dir_names_to_frozen_dict(
+            dir_names_map[overlay_data.target_package],
+        )
+
+        try:
+            package_resources = get_rro_target_package_resources(
+                package_map=package_map,
+                package=overlay_data.package,
+                target_package=overlay_data.target_package,
+                resources=overlay_data.resources,
+                allow_missing=overlay_data.target_package in keep_packages,
+                parse_all_values=True,
+                dir_names=dir_names,
+            )
+        except ValueError:
+            shutil.rmtree(overlay_data.path, ignore_errors=True)
+            overlay_data.removed = True
+            continue
+
+        overlay_data.package_resources = package_resources
+
+        fixup_rro_resources(
+            package=overlay_data.package,
+            resources=overlay_data.resources,
+            package_resources=package_resources,
         )
 
     remove_shadowed_resources(
@@ -382,7 +410,7 @@ def beautify_rro_main():
     )
 
     for overlay_data in overlays_data:
-        if overlay_data.immutable:
+        if overlay_data.immutable or overlay_data.removed:
             continue
 
         write_beautified_overlay(
