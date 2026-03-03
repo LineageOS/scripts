@@ -226,7 +226,12 @@ def commonize_overlays():
                 [],
             )
 
-            resources = get_rro_resources(package, str(resources_path))
+            resources = get_rro_resources(
+                package,
+                str(resources_path),
+                # Keep indices since we do not fixup in commonize
+                track_index=True,
+            )
             overlay_data = OverlayData(
                 path=overlay_path,
                 name=module_name,

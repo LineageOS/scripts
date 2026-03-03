@@ -84,8 +84,15 @@ runtime_resource_overlay {{
         )
 
 
-def get_rro_resources(package: str, resources_path: str):
-    resources = parse_overlay_resources(resources_path)
+def get_rro_resources(
+    package: str,
+    resources_path: str,
+    track_index: bool,
+):
+    resources = parse_overlay_resources(
+        resources_path,
+        track_index,
+    )
     if not resources:
         raise ValueError(f'{package}: No resources in overlay')
 
@@ -156,7 +163,10 @@ def check_rro_matches_aosp(
     if package != aosp_package or target_package != aosp_target_package:
         return
 
-    aosp_resources = parse_overlay_resources(str(resources_path))
+    aosp_resources = parse_overlay_resources(
+        str(resources_path),
+        track_index=False,
+    )
     aosp_package_resources = get_rro_target_package_resources(
         package_map=package_map,
         package=aosp_package,
