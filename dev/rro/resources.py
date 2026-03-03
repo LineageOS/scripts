@@ -148,6 +148,7 @@ class XMLResource(Resource):
     def __init__(
         self,
         index: int,
+        res_dir: str,
         file_name: str,
         dir_name: str,
         is_default: bool,
@@ -162,6 +163,7 @@ class XMLResource(Resource):
 
         self.index = index
         self.tag = tag
+        self.res_dir = res_dir
         self.file_name = file_name
         self.element = element
         self.comments = comments
@@ -183,6 +185,7 @@ class XMLResource(Resource):
     def copy(
         self,
         index: Optional[int] = None,
+        res_dir: Optional[str] = None,
         file_name: Optional[str] = None,
         tag: Optional[str] = None,
         attrib: Optional[Dict[str | bytes, str | bytes]] = None,
@@ -205,6 +208,7 @@ class XMLResource(Resource):
 
         return XMLResource(
             index if index is not None else self.index,
+            res_dir if res_dir is not None else self.res_dir,
             file_name if file_name is not None else self.file_name,
             self.dir_name,
             self.is_default,
@@ -643,6 +647,7 @@ PSEUDOLOCALES = (
 
 
 def parse_xml_resources(
+    res_dir: str,
     dir_name: str,
     file_name: str,
     is_default: bool,
@@ -718,6 +723,7 @@ def parse_xml_resources(
 
         resource = XMLResource(
             index,
+            res_dir,
             file_name,
             dir_name,
             is_default,
@@ -809,6 +815,7 @@ def parse_package_resources_dir(
             if is_values:
                 assert data is not None
                 parse_xml_resources(
+                    res_dir,
                     dir_name,
                     file_name,
                     is_default,
@@ -1229,6 +1236,7 @@ def overlay_resource_fixup_from_package(
         # found
         index = None
         comments = None
+        res_dir = None
         file_name = None
         tag = None
         attrib = None
@@ -1250,6 +1258,7 @@ def overlay_resource_fixup_from_package(
             index = package_resource.index
             comments = package_resource.comments
             file_name = package_resource.file_name
+            res_dir = package_resource.res_dir
 
         if (
             tag is None
@@ -1257,6 +1266,7 @@ def overlay_resource_fixup_from_package(
             and index is None
             and comments is None
             and file_name is None
+            and res_dir is None
         ):
             return
 
@@ -1266,6 +1276,7 @@ def overlay_resource_fixup_from_package(
             index=index,
             comments=comments,
             file_name=file_name,
+            res_dir=res_dir,
         )
 
         if tag is not None or attrib is not None:
@@ -1398,7 +1409,7 @@ def write_resources(
         elif is_by_rel_path_xml_resources(resources):
             sorted_resources = sorted(
                 resources,
-                key=lambda r: (r.index == -1, r.index, r.name),
+                key=lambda r: (r.index == -1, r.res_dir, r.index, r.name),
             )
 
             write_xml_resources(
