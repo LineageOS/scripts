@@ -593,7 +593,7 @@ PSEUDOLOCALES = (
 
 
 def parse_xml_resources(
-    rel_dir_path: str,
+    dir_name: str,
     file_name: str,
     data: bytes,
     resources: Set[Resource],
@@ -658,7 +658,7 @@ def parse_xml_resources(
         resource = XMLResource(
             index,
             file_name,
-            rel_dir_path,
+            dir_name,
             tag,
             name,
             node,
@@ -696,13 +696,15 @@ def parse_package_resources_dir(
         if not dir_file.is_dir():
             continue
 
-        if dir_file.name.startswith('values-') and any(
-            locale in dir_file.name for locale in PSEUDOLOCALES
+        dir_name = dir_file.name
+
+        if dir_name.startswith('values-') and any(
+            locale in dir_name for locale in PSEUDOLOCALES
         ):
             continue
 
-        is_values = dir_file.name.startswith('values')
-        if is_values and not parse_all_values and dir_file.name != 'values':
+        is_values = dir_name.startswith('values')
+        if is_values and not parse_all_values and dir_name != 'values':
             continue
 
         for resource_file in sorted_scandir(dir_file.path):
@@ -721,9 +723,7 @@ def parse_package_resources_dir(
             # Some apps don't place their res directory directly under
             # the package directory
             # Only keep the resource directory name
-            rel_path = path.relpath(resource_file.path, res_dir)
-            rel_dir_path = path.dirname(rel_path)
-            file_name = path.basename(rel_path)
+            file_name = path.basename(resource_file.path)
 
             data = None
             if is_values or read_raw_resources:
@@ -733,14 +733,14 @@ def parse_package_resources_dir(
             if is_values:
                 assert data is not None
                 parse_xml_resources(
-                    rel_dir_path,
+                    dir_name,
                     file_name,
                     data,
                     resources,
                 )
             else:
                 resource = RawResource(
-                    rel_dir_path,
+                    dir_name,
                     file_name,
                     data,
                 )
