@@ -71,9 +71,6 @@ class Resource(ABC):
         self.name = name
         self.type = resource_type
 
-    @abstractmethod
-    def copy(self, rel_dir_path: Optional[str] = None) -> Resource: ...
-
     @property
     @abstractmethod
     def keys(self) -> Tuple[str, ...]: ...
@@ -112,16 +109,6 @@ class RawResource(Resource):
         resource_type = rel_dir_path.split('-', maxsplit=1)[0]
         resource_name = path.splitext(self.name)[0]
         self.reference_name = f'@{resource_type}/{resource_name}'
-
-    def copy(
-        self,
-        rel_dir_path: Optional[str] = None,
-    ):
-        return RawResource(
-            rel_dir_path if rel_dir_path is not None else self.rel_dir_path,
-            self.name,
-            self.data,
-        )
 
     @property
     def keys(self):
