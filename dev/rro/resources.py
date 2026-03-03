@@ -170,7 +170,6 @@ class XMLResource(Resource):
 
     def copy(
         self,
-        dir_name: Optional[str] = None,
         index: Optional[int] = None,
         file_name: Optional[str] = None,
         tag: Optional[str] = None,
@@ -195,7 +194,7 @@ class XMLResource(Resource):
         return XMLResource(
             index if index is not None else self.index,
             file_name if file_name is not None else self.file_name,
-            dir_name if dir_name is not None else self.dir_name,
+            self.dir_name,
             tag if tag is not None else self.tag,
             self.name,
             element if element is not None else self.element,
