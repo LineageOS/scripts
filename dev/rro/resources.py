@@ -1059,48 +1059,6 @@ def fixup_resource_attrib(
     return tag, attrib
 
 
-def overlay_resources_fixup_tag(
-    overlay_resources: ResourceMap,
-    package_resources: ResourceMap,
-):
-    wrong_tag_resources: Set[Tuple[str, str]] = set()
-
-    def fixup_resource_tag(resource: Resource):
-        if not is_xml_resource(resource):
-            return
-
-        package_resource = package_resources.one_by_name(
-            resource.name,
-        )
-        if package_resource is None:
-            return
-
-        assert isinstance(package_resource, XMLResource)
-
-        tag, attrib = fixup_resource_attrib(resource, package_resource)
-
-        if tag is None and attrib is None:
-            return
-
-        new_resource = resource.copy(
-            tag=tag,
-            attrib=attrib,
-        )
-
-        wrong_tag_resources.add(
-            (
-                resource.reference_name,
-                new_resource.reference_name,
-            )
-        )
-
-        return resource, new_resource
-
-    overlay_resources_process(overlay_resources, fixup_resource_tag)
-
-    return wrong_tag_resources
-
-
 def overlay_resources_remove_missing(
     overlay_resources: ResourceMap,
     package_resources: ResourceMap,
@@ -1167,6 +1125,8 @@ def overlay_resource_fixup_from_package(
     overlay_resources: ResourceMap,
     package_resources: ResourceMap,
 ):
+    wrong_tag_resources: Set[Tuple[str, str]] = set()
+
     def fixup_resource_from_package(resource: Resource):
         if not is_xml_resource(resource):
             return
@@ -1176,6 +1136,8 @@ def overlay_resource_fixup_from_package(
         index = -1
         comments = None
         file_name = resource.file_name
+        tag = None
+        attrib = None
 
         package_resource = None
         matching_package_resources = package_resources.by_name(
@@ -1190,20 +1152,35 @@ def overlay_resource_fixup_from_package(
 
         if package_resource is not None:
             assert isinstance(package_resource, XMLResource)
+            tag, attrib = fixup_resource_attrib(resource, package_resource)
             index = package_resource.index
             comments = package_resource.comments
             file_name = package_resource.file_name
 
-        return resource, resource.copy(
+        new_resource = resource.copy(
+            tag=tag,
+            attrib=attrib,
             index=index,
             comments=comments,
             file_name=file_name,
         )
 
+        if tag is not None or attrib is not None:
+            wrong_tag_resources.add(
+                (
+                    resource.reference_name,
+                    new_resource.reference_name,
+                )
+            )
+
+        return resource, new_resource
+
     overlay_resources_process(
         overlay_resources,
         fixup_resource_from_package,
     )
+
+    return wrong_tag_resources
 
 
 def attrib_needs_aapt_raw(
