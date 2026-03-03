@@ -343,7 +343,10 @@ def parse_resources(
         resource_map.add_many(resources)
 
 
-def parse_overlay_resources(resources_path: str):
+def parse_overlay_resources(
+    resources_path: str,
+    track_index: bool,
+):
     resource_map = ResourceMap(
         by_dir_names=True,
         by_rel_path=True,
@@ -355,7 +358,7 @@ def parse_overlay_resources(resources_path: str):
         resources_paths=[resources_path],
         parse_all_values=True,
         read_raw_resources=True,
-        track_index=False,
+        track_index=track_index,
         dir_names=None,
     )
     return resource_map

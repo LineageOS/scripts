@@ -222,6 +222,7 @@ def parse_overlay(
         resources = get_rro_resources(
             package,
             str(resources_path),
+            track_index=False,
         )
     except ValueError as e:
         shutil.rmtree(overlay_path, ignore_errors=True)
