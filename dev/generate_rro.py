@@ -111,6 +111,7 @@ def generate_rro(
         resources=overlay_resources,
         allow_missing=True,
         parse_all_values=False,
+        dir_names=None,
     )
     fixup_rro_resources(
         package=package,

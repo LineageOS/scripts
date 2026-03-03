@@ -29,6 +29,7 @@ from lxml import etree
 
 from apk.arsc_decode_string import ASCII_WHITESPACE, str_needs_whitespace_quotes
 from rro.manifest import NAMESPACE
+from utils.frozendict import FrozenDict
 from utils.xml_utils import (
     XML_COMMENT_TEXT,
     xml_attrib_matches,
@@ -51,6 +52,11 @@ DIMEN_TAG = 'dimen'
 STRING_TAG = 'string'
 
 
+@functools.cache
+def strip_dir_name_qualifiers(dir_name: str):
+    return dir_name.split('-', maxsplit=1)[0]
+
+
 class ResourceType(Enum):
     XML = auto()
     RAW = auto()
@@ -67,6 +73,10 @@ class Resource(ABC):
         is_default: bool,
         resource_type: ResourceType,
     ):
+        if is_default:
+            self.stripped_dir_name = dir_name
+        else:
+            self.stripped_dir_name = strip_dir_name_qualifiers(dir_name)
         self.dir_name = dir_name
         self.is_default = is_default
         self.name = name
@@ -108,9 +118,8 @@ class RawResource(Resource):
         self.__hash = hash(self.__hash_keys)
         self.rel_path = f'{self.dir_name}/{self.name}'
 
-        resource_type = dir_name.split('-', maxsplit=1)[0]
         resource_name = path.splitext(self.name)[0]
-        self.reference_name = f'@{resource_type}/{resource_name}'
+        self.reference_name = f'@{self.stripped_dir_name}/{resource_name}'
 
     @property
     def keys(self):
@@ -274,11 +283,16 @@ class ResourceMap:
         self,
         resources: Optional[Set[Resource]] = None,
         by_name: bool = False,
+        by_dir_names: bool = False,
         by_reference_name: bool = False,
         by_rel_path: bool = False,
         by_references: bool = False,
     ):
         self.__all: Set[Resource] = set()
+
+        self.__by_dir_names: Optional[Dict[str, Set[str]]] = None
+        if by_dir_names:
+            self.__by_dir_names = defaultdict(set)
 
         self.__by_name: Optional[resource_str_map] = None
         if by_name:
@@ -325,6 +339,16 @@ class ResourceMap:
             self.__by_name[resource.name].add(resource)
 
         return self.__by_name
+
+    def __init_by_dir_names(self):
+        if self.__by_dir_names is not None:
+            return self.__by_dir_names
+
+        self.__by_dir_names = defaultdict(set)
+        for resource in self.__all:
+            self.__add_dir_names(resource)
+
+        return self.__by_dir_names
 
     def __init_by_reference_name(self):
         if self.__by_reference_name is not None:
@@ -396,8 +420,20 @@ class ResourceMap:
         for ref in refs:
             self.__references_to_resource[ref].add(resource)
 
+    def __add_dir_names(self, resource: Resource):
+        assert self.__by_dir_names is not None
+
+        self.__by_dir_names[resource.dir_name].add(resource.name)
+
+        if resource.is_default:
+            return
+
+        self.__by_dir_names[resource.stripped_dir_name].add(resource.name)
+
     def add(self, resource: Resource):
         self.__all.add(resource)
+        if self.__by_dir_names is not None:
+            self.__add_dir_names(resource)
         if (
             self.__resource_to_references is not None
             and self.__references_to_resource is not None
@@ -425,10 +461,14 @@ class ResourceMap:
             and self.__references_to_resource is not None
         )
         by_name = self.__by_name
+        by_dir_name = self.__by_dir_names
         by_ref = self.__by_reference_name
         by_path = self.__by_rel_path
 
         for resource in resources:
+            if by_dir_name is not None:
+                self.__add_dir_names(resource)
+
             if do_refs:
                 self.__add_resource_refs(resource)
 
@@ -523,6 +563,13 @@ class ResourceMap:
         assert self.__references_to_resource is not None
         return self.__references_to_resource[resource.reference_name]
 
+    def dir_names_to_names(self):
+        return self.__init_by_dir_names()
+
+
+def dir_names_to_frozen_dict(dir_names: Dict[str, Set[str]]):
+    return FrozenDict({k: frozenset(v) for k, v in dir_names.items()})
+
 
 def node_has_space_after(node: Element):
     return node.tail is not None and node.tail.count('\n') > 1
@@ -601,6 +648,7 @@ def parse_xml_resources(
     is_default: bool,
     data: bytes,
     resources: Set[Resource],
+    resource_names: Optional[FrozenSet[str]],
 ):
     root = etree.fromstring(data)
 
@@ -633,6 +681,11 @@ def parse_xml_resources(
         name = node.attrib.get(NAME_KEY, '')
         if not name:
             raise ValueError('Node has no name')
+
+        if resource_names is not None and name not in resource_names:
+            if node_has_space_after(node):
+                comments = []
+            continue
 
         product = node.attrib.get(PRODUCT_KEY, '')
         # TODO: find out if this is really correct
@@ -694,6 +747,7 @@ def parse_package_resources_dir(
     res_dir: str,
     parse_all_values: bool,
     read_raw_resources: bool,
+    dir_names: Optional[FrozenDict[str, FrozenSet[str]]],
 ):
     resources: Set[Resource] = set()
 
@@ -705,6 +759,10 @@ def parse_package_resources_dir(
         is_values = dir_name.startswith('values')
         is_default = '-' not in dir_name
 
+        resource_names = None
+        if dir_names is not None:
+            resource_names = dir_names.get(dir_name)
+
         if (
             is_values
             and not is_default
@@ -712,8 +770,12 @@ def parse_package_resources_dir(
         ):
             continue
 
-        if is_values and not parse_all_values and not is_default:
-            continue
+        if not is_default:
+            if not parse_all_values:
+                continue
+
+            if dir_names is not None and dir_name not in dir_names:
+                continue
 
         for resource_file in sorted_scandir(dir_file.path):
             if not resource_file.is_file():
@@ -746,8 +808,15 @@ def parse_package_resources_dir(
                     is_default,
                     data,
                     resources,
+                    resource_names=resource_names,
                 )
             else:
+                if (
+                    resource_names is not None
+                    and file_name not in resource_names
+                ):
+                    continue
+
                 resource = RawResource(
                     dir_name,
                     file_name,
@@ -764,18 +833,21 @@ def parse_resources(
     resources_paths: Iterable[str],
     parse_all_values: bool,
     read_raw_resources: bool,
+    dir_names: Optional[FrozenDict[str, FrozenSet[str]]],
 ):
     for resource_path in resources_paths:
         resources = parse_package_resources_dir(
             resource_path,
             parse_all_values,
             read_raw_resources,
+            dir_names,
         )
         resource_map.add_many(resources)
 
 
 def parse_overlay_resources(resources_path: str):
     resource_map = ResourceMap(
+        by_dir_names=True,
         by_rel_path=True,
         by_reference_name=True,
         by_references=True,
@@ -785,6 +857,7 @@ def parse_overlay_resources(resources_path: str):
         [resources_path],
         parse_all_values=True,
         read_raw_resources=True,
+        dir_names=None,
     )
     return resource_map
 
@@ -793,6 +866,7 @@ def parse_overlay_resources(resources_path: str):
 def get_target_package_resources(
     res_dirs: Tuple[str, ...],
     parse_all_values: bool,
+    dir_names: FrozenDict[str, FrozenSet[str]],
 ):
     resource_map = ResourceMap(
         by_name=True,
@@ -802,6 +876,7 @@ def get_target_package_resources(
         res_dirs,
         parse_all_values=parse_all_values,
         read_raw_resources=False,
+        dir_names=dir_names,
     )
     return resource_map
 
@@ -810,12 +885,14 @@ def find_target_package_resources(
     target_packages: List[Tuple[str, str, List[str]]],
     overlay_resources: ResourceMap,
     parse_all_values: bool,
+    dir_names: Optional[FrozenDict[str, FrozenSet[str]]],
 ):
     if len(target_packages) == 1:
         _, module_name, resource_dirs = target_packages[0]
         package_resources = get_target_package_resources(
             tuple(resource_dirs),
             parse_all_values=parse_all_values,
+            dir_names=dir_names,
         )
         return package_resources, module_name
 
@@ -827,6 +904,7 @@ def find_target_package_resources(
         package_resources = get_target_package_resources(
             tuple(resource_dirs),
             parse_all_values=parse_all_values,
+            dir_names=dir_names,
         )
 
         matching_resources = 0
