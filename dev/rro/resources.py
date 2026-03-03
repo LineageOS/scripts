@@ -466,30 +466,21 @@ class ResourceMap:
         index: Optional[resource_str_map],
         key: str,
         resource: Resource,
-        missing_ok: bool,
     ):
         if index is None:
             return
 
         s = index.get(key)
         if s is None:
-            if missing_ok:
-                return
             raise KeyError(key)
 
-        if missing_ok:
-            s.discard(resource)
-        else:
-            s.remove(resource)
+        s.remove(resource)
 
         if not s:
             del index[key]
 
-    def __remove(self, resource: Resource, missing_ok: bool):
-        if missing_ok:
-            self.__all.discard(resource)
-        else:
-            self.__all.remove(resource)
+    def remove(self, resource: Resource):
+        self.__all.remove(resource)
 
         self.__remove_resource_refs(resource)
 
@@ -497,26 +488,17 @@ class ResourceMap:
             self.__by_name,
             resource.name,
             resource,
-            missing_ok,
         )
         self.__index_remove(
             self.__by_reference_name,
             resource.reference_name,
             resource,
-            missing_ok,
         )
         self.__index_remove(
             self.__by_rel_path,
             resource.rel_path,
             resource,
-            missing_ok,
         )
-
-    def remove(self, resource: Resource):
-        self.__remove(resource, missing_ok=False)
-
-    def discard(self, resource: Resource):
-        self.__remove(resource, missing_ok=True)
 
     def remove_many(self, resources: Iterable[Resource]):
         for r in resources:
