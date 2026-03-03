@@ -728,12 +728,11 @@ def parse_package_resources_dir(
         ):
             continue
 
-        if not is_default:
-            if not parse_all_values:
-                continue
+        if dir_names is not None and dir_name not in dir_names:
+            continue
 
-            if dir_names is not None and dir_name not in dir_names:
-                continue
+        if not parse_all_values and not is_default:
+            continue
 
         for resource_file in sorted_scandir(dir_file.path):
             if not resource_file.is_file():
