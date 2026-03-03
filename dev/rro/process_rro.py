@@ -34,6 +34,7 @@ from rro.resources import (
     RESOURCES_DIR,
     Resource,
     ResourceMap,
+    dir_names_to_frozen_dict,
     find_target_package_resources,
     is_resource_in_entries,
     keep_referenced_resources_from_removal,
@@ -163,7 +164,7 @@ def check_rro_matches_aosp(
         resources=aosp_resources,
         allow_missing=True,
         parse_all_values=False,
-        dir_names=None,
+        dir_names=dir_names_to_frozen_dict(resources.dir_names_to_names()),
     )
     fixup_rro_resources(
         package=aosp_package,
