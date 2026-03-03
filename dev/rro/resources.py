@@ -334,63 +334,6 @@ class ResourceMap:
     def __contains__(self, item: Resource):
         return item in self.__all
 
-    def __init_by_name(self):
-        if self.__by_name is not None:
-            return self.__by_name
-
-        self.__by_name = defaultdict(set)
-        for resource in self.__all:
-            self.__by_name[resource.name].add(resource)
-
-        return self.__by_name
-
-    def __init_by_dir_names(self):
-        if self.__by_dir_names is not None:
-            return self.__by_dir_names
-
-        self.__by_dir_names = defaultdict(set)
-        for resource in self.__all:
-            self.__add_dir_names(resource)
-
-        return self.__by_dir_names
-
-    def __init_by_reference_name(self):
-        if self.__by_reference_name is not None:
-            return self.__by_reference_name
-
-        self.__by_reference_name = defaultdict(set)
-        for resource in self.__all:
-            self.__by_reference_name[resource.reference_name].add(resource)
-
-        return self.__by_reference_name
-
-    def __init_by_rel_path(self):
-        if self.__by_rel_path is not None:
-            return self.__by_rel_path
-
-        self.__by_rel_path = defaultdict(set)
-        for resource in self.__all:
-            self.__by_rel_path[resource.rel_path].add(resource)
-
-            if isinstance(resource, RawResource):
-                # Enforce that the same raw resource does not appear multiple times
-                # for the same path, as other logic depends on this
-                assert len(self.__by_rel_path[resource.rel_path]) == 1, resource
-
-        return self.__by_rel_path
-
-    def __init_ref_map(self):
-        if (
-            self.__resource_to_references is not None
-            and self.__references_to_resource is not None
-        ):
-            return
-
-        self.__resource_to_references = defaultdict(set)
-        self.__references_to_resource = defaultdict(set)
-        for resource in self.__all:
-            self.__add_resource_refs(resource)
-
     def __remove_resource_refs(self, resource: Resource):
         if (
             self.__resource_to_references is None
@@ -535,16 +478,20 @@ class ResourceMap:
         return self.__all
 
     def by_rel_path(self):
-        return self.__init_by_rel_path().items()
+        assert self.__by_rel_path is not None
+        return self.__by_rel_path.items()
 
     def by_name(self, name: str):
-        return self.__init_by_name()[name]
+        assert self.__by_name is not None
+        return self.__by_name[name]
 
     def by_reference_name(self, reference_name: str):
-        return self.__init_by_reference_name()[reference_name]
+        assert self.__by_reference_name is not None
+        return self.__by_reference_name[reference_name]
 
     def one_by_name(self, name: str) -> Optional[Resource]:
-        s = self.__init_by_name()[name]
+        assert self.__by_name is not None
+        s = self.__by_name[name]
         if not s:
             return None
 
@@ -557,18 +504,17 @@ class ResourceMap:
         return resources
 
     def resources_referenced_by(self, resource: Resource):
-        self.__init_ref_map()
         assert self.__resource_to_references is not None
         refs = self.__resource_to_references[resource]
         return self.__reference_names_to_resource(refs)
 
     def resources_referencing(self, resource: Resource):
-        self.__init_ref_map()
         assert self.__references_to_resource is not None
         return self.__references_to_resource[resource.reference_name]
 
     def dir_names_to_names(self):
-        return self.__init_by_dir_names()
+        assert self.__by_dir_names is not None
+        return self.__by_dir_names
 
 
 def dir_names_to_frozen_dict(dir_names: Dict[str, Set[str]]):
