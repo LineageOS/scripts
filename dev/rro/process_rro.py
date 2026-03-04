@@ -30,11 +30,10 @@ from rro.manifest import (
     parse_overlay_manifest,
     write_manifest,
 )
-from rro.resource import dir_names_to_frozen_dict
+from rro.resource_map import DirNamesIndex, ResourceMap
 from rro.resources import (
     RESOURCES_DIR,
     Resource,
-    ResourceMap,
     find_target_package_resources,
     is_resource_in_entries,
     keep_referenced_resources_from_removal,
@@ -88,10 +87,12 @@ def get_rro_resources(
     package: str,
     resources_path: str,
     track_index: bool,
+    dir_names: Optional[DirNamesIndex] = None,
 ):
     resources = parse_overlay_resources(
         resources_path,
         track_index,
+        dir_names,
     )
     if not resources:
         raise ValueError(f'{package}: No resources in overlay')
@@ -174,7 +175,7 @@ def check_rro_matches_aosp(
         resources=aosp_resources,
         allow_missing=True,
         parse_all_values=False,
-        dir_names=dir_names_to_frozen_dict(resources.dir_names_to_names()),
+        dir_names=resources.dir_names_to_names(),
     )
     fixup_rro_resources(
         package=aosp_package,
