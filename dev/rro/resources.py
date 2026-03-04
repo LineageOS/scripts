@@ -28,13 +28,13 @@ from rro.manifest import NAMESPACE
 from rro.resource import (
     RawResource,
     Resource,
-    ResourceMap,
     XMLResource,
     is_by_rel_path_raw_resources,
     is_by_rel_path_xml_resources,
     is_raw_resource,
     is_xml_resource,
 )
+from rro.resource_map import DirNamesIndex, IndexFlags, ResourceMap
 from rro.utils import is_referenced_resource_element
 from utils.frozendict import FrozenDict
 from utils.xml_utils import (
@@ -346,12 +346,14 @@ def parse_resources(
 def parse_overlay_resources(
     resources_path: str,
     track_index: bool,
+    dir_names: Optional[DirNamesIndex] = None,
 ):
     resource_map = ResourceMap(
-        by_dir_names=True,
-        by_rel_path=True,
-        by_reference_name=True,
-        by_references=True,
+        indices=IndexFlags.BY_REL_PATH
+        | IndexFlags.BY_REFERENCE_NAME
+        | IndexFlags.REFERENCES
+        | IndexFlags.DIR_NAMES,
+        dir_names=dir_names,
     )
     parse_resources(
         resource_map=resource_map,
@@ -371,7 +373,7 @@ def get_target_package_resources(
     dir_names: FrozenDict[str, FrozenSet[str]],
 ):
     resource_map = ResourceMap(
-        by_name=True,
+        indices=IndexFlags.BY_NAME,
     )
     parse_resources(
         resource_map=resource_map,
