@@ -34,7 +34,7 @@ from rro.resource import (
     is_raw_resource,
     is_xml_resource,
 )
-from rro.resource_map import DirNamesIndex, IndexFlags, ResourceMap
+from rro.resource_map import IndexFlags, ResourceMap
 from rro.utils import is_referenced_resource_element
 from utils.frozendict import FrozenDict
 from utils.xml_utils import (
@@ -343,29 +343,6 @@ def parse_resources(
         resource_map.add_many(resources)
 
 
-def parse_overlay_resources(
-    resources_path: str,
-    track_index: bool,
-    dir_names: Optional[DirNamesIndex] = None,
-):
-    resource_map = ResourceMap(
-        indices=IndexFlags.BY_REL_PATH
-        | IndexFlags.BY_REFERENCE_NAME
-        | IndexFlags.REFERENCES
-        | IndexFlags.DIR_NAMES,
-        dir_names=dir_names,
-    )
-    parse_resources(
-        resource_map=resource_map,
-        resources_paths=[resources_path],
-        parse_all_values=True,
-        read_raw_resources=True,
-        track_index=track_index,
-        dir_names=None,
-    )
-    return resource_map
-
-
 @functools.cache
 def get_target_package_resources(
     resources_paths: Tuple[str, ...],
@@ -392,6 +369,8 @@ def find_target_package_resources(
     parse_all_values: bool,
     dir_names: Optional[FrozenDict[str, FrozenSet[str]]],
 ):
+    assert len(target_packages)
+
     if len(target_packages) == 1:
         _, module_name, resources_paths = target_packages[0]
         package_resources = get_target_package_resources(
@@ -427,6 +406,9 @@ def find_target_package_resources(
             best_matching_resources = matching_resources
             best_module_name = module_name
             best_resources = package_resources
+
+    assert best_resources is not None
+    assert best_module_name is not None
 
     return best_resources, best_module_name
 

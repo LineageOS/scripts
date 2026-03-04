@@ -25,7 +25,6 @@ class IndexFlags(IntFlag):
     BY_NAME = auto()
     BY_REFERENCE_NAME = auto()
     BY_REL_PATH = auto()
-    DIR_NAMES = auto()
     REFERENCES = auto()
 
 
@@ -235,9 +234,6 @@ class ResourceMap:
         if indices & IndexFlags.REFERENCES:
             self.__refs = ReferencesIndex()
             self.__indices.append(self.__refs)
-
-        if dir_names is None and indices & IndexFlags.DIR_NAMES:
-            dir_names = DirNamesIndex()
 
         if dir_names is not None:
             self.__dir_names = dir_names

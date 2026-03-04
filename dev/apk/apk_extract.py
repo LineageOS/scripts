@@ -142,14 +142,13 @@ def extract_apk(
 
 
 def extract_apks(
-    apk_paths: List[Path],
-    output_paths: List[Path],
+    apk_output_paths: List[Tuple[Path, Path]],
     framework_path: Path,
 ):
     assert isinstance(framework_path, Path)
     _, _, framework_resources, _ = extract_apk(framework_path)
 
-    for apk_path, output_path in zip(apk_paths, output_paths):
+    for apk_path, output_path in apk_output_paths:
         output_path.mkdir(parents=True, exist_ok=True)
 
         res_output_path = Path(output_path, 'res')
