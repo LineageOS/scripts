@@ -22,7 +22,6 @@ from rro.process_rro import (
     write_rro,
     write_rro_meta,
 )
-from rro.resource import dir_names_to_frozen_dict
 from rro.resources import RESOURCES_DIR
 from rro.target_package import (
     PackageMap,
@@ -116,7 +115,7 @@ def generate_rro(
         resources=resources,
         allow_missing=True,
         parse_all_values=False,
-        dir_names=dir_names_to_frozen_dict(resources.dir_names_to_names()),
+        dir_names=resources.dir_names_to_names(),
     )
     fixup_rro_resources(
         package=package,

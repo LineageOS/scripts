@@ -6,7 +6,6 @@ from __future__ import annotations
 
 import shutil
 from argparse import ArgumentParser
-from collections import defaultdict
 from dataclasses import dataclass
 from itertools import chain
 from os import path
@@ -28,10 +27,9 @@ from rro.process_rro import (
     remove_rros_shadowed_resources,
     write_rro,
 )
-from rro.resource import dir_names_to_frozen_dict
+from rro.resource_map import PackageDirNamesIndex, ResourceMap
 from rro.resources import (
     RESOURCES_DIR,
-    ResourceMap,
     read_xml_resources_prefix,
 )
 from rro.target_package import (
@@ -191,6 +189,7 @@ def parse_overlay(
     immutable: bool,
     ignore_packages: Set[str],
     overlays_data: List[OverlayData],
+    package_dir_names: PackageDirNamesIndex,
 ):
     overlay_path = Path(overlay_dir)
 
@@ -223,6 +222,7 @@ def parse_overlay(
             package,
             str(resources_path),
             track_index=False,
+            dir_names=package_dir_names.for_package(target_package),
         )
     except ValueError as e:
         shutil.rmtree(overlay_path, ignore_errors=True)
@@ -341,6 +341,7 @@ def beautify_rro_main():
     }
 
     overlays_data: List[OverlayData] = []
+    package_dir_names = PackageDirNamesIndex()
 
     for overlay_dir in get_dirs_with_file(args.overlay_path, ANDROID_BP_NAME):
         parse_overlay(
@@ -348,6 +349,7 @@ def beautify_rro_main():
             immutable=False,
             ignore_packages=ignore_packages,
             overlays_data=overlays_data,
+            package_dir_names=package_dir_names,
         )
 
     for overlay_dir in chain(
@@ -358,29 +360,10 @@ def beautify_rro_main():
             immutable=True,
             ignore_packages=ignore_packages,
             overlays_data=overlays_data,
+            package_dir_names=package_dir_names,
         )
 
-    dir_names_map: Dict[
-        # target name
-        str,
-        Dict[
-            # relative paths
-            str,
-            # resource names
-            Set[str],
-        ],
-    ] = defaultdict(lambda: defaultdict(set))
-
     for overlay_data in overlays_data:
-        dir_name_to_names = overlay_data.resources.dir_names_to_names().items()
-        for dir_name, names in dir_name_to_names:
-            dir_names_map[overlay_data.target_package][dir_name].update(names)
-
-    for overlay_data in overlays_data:
-        dir_names = dir_names_to_frozen_dict(
-            dir_names_map[overlay_data.target_package],
-        )
-
         try:
             package_resources = get_rro_target_package_resources(
                 package_map=package_map,
@@ -389,7 +372,7 @@ def beautify_rro_main():
                 resources=overlay_data.resources,
                 allow_missing=overlay_data.target_package in keep_packages,
                 parse_all_values=True,
-                dir_names=dir_names,
+                dir_names=overlay_data.resources.dir_names_to_names(),
             )
         except ValueError:
             shutil.rmtree(overlay_data.path, ignore_errors=True)

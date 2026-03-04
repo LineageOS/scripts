@@ -22,6 +22,7 @@ from rro.process_rro import (
     write_rro,
     write_rro_meta,
 )
+from rro.resource_map import IndexFlags
 from rro.resources import (
     RESOURCES_DIR,
     ResourceMap,
@@ -130,7 +131,7 @@ def commonize_package_overlays(
     write_rro(
         ResourceMap(
             common_overlay_resources,
-            by_rel_path=True,
+            indices=IndexFlags.BY_REL_PATH,
         ),
         str(overlay_output_path),
         rro_name,
