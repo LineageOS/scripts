@@ -6,21 +6,17 @@ from __future__ import annotations
 
 import shutil
 from argparse import ArgumentParser
-from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List, Tuple
 
-from bp.bp_module import parse_bp_rro_module
-from bp.bp_utils import ANDROID_BP_NAME, get_module_partition
-from rro.manifest import ANDROID_MANIFEST_NAME, parse_overlay_manifest
-from rro.process_rro import (
-    get_rro_resources,
-    overlay_attrs_key,
-    read_rro_meta,
-    simplify_rro_name,
-    simplify_rro_package,
-    write_rro,
-    write_rro_meta,
+from bp.bp_utils import ANDROID_BP_NAME
+from rro.manifest import ANDROID_MANIFEST_NAME
+from rro.overlay import (
+    Overlay,
+    parse_overlay_from_android_bp,
+    simplify_overlay_name,
+    simplify_overlay_package,
+    write_overlay,
 )
 from rro.resource_map import IndexFlags
 from rro.resources import (
@@ -28,124 +24,92 @@ from rro.resources import (
     ResourceMap,
     keep_referenced_resources_from_removal,
 )
-from rro.target_package import fixup_target_package
 from utils.utils import get_dirs_with_file
 
 
-@dataclass
-class OverlayData:
-    path: Path
-    name: str
-    package: str
-    target_package: str
-    partition: str
-    attrs: Dict[str, str]
-    resources: ResourceMap
-
-
 def commonize_package_overlays(
-    common_package: str,
-    overlays_data: List[OverlayData],
+    overlays: List[Overlay],
     device: str,
     output_path: Path,
 ):
     common_overlay_resources = None
-    common_overlays_data: List[OverlayData] = []
-    for overlay_data in overlays_data:
+    for overlay in overlays:
         if common_overlay_resources is None:
-            common_overlay_resources = overlay_data.resources.all().copy()
+            common_overlay_resources = overlay.resources.all().copy()
         else:
-            common_overlay_resources &= overlay_data.resources.all()
-
-        common_overlays_data.append(overlay_data)
+            common_overlay_resources &= overlay.resources.all()
 
     assert common_overlay_resources is not None
 
     if not common_overlay_resources:
         return
 
-    for overlay_data in overlays_data:
+    for overlay in overlays:
         keep_referenced_resources_from_removal(
             resources_to_remove=common_overlay_resources,
-            all_resources=overlay_data.resources,
+            all_resources=overlay.resources,
         )
 
-    rro_meta = None
-    overlay_data = None
-    for overlay_data in common_overlays_data:
-        overlay_data.resources.remove_many(common_overlay_resources)
+    overlay = None
+    for overlay in overlays:
+        overlay.resources.remove_many(common_overlay_resources)
 
-        rro_meta = read_rro_meta(overlay_data.path)
+        shutil.rmtree(overlay.path)
 
-        shutil.rmtree(overlay_data.path)
-
-        if not overlay_data.resources:
+        if not overlay.resources:
             continue
 
-        overlay_data.path.mkdir(parents=True, exist_ok=True)
+        overlay.path.mkdir(parents=True, exist_ok=True)
 
-        write_rro(
-            overlay_data.resources,
-            str(overlay_data.path),
-            overlay_data.name,
-            overlay_data.package,
-            overlay_data.target_package,
-            overlay_data.attrs,
-            partition=overlay_data.partition,
-        )
-        write_rro_meta(
-            overlay_data.path,
-            rro_meta['original_rro_name'],
-            rro_meta['original_package'],
-            rro_meta['original_target_package'],
-            device=rro_meta.get('device'),
+        write_overlay(
+            overlay,
+            # Write meta to allow commonize script to generate its own names
+            write_meta=True,
         )
 
-    assert rro_meta is not None
-    assert overlay_data is not None
+    assert overlay is not None
 
-    reference_device = rro_meta.get('device')
-
-    package = rro_meta['original_package']
-    package, original_package = simplify_rro_package(
-        package,
+    assert overlay.original_name is not None
+    name, original_name = simplify_overlay_name(
+        overlay.original_name,
         device,
-        reference_device,
+        overlay.device,
     )
 
-    target_package = rro_meta['original_target_package']
-    target_package, orignal_target_package = fixup_target_package(
-        target_package,
-    )
-
-    rro_name = rro_meta['original_rro_name']
-    rro_name, original_rro_name = simplify_rro_name(
-        rro_name,
+    assert overlay.original_package is not None
+    package, original_package = simplify_overlay_package(
+        overlay.original_package,
         device,
-        reference_device,
+        overlay.device,
     )
 
-    overlay_output_path = Path(output_path, rro_name)
+    overlay_output_path = Path(output_path, name)
+    shutil.rmtree(overlay_output_path, ignore_errors=True)
     overlay_output_path.mkdir(parents=True, exist_ok=True)
 
-    write_rro(
-        ResourceMap(
+    common_overlay = Overlay(
+        name=name,
+        path=overlay_output_path,
+        manifest_name=ANDROID_MANIFEST_NAME,
+        resources_dir=RESOURCES_DIR,
+        partition=overlay.partition,
+        package=package,
+        target_package=overlay.target_package,
+        attrs=overlay.attrs,
+        resources=ResourceMap(
             common_overlay_resources,
             indices=IndexFlags.BY_REL_PATH,
         ),
-        str(overlay_output_path),
-        rro_name,
-        package,
-        target_package,
-        overlay_data.attrs,
-        partition=overlay_data.partition,
+        original_name=original_name,
+        original_package=original_package,
+        original_target_package=overlay.target_package,
+        device=device,
     )
-    write_rro_meta(
-        overlay_output_path,
-        original_rro_name,
-        original_package,
-        orignal_target_package,
-        device,
+
+    write_overlay(
+        common_overlay,
+        # Write meta for further commonize
+        write_meta=True,
     )
 
 
@@ -186,7 +150,7 @@ def commonize_overlays():
             # overlay attributes
             Tuple[Tuple[str, str], ...],
         ],
-        List[OverlayData],
+        List[Overlay],
     ] = {}
     for overlays_path in args.overlays:
         assert isinstance(overlays_path, Path)
@@ -197,60 +161,34 @@ def commonize_overlays():
         ):
             overlay_path = Path(overlay_dir)
 
-            android_bp_path = Path(overlay_path, ANDROID_BP_NAME)
-            statement = parse_bp_rro_module(android_bp_path)
-
-            module_name = statement['name']
-            module_partition = get_module_partition(statement)
-
-            manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
-            manifest_path = Path(overlay_path, manifest)
-
-            resources_dir = statement.get('resource_dirs', [RESOURCES_DIR])[0]
-            resources_path = Path(overlay_path, resources_dir)
-
-            package, target_package, overlay_attrs = parse_overlay_manifest(
-                str(manifest_path),
+            overlay = parse_overlay_from_android_bp(
+                overlay_path,
+                # Keep indices since we do not fixup in commonize
+                track_index=True,
+                # Read meta left over by generate script
+                read_meta=True,
             )
+            if overlay is None:
+                continue
 
-            rro_meta = read_rro_meta(overlay_path)
-            original_package = rro_meta['original_package']
+            assert overlay.original_package is not None
 
-            overlays_data = overlays_map.setdefault(
+            overlays = overlays_map.setdefault(
                 (
-                    original_package,
-                    overlay_attrs_key(
-                        overlay_attrs,
-                        with_priority=True,
-                    ),
+                    overlay.original_package,
+                    overlay.attrs_key(with_priority=True),
                 ),
                 [],
             )
 
-            resources = get_rro_resources(
-                package,
-                str(resources_path),
-                # Keep indices since we do not fixup in commonize
-                track_index=True,
-            )
-            overlay_data = OverlayData(
-                path=overlay_path,
-                name=module_name,
-                package=package,
-                target_package=target_package,
-                partition=module_partition,
-                attrs=overlay_attrs,
-                resources=resources,
-            )
-            overlays_data.append(overlay_data)
+            overlays.append(overlay)
 
-    for (package, _), overlays_data in overlays_map.items():
-        if len(overlays_data) == 1:
+    for overlays in overlays_map.values():
+        if len(overlays) == 1:
             continue
 
         commonize_package_overlays(
-            package,
-            overlays_data,
+            overlays,
             args.device,
             args.output,
         )
