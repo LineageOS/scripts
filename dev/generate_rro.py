@@ -7,26 +7,24 @@ from __future__ import annotations
 import os
 import shutil
 from argparse import ArgumentParser
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List, Optional, Set, cast
+from typing import List, Optional, cast
 
 from apk.apk_extract import extract_apks
-from rro.manifest import ANDROID_MANIFEST_NAME, parse_overlay_manifest
-from rro.process_rro import (
-    check_rro_matches_aosp,
-    fixup_rro_resources,
-    get_rro_resources,
-    get_rro_target_package_resources,
-    simplify_rro_name,
-    simplify_rro_package,
-    write_rro,
-    write_rro_meta,
+from bp.bp_utils import ANDROID_BP_NAME, write_android_bp
+from rro.overlay import (
+    Overlay,
+    fixup_overlay_resources,
+    is_overlay_aosp,
+    parse_overlay_from_android_bp,
+    parse_overlay_target_package_resources,
+    simplify_overlay_name,
+    write_overlay,
 )
-from rro.resources import RESOURCES_DIR
+from rro.resource_map import PackageDirNamesIndex
 from rro.target_package import (
-    PackageMap,
     append_extra_locations,
-    fixup_target_package,
     map_packages,
     read_package_map,
 )
@@ -71,84 +69,13 @@ def find_apk_partition(apk_path: Path):
     return partition
 
 
-def generate_rro(
-    package_map: PackageMap,
-    rro_name: str,
-    original_rro_name: str,
-    package: str,
-    target_package: str,
-    partition: Optional[str],
-    resources_path: Path,
-    apk_output_path: Path,
-    overlay_attrs: Dict[str, str],
-    exclude_overlays: Set[str],
-    exclude_packages: Set[str],
-    device: Optional[str],
-):
-    package, original_package = simplify_rro_package(
-        package,
-        device,
-    )
-    if package in exclude_overlays:
-        raise ValueError(f'{package}: Excluded')
-    if original_package in exclude_overlays:
-        raise ValueError(f'{original_package}: Excluded')
-
-    target_package, orignal_target_package = fixup_target_package(
-        target_package,
-    )
-    if target_package in exclude_packages:
-        raise ValueError(f'{package}: Excluded by {target_package}')
-
-    if orignal_target_package in exclude_packages:
-        raise ValueError(f'{package}: Excluded by {orignal_target_package}')
-
-    resources = get_rro_resources(
-        package,
-        str(resources_path),
-        track_index=False,
-    )
-    package_resources = get_rro_target_package_resources(
-        package_map=package_map,
-        package=package,
-        target_package=target_package,
-        resources=resources,
-        allow_missing=True,
-        parse_all_values=False,
-        dir_names=resources.dir_names_to_names(),
-    )
-    fixup_rro_resources(
-        package=package,
-        resources=resources,
-        package_resources=package_resources,
-    )
-    check_rro_matches_aosp(
-        package_map=package_map,
-        rro_name=rro_name,
-        package=package,
-        target_package=target_package,
-        resources=resources,
-    )
-
-    shutil.rmtree(apk_output_path, ignore_errors=True)
-    apk_output_path.mkdir(parents=True, exist_ok=True)
-
-    write_rro(
-        resources=resources,
-        output_path=str(apk_output_path),
-        rro_name=rro_name,
-        package=package,
-        target_package=target_package,
-        overlay_attrs=overlay_attrs,
-        partition=partition,
-    )
-    write_rro_meta(
-        output_path=apk_output_path,
-        rro_name=original_rro_name,
-        package=original_package,
-        target_package=orignal_target_package,
-        device=device,
-    )
+@dataclass
+class ApkData:
+    path: Path
+    output_path: Path
+    partition: Optional[str]
+    name: str
+    original_name: str
 
 
 def generate_rro_main():
@@ -253,68 +180,93 @@ def generate_rro_main():
     if framework_path is None and not args.apktool:
         raise ValueError('No framework-res.apk provided')
 
-    output_paths: List[Path] = []
-    rro_names: List[str] = []
-    original_rro_names: List[str] = []
-    partitions: List[Optional[str]] = []
+    apks_data: List[ApkData] = []
 
     for apk_path in apk_paths:
         partition = find_apk_partition(apk_path)
-        partitions.append(partition)
 
-        rro_name, original_rro_name = simplify_rro_name(
+        name, original_name = simplify_overlay_name(
             apk_path.stem,
             args.device,
         )
-        rro_names.append(rro_name)
-        original_rro_names.append(original_rro_name)
 
-        output_path = Path(overlays_path, rro_name)
-        output_paths.append(output_path)
+        output_path = Path(overlays_path, name)
+
+        apk_data = ApkData(
+            path=apk_path,
+            output_path=output_path,
+            partition=partition,
+            name=name,
+            original_name=original_name,
+        )
+        apks_data.append(apk_data)
 
     if not args.apktool:
         assert framework_path is not None
         extract_apks(
-            apk_paths,
-            output_paths,
+            [
+                (
+                    apk_data.path,
+                    apk_data.output_path,
+                )
+                for apk_data in apks_data
+            ],
             framework_path,
         )
 
-    for apk_path, output_path, rro_name, original_rro_name, partition in zip(
-        apk_paths,
-        output_paths,
-        rro_names,
-        original_rro_names,
-        partitions,
-    ):
+    overlays: List[Overlay] = []
+    package_dir_names = PackageDirNamesIndex()
+
+    for apk_data in apks_data:
         if args.apktool:
-            extract_apk(apk_path, output_path)
+            extract_apk(apk_data.path, apk_data.output_path)
 
-        manifest_path = Path(output_path, ANDROID_MANIFEST_NAME)
-        resources_path = Path(output_path, RESOURCES_DIR)
-
-        package, target_package, overlay_attrs = parse_overlay_manifest(
-            str(manifest_path),
+        # Write a dummy Android.bp so we can re-use the parsing logic
+        android_bp_path = Path(apk_data.output_path, ANDROID_BP_NAME)
+        write_android_bp(
+            android_bp_path,
+            name=apk_data.name,
+            aapt_raw=False,
+            partition=apk_data.partition,
         )
 
-        try:
-            generate_rro(
-                package_map=package_map,
-                rro_name=rro_name,
-                original_rro_name=original_rro_name,
-                package=package,
-                target_package=target_package,
-                partition=partition,
-                resources_path=resources_path,
-                apk_output_path=output_path,
-                overlay_attrs=overlay_attrs,
-                exclude_overlays=exclude_overlays,
-                exclude_packages=exclude_packages,
-                device=args.device,
+        overlay = parse_overlay_from_android_bp(
+            apk_data.output_path,
+            package_dir_names=package_dir_names,
+            exclude_overlays=exclude_overlays,
+            exclude_packages=exclude_packages,
+            original_name=apk_data.original_name,
+            device=args.device,
+        )
+        if overlay is None:
+            continue
+
+        overlays.append(overlay)
+
+    for overlay in overlays:
+        parse_overlay_target_package_resources(
+            package_map=package_map,
+            overlay=overlay,
+        )
+        fixup_overlay_resources(overlay)
+
+    for overlay in overlays:
+        shutil.rmtree(overlay.path, ignore_errors=True)
+
+        if is_overlay_aosp(package_map, overlay):
+            color_print(
+                f'Overlay {overlay.name} identical to AOSP',
+                color=Color.GREEN,
             )
-        except ValueError as e:
-            shutil.rmtree(output_path, ignore_errors=True)
-            color_print(e, color=Color.RED)
+            continue
+
+        overlay.path.mkdir(parents=True, exist_ok=True)
+
+        write_overlay(
+            overlay,
+            # Write meta to allow commonize script to generate its own names
+            write_meta=True,
+        )
 
 
 if __name__ == '__main__':

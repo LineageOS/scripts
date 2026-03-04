@@ -6,55 +6,31 @@ from __future__ import annotations
 
 import shutil
 from argparse import ArgumentParser
-from dataclasses import dataclass
 from itertools import chain
-from os import path
 from pathlib import Path
-from typing import Dict, List, Optional, Set, Tuple, cast
+from typing import List, Set, Tuple, cast
 
-from bp.bp_module import parse_bp_rro_module
 from bp.bp_utils import (
     ANDROID_BP_NAME,
-    get_module_partition,
 )
-from rro.manifest import ANDROID_MANIFEST_NAME, parse_overlay_manifest
-from rro.process_rro import (
-    OverlayPriorityData,
-    fixup_rro_resources,
-    get_rro_resources,
-    get_rro_target_package_resources,
-    remove_rro_resources,
-    remove_rros_shadowed_resources,
-    write_rro,
+from rro.overlay import (
+    Overlay,
+    filter_resource_entries,
+    fixup_overlay_resources,
+    parse_overlay_from_android_bp,
+    parse_overlay_target_package_resources,
+    remove_missing_overlay_resources,
+    remove_overlay_resources,
+    remove_overlays_shadowed_resources,
+    write_overlay,
 )
-from rro.resource_map import PackageDirNamesIndex, ResourceMap
-from rro.resources import (
-    RESOURCES_DIR,
-    read_xml_resources_prefix,
-)
+from rro.resource_map import PackageDirNamesIndex
 from rro.target_package import (
     append_extra_locations,
     map_packages,
     read_package_map,
 )
 from utils.utils import Color, color_print, get_dirs_with_file
-
-
-@dataclass
-class OverlayData:
-    name: str
-    path: Path
-    partition: str
-    manifest_name: str
-    manifest_path: Path
-    module_priority: int
-    package: str
-    target_package: str
-    attrs: Dict[str, str]
-    resources: ResourceMap
-    package_resources: Optional[ResourceMap]
-    immutable: bool
-    removed: bool
 
 
 def parse_resource_entries(
@@ -79,42 +55,9 @@ def parse_resource_entries(
     return resource_entries
 
 
-def filter_resource_entries(
-    resource_entries: Set[Tuple[None | str, str]],
-    target_package: str,
-):
-    return frozenset(
-        resource_name
-        for package, resource_name in resource_entries
-        if package is None or package == target_package
-    )
-
-
-def remove_shadowed_resources(
-    overlays_data: List[OverlayData],
-    prefer_resources: Set[Tuple[Optional[str], str]],
-    remove_identical: bool,
-):
-    undetermined_resource_priorities = remove_rros_shadowed_resources(
-        [
-            OverlayPriorityData(
-                package=o.package,
-                target_package=o.target_package,
-                partition=o.partition,
-                priority=o.module_priority,
-                resources=o.resources,
-                package_resources=o.package_resources,
-                removed_resources=set(),
-                prefer_resources=filter_resource_entries(
-                    prefer_resources,
-                    o.package,
-                ),
-                attrs=o.attrs,
-                immutable=o.immutable,
-            )
-            for o in overlays_data
-            if not o.removed
-        ],
+def remove_shadowed_resources(overlays: List[Overlay], remove_identical: bool):
+    undetermined_resource_priorities = remove_overlays_shadowed_resources(
+        overlays=overlays,
         remove_identical=remove_identical,
     )
 
@@ -132,119 +75,39 @@ def remove_shadowed_resources(
 
 
 def write_beautified_overlay(
-    overlay_data: OverlayData,
+    overlay: Overlay,
     remove_resources: Set[Tuple[None | str, str]],
     keep_resources: Set[Tuple[None | str, str]],
-    maintain_copyrights: bool,
 ):
     target_package_remove_resources = filter_resource_entries(
         remove_resources,
-        overlay_data.target_package,
+        overlay.target_package,
     )
     target_package_keep_resources = filter_resource_entries(
         keep_resources,
-        overlay_data.target_package,
+        overlay.target_package,
     )
 
-    try:
-        remove_rro_resources(
-            package=overlay_data.package,
-            target_package=overlay_data.target_package,
-            manifest_path=str(overlay_data.manifest_path),
-            resources=overlay_data.resources,
-            package_resources=overlay_data.package_resources,
-            remove_resources=target_package_remove_resources,
-            keep_resources=target_package_keep_resources,
+    remove_overlay_resources(
+        overlay,
+        remove_resources=target_package_remove_resources,
+    )
+
+    remove_missing_overlay_resources(
+        overlay,
+        keep_resources=target_package_keep_resources,
+    )
+
+    shutil.rmtree(overlay.path, ignore_errors=True)
+
+    if not overlay.resources:
+        color_print(
+            f'{overlay.package}: No resources left in overlay',
+            color=Color.RED,
         )
-
-        # Preserve existing res/values/*.xml headers BEFORE we delete res/
-        preserved_prefixes: Dict[str, bytes] = {}
-        if maintain_copyrights:
-            preserved_prefixes = read_xml_resources_prefix(
-                overlay_data.resources,
-                str(overlay_data.path),
-                extra_paths=[overlay_data.manifest_name],
-            )
-
-        shutil.rmtree(overlay_data.path, ignore_errors=True)
-        Path(overlay_data.path).mkdir(parents=True, exist_ok=True)
-
-        write_rro(
-            overlay_data.resources,
-            str(overlay_data.path),
-            overlay_data.name,
-            overlay_data.package,
-            overlay_data.target_package,
-            overlay_data.attrs,
-            preserved_prefixes=preserved_prefixes,
-            partition=overlay_data.partition,
-        )
-    except ValueError as e:
-        shutil.rmtree(overlay_data.path, ignore_errors=True)
-        color_print(e, color=Color.RED)
-
-
-def parse_overlay(
-    overlay_dir: str,
-    immutable: bool,
-    ignore_packages: Set[str],
-    overlays_data: List[OverlayData],
-    package_dir_names: PackageDirNamesIndex,
-):
-    overlay_path = Path(overlay_dir)
-
-    android_bp_path = Path(overlay_path, ANDROID_BP_NAME)
-    statement = parse_bp_rro_module(android_bp_path)
-
-    module_name = statement['name']
-    dir_name = path.basename(overlay_dir)
-
-    if ignore_packages and (
-        (module_name and module_name in ignore_packages)
-        or (dir_name and dir_name in ignore_packages)
-    ):
         return
 
-    manifest = statement.get('manifest', ANDROID_MANIFEST_NAME)
-    manifest_path = Path(overlay_dir, manifest)
-
-    resources_dir = statement.get('resource_dirs', [RESOURCES_DIR])[0]
-    resources_path = Path(overlay_path, resources_dir)
-
-    package, target_package, overlay_attrs = parse_overlay_manifest(
-        str(manifest_path),
-    )
-    module_partition = get_module_partition(statement)
-    module_priority = int(overlay_attrs.get('priority', 0))
-
-    try:
-        resources = get_rro_resources(
-            package,
-            str(resources_path),
-            track_index=False,
-            dir_names=package_dir_names.for_package(target_package),
-        )
-    except ValueError as e:
-        shutil.rmtree(overlay_path, ignore_errors=True)
-        color_print(e, color=Color.RED)
-        return
-
-    overlay_data = OverlayData(
-        name=module_name,
-        path=overlay_path,
-        partition=module_partition,
-        manifest_name=manifest,
-        manifest_path=manifest_path,
-        module_priority=module_priority,
-        package=package,
-        target_package=target_package,
-        attrs=overlay_attrs,
-        resources=resources,
-        package_resources=None,
-        immutable=immutable,
-        removed=False,
-    )
-    overlays_data.append(overlay_data)
+    write_overlay(overlay)
 
 
 def beautify_rro_main():
@@ -340,68 +203,78 @@ def beautify_rro_main():
         s.strip() for s in ignore_packages.split(',') if s.strip()
     }
 
-    overlays_data: List[OverlayData] = []
+    overlays: List[Overlay] = []
     package_dir_names = PackageDirNamesIndex()
 
     for overlay_dir in get_dirs_with_file(args.overlay_path, ANDROID_BP_NAME):
-        parse_overlay(
-            overlay_dir,
-            immutable=False,
+        overlay = parse_overlay_from_android_bp(
+            Path(overlay_dir),
             ignore_packages=ignore_packages,
-            overlays_data=overlays_data,
             package_dir_names=package_dir_names,
+            prefer_resources=prefer_resources,
+            maintain_copyrights=args.maintain_copyrights,
         )
+        if overlay is None:
+            continue
+
+        overlays.append(overlay)
 
     for overlay_dir in chain(
         *(get_dirs_with_file(c, ANDROID_BP_NAME) for c in common_paths)
     ):
-        parse_overlay(
-            overlay_dir,
+        overlay = parse_overlay_from_android_bp(
+            Path(overlay_dir),
             immutable=True,
+            track_index=False,
             ignore_packages=ignore_packages,
-            overlays_data=overlays_data,
             package_dir_names=package_dir_names,
+            prefer_resources=prefer_resources,
+            maintain_copyrights=args.maintain_copyrights,
         )
-
-    for overlay_data in overlays_data:
-        try:
-            package_resources = get_rro_target_package_resources(
-                package_map=package_map,
-                package=overlay_data.package,
-                target_package=overlay_data.target_package,
-                resources=overlay_data.resources,
-                allow_missing=overlay_data.target_package in keep_packages,
-                parse_all_values=True,
-                dir_names=overlay_data.resources.dir_names_to_names(),
-            )
-        except ValueError:
-            shutil.rmtree(overlay_data.path, ignore_errors=True)
-            overlay_data.removed = True
+        if overlay is None:
             continue
 
-        overlay_data.package_resources = package_resources
+        overlays.append(overlay)
 
-        fixup_rro_resources(
-            package=overlay_data.package,
-            resources=overlay_data.resources,
-            package_resources=package_resources,
+    # Parse target package resources in a different loop to assure that we
+    # gathered all needed directory and resource names
+    remaining_overlays: List[Overlay] = []
+    for overlay in overlays:
+        parse_overlay_target_package_resources(
+            package_map=package_map,
+            overlay=overlay,
         )
 
+        if (
+            overlay.package_resources is not None
+            or overlay.target_package in keep_packages
+        ):
+            remaining_overlays.append(overlay)
+            continue
+
+        color_print(
+            f'{overlay.package}: Unknown package name {overlay.target_package}',
+            color=Color.RED,
+        )
+
+    overlays = remaining_overlays
+
+    for overlay in overlays:
+        fixup_overlay_resources(overlay)
+
     remove_shadowed_resources(
-        overlays_data,
-        prefer_resources,
+        overlays,
         remove_identical=args.remove_identical,
     )
 
-    for overlay_data in overlays_data:
-        if overlay_data.immutable or overlay_data.removed:
+    for overlay in overlays:
+        if overlay.immutable:
             continue
 
         write_beautified_overlay(
-            overlay_data,
+            overlay,
             remove_resources=remove_resources,
             keep_resources=keep_resources,
-            maintain_copyrights=args.maintain_copyrights,
         )
 
 

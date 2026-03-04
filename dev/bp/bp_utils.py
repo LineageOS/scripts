@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Dict, List, Optional
 
 from bp.bp_module import BpModule
@@ -97,27 +98,30 @@ def partition_to_priority(partition: str):
     return PRIORITY_PARTITIONS.index(partition)
 
 
-def write_android_bp(apk_path: str, android_bp_path: str, package: str):
-    apk_path_parts = apk_path.split('/')
-
-    partition = None
-    try:
-        overlay_index = apk_path_parts.index('overlay')
-        partition = apk_path_parts[overlay_index - 1]
-    except (ValueError, IndexError):
-        pass
+def write_android_bp(
+    android_bp_path: Path,
+    name: str,
+    aapt_raw: bool,
+    partition: Optional[str] = None,
+):
+    extra = ''
 
     specific = get_partition_specific(partition)
-    if specific is None:
-        specific = ''
-    else:
-        specific = f'\n    {specific}: true,'
+    if specific is not None:
+        extra += f'\n    {specific}: true,'
 
-    with open(android_bp_path, 'w') as o:
-        o.write(
-            f'''{ANDROID_BP_COPYRIGHT}
+    if aapt_raw:
+        extra += '\n    aaptflags: ["--keep-raw-values"],'
+
+    text = f'''
+//
+// SPDX-FileCopyrightText: The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
 runtime_resource_overlay {{
-    name: "{package}",{specific}
+    name: "{name}",{extra}
 }}
-'''
-        )
+'''.lstrip()
+
+    android_bp_path.write_text(text)
