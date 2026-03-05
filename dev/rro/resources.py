@@ -10,6 +10,7 @@ from fnmatch import fnmatch
 from os import path
 from typing import (
     Callable,
+    DefaultDict,
     Dict,
     FrozenSet,
     Iterable,
@@ -490,39 +491,51 @@ def is_resource_entry_wildcard(resource_entry: str):
     return any(c in resource_entry for c in '*?[')
 
 
-@functools.cache
-def resource_entries_wildcards(resource_entries: FrozenSet[str]):
-    return frozenset(
-        resource_entry
-        for resource_entry in resource_entries
-        if is_resource_entry_wildcard(resource_entry)
-    )
+def filter_resource_entries(
+    resource_entries: DefaultDict[Optional[str], Set[str]],
+    package: str,
+):
+    none_entries = resource_entries[None]
+    package_entries = resource_entries[package]
+
+    normal_entries: Set[str] = set()
+    wildcard_entries: Set[str] = set()
+    for entry in none_entries | package_entries:
+        if is_resource_entry_wildcard(entry):
+            wildcard_entries.add(entry)
+        else:
+            normal_entries.add(entry)
+
+    return frozenset(normal_entries), frozenset(wildcard_entries)
 
 
 def is_resource_in_entries(
-    resource_entries: FrozenSet[str],
     resource: Resource,
+    resource_entries: Tuple[FrozenSet[str], FrozenSet[str]],
 ):
     if not resource_entries:
         return False
 
+    normal_entries = resource_entries[0]
+    wildcard_entries = resource_entries[1]
+
     if is_raw_resource(resource):
-        if resource.name in resource_entries:
+        if resource.name in normal_entries:
             return True
-        if resource.rel_path in resource_entries:
+        if resource.rel_path in normal_entries:
             return True
 
-        for pattern in resource_entries_wildcards(resource_entries):
+        for pattern in wildcard_entries:
             if fnmatch(resource.name, pattern):
                 return True
             if fnmatch(resource.rel_path, pattern):
                 return True
 
     elif is_xml_resource(resource):
-        if resource.name in resource_entries:
+        if resource.name in normal_entries:
             return True
 
-        for pattern in resource_entries_wildcards(resource_entries):
+        for pattern in wildcard_entries:
             if fnmatch(resource.name, pattern):
                 return True
     else:
@@ -533,10 +546,13 @@ def is_resource_in_entries(
 
 def overlay_resources_remove(
     resources: ResourceMap,
-    remove_resources: FrozenSet[str],
+    remove_resources: Tuple[FrozenSet[str], FrozenSet[str]],
 ):
     def remove_resource(resource: Resource):
-        if is_resource_in_entries(remove_resources, resource):
+        if is_resource_in_entries(
+            resource,
+            remove_resources,
+        ):
             return True
 
     removed_resources, _ = overlay_resources_process(
@@ -584,7 +600,7 @@ def overlay_resources_remove_missing(
     resources: ResourceMap,
     package_resources: ResourceMap,
     manifest_path: str,
-    keep_resources: FrozenSet[str],
+    keep_resources: Tuple[FrozenSet[str], FrozenSet[str]],
 ):
     manifest_tree = etree.parse(manifest_path)
     manifest_root = manifest_tree.getroot()
@@ -592,7 +608,10 @@ def overlay_resources_remove_missing(
     kept_resources: Set[Resource] = set()
 
     def remove_missing_resource(resource: Resource):
-        if is_resource_in_entries(keep_resources, resource):
+        if is_resource_in_entries(
+            resource,
+            keep_resources,
+        ):
             kept_resources.add(resource)
             return
 
