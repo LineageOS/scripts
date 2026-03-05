@@ -6,25 +6,32 @@ from __future__ import annotations
 
 import shutil
 from argparse import ArgumentParser
+from collections import defaultdict
 from itertools import chain
 from pathlib import Path
-from typing import List, Set, Tuple, cast
+from typing import (
+    DefaultDict,
+    List,
+    Optional,
+    Set,
+    cast,
+)
 
 from bp.bp_utils import (
     ANDROID_BP_NAME,
 )
 from rro.overlay import (
     Overlay,
-    filter_resource_entries,
     fixup_overlay_resources,
     parse_overlay_from_android_bp,
     parse_overlay_target_package_resources,
-    remove_missing_overlay_resources,
+    remove_overlay_missing_resources,
     remove_overlay_resources,
     remove_overlays_shadowed_resources,
     write_overlay,
 )
 from rro.resource_map import PackageDirNamesIndex
+from rro.resources import filter_resource_entries
 from rro.target_package import (
     append_extra_locations,
     map_packages,
@@ -37,7 +44,7 @@ def parse_resource_entries(
     resource_entries_raw: List[str],
     allow_empty_package: bool = True,
 ):
-    resource_entries: Set[Tuple[None | str, str]] = set()
+    resource_entries: DefaultDict[Optional[str], Set[str]] = defaultdict(set)
 
     for resource_entry_raw in resource_entries_raw:
         resource_entry_parts = resource_entry_raw.split(':')
@@ -47,18 +54,23 @@ def parse_resource_entries(
             raise ValueError(f'Invalid entry: {resource_entry_raw}')
 
         if len(resource_entry_parts) == 1:
-            resource_entries.add((None, resource_entry_raw))
+            resource_entries[None].add(resource_entry_raw)
         elif len(resource_entry_parts) == 2:
             target_package, resource_entry_raw = resource_entry_raw.split(':')
-            resource_entries.add((target_package, resource_entry_raw))
+            resource_entries[target_package].add(resource_entry_raw)
 
     return resource_entries
 
 
-def remove_shadowed_resources(overlays: List[Overlay], remove_identical: bool):
+def remove_shadowed_resources(
+    overlays: List[Overlay],
+    remove_identical: bool,
+    prefer_resources: DefaultDict[Optional[str], Set[str]],
+):
     undetermined_resource_priorities = remove_overlays_shadowed_resources(
         overlays=overlays,
         remove_identical=remove_identical,
+        prefer_resources=prefer_resources,
     )
 
     sorted_undetermined = sorted(
@@ -76,13 +88,14 @@ def remove_shadowed_resources(overlays: List[Overlay], remove_identical: bool):
 
 def write_beautified_overlay(
     overlay: Overlay,
-    remove_resources: Set[Tuple[None | str, str]],
-    keep_resources: Set[Tuple[None | str, str]],
+    remove_resources: DefaultDict[Optional[str], Set[str]],
+    keep_resources: DefaultDict[Optional[str], Set[str]],
 ):
     target_package_remove_resources = filter_resource_entries(
         remove_resources,
         overlay.target_package,
     )
+
     target_package_keep_resources = filter_resource_entries(
         keep_resources,
         overlay.target_package,
@@ -93,7 +106,7 @@ def write_beautified_overlay(
         remove_resources=target_package_remove_resources,
     )
 
-    remove_missing_overlay_resources(
+    remove_overlay_missing_resources(
         overlay,
         keep_resources=target_package_keep_resources,
     )
@@ -211,7 +224,6 @@ def beautify_rro_main():
             Path(overlay_dir),
             ignore_packages=ignore_packages,
             package_dir_names=package_dir_names,
-            prefer_resources=prefer_resources,
             maintain_copyrights=args.maintain_copyrights,
         )
         if overlay is None:
@@ -228,7 +240,6 @@ def beautify_rro_main():
             track_index=False,
             ignore_packages=ignore_packages,
             package_dir_names=package_dir_names,
-            prefer_resources=prefer_resources,
             maintain_copyrights=args.maintain_copyrights,
         )
         if overlay is None:
@@ -265,6 +276,7 @@ def beautify_rro_main():
     remove_shadowed_resources(
         overlays,
         remove_identical=args.remove_identical,
+        prefer_resources=prefer_resources,
     )
 
     for overlay in overlays:
@@ -273,8 +285,8 @@ def beautify_rro_main():
 
         write_beautified_overlay(
             overlay,
-            remove_resources=remove_resources,
-            keep_resources=keep_resources,
+            remove_resources,
+            keep_resources,
         )
 
 
