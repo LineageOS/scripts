@@ -9,6 +9,7 @@ import shutil
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import (
+    DefaultDict,
     Dict,
     FrozenSet,
     List,
@@ -35,6 +36,7 @@ from rro.resource import Resource
 from rro.resource_map import IndexFlags, PackageDirNamesIndex, ResourceMap
 from rro.resources import (
     RESOURCES_DIR,
+    filter_resource_entries,
     find_target_package_resources,
     is_resource_in_entries,
     keep_referenced_resources_from_removal,
@@ -53,10 +55,6 @@ from rro.target_package import (
     get_target_packages,
 )
 from utils.utils import Color, color_print
-
-
-def _str_frozenset() -> FrozenSet[str]:
-    return frozenset()
 
 
 def resource_set() -> Set[Resource]:
@@ -79,8 +77,6 @@ class Overlay:
 
     immutable: bool = False
     package_resources: Optional[ResourceMap] = None
-    prefer_resources: FrozenSet[str] = field(default_factory=_str_frozenset)
-
     preserved_prefixes: Optional[Dict[str, bytes]] = None
     removed_resources: Set[Resource] = field(default_factory=resource_set)
 
@@ -101,17 +97,6 @@ class Overlay:
                 if with_priority or k != 'priority'
             )
         )
-
-
-def filter_resource_entries(
-    resource_entries: Set[Tuple[None | str, str]],
-    target_package: str,
-):
-    return frozenset(
-        resource_name
-        for package, resource_name in resource_entries
-        if package is None or package == target_package
-    )
 
 
 RRO_NAME_SIMPLIFY_REGEX = re.compile(
@@ -231,19 +216,13 @@ def parse_overlay_from_android_bp(
     read_meta: bool = False,
     ignore_packages: Optional[Set[str]] = None,
     package_dir_names: Optional[PackageDirNamesIndex] = None,
-    prefer_resources: Optional[Set[Tuple[Optional[str], str]]] = None,
     exclude_overlays: Optional[Set[str]] = None,
     exclude_packages: Optional[Set[str]] = None,
     original_name: Optional[str] = None,
-    original_package: Optional[str] = None,
-    original_target_package: Optional[str] = None,
     device: Optional[str] = None,
 ):
     if ignore_packages is None:
         ignore_packages = set()
-
-    if prefer_resources is None:
-        prefer_resources = set()
 
     if exclude_overlays is None:
         exclude_overlays = set()
@@ -346,10 +325,6 @@ def parse_overlay_from_android_bp(
         attrs=overlay_attrs,
         immutable=immutable,
         resources=resources,
-        prefer_resources=filter_resource_entries(
-            prefer_resources,
-            target_package,
-        ),
         device=device,
         original_name=original_name,
         original_package=original_package,
@@ -508,7 +483,7 @@ def is_overlay_aosp(package_map: PackageMap, overlay: Overlay):
 
 def remove_overlay_resources(
     overlay: Overlay,
-    remove_resources: FrozenSet[str],
+    remove_resources: Tuple[FrozenSet[str], FrozenSet[str]],
 ):
     overlay_resources_remove(
         overlay.resources,
@@ -516,9 +491,9 @@ def remove_overlay_resources(
     )
 
 
-def remove_missing_overlay_resources(
+def remove_overlay_missing_resources(
     overlay: Overlay,
-    keep_resources: FrozenSet[str],
+    keep_resources: Tuple[FrozenSet[str], FrozenSet[str]],
 ):
     if not overlay.resources:
         return
@@ -546,30 +521,10 @@ def remove_missing_overlay_resources(
         )
 
 
-def resource_equality_key(ro: Tuple[Resource, Overlay]):
-    return (
-        is_resource_in_entries(ro[1].prefer_resources, ro[0]),
-        partition_to_priority(ro[1].partition),
-        ro[1].priority,
-    )
-
-
-def resource_sort_key(ro: Tuple[Resource, Overlay]):
-    return (
-        # Preferred resources first
-        not is_resource_in_entries(ro[1].prefer_resources, ro[0]),
-        # Partition priority
-        -partition_to_priority(ro[1].partition),
-        # Overlay priority
-        -ro[1].priority,
-        # Package name
-        ro[1].package,
-    )
-
-
 def remove_overlays_shadowed_resources(
     overlays: List[Overlay],
     remove_identical: bool,
+    prefer_resources: DefaultDict[Optional[str], Set[str]],
 ):
     undetermined_resource_priorities: Dict[
         Tuple[
@@ -598,6 +553,10 @@ def remove_overlays_shadowed_resources(
             ],
         ],
     ] = {}
+    preferred_resources_map: Dict[
+        str,
+        Tuple[FrozenSet[str], FrozenSet[str]],
+    ] = {}
 
     def add_undetermined(
         resources: List[
@@ -619,6 +578,11 @@ def remove_overlays_shadowed_resources(
         ).extend(r[1].package for r in resources)
 
     for overlay in overlays:
+        preferred_resources_map[overlay.package] = filter_resource_entries(
+            prefer_resources,
+            overlay.package,
+        )
+
         for resource in overlay.resources:
             resource_map.setdefault(
                 (
@@ -633,6 +597,31 @@ def remove_overlays_shadowed_resources(
                     overlay,
                 )
             )
+
+    def resource_equality_key(ro: Tuple[Resource, Overlay]):
+        return (
+            is_resource_in_entries(
+                ro[0],
+                preferred_resources_map[ro[1].package],
+            ),
+            partition_to_priority(ro[1].partition),
+            ro[1].priority,
+        )
+
+    def resource_sort_key(ro: Tuple[Resource, Overlay]):
+        return (
+            # Preferred resources first
+            not is_resource_in_entries(
+                ro[0],
+                preferred_resources_map[ro[1].package],
+            ),
+            # Partition priority
+            -partition_to_priority(ro[1].partition),
+            # Overlay priority
+            -ro[1].priority,
+            # Package name
+            ro[1].package,
+        )
 
     for resources in resource_map.values():
         resources.sort(key=resource_sort_key)
