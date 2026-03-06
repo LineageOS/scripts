@@ -81,6 +81,7 @@ class Overlay:
     removed_resources: Set[Resource] = field(default_factory=resource_set)
 
     device: Optional[str] = None
+    devices: Optional[Set[str]] = None
     original_name: Optional[str] = None
     original_package: Optional[str] = None
     original_target_package: Optional[str] = None
@@ -178,6 +179,7 @@ class RROMeta(TypedDict):
     original_package: str
     original_target_package: str
     device: NotRequired[str]
+    devices: NotRequired[List[str]]
 
 
 def write_rro_meta(
@@ -186,6 +188,7 @@ def write_rro_meta(
     package: str,
     target_package: str,
     device: Optional[str],
+    devices: Optional[List[str]],
 ):
     meta: RROMeta = {
         'original_rro_name': rro_name,
@@ -195,6 +198,9 @@ def write_rro_meta(
 
     if device is not None:
         meta['device'] = device
+
+    if devices is not None:
+        meta['devices'] = devices
 
     rro_meta_path = Path(output_path, RRO_META_NAME)
     with open(rro_meta_path, 'w') as o:
@@ -220,6 +226,7 @@ def parse_overlay_from_android_bp(
     exclude_packages: Optional[Set[str]] = None,
     original_name: Optional[str] = None,
     device: Optional[str] = None,
+    devices: Optional[Set[str]] = None,
 ):
     if ignore_packages is None:
         ignore_packages = set()
@@ -255,6 +262,9 @@ def parse_overlay_from_android_bp(
         package = rro_meta['original_package']
         target_package = rro_meta['original_target_package']
         device = rro_meta.get('device')
+
+        if 'devices' in rro_meta:
+            devices = set(rro_meta['devices'])
 
     package, original_package = simplify_overlay_package(
         package,
@@ -326,6 +336,7 @@ def parse_overlay_from_android_bp(
         immutable=immutable,
         resources=resources,
         device=device,
+        devices=devices,
         original_name=original_name,
         original_package=original_package,
         original_target_package=original_target_package,
@@ -426,6 +437,7 @@ def write_overlay(
             overlay.original_package,
             overlay.original_target_package,
             overlay.device,
+            sorted(overlay.devices) if overlay.devices is not None else None,
         )
 
 

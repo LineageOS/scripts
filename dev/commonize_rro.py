@@ -7,7 +7,7 @@ from __future__ import annotations
 import shutil
 from argparse import ArgumentParser
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Dict, List, Set, Tuple
 
 from bp.bp_utils import ANDROID_BP_NAME
 from rro.manifest import ANDROID_MANIFEST_NAME
@@ -33,7 +33,11 @@ def commonize_package_overlays(
     output_path: Path,
 ):
     common_overlay_resources = None
+    devices: Set[str] = set()
     for overlay in overlays:
+        if overlay.devices is not None:
+            devices.update(overlay.devices)
+
         if common_overlay_resources is None:
             common_overlay_resources = overlay.resources.all().copy()
         else:
@@ -104,6 +108,7 @@ def commonize_package_overlays(
         original_package=original_package,
         original_target_package=overlay.target_package,
         device=device,
+        devices=devices,
     )
 
     write_overlay(

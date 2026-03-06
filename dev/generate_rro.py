@@ -237,6 +237,7 @@ def generate_rro_main():
             exclude_packages=exclude_packages,
             original_name=apk_data.original_name,
             device=args.device,
+            devices=set([args.device]),
         )
         if overlay is None:
             continue
