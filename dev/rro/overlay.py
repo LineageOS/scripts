@@ -6,6 +6,7 @@ from __future__ import annotations
 import json
 import re
 import shutil
+from collections import defaultdict
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import (
@@ -57,8 +58,11 @@ from rro.target_package import (
 from utils.utils import Color, color_print
 
 
-def resource_set() -> Set[Resource]:
-    return set()
+def default_dict_optional_str_set_resource() -> DefaultDict[
+    Optional[str],
+    Set[Resource],
+]:
+    return defaultdict(set)
 
 
 @dataclass
@@ -75,10 +79,11 @@ class Overlay:
 
     resources: ResourceMap
 
-    immutable: bool = False
     package_resources: Optional[ResourceMap] = None
     preserved_prefixes: Optional[Dict[str, bytes]] = None
-    removed_resources: Set[Resource] = field(default_factory=resource_set)
+    removed_resources: DefaultDict[Optional[str], Set[Resource]] = field(
+        default_factory=default_dict_optional_str_set_resource,
+    )
 
     device: Optional[str] = None
     devices: Optional[Set[str]] = None
@@ -216,7 +221,6 @@ def read_rro_meta(overlay_path: Path) -> RROMeta:
 
 def parse_overlay_from_android_bp(
     overlay_path: Path,
-    immutable: bool = False,
     track_index: bool = False,
     maintain_copyrights: bool = False,
     read_meta: bool = False,
@@ -257,14 +261,17 @@ def parse_overlay_from_android_bp(
     )
 
     if read_meta:
-        rro_meta = read_rro_meta(overlay_path)
-        original_name = rro_meta['original_rro_name']
-        package = rro_meta['original_package']
-        target_package = rro_meta['original_target_package']
-        device = rro_meta.get('device')
+        try:
+            rro_meta = read_rro_meta(overlay_path)
+            original_name = rro_meta['original_rro_name']
+            package = rro_meta['original_package']
+            target_package = rro_meta['original_target_package']
+            device = rro_meta.get('device')
 
-        if 'devices' in rro_meta:
-            devices = set(rro_meta['devices'])
+            if 'devices' in rro_meta:
+                devices = set(rro_meta['devices'])
+        except Exception:
+            pass
 
     package, original_package = simplify_overlay_package(
         package,
@@ -333,7 +340,6 @@ def parse_overlay_from_android_bp(
         package=package,
         target_package=target_package,
         attrs=overlay_attrs,
-        immutable=immutable,
         resources=resources,
         device=device,
         devices=devices,
@@ -535,8 +541,8 @@ def remove_overlay_missing_resources(
 
 def remove_overlays_shadowed_resources(
     overlays: List[Overlay],
-    remove_identical: bool,
     prefer_resources: DefaultDict[Optional[str], Set[str]],
+    device: Optional[str],
 ):
     undetermined_resource_priorities: Dict[
         Tuple[
@@ -669,34 +675,21 @@ def remove_overlays_shadowed_resources(
         ):
             add_undetermined(preferred_resources)
 
-        # If we shadowed an immutable resource, do not check if the
-        # preferred resource is identical to AOSP, as we cannot remove
-        # it because the immutable shadowed resource would take priority
-        shadowed_immutable = False
         shadowed_resources = resources[1:]
         for resource, overlay in shadowed_resources:
-            if overlay.immutable:
-                shadowed_immutable = True
-                continue
-
-            overlay.removed_resources.add(resource)
-
-        if shadowed_immutable or not remove_identical:
-            continue
+            overlay.removed_resources[device].add(resource)
 
         if (
             preferred_overlay.package_resources is not None
             and preferred_resource in preferred_overlay.package_resources
         ):
-            preferred_overlay.removed_resources.add(preferred_resource)
+            assert preferred_overlay.removed_resources is not None
+            preferred_overlay.removed_resources[device].add(preferred_resource)
 
     for overlay in overlays:
         keep_referenced_resources_from_removal(
-            overlay.removed_resources,
+            overlay.removed_resources[device],
             overlay.resources,
         )
-
-        overlay.resources.remove_many(overlay.removed_resources)
-        overlay.removed_resources.clear()
 
     return undetermined_resource_priorities
