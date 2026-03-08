@@ -6,6 +6,7 @@ from __future__ import annotations
 import json
 import re
 import shutil
+from collections import defaultdict
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import (
@@ -57,8 +58,11 @@ from rro.target_package import (
 from utils.utils import Color, color_print
 
 
-def resource_set() -> Set[Resource]:
-    return set()
+def default_dict_optional_str_set_resource() -> DefaultDict[
+    Optional[str],
+    Set[Resource],
+]:
+    return defaultdict(set)
 
 
 @dataclass
@@ -78,7 +82,9 @@ class Overlay:
     immutable: bool = False
     package_resources: Optional[ResourceMap] = None
     preserved_prefixes: Optional[Dict[str, bytes]] = None
-    removed_resources: Set[Resource] = field(default_factory=resource_set)
+    removed_resources: DefaultDict[Optional[str], Set[Resource]] = field(
+        default_factory=default_dict_optional_str_set_resource,
+    )
 
     device: Optional[str] = None
     devices: Optional[Set[str]] = None
@@ -257,14 +263,17 @@ def parse_overlay_from_android_bp(
     )
 
     if read_meta:
-        rro_meta = read_rro_meta(overlay_path)
-        original_name = rro_meta['original_rro_name']
-        package = rro_meta['original_package']
-        target_package = rro_meta['original_target_package']
-        device = rro_meta.get('device')
+        try:
+            rro_meta = read_rro_meta(overlay_path)
+            original_name = rro_meta['original_rro_name']
+            package = rro_meta['original_package']
+            target_package = rro_meta['original_target_package']
+            device = rro_meta.get('device')
 
-        if 'devices' in rro_meta:
-            devices = set(rro_meta['devices'])
+            if 'devices' in rro_meta:
+                devices = set(rro_meta['devices'])
+        except Exception:
+            pass
 
     package, original_package = simplify_overlay_package(
         package,
@@ -535,8 +544,8 @@ def remove_overlay_missing_resources(
 
 def remove_overlays_shadowed_resources(
     overlays: List[Overlay],
-    remove_identical: bool,
     prefer_resources: DefaultDict[Optional[str], Set[str]],
+    device: Optional[str],
 ):
     undetermined_resource_priorities: Dict[
         Tuple[
@@ -679,24 +688,21 @@ def remove_overlays_shadowed_resources(
                 shadowed_immutable = True
                 continue
 
-            overlay.removed_resources.add(resource)
+            overlay.removed_resources[device].add(resource)
 
-        if shadowed_immutable or not remove_identical:
+        if shadowed_immutable:
             continue
 
         if (
             preferred_overlay.package_resources is not None
             and preferred_resource in preferred_overlay.package_resources
         ):
-            preferred_overlay.removed_resources.add(preferred_resource)
+            preferred_overlay.removed_resources[device].add(preferred_resource)
 
     for overlay in overlays:
         keep_referenced_resources_from_removal(
-            overlay.removed_resources,
+            overlay.removed_resources[device],
             overlay.resources,
         )
-
-        overlay.resources.remove_many(overlay.removed_resources)
-        overlay.removed_resources.clear()
 
     return undetermined_resource_priorities

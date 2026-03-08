@@ -11,9 +11,11 @@ from itertools import chain
 from pathlib import Path
 from typing import (
     DefaultDict,
+    Dict,
     List,
     Optional,
     Set,
+    Tuple,
     cast,
 )
 
@@ -64,14 +66,36 @@ def parse_resource_entries(
 
 def remove_shadowed_resources(
     overlays: List[Overlay],
-    remove_identical: bool,
     prefer_resources: DefaultDict[Optional[str], Set[str]],
+    devices: Set[Optional[str]],
 ):
-    undetermined_resource_priorities = remove_overlays_shadowed_resources(
-        overlays=overlays,
-        remove_identical=remove_identical,
-        prefer_resources=prefer_resources,
-    )
+    undetermined_resource_priorities: Dict[
+        Tuple[
+            # relative path
+            str,
+            # reference name
+            str,
+        ],
+        # package names
+        List[str],
+    ] = {}
+
+    for device in devices:
+        device_overlays = [
+            overlay
+            for overlay in overlays
+            if overlay.immutable
+            or overlay.devices is None
+            or device in overlay.devices
+        ]
+
+        undetermined_resource_priorities.update(
+            remove_overlays_shadowed_resources(
+                overlays=device_overlays,
+                prefer_resources=prefer_resources,
+                device=device,
+            )
+        )
 
     sorted_undetermined = sorted(
         undetermined_resource_priorities.items(),
@@ -84,6 +108,27 @@ def remove_shadowed_resources(
             f'{", ".join(packages)}',
             color=Color.RED,
         )
+
+    for overlay in overlays:
+        if overlay.immutable:
+            continue
+
+        overlay_devices = overlay.devices or set([None])
+        assert overlay.devices is not None
+
+        common_removed_resources = None
+        for device in overlay_devices:
+            removed_resources = overlay.removed_resources[device]
+            del overlay.removed_resources[device]
+
+            if common_removed_resources is None:
+                common_removed_resources = removed_resources.copy()
+            else:
+                common_removed_resources &= removed_resources
+
+        assert common_removed_resources is not None
+
+        overlay.resources.remove_many(common_removed_resources)
 
 
 def write_beautified_overlay(
@@ -129,7 +174,12 @@ def beautify_rro_main():
         description='Beautify RROs',
     )
 
-    parser.add_argument('overlay_path')
+    parser.add_argument(
+        'overlays',
+        nargs='+',
+        help='Overlays directory',
+        type=Path,
+    )
     parser.add_argument('extra_package_locations', nargs='*')
     parser.add_argument(
         '--maintain-copyrights',
@@ -140,12 +190,6 @@ def beautify_rro_main():
         '--ignore-packages',
         default='',
         help='Comma-separated list of overlay folder names or Android.bp module names to ignore',
-    )
-    parser.add_argument(
-        '--remove-identical',
-        help='Remove resources identical to AOSP '
-        '(do not use for overlays that have been commonized)',
-        action='store_true',
     )
     parser.add_argument(
         '-p',
@@ -219,25 +263,27 @@ def beautify_rro_main():
     overlays: List[Overlay] = []
     package_dir_names = PackageDirNamesIndex()
 
-    for overlay_dir in get_dirs_with_file(args.overlay_path, ANDROID_BP_NAME):
+    for overlay_dir in chain.from_iterable(
+        get_dirs_with_file(c, ANDROID_BP_NAME) for c in args.overlays
+    ):
         overlay = parse_overlay_from_android_bp(
             Path(overlay_dir),
             ignore_packages=ignore_packages,
             package_dir_names=package_dir_names,
             maintain_copyrights=args.maintain_copyrights,
+            read_meta=True,
         )
         if overlay is None:
             continue
 
         overlays.append(overlay)
 
-    for overlay_dir in chain(
-        *(get_dirs_with_file(c, ANDROID_BP_NAME) for c in common_paths)
+    for overlay_dir in chain.from_iterable(
+        get_dirs_with_file(c, ANDROID_BP_NAME) for c in common_paths
     ):
         overlay = parse_overlay_from_android_bp(
             Path(overlay_dir),
             immutable=True,
-            track_index=False,
             ignore_packages=ignore_packages,
             package_dir_names=package_dir_names,
             maintain_copyrights=args.maintain_copyrights,
@@ -268,15 +314,27 @@ def beautify_rro_main():
             color=Color.RED,
         )
 
+    devices: Set[Optional[str]] = set()
     overlays = remaining_overlays
 
     for overlay in overlays:
         fixup_overlay_resources(overlay)
 
+        if overlay.immutable:
+            continue
+
+        if overlay.devices is not None:
+            devices.update(overlay.devices)
+        else:
+            devices.add(None)
+
+    if None in devices:
+        assert len(devices) == 1
+
     remove_shadowed_resources(
         overlays,
-        remove_identical=args.remove_identical,
         prefer_resources=prefer_resources,
+        devices=devices,
     )
 
     for overlay in overlays:
