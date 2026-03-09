@@ -172,6 +172,8 @@ def simplify_overlay_package(
             replaced_device,
             device,
         )
+        if replaced_device not in package:
+            package += suffix
 
     return package, original_package
 
