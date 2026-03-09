@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2026 The LineageOS Project
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 
 from apk.arsc_decode import decode_data, stringify_data
 from apk.arsc_resources import ARSCResourcesMap
@@ -14,6 +14,7 @@ from apk.parse import (
     read_struct,
 )
 from apk.resource_types import (
+    APP_PACKAGE_ID,
     RES_STRING_POOL_TYPE,
     RES_XML_CDATA_TYPE,
     RES_XML_END_ELEMENT_TYPE,
@@ -79,6 +80,7 @@ def parse_attr(
     resources: Optional[ARSCResourcesMap],
     reference_resources: Optional[ARSCResourcesMap],
     resource_ids: Optional[List[int]],
+    package_id_map: Optional[Dict[int, str]],
 ):
     attr, _ = read_struct(ResXMLTree_attribute, data, offset)
     attr_uri = decode_string(attr.ns, strings)
@@ -101,8 +103,9 @@ def parse_attr(
             strings=strings,
             resources=resources,
             reference_resources=reference_resources,
-            reference_package_id=0x7F,
+            reference_package_id=APP_PACKAGE_ID,
             reference_resource_id=resource_id,
+            package_id_map=package_id_map,
         )
         attr_value_str = stringify_data(
             attr_value,
@@ -120,6 +123,7 @@ def parse_xml_node(
     resource_ids: Optional[List[int]],
     resources: Optional[ARSCResourcesMap],
     reference_resources: Optional[ARSCResourcesMap],
+    package_id_map: Optional[Dict[int, str]],
 ):
     node, _ = read_struct(
         ResXMLTree_node,
@@ -167,6 +171,7 @@ def parse_xml_node(
                 resources,
                 reference_resources,
                 resource_ids,
+                package_id_map,
             )
 
             attrs.append(attr)
@@ -196,6 +201,7 @@ def axml_parse(
     data: bytes,
     resources: Optional[ARSCResourcesMap],
     reference_resources: Optional[ARSCResourcesMap],
+    package_id_map: Optional[Dict[int, str]],
     writer: AXMLWriter,
 ):
     mm = memoryview(data)
@@ -245,6 +251,7 @@ def axml_parse(
                 resource_ids,
                 resources,
                 reference_resources,
+                package_id_map,
             )
         else:
             assert False, f'0x{chunk_header.type:x}'

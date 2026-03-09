@@ -21,12 +21,14 @@ from apk.parse import (
     parse_string_pool,
 )
 from apk.resource_types import (
+    APP_PACKAGE_ID,
     RES_STRING_POOL_TYPE,
     RES_TABLE_PACKAGE_TYPE,
     RES_TABLE_STAGED_ALIAS_TYPE,
     RES_TABLE_TYPE,
     RES_TABLE_TYPE_SPEC_TYPE,
     RES_TABLE_TYPE_TYPE,
+    SYS_PACKAGE_ID,
     Res_value,
     ResTable_entry,
     ResTable_header,
@@ -260,6 +262,12 @@ def parse_table_package(
 
     package_name = u16_array_to_str(table_package.name)
 
+    # TODO: parse RES_TABLE_LIBRARY_TYPE
+    package_id_map: Dict[int, str] = {
+        SYS_PACKAGE_ID: 'android',
+        APP_PACKAGE_ID: package_name,
+    }
+
     type_pool_chunk_start = offset + table_package.typeStrings
     type_names, _ = parse_string_pool(
         data,
@@ -313,6 +321,8 @@ def parse_table_package(
         else:
             assert False, f'0x{chunk_header.type:x}'
 
+    return package_id_map
+
 
 def arsc_parse(data: bytes):
     mm = memoryview(data)
@@ -334,6 +344,7 @@ def arsc_parse(data: bytes):
     styles: Optional[List[List[Tuple[str, int, int]]]] = []
     resources: ARSCResourcesMap = {}
     flags: Dict[int, int] = {}
+    package_id_map: Dict[int, str] = {}
 
     for chunk_offset, chunk_header in iter_child_chunks(
         mm,
@@ -346,7 +357,7 @@ def arsc_parse(data: bytes):
                 chunk_offset,
             )
         elif chunk_header.type == RES_TABLE_PACKAGE_TYPE:
-            parse_table_package(
+            package_id_map = parse_table_package(
                 mm,
                 chunk_offset,
                 resources,
@@ -359,7 +370,7 @@ def arsc_parse(data: bytes):
     assert num_res_table_package == table_header.packageCount
     assert strings is not None
 
-    return strings, styles, resources, flags
+    return strings, styles, resources, flags, package_id_map
 
 
 def get_resources_referenced_names(

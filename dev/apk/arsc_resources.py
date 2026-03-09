@@ -45,14 +45,16 @@ class ARSCResource:
         self,
         sign: str,
         relative_to_package_id: Optional[int] = None,
+        package_id_map: Optional[Dict[int, str]] = None,
     ):
 
         package_str = ''
         if (
-            relative_to_package_id is None
-            or relative_to_package_id != self.package_id
+            relative_to_package_id is not None
+            and relative_to_package_id != self.package_id
+            and package_id_map is not None
         ):
-            package_str = f'{self.package_name}:'
+            package_str = f'{package_id_map[self.package_id]}:'
 
         type_str = ''
         if self.type_name != 'attr':
