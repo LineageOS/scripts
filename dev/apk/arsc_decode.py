@@ -156,7 +156,7 @@ def decode_resource_reference(
     sign: str,
     resources: Optional[ARSCResourcesMap] = None,
     reference_resources: Optional[ARSCResourcesMap] = None,
-    reference_pacakge_id: Optional[int] = None,
+    reference_package_id: Optional[int] = None,
 ):
     if data == Res_value.DATA_NULL_UNDEFINED:
         return f'{sign}null'
@@ -169,7 +169,7 @@ def decode_resource_reference(
         reference_resources,
     )
 
-    return found_resource.reference_name(sign, reference_pacakge_id)
+    return found_resource.reference_name(sign, reference_package_id)
 
 
 def get_bag_type(resource: ARSCResourceBag):
@@ -203,7 +203,7 @@ def get_bag_values(
             strings,
             resources=resources,
             reference_resources=reference_resources,
-            reference_pacakge_id=resource.package_id,
+            reference_package_id=resource.package_id,
         )
 
         assert isinstance(item_value, int)
@@ -298,7 +298,7 @@ def decode_data(
     styles: Optional[ARSCAllStyles] = None,
     resources: Optional[ARSCResourcesMap] = None,
     reference_resources: Optional[ARSCResourcesMap] = None,
-    reference_pacakge_id: Optional[int] = None,
+    reference_package_id: Optional[int] = None,
     reference_resource_id: Optional[int] = None,
 ):
     if data_type in (
@@ -331,7 +331,7 @@ def decode_data(
                 sign='@',
                 resources=resources,
                 reference_resources=reference_resources,
-                reference_pacakge_id=reference_pacakge_id,
+                reference_package_id=reference_package_id,
             )
 
         case Res_value.TYPE_ATTRIBUTE:
@@ -340,7 +340,7 @@ def decode_data(
                 sign='?',
                 resources=resources,
                 reference_resources=reference_resources,
-                reference_pacakge_id=reference_pacakge_id,
+                reference_package_id=reference_package_id,
             )
 
         case Res_value.TYPE_STRING:
@@ -436,7 +436,7 @@ def decode_value(
         styles=styles,
         resources=resources,
         reference_resources=reference_resources,
-        reference_pacakge_id=resource.package_id,
+        reference_package_id=resource.package_id,
     )
 
 
@@ -463,7 +463,7 @@ def decode_bag_items(
             styles=styles,
             resources=resources,
             reference_resources=reference_resources,
-            reference_pacakge_id=resource.package_id,
+            reference_package_id=resource.package_id,
             reference_resource_id=reference_resource_id,
         )
         item_value_str = stringify_data(
@@ -478,7 +478,7 @@ def decode_bag_items(
                 sign='',
                 resources=resources,
                 reference_resources=reference_resources,
-                reference_pacakge_id=resource.package_id,
+                reference_package_id=resource.package_id,
             )
 
         item_values.append((item_name, item_value_str))

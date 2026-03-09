@@ -101,7 +101,7 @@ def parse_attr(
             strings=strings,
             resources=resources,
             reference_resources=reference_resources,
-            reference_pacakge_id=0x7F,
+            reference_package_id=0x7F,
             reference_resource_id=resource_id,
         )
         attr_value_str = stringify_data(
