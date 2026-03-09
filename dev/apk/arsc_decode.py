@@ -336,7 +336,7 @@ def decode_data(
         return data
 
     match data_type:
-        case Res_value.TYPE_REFERENCE:
+        case Res_value.TYPE_REFERENCE | Res_value.TYPE_DYNAMIC_REFERENCE:
             return decode_resource_reference(
                 data,
                 sign='@',
@@ -346,7 +346,7 @@ def decode_data(
                 package_id_map=package_id_map,
             )
 
-        case Res_value.TYPE_ATTRIBUTE:
+        case Res_value.TYPE_ATTRIBUTE | Res_value.TYPE_DYNAMIC_ATTRIBUTE:
             return decode_resource_reference(
                 data,
                 sign='?',
