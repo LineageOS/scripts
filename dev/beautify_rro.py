@@ -68,6 +68,7 @@ def remove_shadowed_resources(
     overlays: List[Overlay],
     prefer_resources: DefaultDict[Optional[str], Set[str]],
     devices: Set[Optional[str]],
+    verbose: bool,
 ):
     undetermined_resource_priorities: Dict[
         Tuple[
@@ -94,6 +95,7 @@ def remove_shadowed_resources(
                 overlays=device_overlays,
                 prefer_resources=prefer_resources,
                 device=device,
+                verbose=verbose,
             )
         )
 
@@ -238,6 +240,12 @@ def beautify_rro_main():
         help='Path to cached package map',
         type=Path,
     )
+    parser.add_argument(
+        '-v',
+        '--verbose',
+        help='Print verbose output',
+        action='store_true',
+    )
 
     args = parser.parse_args()
     ignore_packages = cast(str, args.ignore_packages)
@@ -338,6 +346,7 @@ def beautify_rro_main():
         overlays,
         prefer_resources=prefer_resources,
         devices=devices,
+        verbose=args.verbose,
     )
 
     for overlay in overlays:
