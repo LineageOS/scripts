@@ -165,7 +165,10 @@ def write_beautified_overlay(
         )
         return
 
-    write_overlay(overlay)
+    write_overlay(
+        overlay,
+        write_meta=True,
+    )
 
 
 def beautify_rro_main():
