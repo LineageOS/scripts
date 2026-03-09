@@ -268,6 +268,7 @@ def beautify_rro_main():
             package_dir_names=package_dir_names,
             maintain_copyrights=args.maintain_copyrights,
             read_meta=True,
+            verbose=args.verbose,
         )
         if overlay is None:
             continue
