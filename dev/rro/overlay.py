@@ -88,6 +88,7 @@ class Overlay:
 
     device: Optional[str] = None
     devices: Optional[Set[str]] = None
+    original_device: Optional[str] = None
     original_name: Optional[str] = None
     original_package: Optional[str] = None
     original_target_package: Optional[str] = None
@@ -184,6 +185,7 @@ class RROMeta(TypedDict):
     original_rro_name: str
     original_package: str
     original_target_package: str
+    original_device: NotRequired[str]
     device: NotRequired[str]
     devices: NotRequired[List[str]]
 
@@ -193,6 +195,7 @@ def write_rro_meta(
     rro_name: str,
     package: str,
     target_package: str,
+    original_device: Optional[str],
     device: Optional[str],
     devices: Optional[List[str]],
 ):
@@ -201,6 +204,9 @@ def write_rro_meta(
         'original_package': package,
         'original_target_package': target_package,
     }
+
+    if original_device is not None:
+        meta['original_device'] = original_device
 
     if device is not None:
         meta['device'] = device
@@ -264,12 +270,14 @@ def parse_overlay_from_android_bp(
 
     original_package = package
     original_target_package = target_package
+    original_device = device
     if read_meta:
         try:
             rro_meta = read_rro_meta(overlay_path)
             original_name = rro_meta['original_rro_name']
             original_package = rro_meta['original_package']
             original_target_package = rro_meta['original_target_package']
+            original_device = rro_meta.get('original_device')
             device = rro_meta.get('device')
 
             if 'devices' in rro_meta:
@@ -280,6 +288,7 @@ def parse_overlay_from_android_bp(
     package, original_package = simplify_overlay_package(
         original_package,
         device,
+        original_device,
     )
     target_package, original_target_package = fixup_target_package(
         original_target_package,
@@ -351,6 +360,7 @@ def parse_overlay_from_android_bp(
         original_name=original_name,
         original_package=original_package,
         original_target_package=original_target_package,
+        original_device=original_device,
         preserved_prefixes=preserved_prefixes,
     )
 
@@ -447,6 +457,7 @@ def write_overlay(
             overlay.original_name,
             overlay.original_package,
             overlay.original_target_package,
+            overlay.original_device,
             overlay.device,
             sorted(overlay.devices) if overlay.devices is not None else None,
         )
