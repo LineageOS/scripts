@@ -139,6 +139,12 @@ def generate_rro_main():
         help='Path to cached package map',
         type=Path,
     )
+    parser.add_argument(
+        '-v',
+        '--verbose',
+        help='Print verbose output',
+        action='store_true',
+    )
 
     args = parser.parse_args()
     exclude_overlays = set(cast(List[str], args.exclude_overlay))
@@ -238,6 +244,7 @@ def generate_rro_main():
             original_name=apk_data.original_name,
             device=args.device,
             devices=set([args.device]),
+            verbose=args.verbose,
         )
         if overlay is None:
             continue
