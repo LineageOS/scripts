@@ -389,6 +389,7 @@ def fixup_overlay_resources(overlay: Overlay):
         return
 
     wrong_tag_resources = overlay_resource_fixup_from_package(
+        overlay.package,
         overlay.resources,
         overlay.package_resources,
     )
@@ -502,6 +503,7 @@ def remove_overlay_resources(
     remove_resources: Tuple[FrozenSet[str], FrozenSet[str]],
 ):
     overlay_resources_remove(
+        overlay.package,
         overlay.resources,
         remove_resources,
     )
@@ -519,6 +521,7 @@ def remove_overlay_missing_resources(
 
     manifest_path = Path(overlay.path, overlay.manifest_name)
     missing_resources, kept_resources = overlay_resources_remove_missing(
+        overlay.package,
         overlay.resources,
         overlay.package_resources,
         str(manifest_path),
@@ -541,6 +544,7 @@ def remove_overlays_shadowed_resources(
     overlays: List[Overlay],
     prefer_resources: DefaultDict[Optional[str], Set[str]],
     device: Optional[str],
+    verbose: bool,
 ):
     undetermined_resource_priorities: Dict[
         Tuple[
@@ -683,6 +687,13 @@ def remove_overlays_shadowed_resources(
                 shadowed_immutable = True
                 continue
 
+            if verbose:
+                color_print(
+                    f'{overlay.package}: {resource.dir_name}: '
+                    f'{resource.reference_name} shadowed in '
+                    f'{preferred_overlay.package}',
+                    color=Color.GREEN,
+                )
             overlay.removed_resources[device].add(resource)
 
         if shadowed_immutable:
@@ -692,12 +703,21 @@ def remove_overlays_shadowed_resources(
             preferred_overlay.package_resources is not None
             and preferred_resource in preferred_overlay.package_resources
         ):
+            if verbose:
+                color_print(
+                    f'{preferred_overlay.package}: {preferred_resource.dir_name}: '
+                    f'{preferred_resource.reference_name} identical in '
+                    f'target package',
+                    color=Color.GREEN,
+                )
             preferred_overlay.removed_resources[device].add(preferred_resource)
 
     for overlay in overlays:
         keep_referenced_resources_from_removal(
             overlay.removed_resources[device],
             overlay.resources,
+            package=overlay.package,
+            verbose=verbose,
         )
 
     return undetermined_resource_priorities

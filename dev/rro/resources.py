@@ -38,6 +38,7 @@ from rro.resource import (
 from rro.resource_map import IndexFlags, ResourceMap
 from rro.utils import is_referenced_resource_element
 from utils.frozendict import FrozenDict
+from utils.utils import Color, color_print
 from utils.xml_utils import (
     XML_COMMENT_TEXT,
     xml_attrib_matches,
@@ -417,6 +418,8 @@ def find_target_package_resources(
 def keep_referenced_resources_from_removal(
     resources_to_remove: Set[Resource],
     all_resources: ResourceMap,
+    package: str,
+    verbose: bool,
 ):
     keep_resources: Set[Resource] = set()
 
@@ -425,15 +428,33 @@ def keep_referenced_resources_from_removal(
         # get removed, do not remove any of them
         resource_referenced_by = all_resources.resources_referenced_by(resource)
         referenced_in_remove = resource_referenced_by & resources_to_remove
-        if len(referenced_in_remove) != len(resource_referenced_by):
+        not_in_remove = resource_referenced_by - resources_to_remove
+        if not_in_remove:
             keep_resources.add(resource)
             keep_resources.update(referenced_in_remove)
+
+            if verbose:
+                for ref_resource in not_in_remove:
+                    color_print(
+                        f'{package}: keeping {resource.reference_name} -> '
+                        f'{ref_resource.reference_name}',
+                        color=Color.YELLOW,
+                    )
 
         # If there are resources referencing this resource which will not get
         # removed, do not remove this resource either
         resources_referencing = all_resources.resources_referencing(resource)
-        if not resources_referencing <= resources_to_remove:
+        not_in_remove = resources_referencing - resources_to_remove
+        if not_in_remove:
             keep_resources.add(resource)
+
+            if verbose:
+                for ref_resource in not_in_remove:
+                    color_print(
+                        f'{package}: keeping {resource.reference_name} <- '
+                        f'{ref_resource.reference_name}',
+                        color=Color.YELLOW,
+                    )
 
     resources_to_remove -= keep_resources
 
@@ -454,7 +475,9 @@ def overlay_resources_process(
             None,
         ],
     ],
+    package: str,
     keep_if_referenced: bool = False,
+    verbose: bool = False,
 ):
     removed_resources: Set[Resource] = set()
     added_resources: Set[Resource] = set()
@@ -476,6 +499,8 @@ def overlay_resources_process(
         keep_referenced_resources_from_removal(
             removed_resources,
             resources,
+            package=package,
+            verbose=verbose,
         )
 
     for resource in removed_resources:
@@ -545,6 +570,7 @@ def is_resource_in_entries(
 
 
 def overlay_resources_remove(
+    package: str,
     resources: ResourceMap,
     remove_resources: Tuple[FrozenSet[str], FrozenSet[str]],
 ):
@@ -558,6 +584,7 @@ def overlay_resources_remove(
     removed_resources, _ = overlay_resources_process(
         resources,
         remove_resource,
+        package=package,
     )
 
     return removed_resources
@@ -597,6 +624,7 @@ def fixup_resource_attrib(
 
 
 def overlay_resources_remove_missing(
+    package: str,
     resources: ResourceMap,
     package_resources: ResourceMap,
     manifest_path: str,
@@ -635,6 +663,7 @@ def overlay_resources_remove_missing(
         resources,
         remove_missing_resource,
         keep_if_referenced=True,
+        package=package,
     )
 
     return removed_resources, kept_resources
@@ -662,6 +691,7 @@ def package_resource_sort_key(resource: Resource):
 
 
 def overlay_resource_fixup_from_package(
+    package: str,
     resources: ResourceMap,
     package_resources: ResourceMap,
 ):
@@ -712,6 +742,7 @@ def overlay_resource_fixup_from_package(
     overlay_resources_process(
         resources,
         fixup_resource_from_package,
+        package=package,
     )
 
     return wrong_tag_resources
