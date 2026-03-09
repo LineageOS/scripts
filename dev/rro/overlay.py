@@ -232,6 +232,7 @@ def parse_overlay_from_android_bp(
     original_name: Optional[str] = None,
     device: Optional[str] = None,
     devices: Optional[Set[str]] = None,
+    verbose: bool = False,
 ):
     if ignore_packages is None:
         ignore_packages = set()
@@ -290,14 +291,27 @@ def parse_overlay_from_android_bp(
     )
 
     if package in exclude_overlays:
-        raise ValueError(f'{package}: Excluded')
+        if verbose:
+            color_print(f'{package}: Excluded', color=Color.GREEN)
+        return None
     if original_package in exclude_overlays:
-        raise ValueError(f'{original_package}: Excluded')
+        if verbose:
+            color_print(f'{original_package}: Excluded', color=Color.GREEN)
+        return None
 
     if target_package in exclude_packages:
-        raise ValueError(f'{package}: Excluded by {target_package}')
+        if verbose:
+            color_print(
+                f'{package}: Excluded by {target_package}', color=Color.GREEN
+            )
+        return None
     if original_target_package in exclude_packages:
-        raise ValueError(f'{package}: Excluded by {original_target_package}')
+        if verbose:
+            color_print(
+                f'{package}: Excluded by {original_target_package}',
+                color=Color.GREEN,
+            )
+        return None
 
     module_partition = get_module_partition(statement)
 
