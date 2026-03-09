@@ -24,7 +24,7 @@ from rro.resources import (
     ResourceMap,
     keep_referenced_resources_from_removal,
 )
-from utils.utils import get_dirs_with_file
+from utils.utils import Color, color_print, get_dirs_with_file
 
 
 def commonize_package_overlays(
@@ -55,6 +55,7 @@ def commonize_package_overlays(
         )
 
     overlay = None
+    any_left = False
     for overlay in overlays:
         overlay.resources.remove_many(common_overlay_resources)
 
@@ -62,6 +63,8 @@ def commonize_package_overlays(
 
         if not overlay.resources:
             continue
+
+        any_left = True
 
         overlay.path.mkdir(parents=True, exist_ok=True)
 
@@ -86,6 +89,11 @@ def commonize_package_overlays(
         device,
         overlay.device,
     )
+
+    if (
+        name == overlay.original_name or package == overlay.original_package
+    ) and any_left:
+        color_print(f'{package}: commonized partially', color=Color.RED)
 
     overlay_output_path = Path(output_path, name)
     shutil.rmtree(overlay_output_path, ignore_errors=True)
