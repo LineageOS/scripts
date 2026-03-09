@@ -238,6 +238,7 @@ def generate_rro_main():
             original_name=apk_data.original_name,
             device=args.device,
             devices=set([args.device]),
+            verbose=args.verbose,
         )
         if overlay is None:
             continue
