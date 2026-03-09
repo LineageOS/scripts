@@ -27,7 +27,6 @@ class ARSCResource:
         key_id: int,
         type_name: str,
         key_name: str,
-        package_name: str,
         config: ResTable_config,
     ):
         self.package_id = package_id
@@ -36,7 +35,6 @@ class ARSCResource:
         self.key_id = key_id
         self.type_name = type_name
         self.key_name = key_name
-        self.package_name = package_name
         self.config = config
         self.config_key = bytes(config)
         self.resource_id = to_resource_id(package_id, type_id, entry_id)
@@ -72,7 +70,6 @@ class ARSCResourceValue(ARSCResource):
         key_id: int,
         type_name: str,
         key_name: str,
-        package_name: str,
         config: ResTable_config,
         data_type: int,
         data: int,
@@ -84,7 +81,6 @@ class ARSCResourceValue(ARSCResource):
             key_id=key_id,
             type_name=type_name,
             key_name=key_name,
-            package_name=package_name,
             config=config,
         )
         self.data_type = data_type
@@ -99,7 +95,6 @@ class ARSCResourceValue(ARSCResource):
             f'  key_id: {self.key_id},\n'
             f'  type_name: {self.type_name},\n'
             f'  key_name: {self.key_name},\n'
-            f'  package_name: {self.package_name},\n'
             f'  resource_id: {self.resource_id:#010x},\n'
             f'  config: {self.config},\n'
             f'  data_type: {self.data_type:#04x},\n'
@@ -138,7 +133,6 @@ class ARSCResourceBag(ARSCResource):
         key_id: int,
         type_name: str,
         key_name: str,
-        package_name: str,
         config: ResTable_config,
         parent_resource_id: int,
         items: List[ARSCResourceBagItem],
@@ -150,7 +144,6 @@ class ARSCResourceBag(ARSCResource):
             key_id=key_id,
             type_name=type_name,
             key_name=key_name,
-            package_name=package_name,
             config=config,
         )
         self.parent_resource_id = parent_resource_id
@@ -167,7 +160,6 @@ class ARSCResourceBag(ARSCResource):
             f'  key_id: {self.key_id},\n'
             f'  type_name: {self.type_name},\n'
             f'  key_name: {self.key_name},\n'
-            f'  package_name: {self.package_name},\n'
             f'  resource_id: {self.resource_id:#010x},\n'
             f'  config: {self.config},\n'
             f'  parent_resource_id: {self.parent_resource_id:#010x},\n'
