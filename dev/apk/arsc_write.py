@@ -110,6 +110,7 @@ def resource_content_to_xml_str(
     resource: ARSCResource,
     strings: List[str],
     styles: ARSCAllStyles,
+    package_id_map: Dict[int, str],
     resources: ARSCResourcesMap,
     reference_resources: ARSCResourcesMap,
 ):
@@ -119,6 +120,7 @@ def resource_content_to_xml_str(
             strings,
             resources,
             styles=styles,
+            package_id_map=package_id_map,
             reference_resources=reference_resources,
         )
 
@@ -128,6 +130,7 @@ def resource_content_to_xml_str(
             resource,
             strings,
             styles,
+            package_id_map,
             resources,
             reference_resources,
         )
@@ -150,6 +153,7 @@ def resource_to_xml_str(
     resource: ARSCResource,
     strings: List[str],
     styles: ARSCAllStyles,
+    package_id_map: Dict[int, str],
     resources: ARSCResourcesMap,
     reference_resources: ARSCResourcesMap,
 ):
@@ -169,6 +173,7 @@ def resource_to_xml_str(
         resource,
         strings,
         styles,
+        package_id_map,
         resources,
         reference_resources,
     )
@@ -243,6 +248,7 @@ def resource_to_xml_str(
 def write_resources(
     strings: List[str],
     styles: ARSCAllStyles,
+    package_id_map: Dict[int, str],
     resources: ARSCResourcesMap,
     reference_resources: ARSCResourcesMap,
     out_path: Path,
@@ -272,6 +278,7 @@ def write_resources(
                     resource,
                     strings,
                     styles,
+                    package_id_map,
                     resources,
                     reference_resources,
                 )

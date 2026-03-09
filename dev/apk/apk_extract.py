@@ -43,6 +43,7 @@ def extract_apk_raw(
     strings: List[str],
     resources: ARSCResourcesMap,
     reference_resources: Optional[ARSCResourcesMap] = None,
+    package_id_map: Optional[Dict[int, str]] = None,
 ):
     referenced_names = get_resources_referenced_names(
         resources,
@@ -112,6 +113,7 @@ def extract_apk_raw(
                     data,
                     resources,
                     reference_resources,
+                    package_id_map,
                     writer,
                 )
         except AXMLParseError:
@@ -127,7 +129,7 @@ def extract_apk(
         assert 'resources.arsc' in z.namelist()
 
         arsc = z.read('resources.arsc')
-        strings, styles, resources, flags = arsc_parse(arsc)
+        strings, styles, resources, flags, package_id_map = arsc_parse(arsc)
 
         if out_path is not None:
             extract_apk_raw(
@@ -136,9 +138,10 @@ def extract_apk(
                 strings,
                 resources,
                 reference_resources,
+                package_id_map,
             )
 
-        return strings, styles, resources, flags
+        return strings, styles, resources, flags, package_id_map
 
 
 def extract_apks(
@@ -146,7 +149,7 @@ def extract_apks(
     framework_path: Path,
 ):
     assert isinstance(framework_path, Path)
-    _, _, framework_resources, _ = extract_apk(framework_path)
+    _, _, framework_resources, _, _ = extract_apk(framework_path)
 
     for apk_path, output_path in apk_output_paths:
         output_path.mkdir(parents=True, exist_ok=True)
@@ -155,7 +158,7 @@ def extract_apks(
         shutil.rmtree(res_output_path, ignore_errors=True)
         res_output_path.mkdir(parents=True, exist_ok=True)
 
-        strings, styles, resources, flags = extract_apk(
+        strings, styles, resources, flags, package_id_map = extract_apk(
             apk_path,
             output_path,
             framework_resources,
@@ -165,6 +168,7 @@ def extract_apks(
         write_resources(
             strings,
             styles,
+            package_id_map,
             resources,
             framework_resources,
             res_output_path,

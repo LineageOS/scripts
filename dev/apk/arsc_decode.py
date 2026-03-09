@@ -157,6 +157,7 @@ def decode_resource_reference(
     resources: Optional[ARSCResourcesMap] = None,
     reference_resources: Optional[ARSCResourcesMap] = None,
     reference_package_id: Optional[int] = None,
+    package_id_map: Optional[Dict[int, str]] = None,
 ):
     if data == Res_value.DATA_NULL_UNDEFINED:
         return f'{sign}null'
@@ -169,7 +170,11 @@ def decode_resource_reference(
         reference_resources,
     )
 
-    return found_resource.reference_name(sign, reference_package_id)
+    return found_resource.reference_name(
+        sign,
+        reference_package_id,
+        package_id_map,
+    )
 
 
 def get_bag_type(resource: ARSCResourceBag):
@@ -183,6 +188,7 @@ def get_bag_type(resource: ARSCResourceBag):
 def get_bag_values(
     resource: ARSCResourceBag,
     strings: List[str],
+    package_id_map: Optional[Dict[int, str]] = None,
     resources: Optional[ARSCResourcesMap] = None,
     reference_resources: Optional[ARSCResourcesMap] = None,
 ):
@@ -201,6 +207,7 @@ def get_bag_values(
             item.data_type,
             item.data,
             strings,
+            package_id_map=package_id_map,
             resources=resources,
             reference_resources=reference_resources,
             reference_package_id=resource.package_id,
@@ -260,6 +267,7 @@ def decode_attr_value(
     data: int,
     reference_resource_id: int,
     strings: List[str],
+    package_id_map: Optional[Dict[int, str]] = None,
     resources: Optional[ARSCResourcesMap] = None,
     reference_resources: Optional[ARSCResourcesMap] = None,
 ):
@@ -279,6 +287,7 @@ def decode_attr_value(
     bag_values = get_bag_values(
         found_resource,
         strings,
+        package_id_map,
         resources,
         reference_resources,
     )
@@ -296,6 +305,7 @@ def decode_data(
     data: int,
     strings: List[str],
     styles: Optional[ARSCAllStyles] = None,
+    package_id_map: Optional[Dict[int, str]] = None,
     resources: Optional[ARSCResourcesMap] = None,
     reference_resources: Optional[ARSCResourcesMap] = None,
     reference_package_id: Optional[int] = None,
@@ -316,6 +326,7 @@ def decode_data(
                 data,
                 reference_resource_id,
                 strings,
+                package_id_map,
                 resources,
                 reference_resources,
             )
@@ -332,6 +343,7 @@ def decode_data(
                 resources=resources,
                 reference_resources=reference_resources,
                 reference_package_id=reference_package_id,
+                package_id_map=package_id_map,
             )
 
         case Res_value.TYPE_ATTRIBUTE:
@@ -341,6 +353,7 @@ def decode_data(
                 resources=resources,
                 reference_resources=reference_resources,
                 reference_package_id=reference_package_id,
+                package_id_map=package_id_map,
             )
 
         case Res_value.TYPE_STRING:
@@ -427,6 +440,7 @@ def decode_value(
     strings: List[str],
     resources: ARSCResourcesMap,
     styles: Optional[ARSCAllStyles] = None,
+    package_id_map: Optional[Dict[int, str]] = None,
     reference_resources: Optional[ARSCResourcesMap] = None,
 ):
     return decode_data(
@@ -434,6 +448,7 @@ def decode_value(
         resource.data,
         strings,
         styles=styles,
+        package_id_map=package_id_map,
         resources=resources,
         reference_resources=reference_resources,
         reference_package_id=resource.package_id,
@@ -444,6 +459,7 @@ def decode_bag_items(
     resource: ARSCResourceBag,
     strings: List[str],
     styles: ARSCAllStyles,
+    package_id_map: Dict[int, str],
     resources: ARSCResourcesMap,
     reference_resources: ARSCResourcesMap,
 ):
@@ -461,6 +477,7 @@ def decode_bag_items(
             item.data,
             strings,
             styles=styles,
+            package_id_map=package_id_map,
             resources=resources,
             reference_resources=reference_resources,
             reference_package_id=resource.package_id,
@@ -479,6 +496,7 @@ def decode_bag_items(
                 resources=resources,
                 reference_resources=reference_resources,
                 reference_package_id=resource.package_id,
+                package_id_map=package_id_map,
             )
 
         item_values.append((item_name, item_value_str))
