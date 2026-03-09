@@ -31,6 +31,7 @@ def commonize_package_overlays(
     overlays: List[Overlay],
     device: str,
     output_path: Path,
+    verbose: bool,
 ):
     common_overlay_resources = None
     devices: Set[str] = set()
@@ -52,6 +53,8 @@ def commonize_package_overlays(
         keep_referenced_resources_from_removal(
             resources_to_remove=common_overlay_resources,
             all_resources=overlay.resources,
+            package=overlay.package,
+            verbose=verbose,
         )
 
     overlay = None
@@ -150,6 +153,12 @@ def commonize_overlays():
         help='Device name to be used for the common RROs',
         required=True,
     )
+    parser.add_argument(
+        '-v',
+        '--verbose',
+        help='Print verbose output',
+        action='store_true',
+    )
 
     args = parser.parse_args()
 
@@ -204,6 +213,7 @@ def commonize_overlays():
             overlays,
             args.device,
             args.output,
+            verbose=args.verbose,
         )
 
 
