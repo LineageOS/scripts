@@ -207,7 +207,7 @@ def resource_to_xml_str(
             sign='@',
             resources=resources,
             reference_resources=reference_resources,
-            reference_pacakge_id=resource.package_id,
+            reference_package_id=resource.package_id,
         )
         parent_str = f' parent="{parent_reference}"'
 
