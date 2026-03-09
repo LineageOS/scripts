@@ -260,12 +260,14 @@ def parse_overlay_from_android_bp(
         str(manifest_path),
     )
 
+    original_package = package
+    original_target_package = target_package
     if read_meta:
         try:
             rro_meta = read_rro_meta(overlay_path)
             original_name = rro_meta['original_rro_name']
-            package = rro_meta['original_package']
-            target_package = rro_meta['original_target_package']
+            original_package = rro_meta['original_package']
+            original_target_package = rro_meta['original_target_package']
             device = rro_meta.get('device')
 
             if 'devices' in rro_meta:
@@ -274,11 +276,11 @@ def parse_overlay_from_android_bp(
             pass
 
     package, original_package = simplify_overlay_package(
-        package,
+        original_package,
         device,
     )
     target_package, original_target_package = fixup_target_package(
-        target_package,
+        original_target_package,
     )
 
     if package in exclude_overlays:
