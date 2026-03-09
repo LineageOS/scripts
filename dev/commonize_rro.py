@@ -80,14 +80,14 @@ def commonize_package_overlays(
     name, original_name = simplify_overlay_name(
         overlay.original_name,
         device,
-        overlay.device,
+        overlay.original_device,
     )
 
     assert overlay.original_package is not None
     package, original_package = simplify_overlay_package(
         overlay.original_package,
         device,
-        overlay.device,
+        overlay.original_device,
     )
 
     if (
@@ -115,7 +115,7 @@ def commonize_package_overlays(
         original_name=original_name,
         original_package=original_package,
         original_target_package=overlay.target_package,
-        device=device,
+        original_device=overlay.original_device,
         devices=devices,
     )
 
