@@ -309,6 +309,7 @@ def parse_overlay_from_android_bp(
                 f'{package}: Excluded by {original_target_package}',
                 color=Color.GREEN,
             )
+        return None
 
     module_partition = get_module_partition(statement)
 

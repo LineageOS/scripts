@@ -247,6 +247,7 @@ def generate_rro_main():
             verbose=args.verbose,
         )
         if overlay is None:
+            shutil.rmtree(apk_data.output_path, ignore_errors=True)
             continue
 
         overlays.append(overlay)
