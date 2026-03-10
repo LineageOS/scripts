@@ -246,6 +246,9 @@ def generate_rro_main():
             devices=set([args.device]),
             verbose=args.verbose,
         )
+
+        shutil.rmtree(apk_data.output_path, ignore_errors=True)
+
         if overlay is None:
             continue
 
@@ -259,8 +262,6 @@ def generate_rro_main():
         fixup_overlay_resources(overlay)
 
     for overlay in overlays:
-        shutil.rmtree(overlay.path, ignore_errors=True)
-
         if is_overlay_aosp(package_map, overlay):
             color_print(
                 f'Overlay {overlay.name} identical to AOSP',

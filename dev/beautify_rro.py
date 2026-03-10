@@ -155,8 +155,6 @@ def write_beautified_overlay(
         keep_resources=target_package_keep_resources,
     )
 
-    shutil.rmtree(overlay.path, ignore_errors=True)
-
     if not overlay.resources:
         color_print(
             f'{overlay.package}: No resources left in overlay',
@@ -282,6 +280,9 @@ def beautify_rro_main():
             read_meta=True,
             verbose=args.verbose,
         )
+
+        shutil.rmtree(overlay_dir, ignore_errors=True)
+
         if overlay is None:
             continue
 
