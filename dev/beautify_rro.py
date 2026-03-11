@@ -72,6 +72,10 @@ def remove_shadowed_resources(
 ):
     undetermined_resource_priorities: Dict[
         Tuple[
+            # device
+            Optional[str],
+            # package
+            str,
             # relative path
             str,
             # reference name
@@ -86,8 +90,7 @@ def remove_shadowed_resources(
             overlay
             for overlay in overlays
             if overlay.immutable
-            or overlay.meta.devices is None
-            or device in overlay.meta.devices
+            or device in (overlay.meta.devices or set([None]))
         ]
 
         undetermined_resource_priorities.update(
@@ -103,10 +106,19 @@ def remove_shadowed_resources(
         undetermined_resource_priorities.items(),
         key=lambda v: v[0],
     )
-    for (rel_path, reference_name), packages in sorted_undetermined:
+    for (
+        device,
+        package,
+        rel_path,
+        reference_name,
+    ), packages in sorted_undetermined:
+        device_str = ''
+        if device is not None:
+            device_str = f'{device}: '
+
         color_print(
-            f'Resource {rel_path}: {reference_name} has '
-            'undetermined priority between packages: '
+            f'{device_str}{package}: {rel_path}: {reference_name} has '
+            'undetermined priority with packages: '
             f'{", ".join(packages)}',
             color=Color.RED,
         )

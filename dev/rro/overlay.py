@@ -567,8 +567,16 @@ def remove_overlays_shadowed_resources(
     device: Optional[str],
     verbose: bool,
 ):
+    device_str = ''
+    if device is not None:
+        device_str = f'{device}: '
+
     undetermined_resource_priorities: Dict[
         Tuple[
+            # device
+            Optional[str],
+            # package
+            str,
             # relative path
             str,
             # reference name
@@ -612,11 +620,13 @@ def remove_overlays_shadowed_resources(
 
         undetermined_resource_priorities.setdefault(
             (
+                device,
+                resources[0][1].package,
                 resources[0][0].rel_path,
                 resources[0][0].reference_name,
             ),
             [],
-        ).extend(r[1].package for r in resources)
+        ).extend(r[1].package for r in resources[1:])
 
     for overlay in overlays:
         preferred_resources_map[overlay.package] = filter_resource_entries(
@@ -710,6 +720,7 @@ def remove_overlays_shadowed_resources(
 
             if verbose:
                 color_print(
+                    f'{device_str}'
                     f'{overlay.package}: {resource.dir_name}: '
                     f'{resource.reference_name} shadowed in '
                     f'{preferred_overlay.package}',
@@ -726,6 +737,7 @@ def remove_overlays_shadowed_resources(
         ):
             if verbose:
                 color_print(
+                    f'{device_str}'
                     f'{preferred_overlay.package}: {preferred_resource.dir_name}: '
                     f'{preferred_resource.reference_name} identical in '
                     f'target package',
@@ -739,6 +751,7 @@ def remove_overlays_shadowed_resources(
             overlay.resources,
             package=overlay.package,
             verbose=verbose,
+            device=device,
         )
 
     return undetermined_resource_priorities
