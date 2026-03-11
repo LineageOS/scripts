@@ -21,6 +21,8 @@ from typing import (
     cast,
 )
 
+from lxml import etree
+
 from bp.bp_module import parse_bp_rro_module
 from bp.bp_utils import (
     ANDROID_BP_NAME,
@@ -75,6 +77,9 @@ def default_dict_optional_str_set_resource() -> DefaultDict[
     return defaultdict(set)
 
 
+ElementTree = etree._ElementTree  # type: ignore
+
+
 @dataclass
 class Overlay:
     name: str
@@ -96,6 +101,7 @@ class Overlay:
     removed_resources: DefaultDict[Optional[str], Set[Resource]] = field(
         default_factory=default_dict_optional_str_set_resource,
     )
+    manifest_tree: Optional[ElementTree] = None
 
     @property
     def priority(self):
@@ -258,8 +264,9 @@ def parse_overlay_from_android_bp(
     resources_dir = statement.get('resource_dirs', [RESOURCES_DIR])[0]
     resources_path = Path(overlay_path, resources_dir)
 
+    manifest_tree = etree.parse(manifest_path)
     package, target_package, overlay_attrs = parse_overlay_manifest(
-        str(manifest_path),
+        manifest_tree,
     )
 
     original_package = package
@@ -366,6 +373,7 @@ def parse_overlay_from_android_bp(
         resources=resources,
         preserved_prefixes=preserved_prefixes,
         meta=meta,
+        manifest_tree=manifest_tree,
     )
 
 
@@ -533,12 +541,11 @@ def remove_overlay_missing_resources(
     if overlay.package_resources is None:
         return
 
-    manifest_path = Path(overlay.path, overlay.manifest_name)
     missing_resources, kept_resources = overlay_resources_remove_missing(
         overlay.package,
         overlay.resources,
         overlay.package_resources,
-        str(manifest_path),
+        overlay.manifest_tree,
         keep_resources,
     )
 

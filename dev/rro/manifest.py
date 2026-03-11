@@ -10,6 +10,8 @@ from lxml import etree
 
 from utils.xml_utils import XML_COMMENT
 
+ElementTree = etree._ElementTree  # type: ignore
+
 NAMESPACE_NAME = 'android'
 NAMESPACE = 'http://schemas.android.com/apk/res/android'
 ANDROID_MANIFEST_NAME = 'AndroidManifest.xml'
@@ -41,8 +43,7 @@ def parse_package_manifest(manifest_path: str):
     return package_name
 
 
-def parse_overlay_manifest(manifest_path: str):
-    tree = etree.parse(manifest_path)
+def parse_overlay_manifest(tree: ElementTree):
     root = tree.getroot()
 
     package = root.attrib.get(PACKAGE_KEY)
