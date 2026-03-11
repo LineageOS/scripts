@@ -466,6 +466,8 @@ def keep_referenced_resources_from_removal(
 
     resources_to_remove -= keep_resources
 
+    return keep_resources
+
 
 def overlay_resources_process(
     resources: ResourceMap,
