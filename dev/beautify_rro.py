@@ -131,8 +131,8 @@ def remove_shadowed_resources(
 
         common_removed_resources = None
         for device in overlay_devices:
-            removed_resources = overlay.removed_resources[device]
-            del overlay.removed_resources[device]
+            removed_resources = overlay.device_removed_resources[device]
+            del overlay.device_removed_resources[device]
 
             if common_removed_resources is None:
                 common_removed_resources = removed_resources.copy()
@@ -141,7 +141,27 @@ def remove_shadowed_resources(
 
         assert common_removed_resources is not None
 
-        overlay.resources.remove_many(common_removed_resources)
+        overlay.removed_resources = common_removed_resources
+
+    for overlay in overlays:
+        for (
+            preferred_resource,
+            shadowed_resources,
+        ) in overlay.identical_resources.items():
+            can_remove_identical = True
+            for shadowed_resource, shadowed_overlay in shadowed_resources:
+                if shadowed_resource not in shadowed_overlay.removed_resources:
+                    can_remove_identical = False
+                    break
+
+            if not can_remove_identical:
+                continue
+
+            overlay.removed_resources.add(preferred_resource)
+
+    for overlay in overlays:
+        overlay.resources.remove_many(overlay.removed_resources)
+        overlay.removed_resources.clear()
 
 
 def write_beautified_overlay(
