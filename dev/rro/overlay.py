@@ -70,11 +70,22 @@ class OverlayMeta:
     devices: Optional[Set[str]]
 
 
+def resource_set() -> Set[Resource]:
+    return set()
+
+
 def default_dict_optional_str_set_resource() -> DefaultDict[
     Optional[str],
     Set[Resource],
 ]:
     return defaultdict(set)
+
+
+def default_dict_optional_str_resource_list_resource_overlay() -> DefaultDict[
+    Resource,
+    List[Tuple[Resource, Overlay]],
+]:
+    return defaultdict(list)
 
 
 ElementTree = etree._ElementTree  # type: ignore
@@ -98,8 +109,18 @@ class Overlay:
     immutable: bool = False
     package_resources: Optional[ResourceMap] = None
     preserved_prefixes: Optional[Dict[str, bytes]] = None
-    removed_resources: DefaultDict[Optional[str], Set[Resource]] = field(
+    removed_resources: Set[Resource] = field(default_factory=resource_set)
+    device_removed_resources: DefaultDict[
+        Optional[str],
+        Set[Resource],
+    ] = field(
         default_factory=default_dict_optional_str_set_resource,
+    )
+    identical_resources: DefaultDict[
+        Resource,
+        List[Tuple[Resource, Overlay]],
+    ] = field(
+        default_factory=default_dict_optional_str_resource_list_resource_overlay,
     )
     manifest_tree: Optional[ElementTree] = None
 
@@ -727,7 +748,7 @@ def remove_overlays_shadowed_resources(
                     f'{preferred_overlay.package}',
                     color=Color.GREEN,
                 )
-            overlay.removed_resources[device].add(resource)
+            overlay.device_removed_resources[device].add(resource)
 
         if shadowed_immutable:
             continue
@@ -744,11 +765,13 @@ def remove_overlays_shadowed_resources(
                     f'target package',
                     color=Color.GREEN,
                 )
-            preferred_overlay.removed_resources[device].add(preferred_resource)
+            preferred_overlay.identical_resources[preferred_resource].extend(
+                shadowed_resources,
+            )
 
     for overlay in overlays:
         keep_referenced_resources_from_removal(
-            overlay.removed_resources[device],
+            overlay.device_removed_resources[device],
             overlay.resources,
             package=overlay.package,
             verbose=verbose,
