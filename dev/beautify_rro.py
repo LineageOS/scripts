@@ -344,6 +344,7 @@ def beautify_rro_main():
         parse_overlay_target_package_resources(
             package_map=package_map,
             overlay=overlay,
+            verbose=args.verbose,
         )
 
         if (
@@ -362,7 +363,10 @@ def beautify_rro_main():
     overlays = remaining_overlays
 
     for overlay in overlays:
-        fixup_overlay_resources(overlay)
+        fixup_overlay_resources(
+            overlay,
+            verbose=args.verbose,
+        )
 
         if overlay.immutable:
             continue

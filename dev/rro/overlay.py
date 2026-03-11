@@ -401,6 +401,7 @@ def parse_overlay_from_android_bp(
 def parse_overlay_target_package_resources(
     package_map: PackageMap,
     overlay: Overlay,
+    verbose: bool,
 ):
     target_packages = get_target_packages(package_map, overlay.target_package)
     if not target_packages:
@@ -415,7 +416,7 @@ def parse_overlay_target_package_resources(
 
     overlay.package_resources = package_resources
 
-    if len(target_packages) > 1:
+    if len(target_packages) > 1 and verbose:
         color_print(
             f'{overlay.package}: found multiple matches for {overlay.target_package}:',
             color=Color.YELLOW,
@@ -427,7 +428,10 @@ def parse_overlay_target_package_resources(
         )
 
 
-def fixup_overlay_resources(overlay: Overlay):
+def fixup_overlay_resources(
+    overlay: Overlay,
+    verbose: bool,
+):
     if overlay.package_resources is None:
         return
 
@@ -436,6 +440,10 @@ def fixup_overlay_resources(overlay: Overlay):
         overlay.resources,
         overlay.package_resources,
     )
+
+    if not verbose:
+        return
+
     for old_resource, new_resource in sorted(wrong_tag_resources):
         color_print(
             f'{overlay.package}: {old_resource} -> {new_resource}',
@@ -489,7 +497,11 @@ def write_overlay(
         )
 
 
-def is_overlay_aosp(package_map: PackageMap, overlay: Overlay):
+def is_overlay_aosp(
+    package_map: PackageMap,
+    overlay: Overlay,
+    verbose: bool,
+):
     aosp_rro_android_bp_dir = find_overlay_android_bp_path_by_name(
         package_map,
         overlay.name,
@@ -515,7 +527,10 @@ def is_overlay_aosp(package_map: PackageMap, overlay: Overlay):
     # package resources
     aosp_overlay.package_resources = overlay.package_resources
 
-    fixup_overlay_resources(aosp_overlay)
+    fixup_overlay_resources(
+        aosp_overlay,
+        verbose=verbose,
+    )
 
     if overlay.resources == aosp_overlay.resources:
         return True
