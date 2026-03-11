@@ -46,6 +46,7 @@ from utils.xml_utils import (
 )
 
 Element = etree._Element  # type: ignore
+ElementTree = etree._ElementTree  # type: ignore
 Comment = etree._Comment  # type: ignore
 
 TRANSLATABLE_KEY = 'translatable'
@@ -627,12 +628,9 @@ def overlay_resources_remove_missing(
     package: str,
     resources: ResourceMap,
     package_resources: ResourceMap,
-    manifest_path: str,
+    manifest_tree: Optional[ElementTree],
     keep_resources: Tuple[FrozenSet[str], FrozenSet[str]],
 ):
-    manifest_tree = etree.parse(manifest_path)
-    manifest_root = manifest_tree.getroot()
-
     kept_resources: Set[Resource] = set()
 
     def remove_missing_resource(resource: Resource):
@@ -650,12 +648,13 @@ def overlay_resources_remove_missing(
             if package_resource.is_default:
                 return
 
-        is_manifest_referencing = is_referenced_resource_element(
-            resource.reference_name,
-            manifest_root,
-        )
-        if is_manifest_referencing:
-            return
+        if manifest_tree is not None:
+            is_manifest_referencing = is_referenced_resource_element(
+                resource.reference_name,
+                manifest_tree.getroot(),
+            )
+            if is_manifest_referencing:
+                return
 
         return True
 
