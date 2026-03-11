@@ -587,7 +587,7 @@ def remove_overlays_shadowed_resources(
         # package names
         List[str],
     ] = {}
-    resource_map: Dict[
+    resource_map: DefaultDict[
         # resource keys
         Tuple[
             # target package
@@ -603,7 +603,7 @@ def remove_overlays_shadowed_resources(
                 Overlay,
             ],
         ],
-    ] = {}
+    ] = defaultdict(list)
     preferred_resources_map: Dict[
         str,
         Tuple[FrozenSet[str], FrozenSet[str]],
@@ -637,14 +637,13 @@ def remove_overlays_shadowed_resources(
         )
 
         for resource in overlay.resources:
-            resource_map.setdefault(
+            resource_map[
                 (
                     overlay.target_package,
                     overlay.attrs_key(),
                     resource.keys,
-                ),
-                [],
-            ).append(
+                )
+            ].append(
                 (
                     resource,
                     overlay,
