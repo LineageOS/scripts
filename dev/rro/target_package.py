@@ -348,9 +348,9 @@ target_package_name_map = {
 
 def fixup_target_package(target_package: str):
     if target_package in target_package_name_map:
-        return target_package_name_map[target_package], target_package
+        return target_package_name_map[target_package]
 
-    return target_package, target_package
+    return target_package
 
 
 def get_target_packages(package_map: PackageMap, target_package: str):

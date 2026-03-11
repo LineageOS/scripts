@@ -77,14 +77,14 @@ def commonize_package_overlays(
     assert overlay is not None
 
     assert overlay.original_name is not None
-    name, original_name = simplify_overlay_name(
+    name = simplify_overlay_name(
         overlay.original_name,
         device,
         overlay.original_device,
     )
 
     assert overlay.original_package is not None
-    package, original_package = simplify_overlay_package(
+    package = simplify_overlay_package(
         overlay.original_package,
         device,
         overlay.original_device,
@@ -112,9 +112,9 @@ def commonize_package_overlays(
             common_overlay_resources,
             indices=IndexFlags.BY_REL_PATH,
         ),
-        original_name=original_name,
-        original_package=original_package,
-        original_target_package=overlay.target_package,
+        original_name=overlay.original_name,
+        original_package=overlay.original_package,
+        original_target_package=overlay.original_target_package,
         original_device=overlay.original_device,
         device=device,
         devices=devices,

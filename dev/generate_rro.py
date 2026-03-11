@@ -185,8 +185,9 @@ def generate_rro_main():
     for apk_path in apk_paths:
         partition = find_apk_partition(apk_path)
 
-        name, original_name = simplify_overlay_name(
-            apk_path.stem,
+        original_name = apk_path.stem
+        name = simplify_overlay_name(
+            original_name,
             args.device,
         )
 
