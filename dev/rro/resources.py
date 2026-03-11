@@ -421,7 +421,12 @@ def keep_referenced_resources_from_removal(
     all_resources: ResourceMap,
     package: str,
     verbose: bool,
+    device: Optional[str] = None,
 ):
+    device_str = ''
+    if device is not None:
+        device_str = f'{device}: '
+
     keep_resources: Set[Resource] = set()
 
     for resource in resources_to_remove:
@@ -437,6 +442,7 @@ def keep_referenced_resources_from_removal(
             if verbose:
                 for ref_resource in not_in_remove:
                     color_print(
+                        f'{device_str}'
                         f'{package}: keeping {resource.reference_name} -> '
                         f'{ref_resource.reference_name}',
                         color=Color.YELLOW,
@@ -452,6 +458,7 @@ def keep_referenced_resources_from_removal(
             if verbose:
                 for ref_resource in not_in_remove:
                     color_print(
+                        f'{device_str}'
                         f'{package}: keeping {resource.reference_name} <- '
                         f'{ref_resource.reference_name}',
                         color=Color.YELLOW,
