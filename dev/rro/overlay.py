@@ -10,15 +10,15 @@ from collections import defaultdict
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import (
+    Any,
     DefaultDict,
     Dict,
     FrozenSet,
     List,
-    NotRequired,
     Optional,
     Set,
     Tuple,
-    TypedDict,
+    cast,
 )
 
 from bp.bp_module import parse_bp_rro_module
@@ -58,6 +58,16 @@ from rro.target_package import (
 from utils.utils import Color, color_print
 
 
+@dataclass
+class OverlayMeta:
+    original_name: Optional[str]
+    original_package: str
+    original_target_package: str
+    original_device: Optional[str]
+    device: Optional[str]
+    devices: Optional[Set[str]]
+
+
 def default_dict_optional_str_set_resource() -> DefaultDict[
     Optional[str],
     Set[Resource],
@@ -78,6 +88,7 @@ class Overlay:
     attrs: Dict[str, str]
 
     resources: ResourceMap
+    meta: OverlayMeta
 
     immutable: bool = False
     package_resources: Optional[ResourceMap] = None
@@ -85,13 +96,6 @@ class Overlay:
     removed_resources: DefaultDict[Optional[str], Set[Resource]] = field(
         default_factory=default_dict_optional_str_set_resource,
     )
-
-    device: Optional[str] = None
-    devices: Optional[Set[str]] = None
-    original_device: Optional[str] = None
-    original_name: Optional[str] = None
-    original_package: Optional[str] = None
-    original_target_package: Optional[str] = None
 
     @property
     def priority(self):
@@ -178,52 +182,43 @@ def simplify_overlay_package(
     return package
 
 
-RRO_META_NAME = '.rro-meta.json'
+OVERLAY_META_NAME = '.overlay-meta.json'
 
 
-class RROMeta(TypedDict):
-    original_rro_name: str
-    original_package: str
-    original_target_package: str
-    original_device: NotRequired[str]
-    device: NotRequired[str]
-    devices: NotRequired[List[str]]
-
-
-def write_rro_meta(
+def write_overlay_meta(
     output_path: Path,
-    rro_name: str,
-    package: str,
-    target_package: str,
-    original_device: Optional[str],
-    device: Optional[str],
-    devices: Optional[List[str]],
+    meta: OverlayMeta,
 ):
-    meta: RROMeta = {
-        'original_rro_name': rro_name,
-        'original_package': package,
-        'original_target_package': target_package,
+    meta_data: Dict[str, Any] = {
+        'original_name': meta.original_name,
+        'original_package': meta.original_package,
+        'original_target_package': meta.original_target_package,
+        'original_device': meta.original_device,
+        'device': meta.device,
+        'devices': None if meta.devices is None else list(sorted(meta.devices)),
     }
 
-    if original_device is not None:
-        meta['original_device'] = original_device
-
-    if device is not None:
-        meta['device'] = device
-
-    if devices is not None:
-        meta['devices'] = devices
-
-    rro_meta_path = Path(output_path, RRO_META_NAME)
+    rro_meta_path = Path(output_path, OVERLAY_META_NAME)
     with open(rro_meta_path, 'w') as o:
-        json.dump(meta, o, indent=4, sort_keys=True)
+        json.dump(meta_data, o, indent=4, sort_keys=True)
         o.write('\n')
 
 
-def read_rro_meta(overlay_path: Path) -> RROMeta:
-    rro_meta_path = Path(overlay_path, RRO_META_NAME)
+def read_overlay_meta(overlay_path: Path) -> OverlayMeta:
+    rro_meta_path = Path(overlay_path, OVERLAY_META_NAME)
     with open(rro_meta_path, 'r') as i:
-        return json.load(i)
+        data = cast(Dict[str, Any], json.load(i))
+
+    return OverlayMeta(
+        original_name=cast(Optional[str], data.get('original_name')),
+        original_package=cast(str, data.get('original_package')),
+        original_target_package=cast(str, data.get('original_target_package')),
+        original_device=cast(Optional[str], data.get('original_device')),
+        device=cast(Optional[str], data.get('device')),
+        devices=None
+        if data.get('devices') is None
+        else set(cast(List[str], data.get('devices'))),
+    )
 
 
 def parse_overlay_from_android_bp(
@@ -271,17 +266,19 @@ def parse_overlay_from_android_bp(
     original_package = package
     original_target_package = target_package
     original_device = device
+
+    meta = OverlayMeta(
+        original_name=original_name,
+        original_package=original_package,
+        original_target_package=original_target_package,
+        original_device=original_device,
+        device=device,
+        devices=devices,
+    )
+
     if read_meta:
         try:
-            rro_meta = read_rro_meta(overlay_path)
-            original_name = rro_meta['original_rro_name']
-            original_package = rro_meta['original_package']
-            original_target_package = rro_meta['original_target_package']
-            original_device = rro_meta.get('original_device')
-            device = rro_meta.get('device')
-
-            if 'devices' in rro_meta:
-                devices = set(rro_meta['devices'])
+            meta = read_overlay_meta(overlay_path)
         except Exception:
             pass
 
@@ -355,13 +352,8 @@ def parse_overlay_from_android_bp(
         attrs=overlay_attrs,
         immutable=immutable,
         resources=resources,
-        device=device,
-        devices=devices,
-        original_name=original_name,
-        original_package=original_package,
-        original_target_package=original_target_package,
-        original_device=original_device,
         preserved_prefixes=preserved_prefixes,
+        meta=meta,
     )
 
 
@@ -449,17 +441,9 @@ def write_overlay(
     )
 
     if write_meta:
-        assert overlay.original_name is not None
-        assert overlay.original_package is not None
-        assert overlay.original_target_package is not None
-        write_rro_meta(
+        write_overlay_meta(
             overlay.path,
-            overlay.original_name,
-            overlay.original_package,
-            overlay.original_target_package,
-            overlay.original_device,
-            overlay.device,
-            sorted(overlay.devices) if overlay.devices is not None else None,
+            overlay.meta,
         )
 
 
