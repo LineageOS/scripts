@@ -259,11 +259,19 @@ def generate_rro_main():
         parse_overlay_target_package_resources(
             package_map=package_map,
             overlay=overlay,
+            verbose=args.verbose,
         )
-        fixup_overlay_resources(overlay)
+        fixup_overlay_resources(
+            overlay,
+            verbose=args.verbose,
+        )
 
     for overlay in overlays:
-        if is_overlay_aosp(package_map, overlay):
+        if is_overlay_aosp(
+            package_map,
+            overlay,
+            verbose=args.verbose,
+        ):
             color_print(
                 f'Overlay {overlay.name} identical to AOSP',
                 color=Color.GREEN,
