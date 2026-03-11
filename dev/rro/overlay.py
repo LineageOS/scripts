@@ -131,7 +131,6 @@ def simplify_overlay_name(
     else:
         suffix = device.capitalize()
 
-    original_name = name
     name = name.replace('framework-res', 'FrameworkRes')
     name = RRO_NAME_SIMPLIFY_REGEX.sub(
         lambda m: f'Overlay{m.group(1).capitalize()}{suffix}',
@@ -147,7 +146,7 @@ def simplify_overlay_name(
             device.capitalize(),
         )
 
-    return name, original_name
+    return name
 
 
 def simplify_overlay_package(
@@ -160,7 +159,6 @@ def simplify_overlay_package(
     else:
         suffix = f'.{device}'
 
-    original_package = package
     package = RRO_PACKAGE_SIMPLIFY_REGEX.sub(
         rf'.overlay.\1{suffix}',
         package,
@@ -175,7 +173,7 @@ def simplify_overlay_package(
             device,
         )
 
-    return package, original_package
+    return package
 
 
 RRO_META_NAME = '.rro-meta.json'
@@ -285,12 +283,12 @@ def parse_overlay_from_android_bp(
         except Exception:
             pass
 
-    package, original_package = simplify_overlay_package(
+    package = simplify_overlay_package(
         original_package,
         device,
         original_device,
     )
-    target_package, original_target_package = fixup_target_package(
+    target_package = fixup_target_package(
         original_target_package,
     )
 
