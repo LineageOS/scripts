@@ -85,8 +85,8 @@ def remove_shadowed_resources(
             overlay
             for overlay in overlays
             if overlay.immutable
-            or overlay.devices is None
-            or device in overlay.devices
+            or overlay.meta.devices is None
+            or device in overlay.meta.devices
         ]
 
         undetermined_resource_priorities.update(
@@ -113,8 +113,7 @@ def remove_shadowed_resources(
         if overlay.immutable:
             continue
 
-        overlay_devices = overlay.devices or set([None])
-        assert overlay.devices is not None
+        overlay_devices = overlay.meta.devices or set([None])
 
         common_removed_resources = None
         for device in overlay_devices:
@@ -323,8 +322,8 @@ def beautify_rro_main():
         if overlay.immutable:
             continue
 
-        if overlay.devices is not None:
-            devices.update(overlay.devices)
+        if overlay.meta.devices is not None:
+            devices.update(overlay.meta.devices)
         else:
             devices.add(None)
 
