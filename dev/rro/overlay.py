@@ -704,7 +704,6 @@ def remove_overlays_shadowed_resources(
             preferred_resource_overlay,
         )
 
-        num_equal_preferred_resources = 0
         preferred_resources: List[
             Tuple[
                 Resource,
@@ -715,18 +714,9 @@ def remove_overlays_shadowed_resources(
             if resource_equality_key(ro) != preferred_resource_equality_key:
                 break
 
-            if ro[0] == preferred_resource:
-                num_equal_preferred_resources += 1
-
             preferred_resources.append(ro)
 
-        # If all undetermined priority resources are equal then keep
-        # the one in the first overlay (alphabetically)
-        if (
-            num_equal_preferred_resources != len(preferred_resources)
-            and len(preferred_resources) > 1
-        ):
-            add_undetermined(preferred_resources)
+        add_undetermined(preferred_resources)
 
         # If we shadowed an immutable resource, do not check if the
         # preferred resource is identical to AOSP, as we cannot remove
