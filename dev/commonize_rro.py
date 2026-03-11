@@ -13,6 +13,7 @@ from bp.bp_utils import ANDROID_BP_NAME
 from rro.manifest import ANDROID_MANIFEST_NAME
 from rro.overlay import (
     Overlay,
+    OverlayMeta,
     parse_overlay_from_android_bp,
     simplify_overlay_name,
     simplify_overlay_package,
@@ -35,8 +36,10 @@ def commonize_package_overlays(
     common_overlay_resources = None
     devices: Set[str] = set()
     for overlay in overlays:
-        if overlay.devices is not None:
-            devices.update(overlay.devices)
+        if overlay.meta.devices is None:
+            raise ValueError('Generation was done without --device argument')
+
+        devices.update(overlay.meta.devices)
 
         if common_overlay_resources is None:
             common_overlay_resources = overlay.resources.all().copy()
@@ -76,22 +79,22 @@ def commonize_package_overlays(
 
     assert overlay is not None
 
-    assert overlay.original_name is not None
+    assert overlay.meta.original_name is not None
     name = simplify_overlay_name(
-        overlay.original_name,
+        overlay.meta.original_name,
         device,
-        overlay.original_device,
+        overlay.meta.original_device,
     )
 
-    assert overlay.original_package is not None
     package = simplify_overlay_package(
-        overlay.original_package,
+        overlay.meta.original_package,
         device,
-        overlay.original_device,
+        overlay.meta.original_device,
     )
 
     if (
-        name == overlay.original_name or package == overlay.original_package
+        name == overlay.meta.original_name
+        or package == overlay.meta.original_package
     ) and any_left:
         color_print(f'{package}: commonized partially', color=Color.RED)
 
@@ -112,12 +115,14 @@ def commonize_package_overlays(
             common_overlay_resources,
             indices=IndexFlags.BY_REL_PATH,
         ),
-        original_name=overlay.original_name,
-        original_package=overlay.original_package,
-        original_target_package=overlay.original_target_package,
-        original_device=overlay.original_device,
-        device=device,
-        devices=devices,
+        meta=OverlayMeta(
+            original_name=overlay.meta.original_name,
+            original_package=overlay.meta.original_package,
+            original_target_package=overlay.meta.original_target_package,
+            original_device=overlay.meta.original_device,
+            device=device,
+            devices=devices,
+        ),
     )
 
     write_overlay(
@@ -185,11 +190,9 @@ def commonize_overlays():
             if overlay is None:
                 continue
 
-            assert overlay.original_package is not None
-
             overlays = overlays_map.setdefault(
                 (
-                    overlay.original_package,
+                    overlay.meta.original_package,
                     overlay.attrs_key(with_priority=True),
                 ),
                 [],
