@@ -504,8 +504,8 @@ def is_overlay_aosp(package_map: PackageMap, overlay: Overlay):
         return False
 
     if (
-        overlay.package != aosp_overlay.package
-        or overlay.target_package != aosp_overlay.target_package
+        overlay.meta.original_package != aosp_overlay.package
+        or overlay.meta.original_target_package != aosp_overlay.target_package
     ):
         return False
 
