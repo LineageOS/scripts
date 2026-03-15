@@ -10,22 +10,16 @@ from pathlib import Path
 from typing import Dict, List, Set, Tuple
 
 from bp.bp_utils import ANDROID_BP_NAME
-from rro.manifest import ANDROID_MANIFEST_NAME
 from rro.overlay import (
     Overlay,
-    OverlayMeta,
     parse_overlay_from_android_bp,
-    simplify_overlay_name,
-    simplify_overlay_package,
+    simplify_overlay_name_and_package,
     write_overlay,
 )
-from rro.resource_map import IndexFlags
 from rro.resources import (
-    RESOURCES_DIR,
-    ResourceMap,
     keep_referenced_resources_from_removal,
 )
-from utils.utils import Color, color_print, get_dirs_with_file
+from utils.utils import get_dirs_with_file
 
 
 def commonize_package_overlays(
@@ -61,16 +55,25 @@ def commonize_package_overlays(
         )
 
     overlay = None
-    any_left = False
+    add_device_suffix = False
     for overlay in overlays:
         overlay.resources.remove_many(common_overlay_resources)
 
         shutil.rmtree(overlay.path)
 
+        # Add device suffix if there are resources left or if it was already
+        # added previously
+        if overlay.resources or overlay.meta.has_device_suffix:
+            add_device_suffix = True
+
+    for overlay in overlays:
         if not overlay.resources:
             continue
 
-        any_left = True
+        simplify_overlay_name_and_package(
+            overlay,
+            add_device_suffix=add_device_suffix,
+        )
 
         overlay.path.mkdir(parents=True, exist_ok=True)
 
@@ -82,54 +85,19 @@ def commonize_package_overlays(
 
     assert overlay is not None
 
-    assert overlay.meta.original_name is not None
-    name = simplify_overlay_name(
-        overlay.meta.original_name,
-        device,
-        overlay.meta.original_device,
+    overlay.meta.device = device
+    overlay.path = Path(output_path, overlay.path.name)
+    simplify_overlay_name_and_package(
+        overlay,
+        add_device_suffix=add_device_suffix,
     )
 
-    package = simplify_overlay_package(
-        overlay.meta.original_package,
-        device,
-        overlay.meta.original_device,
-    )
-
-    if (
-        name == overlay.meta.original_name
-        or package == overlay.meta.original_package
-    ) and any_left:
-        color_print(f'{package}: commonized partially', color=Color.RED)
-
-    overlay_output_path = Path(output_path, name)
-    shutil.rmtree(overlay_output_path, ignore_errors=True)
-    overlay_output_path.mkdir(parents=True, exist_ok=True)
-
-    common_overlay = Overlay(
-        name=name,
-        path=overlay_output_path,
-        manifest_name=ANDROID_MANIFEST_NAME,
-        resources_dir=RESOURCES_DIR,
-        partition=overlay.partition,
-        package=package,
-        target_package=overlay.target_package,
-        attrs=overlay.attrs,
-        resources=ResourceMap(
-            common_overlay_resources,
-            indices=IndexFlags.BY_REL_PATH,
-        ),
-        meta=OverlayMeta(
-            original_name=overlay.meta.original_name,
-            original_package=overlay.meta.original_package,
-            original_target_package=overlay.meta.original_target_package,
-            original_device=overlay.meta.original_device,
-            device=device,
-            devices=devices,
-        ),
-    )
+    overlay.meta.devices = devices
+    overlay.resources.clear()
+    overlay.resources.add_many(common_overlay_resources)
 
     write_overlay(
-        common_overlay,
+        overlay,
         # Write meta for further commonize
         write_meta=True,
     )

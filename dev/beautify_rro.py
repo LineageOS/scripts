@@ -312,7 +312,6 @@ def beautify_rro_main():
             package_dir_names=package_dir_names,
             maintain_copyrights=args.maintain_copyrights,
             read_meta=True,
-            verbose=args.verbose,
         )
 
         shutil.rmtree(overlay_dir, ignore_errors=True)

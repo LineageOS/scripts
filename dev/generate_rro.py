@@ -19,7 +19,7 @@ from rro.overlay import (
     is_overlay_aosp,
     parse_overlay_from_android_bp,
     parse_overlay_target_package_resources,
-    simplify_overlay_name,
+    simplify_overlay_name_and_package,
     write_overlay,
 )
 from rro.resource_map import PackageDirNamesIndex
@@ -75,7 +75,6 @@ class ApkData:
     output_path: Path
     partition: Optional[str]
     name: str
-    original_name: str
 
 
 def generate_rro_main():
@@ -191,12 +190,7 @@ def generate_rro_main():
     for apk_path in apk_paths:
         partition = find_apk_partition(apk_path)
 
-        original_name = apk_path.stem
-        name = simplify_overlay_name(
-            original_name,
-            args.device,
-        )
-
+        name = apk_path.stem
         output_path = Path(overlays_path, name)
 
         apk_data = ApkData(
@@ -204,7 +198,6 @@ def generate_rro_main():
             output_path=output_path,
             partition=partition,
             name=name,
-            original_name=original_name,
         )
         apks_data.append(apk_data)
 
@@ -224,6 +217,29 @@ def generate_rro_main():
     overlays: List[Overlay] = []
     package_dir_names = PackageDirNamesIndex()
 
+    def is_overlay_excluded(
+        overlay: Overlay,
+        package: str,
+        target_package: str,
+    ):
+        if package in exclude_overlays:
+            if args.verbose:
+                color_print(
+                    f'{overlay.package}: Excluded',
+                    color=Color.GREEN,
+                )
+            return True
+
+        if target_package in exclude_packages:
+            if args.verbose:
+                color_print(
+                    f'{overlay.package}: Excluded by {target_package}',
+                    color=Color.GREEN,
+                )
+            return True
+
+        return False
+
     for apk_data in apks_data:
         if args.apktool:
             extract_apk(apk_data.path, apk_data.output_path)
@@ -240,17 +256,26 @@ def generate_rro_main():
         overlay = parse_overlay_from_android_bp(
             apk_data.output_path,
             package_dir_names=package_dir_names,
-            exclude_overlays=exclude_overlays,
-            exclude_packages=exclude_packages,
-            original_name=apk_data.original_name,
             device=args.device,
             devices=set([args.device]),
-            verbose=args.verbose,
         )
 
         shutil.rmtree(apk_data.output_path, ignore_errors=True)
 
         if overlay is None:
+            continue
+
+        simplify_overlay_name_and_package(overlay)
+
+        if is_overlay_excluded(
+            overlay,
+            overlay.meta.original_package,
+            overlay.meta.original_target_package,
+        ) or is_overlay_excluded(
+            overlay,
+            overlay.package,
+            overlay.target_package,
+        ):
             continue
 
         overlays.append(overlay)
