@@ -46,6 +46,9 @@ class AllIndex(ResourceIndex):
     def remove(self, r: Resource):
         self._all.remove(r)
 
+    def copy(self):
+        return self._all.copy()
+
     def __iter__(self):
         return iter(self._all)
 
@@ -258,6 +261,9 @@ class ResourceMap:
     def remove_many(self, resources: Iterable[Resource]):
         for r in resources:
             self.remove(r)
+
+    def clear(self):
+        self.remove_many(self.__all.copy())
 
     def __iter__(self):
         return iter(self.__all)

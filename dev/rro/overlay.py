@@ -68,6 +68,7 @@ class OverlayMeta:
     original_device: Optional[str]
     device: Optional[str]
     devices: Optional[Set[str]]
+    has_device_suffix: bool = False
 
 
 def resource_set() -> Set[Resource]:
@@ -153,14 +154,17 @@ RRO_PACKAGE_CHR_SIMPLIFY_REGEX = re.compile(
 
 
 def simplify_overlay_name(
-    name: str,
-    device: Optional[str],
-    replaced_device: Optional[str] = None,
+    overlay: Overlay,
+    add_device_suffix: bool,
 ):
+    device = overlay.meta.device
     if device is None:
         suffix = ''
     else:
         suffix = device.capitalize()
+
+    name = overlay.meta.original_name
+    assert name is not None
 
     name = name.replace('framework-res', 'FrameworkRes')
     name = RRO_NAME_SIMPLIFY_REGEX.sub(
@@ -171,24 +175,31 @@ def simplify_overlay_name(
         f'Overlay{suffix}',
         name,
     )
-    if replaced_device is not None and device is not None:
+    if overlay.meta.original_device is not None and device is not None:
         name = name.replace(
-            replaced_device.capitalize(),
+            overlay.meta.original_device.capitalize(),
             device.capitalize(),
         )
 
-    return name
+    if add_device_suffix and suffix and suffix not in name:
+        name += suffix
+
+    overlay.name = name
+    overlay.path = Path(overlay.path.parent, name)
 
 
 def simplify_overlay_package(
-    package: str,
-    device: Optional[str],
-    replaced_device: Optional[str] = None,
+    overlay: Overlay,
+    add_device_suffix: bool,
 ):
+    device = overlay.meta.device
     if device is None:
         suffix = ''
     else:
         suffix = f'.{device}'
+
+    package = overlay.meta.original_package
+    assert package is not None
 
     package = RRO_PACKAGE_SIMPLIFY_REGEX.sub(
         rf'.overlay.\1{suffix}',
@@ -198,13 +209,32 @@ def simplify_overlay_package(
         rf'.overlay{suffix}',
         package,
     )
-    if replaced_device is not None and device is not None:
+    if overlay.meta.original_device is not None and device is not None:
         package = package.replace(
-            replaced_device,
+            overlay.meta.original_device,
             device,
         )
+    if add_device_suffix and suffix and suffix not in package:
+        package += suffix
 
-    return package
+    overlay.package = package
+
+
+def simplify_overlay_name_and_package(
+    overlay: Overlay,
+    add_device_suffix: bool = False,
+):
+    simplify_overlay_name(
+        overlay,
+        add_device_suffix=add_device_suffix,
+    )
+    simplify_overlay_package(
+        overlay,
+        add_device_suffix=add_device_suffix,
+    )
+
+    if add_device_suffix:
+        overlay.meta.has_device_suffix = True
 
 
 OVERLAY_META_NAME = '.overlay-meta.json'
@@ -221,6 +251,7 @@ def write_overlay_meta(
         'original_device': meta.original_device,
         'device': meta.device,
         'devices': None if meta.devices is None else list(sorted(meta.devices)),
+        'has_device_suffix': meta.has_device_suffix,
     }
 
     rro_meta_path = Path(output_path, OVERLAY_META_NAME)
@@ -243,6 +274,7 @@ def read_overlay_meta(overlay_path: Path) -> OverlayMeta:
         devices=None
         if data.get('devices') is None
         else set(cast(List[str], data.get('devices'))),
+        has_device_suffix=cast(bool, data.get('has_device_suffix', False)),
     )
 
 
@@ -254,21 +286,11 @@ def parse_overlay_from_android_bp(
     read_meta: bool = False,
     ignore_packages: Optional[Set[str]] = None,
     package_dir_names: Optional[PackageDirNamesIndex] = None,
-    exclude_overlays: Optional[Set[str]] = None,
-    exclude_packages: Optional[Set[str]] = None,
-    original_name: Optional[str] = None,
     device: Optional[str] = None,
     devices: Optional[Set[str]] = None,
-    verbose: bool = False,
 ):
     if ignore_packages is None:
         ignore_packages = set()
-
-    if exclude_overlays is None:
-        exclude_overlays = set()
-
-    if exclude_packages is None:
-        exclude_packages = set()
 
     android_bp_path = Path(overlay_path, ANDROID_BP_NAME)
     statement = parse_bp_rro_module(android_bp_path)
@@ -290,15 +312,11 @@ def parse_overlay_from_android_bp(
         manifest_tree,
     )
 
-    original_package = package
-    original_target_package = target_package
-    original_device = device
-
     meta = OverlayMeta(
-        original_name=original_name,
-        original_package=original_package,
-        original_target_package=original_target_package,
-        original_device=original_device,
+        original_name=overlay_path.name,
+        original_package=package,
+        original_target_package=target_package,
+        original_device=device,
         device=device,
         devices=devices,
     )
@@ -309,37 +327,9 @@ def parse_overlay_from_android_bp(
         except Exception:
             pass
 
-    package = simplify_overlay_package(
-        original_package,
-        device,
-        original_device,
-    )
     target_package = fixup_target_package(
-        original_target_package,
+        meta.original_target_package,
     )
-
-    if package in exclude_overlays:
-        if verbose:
-            color_print(f'{package}: Excluded', color=Color.GREEN)
-        return None
-    if original_package in exclude_overlays:
-        if verbose:
-            color_print(f'{original_package}: Excluded', color=Color.GREEN)
-        return None
-
-    if target_package in exclude_packages:
-        if verbose:
-            color_print(
-                f'{package}: Excluded by {target_package}', color=Color.GREEN
-            )
-        return None
-    if original_target_package in exclude_packages:
-        if verbose:
-            color_print(
-                f'{package}: Excluded by {original_target_package}',
-                color=Color.GREEN,
-            )
-        return None
 
     module_partition = get_module_partition(statement)
 
