@@ -1035,3 +1035,73 @@ def find_public_rules(
     )
 
     return public_rules
+
+
+def process_rules(
+    m: MultiLevelDict[Rule],
+    source_rules: List[Rule],
+    source_perms: List[Tuple[str, Set[str]]],
+    source_ioctls: List[Tuple[str, Set[str]]],
+    source_ioctl_defines: Dict[str, str],
+    source_nlmsgs: List[Tuple[str, Set[str]]],
+    source_nlmsg_defines: Dict[str, str],
+    source_class_sets: List[Tuple[str, Set[str]]],
+    public_rules: List[Rule],
+    platform_decompiled_rules: Optional[List[Rule]],
+    rule_matches: List[RuleMatch],
+    name: str,
+    remove_public: bool,
+    classmap: Classmap,
+    verbose: bool,
+):
+    remove_rules(
+        m,
+        source_rules,
+        'source',
+        name,
+    )
+
+    if platform_decompiled_rules is not None:
+        remove_rules(
+            m,
+            platform_decompiled_rules,
+            'prebuilt platform',
+            name,
+        )
+
+    if remove_public:
+        remove_rules(
+            m,
+            public_rules,
+            'public',
+            name,
+        )
+
+    replace_macro_rules(
+        m,
+        rule_matches,
+        name,
+        verbose,
+    )
+
+    merge_typeattribute_rules(m, name)
+
+    replace_perms(m, classmap, source_perms, name)
+    replace_ioctls(
+        m,
+        source_ioctls,
+        source_ioctl_defines,
+        name,
+        is_nlmsg=False,
+    )
+    replace_ioctls(
+        m,
+        source_nlmsgs,
+        source_nlmsg_defines,
+        name,
+        is_nlmsg=True,
+    )
+    merge_class_sets(m, source_class_sets, name)
+
+    # We can also merge target domains, but rules get long quickly
+    # merge_target_domains(m)

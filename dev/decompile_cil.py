@@ -44,15 +44,10 @@ from sepolicy.match import (
     find_public_rules,
     find_used_types,
     match_macros_rules,
-    merge_class_sets,
     merge_ioctl_rules,
-    merge_typeattribute_rules,
-    remove_rules,
+    process_rules,
     remove_rules_from_rule_matches,
     remove_unused_types,
-    replace_ioctls,
-    replace_macro_rules,
-    replace_perms,
 )
 from sepolicy.output import (
     group_rules,
@@ -618,70 +613,45 @@ def decompile_cil():
             'prebuilt platform',
         )
 
-    def process_rules(
-        m: MultiLevelDict[Rule],
-        name: str,
-        remove_public: bool,
-    ):
-        remove_rules(
-            m,
-            source_rules,
-            'source',
-            name,
-        )
-
-        if platform_decompiled_rules is not None:
-            remove_rules(
-                m,
-                platform_decompiled_rules,
-                'prebuilt platform',
-                name,
-            )
-
-        if remove_public:
-            remove_rules(
-                m,
-                public_rules,
-                'public',
-                name,
-            )
-
-        replace_macro_rules(
-            m,
-            rule_matches,
-            name,
-            verbose,
-        )
-
-        merge_typeattribute_rules(m, name)
-
-        replace_perms(m, classmap, source_perms, name)
-        replace_ioctls(
-            m,
-            source_ioctls,
-            source_ioctl_defines,
-            name,
-            is_nlmsg=False,
-        )
-        replace_ioctls(
-            m,
-            source_nlmsgs,
-            source_nlmsg_defines,
-            name,
-            is_nlmsg=True,
-        )
-        merge_class_sets(m, source_class_sets, name)
-
-        # We can also merge target domains, but rules get long quickly
-        # merge_target_domains(m)
-
-    process_rules(mld, 'private', remove_public=True)
+    process_rules(
+        mld,
+        source_rules=source_rules,
+        source_perms=source_perms,
+        source_ioctls=source_ioctls,
+        source_ioctl_defines=source_ioctl_defines,
+        source_nlmsgs=source_nlmsgs,
+        source_nlmsg_defines=source_nlmsg_defines,
+        source_class_sets=source_class_sets,
+        public_rules=public_rules,
+        platform_decompiled_rules=platform_decompiled_rules,
+        rule_matches=rule_matches,
+        name='private',
+        remove_public=True,
+        classmap=classmap,
+        verbose=verbose,
+    )
 
     if split_public_private:
         for public_rule in public_rules:
             public_mld.add(public_rule.hash_values, public_rule)
 
-    process_rules(public_mld, 'public', remove_public=False)
+    process_rules(
+        public_mld,
+        source_rules=source_rules,
+        source_perms=source_perms,
+        source_ioctls=source_ioctls,
+        source_ioctl_defines=source_ioctl_defines,
+        source_nlmsgs=source_nlmsgs,
+        source_nlmsg_defines=source_nlmsg_defines,
+        source_class_sets=source_class_sets,
+        public_rules=public_rules,
+        platform_decompiled_rules=platform_decompiled_rules,
+        rule_matches=rule_matches,
+        name='public',
+        remove_public=False,
+        classmap=classmap,
+        verbose=verbose,
+    )
 
     # Remove decompiled contexts also found in the source contexts
     decompiled_contexts = remove_source_contexts(
