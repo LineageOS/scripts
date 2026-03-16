@@ -50,18 +50,18 @@ def domain_type(rule: Rule):
 def rule_simple_type_name(rule: Rule):
     if rule.rule_type == RuleType.TYPE.value:
         if 'dev_type' in rule.varargs:
-            return DEVICE_TYPE_RULES_NAME
+            return DEVICE_TYPE_RULES_NAME, False
         elif 'file_type' in rule.varargs or 'fs_type' in rule.varargs:
-            return FILE_TYPE_RULES_NAME
+            return FILE_TYPE_RULES_NAME, False
         elif isinstance(rule.parts[0], str):
             if rule.parts[0].endswith('_prop'):
-                return PROPERTY_RULES_NAME
+                return PROPERTY_RULES_NAME, False
             elif rule.parts[0].endswith('_hwservice'):
-                return HWSERVICE_TYPE_RULES_NAME
+                return HWSERVICE_TYPE_RULES_NAME, False
             elif rule.parts[0].endswith('_service'):
-                return SERVICE_TYPE_RULES_NAME
+                return SERVICE_TYPE_RULES_NAME, False
 
-        return None
+        return None, False
     elif rule.rule_type in set(
         [
             RuleType.ATTRIBUTE.value,
@@ -69,12 +69,12 @@ def rule_simple_type_name(rule: Rule):
             'hal_attribute',
         ]
     ):
-        return ATTRIBUTE_RULES_NAME
+        return ATTRIBUTE_RULES_NAME, True
     elif isinstance(rule.parts[0], str):
         if rule.parts[0].endswith('_prop'):
-            return PROPERTY_RULES_NAME
+            return PROPERTY_RULES_NAME, False
 
-    return None
+    return None, False
 
 
 def group_rules(mld: MultiLevelDict[Rule]):
@@ -94,22 +94,29 @@ def group_rules(mld: MultiLevelDict[Rule]):
         # If all rules of this group are simple, re-group them
         is_all_simple_type = True
         simple_type_names: List[Optional[str]] = []
+        force_in_simple_types: List[bool] = []
         for rule in rules:
-            simple_type_name = rule_simple_type_name(rule)
+            simple_type_name, force_in_simple_type = rule_simple_type_name(rule)
             simple_type_names.append(simple_type_name)
+            force_in_simple_types.append(force_in_simple_type)
 
             if simple_type_name is None:
                 is_all_simple_type = False
 
-        for new_name, rule in zip(simple_type_names, rules):
-            if is_all_simple_type:
+        for new_name, force_in_simple_type, rule in zip(
+            simple_type_names,
+            force_in_simple_types,
+            rules,
+        ):
+            group_name = name
+            if is_all_simple_type or force_in_simple_type:
                 assert new_name is not None
-                name = new_name
+                group_name = new_name
 
-            if name not in regrouped_rules:
-                regrouped_rules[name] = set()
+            if group_name not in regrouped_rules:
+                regrouped_rules[group_name] = set()
 
-            regrouped_rules[name].add(rule)
+            regrouped_rules[group_name].add(rule)
 
     return regrouped_rules
 
