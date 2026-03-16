@@ -3,9 +3,10 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from itertools import chain
 from pathlib import Path
-from typing import Dict, List, Set
+from typing import Dict, List, Set, Tuple
 
 from sepolicy.cil_policy import decompile_one_cil
 from sepolicy.classmap import Classmap
@@ -31,6 +32,21 @@ from sepolicy.macro import (
 )
 from sepolicy.rule import Rule
 from sepolicy.rules import parse_rules, resolve_rule_paths
+
+
+@dataclass
+class ParsedSource:
+    rules: List[Rule]
+    genfs_rules: List[Rule]
+    perms: List[Tuple[str, Set[str]]]
+    class_sets: List[Tuple[str, Set[str]]]
+    ioctls: List[Tuple[str, Set[str]]]
+    nlmsgs: List[Tuple[str, Set[str]]]
+    ioctl_defines: Dict[str, str]
+    nlmsg_defines: Dict[str, str]
+    macros_name_rules: List[Tuple[str, List[Rule]]]
+    contexts: Dict[ContextsType, List[Tuple[str, ...]]]
+    classmap: Classmap
 
 
 def get_variable_choices(
@@ -75,7 +91,7 @@ def get_variable_choices(
     return all_variables_choices
 
 
-def parse_source_macros_rules(
+def parse_source(
     macros_paths: List[Path],
     extra_macros_paths: List[Path],
     rules_paths: List[Path],
@@ -210,16 +226,16 @@ def parse_source_macros_rules(
     # external/selinux/libsepol/src/module_to_cil.c
     source_rules.append(Rule('attribute', ('cil_gen_require',), ()))
 
-    return (
-        source_rules,
-        source_contexts,
-        source_genfs_rules,
-        source_perms,
-        source_class_sets,
-        source_ioctls,
-        source_nlmsgs,
-        source_ioctl_defines,
-        source_nlmsg_defines,
-        macros_name_rules,
-        classmap,
+    return ParsedSource(
+        rules=source_rules,
+        contexts=source_contexts,
+        genfs_rules=source_genfs_rules,
+        perms=source_perms,
+        class_sets=source_class_sets,
+        ioctls=source_ioctls,
+        nlmsgs=source_nlmsgs,
+        ioctl_defines=source_ioctl_defines,
+        nlmsg_defines=source_nlmsg_defines,
+        macros_name_rules=macros_name_rules,
+        classmap=classmap,
     )

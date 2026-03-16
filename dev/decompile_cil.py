@@ -35,7 +35,7 @@ from sepolicy.output import (
     output_grouped_rules,
 )
 from sepolicy.rule import RULE_DYNAMIC_PARTS_INDEX, Rule
-from sepolicy.source_policy import parse_source_macros_rules
+from sepolicy.source_policy import parse_source
 from utils.mld import MultiLevelDict
 from utils.utils import Color, android_root, color_print
 
@@ -353,19 +353,7 @@ def decompile_cil():
         assert referencing_rules is not None
         public_rules = find_public_rules(mld, referencing_rules, public_types)
 
-    (
-        source_rules,
-        source_contexts,
-        source_genfs_rules,
-        source_perms,
-        source_class_sets,
-        source_ioctls,
-        source_nlmsgs,
-        source_ioctl_defines,
-        source_nlmsg_defines,
-        macros_name_rules,
-        classmap,
-    ) = parse_source_macros_rules(
+    source = parse_source(
         macros_paths,
         extra_macros_paths,
         rules_paths,
@@ -377,7 +365,7 @@ def decompile_cil():
     )
 
     color_print(
-        f'Found {len(source_rules)} source rules',
+        f'Found {len(source.rules)} source rules',
         color=Color.GREEN,
     )
 
@@ -400,14 +388,14 @@ def decompile_cil():
 
     rule_matches = match_macros_rules(
         mld,
-        macros_name_rules,
+        source.macros_name_rules,
         verbose,
     )
     rule_matches = discard_rule_matches(rule_matches, verbose)
 
     rule_matches = remove_rules_from_rule_matches(
         rule_matches,
-        source_rules,
+        source.rules,
         'source',
     )
 
@@ -420,19 +408,12 @@ def decompile_cil():
 
     process_rules(
         mld,
-        source_rules=source_rules,
-        source_perms=source_perms,
-        source_ioctls=source_ioctls,
-        source_ioctl_defines=source_ioctl_defines,
-        source_nlmsgs=source_nlmsgs,
-        source_nlmsg_defines=source_nlmsg_defines,
-        source_class_sets=source_class_sets,
+        source=source,
         public_rules=public_rules,
         platform_decompiled_rules=platform_decompiled_rules,
         rule_matches=rule_matches,
         name='private',
         remove_public=True,
-        classmap=classmap,
         verbose=verbose,
     )
 
@@ -442,30 +423,23 @@ def decompile_cil():
 
     process_rules(
         public_mld,
-        source_rules=source_rules,
-        source_perms=source_perms,
-        source_ioctls=source_ioctls,
-        source_ioctl_defines=source_ioctl_defines,
-        source_nlmsgs=source_nlmsgs,
-        source_nlmsg_defines=source_nlmsg_defines,
-        source_class_sets=source_class_sets,
+        source=source,
         public_rules=public_rules,
         platform_decompiled_rules=platform_decompiled_rules,
         rule_matches=rule_matches,
         name='public',
         remove_public=False,
-        classmap=classmap,
         verbose=verbose,
     )
 
     # Remove decompiled contexts also found in the source contexts
     decompiled_contexts = remove_source_contexts(
         decompiled_contexts,
-        source_contexts,
+        source.contexts,
     )
     decompiled_genfs_rules = remove_source_genfs_rules(
         decompiled_genfs_rules,
-        source_genfs_rules,
+        source.genfs_rules,
     )
 
     color_print(

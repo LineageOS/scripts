@@ -25,6 +25,7 @@ from sepolicy.rule import (
     rule_hash_value,
     rule_part,
 )
+from sepolicy.source_policy import ParsedSource
 from utils.mld import MultiLevelDict
 from utils.utils import Color, color_print
 
@@ -1039,24 +1040,17 @@ def find_public_rules(
 
 def process_rules(
     m: MultiLevelDict[Rule],
-    source_rules: List[Rule],
-    source_perms: List[Tuple[str, Set[str]]],
-    source_ioctls: List[Tuple[str, Set[str]]],
-    source_ioctl_defines: Dict[str, str],
-    source_nlmsgs: List[Tuple[str, Set[str]]],
-    source_nlmsg_defines: Dict[str, str],
-    source_class_sets: List[Tuple[str, Set[str]]],
+    source: ParsedSource,
     public_rules: List[Rule],
     platform_decompiled_rules: Optional[List[Rule]],
     rule_matches: List[RuleMatch],
     name: str,
     remove_public: bool,
-    classmap: Classmap,
     verbose: bool,
 ):
     remove_rules(
         m,
-        source_rules,
+        source.rules,
         'source',
         name,
     )
@@ -1086,22 +1080,22 @@ def process_rules(
 
     merge_typeattribute_rules(m, name)
 
-    replace_perms(m, classmap, source_perms, name)
+    replace_perms(m, source.classmap, source.perms, name)
     replace_ioctls(
         m,
-        source_ioctls,
-        source_ioctl_defines,
+        source.ioctls,
+        source.ioctl_defines,
         name,
         is_nlmsg=False,
     )
     replace_ioctls(
         m,
-        source_nlmsgs,
-        source_nlmsg_defines,
+        source.nlmsgs,
+        source.nlmsg_defines,
         name,
         is_nlmsg=True,
     )
-    merge_class_sets(m, source_class_sets, name)
+    merge_class_sets(m, source.class_sets, name)
 
     # We can also merge target domains, but rules get long quickly
     # merge_target_domains(m)
