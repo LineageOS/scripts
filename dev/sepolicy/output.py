@@ -48,7 +48,15 @@ def domain_type(rule: Rule):
 
 
 def rule_simple_type_name(rule: Rule):
-    if rule.rule_type == RuleType.TYPE.value:
+    if rule.rule_type in set(
+        [
+            RuleType.ATTRIBUTE.value,
+            RuleType.EXPANDATTRIBUTE.value,
+            'hal_attribute',
+        ]
+    ):
+        return ATTRIBUTE_RULES_NAME
+    elif rule.rule_type == RuleType.TYPE.value:
         if 'dev_type' in rule.varargs:
             return DEVICE_TYPE_RULES_NAME
         elif 'file_type' in rule.varargs or 'fs_type' in rule.varargs:
@@ -62,14 +70,6 @@ def rule_simple_type_name(rule: Rule):
                 return SERVICE_TYPE_RULES_NAME
 
         return None
-    elif rule.rule_type in set(
-        [
-            RuleType.ATTRIBUTE.value,
-            RuleType.EXPANDATTRIBUTE.value,
-            'hal_attribute',
-        ]
-    ):
-        return ATTRIBUTE_RULES_NAME
     elif isinstance(rule.parts[0], str):
         if rule.parts[0].endswith('_prop'):
             return PROPERTY_RULES_NAME
