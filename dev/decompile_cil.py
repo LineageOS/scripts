@@ -355,10 +355,7 @@ def decompile_cil():
         version,
     )
 
-    color_print(
-        f'Found {len(source.rules)} source rules',
-        color=Color.GREEN,
-    )
+    color_print(f'Found {len(source.rules)} source rules', color=Color.GREEN)
 
     def count_decompiled_rules():
         num_decompiled_contexts = sum(
