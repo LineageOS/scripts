@@ -19,6 +19,8 @@ ignorelist = [
     "gs101",
     "gs201",
     "kernels",
+    "laguna",
+    "muzel",
     "pantah",
     "raviole",
     "redbull",
