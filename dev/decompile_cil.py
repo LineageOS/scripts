@@ -265,17 +265,6 @@ def decompile_cil():
     conditional_types_map: Dict[str, ConditionalType] = {}
     missing_generated_types: Set[str] = set()
 
-    # Load generated types and rules from platform policy
-    platform_decompiled_rules = None
-    if platform_policy is not None:
-        platform_decompiled_rules, _ = decompile_one_cil(
-            platform_policy,
-            conditional_types_map,
-            set(),
-            version,
-            'platform policy',
-        )
-
     decompiled_rules, decompiled_genfs_rules = decompile_one_cil(
         policy,
         conditional_types_map,
@@ -291,11 +280,20 @@ def decompile_cil():
     mld: MultiLevelDict[Rule] = MultiLevelDict(RULE_DYNAMIC_PARTS_INDEX)
     mld.add_many(decompiled_rules, lambda r: r.hash_values)
 
+    # Load generated types and rules from platform policy
     # Add platform rules and remove them later to allow matching
     # set_prop(vendor_init, ...)
     # Since somehow allow vendor_init property_socket:sock_file write;
     # only ends up in platform sepolicy
-    if platform_decompiled_rules is not None:
+    platform_decompiled_rules = None
+    if platform_policy is not None:
+        platform_decompiled_rules, _ = decompile_one_cil(
+            platform_policy,
+            conditional_types_map,
+            set(),
+            version,
+            'platform policy',
+        )
         mld.add_many(platform_decompiled_rules, lambda r: r.hash_values)
 
     decompiled_contexts_file_paths = resolve_contexts_paths(
