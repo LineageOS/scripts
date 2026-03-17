@@ -276,21 +276,6 @@ def decompile_cil():
             'platform policy',
         )
 
-    # Load rules being referenced by other sepolicy which need to be
-    # public
-    referencing_rules = None
-    if split_public_private:
-        assert referencing_policy_path is not None
-        assert referencing_policy_version is not None
-
-        referencing_rules, _ = decompile_one_cil(
-            referencing_policy_path,
-            {},
-            set(),
-            referencing_policy_version,
-            'referencing policy',
-        )
-
     # Find all used types and remove all unused ones
     decompiled_used_types: Set[str] = set()
 
@@ -341,7 +326,19 @@ def decompile_cil():
 
     public_rules: List[Rule] = []
     if split_public_private:
-        assert referencing_rules is not None
+        assert referencing_policy_path is not None
+        assert referencing_policy_version is not None
+
+        # Load rules being referenced by other sepolicy which need to be
+        # public
+        referencing_rules, _ = decompile_one_cil(
+            referencing_policy_path,
+            {},
+            set(),
+            referencing_policy_version,
+            'referencing policy',
+        )
+
         public_rules = find_public_rules(mld, referencing_rules, set())
 
     source = parse_source(
