@@ -301,6 +301,21 @@ def decompile_cil():
         version,
         'decompiled policy',
     )
+
+    # Generate match dicts starting after the first token of the rule
+    # which is almost always the type
+    # This means that we can't match rules not knowing their type, but
+    # that's fine usually
+    mld: MultiLevelDict[Rule] = MultiLevelDict(RULE_DYNAMIC_PARTS_INDEX)
+    mld.add_many(decompiled_rules, lambda r: r.hash_values)
+
+    # Add platform rules and remove them later to allow matching
+    # set_prop(vendor_init, ...)
+    # Since somehow allow vendor_init property_socket:sock_file write;
+    # only ends up in platform sepolicy
+    if platform_decompiled_rules is not None:
+        mld.add_many(platform_decompiled_rules, lambda r: r.hash_values)
+
     decompiled_contexts_file_paths = resolve_contexts_paths(
         [selinux_dir],
         partition_name,
@@ -318,36 +333,16 @@ def decompile_cil():
     find_used_types(decompiled_genfs_rules, decompiled_used_types)
     find_contexts_used_types(decompiled_contexts, decompiled_used_types)
 
-    # Generate match dicts starting after the first token of the rule
-    # which is almost always the type
-    # This means that we can't match rules not knowing their type, but
-    # that's fine usually
-    mld: MultiLevelDict[Rule] = MultiLevelDict(RULE_DYNAMIC_PARTS_INDEX)
-
-    # Add all public rules into a separate dictionary to be able to group them
-    # and do the same processing as private rules
-    public_mld: MultiLevelDict[Rule] = MultiLevelDict(RULE_DYNAMIC_PARTS_INDEX)
-
-    mld.add_many(decompiled_rules, lambda r: r.hash_values)
-
-    # Add platform rules and remove them later to allow matching
-    # set_prop(vendor_init, ...)
-    # Since somehow allow vendor_init property_socket:sock_file write;
-    # only ends up in platform sepolicy
-    if platform_decompiled_rules is not None:
-        mld.add_many(platform_decompiled_rules, lambda r: r.hash_values)
-
     # TODO: get rid of this, as it is only necessary because some of the types
     # in system_ext end up in product, but it's not all of the public types,
     # as some types end up in vendor's versioned policy while they do not end up
     # in product
     remove_unused_types(mld, decompiled_used_types)
 
-    public_types: Set[str] = set()
     public_rules: List[Rule] = []
     if split_public_private:
         assert referencing_rules is not None
-        public_rules = find_public_rules(mld, referencing_rules, public_types)
+        public_rules = find_public_rules(mld, referencing_rules, set())
 
     source = parse_source(
         macros_paths,
@@ -413,19 +408,42 @@ def decompile_cil():
         verbose=verbose,
     )
 
+    shutil.rmtree(output_dir, ignore_errors=True)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
     if split_public_private:
+        # Add all public rules into a separate dictionary to be able to group them
+        # and do the same processing as private rules
+        public_mld: MultiLevelDict[Rule] = MultiLevelDict(
+            RULE_DYNAMIC_PARTS_INDEX,
+        )
         public_mld.add_many(public_rules, lambda r: r.hash_values)
 
-    process_rules(
-        public_mld,
-        source=source,
-        public_rules=public_rules,
-        platform_decompiled_rules=platform_decompiled_rules,
-        rule_matches=rule_matches,
-        name='public',
-        remove_public=False,
-        verbose=verbose,
-    )
+        process_rules(
+            public_mld,
+            source=source,
+            public_rules=public_rules,
+            platform_decompiled_rules=platform_decompiled_rules,
+            rule_matches=rule_matches,
+            name='public',
+            remove_public=False,
+            verbose=verbose,
+        )
+
+        private_output_dir = Path(output_dir, 'private')
+        private_output_dir.mkdir(parents=True, exist_ok=True)
+
+        public_output_dir = Path(output_dir, 'public')
+        public_output_dir.mkdir(parents=True, exist_ok=True)
+
+        public_grouped_rules = group_rules(public_mld)
+        output_grouped_rules(
+            public_grouped_rules,
+            rule_matches,
+            public_output_dir,
+        )
+    else:
+        private_output_dir = output_dir
 
     # Remove decompiled contexts also found in the source contexts
     decompiled_contexts = remove_source_contexts(
@@ -442,27 +460,10 @@ def decompile_cil():
     )
 
     grouped_rules = group_rules(mld)
-    public_grouped_rules = group_rules(public_mld)
-
-    shutil.rmtree(output_dir, ignore_errors=True)
-    output_dir.mkdir(parents=True, exist_ok=True)
-
-    if split_public_private:
-        private_output_dir = Path(output_dir, 'private')
-        private_output_dir.mkdir(parents=True, exist_ok=True)
-    else:
-        private_output_dir = output_dir
 
     output_contexts(decompiled_contexts, private_output_dir)
     output_genfs_contexts(decompiled_genfs_rules, private_output_dir)
     output_grouped_rules(grouped_rules, rule_matches, private_output_dir)
-
-    if split_public_private:
-        public_output_dir = Path(output_dir, 'public')
-        public_output_dir.mkdir(parents=True, exist_ok=True)
-        output_grouped_rules(
-            public_grouped_rules, rule_matches, public_output_dir
-        )
 
 
 if __name__ == '__main__':
