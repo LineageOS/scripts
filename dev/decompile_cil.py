@@ -7,11 +7,12 @@ from __future__ import annotations
 import shutil
 from argparse import ArgumentParser
 from pathlib import Path
-from typing import Dict, List, Optional, Set
+from typing import Dict, List, Optional, Set, Tuple
 
 from sepolicy.cil_policy import decompile_one_cil
 from sepolicy.conditional_type import ConditionalType
 from sepolicy.contexts import (
+    ContextsType,
     find_contexts_used_types,
     output_contexts,
     output_genfs_contexts,
@@ -22,6 +23,7 @@ from sepolicy.contexts import (
     split_contexts_text,
 )
 from sepolicy.match import (
+    RuleMatch,
     discard_rule_matches,
     find_public_rules,
     find_used_types,
@@ -35,11 +37,30 @@ from sepolicy.output import (
     output_grouped_rules,
 )
 from sepolicy.rule import RULE_DYNAMIC_PARTS_INDEX, Rule
-from sepolicy.source_policy import parse_source
+from sepolicy.source_policy import ParsedSource, parse_source
 from utils.mld import MultiLevelDict
 from utils.utils import Color, android_root, color_print
 
 system_sepolicy_path = Path(android_root, 'system/sepolicy')
+
+
+def count_decompiled_rules(
+    mld: MultiLevelDict[Rule],
+    decompiled_contexts: Optional[
+        Dict[
+            ContextsType,
+            List[Tuple[str, ...]],
+        ]
+    ],
+    decompiled_genfs_rules: Optional[List[Rule]],
+):
+    num_decompiled_contexts = sum(
+        len(c) for c in (decompiled_contexts or {}).values()
+    )
+    num_decompiled_rules = (
+        len(mld) + len(decompiled_genfs_rules or []) + num_decompiled_contexts
+    )
+    return num_decompiled_rules
 
 
 def get_macros_paths(version: str, current: bool):
@@ -157,6 +178,55 @@ def get_selinux_dir_policy(selinux_dir: Path):
         referencing_policy_path,
         referencing_policy_version,
     )
+
+
+def process_output_rules(
+    mld: MultiLevelDict[Rule],
+    genfs_rules: Optional[List[Rule]],
+    contexts: Optional[Dict[ContextsType, List[Tuple[str, ...]]]],
+    removed_rules: List[Tuple[str, List[Rule]]],
+    output_dir: Path,
+    rule_matches: List[RuleMatch],
+    source: ParsedSource,
+    verbose: bool,
+    name: str,
+):
+    process_rules(
+        mld,
+        source=source,
+        removed_rules=removed_rules,
+        rule_matches=rule_matches,
+        name=name,
+        verbose=verbose,
+    )
+
+    # Remove decompiled contexts also found in the source contexts
+    if contexts is not None:
+        contexts = remove_source_contexts(
+            contexts,
+            source.contexts,
+        )
+
+    if genfs_rules is not None:
+        genfs_rules = remove_source_genfs_rules(
+            genfs_rules,
+            source.genfs_rules,
+        )
+
+    count = count_decompiled_rules(
+        mld,
+        contexts,
+        genfs_rules,
+    )
+    color_print(f'Leftover {name} rules: {count}', color=Color.GREEN)
+
+    grouped_rules = group_rules(mld)
+
+    if contexts is not None:
+        output_contexts(contexts, output_dir)
+    if genfs_rules is not None:
+        output_genfs_contexts(genfs_rules, output_dir)
+    output_grouped_rules(grouped_rules, rule_matches, output_dir)
 
 
 def decompile_cil():
@@ -351,22 +421,12 @@ def decompile_cil():
 
     color_print(f'Found {len(source.rules)} source rules', color=Color.GREEN)
 
-    def count_decompiled_rules():
-        num_decompiled_contexts = sum(
-            len(c) for c in decompiled_contexts.values()
-        )
-        num_decompiled_rules = (
-            len(mld)
-            + len(public_mld)
-            + len(decompiled_genfs_rules)
-            + num_decompiled_contexts
-        )
-        return num_decompiled_rules
-
-    color_print(
-        f'Found {count_decompiled_rules()} prebuilt rules',
-        color=Color.GREEN,
+    count = count_decompiled_rules(
+        mld,
+        decompiled_contexts,
+        decompiled_genfs_rules,
     )
+    color_print(f'Found {count} prebuilt rules', color=Color.GREEN)
 
     rule_matches = match_macros_rules(
         mld,
@@ -388,71 +448,53 @@ def decompile_cil():
             'prebuilt platform',
         )
 
-    process_rules(
-        mld,
-        source=source,
-        public_rules=public_rules,
-        platform_decompiled_rules=platform_decompiled_rules,
-        rule_matches=rule_matches,
-        name='private',
-        remove_public=True,
-        verbose=verbose,
-    )
-
     shutil.rmtree(output_dir, ignore_errors=True)
     output_dir.mkdir(parents=True, exist_ok=True)
 
+    private_output_dir = output_dir
     if split_public_private:
+        private_output_dir = Path(output_dir, 'private')
+        private_output_dir.mkdir(parents=True, exist_ok=True)
+
+    process_output_rules(
+        mld=mld,
+        genfs_rules=decompiled_genfs_rules,
+        contexts=decompiled_contexts,
+        removed_rules=[
+            ('source', source.rules),
+            ('prebuilt platform', platform_decompiled_rules or []),
+            ('public', public_rules),
+        ],
+        output_dir=private_output_dir,
+        rule_matches=rule_matches,
+        source=source,
+        verbose=verbose,
+        name='private',
+    )
+
+    if split_public_private:
+        public_output_dir = Path(output_dir, 'public')
+        public_output_dir.mkdir(parents=True, exist_ok=True)
+
         # Add all public rules into a separate dictionary to be able to group them
         # and do the same processing as private rules
         public_mld = MultiLevelDict[Rule](RULE_DYNAMIC_PARTS_INDEX)
         public_mld.add_many(public_rules, lambda r: r.hash_values)
 
-        process_rules(
-            public_mld,
-            source=source,
-            public_rules=public_rules,
-            platform_decompiled_rules=platform_decompiled_rules,
+        process_output_rules(
+            mld=public_mld,
+            genfs_rules=None,
+            contexts=None,
+            output_dir=public_output_dir,
+            removed_rules=[
+                ('source', source.rules),
+                ('prebuilt platform', platform_decompiled_rules or []),
+            ],
             rule_matches=rule_matches,
-            name='public',
-            remove_public=False,
+            source=source,
             verbose=verbose,
+            name='public',
         )
-
-        private_output_dir = Path(output_dir, 'private')
-        private_output_dir.mkdir(parents=True, exist_ok=True)
-
-        public_output_dir = Path(output_dir, 'public')
-        public_output_dir.mkdir(parents=True, exist_ok=True)
-
-        public_grouped_rules = group_rules(public_mld)
-        output_grouped_rules(
-            public_grouped_rules,
-            rule_matches,
-            public_output_dir,
-        )
-    else:
-        private_output_dir = output_dir
-
-    # Remove decompiled contexts also found in the source contexts
-    decompiled_contexts = remove_source_contexts(
-        decompiled_contexts,
-        source.contexts,
-    )
-    decompiled_genfs_rules = remove_source_genfs_rules(
-        decompiled_genfs_rules,
-        source.genfs_rules,
-    )
-
-    color_print(
-        f'Leftover rules: {count_decompiled_rules()}', color=Color.GREEN
-    )
-
-    grouped_rules = group_rules(mld)
-
-    output_contexts(decompiled_contexts, private_output_dir)
-    output_genfs_contexts(decompiled_genfs_rules, private_output_dir)
-    output_grouped_rules(grouped_rules, rule_matches, private_output_dir)
 
 
 if __name__ == '__main__':

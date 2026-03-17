@@ -1034,33 +1034,16 @@ def find_public_rules(mld: MultiLevelDict[Rule], referencing_rules: List[Rule]):
 def process_rules(
     m: MultiLevelDict[Rule],
     source: ParsedSource,
-    public_rules: List[Rule],
-    platform_decompiled_rules: Optional[List[Rule]],
+    removed_rules: List[Tuple[str, List[Rule]]],
     rule_matches: List[RuleMatch],
     name: str,
-    remove_public: bool,
     verbose: bool,
 ):
-    remove_rules(
-        m,
-        source.rules,
-        'source',
-        name,
-    )
-
-    if platform_decompiled_rules is not None:
+    for rules_name, rules in removed_rules:
         remove_rules(
             m,
-            platform_decompiled_rules,
-            'prebuilt platform',
-            name,
-        )
-
-    if remove_public:
-        remove_rules(
-            m,
-            public_rules,
-            'public',
+            rules,
+            rules_name,
             name,
         )
 
