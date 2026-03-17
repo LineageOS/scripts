@@ -411,9 +411,7 @@ def decompile_cil():
     if split_public_private:
         # Add all public rules into a separate dictionary to be able to group them
         # and do the same processing as private rules
-        public_mld: MultiLevelDict[Rule] = MultiLevelDict(
-            RULE_DYNAMIC_PARTS_INDEX,
-        )
+        public_mld = MultiLevelDict[Rule](RULE_DYNAMIC_PARTS_INDEX)
         public_mld.add_many(public_rules, lambda r: r.hash_values)
 
         process_rules(
