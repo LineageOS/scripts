@@ -276,9 +276,6 @@ def decompile_cil():
             'platform policy',
         )
 
-    # Find all used types and remove all unused ones
-    decompiled_used_types: Set[str] = set()
-
     decompiled_rules, decompiled_genfs_rules = decompile_one_cil(
         policy,
         conditional_types_map,
@@ -314,6 +311,8 @@ def decompile_cil():
         decompiled_contexts_texts,
     )
 
+    # Find all used types and remove all unused ones
+    decompiled_used_types: Set[str] = set()
     find_used_types(decompiled_rules, decompiled_used_types)
     find_used_types(decompiled_genfs_rules, decompiled_used_types)
     find_contexts_used_types(decompiled_contexts, decompiled_used_types)
