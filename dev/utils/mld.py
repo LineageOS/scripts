@@ -6,9 +6,11 @@ from __future__ import annotations
 import itertools
 from collections.abc import Hashable
 from typing import (
+    Callable,
     Dict,
     Generator,
     Generic,
+    Iterable,
     List,
     Sequence,
     Set,
@@ -62,6 +64,14 @@ class MultiLevelDict(Generic[T]):
                 levels_data[t] = set()
 
             levels_data[t].add(value)
+
+    def add_many(
+        self,
+        values: Iterable[T],
+        fn: Callable[[T], Sequence[Hashable]],
+    ):
+        for value in values:
+            self.add(fn(value), value)
 
     def remove(self, keys: Sequence[Hashable], value: T):
         self.__all_data.remove(value)

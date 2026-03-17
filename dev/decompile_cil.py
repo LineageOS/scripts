@@ -328,18 +328,14 @@ def decompile_cil():
     # and do the same processing as private rules
     public_mld: MultiLevelDict[Rule] = MultiLevelDict(RULE_DYNAMIC_PARTS_INDEX)
 
-    for rule in decompiled_rules:
-        # Add partial matches to this rule
-        # Start partial matching after the first key
-        mld.add(rule.hash_values, rule)
+    mld.add_many(decompiled_rules, lambda r: r.hash_values)
 
     # Add platform rules and remove them later to allow matching
     # set_prop(vendor_init, ...)
     # Since somehow allow vendor_init property_socket:sock_file write;
     # only ends up in platform sepolicy
     if platform_decompiled_rules is not None:
-        for rule in platform_decompiled_rules:
-            mld.add(rule.hash_values, rule)
+        mld.add_many(platform_decompiled_rules, lambda r: r.hash_values)
 
     # TODO: get rid of this, as it is only necessary because some of the types
     # in system_ext end up in product, but it's not all of the public types,
@@ -418,8 +414,7 @@ def decompile_cil():
     )
 
     if split_public_private:
-        for public_rule in public_rules:
-            public_mld.add(public_rule.hash_values, public_rule)
+        public_mld.add_many(public_rules, lambda r: r.hash_values)
 
     process_rules(
         public_mld,
