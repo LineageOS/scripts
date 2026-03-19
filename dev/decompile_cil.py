@@ -36,6 +36,7 @@ from sepolicy.output import (
     group_rules,
     output_grouped_rules,
 )
+from sepolicy.policy_info import get_selinux_dir_policy
 from sepolicy.rule import RULE_DYNAMIC_PARTS_INDEX, Rule
 from sepolicy.source_policy import ParsedSource, parse_source
 from utils.mld import MultiLevelDict
@@ -85,99 +86,6 @@ def get_rules_paths(version: Optional[str], current: bool):
         # Vendor sepolicy is not versioned, this is a best effort
         vendor_sepolicy_path,
     ]
-
-
-def get_sdk_value(build_prop_path: Path):
-    SDK_PROP = 'ro.build.version.sdk='
-    sdk_value_str: Optional[str] = None
-
-    for line in build_prop_path.read_text().splitlines():
-        if line.startswith(SDK_PROP):
-            sdk_value_str = line[len(SDK_PROP) :]
-
-    if sdk_value_str is None:
-        return None
-
-    # TODO: find the proper value
-    if sdk_value_str == '36':
-        return '202504'
-    elif sdk_value_str == '35':
-        return '202404'
-
-    return f'{sdk_value_str}.0'
-
-
-def get_selinux_dir_policy(selinux_dir: Path):
-    partition_root = selinux_dir.parent.parent
-    partition_name = partition_root.name
-    dump_root = partition_root.parent
-
-    vendor_policy_path = Path(dump_root, 'vendor/etc/selinux')
-    system_policy_path = Path(dump_root, 'system/etc/selinux')
-    platform_build_prop_path = Path(dump_root, 'system/build.prop')
-
-    split_public_private = False
-    referencing_policy_path = None
-    referencing_policy_version = None
-
-    # Read policy for vendor / odm
-    # For system / system_ext / product, this is used to find public
-    # types
-    # For vendor / odm, this is loaded to allow proper macro resolution
-    versioned_platform_policy_path = Path(
-        vendor_policy_path,
-        'plat_pub_versioned.cil',
-    )
-    assert versioned_platform_policy_path.exists(), (
-        versioned_platform_policy_path
-    )
-
-    # Read policy version for vendor / odm
-    versioned_platform_policy_version_path = Path(
-        vendor_policy_path,
-        'plat_sepolicy_vers.txt',
-    )
-    assert versioned_platform_policy_version_path.exists(), (
-        versioned_platform_policy_version_path
-    )
-    versioned_platform_policy_version = (
-        versioned_platform_policy_version_path.read_text().strip()
-    )
-
-    if partition_name in ['vendor', 'odm']:
-        platform_policy_path = versioned_platform_policy_path
-        policy_version = versioned_platform_policy_version
-    else:
-        platform_policy_path = Path(
-            system_policy_path,
-            'plat_sepolicy.cil',
-        )
-        assert platform_policy_path.exists(), platform_policy_path
-
-        policy_version = get_sdk_value(platform_build_prop_path)
-
-        split_public_private = True
-        referencing_policy_path = versioned_platform_policy_path
-        referencing_policy_version = versioned_platform_policy_version
-
-    if partition_name == 'system':
-        partition_name = 'plat'
-        platform_policy_path = None
-
-    policy_path = Path(selinux_dir, f'{partition_name}_sepolicy.cil')
-
-    assert policy_path.exists(), policy_path
-    assert policy_version is not None
-
-    return (
-        platform_policy_path,
-        policy_path,
-        policy_version,
-        partition_name,
-        split_public_private,
-        referencing_policy_path,
-        referencing_policy_version,
-    )
 
 
 def process_output_rules(
@@ -306,40 +214,36 @@ def decompile_cil():
     extra_rules_paths = [Path(s) for s in args.extra_rules]
     output_dir = Path(args.output)
     selinux_dir = Path(args.selinux)
-    (
-        platform_policy,
-        policy,
-        version,
-        partition_name,
-        split_public_private,
-        referencing_policy_path,
-        referencing_policy_version,
-    ) = get_selinux_dir_policy(
-        selinux_dir,
-    )
+
+    policy_info = get_selinux_dir_policy(selinux_dir)
 
     if not macros_paths:
-        macros_paths = get_macros_paths(version, current_policy)
+        macros_paths = get_macros_paths(policy_info.version, current_policy)
 
     if not rules_paths:
-        rules_paths = get_rules_paths(version, current_policy)
+        rules_paths = get_rules_paths(policy_info.version, current_policy)
 
-    print(f'Found platform policy: {platform_policy}')
-    print(f'Found policy: {policy}')
-    print(f'Found policy version: {version}')
-    if referencing_policy_path is not None:
-        print(f'Found referencing policy: {referencing_policy_path}')
-    if referencing_policy_version is not None:
-        print(f'Found referencing policy version: {referencing_policy_version}')
+    print(f'Found platform policy: {policy_info.platform_policy_path}')
+    print(f'Found policy: {policy_info.policy_path}')
+    print(f'Found policy version: {policy_info.version}')
+    if policy_info.referencing_policy_path is not None:
+        print(
+            f'Found referencing policy: {policy_info.referencing_policy_path}'
+        )
+    if policy_info.referencing_policy_version is not None:
+        print(
+            f'Found referencing policy version: '
+            f'{policy_info.referencing_policy_version}'
+        )
 
     conditional_types_map: Dict[str, ConditionalType] = {}
     missing_generated_types: Set[str] = set()
 
     decompiled_rules, decompiled_genfs_rules = decompile_one_cil(
-        policy,
+        policy_info.policy_path,
         conditional_types_map,
         missing_generated_types,
-        version,
+        policy_info.version,
         'decompiled policy',
     )
 
@@ -356,19 +260,19 @@ def decompile_cil():
     # Since somehow allow vendor_init property_socket:sock_file write;
     # only ends up in platform sepolicy
     platform_decompiled_rules = None
-    if platform_policy is not None:
+    if policy_info.platform_policy_path is not None:
         platform_decompiled_rules, _ = decompile_one_cil(
-            platform_policy,
+            policy_info.platform_policy_path,
             conditional_types_map,
             set(),
-            version,
+            policy_info.version,
             'platform policy',
         )
         mld.add_many(platform_decompiled_rules, lambda r: r.hash_values)
 
     decompiled_contexts_file_paths = resolve_contexts_paths(
         [selinux_dir],
-        partition_name,
+        policy_info.partition_name,
         None,
         verbose,
     )
@@ -392,17 +296,17 @@ def decompile_cil():
     remove_unused_types(mld, decompiled_used_types)
 
     public_rules: List[Rule] = []
-    if split_public_private:
-        assert referencing_policy_path is not None
-        assert referencing_policy_version is not None
+    if policy_info.split_public_private:
+        assert policy_info.referencing_policy_path is not None
+        assert policy_info.referencing_policy_version is not None
 
         # Load rules being referenced by other sepolicy which need to be
         # public
         referencing_rules, _ = decompile_one_cil(
-            referencing_policy_path,
+            policy_info.referencing_policy_path,
             {},
             set(),
-            referencing_policy_version,
+            policy_info.referencing_policy_version,
             'referencing policy',
         )
 
@@ -416,7 +320,7 @@ def decompile_cil():
         system_sepolicy_path,
         args.var,
         verbose,
-        version,
+        policy_info.version,
     )
 
     color_print(f'Found {len(source.rules)} source rules', color=Color.GREEN)
@@ -452,7 +356,7 @@ def decompile_cil():
     output_dir.mkdir(parents=True, exist_ok=True)
 
     private_output_dir = output_dir
-    if split_public_private:
+    if policy_info.split_public_private:
         private_output_dir = Path(output_dir, 'private')
         private_output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -472,7 +376,7 @@ def decompile_cil():
         name='private',
     )
 
-    if split_public_private:
+    if policy_info.split_public_private:
         public_output_dir = Path(output_dir, 'public')
         public_output_dir.mkdir(parents=True, exist_ok=True)
 
