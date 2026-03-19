@@ -272,23 +272,6 @@ def decompile_cil():
     # in product
     remove_unused_types(mld, decompiled_used_types)
 
-    public_rules: List[Rule] = []
-    if policy_info.split_public_private:
-        assert policy_info.referencing_policy_path is not None
-        assert policy_info.referencing_policy_version is not None
-
-        # Load rules being referenced by other sepolicy which need to be
-        # public
-        referencing_rules, _ = decompile_one_cil(
-            policy_info.referencing_policy_path,
-            {},
-            set(),
-            policy_info.referencing_policy_version,
-            'referencing policy',
-        )
-
-        public_rules = find_public_rules(mld, referencing_rules)
-
     source = parse_source(
         macros_paths,
         extra_macros_paths,
@@ -332,10 +315,26 @@ def decompile_cil():
     shutil.rmtree(output_dir, ignore_errors=True)
     output_dir.mkdir(parents=True, exist_ok=True)
 
+    public_rules: List[Rule] = []
     private_output_dir = output_dir
     if policy_info.split_public_private:
         private_output_dir = Path(output_dir, 'private')
         private_output_dir.mkdir(parents=True, exist_ok=True)
+
+        # Load rules being referenced by other sepolicy which need to be
+        # public
+        assert policy_info.referencing_policy_path is not None
+        assert policy_info.referencing_policy_version is not None
+        referencing_rules, _ = decompile_one_cil(
+            policy_info.referencing_policy_path,
+            {},
+            set(),
+            policy_info.referencing_policy_version,
+            'referencing policy',
+        )
+
+        public_rules = find_public_rules(mld, referencing_rules)
+
 
     process_output_rules(
         mld=mld,
