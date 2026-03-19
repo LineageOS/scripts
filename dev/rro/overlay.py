@@ -353,6 +353,7 @@ def parse_overlay_from_android_bp(
         parse_all_values=True,
         read_raw_resources=True,
         track_index=track_index,
+        remove_translatable=True,
         # Dir names to parse, we are parsing an overlay here so we do not want
         # to limit these
         dir_names=None,

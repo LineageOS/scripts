@@ -138,6 +138,7 @@ def parse_xml_resources(
     file_name: str,
     is_default: bool,
     track_index: bool,
+    remove_translatable: bool,
     data: bytes,
     resources: Set[Resource],
     resource_names: Optional[FrozenSet[str]],
@@ -201,7 +202,7 @@ def parse_xml_resources(
 
         # Overlays don't have translatable=false, remove it to fix
         # equality check
-        if TRANSLATABLE_KEY in node.attrib:
+        if remove_translatable and TRANSLATABLE_KEY in node.attrib:
             del node.attrib[TRANSLATABLE_KEY]
 
         if MSGID_KEY in node.attrib:
@@ -245,6 +246,7 @@ def parse_package_resources_dir(
     parse_all_values: bool,
     read_raw_resources: bool,
     track_index: bool,
+    remove_translatable: bool,
     dir_names: Optional[FrozenDict[str, FrozenSet[str]]],
 ):
     resources: Set[Resource] = set()
@@ -305,6 +307,7 @@ def parse_package_resources_dir(
                     file_name=file_name,
                     is_default=is_default,
                     track_index=track_index,
+                    remove_translatable=remove_translatable,
                     data=data,
                     resources=resources,
                     resource_names=resource_names,
@@ -333,6 +336,7 @@ def parse_resources(
     parse_all_values: bool,
     read_raw_resources: bool,
     track_index: bool,
+    remove_translatable: bool,
     dir_names: Optional[FrozenDict[str, FrozenSet[str]]],
 ):
     for resources_path in resources_paths:
@@ -341,6 +345,7 @@ def parse_resources(
             parse_all_values=parse_all_values,
             read_raw_resources=read_raw_resources,
             track_index=track_index,
+            remove_translatable=remove_translatable,
             dir_names=dir_names,
         )
         resource_map.add_many(resources)
@@ -361,6 +366,7 @@ def get_target_package_resources(
         parse_all_values=parse_all_values,
         read_raw_resources=False,
         track_index=True,
+        remove_translatable=False,
         dir_names=dir_names,
     )
     return resource_map
@@ -629,6 +635,7 @@ def fixup_resource_attrib(
 
     assign_attrib('type')
     assign_attrib('format')
+    assign_attrib(TRANSLATABLE_KEY)
 
     return tag, attrib
 
