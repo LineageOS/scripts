@@ -38,7 +38,7 @@ from sepolicy.output import (
 )
 from sepolicy.policy_info import get_selinux_dir_policy
 from sepolicy.rule import RULE_DYNAMIC_PARTS_INDEX, Rule
-from sepolicy.source_policy import ParsedSource, parse_source
+from sepolicy.source_policy import SourcePolicy, parse_source
 from utils.mld import MultiLevelDict
 from utils.utils import Color, android_root, color_print
 
@@ -95,7 +95,7 @@ def process_output_rules(
     removed_rules: List[Tuple[str, List[Rule]]],
     output_dir: Path,
     rule_matches: List[RuleMatch],
-    source: ParsedSource,
+    source: SourcePolicy,
     verbose: bool,
     name: str,
 ):

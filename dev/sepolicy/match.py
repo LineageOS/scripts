@@ -25,7 +25,7 @@ from sepolicy.rule import (
     rule_hash_value,
     rule_part,
 )
-from sepolicy.source_policy import ParsedSource
+from sepolicy.source_policy import SourcePolicy
 from utils.mld import MultiLevelDict
 from utils.utils import Color, color_print
 
@@ -1033,7 +1033,7 @@ def find_public_rules(mld: MultiLevelDict[Rule], referencing_rules: List[Rule]):
 
 def process_rules(
     m: MultiLevelDict[Rule],
-    source: ParsedSource,
+    source: SourcePolicy,
     removed_rules: List[Tuple[str, List[Rule]]],
     rule_matches: List[RuleMatch],
     name: str,

@@ -35,7 +35,7 @@ from sepolicy.rules import parse_rules, resolve_rule_paths
 
 
 @dataclass
-class ParsedSource:
+class SourcePolicy:
     rules: List[Rule]
     genfs_rules: List[Rule]
     perms: List[Tuple[str, Set[str]]]
@@ -226,7 +226,7 @@ def parse_source(
     # external/selinux/libsepol/src/module_to_cil.c
     source_rules.append(Rule('attribute', ('cil_gen_require',), ()))
 
-    return ParsedSource(
+    return SourcePolicy(
         rules=source_rules,
         contexts=source_contexts,
         genfs_rules=source_genfs_rules,
