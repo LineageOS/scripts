@@ -160,27 +160,10 @@ def decompile_cil():
         help='Path to selinux directory (eg: vendor/etc/selinux)',
     )
     parser.add_argument(
-        '-m',
-        '--macros',
-        action='append',
-        default=[],
-        help='Path to directory containing macros '
-        '(eg: system/sepolicy/prebuilts/api/31.0)',
-    )
-    parser.add_argument(
         '--extra-macros',
         action='append',
         default=[],
         help='Path to files or directories containing extra macros',
-    )
-    parser.add_argument(
-        '-r',
-        '--rules',
-        action='append',
-        default=[],
-        help='Path to files or directories containing rules and contexts to be removed '
-        '(eg: system/sepolicy/prebuilts/api/31.0), '
-        'will default to the macros path if not specified',
     )
     parser.add_argument(
         '--extra-rules',
@@ -208,20 +191,14 @@ def decompile_cil():
 
     current_policy: bool = args.current
     verbose: bool = args.verbose
-    macros_paths = [Path(s) for s in args.macros]
-    rules_paths = [Path(s) for s in args.rules]
     extra_macros_paths = [Path(s) for s in args.extra_macros]
     extra_rules_paths = [Path(s) for s in args.extra_rules]
     output_dir = Path(args.output)
     selinux_dir = Path(args.selinux)
 
     policy_info = get_selinux_dir_policy(selinux_dir)
-
-    if not macros_paths:
-        macros_paths = get_macros_paths(policy_info.version, current_policy)
-
-    if not rules_paths:
-        rules_paths = get_rules_paths(policy_info.version, current_policy)
+    macros_paths = get_macros_paths(policy_info.version, current_policy)
+    rules_paths = get_rules_paths(policy_info.version, current_policy)
 
     print(f'Found platform policy: {policy_info.platform_policy_path}')
     print(f'Found policy: {policy_info.policy_path}')
