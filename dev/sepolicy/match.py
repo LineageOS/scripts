@@ -1016,18 +1016,11 @@ def remove_unused_types(mld: MultiLevelDict[Rule], used_types: Set[str]):
     )
 
 
-def find_public_rules(
-    mld: MultiLevelDict[Rule],
-    referencing_rules: List[Rule],
-    public_types: Set[str],
-):
+def find_public_rules(mld: MultiLevelDict[Rule], referencing_rules: List[Rule]):
     public_rules: List[Rule] = []
 
     for rule in referencing_rules:
         for matched_rule in mld.match(rule.hash_values):
-            if rule.rule_type == RuleType.TYPEATTRIBUTE:
-                assert isinstance(rule.parts[0], str)
-                public_types.add(rule.parts[0])
             public_rules.append(matched_rule)
 
     color_print(

@@ -336,7 +336,7 @@ def decompile_cil():
             'referencing policy',
         )
 
-        public_rules = find_public_rules(mld, referencing_rules, set())
+        public_rules = find_public_rules(mld, referencing_rules)
 
     source = parse_source(
         macros_paths,
