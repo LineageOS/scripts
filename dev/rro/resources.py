@@ -49,7 +49,6 @@ Element = etree._Element  # type: ignore
 ElementTree = etree._ElementTree  # type: ignore
 Comment = etree._Comment  # type: ignore
 
-TRANSLATABLE_KEY = 'translatable'
 FEATURE_FLAG_KEY = f'{{{NAMESPACE}}}featureFlag'
 MSGID_KEY = 'msgid'
 RESOURCES_TAG = 'resources'
@@ -198,11 +197,6 @@ def parse_xml_resources(
 
             if tag == STRING_TAG:
                 node.text = normalize_node_text_string(node.text)
-
-        # Overlays don't have translatable=false, remove it to fix
-        # equality check
-        if TRANSLATABLE_KEY in node.attrib:
-            del node.attrib[TRANSLATABLE_KEY]
 
         if MSGID_KEY in node.attrib:
             del node.attrib[MSGID_KEY]
@@ -629,6 +623,7 @@ def fixup_resource_attrib(
 
     assign_attrib('type')
     assign_attrib('format')
+    assign_attrib('translatable')
 
     return tag, attrib
 
