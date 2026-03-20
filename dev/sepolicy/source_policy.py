@@ -215,10 +215,8 @@ def parse_source(
     if technical_debt_path is not None:
         source_technical_debt_rules, _ = decompile_one_cil(
             technical_debt_path,
-            {},
-            set(),
-            version,
-            'source technical debt policy',
+            version=version,
+            name='source technical debt policy',
         )
         source_rules += source_technical_debt_rules
 

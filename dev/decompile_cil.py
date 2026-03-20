@@ -7,26 +7,20 @@ from __future__ import annotations
 import shutil
 from argparse import ArgumentParser
 from pathlib import Path
-from typing import Dict, List, Optional, Set, Tuple
+from typing import Dict, List, Optional, Tuple
 
-from sepolicy.cil_policy import decompile_one_cil
-from sepolicy.conditional_type import ConditionalType
+from sepolicy.cil_policy import decompile_one_cil, parse_prebuilt
 from sepolicy.contexts import (
     ContextsType,
-    find_contexts_used_types,
     output_contexts,
     output_genfs_contexts,
-    parse_contexts_texts,
     remove_source_contexts,
     remove_source_genfs_rules,
-    resolve_contexts_paths,
-    split_contexts_text,
 )
 from sepolicy.match import (
     RuleMatch,
     discard_rule_matches,
     find_public_rules,
-    find_used_types,
     match_macros_rules,
     process_rules,
     remove_rules_from_rule_matches,
@@ -213,65 +207,6 @@ def decompile_cil():
             f'{policy_info.referencing_policy_version}'
         )
 
-    conditional_types_map: Dict[str, ConditionalType] = {}
-    missing_generated_types: Set[str] = set()
-
-    decompiled_rules, decompiled_genfs_rules = decompile_one_cil(
-        policy_info.policy_path,
-        conditional_types_map,
-        missing_generated_types,
-        policy_info.version,
-        'decompiled policy',
-    )
-
-    # Generate match dicts starting after the first token of the rule
-    # which is almost always the type
-    # This means that we can't match rules not knowing their type, but
-    # that's fine usually
-    mld: MultiLevelDict[Rule] = MultiLevelDict(RULE_DYNAMIC_PARTS_INDEX)
-    mld.add_many(decompiled_rules, lambda r: r.hash_values)
-
-    # Load generated types and rules from platform policy
-    # Add platform rules and remove them later to allow matching
-    # set_prop(vendor_init, ...)
-    # Since somehow allow vendor_init property_socket:sock_file write;
-    # only ends up in platform sepolicy
-    platform_decompiled_rules = None
-    if policy_info.platform_policy_path is not None:
-        platform_decompiled_rules, _ = decompile_one_cil(
-            policy_info.platform_policy_path,
-            conditional_types_map,
-            set(),
-            policy_info.version,
-            'platform policy',
-        )
-        mld.add_many(platform_decompiled_rules, lambda r: r.hash_values)
-
-    decompiled_contexts_file_paths = resolve_contexts_paths(
-        [selinux_dir],
-        policy_info.partition_name,
-        None,
-        verbose,
-    )
-    decompiled_contexts_texts = split_contexts_text(
-        decompiled_contexts_file_paths,
-    )
-    decompiled_contexts, _ = parse_contexts_texts(
-        decompiled_contexts_texts,
-    )
-
-    # Find all used types and remove all unused ones
-    decompiled_used_types: Set[str] = set()
-    find_used_types(decompiled_rules, decompiled_used_types)
-    find_used_types(decompiled_genfs_rules, decompiled_used_types)
-    find_contexts_used_types(decompiled_contexts, decompiled_used_types)
-
-    # TODO: get rid of this, as it is only necessary because some of the types
-    # in system_ext end up in product, but it's not all of the public types,
-    # as some types end up in vendor's versioned policy while they do not end up
-    # in product
-    remove_unused_types(mld, decompiled_used_types)
-
     source = parse_source(
         macros_paths,
         extra_macros_paths,
@@ -285,10 +220,26 @@ def decompile_cil():
 
     color_print(f'Found {len(source.rules)} source rules', color=Color.GREEN)
 
+    prebuilt = parse_prebuilt(policy_info, verbose)
+    prebuilt.extra_rules += [('source', source.rules)]
+
+    # Generate match dicts starting after the first token of the rule
+    # which is almost always the type
+    # This means that we can't match rules not knowing their type, but
+    # that's fine usually
+    mld: MultiLevelDict[Rule] = MultiLevelDict(RULE_DYNAMIC_PARTS_INDEX)
+    mld.add_many(prebuilt.rules, lambda r: r.hash_values)
+
+    # TODO: get rid of this, as it is only necessary because some of the types
+    # in system_ext end up in product, but it's not all of the public types,
+    # as some types end up in vendor's versioned policy while they do not end up
+    # in product
+    remove_unused_types(mld, prebuilt.used_types)
+
     count = count_decompiled_rules(
         mld,
-        decompiled_contexts,
-        decompiled_genfs_rules,
+        prebuilt.contexts,
+        prebuilt.genfs_rules,
     )
     color_print(f'Found {count} prebuilt rules', color=Color.GREEN)
 
@@ -299,17 +250,11 @@ def decompile_cil():
     )
     rule_matches = discard_rule_matches(rule_matches, verbose)
 
-    rule_matches = remove_rules_from_rule_matches(
-        rule_matches,
-        source.rules,
-        'source',
-    )
-
-    if platform_decompiled_rules is not None:
+    for name, extra_rules in prebuilt.extra_rules:
         rule_matches = remove_rules_from_rule_matches(
             rule_matches,
-            platform_decompiled_rules,
-            'prebuilt platform',
+            extra_rules,
+            name,
         )
 
     shutil.rmtree(output_dir, ignore_errors=True)
@@ -327,22 +272,18 @@ def decompile_cil():
         assert policy_info.referencing_policy_version is not None
         referencing_rules, _ = decompile_one_cil(
             policy_info.referencing_policy_path,
-            {},
-            set(),
-            policy_info.referencing_policy_version,
-            'referencing policy',
+            name='referencing policy',
+            version=policy_info.referencing_policy_version,
         )
 
         public_rules = find_public_rules(mld, referencing_rules)
 
-
     process_output_rules(
         mld=mld,
-        genfs_rules=decompiled_genfs_rules,
-        contexts=decompiled_contexts,
+        genfs_rules=prebuilt.genfs_rules,
+        contexts=prebuilt.contexts,
         removed_rules=[
-            ('source', source.rules),
-            ('prebuilt platform', platform_decompiled_rules or []),
+            *prebuilt.extra_rules,
             ('public', public_rules),
         ],
         output_dir=private_output_dir,
@@ -367,8 +308,7 @@ def decompile_cil():
             contexts=None,
             output_dir=public_output_dir,
             removed_rules=[
-                ('source', source.rules),
-                ('prebuilt platform', platform_decompiled_rules or []),
+                *prebuilt.extra_rules,
             ],
             rule_matches=rule_matches,
             source=source,
