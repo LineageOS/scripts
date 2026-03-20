@@ -3,8 +3,6 @@
 
 from __future__ import annotations
 
-from functools import partial
-from itertools import chain
 from pathlib import Path
 from typing import List, Set
 
@@ -120,16 +118,22 @@ def split_rules(
     assert not block.strip(), block
 
 
-def parse_rules(classmap: Classmap, rules: List[str]):
-    from_line_fn = partial(SourceRule.from_line, classmap=classmap)
+def parse_rules(classmap: Classmap, source_lines: List[str]):
     decompiled_rules: List[Rule] = []
     unique_rules: Set[Rule] = set()
 
-    for rule in list(chain.from_iterable(map(from_line_fn, rules))):
+    def add_rule(rule: Rule):
         if rule in unique_rules:
-            continue
+            return
 
         decompiled_rules.append(rule)
         unique_rules.add(rule)
+
+    for source_line in source_lines:
+        SourceRule.from_line(
+            source_line,
+            add_rule=add_rule,
+            classmap=classmap,
+        )
 
     return decompiled_rules

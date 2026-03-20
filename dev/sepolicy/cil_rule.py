@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 from enum import StrEnum
-from typing import Dict, List, Optional, Set
+from typing import Callable, Dict, List, Optional, Set
 
 from sepolicy.conditional_type import ConditionalType, ConditionalTypeRedirect
 from sepolicy.rule import (
@@ -211,9 +211,10 @@ class CilRule(Rule):
         line: str,
         conditional_types_map: Dict[str, ConditionalType],
         missing_generated_types: Set[str],
-        genfs_rules: List[Rule],
+        add_rule: Callable[[Rule], None],
+        add_genfs_rule: Callable[[Rule], None],
         version: Optional[str],
-    ) -> List[Rule]:
+    ):
         def type_redirect(t: str):
             return ConditionalTypeRedirect(
                 t,
@@ -228,23 +229,23 @@ class CilRule(Rule):
 
         # Skip comments and empty lines
         if not is_valid_cil_line(line):
-            return []
+            return
 
         parts = unpack_line(line, '(', ')', ' ')
         if not parts:
-            return []
+            return
 
         assert isinstance(parts[0], str), line
 
         # Remove rules that don't have a meaningful source mapping
         if parts[0] in unknown_rule_types:
-            return []
+            return
 
         # Remove allow $3 $1:process sigchld as it is part of an ifelse
         # statement based on one of the parameters and it is not possible
         # to generate the checks for it as part of macro expansion
         if is_allow_process_sigchld(parts):
-            return []
+            return
 
         varargs: List[str] = []
 
@@ -280,7 +281,7 @@ class CilRule(Rule):
                     (src, dst, parts[3][0]),
                     tuple(varargs),
                 )
-                return [rule]
+                add_rule(rule)
             case (
                 CilRuleType.ALLOWX.value
                 | CilRuleType.AUDITALLOWX.value
@@ -324,7 +325,7 @@ class CilRule(Rule):
                     (src, dst, parts[3][1], parts[3][0]),
                     tuple(varargs),
                 )
-                return [rule]
+                add_rule(rule)
             case CilRuleType.TYPEATTRIBUTE.value:
                 # (typeattribute a)
                 assert len(parts) == 2, line
@@ -333,7 +334,7 @@ class CilRule(Rule):
                 # Remove generated typeattribute as they do not map to a source
                 # rule
                 if is_type_generated(parts[1]):
-                    return []
+                    return
 
                 t = remove_type_suffix(version_suffix, parts[1])
 
@@ -345,7 +346,7 @@ class CilRule(Rule):
                     (t,),
                     (),
                 )
-                return [rule]
+                add_rule(rule)
             case CilRuleType.TYPEATTRIBUTESET.value:
                 assert isinstance(parts[1], str), line
                 v = remove_type_suffix(version_suffix, parts[1])
@@ -360,15 +361,13 @@ class CilRule(Rule):
                         parts[2],
                     )
                     if conditional_type is None:
-                        return []
+                        return
 
                     assert v not in conditional_types_map, line
                     conditional_types_map[v] = conditional_type
-                    return []
+                    return
 
                 # Expand typeattributeset into multiple typeattribute rules
-                expanded_rules: List[Rule] = []
-
                 for t in parts[2]:
                     assert isinstance(t, str), line
                     t = remove_type_suffix(version_suffix, t)
@@ -378,9 +377,7 @@ class CilRule(Rule):
                         (t, v),
                         (),
                     )
-                    expanded_rules.append(rule)
-
-                return expanded_rules
+                    add_rule(rule)
             case RuleType.GENFSCON.value:
                 # (genfscon sysfs /kernel/aov (u object_r sysfs_adspd ((s0) (s0))))
                 assert len(parts) == 4, line
@@ -404,8 +401,7 @@ class CilRule(Rule):
                     (parts[1], parts[2], parts[3][2]),
                     (),
                 )
-                genfs_rules.append(rule)
-                return []
+                add_genfs_rule(rule)
             case CilRuleType.TYPETRANSITION.value:
                 # (typetransition a b c d)
                 # (typetransition a b c "[userfaultfd]" d)
@@ -435,7 +431,7 @@ class CilRule(Rule):
                     (src, dst, parts[3], parts[-1]),
                     tuple(varargs),
                 )
-                return [rule]
+                add_rule(rule)
             case CilRuleType.EXPANDTYPEATTRIBUTE.value:
                 # (expandtypeattribute (a) true)
                 assert len(parts) == 3, line
@@ -449,7 +445,7 @@ class CilRule(Rule):
                     (parts[1][0], parts[2]),
                     (),
                 )
-                return [rule]
+                add_rule(rule)
             case RuleType.TYPE.value:
                 assert len(parts) == 2
                 assert isinstance(parts[1], str)
@@ -459,6 +455,6 @@ class CilRule(Rule):
                     (parts[1],),
                     (),
                 )
-                return [rule]
+                add_rule(rule)
             case _:
                 assert False, line

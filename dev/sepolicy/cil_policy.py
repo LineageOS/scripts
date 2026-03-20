@@ -4,8 +4,6 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from functools import partial
-from itertools import chain
 from pathlib import Path
 from typing import Dict, List, Optional, Set, Tuple
 
@@ -45,16 +43,23 @@ def decompile_one_cil(
     cil_lines = cil_data.splitlines()
 
     genfs_rules: List[Rule] = []
+    rules: List[Rule] = []
 
-    # Convert lines to rules
-    fn = partial(
-        CilRule.from_line,
-        conditional_types_map=conditional_types_map,
-        missing_generated_types=missing_generated_types,
-        genfs_rules=genfs_rules,
-        version=version,
-    )
-    rules = list(chain.from_iterable(map(fn, cil_lines)))
+    def add_rule(rule: Rule):
+        rules.append(rule)
+
+    def add_genfs_rule(rule: Rule):
+        genfs_rules.append(rule)
+
+    for cil_line in cil_lines:
+        CilRule.from_line(
+            cil_line,
+            conditional_types_map=conditional_types_map,
+            missing_generated_types=missing_generated_types,
+            add_rule=add_rule,
+            add_genfs_rule=add_genfs_rule,
+            version=version,
+        )
 
     # ioctl rules are split at comments / newlines by the compiler
     # merge adjacent ioctl rules of the same type back

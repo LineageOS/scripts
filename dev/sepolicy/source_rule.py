@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 from itertools import product
-from typing import List, Optional, Set
+from typing import Callable, List, Optional, Set
 
 from sepolicy.classmap import Classmap
 from sepolicy.conditional_type import ConditionalType
@@ -124,7 +124,10 @@ unknown_rule_types: Set[str] = set(
 
 class SourceRule(Rule):
     @classmethod
-    def genfscon_from_line(cls, line: str):
+    def genfscon_from_line(
+        cls,
+        line: str,
+    ):
         parts = unpack_line(
             line,
             '{',
@@ -149,7 +152,12 @@ class SourceRule(Rule):
         return rule
 
     @classmethod
-    def from_line(cls, line: str, classmap: Optional[Classmap]) -> List[Rule]:
+    def from_line(
+        cls,
+        line: str,
+        add_rule: Callable[[Rule], None],
+        classmap: Optional[Classmap],
+    ):
         parts = unpack_line(
             line,
             '{',
@@ -159,21 +167,19 @@ class SourceRule(Rule):
             ignored_chars=';',
         )
         if not parts:
-            return []
+            return
 
         if not isinstance(parts[0], str) or len(parts) == 1:
             raise ValueError(f'Invalid line: {line}')
 
         if parts[0] in unknown_rule_types:
-            return []
+            return
 
         # Remove allow $3 $1:process sigchld as it is part of an ifelse
         # statement based on one of the parameters and it is not possible
         # to generate the checks for it as part of macro expansion
         if is_allow_process_sigchld(parts):
-            return []
-
-        rules: List[Rule] = []
+            return
 
         match parts[0]:
             case (
@@ -231,7 +237,7 @@ class SourceRule(Rule):
                         (src, dst, class_name),
                         tuple(class_varargs),
                     )
-                    rules.append(rule)
+                    add_rule(rule)
             case RuleType.TYPE_TRANSITION.value:
                 assert len(parts) in [5, 6], line
                 assert isinstance(parts[4], str), line
@@ -254,7 +260,7 @@ class SourceRule(Rule):
                         (src, dst, class_name, parts[4]),
                         tuple(varargs),
                     )
-                    rules.append(rule)
+                    add_rule(rule)
             case (
                 RuleType.ALLOWXPERM.value
                 | RuleType.AUDITALLOWXPERM
@@ -283,7 +289,7 @@ class SourceRule(Rule):
                         (src, dst, class_name, ioctl_or_nlmsg),
                         tuple(ioctls),
                     )
-                    rules.append(rule)
+                    add_rule(rule)
 
             case RuleType.ATTRIBUTE.value:
                 assert len(parts) == 2, line
@@ -294,7 +300,7 @@ class SourceRule(Rule):
                     (parts[1],),
                     (),
                 )
-                return [rule]
+                add_rule(rule)
             case RuleType.TYPEATTRIBUTE.value:
                 assert isinstance(parts[1], str), line
 
@@ -305,7 +311,7 @@ class SourceRule(Rule):
                         (parts[1], t),
                         (),
                     )
-                    rules.append(rule)
+                    add_rule(rule)
             case RuleType.TYPE.value:
                 assert isinstance(parts[1], str), line
 
@@ -314,7 +320,7 @@ class SourceRule(Rule):
                     (parts[1],),
                     (),
                 )
-                rules.append(rule)
+                add_rule(rule)
 
                 # Convert type rules to typeattribute to allow easy matching
                 # with split typeattributeset rules
@@ -325,7 +331,7 @@ class SourceRule(Rule):
                         (parts[1], t),
                         (),
                     )
-                    rules.append(rule)
+                    add_rule(rule)
             case RuleType.EXPANDATTRIBUTE.value:
                 assert len(parts) == 3
                 assert isinstance(parts[1], str), line
@@ -336,8 +342,6 @@ class SourceRule(Rule):
                     (parts[1], parts[2]),
                     (),
                 )
-                rules.append(rule)
+                add_rule(rule)
             case _:
                 assert False, line
-
-        return rules

@@ -637,8 +637,6 @@ def parse_macros(
     classmap: Classmap,
     expanded_macros: List[Tuple[str, str]],
 ):
-    from_line_fn = partial(SourceRule.from_line, classmap=classmap)
-
     expanded_macro_rules: List[Tuple[str, List[Rule]]] = []
     unqiue_macro_name_rules: Set[Tuple[str, FrozenSet[Rule]]] = set()
     unique_macro_rules: Dict[FrozenSet[Rule], str] = {}
@@ -647,8 +645,20 @@ def parse_macros(
     for name, body in expanded_macros:
         lines = body.splitlines()
 
+        rules: List[Rule] = []
+
+        def add_rule(rule: Rule):
+            rules.append(rule)
+
+        from_line_fn = partial(
+            SourceRule.from_line,
+            classmap=classmap,
+            add_rule=add_rule,
+        )
+
         try:
-            rules = list(chain.from_iterable(map(from_line_fn, lines)))
+            for line in lines:
+                from_line_fn(line)
         except ValueError as e:
             if name not in invalid_macro_names:
                 color_print(f'Invalid macro {name}: {e}', color=Color.YELLOW)
