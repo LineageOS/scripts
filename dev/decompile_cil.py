@@ -23,7 +23,6 @@ from sepolicy.match import (
     find_public_rules,
     match_macros_rules,
     process_rules,
-    remove_rules_from_rule_matches,
     remove_unused_types,
 )
 from sepolicy.output import (
@@ -249,13 +248,6 @@ def decompile_cil():
         verbose,
     )
     rule_matches = discard_rule_matches(rule_matches, verbose)
-
-    for name, extra_rules in prebuilt.extra_rules:
-        rule_matches = remove_rules_from_rule_matches(
-            rule_matches,
-            extra_rules,
-            name,
-        )
 
     shutil.rmtree(output_dir, ignore_errors=True)
     output_dir.mkdir(parents=True, exist_ok=True)

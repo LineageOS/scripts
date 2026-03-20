@@ -392,64 +392,6 @@ def replace_macro_rules(
     )
 
 
-def remove_rules_from_rule_matches(
-    all_rule_matches: List[RuleMatch],
-    source_rules: List[Rule],
-    source_name: str,
-):
-    source_rules_set = set(source_rules)
-
-    removed_rule_matches: Set[RuleMatch] = set()
-    removed_rules_in_matches: Set[Rule] = set()
-    added_rule_matches: List[RuleMatch] = []
-    for rule_match in all_rule_matches:
-        removed_rules_in_match: Set[Rule] = set()
-
-        for rule in rule_match.rules:
-            if rule in source_rules_set:
-                removed_rules_in_match.add(rule)
-
-        if not removed_rules_in_match:
-            continue
-
-        removed_rule_matches.add(rule_match)
-        removed_rules_in_matches.update(removed_rules_in_match)
-
-        new_rule_match_rules: List[Rule] = []
-        for rule in rule_match.rules:
-            if rule not in removed_rules_in_match:
-                new_rule_match_rules.append(rule)
-
-        if not new_rule_match_rules:
-            continue
-
-        new_rule_match = RuleMatch(
-            rule_match.macro_name,
-            new_rule_match_rules,
-            rule_match.arg_values,
-        )
-        added_rule_matches.append(new_rule_match)
-
-    new_rule_matches: List[RuleMatch] = []
-    for rule_match in all_rule_matches:
-        if rule_match not in removed_rule_matches:
-            new_rule_matches.append(rule_match)
-
-    for rule_match in added_rule_matches:
-        new_rule_matches.append(rule_match)
-
-    color_print(
-        f'Removed {len(removed_rule_matches)} {source_name} macros',
-        color=Color.GREEN,
-    )
-    color_print(
-        f'Removed {len(removed_rules_in_matches)} {source_name} rules from macros',
-        color=Color.GREEN,
-    )
-
-    return new_rule_matches
-
-
 def remove_rules(
     mld: MultiLevelDict[Rule],
     rules: List[Rule],
