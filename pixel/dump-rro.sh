@@ -508,6 +508,7 @@ declare -a remove_resource_names=(
   android:config_showGesturalNavigationHints
   android:config_smart_battery_available
   android:config_storageManagerDaystoRetainDefault
+  android:config_supervisedUserCreationPackage
   android:config_supportDoubleTapSleep
   android:config_supportLongPressPowerWhenNonInteractive
   android:config_supportsCamToggle
@@ -538,6 +539,7 @@ declare -a remove_resource_names=(
   android:config_wallpaperCropperPackage
   android:default_wallpaper.png
   android:default_wallpaper_component
+  android:default_wallpaper_component_per_device_color
   android:error_color_device_default_dark
   android:error_color_device_default_light
   android:face_acquired_vendor
@@ -627,6 +629,8 @@ declare -a remove_resource_names=(
   com.android.server.telecom:call_diagnostic_service_package_name
   com.android.server.telecom:dialer_default_class
   com.android.settings:config_avatar_picker_package
+  com.android.settings:config_face_enroll_guidance_page
+  com.android.settings:config_face_enroll_supported_posture
   com.android.settings:config_hspa_data_distinguishable
   com.android.settings:config_network_selection_list_aggregation_enabled
   com.android.settings:config_settings_slices_accessibility_components
@@ -636,6 +640,9 @@ declare -a remove_resource_names=(
   com.android.settings:display_white_balance_summary
   com.android.settings:display_white_balance_title
   com.android.settings:face_education.mp4
+  com.android.settings:face_enroll_education_lottie_frame_margin_top
+  com.android.settings:face_enroll_icon_large_height
+  com.android.settings:face_enroll_icon_large_width
   com.android.settings:face_enroll_intro_illustration_margin_bottom
   com.android.settings:face_preview_scale
   com.android.settings:face_preview_translate_x
@@ -652,6 +659,11 @@ declare -a remove_resource_names=(
   com.android.settings:ic_5g_plus_mobiledata.xml
   com.android.settings:ic_5g_plus_mobiledata_updated.xml
   com.android.settings:icon_accent
+  com.android.settings:illustration_accessibility_margin_top
+  com.android.settings:illustration_lottie_height
+  com.android.settings:limited_vision_button_margin_bottom
+  com.android.settings:limited_vision_button_margin_top
+  com.android.settings:limited_vision_button_toggle_margin_top
   com.android.settings:link_locale_picker_footer_learn_more
   com.android.settings:location_settings_footer_learn_more_link
   com.android.settings:peak_refresh_rate_summary
