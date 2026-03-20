@@ -7,9 +7,9 @@ from __future__ import annotations
 import shutil
 from argparse import ArgumentParser
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, Iterable, List, Optional, Tuple
 
-from sepolicy.cil_policy import decompile_one_cil, parse_prebuilt
+from sepolicy.cil_policy import parse_prebuilt
 from sepolicy.contexts import (
     ContextsType,
     output_contexts,
@@ -20,7 +20,6 @@ from sepolicy.contexts import (
 from sepolicy.match import (
     RuleMatch,
     discard_rule_matches,
-    find_public_rules,
     match_macros_rules,
     process_rules,
     remove_unused_types,
@@ -30,7 +29,7 @@ from sepolicy.output import (
     output_grouped_rules,
 )
 from sepolicy.policy_info import get_selinux_dir_policy
-from sepolicy.rule import RULE_DYNAMIC_PARTS_INDEX, Rule
+from sepolicy.rule import Rule
 from sepolicy.source_policy import SourcePolicy, parse_source
 from utils.mld import MultiLevelDict
 from utils.utils import Color, android_root, color_print
@@ -85,7 +84,7 @@ def process_output_rules(
     mld: MultiLevelDict[Rule],
     genfs_rules: Optional[List[Rule]],
     contexts: Optional[Dict[ContextsType, List[Tuple[str, ...]]]],
-    removed_rules: List[Tuple[str, List[Rule]]],
+    removed_rules: List[Tuple[str, Iterable[Rule]]],
     output_dir: Path,
     rule_matches: List[RuleMatch],
     source: SourcePolicy,
@@ -221,28 +220,21 @@ def decompile_cil():
 
     prebuilt = parse_prebuilt(policy_info, verbose)
 
-    # Generate match dicts starting after the first token of the rule
-    # which is almost always the type
-    # This means that we can't match rules not knowing their type, but
-    # that's fine usually
-    mld: MultiLevelDict[Rule] = MultiLevelDict(RULE_DYNAMIC_PARTS_INDEX)
-    mld.add_many(prebuilt.rules, lambda r: r.hash_values)
-
     # TODO: get rid of this, as it is only necessary because some of the types
     # in system_ext end up in product, but it's not all of the public types,
     # as some types end up in vendor's versioned policy while they do not end up
     # in product
-    remove_unused_types(mld, prebuilt.used_types)
+    remove_unused_types(prebuilt.mld, prebuilt.used_types)
 
     count = count_decompiled_rules(
-        mld,
+        prebuilt.mld,
         prebuilt.contexts,
         prebuilt.genfs_rules,
     )
     color_print(f'Found {count} prebuilt rules', color=Color.GREEN)
 
     rule_matches = match_macros_rules(
-        mld,
+        prebuilt.mld,
         source.macros_name_rules,
         verbose,
     )
@@ -251,32 +243,19 @@ def decompile_cil():
     shutil.rmtree(output_dir, ignore_errors=True)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    public_rules: List[Rule] = []
     private_output_dir = output_dir
     if policy_info.split_public_private:
         private_output_dir = Path(output_dir, 'private')
         private_output_dir.mkdir(parents=True, exist_ok=True)
 
-        # Load rules being referenced by other sepolicy which need to be
-        # public
-        assert policy_info.referencing_policy_path is not None
-        assert policy_info.referencing_policy_version is not None
-        referencing_rules, _ = decompile_one_cil(
-            policy_info.referencing_policy_path,
-            name='referencing policy',
-            version=policy_info.referencing_policy_version,
-        )
-
-        public_rules = find_public_rules(mld, referencing_rules)
-
     process_output_rules(
-        mld=mld,
+        mld=prebuilt.mld,
         genfs_rules=prebuilt.genfs_rules,
         contexts=prebuilt.contexts,
         removed_rules=[
             ('source', source.rules),
             *prebuilt.extra_rules,
-            ('public', public_rules),
+            ('public', prebuilt.public_mld),
         ],
         output_dir=private_output_dir,
         rule_matches=rule_matches,
@@ -289,13 +268,8 @@ def decompile_cil():
         public_output_dir = Path(output_dir, 'public')
         public_output_dir.mkdir(parents=True, exist_ok=True)
 
-        # Add all public rules into a separate dictionary to be able to group them
-        # and do the same processing as private rules
-        public_mld = MultiLevelDict[Rule](RULE_DYNAMIC_PARTS_INDEX)
-        public_mld.add_many(public_rules, lambda r: r.hash_values)
-
         process_output_rules(
-            mld=public_mld,
+            mld=prebuilt.public_mld,
             genfs_rules=None,
             contexts=None,
             output_dir=public_output_dir,

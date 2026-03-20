@@ -18,9 +18,10 @@ from sepolicy.contexts import (
     resolve_contexts_paths,
     split_contexts_text,
 )
-from sepolicy.match import find_used_types, merge_ioctl_rules
+from sepolicy.match import find_public_rules, find_used_types, merge_ioctl_rules
 from sepolicy.policy_info import PolicyInfo
-from sepolicy.rule import Rule
+from sepolicy.rule import RULE_DYNAMIC_PARTS_INDEX, Rule
+from utils.mld import MultiLevelDict
 
 
 def decompile_one_cil(
@@ -67,7 +68,8 @@ def decompile_one_cil(
 
 @dataclass
 class PrebuiltPolicy:
-    rules: List[Rule]
+    mld: MultiLevelDict[Rule]
+    public_mld: MultiLevelDict[Rule]
     genfs_rules: List[Rule]
     contexts: Dict[ContextsType, List[Tuple[str, ...]]]
     extra_rules: List[Tuple[str, List[Rule]]]
@@ -123,8 +125,35 @@ def parse_prebuilt(policy_info: PolicyInfo, verbose: bool):
     find_used_types(genfs_rules, used_types)
     find_contexts_used_types(contexts, used_types)
 
+    # Generate match dicts starting after the first token of the rule
+    # which is almost always the type
+    # This means that we can't match rules not knowing their type, but
+    # that's fine usually
+    mld: MultiLevelDict[Rule] = MultiLevelDict(RULE_DYNAMIC_PARTS_INDEX)
+    mld.add_many(rules, lambda r: r.hash_values)
+
+    public_rules: List[Rule] = []
+    if policy_info.split_public_private:
+        # Load rules being referenced by other sepolicy which need to be
+        # public
+        assert policy_info.referencing_policy_path is not None
+        assert policy_info.referencing_policy_version is not None
+        referencing_rules, _ = decompile_one_cil(
+            policy_info.referencing_policy_path,
+            name='referencing policy',
+            version=policy_info.referencing_policy_version,
+        )
+
+        public_rules = find_public_rules(mld, referencing_rules)
+
+    # Add all public rules into a separate dictionary to be able to group them
+    # and do the same processing as private rules
+    public_mld = MultiLevelDict[Rule](RULE_DYNAMIC_PARTS_INDEX)
+    public_mld.add_many(public_rules, lambda r: r.hash_values)
+
     return PrebuiltPolicy(
-        rules=rules,
+        mld=mld,
+        public_mld=public_mld,
         genfs_rules=genfs_rules,
         contexts=contexts,
         extra_rules=extra_rules,

@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional, Set, Tuple
+from typing import Dict, Iterable, List, Optional, Set, Tuple
 
 from sepolicy.class_set import ClassSet
 from sepolicy.classmap import Classmap
@@ -394,7 +394,7 @@ def replace_macro_rules(
 
 def remove_rules(
     mld: MultiLevelDict[Rule],
-    rules: List[Rule],
+    rules: Iterable[Rule],
     source: str,
     name: str,
 ):
@@ -976,7 +976,7 @@ def find_public_rules(mld: MultiLevelDict[Rule], referencing_rules: List[Rule]):
 def process_rules(
     m: MultiLevelDict[Rule],
     source: SourcePolicy,
-    removed_rules: List[Tuple[str, List[Rule]]],
+    removed_rules: List[Tuple[str, Iterable[Rule]]],
     rule_matches: List[RuleMatch],
     name: str,
     verbose: bool,
