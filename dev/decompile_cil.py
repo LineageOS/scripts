@@ -220,7 +220,6 @@ def decompile_cil():
     color_print(f'Found {len(source.rules)} source rules', color=Color.GREEN)
 
     prebuilt = parse_prebuilt(policy_info, verbose)
-    prebuilt.extra_rules += [('source', source.rules)]
 
     # Generate match dicts starting after the first token of the rule
     # which is almost always the type
@@ -275,6 +274,7 @@ def decompile_cil():
         genfs_rules=prebuilt.genfs_rules,
         contexts=prebuilt.contexts,
         removed_rules=[
+            ('source', source.rules),
             *prebuilt.extra_rules,
             ('public', public_rules),
         ],
@@ -300,6 +300,7 @@ def decompile_cil():
             contexts=None,
             output_dir=public_output_dir,
             removed_rules=[
+                ('source', source.rules),
                 *prebuilt.extra_rules,
             ],
             rule_matches=rule_matches,
