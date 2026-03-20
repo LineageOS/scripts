@@ -47,8 +47,8 @@ class MultiLevelDict(Generic[T]):
     def data(self):
         return self.__data
 
-    def walk(self) -> Generator[T, None, None]:
-        yield from self.__all_data
+    def __iter__(self):
+        return iter(self.__all_data)
 
     def add(self, keys: Sequence[Hashable], value: T):
         self.__all_data.add(value)

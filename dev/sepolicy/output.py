@@ -80,7 +80,7 @@ def rule_simple_type_name(rule: Rule):
 def group_rules(mld: MultiLevelDict[Rule]):
     # Group rules based on main type
     grouped_rules: Dict[str, Set[Rule]] = {}
-    for rule in mld.walk():
+    for rule in mld:
         name = domain_type(rule)
 
         if name not in grouped_rules:
