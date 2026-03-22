@@ -101,13 +101,13 @@ def parse_prebuilt(policy_info: PolicyInfo, verbose: bool):
     # set_prop(vendor_init, ...)
     # Since somehow allow vendor_init property_socket:sock_file write;
     # only ends up in platform sepolicy
-    if policy_info.platform_policy_path is not None:
+    for policy_version, policy_path in policy_info.extra_rules_paths:
         platform_rules, _ = decompile_one_cil(
-            policy_info.platform_policy_path,
+            policy_path,
             conditional_types_map=conditional_types_map,
             missing_generated_types=set(),
             used_types=set(),
-            version=policy_info.version,
+            version=policy_version,
             name='platform policy',
         )
         extra_rules.append(('platform policy', platform_rules))
@@ -138,18 +138,16 @@ def parse_prebuilt(policy_info: PolicyInfo, verbose: bool):
     mld.add_many(rules, lambda r: r.hash_values)
 
     public_rules: List[Rule] = []
-    if policy_info.split_public_private:
+    for policy_version, policy_path in policy_info.public_rules_paths:
         # Load rules being referenced by other sepolicy which need to be
         # public
-        assert policy_info.referencing_policy_path is not None
-        assert policy_info.referencing_policy_version is not None
         referencing_rules, _ = decompile_one_cil(
-            policy_info.referencing_policy_path,
+            policy_path,
             name='referencing policy',
-            version=policy_info.referencing_policy_version,
+            version=policy_version,
         )
 
-        public_rules = find_public_rules(mld, referencing_rules)
+        public_rules += find_public_rules(mld, referencing_rules)
 
     # Add all public rules into a separate dictionary to be able to group them
     # and do the same processing as private rules

@@ -192,17 +192,15 @@ def decompile_cil():
     macros_paths = get_macros_paths(policy_info.version, current_policy)
     rules_paths = get_rules_paths(policy_info.version, current_policy)
 
-    print(f'Found platform policy: {policy_info.platform_policy_path}')
     print(f'Found policy: {policy_info.policy_path}')
     print(f'Found policy version: {policy_info.version}')
-    if policy_info.referencing_policy_path is not None:
+
+    for policy_version, policy_path in policy_info.extra_rules_paths:
+        print(f'Found extra policy: {policy_path}, version: {policy_version}')
+    for policy_version, policy_path in policy_info.public_rules_paths:
         print(
-            f'Found referencing policy: {policy_info.referencing_policy_path}'
-        )
-    if policy_info.referencing_policy_version is not None:
-        print(
-            f'Found referencing policy version: '
-            f'{policy_info.referencing_policy_version}'
+            f'Found referencing policy: {policy_path}, '
+            f'version: {policy_version}'
         )
 
     source = parse_source(
@@ -244,7 +242,7 @@ def decompile_cil():
     output_dir.mkdir(parents=True, exist_ok=True)
 
     private_output_dir = output_dir
-    if policy_info.split_public_private:
+    if policy_info.public_rules_paths:
         private_output_dir = Path(output_dir, 'private')
         private_output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -264,7 +262,7 @@ def decompile_cil():
         name='private',
     )
 
-    if policy_info.split_public_private:
+    if policy_info.public_rules_paths:
         public_output_dir = Path(output_dir, 'public')
         public_output_dir.mkdir(parents=True, exist_ok=True)
 
