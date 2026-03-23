@@ -369,6 +369,7 @@ def parse_overlay_from_android_bp(
         preserved_prefixes = read_xml_resources_prefix(
             resources,
             str(overlay_path),
+            resources_dir,
             extra_paths=[manifest],
         )
 

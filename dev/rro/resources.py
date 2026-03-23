@@ -904,6 +904,7 @@ def write_raw_resource(
 def read_xml_resources_prefix(
     all_resources: ResourceMap,
     output_path: str,
+    resources_dir: str,
     extra_paths: List[str],
 ):
     rel_xml_paths: Set[str] = set()
@@ -912,15 +913,12 @@ def read_xml_resources_prefix(
         if not is_by_rel_path_xml_resources(resources):
             continue
 
-        rel_xml_paths.add(rel_path)
+        rel_xml_paths.add(path.join(resources_dir, rel_path))
 
     rel_xml_paths.update(extra_paths)
 
     preserved_prefixes: Dict[str, bytes] = {}
     for rel_xml_path in rel_xml_paths:
-        if rel_xml_path in preserved_prefixes:
-            continue
-
         existing_xml_path = path.join(output_path, rel_xml_path)
 
         preserved = xml_read_prefix_before_tag(existing_xml_path, 'resources')
