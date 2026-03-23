@@ -870,6 +870,7 @@ beautify_rro_one() {
     extra_args+=("${dev_dir}/${d}/overlay")
   done
   extra_args+=(--common vendor/lineage/overlay/rro_packages)
+  extra_args+=(--write-meta)
 
   lineage/scripts/dev/beautify_rro.py \
       "${extra_args[@]}"

@@ -168,6 +168,7 @@ def write_beautified_overlay(
     overlay: Overlay,
     remove_resources: DefaultDict[Optional[str], Set[str]],
     keep_resources: DefaultDict[Optional[str], Set[str]],
+    write_meta: bool,
 ):
     target_package_remove_resources = filter_resource_entries(
         remove_resources,
@@ -198,7 +199,7 @@ def write_beautified_overlay(
 
     write_overlay(
         overlay,
-        write_meta=True,
+        write_meta=write_meta,
     )
 
 
@@ -268,6 +269,11 @@ def beautify_rro_main():
         '--package-map',
         help='Path to cached package map',
         type=Path,
+    )
+    parser.add_argument(
+        '--write-meta',
+        help='Write meta after beautifying',
+        action='store_true',
     )
     parser.add_argument(
         '-v',
@@ -393,6 +399,7 @@ def beautify_rro_main():
             overlay,
             remove_resources,
             keep_resources,
+            write_meta=args.write_meta,
         )
 
 
