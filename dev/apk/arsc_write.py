@@ -113,6 +113,7 @@ def resource_content_to_xml_str(
     package_id_map: Dict[int, str],
     resources: ARSCResourcesMap,
     reference_resources: ARSCResourcesMap,
+    reference_flags: Dict[int, int],
 ):
     if isinstance(resource, ARSCResourceValue):
         resource_value = decode_value(
@@ -122,6 +123,7 @@ def resource_content_to_xml_str(
             styles=styles,
             package_id_map=package_id_map,
             reference_resources=reference_resources,
+            reference_flags=reference_flags,
         )
 
         return stringify_data(resource_value, resource.data_type)
@@ -133,6 +135,7 @@ def resource_content_to_xml_str(
             package_id_map,
             resources,
             reference_resources,
+            reference_flags,
         )
 
         item_values_str = ''
@@ -156,6 +159,7 @@ def resource_to_xml_str(
     package_id_map: Dict[int, str],
     resources: ARSCResourcesMap,
     reference_resources: ARSCResourcesMap,
+    reference_flags: Dict[int, int],
 ):
     if (
         get_self_referencing_raw_resource(
@@ -176,6 +180,7 @@ def resource_to_xml_str(
         package_id_map,
         resources,
         reference_resources,
+        reference_flags,
     )
 
     # TODO: remove apktool compatibility for dimen vs item type="dimen"
@@ -251,6 +256,7 @@ def write_resources(
     package_id_map: Dict[int, str],
     resources: ARSCResourcesMap,
     reference_resources: ARSCResourcesMap,
+    reference_flags: Dict[int, int],
     out_path: Path,
 ):
     out_path.mkdir(parents=True, exist_ok=True)
@@ -281,6 +287,7 @@ def write_resources(
                     package_id_map,
                     resources,
                     reference_resources,
+                    reference_flags,
                 )
                 if not resource_str:
                     continue
