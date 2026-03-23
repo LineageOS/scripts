@@ -193,9 +193,6 @@ def parse_xml_resources(
         feature_flag = node.attrib.get(FEATURE_FLAG_KEY, '')
 
         if node.text is not None:
-            # TODO: this is just a hack for wrong @*
-            node.text = node.text.replace('@*', '@')
-
             if tag == DIMEN_TAG:
                 node.text = normalize_node_text_dimens_units(node.text)
 

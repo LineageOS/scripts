@@ -19,7 +19,7 @@ from apk.arsc_resources import (
     ARSCResourcesMap,
     ARSCResourceValue,
 )
-from apk.resource_types import Res_value, ResTable_map
+from apk.resource_types import Res_value, ResTable_map, ResTable_typeSpec
 
 RADIX_MULTS = {
     Res_value.COMPLEX_RADIX_23p0: 1.0,
@@ -156,6 +156,7 @@ def decode_resource_reference(
     sign: str,
     resources: Optional[ARSCResourcesMap] = None,
     reference_resources: Optional[ARSCResourcesMap] = None,
+    reference_flags: Optional[Dict[int, int]] = None,
     reference_package_id: Optional[int] = None,
     package_id_map: Optional[Dict[int, str]] = None,
 ):
@@ -170,10 +171,20 @@ def decode_resource_reference(
         reference_resources,
     )
 
+    is_public = True
+    if (
+        reference_resources is not None
+        and reference_flags is not None
+        and data in reference_resources
+        and data in reference_flags
+    ):
+        is_public = reference_flags[data] & ResTable_typeSpec.SPEC_PUBLIC
+
     return found_resource.reference_name(
         sign,
         reference_package_id,
         package_id_map,
+        is_private=not is_public,
     )
 
 
@@ -308,6 +319,7 @@ def decode_data(
     package_id_map: Optional[Dict[int, str]] = None,
     resources: Optional[ARSCResourcesMap] = None,
     reference_resources: Optional[ARSCResourcesMap] = None,
+    reference_flags: Optional[Dict[int, int]] = None,
     reference_package_id: Optional[int] = None,
     reference_resource_id: Optional[int] = None,
 ):
@@ -342,6 +354,7 @@ def decode_data(
                 sign='@',
                 resources=resources,
                 reference_resources=reference_resources,
+                reference_flags=reference_flags,
                 reference_package_id=reference_package_id,
                 package_id_map=package_id_map,
             )
@@ -352,6 +365,7 @@ def decode_data(
                 sign='?',
                 resources=resources,
                 reference_resources=reference_resources,
+                reference_flags=reference_flags,
                 reference_package_id=reference_package_id,
                 package_id_map=package_id_map,
             )
@@ -442,6 +456,7 @@ def decode_value(
     styles: Optional[ARSCAllStyles] = None,
     package_id_map: Optional[Dict[int, str]] = None,
     reference_resources: Optional[ARSCResourcesMap] = None,
+    reference_flags: Optional[Dict[int, int]] = None,
 ):
     return decode_data(
         resource.data_type,
@@ -451,6 +466,7 @@ def decode_value(
         package_id_map=package_id_map,
         resources=resources,
         reference_resources=reference_resources,
+        reference_flags=reference_flags,
         reference_package_id=resource.package_id,
     )
 
@@ -462,6 +478,7 @@ def decode_bag_items(
     package_id_map: Dict[int, str],
     resources: ARSCResourcesMap,
     reference_resources: ARSCResourcesMap,
+    reference_flags: Dict[int, int],
 ):
     item_values: List[Tuple[Optional[str], str | int | float]] = []
 
