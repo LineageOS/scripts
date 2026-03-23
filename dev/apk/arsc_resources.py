@@ -44,6 +44,7 @@ class ARSCResource:
         sign: str,
         relative_to_package_id: Optional[int] = None,
         package_id_map: Optional[Dict[int, str]] = None,
+        is_private: Optional[bool] = None
     ):
 
         package_str = ''
@@ -58,7 +59,11 @@ class ARSCResource:
         if self.type_name != 'attr':
             type_str = f'{self.type_name}/'
 
-        return f'{sign}{package_str}{type_str}{self.key_name}'
+        private_str = ''
+        if is_private:
+            private_str = '*'
+
+        return f'{sign}{private_str}{package_str}{type_str}{self.key_name}'
 
 
 class ARSCResourceValue(ARSCResource):

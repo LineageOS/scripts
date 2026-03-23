@@ -149,7 +149,7 @@ def extract_apks(
     framework_path: Path,
 ):
     assert isinstance(framework_path, Path)
-    _, _, framework_resources, _, _ = extract_apk(framework_path)
+    _, _, framework_resources, framework_flags, _ = extract_apk(framework_path)
 
     for apk_path, output_path in apk_output_paths:
         output_path.mkdir(parents=True, exist_ok=True)
@@ -171,6 +171,7 @@ def extract_apks(
             package_id_map,
             resources,
             framework_resources,
+            framework_flags,
             res_output_path,
         )
         write_resources_public_xml(
