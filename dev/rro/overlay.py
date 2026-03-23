@@ -544,7 +544,7 @@ def is_overlay_aosp(
             print(resource)
     print()
 
-    return (False,)
+    return False
 
 
 def remove_overlay_resources(
