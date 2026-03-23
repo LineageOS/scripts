@@ -41,6 +41,6 @@ def parse_bp_rro_module(android_bp_path: Path):
         )
     )
 
-    assert len(statements) == 1
+    assert len(statements) == 1, android_bp_path
 
     return cast(RROModule, statements[0])
