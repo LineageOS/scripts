@@ -132,6 +132,13 @@ PSEUDOLOCALES = (
 )
 
 
+TRANLATABLE_TAGS = {
+    'string',
+    'string-array',
+    'plurals',
+}
+
+
 def parse_xml_resources(
     res_dir: str,
     dir_name: str,
@@ -201,8 +208,9 @@ def parse_xml_resources(
 
         # Overlays don't have translatable=false, remove it to fix
         # equality check
-        if remove_translatable and TRANSLATABLE_KEY in node.attrib:
-            del node.attrib[TRANSLATABLE_KEY]
+        if TRANSLATABLE_KEY in node.attrib:
+            if remove_translatable or tag not in TRANLATABLE_TAGS:
+                del node.attrib[TRANSLATABLE_KEY]
 
         if MSGID_KEY in node.attrib:
             del node.attrib[MSGID_KEY]
