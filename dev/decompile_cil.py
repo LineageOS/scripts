@@ -188,7 +188,7 @@ def decompile_cil():
     output_dir = Path(args.output)
     selinux_dir = Path(args.selinux)
 
-    policy_info = get_selinux_dir_policy(selinux_dir)
+    policy_info = get_selinux_dir_policy(selinux_dir, verbose)
     macros_paths = get_macros_paths(policy_info.version, current_policy)
     rules_paths = get_rules_paths(policy_info.version, current_policy)
 

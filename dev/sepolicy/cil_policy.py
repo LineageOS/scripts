@@ -13,7 +13,6 @@ from sepolicy.contexts import (
     ContextsType,
     find_contexts_used_types,
     parse_contexts_texts,
-    resolve_contexts_paths,
     split_contexts_text,
 )
 from sepolicy.match import find_public_rules, find_used_types, merge_ioctl_rules
@@ -112,14 +111,8 @@ def parse_prebuilt(policy_info: PolicyInfo, verbose: bool):
         )
         extra_rules.append(('platform policy', platform_rules))
 
-    contexts_file_paths = resolve_contexts_paths(
-        [policy_info.path],
-        policy_info.partition_name,
-        None,
-        verbose,
-    )
     contexts_texts = split_contexts_text(
-        contexts_file_paths,
+        policy_info.contexts_file_paths,
     )
     contexts, _ = parse_contexts_texts(
         contexts_texts,

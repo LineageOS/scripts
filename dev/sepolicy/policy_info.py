@@ -6,12 +6,14 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
+
+from sepolicy.contexts import ContextsType, resolve_contexts_paths
 
 
 @dataclass(frozen=True)
 class PolicyInfo:
-    path: Path
+    contexts_file_paths: Dict[ContextsType, List[Path]]
     extra_rules_paths: List[Tuple[str, Path]]
     public_rules_paths: List[Tuple[str, Path]]
     policy_path: Path
@@ -38,7 +40,7 @@ def get_sdk_value(build_prop_path: Path):
     return f'{sdk_value_str}.0'
 
 
-def get_selinux_dir_policy(selinux_dir: Path):
+def get_selinux_dir_policy(selinux_dir: Path, verbose: bool):
     partition_root = selinux_dir.parent.parent
     partition_name = partition_root.name
     dump_root = partition_root.parent
@@ -46,6 +48,13 @@ def get_selinux_dir_policy(selinux_dir: Path):
     vendor_policy_path = Path(dump_root, 'vendor/etc/selinux')
     system_policy_path = Path(dump_root, 'system/etc/selinux')
     platform_build_prop_path = Path(dump_root, 'system/build.prop')
+
+    contexts_file_paths = resolve_contexts_paths(
+        [selinux_dir],
+        partition_name,
+        None,
+        verbose,
+    )
 
     # Read policy for vendor / odm
     # For system / system_ext / product, this is used to find public
@@ -102,7 +111,7 @@ def get_selinux_dir_policy(selinux_dir: Path):
     assert policy_path.exists(), policy_path
 
     return PolicyInfo(
-        path=selinux_dir,
+        contexts_file_paths=contexts_file_paths,
         extra_rules_paths=extra_rules_paths,
         public_rules_paths=referencing_rules_paths,
         policy_path=policy_path,
