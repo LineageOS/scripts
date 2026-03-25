@@ -8,7 +8,7 @@ from itertools import chain
 from pathlib import Path
 from typing import Dict, List, Set, Tuple
 
-from sepolicy.cil_policy import decompile_one_cil
+from sepolicy.cil_rule import CilRule
 from sepolicy.classmap import Classmap
 from sepolicy.contexts import (
     ContextsType,
@@ -212,13 +212,19 @@ def parse_source(
     macros_name_rules = parse_macros(classmap, expanded_macros)
     source_rules = parse_rules(classmap, source_rule_texts)
 
+    def add_rule(rule: Rule):
+        source_rules.append(rule)
+
     if technical_debt_path is not None:
-        source_technical_debt_rules, _ = decompile_one_cil(
-            technical_debt_path,
-            version=version,
-            name='source technical debt policy',
-        )
-        source_rules += source_technical_debt_rules
+        for line in technical_debt_path.read_text().splitlines():
+            CilRule.from_line(
+                line,
+                conditional_types_map={},
+                missing_generated_types=set(),
+                add_rule=add_rule,
+                add_genfs_rule=None,
+                version=version,
+            )
 
     # This rule is automatically added by
     # external/selinux/libsepol/src/module_to_cil.c

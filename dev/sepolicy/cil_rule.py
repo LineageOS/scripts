@@ -212,7 +212,7 @@ class CilRule(Rule):
         conditional_types_map: Dict[str, ConditionalType],
         missing_generated_types: Set[str],
         add_rule: Callable[[Rule], None],
-        add_genfs_rule: Callable[[Rule], None],
+        add_genfs_rule: Optional[Callable[[Rule], None]],
         version: Optional[str],
     ):
         def type_redirect(t: str):
@@ -401,6 +401,7 @@ class CilRule(Rule):
                     (parts[1], parts[2], parts[3][2]),
                     (),
                 )
+                assert add_genfs_rule is not None
                 add_genfs_rule(rule)
             case CilRuleType.TYPETRANSITION.value:
                 # (typetransition a b c d)
