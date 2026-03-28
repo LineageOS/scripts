@@ -229,6 +229,22 @@ class ProcessedMacro:
     )
     recursively_used_macros_processed: bool = field(default=False)
 
+    def __repr__(self):
+        return (
+            'ProcessedMacro {\n'
+            f'  name: {self.name!r}\n'
+            f'  arity: {self.arity}\n'
+            f'  is_rule: {self.is_rule}\n'
+            f'  is_unquoted_ifelse: {self.is_unquoted_ifelse}\n'
+            f'  is_any_macro_unquoted_ifelse: {self.is_any_macro_unquoted_ifelse}\n'
+            f'  used_macros: {self.used_macros}\n'
+            f'  used_variables: {self.used_variables}\n'
+            f'  recursively_used_macros: {self.recursively_used_macros}\n'
+            f'  recursively_used_variables: {self.recursively_used_variables}\n'
+            f'  recursively_used_macros_processed: {self.recursively_used_macros_processed}\n'
+            '}'
+        )
+
 
 def macro_recursive_used_macros(
     macro: ProcessedMacro,
