@@ -6,11 +6,13 @@ from __future__ import annotations
 import itertools
 import re
 import subprocess
+from collections import defaultdict
 from dataclasses import dataclass, field
 from functools import cache, partial
 from itertools import chain
 from pathlib import Path
 from typing import (
+    DefaultDict,
     Dict,
     FrozenSet,
     Generator,
@@ -116,11 +118,9 @@ def macro_used_variables(name: Optional[str], body: str):
     # while all other conditions have their values quoted
     # Find out what to do about them
 
-    conditionals_values: Dict[str, Set[str]] = {}
+    conditionals_values: DefaultDict[str, Set[str]] = defaultdict(set)
 
     def add_conditionals(key: str, value: str):
-        if key not in conditionals_values:
-            conditionals_values[key] = set()
         conditionals_values[key].add(value)
 
     # Find variables and values checked against
