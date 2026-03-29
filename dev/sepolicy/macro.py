@@ -640,7 +640,6 @@ def split_macros_text(macro_file_paths: List[Path]) -> List[str]:
 
     # Split into lines, remove empty lines and commented lines
     input_text_lines = split_normalize_text(input_text)
-    input_text = ''.join(input_text_lines)
 
     # After merging all the input files, split them into top-level
     # macro definitions
