@@ -25,11 +25,18 @@ def resolve_rule_paths(
 ):
     rule_file_paths: List[Path] = []
 
+    def add_rule(p: Path):
+        if p.suffix != '.te':
+            return
+
+        if verbose:
+            print(f'Loading rules: {p}')
+
+        rule_file_paths.append(p)
+
     for rule_path in rule_paths:
-        if rule_path.is_file() and rule_path.suffix == '.te':
-            if verbose:
-                print(f'Loading rules: {rule_path}')
-            rule_file_paths.append(rule_path)
+        if rule_path.is_file():
+            add_rule(rule_path)
             continue
 
         if not rule_path.is_dir():
@@ -50,16 +57,9 @@ def resolve_rule_paths(
             subdirs_to_scan = [rule_path]
 
         for file_subdir in subdirs_to_scan:
-            if verbose:
-                print(f'Loading rules from directory: {file_subdir}')
-
             for file_path in file_subdir.rglob('*.te'):
-                if not file_path.is_file():
-                    continue
-
-                if verbose:
-                    print(file_path.relative_to(file_subdir))
-                rule_file_paths.append(file_path)
+                if file_path.is_file():
+                    add_rule(file_path)
 
     return rule_file_paths
 
