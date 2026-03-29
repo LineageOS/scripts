@@ -192,9 +192,10 @@ def decompile_cil():
     macros_paths = get_macros_paths(policy_info.version, current_policy)
     rules_paths = get_rules_paths(policy_info.version, current_policy)
 
-    print(f'Found policy: {policy_info.policy_path}')
-    print(f'Found policy version: {policy_info.version}')
-
+    print(
+        f'Found policy: {policy_info.policy_path}, '
+        f'version: {policy_info.version}'
+    )
     for policy_version, policy_path in policy_info.extra_rules_paths:
         print(f'Found extra policy: {policy_path}, version: {policy_version}')
     for policy_version, policy_path in policy_info.public_rules_paths:
