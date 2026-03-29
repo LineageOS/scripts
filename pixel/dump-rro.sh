@@ -575,6 +575,7 @@ declare -a remove_resource_names=(
   android:quick_qs_offset_height
   android:safety_protection_display_text
   android:scCellularNetworkSecurityLearnMore
+  android:theming_defaults
   android:trusted_location_settings_action
   android:user_icon_1
   android:vendor_cross_profile_apps
