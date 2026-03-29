@@ -8,6 +8,7 @@ import re
 from contextlib import contextmanager
 from enum import StrEnum
 from os import path
+from pathlib import Path
 from subprocess import PIPE, run
 from typing import Generator, List, Optional, Set
 
@@ -94,6 +95,15 @@ def squash_spaces(line: str):
 
 def is_empty_line(line: str):
     return not line.strip()
+
+
+def read_texts(text_file_paths: List[Path]):
+    texts: List[str] = []
+    for text_file_path in text_file_paths:
+        text = text_file_path.read_text()
+        texts.append(text)
+        texts.append('\n')
+    return ''.join(texts)
 
 
 def split_normalize_text(text: str):

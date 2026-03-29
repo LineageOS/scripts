@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from itertools import chain
 from pathlib import Path
 from typing import Dict, List, Set, Tuple
 
@@ -12,26 +11,28 @@ from sepolicy.cil_rule import CilRule
 from sepolicy.classmap import Classmap
 from sepolicy.contexts import (
     ContextsType,
-    expand_contexts_texts,
     parse_contexts_texts,
     resolve_contexts_paths,
-    split_contexts_text,
+    split_normalize_contexts_text,
 )
+from sepolicy.expand import expand_macro_calls_and_variables
 from sepolicy.macro import (
     categorize_macros,
-    expand_macro_bodies,
-    macro_name_body_raw,
-    macro_used_variables,
+    macro_required_name_body_raw,
     parse_ioctl_defines,
     parse_ioctls,
     parse_macros,
     parse_perms,
     resolve_macro_paths,
-    split_ioctl_defines,
-    split_macros_text,
+    rule_body,
 )
 from sepolicy.rule import Rule
-from sepolicy.rules import parse_rules, resolve_rule_paths
+from sepolicy.rules import (
+    parse_rules,
+    resolve_rule_paths,
+    split_normalize_rules_text,
+)
+from utils.utils import read_texts
 
 
 @dataclass
@@ -49,62 +50,22 @@ class SourcePolicy:
     classmap: Classmap
 
 
-def get_variable_choices(
-    args_variables: List[str],
-    macros_texts: List[List[str]],
-    contexts_texts: Dict[ContextsType, List[str]],
-    version: str,
-):
-    all_variables_choices: Dict[str, Set[str]] = {}
-
-    # Find conditional variables used in the input text
-    # Conditional variables can be specified, but we need to know if the
-    # macro arguments are used in them
-    for macros_text in macros_texts:
-        for macro_text in macros_text:
-            name, body = macro_name_body_raw(macro_text)
-            conditional_variables = macro_used_variables(name, body)
-            all_variables_choices.update(conditional_variables)
-
-    for context_texts in contexts_texts.values():
-        for context_text in context_texts:
-            conditional_variables = macro_used_variables(None, context_text)
-            all_variables_choices.update(conditional_variables)
-
-    # Variables extracted from system/sepolicy/build/soong/policy.go
-    all_variables_choices['mls_num_sens'] = set(['1'])
-    all_variables_choices['mls_num_cats'] = set(['1024'])
-
-    all_variables_choices['target_board_api_level'] = set([version])
-
-    for kv in args_variables:
-        k, v = kv.split('=')
-        if k not in all_variables_choices:
-            all_variables_choices[k] = set()
-
-        all_variables_choices[k].add(v)
-
-    print('Using variables:')
-    for k, vs in all_variables_choices.items():
-        print(f'{k}={", ".join(vs)}')
-
-    return all_variables_choices
-
-
 def parse_source(
     macros_paths: List[Path],
     extra_macros_paths: List[Path],
     rules_paths: List[Path],
     extra_rules_paths: List[Path],
     system_sepolicy_path: Path,
-    args_variables: List[str],
     verbose: bool,
     version: str,
+    variables: Dict[str, str],
 ):
     (
         macro_file_paths,
         ioctl_defines_file_paths,
+        ioctl_macros_file_paths,
         nlmsg_defines_file_paths,
+        nlmsg_macros_file_paths,
         technical_debt_path,
         access_vectors_path,
         flagging_macros_path,
@@ -120,83 +81,133 @@ def parse_source(
         verbose,
     )
 
-    macro_file_paths += rule_file_paths
-    macros_texts = split_macros_text(macro_file_paths)
-    ioctl_defines_texts = split_macros_text(ioctl_defines_file_paths)
-    nlmsg_defines_texts = split_macros_text(nlmsg_defines_file_paths)
-
-    source_contexts_file_paths = resolve_contexts_paths(
+    contexts_file_paths = resolve_contexts_paths(
         rules_paths + extra_rules_paths,
         None,
         system_sepolicy_path,
         verbose,
     )
-    source_contexts_texts = split_contexts_text(
-        source_contexts_file_paths,
+
+    macros_text = read_texts(macro_file_paths)
+    rules_text = read_texts(rule_file_paths)
+    ioctl_defines_text = read_texts(ioctl_defines_file_paths)
+    nlmsg_defines_text = read_texts(nlmsg_defines_file_paths)
+    ioctl_macros_text = read_texts(ioctl_macros_file_paths)
+    nlmsg_macros_text = read_texts(nlmsg_macros_file_paths)
+    flagging_macros_text = read_texts([flagging_macros_path])
+    contexts_text = {
+        name: read_texts(context_file_paths)
+        for name, context_file_paths in contexts_file_paths.items()
+    }
+
+    base_environment_texts = [
+        flagging_macros_text,
+    ]
+
+    macros_environment_texts = [
+        flagging_macros_text,
+        ioctl_defines_text,
+        ioctl_macros_text,
+        nlmsg_defines_text,
+        nlmsg_macros_text,
+    ]
+
+    ioctl_defines = expand_macro_calls_and_variables(
+        text=ioctl_defines_text,
+        environment_texts=base_environment_texts,
+        variables=variables,
+        split_fn=split_normalize_rules_text,
+        map_fn=macro_required_name_body_raw,
+        text_name='ioctl_defines',
+        verbose=verbose,
     )
 
-    all_variables_choices = get_variable_choices(
-        args_variables,
-        [macros_texts, ioctl_defines_texts, nlmsg_defines_texts],
-        source_contexts_texts,
-        version,
+    nlmsg_defines = expand_macro_calls_and_variables(
+        text=nlmsg_defines_text,
+        environment_texts=base_environment_texts,
+        variables=variables,
+        split_fn=split_normalize_rules_text,
+        map_fn=macro_required_name_body_raw,
+        text_name='nlmsg_defines',
+        verbose=verbose,
     )
 
-    expanded_ioctl_defines_text = expand_macro_bodies(
-        ioctl_defines_texts,
-        all_variables_choices,
-        macros_handled_elsewhere=set(),
+    ioctl_macros = expand_macro_calls_and_variables(
+        text=ioctl_macros_text,
+        environment_texts=[
+            *base_environment_texts,
+            ioctl_defines_text,
+        ],
+        variables=variables,
+        split_fn=split_normalize_rules_text,
+        map_fn=macro_required_name_body_raw,
+        text_name='ioctl_macros',
+        verbose=verbose,
     )
 
-    expanded_nlmsg_defines_text = expand_macro_bodies(
-        nlmsg_defines_texts,
-        all_variables_choices,
-        macros_handled_elsewhere=set(),
+    nlmsg_macros = expand_macro_calls_and_variables(
+        text=nlmsg_macros_text,
+        environment_texts=[
+            *base_environment_texts,
+            nlmsg_defines_text,
+        ],
+        variables=variables,
+        split_fn=split_normalize_rules_text,
+        map_fn=macro_required_name_body_raw,
+        text_name='nlmsg_macros',
+        verbose=verbose,
     )
 
-    ioctl_defines = split_ioctl_defines(expanded_ioctl_defines_text)
-    nlmsg_defines = split_ioctl_defines(expanded_nlmsg_defines_text)
+    expanded_macros = expand_macro_calls_and_variables(
+        text=macros_text,
+        environment_texts=macros_environment_texts,
+        variables=variables,
+        split_fn=split_normalize_rules_text,
+        map_fn=macro_required_name_body_raw,
+        text_name='expanded_macros',
+        verbose=verbose,
+    )
 
-    # Prevent expand_macro_bodies() from expanding and assigning ioctls and
-    # nlmsgs again, while also providing them for expansion
-    ioctl_nlmsg_defines_names = set(
-        name
-        for name, _ in chain(
-            ioctl_defines,
-            nlmsg_defines,
+    expanded_rules = expand_macro_calls_and_variables(
+        text=rules_text,
+        environment_texts=[
+            *macros_environment_texts,
+            macros_text,
+        ],
+        variables=variables,
+        split_fn=split_normalize_rules_text,
+        map_fn=rule_body,
+        text_name='expanded_rules',
+        verbose=verbose,
+    )
+
+    expanded_contexts = {
+        name: expand_macro_calls_and_variables(
+            text=context_text,
+            environment_texts=base_environment_texts,
+            variables=variables,
+            split_fn=split_normalize_contexts_text,
+            map_fn=lambda s: s,
+            text_name=name,
+            verbose=verbose,
         )
-    )
-
-    expanded_macros_text = expand_macro_bodies(
-        macros_texts,
-        all_variables_choices,
-        macros_handled_elsewhere=ioctl_nlmsg_defines_names,
-    )
-
-    expanded_source_contexts_texts = expand_contexts_texts(
-        source_contexts_texts,
-        all_variables_choices,
-        flagging_macros_path,
-        version,
-    )
+        for name, context_text in contexts_text.items()
+    }
 
     source_contexts, source_genfs_rules = parse_contexts_texts(
-        expanded_source_contexts_texts,
+        expanded_contexts,
     )
 
     (
-        expanded_macros,
+        macros,
         class_sets,
         perms,
-        ioctls,
-        nlmsgs,
-        source_rule_texts,
-    ) = categorize_macros(expanded_macros_text)
+    ) = categorize_macros(expanded_macros)
 
     source_perms = parse_perms(perms)
     source_class_sets = parse_perms(class_sets)
-    source_ioctls = parse_ioctls(ioctls, is_nlmsg=False)
-    source_nlmsgs = parse_ioctls(nlmsgs, is_nlmsg=True)
+    source_ioctls = parse_ioctls(ioctl_macros, is_nlmsg=False)
+    source_nlmsgs = parse_ioctls(nlmsg_macros, is_nlmsg=True)
     source_ioctl_defines = parse_ioctl_defines(
         ioctl_defines,
         verbose,
@@ -209,8 +220,8 @@ def parse_source(
     )
 
     classmap = Classmap(flagging_macros_path, version, access_vectors_path)
-    macros_name_rules = parse_macros(classmap, expanded_macros)
-    source_rules = parse_rules(classmap, source_rule_texts)
+    macros_name_rules = parse_macros(classmap, macros)
+    source_rules = parse_rules(classmap, expanded_rules)
 
     def add_rule(rule: Rule):
         source_rules.append(rule)

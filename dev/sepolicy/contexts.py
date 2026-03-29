@@ -3,18 +3,10 @@
 
 from __future__ import annotations
 
-import subprocess
 from enum import StrEnum
 from pathlib import Path
 from typing import Dict, List, Optional, Set, Tuple
 
-from sepolicy.macro import (
-    TARGET_FLAG_PREFIX,
-    combine_variable_choices,
-    define_variable,
-    names_pattern,
-    used_variables_choices,
-)
 from sepolicy.rule import Rule, trim_contexts_label
 from sepolicy.rules import (
     ALLOWED_ROOT_SYSTEM_SEPOLICY_RULES_SUBDIRS,
@@ -114,103 +106,20 @@ def resolve_contexts_paths(
     return contexts_file_paths
 
 
-def split_contexts_text(contexts_file_paths: Dict[ContextsType, List[Path]]):
-    contexts_texts: Dict[ContextsType, List[str]] = {}
+def split_normalize_contexts_text(text: str):
+    input_text_lines = split_normalize_text(text)
 
-    for contexts_type, file_paths in contexts_file_paths.items():
-        contexts_texts[contexts_type] = []
-
-        for file_path in file_paths:
-            text = file_path.read_text()
-            for rule in split_rules(
-                split_normalize_text(text),
-                # Only end a rule if level is 0 and line ended
-                ending_char='\n',
-                # We make the assumption that anyone writing macro calls in
-                # contexts won't place stray characters anywhere...
-                # This will blow up later if that's the case
-                only_end_at_ending_char=True,
-            ):
-                contexts_texts[contexts_type].append(rule)
-
-    return contexts_texts
-
-
-def expand_context_texts(
-    context_texts: List[str],
-    all_variables_choices: Dict[str, Set[str]],
-    flagging_macros_path: Optional[Path],
-    version: str,
-):
-    input_text = ''
-
-    if flagging_macros_path is not None:
-        input_text = flagging_macros_path.read_text()
-
-    # TODO: deduplicate this logic from expand_macro_bodies()
-    target_flags: Set[str] = set()
-    dependency_all_variables_choices: Dict[str, Set[str]] = {}
-    for name, value in all_variables_choices.items():
-        if name.startswith(TARGET_FLAG_PREFIX):
-            name = name.removeprefix(TARGET_FLAG_PREFIX)
-            target_flags.add(name)
-
-        dependency_all_variables_choices[name] = value
-
-    variable_names = list(dependency_all_variables_choices.keys())
-    variables_pattern = names_pattern(variable_names)
-
-    for context_text in context_texts:
-        used_variables: Set[str] = set()
-        for match in variables_pattern.finditer(context_text):
-            used_variables.add(match.group(1))
-
-        if used_variables:
-            assert flagging_macros_path is not None
-
-        variables_choices = used_variables_choices(
-            used_variables,
-            dependency_all_variables_choices,
+    return list(
+        split_rules(
+            input_text_lines,
+            # Only end a rule if level is 0 and line ended
+            ending_char='\n',
+            # We make the assumption that anyone writing macro calls in
+            # contexts won't place stray characters anywhere...
+            # This will blow up later if that's the case
+            only_end_at_ending_char=True,
         )
-
-        for combined_variables in combine_variable_choices(variables_choices):
-            for k, v in combined_variables.items():
-                # TODO: fix
-                if k in target_flags:
-                    k = f'{TARGET_FLAG_PREFIX}{k}'
-
-                input_text += define_variable(k, v)
-
-            input_text += context_text
-            input_text += '\n'
-
-    # TODO: unify this with macro processing
-    text = subprocess.check_output(
-        ['m4', '-D', f'target_board_api_level={version}'],
-        input=input_text,
-        text=True,
     )
-
-    return split_normalize_text(text)
-
-
-def expand_contexts_texts(
-    contexts_texts: Dict[ContextsType, List[str]],
-    all_variables_choices: Dict[str, Set[str]],
-    flagging_macros_path: Optional[Path],
-    version: str,
-):
-    contexts: Dict[ContextsType, List[str]] = {}
-
-    for contexts_type, context_texts in contexts_texts.items():
-        contexts[contexts_type] = expand_context_texts(
-            context_texts,
-            all_variables_choices,
-            flagging_macros_path,
-            version,
-        )
-
-    return contexts
 
 
 def parse_contexts_texts(contexts_texts: Dict[ContextsType, List[str]]):

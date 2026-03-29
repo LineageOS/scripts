@@ -37,6 +37,16 @@ from utils.utils import Color, android_root, color_print
 system_sepolicy_path = Path(android_root, 'system/sepolicy')
 
 
+def parse_args_variables(args: List[str]):
+    args_variables: Dict[str, str] = {}
+
+    for kv in args:
+        k, v = kv.split('=', 1)
+        args_variables[k] = v
+
+    return args_variables
+
+
 def count_decompiled_rules(
     mld: MultiLevelDict[Rule],
     decompiled_contexts: Optional[
@@ -187,8 +197,11 @@ def decompile_cil():
     extra_rules_paths = [Path(s) for s in args.extra_rules]
     output_dir = Path(args.output)
     selinux_dir = Path(args.selinux)
+    args_variables = parse_args_variables(args.var)
 
     policy_info = get_selinux_dir_policy(selinux_dir, verbose)
+    policy_info.variables.update(args_variables)
+
     macros_paths = get_macros_paths(policy_info.version, current_policy)
     rules_paths = get_rules_paths(policy_info.version, current_policy)
 
@@ -210,9 +223,9 @@ def decompile_cil():
         rules_paths,
         extra_rules_paths,
         system_sepolicy_path,
-        args.var,
         verbose,
         policy_info.version,
+        policy_info.variables,
     )
 
     color_print(f'Found {len(source.rules)} source rules', color=Color.GREEN)

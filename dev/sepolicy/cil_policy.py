@@ -13,12 +13,13 @@ from sepolicy.contexts import (
     ContextsType,
     find_contexts_used_types,
     parse_contexts_texts,
-    split_contexts_text,
+    split_normalize_contexts_text,
 )
 from sepolicy.match import find_public_rules, find_used_types, merge_ioctl_rules
 from sepolicy.policy_info import PolicyInfo
 from sepolicy.rule import RULE_DYNAMIC_PARTS_INDEX, Rule
 from utils.mld import MultiLevelDict
+from utils.utils import read_texts
 
 
 def decompile_one_cil(
@@ -111,9 +112,12 @@ def parse_prebuilt(policy_info: PolicyInfo, verbose: bool):
         )
         extra_rules.append(('platform policy', platform_rules))
 
-    contexts_texts = split_contexts_text(
-        policy_info.contexts_file_paths,
-    )
+    contexts_texts = {
+        name: list(
+            split_normalize_contexts_text(read_texts(context_file_paths))
+        )
+        for name, context_file_paths in policy_info.contexts_file_paths.items()
+    }
     contexts, _ = parse_contexts_texts(
         contexts_texts,
     )

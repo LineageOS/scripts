@@ -162,7 +162,7 @@ class SourceRule(Rule):
             line,
             '{',
             '}',
-            ' :,',
+            ' \n:,',
             open_by_default=True,
             ignored_chars=';',
         )

@@ -9,13 +9,14 @@ from typing import List, Set
 from sepolicy.classmap import Classmap
 from sepolicy.rule import Rule
 from sepolicy.source_rule import SourceRule
-from utils.utils import Color, color_print
+from utils.utils import Color, color_print, split_normalize_text
 
 ALLOWED_ROOT_SYSTEM_SEPOLICY_RULES_SUBDIRS = [
     'private',
     'public',
     'vendor',
 ]
+ATTRIBUTES_FILE = 'attributes'
 
 
 def resolve_rule_paths(
@@ -26,7 +27,7 @@ def resolve_rule_paths(
     rule_file_paths: List[Path] = []
 
     def add_rule(p: Path):
-        if p.suffix != '.te':
+        if p.suffix != '.te' and p.name != ATTRIBUTES_FILE:
             return
 
         if verbose:
@@ -116,6 +117,15 @@ def split_rules(
         block = ''
 
     assert not block.strip(), block
+
+
+def split_normalize_rules_text(text: str):
+    # Split into lines, remove empty lines and commented lines
+    input_text_lines = split_normalize_text(text)
+
+    # After merging all the input files, split them into top-level
+    # macro definitions
+    return list(split_rules(input_text_lines))
 
 
 def parse_rules(classmap: Classmap, source_lines: List[str]):
