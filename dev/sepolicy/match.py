@@ -176,6 +176,7 @@ def match_macro_rule(
                 print(f'Merging arg values: {arg_values_str}')
                 print(f'with: {new_arg_values_str}')
                 print(f'= {merged_arg_values_str}')
+                print()
 
             if new_arg_values is None:
                 if verbose:
