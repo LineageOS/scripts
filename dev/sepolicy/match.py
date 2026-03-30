@@ -110,7 +110,7 @@ def rule_arity(rule: Rule):
 def match_macro_rule(
     mld: MultiLevelDict[Rule],
     macro_rule: Rule,
-    rule_matches: List[RuleMatch],
+    rule_match: RuleMatch,
     verbose: bool,
 ):
     print(f'Processing rule: {macro_rule}')
@@ -122,82 +122,114 @@ def match_macro_rule(
     assert macro_rule_args is not None
 
     # Check if this rule requires only already completed args
-    is_match_keys_full = macro_rule_args.keys() <= rule_matches[0].filled_args()
+    is_match_keys_full = macro_rule_args.keys() <= rule_match.filled_args()
 
     new_rule_matches: List[RuleMatch] = []
-    for rule_match in rule_matches:
-        if verbose:
-            print(f'Processing rule match: {rule_match}')
+    if verbose:
+        print(f'Processing rule match: {rule_match}')
 
-        # TODO: make rule args extraction build a path that can be used for
-        # filling no matter the args
-        filled_rule = rule_fill(macro_rule, rule_match.arg_values)
+    # TODO: make rule args extraction build a path that can be used for
+    # filling no matter the args
+    filled_rule = rule_fill(macro_rule, rule_match.arg_values)
+    if verbose:
+        print(f'Constructed filled rule: {filled_rule}')
+    if filled_rule is None:
+        return new_rule_matches
+
+    match_keys = rule_match_keys(filled_rule, is_match_keys_full)
+    if verbose:
+        match_keys_str = [
+            sorted(v) if isinstance(v, frozenset) else str(v)
+            for v in match_keys
+        ]
+        print(f'Constructed match keys: {match_keys_str}')
+
+    for matched_rule in mld.match(match_keys):
         if verbose:
-            print(f'Constructed filled rule: {filled_rule}')
-        if filled_rule is None:
+            print(f'Found matching rule: {matched_rule}')
+
+        if is_match_keys_full:
+            # If the rule is fully filled don't expand the args
+            new_args_values = {}
+        else:
+            new_args_values = rule_extract_part_iter(
+                filled_rule.parts,
+                matched_rule.parts,
+            )
+
+        new_arg_values = merge_arg_values(
+            rule_match.arg_values,
+            new_args_values,
+        )
+
+        if verbose:
+            arg_values_str = {
+                k: str(v) for k, v in rule_match.arg_values.items()
+            }
+            new_arg_values_str = {
+                k: str(v) for k, v in (new_args_values or {}).items()
+            }
+            merged_arg_values_str = {
+                k: str(v) for k, v in (new_arg_values or {}).items()
+            }
+            print(f'Merging arg values: {arg_values_str}')
+            print(f'with: {new_arg_values_str}')
+            print(f'= {merged_arg_values_str}')
+            print()
+
+        if new_arg_values is None:
+            if verbose:
+                print('Arg values incompatible, skip')
             continue
 
-        match_keys = rule_match_keys(filled_rule, is_match_keys_full)
-        if verbose:
-            match_keys_str = [
-                sorted(v) if isinstance(v, frozenset) else str(v)
-                for v in match_keys
-            ]
-            print(f'Constructed match keys: {match_keys_str}')
+        new_rules = rule_match.rules.copy()
+        new_rules.append(matched_rule)
 
-        for matched_rule in mld.match(match_keys):
-            if verbose:
-                print(f'Found matching rule: {matched_rule}')
-
-            if is_match_keys_full:
-                # If the rule is fully filled don't expand the args
-                new_args_values = {}
-            else:
-                new_args_values = rule_extract_part_iter(
-                    filled_rule.parts,
-                    matched_rule.parts,
-                )
-
-            new_arg_values = merge_arg_values(
-                rule_match.arg_values,
-                new_args_values,
-            )
-
-            if verbose:
-                arg_values_str = {
-                    k: str(v) for k, v in rule_match.arg_values.items()
-                }
-                new_arg_values_str = {
-                    k: str(v) for k, v in (new_args_values or {}).items()
-                }
-                merged_arg_values_str = {
-                    k: str(v) for k, v in (new_arg_values or {}).items()
-                }
-                print(f'Merging arg values: {arg_values_str}')
-                print(f'with: {new_arg_values_str}')
-                print(f'= {merged_arg_values_str}')
-                print()
-
-            if new_arg_values is None:
-                if verbose:
-                    print('Arg values incompatible, skip')
-                continue
-
-            new_rules = rule_match.rules.copy()
-            new_rules.append(matched_rule)
-
-            new_rule_match = RuleMatch(
-                rule_match.macro_name,
-                new_rules,
-                new_arg_values,
-            )
-            new_rule_matches.append(new_rule_match)
+        new_rule_match = RuleMatch(
+            rule_match.macro_name,
+            new_rules,
+            new_arg_values,
+        )
+        new_rule_matches.append(new_rule_match)
 
     if not new_rule_matches:
         if verbose:
             print('No matched rules')
 
     return new_rule_matches
+
+
+def match_macro_rule_depth(
+    mld: MultiLevelDict[Rule],
+    macro_rules: List[Rule],
+    rule_match: RuleMatch,
+    results: List[RuleMatch],
+    verbose: bool,
+):
+    if not macro_rules:
+        results.append(rule_match)
+        return
+
+    macro_rule = macro_rules[0]
+
+    next_matches = match_macro_rule(
+        mld,
+        macro_rule,
+        rule_match,
+        verbose,
+    )
+
+    if not next_matches:
+        return
+
+    for next_match in next_matches:
+        match_macro_rule_depth(
+            mld,
+            macro_rules[1:],
+            next_match,
+            results,
+            verbose,
+        )
 
 
 def match_macro_rules(
@@ -217,24 +249,15 @@ def match_macro_rules(
     # the arg matching algorithm
     macro_rules.sort(key=rule_arity, reverse=True)
 
-    rule_matches: List[RuleMatch] = [RuleMatch(macro_name)]
-    for macro_rule in macro_rules:
-        new_rule_matches = match_macro_rule(
-            mld,
-            macro_rule,
-            rule_matches,
-            verbose,
-        )
-        print(f'Found {len(new_rule_matches)} candidates')
-        if verbose:
-            for rule_match in new_rule_matches:
-                print(rule_match)
-            print()
-        if not len(new_rule_matches):
-            print()
-            return
+    rule_matches: List[RuleMatch] = []
 
-        rule_matches = new_rule_matches
+    match_macro_rule_depth(
+        mld,
+        macro_rules,
+        RuleMatch(macro_name),
+        rule_matches,
+        verbose,
+    )
 
     all_rule_matches.extend(rule_matches)
 
