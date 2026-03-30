@@ -139,7 +139,11 @@ def match_macro_rule(
 
         match_keys = rule_match_keys(filled_rule, is_match_keys_full)
         if verbose:
-            print(f'Constructed match keys: {match_keys}')
+            match_keys_str = [
+                sorted(v) if isinstance(v, frozenset) else str(v)
+                for v in match_keys
+            ]
+            print(f'Constructed match keys: {match_keys_str}')
 
         for matched_rule in mld.match(match_keys):
             if verbose:
@@ -160,9 +164,18 @@ def match_macro_rule(
             )
 
             if verbose:
-                print(f'Merging arg values: {rule_match.arg_values}')
-                print(f'with: {new_args_values}')
-                print(f'= {new_arg_values}')
+                arg_values_str = {
+                    k: str(v) for k, v in rule_match.arg_values.items()
+                }
+                new_arg_values_str = {
+                    k: str(v) for k, v in (new_args_values or {}).items()
+                }
+                merged_arg_values_str = {
+                    k: str(v) for k, v in (new_arg_values or {}).items()
+                }
+                print(f'Merging arg values: {arg_values_str}')
+                print(f'with: {new_arg_values_str}')
+                print(f'= {merged_arg_values_str}')
 
             if new_arg_values is None:
                 if verbose:
