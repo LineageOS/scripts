@@ -224,6 +224,7 @@ def decompile_cil():
     # as some types end up in vendor's versioned policy while they do not end up
     # in product
     remove_unused_types(prebuilt.mld, prebuilt.used_types)
+    remove_unused_types(prebuilt.public_mld, prebuilt.used_types)
 
     count = count_decompiled_rules(
         prebuilt.mld,
