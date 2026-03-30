@@ -130,6 +130,9 @@ def parse_prebuilt(policy_info: PolicyInfo, verbose: bool):
     mld: MultiLevelDict[Rule] = MultiLevelDict(RULE_DYNAMIC_PARTS_INDEX)
     mld.add_many(rules, lambda r: r.hash_values)
 
+    for _, rules in extra_rules:
+        mld.add_many(rules, lambda r: r.hash_values)
+
     public_rules: List[Rule] = []
     for policy_version, policy_path in policy_info.public_rules_paths:
         # Load rules being referenced by other sepolicy which need to be
