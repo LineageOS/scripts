@@ -6,7 +6,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Tuple
 
 from sepolicy.contexts import ContextsType, resolve_contexts_paths
 
@@ -21,15 +21,18 @@ class PolicyInfo:
     partition_name: str
 
 
-def get_sdk_value(build_prop_path: Path):
-    SDK_PROP = 'ro.build.version.sdk='
-    sdk_value_str: Optional[str] = None
+def get_build_prop(lines: List[str], prop_name: str):
+    prop_name_eq = f'{prop_name}='
 
-    for line in build_prop_path.read_text().splitlines():
-        if line.startswith(SDK_PROP):
-            sdk_value_str = line[len(SDK_PROP) :]
+    for line in lines:
+        if line.startswith(prop_name_eq):
+            return line[len(prop_name_eq) :]
 
-    assert sdk_value_str is not None, build_prop_path
+    assert False, f'Failed to find build prop: {prop_name}'
+
+
+def get_sdk_value(build_prop_lines: List[str]):
+    sdk_value_str = get_build_prop(build_prop_lines, 'ro.build.version.sdk')
 
     # TODO: find the proper value
     if sdk_value_str == '36':
@@ -47,7 +50,19 @@ def get_selinux_dir_policy(selinux_dir: Path, verbose: bool):
 
     vendor_policy_path = Path(dump_root, 'vendor/etc/selinux')
     system_policy_path = Path(dump_root, 'system/etc/selinux')
+
     platform_build_prop_path = Path(dump_root, 'system/build.prop')
+    platform_build_prop_text = platform_build_prop_path.read_text()
+    platform_build_prop_lines = platform_build_prop_text.splitlines()
+    platform_policy_version = get_sdk_value(platform_build_prop_lines)
+
+    vendor_build_prop_path = Path(dump_root, 'vendor/etc/build.prop')
+    vendor_build_prop_text = vendor_build_prop_path.read_text()
+    vendor_build_prop_lines = vendor_build_prop_text.splitlines()
+    vendor_board_api_level = get_build_prop(
+        vendor_build_prop_lines,
+        'ro.board.api_level',
+    )
 
     contexts_file_paths = resolve_contexts_paths(
         [selinux_dir],
@@ -68,37 +83,24 @@ def get_selinux_dir_policy(selinux_dir: Path, verbose: bool):
         versioned_platform_policy_path
     )
 
-    # Read policy version for vendor / odm
-    versioned_platform_policy_version_path = Path(
-        vendor_policy_path,
-        'plat_sepolicy_vers.txt',
-    )
-    assert versioned_platform_policy_version_path.exists(), (
-        versioned_platform_policy_version_path
-    )
-    versioned_platform_policy_version = (
-        versioned_platform_policy_version_path.read_text().strip()
-    )
-
     platform_policy_path = Path(
         system_policy_path,
         'plat_sepolicy.cil',
     )
     assert platform_policy_path.exists(), platform_policy_path
-    platform_policy_version = get_sdk_value(platform_build_prop_path)
 
     if partition_name in ['vendor', 'odm']:
         extra_rules_paths = [
-            (versioned_platform_policy_version, versioned_platform_policy_path),
+            (vendor_board_api_level, versioned_platform_policy_path),
         ]
         referencing_rules_paths = []
-        policy_version = versioned_platform_policy_version
+        policy_version = vendor_board_api_level
     else:
         extra_rules_paths = [
             (platform_policy_version, platform_policy_path),
         ]
         referencing_rules_paths = [
-            (versioned_platform_policy_version, versioned_platform_policy_path),
+            (vendor_board_api_level, versioned_platform_policy_path),
         ]
         policy_version = platform_policy_version
 
