@@ -13,7 +13,6 @@ from typing import (
     Iterable,
     List,
     Sequence,
-    Set,
     Tuple,
     TypeVar,
     Union,
@@ -37,8 +36,8 @@ def tuples_with_nones(
 
 class MultiLevelDict(Generic[T]):
     def __init__(self, nones_start: int = 0):
-        self.__data: Dict[int, Dict[Tuple[Hashable, ...], Set[T]]] = {}
-        self.__all_data: Set[T] = set()
+        self.__data: Dict[int, Dict[Tuple[Hashable, ...], Dict[T, None]]] = {}
+        self.__all_data: Dict[T, None] = {}
         self.__nones_start = nones_start
 
     def __len__(self):
@@ -51,7 +50,7 @@ class MultiLevelDict(Generic[T]):
         return iter(self.__all_data)
 
     def add(self, keys: Sequence[Hashable], value: T):
-        self.__all_data.add(value)
+        self.__all_data[value] = None
 
         levels = len(keys)
         if levels not in self.__data:
@@ -61,9 +60,9 @@ class MultiLevelDict(Generic[T]):
 
         for t in tuples_with_nones(keys, self.__nones_start):
             if t not in levels_data:
-                levels_data[t] = set()
+                levels_data[t] = {}
 
-            levels_data[t].add(value)
+            levels_data[t][value] = None
 
     def add_many(
         self,
@@ -74,14 +73,14 @@ class MultiLevelDict(Generic[T]):
             self.add(fn(value), value)
 
     def remove(self, keys: Sequence[Hashable], value: T):
-        self.__all_data.remove(value)
+        del self.__all_data[value]
 
         levels = len(keys)
         assert levels in self.__data
         levels_data = self.__data[levels]
 
         for t in tuples_with_nones(keys, self.__nones_start):
-            levels_data[t].remove(value)
+            del levels_data[t][value]
 
     def match(
         self,
