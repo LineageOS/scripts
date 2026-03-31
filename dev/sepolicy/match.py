@@ -25,7 +25,7 @@ from sepolicy.rule import (
     rule_hash_value,
     rule_part,
 )
-from sepolicy.source_policy import SourcePolicy
+from sepolicy.source_policy import SourceMacros
 from utils.mld import MultiLevelDict
 from utils.utils import Color, color_print
 
@@ -1012,7 +1012,7 @@ def find_public_rules(mld: MultiLevelDict[Rule], referencing_rules: List[Rule]):
 
 def process_rules(
     m: MultiLevelDict[Rule],
-    source: SourcePolicy,
+    source_macros: SourceMacros,
     removed_rules: List[Tuple[str, Iterable[Rule]]],
     rule_matches: List[RuleMatch],
     name: str,
@@ -1035,22 +1035,22 @@ def process_rules(
 
     merge_typeattribute_rules(m, name)
 
-    replace_perms(m, source.classmap, source.perms, name)
+    replace_perms(m, source_macros.classmap, source_macros.perms, name)
     replace_ioctls(
         m,
-        source.ioctls,
-        source.ioctl_defines,
+        source_macros.ioctls,
+        source_macros.ioctl_defines,
         name,
         is_nlmsg=False,
     )
     replace_ioctls(
         m,
-        source.nlmsgs,
-        source.nlmsg_defines,
+        source_macros.nlmsgs,
+        source_macros.nlmsg_defines,
         name,
         is_nlmsg=True,
     )
-    merge_class_sets(m, source.class_sets, name)
+    merge_class_sets(m, source_macros.class_sets, name)
 
     # We can also merge target domains, but rules get long quickly
     # merge_target_domains(m)

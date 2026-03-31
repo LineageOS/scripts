@@ -30,7 +30,7 @@ from sepolicy.output import (
 )
 from sepolicy.policy_info import get_selinux_dir_policy
 from sepolicy.rule import Rule
-from sepolicy.source_policy import SourcePolicy, parse_source
+from sepolicy.source_policy import SourceMacros, SourcePolicy, parse_source
 from utils.mld import MultiLevelDict
 from utils.utils import Color, android_root, color_print
 
@@ -97,13 +97,14 @@ def process_output_rules(
     removed_rules: List[Tuple[str, Iterable[Rule]]],
     output_dir: Path,
     rule_matches: List[RuleMatch],
-    source: SourcePolicy,
+    source_policy: SourcePolicy,
+    source_macros: SourceMacros,
     verbose: bool,
     name: str,
 ):
     process_rules(
         mld,
-        source=source,
+        source_macros=source_macros,
         removed_rules=removed_rules,
         rule_matches=rule_matches,
         name=name,
@@ -114,13 +115,13 @@ def process_output_rules(
     if contexts is not None:
         contexts = remove_source_contexts(
             contexts,
-            source.contexts,
+            source_policy.contexts,
         )
 
     if genfs_rules is not None:
         genfs_rules = remove_source_genfs_rules(
             genfs_rules,
-            source.genfs_rules,
+            source_policy.genfs_rules,
         )
 
     count = count_decompiled_rules(
@@ -217,7 +218,7 @@ def decompile_cil():
             f'version: {policy_version}'
         )
 
-    source = parse_source(
+    source_policy, source_macros = parse_source(
         macros_paths,
         extra_macros_paths,
         rules_paths,
@@ -228,7 +229,10 @@ def decompile_cil():
         policy_info.variables,
     )
 
-    color_print(f'Found {len(source.rules)} source rules', color=Color.GREEN)
+    color_print(
+        f'Found {len(source_policy.rules)} source rules',
+        color=Color.GREEN,
+    )
 
     prebuilt = parse_prebuilt(policy_info, verbose)
 
@@ -248,7 +252,7 @@ def decompile_cil():
 
     rule_matches = match_macros_rules(
         prebuilt.mld,
-        source.macros_name_rules,
+        source_macros.macros_name_rules,
         verbose,
     )
     rule_matches = discard_rule_matches(rule_matches, verbose)
@@ -266,13 +270,14 @@ def decompile_cil():
         genfs_rules=prebuilt.genfs_rules,
         contexts=prebuilt.contexts,
         removed_rules=[
-            ('source', source.rules),
+            ('source', source_policy.rules),
             *prebuilt.extra_rules,
             ('public', prebuilt.public_mld),
         ],
         output_dir=private_output_dir,
         rule_matches=rule_matches,
-        source=source,
+        source_policy=source_policy,
+        source_macros=source_macros,
         verbose=verbose,
         name='private',
     )
@@ -287,11 +292,12 @@ def decompile_cil():
             contexts=None,
             output_dir=public_output_dir,
             removed_rules=[
-                ('source', source.rules),
+                ('source', source_policy.rules),
                 *prebuilt.extra_rules,
             ],
             rule_matches=rule_matches,
-            source=source,
+            source_policy=source_policy,
+            source_macros=source_macros,
             verbose=verbose,
             name='public',
         )

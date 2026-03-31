@@ -36,9 +36,7 @@ from utils.utils import read_texts
 
 
 @dataclass
-class SourcePolicy:
-    rules: List[Rule]
-    genfs_rules: List[Rule]
+class SourceMacros:
     perms: List[Tuple[str, Set[str]]]
     class_sets: List[Tuple[str, Set[str]]]
     ioctls: List[Tuple[str, Set[str]]]
@@ -46,8 +44,14 @@ class SourcePolicy:
     ioctl_defines: Dict[str, str]
     nlmsg_defines: Dict[str, str]
     macros_name_rules: List[Tuple[str, List[Rule]]]
-    contexts: Dict[ContextsType, List[Tuple[str, ...]]]
     classmap: Classmap
+
+
+@dataclass
+class SourcePolicy:
+    rules: List[Rule]
+    genfs_rules: List[Rule]
+    contexts: Dict[ContextsType, List[Tuple[str, ...]]]
 
 
 def parse_source(
@@ -241,16 +245,20 @@ def parse_source(
     # external/selinux/libsepol/src/module_to_cil.c
     source_rules.append(Rule('attribute', ('cil_gen_require',), ()))
 
-    return SourcePolicy(
-        rules=source_rules,
-        contexts=source_contexts,
-        genfs_rules=source_genfs_rules,
-        perms=source_perms,
-        class_sets=source_class_sets,
-        ioctls=source_ioctls,
-        nlmsgs=source_nlmsgs,
-        ioctl_defines=source_ioctl_defines,
-        nlmsg_defines=source_nlmsg_defines,
-        macros_name_rules=macros_name_rules,
-        classmap=classmap,
+    return (
+        SourcePolicy(
+            rules=source_rules,
+            contexts=source_contexts,
+            genfs_rules=source_genfs_rules,
+        ),
+        SourceMacros(
+            perms=source_perms,
+            class_sets=source_class_sets,
+            ioctls=source_ioctls,
+            nlmsgs=source_nlmsgs,
+            ioctl_defines=source_ioctl_defines,
+            nlmsg_defines=source_nlmsg_defines,
+            macros_name_rules=macros_name_rules,
+            classmap=classmap,
+        ),
     )
