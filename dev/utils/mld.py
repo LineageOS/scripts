@@ -3,35 +3,22 @@
 
 from __future__ import annotations
 
-import itertools
+from collections import defaultdict
 from collections.abc import Hashable
 from typing import (
     Callable,
+    DefaultDict,
     Dict,
-    Generator,
     Generic,
     Iterable,
+    Iterator,
     List,
     Sequence,
     Tuple,
     TypeVar,
-    Union,
 )
 
 T = TypeVar('T')
-
-
-def tuples_with_nones(
-    t: Sequence[Hashable],
-    nones_start: int,
-) -> Generator[Tuple[Union[Hashable, None], ...], None, None]:
-    choices: List[Tuple[Union[Hashable, None], ...]] = []
-    for i, x in enumerate(t):
-        if i < nones_start:
-            choices.append((x,))
-        else:
-            choices.append((x, None))
-    yield from itertools.product(*choices)
 
 
 class MultiLevelDict(Generic[T]):
@@ -40,10 +27,29 @@ class MultiLevelDict(Generic[T]):
         fn: Callable[[T], Tuple[Hashable, ...]],
         nones_start: int = 0,
     ):
-        self.__data: Dict[int, Dict[Tuple[Hashable, ...], Dict[T, None]]] = {}
-        self.__all_data: Dict[T, None] = {}
         self.__nones_start = nones_start
         self.__fn = fn
+
+        self.__all_data: Dict[T, Tuple[Hashable, ...]] = {}
+
+        self.__data: DefaultDict[
+            # levels
+            int,
+            DefaultDict[
+                # position
+                int,
+                DefaultDict[
+                    # keys
+                    Hashable,
+                    # values
+                    Dict[T, None],
+                ],
+            ],
+        ] = defaultdict(
+            lambda: defaultdict(
+                lambda: defaultdict(dict),
+            ),
+        )
 
     def __len__(self):
         return len(self.__all_data)
@@ -56,19 +62,14 @@ class MultiLevelDict(Generic[T]):
 
     def add(self, value: T):
         keys = self.__fn(value)
-        self.__all_data[value] = None
+
+        self.__all_data[value] = keys
 
         levels = len(keys)
-        if levels not in self.__data:
-            self.__data[levels] = {}
-
         levels_data = self.__data[levels]
 
-        for t in tuples_with_nones(keys, self.__nones_start):
-            if t not in levels_data:
-                levels_data[t] = {}
-
-            levels_data[t][value] = None
+        for i, k in enumerate(keys):
+            levels_data[i][k][value] = None
 
     def add_many(self, values: Iterable[T]):
         for value in values:
@@ -76,27 +77,69 @@ class MultiLevelDict(Generic[T]):
 
     def remove(self, value: T):
         keys = self.__fn(value)
+        assert self.__all_data[value] == keys
+
         del self.__all_data[value]
 
         levels = len(keys)
-        assert levels in self.__data
         levels_data = self.__data[levels]
 
-        for t in tuples_with_nones(keys, self.__nones_start):
-            del levels_data[t][value]
+        for i, key in enumerate(keys):
+            position_data = levels_data[i]
+            bucket = position_data[key]
 
-    def match(
-        self,
-        keys: Sequence[Hashable],
-    ) -> Generator[T]:
-        keys_tuple = tuple(keys)
+            del bucket[value]
 
-        levels = len(keys_tuple)
-        if levels not in self.__data:
+            if bucket:
+                continue
+
+            del position_data[key]
+
+            if position_data:
+                continue
+
+            del levels_data[i]
+
+    def match(self, keys: Sequence[Hashable]) -> Iterator[T]:
+        keys = tuple(keys)
+
+        levels = len(keys)
+        levels_data = self.__data.get(levels)
+        if levels_data is None:
             return
 
-        levels_data = self.__data[levels]
-        if keys_tuple not in levels_data:
-            return
+        buckets: List[Dict[T, None]] = []
+        saw_not_none = False
 
-        yield from levels_data[keys_tuple]
+        for i, key in enumerate(keys):
+            if key is None:
+                assert i >= self.__nones_start
+                continue
+
+            saw_not_none = True
+
+            position_data = levels_data.get(i)
+            if position_data is None:
+                return
+
+            bucket = position_data.get(key)
+            if bucket is None:
+                return
+
+            buckets.append(bucket)
+
+        # Querries that are only None are not allowed
+        assert saw_not_none
+
+        buckets.sort(key=len)
+        smallest_bucket = buckets[0]
+        other_buckets = buckets[1:]
+
+        common = smallest_bucket.keys()
+        for bucket in other_buckets:
+            common = common & bucket.keys()
+
+        # Keep original order
+        for value in smallest_bucket:
+            if value in common:
+                yield value
