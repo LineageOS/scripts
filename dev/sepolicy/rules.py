@@ -3,66 +3,9 @@
 
 from __future__ import annotations
 
-from pathlib import Path
-from typing import List, Set
+from typing import List
 
-from sepolicy.classmap import Classmap
-from sepolicy.rule import Rule
-from sepolicy.source_rule import SourceRule
-from utils.utils import Color, color_print, split_normalize_text
-
-ALLOWED_ROOT_SYSTEM_SEPOLICY_RULES_SUBDIRS = [
-    'private',
-    'public',
-    'vendor',
-]
-ATTRIBUTES_FILE = 'attributes'
-
-
-def resolve_rule_paths(
-    rule_paths: List[Path],
-    system_sepolicy_path: Path,
-    verbose: bool,
-):
-    rule_file_paths: List[Path] = []
-
-    def add_rule(p: Path):
-        if p.suffix != '.te' and p.name != ATTRIBUTES_FILE:
-            return
-
-        if verbose:
-            print(f'Loading rules: {p}')
-
-        rule_file_paths.append(p)
-
-    for rule_path in rule_paths:
-        if rule_path.is_file():
-            add_rule(rule_path)
-            continue
-
-        if not rule_path.is_dir():
-            color_print(
-                f'Rule path {rule_path} is not a file or directory',
-                color=Color.RED,
-            )
-            continue
-
-        # --current uses the root directory, which contains a lot of .te
-        # files from other versions of the API too
-        if rule_path == system_sepolicy_path:
-            subdirs_to_scan = [
-                Path(rule_path, subdir_name)
-                for subdir_name in ALLOWED_ROOT_SYSTEM_SEPOLICY_RULES_SUBDIRS
-            ]
-        else:
-            subdirs_to_scan = [rule_path]
-
-        for file_subdir in subdirs_to_scan:
-            for file_path in file_subdir.rglob('*.te'):
-                if file_path.is_file():
-                    add_rule(file_path)
-
-    return rule_file_paths
+from utils.utils import split_normalize_text
 
 
 def split_rules(
@@ -126,24 +69,3 @@ def split_normalize_rules_text(text: str):
     # After merging all the input files, split them into top-level
     # macro definitions
     return list(split_rules(input_text_lines))
-
-
-def parse_rules(classmap: Classmap, source_lines: List[str]):
-    decompiled_rules: List[Rule] = []
-    unique_rules: Set[Rule] = set()
-
-    def add_rule(rule: Rule):
-        if rule in unique_rules:
-            return
-
-        decompiled_rules.append(rule)
-        unique_rules.add(rule)
-
-    for source_line in source_lines:
-        SourceRule.from_line(
-            source_line,
-            add_rule=add_rule,
-            classmap=classmap,
-        )
-
-    return decompiled_rules

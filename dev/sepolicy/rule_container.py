@@ -6,31 +6,27 @@ from __future__ import annotations
 from collections import defaultdict
 from collections.abc import Hashable
 from typing import (
-    Callable,
     DefaultDict,
     Dict,
-    Generic,
     Iterable,
     Iterator,
     List,
+    Optional,
     Sequence,
     Tuple,
-    TypeVar,
 )
 
-T = TypeVar('T')
+from sepolicy.rule import Rule
 
 
-class MultiLevelDict(Generic[T]):
+class RuleContainer:
     def __init__(
         self,
-        fn: Callable[[T], Tuple[Hashable, ...]],
-        nones_start: int = 0,
+        iterable: Optional[Iterable[Rule]] = None,
+        sparse_match: bool = False,
     ):
-        self.__nones_start = nones_start
-        self.__fn = fn
-
-        self.__all_data: Dict[T, Tuple[Hashable, ...]] = {}
+        self.__all_data: Dict[Rule, Tuple[Hashable, ...]] = {}
+        self.__sparse_match = sparse_match
 
         self.__data: DefaultDict[
             # levels
@@ -42,7 +38,7 @@ class MultiLevelDict(Generic[T]):
                     # keys
                     Hashable,
                     # values
-                    Dict[T, None],
+                    Dict[Rule, None],
                 ],
             ],
         ] = defaultdict(
@@ -51,19 +47,29 @@ class MultiLevelDict(Generic[T]):
             ),
         )
 
+        if iterable is not None:
+            for value in iterable:
+                self.add(value)
+
     def __len__(self):
         return len(self.__all_data)
 
     def __iter__(self):
         return iter(self.__all_data)
 
-    def __contains__(self, value: T):
+    def __contains__(self, value: Rule):
         return value in self.__all_data
 
-    def add(self, value: T):
-        keys = self.__fn(value)
+    def add(self, value: Rule):
+        keys = value.hash_values
+        if value in self.__all_data:
+            assert self.__all_data[value] == keys, value
+            return
 
         self.__all_data[value] = keys
+
+        if not self.__sparse_match:
+            return
 
         levels = len(keys)
         levels_data = self.__data[levels]
@@ -71,15 +77,23 @@ class MultiLevelDict(Generic[T]):
         for i, k in enumerate(keys):
             levels_data[i][k][value] = None
 
-    def add_many(self, values: Iterable[T]):
+    def add_many(self, values: Iterable[Rule]):
         for value in values:
             self.add(value)
 
-    def remove(self, value: T):
-        keys = self.__fn(value)
-        assert self.__all_data[value] == keys
+    def remove(self, value: Rule, optional: bool = False):
+        if optional and value not in self.__all_data:
+            return False
+
+        keys = value.hash_values
+
+        assert value in self.__all_data, value
+        assert self.__all_data[value] == keys, value
 
         del self.__all_data[value]
+
+        if not self.__sparse_match:
+            return
 
         levels = len(keys)
         levels_data = self.__data[levels]
@@ -100,7 +114,21 @@ class MultiLevelDict(Generic[T]):
 
             del levels_data[i]
 
-    def match(self, keys: Sequence[Hashable]) -> Iterator[T]:
+        return True
+
+    def remove_many(self, values: Iterable[Rule], optional: bool = False):
+        removed_count = 0
+
+        for value in values:
+            removed = self.remove(value, optional)
+            if removed:
+                removed_count += 1
+
+        return removed_count
+
+    def match(self, keys: Sequence[Hashable]) -> Iterator[Rule]:
+        assert self.__sparse_match
+
         keys = tuple(keys)
 
         levels = len(keys)
@@ -108,12 +136,11 @@ class MultiLevelDict(Generic[T]):
         if levels_data is None:
             return
 
-        buckets: List[Dict[T, None]] = []
+        buckets: List[Dict[Rule, None]] = []
         saw_not_none = False
 
         for i, key in enumerate(keys):
             if key is None:
-                assert i >= self.__nones_start
                 continue
 
             saw_not_none = True

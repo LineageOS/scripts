@@ -4,9 +4,9 @@
 from __future__ import annotations
 
 from enum import StrEnum
-from typing import Callable, Dict, List, Optional, Set
+from typing import Callable, Dict, FrozenSet, List, Optional, Set
 
-from sepolicy.conditional_type import ConditionalType, ConditionalTypeRedirect
+from sepolicy.conditional_type import ConditionalType
 from sepolicy.rule import (
     Rule,
     RuleType,
@@ -204,38 +204,43 @@ unknown_rule_types: Set[str] = set(
 )
 
 
+def unpack_cil_line(line: str):
+    # Skip comments and empty lines
+    if not is_valid_cil_line(line):
+        return None
+
+    parts = unpack_line(line, '(', ')', ' ')
+    if not parts:
+        return None
+
+    return parts
+
+
 class CilRule(Rule):
     @classmethod
     def from_line(
         cls,
         line: str,
+        parts: raw_parts_list,
         conditional_types_map: Dict[str, ConditionalType],
-        missing_generated_types: Set[str],
         add_rule: Callable[[Rule], None],
         add_genfs_rule: Optional[Callable[[Rule], None]],
         version: Optional[str],
+        allowed_types: Optional[FrozenSet[str]] = None,
+        disallowed_types: Optional[FrozenSet[str]] = None,
     ):
-        def type_redirect(t: str):
-            return ConditionalTypeRedirect(
-                t,
-                conditional_types_map,
-                missing_generated_types,
-            )
-
         version_suffix = None
         if version is not None:
             version = version.replace('.', '_')
             version_suffix = f'_{version}'
 
-        # Skip comments and empty lines
-        if not is_valid_cil_line(line):
-            return
-
-        parts = unpack_line(line, '(', ')', ' ')
-        if not parts:
-            return
-
         assert isinstance(parts[0], str), line
+
+        if allowed_types is not None and parts[0] not in allowed_types:
+            return
+
+        if disallowed_types is not None and parts[0] in disallowed_types:
+            return
 
         # Remove rules that don't have a meaningful source mapping
         if parts[0] in unknown_rule_types:
@@ -270,11 +275,11 @@ class CilRule(Rule):
 
                 src = remove_type_suffix(version_suffix, parts[1])
                 if is_type_generated(src):
-                    src = type_redirect(src)
+                    src = conditional_types_map[src]
 
                 dst = remove_type_suffix(version_suffix, parts[2])
                 if is_type_generated(dst):
-                    dst = type_redirect(dst)
+                    dst = conditional_types_map[dst]
 
                 rule = Rule(
                     parts[0],
@@ -303,11 +308,11 @@ class CilRule(Rule):
 
                 src = remove_type_suffix(version_suffix, parts[1])
                 if is_type_generated(src):
-                    src = type_redirect(src)
+                    src = conditional_types_map[src]
 
                 dst = remove_type_suffix(version_suffix, parts[2])
                 if is_type_generated(dst):
-                    dst = type_redirect(dst)
+                    dst = conditional_types_map[dst]
 
                 if parts[0] == CilRuleType.ALLOWX.value:
                     rule_type = RuleType.ALLOWXPERM.value
@@ -421,11 +426,11 @@ class CilRule(Rule):
 
                 src = remove_type_suffix(version_suffix, parts[1])
                 if is_type_generated(src):
-                    src = type_redirect(src)
+                    src = conditional_types_map[src]
 
                 dst = remove_type_suffix(version_suffix, parts[2])
                 if is_type_generated(dst):
-                    src = type_redirect(dst)
+                    dst = conditional_types_map[dst]
 
                 rule = Rule(
                     RuleType.TYPE_TRANSITION.value,

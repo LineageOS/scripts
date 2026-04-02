@@ -3,19 +3,20 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from collections import defaultdict
+from dataclasses import astuple, dataclass
 from pathlib import Path
-from typing import Dict, List, Set, Tuple
+from typing import DefaultDict, Dict, List, Optional, Set, Tuple
 
-from sepolicy.cil_rule import CilRule
+from sepolicy.cil_rule import CilRule, unpack_cil_line
 from sepolicy.classmap import Classmap
 from sepolicy.contexts import (
     ContextsType,
     parse_contexts_texts,
-    resolve_contexts_paths,
+    parse_genfs_contexts,
     split_normalize_contexts_text,
 )
-from sepolicy.expand import expand_macro_calls_and_variables
+from sepolicy.expand import expand_macro_calls, expand_macro_calls_and_split
 from sepolicy.macro import (
     categorize_macros,
     macro_required_name_body_raw,
@@ -23,16 +24,42 @@ from sepolicy.macro import (
     parse_ioctls,
     parse_macros,
     parse_perms,
-    resolve_macro_paths,
     rule_body,
 )
-from sepolicy.rule import Rule
-from sepolicy.rules import (
-    parse_rules,
-    resolve_rule_paths,
-    split_normalize_rules_text,
+from sepolicy.policy import (
+    Policy,
+    PolicyMetadata,
+    PolicyName,
+    PolicyParseFormat,
+    PolicySourceOrigin,
+    PolicyType,
+    get_policy_types_by_origin,
 )
-from utils.utils import read_texts
+from sepolicy.rule import Rule
+from sepolicy.rule_container import RuleContainer
+from sepolicy.rules import split_normalize_rules_text
+from sepolicy.source_rule import SourceRule
+from utils.frozendict import FrozenDict
+from utils.utils import android_root, read_texts, resolve_paths
+
+system_sepolicy_path = Path(android_root, 'system/sepolicy')
+
+
+def get_source_policy_path(version: str, current: bool):
+    if current:
+        return system_sepolicy_path
+
+    return Path(system_sepolicy_path, f'prebuilts/api/{version}')
+
+
+@dataclass
+class SourceMacrosText:
+    flagging_macros: str
+    ioctl_defines: str
+    nlmsg_defines: str
+    ioctl_macros: str
+    nlmsg_macros: str
+    macros: str
 
 
 @dataclass
@@ -44,80 +71,237 @@ class SourceMacros:
     ioctl_defines: Dict[str, str]
     nlmsg_defines: Dict[str, str]
     macros_name_rules: List[Tuple[str, List[Rule]]]
-    classmap: Classmap
+
+    def __repr__(self):
+        return (
+            f'perms: {len(self.perms)}\n'
+            f'class sets: {len(self.class_sets)}\n'
+            f'ioctls: {len(self.ioctls)}\n'
+            f'nlmsgs: {len(self.nlmsgs)}\n'
+            f'ioctl defines: {len(self.ioctl_defines)}\n'
+            f'nlmsg defines: {len(self.nlmsg_defines)}\n'
+            f'macros: {len(self.macros_name_rules)}\n'
+        )
 
 
 @dataclass
-class SourcePolicy:
-    rules: List[Rule]
-    genfs_rules: List[Rule]
-    contexts: Dict[ContextsType, List[Tuple[str, ...]]]
+class Source:
+    macros: SourceMacros
+    classmap: Classmap
+    policy_index: Dict[PolicyName, Policy]
 
 
-def parse_source(
-    macros_paths: List[Path],
+MACRO_FILES = {
+    'global_macros',
+    'neverallow_macros',
+    'te_macros',
+}
+IOCTL_DEFINES_FILE = 'ioctl_defines'
+IOCTL_MACROS_FILE = 'ioctl_macros'
+NLMSG_DEFINES_FILE = 'nlmsg_defines'
+NLMSG_MACROS_FILE = 'nlmsg_macros'
+
+
+def read_source_macros_text(
     extra_macros_paths: List[Path],
-    rules_paths: List[Path],
-    extra_rules_paths: List[Path],
-    system_sepolicy_path: Path,
-    verbose: bool,
     version: str,
-    variables: Dict[str, str],
+    current: bool,
+    verbose: bool,
 ):
-    (
-        macro_file_paths,
-        ioctl_defines_file_paths,
-        ioctl_macros_file_paths,
-        nlmsg_defines_file_paths,
-        nlmsg_macros_file_paths,
-        technical_debt_path,
-        access_vectors_path,
-        flagging_macros_path,
-    ) = resolve_macro_paths(
-        macros_paths + extra_macros_paths,
-        system_sepolicy_path,
-        verbose,
+    sepolicy_path = get_source_policy_path(version, current)
+
+    def _resolve_paths(names: Set[str]):
+        system_paths = [Path(sepolicy_path, 'public', n) for n in names]
+
+        return system_paths + resolve_paths(
+            extra_macros_paths,
+            names=names,
+            recursive=True,
+            paths_name='macros',
+            verbose=verbose,
+        )
+
+    return SourceMacrosText(
+        macros=read_texts(_resolve_paths(MACRO_FILES)),
+        ioctl_defines=read_texts(_resolve_paths({IOCTL_DEFINES_FILE})),
+        nlmsg_defines=read_texts(_resolve_paths({NLMSG_DEFINES_FILE})),
+        ioctl_macros=read_texts(_resolve_paths({IOCTL_MACROS_FILE})),
+        nlmsg_macros=read_texts(_resolve_paths({NLMSG_MACROS_FILE})),
+        flagging_macros=read_texts(
+            [
+                Path(
+                    # These do not exist per-version
+                    system_sepolicy_path,
+                    'flagging',
+                    'flagging_macros',
+                )
+            ],
+        ),
     )
 
-    rule_file_paths = resolve_rule_paths(
-        rules_paths + extra_rules_paths,
-        system_sepolicy_path,
-        verbose,
+
+def read_source_rules_text(
+    extra_rules_paths: List[Path],
+    policy_type: PolicyType,
+    subdir: Optional[str],
+    version: str,
+    current: bool,
+    verbose: bool,
+):
+    sepolicy_path = get_source_policy_path(version, current)
+    names = {'*.te', 'attributes'}
+
+    source_paths = []
+    if subdir:
+        source_paths = resolve_paths(
+            [Path(sepolicy_path, subdir)],
+            names=names,
+            recursive=False,
+            paths_name=f'{policy_type.pretty_name} rules',
+            verbose=verbose,
+        )
+
+    return read_texts(
+        source_paths
+        + resolve_paths(
+            extra_rules_paths,
+            names=names,
+            recursive=True,
+            paths_name=f'{policy_type.pretty_name} rules',
+            verbose=verbose,
+        )
     )
 
-    contexts_file_paths = resolve_contexts_paths(
-        rules_paths + extra_rules_paths,
-        None,
-        system_sepolicy_path,
-        verbose,
-    )
 
-    macros_text = read_texts(macro_file_paths)
-    rules_text = read_texts(rule_file_paths)
-    ioctl_defines_text = read_texts(ioctl_defines_file_paths)
-    nlmsg_defines_text = read_texts(nlmsg_defines_file_paths)
-    ioctl_macros_text = read_texts(ioctl_macros_file_paths)
-    nlmsg_macros_text = read_texts(nlmsg_macros_file_paths)
-    flagging_macros_text = read_texts([flagging_macros_path])
-    contexts_text = {
-        name: read_texts(context_file_paths)
-        for name, context_file_paths in contexts_file_paths.items()
+def read_source_contexts_text(
+    extra_rules_paths: List[Path],
+    origin: PolicySourceOrigin,
+    version: str,
+    current: bool,
+    name: str,
+    verbose: bool,
+):
+    sepolicy_path = get_source_policy_path(version, current)
+
+    def _source_paths(context_name: str):
+        source_paths = []
+
+        if origin.subdir:
+            source_paths = resolve_paths(
+                [Path(sepolicy_path, origin.subdir)],
+                names={context_name},
+                recursive=False,
+                paths_name=f'{name} {context_name}',
+                verbose=verbose,
+            )
+
+        return source_paths
+
+    contexts = {
+        context_type: read_texts(
+            _source_paths(context_name)
+            + resolve_paths(
+                extra_rules_paths,
+                names={context_name},
+                recursive=True,
+                paths_name=f'{name} {context_name}',
+                verbose=verbose,
+            )
+        )
+        for context_type, context_name in origin.contexts_name_map.items()
     }
 
+    return contexts
+
+
+def parse_source_rules(
+    rules_text: str,
+    source_macros_text: SourceMacrosText,
+    variables: FrozenDict[str, str],
+    classmap: Classmap,
+    verbose: bool,
+):
+    expanded_rules = expand_macro_calls_and_split(
+        text=rules_text,
+        environment_texts=list(astuple(source_macros_text)),
+        variables=variables,
+        split_fn=split_normalize_rules_text,
+        map_fn=rule_body,
+        text_name='expanded_rules',
+        verbose=verbose,
+    )
+
+    rules = RuleContainer()
+
+    def add_rule(rule: Rule):
+        rules.add(rule)
+
+    for source_line in expanded_rules:
+        SourceRule.from_line(
+            source_line,
+            add_rule=add_rule,
+            classmap=classmap,
+        )
+
+    return rules
+
+
+def parse_source_contexts(
+    contexts_text: Dict[ContextsType, str],
+    source_macros_text: SourceMacrosText,
+    variables: FrozenDict[str, str],
+    verbose: bool,
+):
+    expanded_contexts = {
+        context_type: expand_macro_calls_and_split(
+            text=context_text,
+            environment_texts=[
+                source_macros_text.flagging_macros,
+            ],
+            variables=variables,
+            split_fn=split_normalize_contexts_text,
+            map_fn=lambda s: s,
+            text_name=context_type,
+            verbose=verbose,
+        )
+        for context_type, context_text in contexts_text.items()
+    }
+
+    genfs_rules = RuleContainer()
+    if ContextsType.GENFS_CONTEXTS_NAME in contexts_text:
+        genfs_rules = parse_genfs_contexts(
+            expanded_contexts[ContextsType.GENFS_CONTEXTS_NAME],
+        )
+        del expanded_contexts[ContextsType.GENFS_CONTEXTS_NAME]
+
+    contexts = {
+        context_type: parse_contexts_texts(context_texts)
+        for context_type, context_texts in expanded_contexts.items()
+    }
+
+    return contexts, genfs_rules
+
+
+def parse_source_macros(
+    source_macros_text: SourceMacrosText,
+    variables: FrozenDict[str, str],
+    classmap: Classmap,
+    verbose: bool,
+):
     base_environment_texts = [
-        flagging_macros_text,
+        source_macros_text.flagging_macros,
     ]
 
     macros_environment_texts = [
-        flagging_macros_text,
-        ioctl_defines_text,
-        ioctl_macros_text,
-        nlmsg_defines_text,
-        nlmsg_macros_text,
+        source_macros_text.flagging_macros,
+        source_macros_text.ioctl_defines,
+        source_macros_text.ioctl_macros,
+        source_macros_text.nlmsg_defines,
+        source_macros_text.nlmsg_macros,
     ]
 
-    ioctl_defines = expand_macro_calls_and_variables(
-        text=ioctl_defines_text,
+    ioctl_defines = expand_macro_calls_and_split(
+        text=source_macros_text.ioctl_defines,
         environment_texts=base_environment_texts,
         variables=variables,
         split_fn=split_normalize_rules_text,
@@ -126,8 +310,8 @@ def parse_source(
         verbose=verbose,
     )
 
-    nlmsg_defines = expand_macro_calls_and_variables(
-        text=nlmsg_defines_text,
+    nlmsg_defines = expand_macro_calls_and_split(
+        text=source_macros_text.nlmsg_defines,
         environment_texts=base_environment_texts,
         variables=variables,
         split_fn=split_normalize_rules_text,
@@ -136,11 +320,11 @@ def parse_source(
         verbose=verbose,
     )
 
-    ioctl_macros = expand_macro_calls_and_variables(
-        text=ioctl_macros_text,
+    ioctl_macros = expand_macro_calls_and_split(
+        text=source_macros_text.ioctl_macros,
         environment_texts=[
-            *base_environment_texts,
-            ioctl_defines_text,
+            source_macros_text.flagging_macros,
+            source_macros_text.ioctl_defines,
         ],
         variables=variables,
         split_fn=split_normalize_rules_text,
@@ -149,11 +333,11 @@ def parse_source(
         verbose=verbose,
     )
 
-    nlmsg_macros = expand_macro_calls_and_variables(
-        text=nlmsg_macros_text,
+    nlmsg_macros = expand_macro_calls_and_split(
+        text=source_macros_text.nlmsg_macros,
         environment_texts=[
-            *base_environment_texts,
-            nlmsg_defines_text,
+            source_macros_text.flagging_macros,
+            source_macros_text.nlmsg_defines,
         ],
         variables=variables,
         split_fn=split_normalize_rules_text,
@@ -162,44 +346,14 @@ def parse_source(
         verbose=verbose,
     )
 
-    expanded_macros = expand_macro_calls_and_variables(
-        text=macros_text,
+    expanded_macros = expand_macro_calls_and_split(
+        text=source_macros_text.macros,
         environment_texts=macros_environment_texts,
         variables=variables,
         split_fn=split_normalize_rules_text,
         map_fn=macro_required_name_body_raw,
         text_name='expanded_macros',
         verbose=verbose,
-    )
-
-    expanded_rules = expand_macro_calls_and_variables(
-        text=rules_text,
-        environment_texts=[
-            *macros_environment_texts,
-            macros_text,
-        ],
-        variables=variables,
-        split_fn=split_normalize_rules_text,
-        map_fn=rule_body,
-        text_name='expanded_rules',
-        verbose=verbose,
-    )
-
-    expanded_contexts = {
-        name: expand_macro_calls_and_variables(
-            text=context_text,
-            environment_texts=base_environment_texts,
-            variables=variables,
-            split_fn=split_normalize_contexts_text,
-            map_fn=lambda s: s,
-            text_name=name,
-            verbose=verbose,
-        )
-        for name, context_text in contexts_text.items()
-    }
-
-    source_contexts, source_genfs_rules = parse_contexts_texts(
-        expanded_contexts,
     )
 
     (
@@ -223,42 +377,223 @@ def parse_source(
         is_nlmsg=True,
     )
 
-    classmap = Classmap(flagging_macros_path, version, access_vectors_path)
     macros_name_rules = parse_macros(classmap, macros)
-    source_rules = parse_rules(classmap, expanded_rules)
+
+    return SourceMacros(
+        perms=source_perms,
+        class_sets=source_class_sets,
+        ioctls=source_ioctls,
+        nlmsgs=source_nlmsgs,
+        ioctl_defines=source_ioctl_defines,
+        nlmsg_defines=source_nlmsg_defines,
+        macros_name_rules=macros_name_rules,
+    )
+
+
+def parse_source_classmap(
+    source_macros_text: SourceMacrosText,
+    metadata: PolicyMetadata,
+    current: bool,
+    verbose: bool,
+):
+    versioned_system_sepolicy_path = get_source_policy_path(
+        metadata.version,
+        current,
+    )
+
+    access_vectors = read_texts(
+        [
+            Path(
+                versioned_system_sepolicy_path,
+                'private',
+                'access_vectors',
+            )
+        ]
+    )
+
+    classmap_text = expand_macro_calls(
+        [access_vectors],
+        [source_macros_text.flagging_macros],
+        metadata.variables,
+        'access_vectors',
+        verbose,
+    )
+
+    return Classmap(classmap_text)
+
+
+def parse_source_cil_rules(
+    origin: PolicySourceOrigin,
+    version: str,
+    current: bool,
+):
+    assert origin.cil_file_name is not None
+
+    sepolicy_path = get_source_policy_path(version, current)
+    source_cil_rules_path = Path(
+        sepolicy_path,
+        origin.subdir or '',
+        origin.cil_file_name,
+    )
+    rules = RuleContainer()
 
     def add_rule(rule: Rule):
-        source_rules.append(rule)
+        rules.add(rule)
 
-    if technical_debt_path is not None:
-        for line in technical_debt_path.read_text().splitlines():
-            CilRule.from_line(
-                line,
-                conditional_types_map={},
-                missing_generated_types=set(),
-                add_rule=add_rule,
-                add_genfs_rule=None,
-                version=version,
+    for line in source_cil_rules_path.read_text().splitlines():
+        parts = unpack_cil_line(line)
+        if parts is None:
+            continue
+
+        CilRule.from_line(
+            line,
+            parts,
+            conditional_types_map={},
+            add_rule=add_rule,
+            add_genfs_rule=None,
+            version=None,
+        )
+
+    return rules
+
+
+def parse_metadata_source_policies(
+    extra_rules_paths: List[Path],
+    policy_type: PolicyType,
+    metadata: PolicyMetadata,
+    source_macros_text: SourceMacrosText,
+    classmap: Classmap,
+    current: bool,
+    verbose: bool,
+):
+    assert isinstance(policy_type.origin, PolicySourceOrigin)
+
+    if policy_type.origin.format == PolicyParseFormat.CIL:
+        rules = parse_source_cil_rules(
+            policy_type.origin,
+            metadata.version,
+            current,
+        )
+
+        return Policy(
+            policy_type.name,
+            rules,
+            genfs_rules=RuleContainer(),
+            contexts={},
+            metadata=metadata,
+        )
+
+    rules_text = read_source_rules_text(
+        extra_rules_paths,
+        policy_type,
+        subdir=policy_type.origin.subdir,
+        version=metadata.version,
+        current=current,
+        verbose=verbose,
+    )
+
+    contexts_text = read_source_contexts_text(
+        extra_rules_paths,
+        policy_type.origin,
+        version=metadata.version,
+        current=current,
+        name=policy_type.pretty_name,
+        verbose=verbose,
+    )
+
+    rules = parse_source_rules(
+        rules_text,
+        source_macros_text,
+        metadata.variables,
+        classmap,
+        verbose=verbose,
+    )
+
+    contexts, genfs_rules = parse_source_contexts(
+        contexts_text,
+        source_macros_text,
+        metadata.variables,
+        verbose=verbose,
+    )
+
+    return Policy(
+        policy_type.name,
+        rules,
+        genfs_rules=genfs_rules,
+        contexts=contexts,
+        metadata=metadata,
+    )
+
+
+def parse_source_policies(
+    metadatas: List[PolicyMetadata],
+    extra_rules_paths: List[Path],
+    extra_macros_paths: List[Path],
+    current: bool,
+    verbose: bool,
+):
+    source_index: DefaultDict[PolicyMetadata, Source] = defaultdict()
+    version_macros_text_map: Dict[str, SourceMacrosText] = {}
+    versions = sorted(set(m.version for m in metadatas))
+
+    for version in versions:
+        version_macros_text_map[version] = read_source_macros_text(
+            extra_macros_paths,
+            version,
+            current,
+            verbose,
+        )
+
+    for metadata in metadatas:
+        if verbose:
+            print(
+                f'Loading source policies for metadata version: '
+                f'{metadata.version}'
+            )
+            print('Variables:')
+            for k, v in metadata.variables.items():
+                print(f'{k}={v}')
+
+        source_macros_text = version_macros_text_map[metadata.version]
+
+        classmap = parse_source_classmap(
+            source_macros_text,
+            metadata,
+            current=current,
+            verbose=verbose,
+        )
+
+        macros = parse_source_macros(
+            source_macros_text,
+            metadata.variables,
+            classmap,
+            verbose=verbose,
+        )
+
+        print(f'Found macros:\n{macros}')
+
+        policy_index: Dict[PolicyName, Policy] = {}
+        for policy_type in get_policy_types_by_origin(PolicySourceOrigin):
+            assert isinstance(policy_type.origin, PolicySourceOrigin)
+
+            policy = parse_metadata_source_policies(
+                extra_rules_paths,
+                policy_type,
+                metadata,
+                source_macros_text,
+                classmap,
+                current=current,
+                verbose=verbose,
             )
 
-    # This rule is automatically added by
-    # external/selinux/libsepol/src/module_to_cil.c
-    source_rules.append(Rule('attribute', ('cil_gen_require',), ()))
+            policy_index[policy_type.name] = policy
 
-    return (
-        SourcePolicy(
-            rules=source_rules,
-            contexts=source_contexts,
-            genfs_rules=source_genfs_rules,
-        ),
-        SourceMacros(
-            perms=source_perms,
-            class_sets=source_class_sets,
-            ioctls=source_ioctls,
-            nlmsgs=source_nlmsgs,
-            ioctl_defines=source_ioctl_defines,
-            nlmsg_defines=source_nlmsg_defines,
-            macros_name_rules=macros_name_rules,
-            classmap=classmap,
-        ),
-    )
+            print(f'Found policy: {policy}')
+
+        source_index[metadata] = Source(
+            macros,
+            classmap,
+            policy_index,
+        )
+
+    return source_index

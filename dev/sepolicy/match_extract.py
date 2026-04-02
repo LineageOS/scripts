@@ -8,7 +8,7 @@ from functools import cache
 from itertools import permutations
 from typing import Dict, List, Optional, Tuple
 
-from sepolicy.conditional_type import IConditionalType
+from sepolicy.conditional_type import ConditionalType
 from sepolicy.rule import rule_part
 
 args_type = Dict[int, rule_part]
@@ -183,8 +183,8 @@ def rule_extract_part_set_str(mrp: List[str], rp: List[str]):
         return arg_values_list[0]
 
 
-def rule_extract_part_cond(mrp: IConditionalType, rp: rule_part):
-    if not isinstance(rp, IConditionalType):
+def rule_extract_part_cond(mrp: ConditionalType, rp: rule_part):
+    if not isinstance(rp, ConditionalType):
         return None
 
     positive_arg_values = rule_extract_part_set_str(mrp.positive, rp.positive)
@@ -196,7 +196,7 @@ def rule_extract_part(mrp: rule_part, rp: rule_part):
     if isinstance(mrp, str):
         return rule_extract_part_str(mrp, rp)
     else:
-        assert isinstance(mrp, IConditionalType)
+        assert isinstance(mrp, ConditionalType)
         return rule_extract_part_cond(mrp, rp)
 
 

@@ -7,11 +7,10 @@ from __future__ import annotations
 import shutil
 from argparse import ArgumentParser
 from pathlib import Path
-from typing import Dict, Iterable, List, Optional, Tuple
+from typing import Dict, List
 
-from sepolicy.cil_policy import parse_prebuilt
+from sepolicy.cil_policy import parse_dump_policies
 from sepolicy.contexts import (
-    ContextsType,
     output_contexts,
     output_genfs_contexts,
     remove_source_contexts,
@@ -21,123 +20,212 @@ from sepolicy.match import (
     RuleMatch,
     discard_rule_matches,
     match_macros_rules,
-    process_rules,
-    remove_unused_types,
+    merge_class_sets,
+    merge_typeattribute_rules,
+    replace_ioctls,
+    replace_macro_rules,
+    replace_perms,
 )
-from sepolicy.output import (
-    group_rules,
-    output_grouped_rules,
+from sepolicy.output import group_rules, output_grouped_rules
+from sepolicy.policy import (
+    Policy,
+    PolicyName,
+    PolicyParsedOrigin,
+    get_hardcoded_policy,
 )
-from sepolicy.policy_info import get_selinux_dir_policy
-from sepolicy.rule import Rule
-from sepolicy.source_policy import SourceMacros, SourcePolicy, parse_source
-from utils.mld import MultiLevelDict
-from utils.utils import Color, android_root, color_print
-
-system_sepolicy_path = Path(android_root, 'system/sepolicy')
+from sepolicy.rule_container import RuleContainer
+from sepolicy.source_policy import Source, parse_source_policies
+from utils.utils import Color, color_print
 
 
-def parse_args_variables(args: List[str]):
-    args_variables: Dict[str, str] = {}
-
-    for kv in args:
-        k, v = kv.split('=', 1)
-        args_variables[k] = v
-
-    return args_variables
-
-
-def count_decompiled_rules(
-    mld: MultiLevelDict[Rule],
-    decompiled_contexts: Optional[
-        Dict[
-            ContextsType,
-            List[Tuple[str, ...]],
-        ]
-    ],
-    decompiled_genfs_rules: Optional[List[Rule]],
+def split_policy_in_out(
+    policy: Policy,
+    other_policy: Policy,
+    in_name: PolicyName,
+    out_name: PolicyName,
 ):
-    num_decompiled_contexts = sum(
-        len(c) for c in (decompiled_contexts or {}).values()
+    assert not other_policy.contexts, other_policy.contexts
+    assert not other_policy.genfs_rules, other_policy.genfs_rules
+
+    in_other_rules = RuleContainer(sparse_match=True)
+    out_other_rules = RuleContainer(sparse_match=True)
+
+    for rule in policy.rules:
+        if rule in other_policy.rules:
+            in_other_rules.add(rule)
+        else:
+            out_other_rules.add(rule)
+
+    return (
+        Policy(
+            name=in_name,
+            rules=in_other_rules,
+            contexts={},
+            genfs_rules=RuleContainer(),
+            metadata=policy.metadata,
+        ),
+        Policy(
+            name=out_name,
+            rules=out_other_rules,
+            contexts=policy.contexts,
+            genfs_rules=policy.genfs_rules,
+            metadata=policy.metadata,
+        ),
     )
-    num_decompiled_rules = (
-        len(mld) + len(decompiled_genfs_rules or []) + num_decompiled_contexts
-    )
-    return num_decompiled_rules
 
 
-def get_macros_paths(version: str, current: bool):
-    if current:
-        return [system_sepolicy_path]
-
-    return [
-        Path(system_sepolicy_path, f'prebuilts/api/{version}'),
-    ]
-
-
-def get_rules_paths(version: Optional[str], current: bool):
-    vendor_sepolicy_path = Path(system_sepolicy_path, 'vendor')
-    if current:
-        return [
-            system_sepolicy_path,
-            vendor_sepolicy_path,
-        ]
-
-    return [
-        Path(system_sepolicy_path, f'prebuilts/api/{version}'),
-        # Vendor sepolicy is not versioned, this is a best effort
-        vendor_sepolicy_path,
-    ]
-
-
-def process_output_rules(
-    mld: MultiLevelDict[Rule],
-    genfs_rules: Optional[List[Rule]],
-    contexts: Optional[Dict[ContextsType, List[Tuple[str, ...]]]],
-    removed_rules: List[Tuple[str, Iterable[Rule]]],
-    output_dir: Path,
+def process_policy_post_split(
+    policy: Policy,
+    policy_index: Dict[PolicyName, Policy],
     rule_matches: List[RuleMatch],
-    source_policy: SourcePolicy,
-    source_macros: SourceMacros,
+    source: Source,
+    output_dir: Path,
     verbose: bool,
-    name: str,
 ):
-    process_rules(
-        mld,
-        source_macros=source_macros,
-        removed_rules=removed_rules,
-        rule_matches=rule_matches,
-        name=name,
-        verbose=verbose,
-    )
+    print(f'Replacing in {policy.pretty_name}')
 
-    # Remove decompiled contexts also found in the source contexts
-    if contexts is not None:
-        contexts = remove_source_contexts(
+    assert policy.type.output is not None
+
+    rules = RuleContainer(policy.rules, sparse_match=True)
+    contexts = policy.contexts
+    genfs_rules = policy.genfs_rules
+
+    for policy_name in policy.type.output.cleanup_policy:
+        cleanup_policy = policy_index[policy_name]
+        print(f'Removing policy {cleanup_policy} from {policy.pretty_name}')
+
+        removed_rules = rules.remove_many(
+            cleanup_policy.rules,
+            optional=True,
+        )
+        contexts, removed_contexts = remove_source_contexts(
             contexts,
-            source_policy.contexts,
+            cleanup_policy.contexts,
         )
-
-    if genfs_rules is not None:
-        genfs_rules = remove_source_genfs_rules(
+        genfs_rules, removed_genfs_rules = remove_source_genfs_rules(
             genfs_rules,
-            source_policy.genfs_rules,
+            cleanup_policy.genfs_rules,
         )
 
-    count = count_decompiled_rules(
-        mld,
-        contexts,
-        genfs_rules,
+        color_print(
+            f'Removed {removed_rules} rules from {policy.pretty_name}',
+            color=Color.GREEN,
+        )
+        color_print(
+            f'Removed {removed_contexts} contexts from {policy.pretty_name}',
+            color=Color.GREEN,
+        )
+        color_print(
+            f'Removed {removed_genfs_rules} genfs rules from {policy.pretty_name}',
+            color=Color.GREEN,
+        )
+
+    replace_macro_rules(
+        rules,
+        rule_matches,
+        policy.pretty_name,
+        verbose,
     )
-    color_print(f'Leftover {name} rules: {count}', color=Color.GREEN)
 
-    grouped_rules = group_rules(mld)
+    merge_typeattribute_rules(
+        rules,
+        policy.pretty_name,
+    )
 
-    if contexts is not None:
-        output_contexts(contexts, output_dir)
-    if genfs_rules is not None:
-        output_genfs_contexts(genfs_rules, output_dir)
-    output_grouped_rules(grouped_rules, rule_matches, output_dir)
+    replace_perms(
+        rules,
+        source.classmap,
+        source.macros.perms,
+        policy.pretty_name,
+    )
+    replace_ioctls(
+        rules,
+        source.macros.ioctls,
+        source.macros.ioctl_defines,
+        policy.pretty_name,
+        is_nlmsg=False,
+    )
+    replace_ioctls(
+        rules,
+        source.macros.nlmsgs,
+        source.macros.nlmsg_defines,
+        policy.pretty_name,
+        is_nlmsg=True,
+    )
+    merge_class_sets(
+        rules,
+        source.macros.class_sets,
+        policy.pretty_name,
+    )
+
+    # We can also merge target domains, but rules get long quickly
+    # merge_target_domains(policy.rules)
+
+    color_print(f'Leftover policy: {policy}', color=Color.GREEN)
+
+    policy_output_dir = Path(output_dir, policy.type.output.relative_dir)
+    policy_output_dir.mkdir(parents=True, exist_ok=True)
+
+    output_contexts(contexts, policy_output_dir)
+    output_genfs_contexts(genfs_rules, policy_output_dir)
+
+    grouped_rules = group_rules(rules)
+    output_grouped_rules(grouped_rules, rule_matches, policy_output_dir)
+
+
+def process_policy_pre_split(
+    policy: Policy,
+    policy_index: Dict[PolicyName, Policy],
+    source: Source,
+    output_dir: Path,
+    verbose: bool,
+):
+    print(f'Processing {policy.pretty_name}')
+
+    assert isinstance(policy.type.origin, PolicyParsedOrigin)
+
+    if policy.type.output is None and policy.type.referencing is None:
+        print(f'Skipping {policy.pretty_name}')
+        return
+
+    rule_matches = match_macros_rules(
+        policy.rules,
+        source.macros.macros_name_rules,
+        verbose,
+    )
+    rule_matches = discard_rule_matches(rule_matches, verbose)
+
+    if policy.type.referencing is None:
+        process_policy_post_split(
+            policy,
+            policy_index,
+            rule_matches,
+            source,
+            output_dir,
+            verbose,
+        )
+        return
+
+    referencing_policy = policy_index[policy.type.referencing.name]
+
+    print(f'Splitting {policy.pretty_name}')
+
+    split_policies = split_policy_in_out(
+        policy,
+        referencing_policy,
+        in_name=policy.type.referencing.in_name,
+        out_name=policy.type.referencing.out_name,
+    )
+
+    for split_policy in split_policies:
+        process_policy_post_split(
+            split_policy,
+            policy_index,
+            rule_matches,
+            source,
+            output_dir,
+            verbose,
+        )
 
 
 def decompile_cil():
@@ -153,14 +241,14 @@ def decompile_cil():
     parser.add_argument(
         '--current',
         action='store_true',
-        help='Use current macros (rather than versioned macros)',
+        help='Use current macros',
     )
     parser.add_argument(
-        '-s',
-        '--selinux',
+        '-d',
+        '--dump',
         action='store',
         required=True,
-        help='Path to selinux directory (eg: vendor/etc/selinux)',
+        help='Path to dump to extract selinux from',
     )
     parser.add_argument(
         '--extra-macros',
@@ -174,13 +262,6 @@ def decompile_cil():
         default=[],
         help='Path to files or directories containing extra rules and contexts to be removed '
         '(eg: device/qcom/sepolicy_vndr/sm8450)',
-    )
-    parser.add_argument(
-        '-v',
-        '--var',
-        action='append',
-        default=[],
-        help='Variable used when expanding macros',
     )
     parser.add_argument(
         '-o',
@@ -197,109 +278,48 @@ def decompile_cil():
     extra_macros_paths = [Path(s) for s in args.extra_macros]
     extra_rules_paths = [Path(s) for s in args.extra_rules]
     output_dir = Path(args.output)
-    selinux_dir = Path(args.selinux)
-    args_variables = parse_args_variables(args.var)
+    dump_dir = Path(args.dump)
 
-    policy_info = get_selinux_dir_policy(selinux_dir, verbose)
-    policy_info.variables.update(args_variables)
+    hardcoded_policy_index = {p.name: p for p in get_hardcoded_policy()}
 
-    macros_paths = get_macros_paths(policy_info.version, current_policy)
-    rules_paths = get_rules_paths(policy_info.version, current_policy)
+    cil_policy_index = parse_dump_policies(dump_dir, verbose)
+    for policy in cil_policy_index.values():
+        print(f'Found policy: {policy}')
+        print()
 
-    print(
-        f'Found policy: {policy_info.policy_path}, '
-        f'version: {policy_info.version}'
-    )
-    for policy_version, policy_path in policy_info.extra_rules_paths:
-        print(f'Found extra policy: {policy_path}, version: {policy_version}')
-    for policy_version, policy_path in policy_info.public_rules_paths:
-        print(
-            f'Found referencing policy: {policy_path}, '
-            f'version: {policy_version}'
+    cil_policy_metadatas = list(
+        set(
+            p.metadata
+            for p in cil_policy_index.values()
+            if p.metadata is not None
         )
+    )
+    print(f'Found {len(cil_policy_metadatas)} distinct metadatas')
 
-    source_policy, source_macros = parse_source(
-        macros_paths,
-        extra_macros_paths,
-        rules_paths,
+    source_index = parse_source_policies(
+        cil_policy_metadatas,
         extra_rules_paths,
-        system_sepolicy_path,
-        verbose,
-        policy_info.version,
-        policy_info.variables,
+        extra_macros_paths,
+        current=current_policy,
+        verbose=verbose,
     )
-
-    color_print(
-        f'Found {len(source_policy.rules)} source rules',
-        color=Color.GREEN,
-    )
-
-    prebuilt = parse_prebuilt(policy_info, verbose)
-
-    # TODO: get rid of this, as it is only necessary because some of the types
-    # in system_ext end up in product, but it's not all of the public types,
-    # as some types end up in vendor's versioned policy while they do not end up
-    # in product
-    remove_unused_types(prebuilt.mld, prebuilt.used_types)
-    remove_unused_types(prebuilt.public_mld, prebuilt.used_types)
-
-    count = count_decompiled_rules(
-        prebuilt.mld,
-        prebuilt.contexts,
-        prebuilt.genfs_rules,
-    )
-    color_print(f'Found {count} prebuilt rules', color=Color.GREEN)
-
-    rule_matches = match_macros_rules(
-        prebuilt.mld,
-        source_macros.macros_name_rules,
-        verbose,
-    )
-    rule_matches = discard_rule_matches(rule_matches, verbose)
 
     shutil.rmtree(output_dir, ignore_errors=True)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    private_output_dir = output_dir
-    if policy_info.public_rules_paths:
-        private_output_dir = Path(output_dir, 'private')
-        private_output_dir.mkdir(parents=True, exist_ok=True)
+    for policy in cil_policy_index.values():
+        assert policy.metadata is not None
+        source = source_index[policy.metadata]
+        policy_index = (
+            cil_policy_index | hardcoded_policy_index | source.policy_index
+        )
 
-    process_output_rules(
-        mld=prebuilt.mld,
-        genfs_rules=prebuilt.genfs_rules,
-        contexts=prebuilt.contexts,
-        removed_rules=[
-            ('source', source_policy.rules),
-            *prebuilt.extra_rules,
-            ('public', prebuilt.public_mld),
-        ],
-        output_dir=private_output_dir,
-        rule_matches=rule_matches,
-        source_policy=source_policy,
-        source_macros=source_macros,
-        verbose=verbose,
-        name='private',
-    )
-
-    if policy_info.public_rules_paths:
-        public_output_dir = Path(output_dir, 'public')
-        public_output_dir.mkdir(parents=True, exist_ok=True)
-
-        process_output_rules(
-            mld=prebuilt.public_mld,
-            genfs_rules=None,
-            contexts=None,
-            output_dir=public_output_dir,
-            removed_rules=[
-                ('source', source_policy.rules),
-                *prebuilt.extra_rules,
-            ],
-            rule_matches=rule_matches,
-            source_policy=source_policy,
-            source_macros=source_macros,
+        process_policy_pre_split(
+            policy=policy,
+            policy_index=policy_index,
+            source=source,
+            output_dir=output_dir,
             verbose=verbose,
-            name='public',
         )
 
 

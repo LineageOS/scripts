@@ -8,17 +8,14 @@ from enum import StrEnum
 from typing import FrozenSet, Generator, List, Optional, Tuple, Union
 
 from sepolicy.class_set import ClassSet
-from sepolicy.conditional_type import IConditionalType
+from sepolicy.conditional_type import ConditionalType
 
 macro_argument_regex = re.compile(r'\$(\d+)')
 
 raw_part = Union[str, List['raw_part']]
 raw_parts_list = List[raw_part]
-rule_part = Union[str, IConditionalType, ClassSet]
+rule_part = Union[str, ConditionalType, ClassSet]
 rule_hash_value = Union[rule_part, FrozenSet[str]]
-
-
-RULE_DYNAMIC_PARTS_INDEX = 1
 
 
 def is_type_generated(part: rule_part):

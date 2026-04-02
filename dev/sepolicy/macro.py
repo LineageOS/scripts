@@ -6,12 +6,10 @@ from __future__ import annotations
 import re
 from functools import partial
 from itertools import chain
-from pathlib import Path
 from typing import (
     Dict,
     FrozenSet,
     List,
-    Optional,
     Set,
     Tuple,
 )
@@ -104,118 +102,6 @@ def categorize_macros(expanded_macros: List[Tuple[str, str]]):
             macros.append(macro_tuple)
 
     return macros, class_sets, perms
-
-
-# Extracted from system/sepolicy/build/soong/policy.go
-IOCTL_DEFINES_FILE = 'ioctl_defines'
-NLMSG_DEFINES_FILE = 'nlmsg_defines'
-IOCTL_MACROS_FILE = 'ioctl_macros'
-NLMSG_MACROS_FILE = 'nlmsg_macros'
-
-SEPOLICY_FILES = [
-    'global_macros',
-    'neverallow_macros',
-    'te_macros',
-    IOCTL_DEFINES_FILE,
-    IOCTL_MACROS_FILE,
-    NLMSG_DEFINES_FILE,
-    NLMSG_MACROS_FILE,
-]
-
-SEPOLICY_FILES_PREFIXES = [
-    'public',
-    'private',
-    '',
-]
-
-
-def resolve_macro_paths(
-    macro_paths: List[Path],
-    system_sepolicy_path: Path,
-    verbose: bool,
-):
-    macro_file_paths: List[Path] = []
-    ioctl_defines_file_paths: List[Path] = []
-    ioctl_macros_file_paths: List[Path] = []
-    nlmsg_defines_file_paths: List[Path] = []
-    nlmsg_macros_file_paths: List[Path] = []
-    access_vectors_path: Optional[Path] = None
-    flagging_macros_path: Optional[Path] = None
-    technical_debt_path: Optional[Path] = None
-
-    # These do not exist per-version
-    flagging_macros_path = Path(
-        system_sepolicy_path,
-        'flagging/flagging_macros',
-    )
-    if flagging_macros_path.is_file():
-        if verbose:
-            print(f'Loading flagging macros: {flagging_macros_path}')
-
-    def add_macro_path(mp: Path):
-        if verbose:
-            print(f'Loading macros: {mp}')
-
-        if mp.name == IOCTL_DEFINES_FILE:
-            ioctl_defines_file_paths.append(mp)
-            return
-        elif mp.name == NLMSG_DEFINES_FILE:
-            nlmsg_defines_file_paths.append(mp)
-            return
-        elif mp.name == IOCTL_MACROS_FILE:
-            ioctl_macros_file_paths.append(mp)
-            return
-        elif mp.name == NLMSG_MACROS_FILE:
-            nlmsg_macros_file_paths.append(mp)
-            return
-
-        macro_file_paths.append(mp)
-
-    for macro_path in macro_paths:
-        if macro_path.is_file():
-            add_macro_path(macro_path)
-            continue
-
-        if not macro_path.is_dir():
-            color_print(
-                f'Macro path {macro_path} is not a file or directory',
-                color=Color.RED,
-            )
-            continue
-
-        for file_name in SEPOLICY_FILES:
-            for file_prefix in SEPOLICY_FILES_PREFIXES:
-                file_path = Path(macro_path, file_prefix, file_name)
-                if file_path.is_file():
-                    add_macro_path(file_path)
-
-        file_path = Path(macro_path, 'private/access_vectors')
-        if file_path.is_file():
-            assert access_vectors_path is None, access_vectors_path
-            access_vectors_path = file_path
-            if verbose:
-                print(f'Loading access vectors: {access_vectors_path}')
-
-        file_path = Path(macro_path, 'private/technical_debt.cil')
-        if file_path.is_file():
-            assert technical_debt_path is None, technical_debt_path
-            technical_debt_path = file_path
-            if verbose:
-                print(f'Loading technical debt: {technical_debt_path}')
-
-    assert access_vectors_path is not None
-    assert flagging_macros_path is not None
-
-    return (
-        macro_file_paths,
-        ioctl_defines_file_paths,
-        ioctl_macros_file_paths,
-        nlmsg_defines_file_paths,
-        nlmsg_macros_file_paths,
-        technical_debt_path,
-        access_vectors_path,
-        flagging_macros_path,
-    )
 
 
 def parse_macros(
@@ -314,7 +200,7 @@ def parse_ioctls(
             text,
             '{',
             '}',
-            ' ',
+            ' \n',
             open_by_default=True,
             ignored_chars=';',
         )

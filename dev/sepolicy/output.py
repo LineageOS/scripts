@@ -10,7 +10,7 @@ from typing import Dict, List, Optional, Set
 
 from sepolicy.match import RuleMatch
 from sepolicy.rule import Rule, RuleType, rule_sort_key, rule_type_order
-from utils.mld import MultiLevelDict
+from sepolicy.rule_container import RuleContainer
 
 
 @cache
@@ -77,10 +77,10 @@ def rule_simple_type_name(rule: Rule):
     return None, False
 
 
-def group_rules(mld: MultiLevelDict[Rule]):
+def group_rules(rules: RuleContainer):
     # Group rules based on main type
     grouped_rules: Dict[str, Set[Rule]] = {}
-    for rule in mld:
+    for rule in rules:
         name = domain_type(rule)
 
         if name not in grouped_rules:
@@ -90,12 +90,12 @@ def group_rules(mld: MultiLevelDict[Rule]):
 
     # Re-group simple rules into common files
     regrouped_rules: Dict[str, Set[Rule]] = {}
-    for name, rules in grouped_rules.items():
+    for name, group in grouped_rules.items():
         # If all rules of this group are simple, re-group them
         is_all_simple_type = True
         simple_type_names: List[Optional[str]] = []
         force_in_simple_types: List[bool] = []
-        for rule in rules:
+        for rule in group:
             simple_type_name, force_in_simple_type = rule_simple_type_name(rule)
             simple_type_names.append(simple_type_name)
             force_in_simple_types.append(force_in_simple_type)
@@ -106,7 +106,7 @@ def group_rules(mld: MultiLevelDict[Rule]):
         for new_name, force_in_simple_type, rule in zip(
             simple_type_names,
             force_in_simple_types,
-            rules,
+            group,
         ):
             group_name = name
             if is_all_simple_type or force_in_simple_type:

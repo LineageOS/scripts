@@ -8,7 +8,6 @@ import subprocess
 from pathlib import Path
 from typing import (
     Callable,
-    Dict,
     Iterable,
     List,
     Optional,
@@ -17,6 +16,7 @@ from typing import (
 )
 
 from sepolicy.macro import macro_arity, macro_name
+from utils.frozendict import FrozenDict
 
 
 @functools.cache
@@ -41,7 +41,7 @@ def quote_char(c: str):
 def expand_macro_calls(
     texts: Iterable[str],
     environment_texts: List[str],
-    variables: Dict[str, str],
+    variables: FrozenDict[str, str],
     text_name: str,
     verbose: bool,
 ):
@@ -114,10 +114,10 @@ def not_none(x: Optional[T]) -> TypeGuard[T]:
     return x is not None
 
 
-def expand_macro_calls_and_variables(
+def expand_macro_calls_and_split(
     text: str,
     environment_texts: List[str],
-    variables: Dict[str, str],
+    variables: FrozenDict[str, str],
     split_fn: Callable[[str], List[str]],
     map_fn: Callable[[str], Optional[T]],
     text_name: str,

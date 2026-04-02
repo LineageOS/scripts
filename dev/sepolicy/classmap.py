@@ -3,30 +3,12 @@
 
 from __future__ import annotations
 
-import subprocess
-from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 from utils.utils import split_normalize_text
 
 
-def extract_classmap(
-    flagging_macros_path: Optional[Path],
-    version: str,
-    access_vectors_path: Path,
-) -> Dict[str, List[str]]:
-    text = access_vectors_path.read_text()
-
-    if flagging_macros_path is not None:
-        input_text = flagging_macros_path.read_text()
-        input_text += text
-        # TODO: unify this with macro processing
-        text = subprocess.check_output(
-            ['m4', '-D', f'target_board_api_level={version}'],
-            input=input_text,
-            text=True,
-        )
-
+def extract_classmap(text: str) -> Dict[str, List[str]]:
     lines = split_normalize_text(text)
     text = ''.join(lines)
     tokens = text.split()
@@ -79,17 +61,8 @@ def extract_classmap(
 
 
 class Classmap:
-    def __init__(
-        self,
-        flagging_macros_path: Optional[Path],
-        version: str,
-        access_vectors_path: Path,
-    ):
-        self.__class_perms_map = extract_classmap(
-            flagging_macros_path,
-            version,
-            access_vectors_path,
-        )
+    def __init__(self, text: str):
+        self.__class_perms_map = extract_classmap(text)
 
     def class_types(self, t: str):
         for key in self.__class_perms_map:

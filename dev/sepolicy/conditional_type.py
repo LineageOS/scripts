@@ -3,44 +3,10 @@
 
 from __future__ import annotations
 
-from abc import ABC, abstractmethod
-from typing import Dict, Hashable, List, Set
-
-from utils.utils import Color, color_print
+from typing import Hashable, List
 
 
-class IConditionalType(ABC):
-    @abstractmethod
-    def __eq__(self, other: object) -> bool: ...
-
-    @abstractmethod
-    def __hash__(self) -> int: ...
-
-    @abstractmethod
-    def __str__(self) -> str: ...
-
-    @property
-    @abstractmethod
-    def hash(self) -> int: ...
-
-    @property
-    @abstractmethod
-    def hash_values(self) -> Hashable: ...
-
-    @property
-    @abstractmethod
-    def positive(self) -> List[str]: ...
-
-    @property
-    @abstractmethod
-    def negative(self) -> List[str]: ...
-
-    @property
-    @abstractmethod
-    def is_all(self) -> bool: ...
-
-
-class ConditionalType(IConditionalType):
+class ConditionalType:
     def __init__(self, positive: List[str], negative: List[str], is_all: bool):
         self.__positive = positive
         self.__negative = negative
@@ -75,7 +41,7 @@ class ConditionalType(IConditionalType):
         return self.__is_all
 
     def __eq__(self, other: object):
-        if not isinstance(other, IConditionalType):
+        if not isinstance(other, ConditionalType):
             return False
 
         if self.__hash != other.hash:
@@ -110,84 +76,3 @@ class ConditionalType(IConditionalType):
             s += self.__negative[0]
 
         return s
-
-
-class ConditionalTypeRedirect(IConditionalType):
-    def __init__(self, t: str, m: Dict[str, ConditionalType], i: Set[str]):
-        self.__t = t
-        self.__m = m
-        self.__i = i
-
-    # TODO: is it necessary to do comparisons by actual value, or is it
-    # enough to compare the generated type name
-
-    def __get_c(self):
-        if self.__t not in self.__m:
-            if self.__t not in self.__i:
-                color_print(
-                    f'Generated type {self.__t} not found',
-                    color=Color.YELLOW,
-                )
-                self.__i.add(self.__t)
-            return None
-
-        return self.__m[self.__t]
-
-    @property
-    def hash(self):
-        c = self.__get_c()
-        if c is None:
-            assert False
-        return c.hash
-
-    @property
-    def hash_values(self) -> Hashable:
-        c = self.__get_c()
-        if c is None:
-            assert False
-        return c.hash_values
-
-    @property
-    def positive(self) -> List[str]:
-        c = self.__get_c()
-        if c is None:
-            return []
-
-        return c.positive
-
-    @property
-    def negative(self) -> List[str]:
-        c = self.__get_c()
-        if c is None:
-            return []
-
-        return c.negative
-
-    @property
-    def is_all(self):
-        c = self.__get_c()
-        if c is None:
-            return False
-
-        return c.is_all
-
-    def __eq__(self, other: object):
-        c = self.__get_c()
-        if c is None:
-            return self.__t == other
-
-        return c == other
-
-    def __hash__(self):
-        c = self.__get_c()
-        if c is None:
-            return hash(self.__t)
-
-        return hash(c)
-
-    def __str__(self):
-        c = self.__get_c()
-        if c is None:
-            return self.__t
-
-        return str(c)

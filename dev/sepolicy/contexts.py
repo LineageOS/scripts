@@ -3,107 +3,15 @@
 
 from __future__ import annotations
 
-from enum import StrEnum
 from pathlib import Path
-from typing import Dict, List, Optional, Set, Tuple
+from typing import Dict, List, Set, Tuple
 
-from sepolicy.rule import Rule, trim_contexts_label
-from sepolicy.rules import (
-    ALLOWED_ROOT_SYSTEM_SEPOLICY_RULES_SUBDIRS,
-    split_rules,
-)
+from sepolicy.policy import ContextsType
+from sepolicy.rule import trim_contexts_label
+from sepolicy.rule_container import RuleContainer
+from sepolicy.rules import split_rules
 from sepolicy.source_rule import SourceRule
-from utils.utils import Color, color_print, split_normalize_text
-
-
-class ContextsType(StrEnum):
-    PROPERTY_CONTEXTS_NAME = 'property_contexts'
-    FILE_CONTEXTS_NAME = 'file_contexts'
-    HWSERVICE_CONTEXTS_NAME = 'hwservice_contexts'
-    VNDSERVICE_CONTEXTS_NAME = 'vndservice_contexts'
-    SERVICE_CONTEXTS_NAME = 'service_contexts'
-    SEAPP_CONTEXTS_NAME = 'seapp_contexts'
-    GENFS_CONTEXTS_NAME = 'genfs_contexts'
-    BUG_MAP_NAME = 'bug_map'
-
-
-CONTEXTS_ALTERNATIVE_FILE_NAMES = {
-    ContextsType.BUG_MAP_NAME: ['selinux_denial_metadata'],
-}
-
-CONTEXTS_NO_PARTITION_PREFIX = {
-    ContextsType.BUG_MAP_NAME: True,
-}
-
-
-def resolve_contexts_paths(
-    contexts_paths: List[Path],
-    partition_name: Optional[str],
-    system_sepolicy_path: Optional[Path],
-    verbose: bool,
-):
-    contexts_file_paths: Dict[ContextsType, List[Path]] = {}
-
-    def add_contexts_file_path(fp: Path):
-        if not fp.is_file():
-            return
-
-        for contexts_type in ContextsType:
-            file_names: List[str] = [
-                contexts_type.value,
-                *CONTEXTS_ALTERNATIVE_FILE_NAMES.get(contexts_type, []),
-            ]
-
-            for file_name in file_names:
-                if (
-                    partition_name is not None
-                    and not CONTEXTS_NO_PARTITION_PREFIX.get(
-                        contexts_type, False
-                    )
-                    and contexts_type != ContextsType.VNDSERVICE_CONTEXTS_NAME
-                ):
-                    file_name = f'{partition_name}_{file_name}'
-
-                if fp.name != file_name:
-                    continue
-
-                if contexts_type not in contexts_file_paths:
-                    contexts_file_paths[contexts_type] = []
-
-                contexts_file_paths[contexts_type].append(fp)
-                if verbose:
-                    print(f'Loading contexts: {fp}')
-
-    for contexts_path in contexts_paths:
-        if contexts_path.is_file():
-            add_contexts_file_path(contexts_path)
-            continue
-
-        # --current uses the root directory, which contains a lot of .te
-        # files from other versions of the API too
-        if contexts_path == system_sepolicy_path:
-            subdirs_to_scan = [
-                Path(contexts_path, subdir_name)
-                for subdir_name in ALLOWED_ROOT_SYSTEM_SEPOLICY_RULES_SUBDIRS
-            ]
-        else:
-            subdirs_to_scan = [contexts_path]
-
-        for file_subdir in subdirs_to_scan:
-            if verbose:
-                print(f'Loading contexts from directory: {file_subdir}')
-
-            if not file_subdir.is_dir():
-                color_print(
-                    f'Contexts path {file_subdir} is not a file or directory',
-                    color=Color.RED,
-                )
-                continue
-
-            for file_path in file_subdir.rglob('*'):
-                add_contexts_file_path(file_path)
-
-    return contexts_file_paths
+from utils.utils import split_normalize_text
 
 
 def split_normalize_contexts_text(text: str):
@@ -122,28 +30,27 @@ def split_normalize_contexts_text(text: str):
     )
 
 
-def parse_contexts_texts(contexts_texts: Dict[ContextsType, List[str]]):
-    contexts: Dict[ContextsType, List[Tuple[str, ...]]] = {}
-    genfs_rules: List[Rule] = []
+def parse_genfs_contexts(texts: List[str]):
+    genfs_rules = RuleContainer()
 
-    for contexts_type, context_texts in contexts_texts.items():
-        contexts[contexts_type] = []
+    for text in texts:
+        text = text.strip()
 
-        if contexts_type == ContextsType.GENFS_CONTEXTS_NAME:
-            for context_text in context_texts:
-                context_text = context_text.strip()
+        genfs_rule = SourceRule.genfscon_from_line(text)
+        genfs_rules.add(genfs_rule)
 
-                genfs_rule = SourceRule.genfscon_from_line(context_text)
-                genfs_rules.append(genfs_rule)
+    return genfs_rules
 
-            continue
 
-        for context_text in context_texts:
-            context_text = context_text.strip()
-            context_parts = context_text.split(' ')
-            contexts[contexts_type].append(tuple(context_parts))
+def parse_contexts_texts(texts: List[str]):
+    contexts: List[Tuple[str, ...]] = []
 
-    return contexts, genfs_rules
+    for text in texts:
+        text = text.strip()
+        context_parts = text.split(' ')
+        contexts.append(tuple(context_parts))
+
+    return contexts
 
 
 def remove_source_contexts(
@@ -151,6 +58,7 @@ def remove_source_contexts(
     source_contexts: Dict[ContextsType, List[Tuple[str, ...]]],
 ):
     new_contexts: Dict[ContextsType, List[Tuple[str, ...]]] = {}
+    removed_rules = 0
 
     for contexts_type, contexts_rules in contexts.items():
         if contexts_type not in source_contexts:
@@ -159,7 +67,6 @@ def remove_source_contexts(
 
         source_contexts_rules_set = set(source_contexts[contexts_type])
         new_contexts_rules: List[Tuple[str, ...]] = []
-        removed_rules = 0
         for rule in contexts_rules:
             if rule in source_contexts_rules_set:
                 removed_rules += 1
@@ -167,37 +74,26 @@ def remove_source_contexts(
 
             new_contexts_rules.append(rule)
 
-        color_print(
-            f'Removed {removed_rules} {contexts_type} source rules',
-            color=Color.GREEN,
-        )
-
         new_contexts[contexts_type] = new_contexts_rules
 
-    return new_contexts
+    return new_contexts, removed_rules
 
 
 def remove_source_genfs_rules(
-    genfs_rules: List[Rule],
-    source_genfs_rules: List[Rule],
+    genfs_rules: RuleContainer,
+    source_genfs_rules: RuleContainer,
 ):
-    source_genfs_rules_set = set(source_genfs_rules)
-    clean_genfs_rules: List[Rule] = []
+    clean_genfs_rules = RuleContainer()
     removed_rules = 0
 
     for rule in genfs_rules:
-        if rule in source_genfs_rules_set:
+        if rule in source_genfs_rules:
             removed_rules += 1
             continue
 
-        clean_genfs_rules.append(rule)
+        clean_genfs_rules.add(rule)
 
-    color_print(
-        f'Removed {removed_rules} {ContextsType.GENFS_CONTEXTS_NAME.value} source rules',
-        color=Color.GREEN,
-    )
-
-    return clean_genfs_rules
+    return clean_genfs_rules, removed_rules
 
 
 def output_contexts(
@@ -225,7 +121,7 @@ def output_contexts(
         output_contexts_path.write_text(output_text)
 
 
-def output_genfs_contexts(genfs_rules: List[Rule], output_dir: Path):
+def output_genfs_contexts(genfs_rules: RuleContainer, output_dir: Path):
     if not genfs_rules:
         return
 
