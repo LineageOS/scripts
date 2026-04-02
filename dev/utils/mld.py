@@ -57,6 +57,9 @@ class MultiLevelDict(Generic[T]):
     def __iter__(self):
         return iter(self.__all_data)
 
+    def __contains__(self, value: T):
+        return value in self.__all_data
+
     def add(self, value: T):
         keys = self.__fn(value)
 
