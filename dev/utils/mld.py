@@ -54,9 +54,6 @@ class MultiLevelDict(Generic[T]):
     def __len__(self):
         return len(self.__all_data)
 
-    def data(self):
-        return self.__data
-
     def __iter__(self):
         return iter(self.__all_data)
 
