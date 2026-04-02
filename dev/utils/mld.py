@@ -35,10 +35,15 @@ def tuples_with_nones(
 
 
 class MultiLevelDict(Generic[T]):
-    def __init__(self, nones_start: int = 0):
+    def __init__(
+        self,
+        fn: Callable[[T], Tuple[Hashable, ...]],
+        nones_start: int = 0,
+    ):
         self.__data: Dict[int, Dict[Tuple[Hashable, ...], Dict[T, None]]] = {}
         self.__all_data: Dict[T, None] = {}
         self.__nones_start = nones_start
+        self.__fn = fn
 
     def __len__(self):
         return len(self.__all_data)
@@ -49,7 +54,8 @@ class MultiLevelDict(Generic[T]):
     def __iter__(self):
         return iter(self.__all_data)
 
-    def add(self, keys: Sequence[Hashable], value: T):
+    def add(self, value: T):
+        keys = self.__fn(value)
         self.__all_data[value] = None
 
         levels = len(keys)
@@ -64,15 +70,12 @@ class MultiLevelDict(Generic[T]):
 
             levels_data[t][value] = None
 
-    def add_many(
-        self,
-        values: Iterable[T],
-        fn: Callable[[T], Sequence[Hashable]],
-    ):
+    def add_many(self, values: Iterable[T]):
         for value in values:
-            self.add(fn(value), value)
+            self.add(value)
 
-    def remove(self, keys: Sequence[Hashable], value: T):
+    def remove(self, value: T):
+        keys = self.__fn(value)
         del self.__all_data[value]
 
         levels = len(keys)

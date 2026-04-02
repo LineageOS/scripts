@@ -127,11 +127,14 @@ def parse_prebuilt(policy_info: PolicyInfo, verbose: bool):
     # which is almost always the type
     # This means that we can't match rules not knowing their type, but
     # that's fine usually
-    mld: MultiLevelDict[Rule] = MultiLevelDict(RULE_DYNAMIC_PARTS_INDEX)
-    mld.add_many(rules, lambda r: r.hash_values)
+    mld = MultiLevelDict[Rule](
+        fn=lambda r: r.hash_values,
+        nones_start=RULE_DYNAMIC_PARTS_INDEX,
+    )
+    mld.add_many(rules)
 
     for _, rules in extra_rules:
-        mld.add_many(rules, lambda r: r.hash_values)
+        mld.add_many(rules)
 
     public_rules: List[Rule] = []
     for policy_version, policy_path in policy_info.public_rules_paths:
@@ -147,8 +150,11 @@ def parse_prebuilt(policy_info: PolicyInfo, verbose: bool):
 
     # Add all public rules into a separate dictionary to be able to group them
     # and do the same processing as private rules
-    public_mld = MultiLevelDict[Rule](RULE_DYNAMIC_PARTS_INDEX)
-    public_mld.add_many(public_rules, lambda r: r.hash_values)
+    public_mld = MultiLevelDict[Rule](
+        fn=lambda r: r.hash_values,
+        nones_start=RULE_DYNAMIC_PARTS_INDEX,
+    )
+    public_mld.add_many(public_rules)
 
     return PrebuiltPolicy(
         mld=mld,

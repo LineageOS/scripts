@@ -395,7 +395,7 @@ def replace_macro_rules(
         removed_any = False
         for rule in rule_match.rules:
             try:
-                mld.remove(rule.hash_values, rule)
+                mld.remove(rule)
                 removed_any = True
                 removed_rules += 1
                 if verbose:
@@ -415,7 +415,7 @@ def replace_macro_rules(
             print()
 
         rule = rule_match.macro
-        mld.add(rule.hash_values, rule)
+        mld.add(rule)
 
     # for rule in sorted(double_removed_rules, key=rule_sort_key):
     #     color_print(
@@ -438,7 +438,7 @@ def remove_rules(
     removed_rules = 0
     for rule in rules:
         try:
-            mld.remove(rule.hash_values, rule)
+            mld.remove(rule)
             removed_rules += 1
         except KeyError:
             pass
@@ -492,7 +492,7 @@ def merge_typeattribute_rules(
         removed_rules.add(rule)
 
     for rule in removed_rules:
-        mld.remove(rule.hash_values, rule)
+        mld.remove(rule)
 
     for t, values in types.items():
         new_rule = Rule(
@@ -500,7 +500,7 @@ def merge_typeattribute_rules(
             (t,),
             tuple(values),
         )
-        mld.add(new_rule.hash_values, new_rule)
+        mld.add(new_rule)
 
     color_print(
         f'Merged {len(removed_rules)} typeattributes into {len(types)} types in {name}',
@@ -667,10 +667,10 @@ def replace_perms(
     _replace_type_perm(socket_perms, socket_classes)
 
     for rule in removed_rules:
-        mld.remove(rule.hash_values, rule)
+        mld.remove(rule)
 
     for rule in added_rules:
-        mld.add(rule.hash_values, rule)
+        mld.add(rule)
 
     color_print(
         f'Replaced perm macros in {len(removed_rules)} rules in {name}',
@@ -732,10 +732,10 @@ def replace_ioctls(
             removed_rules.add(matched_rule)
 
     for rule in removed_rules:
-        mld.remove(rule.hash_values, rule)
+        mld.remove(rule)
 
     for rule in added_rules:
-        mld.add(rule.hash_values, rule)
+        mld.add(rule)
 
     ioctl_type_name_str = ioctl_type_name(is_nlmsg)
     color_print(
@@ -786,7 +786,7 @@ def merge_class_set_rule_type(
                 new_classes.add(name)
 
         for rule in rules:
-            mld.remove(rule.hash_values, rule)
+            mld.remove(rule)
             removed_rules += 1
 
         matched_rule = next(iter(rules))
@@ -801,7 +801,7 @@ def merge_class_set_rule_type(
             ),
             matched_rule.varargs,
         )
-        mld.add(new_rule.hash_values, new_rule)
+        mld.add(new_rule)
         added_rules += 1
 
     return removed_rules, added_rules
@@ -868,7 +868,7 @@ def merge_target_domains_rule_type(
             continue
 
         for rule in rules:
-            mld.remove(rule.hash_values, rule)
+            mld.remove(rule)
             removed_rules += 1
 
         matched_rule = next(iter(rules))
@@ -888,7 +888,7 @@ def merge_target_domains_rule_type(
             ),
             matched_rule.varargs,
         )
-        mld.add(new_rule.hash_values, new_rule)
+        mld.add(new_rule)
         added_rules += 1
 
     return removed_rules, added_rules
@@ -962,7 +962,7 @@ def _remove_unused_types(
         removed_rules.add(rule)
 
     for rule in removed_rules:
-        mld.remove(rule.hash_values, rule)
+        mld.remove(rule)
 
     return len(removed_rules)
 
