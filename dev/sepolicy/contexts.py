@@ -154,6 +154,7 @@ def remove_source_contexts(
 
     for contexts_type, contexts_rules in contexts.items():
         if contexts_type not in source_contexts:
+            new_contexts[contexts_type] = contexts_rules
             continue
 
         source_contexts_rules_set = set(source_contexts[contexts_type])
