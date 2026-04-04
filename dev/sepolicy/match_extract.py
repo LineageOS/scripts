@@ -145,10 +145,10 @@ def rule_extract_part_set_str(mrp: List[str], rp: List[str]):
 
     for mrp_part in mrp:
         # Match part to itself to see if it has any args
-        arg_values = rule_extract_part_str(mrp_part, mrp_part)
+        arg_indices, _, _ = rule_part_str_regex(mrp_part)
 
         # If it has args, don't remove it
-        if arg_values:
+        if arg_indices:
             continue
 
         # If it does not have args and is not present in the rule part,
