@@ -188,7 +188,7 @@ class SourceRule(Rule):
                 | RuleType.AUDITALLOW.value
                 | RuleType.DONTAUDIT.value
             ):
-                # neverallow ~{ a b }:d e;
+                # neverallow ~{ a b } c:d e;
                 negative_srcs = False
                 if len(parts) > 5 and parts[1] == '~':
                     negative_srcs = True
