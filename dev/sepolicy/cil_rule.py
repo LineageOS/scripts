@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 from enum import StrEnum
-from typing import Callable, Dict, FrozenSet, List, Optional, Set
+from typing import Callable, Dict, FrozenSet, List, Optional, Set, cast
 
 from sepolicy.conditional_type import ConditionalType
 from sepolicy.rule import (
@@ -16,6 +16,12 @@ from sepolicy.rule import (
     unpack_line,
 )
 from utils.utils import Color, color_print
+
+
+def assert_parts_str_list(value: raw_parts_list, line: str) -> List[str]:
+    assert isinstance(value, list), line
+    assert all(isinstance(item, str) for item in value), line
+    return cast(List[str], value)
 
 
 def is_conditional_typeattr(part: raw_part):
@@ -239,8 +245,6 @@ class CilRule(Rule):
         if is_allow_process_sigchld(parts):
             return
 
-        varargs: List[str] = []
-
         match parts[0]:
             case (
                 RuleType.ALLOW.value
@@ -256,10 +260,6 @@ class CilRule(Rule):
                 assert isinstance(parts[3][0], str), line
                 assert isinstance(parts[3][1], list), line
 
-                for part in parts[3][1]:
-                    assert isinstance(part, str), line
-                    varargs.append(part)
-
                 src = parts[1].removesuffix(version_suffix)
                 if is_type_generated(src):
                     src = conditional_types_map[src]
@@ -268,10 +268,12 @@ class CilRule(Rule):
                 if is_type_generated(dst):
                     dst = conditional_types_map[dst]
 
+                perms = assert_parts_str_list(parts[3][1], line)
+
                 rule = Rule(
                     parts[0],
                     (src, dst, parts[3][0]),
-                    tuple(varargs),
+                    tuple(perms),
                 )
                 add_rule(rule)
             case (
@@ -289,9 +291,6 @@ class CilRule(Rule):
                 assert isinstance(parts[3][0], str), line
                 assert isinstance(parts[3][1], str), line
                 assert isinstance(parts[3][2], list), line
-
-                for ioctl in unpack_ioctls(parts[3][2]):
-                    varargs.append(ioctl)
 
                 src = parts[1].removesuffix(version_suffix)
                 if is_type_generated(src):
@@ -315,7 +314,7 @@ class CilRule(Rule):
                 rule = Rule(
                     rule_type,
                     (src, dst, parts[3][1], parts[3][0]),
-                    tuple(varargs),
+                    tuple(unpack_ioctls(parts[3][2])),
                 )
                 add_rule(rule)
             case CilRuleType.TYPEATTRIBUTE.value:
@@ -407,9 +406,9 @@ class CilRule(Rule):
                 if len(parts) == 6:
                     assert isinstance(parts[4], str), line
                     # assert parts[4] == '"[userfaultfd]"', line
-                    varargs = [parts[4]]
+                    varargs = (parts[4],)
                 else:
-                    varargs = []
+                    varargs = tuple()
 
                 src = parts[1].removesuffix(version_suffix)
                 if is_type_generated(src):
@@ -422,7 +421,7 @@ class CilRule(Rule):
                 rule = Rule(
                     RuleType.TYPE_TRANSITION.value,
                     (src, dst, parts[3], parts[-1]),
-                    tuple(varargs),
+                    varargs,
                 )
                 add_rule(rule)
             case CilRuleType.EXPANDTYPEATTRIBUTE.value:
