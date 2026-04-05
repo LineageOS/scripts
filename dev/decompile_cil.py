@@ -116,7 +116,10 @@ def get_variable_choices(
     all_variables_choices['mls_num_sens'] = set(['1'])
     all_variables_choices['mls_num_cats'] = set(['1024'])
 
-    all_variables_choices['target_board_api_level'] = set([version])
+    api_version = version
+    if api_version.endswith('.0'):
+        api_version = str(int(float(version)))
+    all_variables_choices['target_board_api_level'] = set([api_version])
 
     for kv in args_variables:
         k, v = kv.split('=')

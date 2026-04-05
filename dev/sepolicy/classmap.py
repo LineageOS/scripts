@@ -21,8 +21,11 @@ def extract_classmap(
         input_text = flagging_macros_path.read_text()
         input_text += text
         # TODO: unify this with macro processing
+        api_version = version
+        if api_version.endswith('.0'):
+            api_version = str(int(float(version)))
         text = subprocess.check_output(
-            ['m4', '-D', f'target_board_api_level={version}'],
+            ['m4', '-D', f'target_board_api_level={api_version}'],
             input=input_text,
             text=True,
         )
