@@ -125,11 +125,15 @@ def parse_rules(classmap: Classmap, rules: List[str]):
     decompiled_rules: List[Rule] = []
     unique_rules: Set[Rule] = set()
 
-    for rule in list(chain.from_iterable(map(from_line_fn, rules))):
-        if rule in unique_rules:
-            continue
+    for line in rules:
+        try:
+            for rule in from_line_fn(line):
+                if rule in unique_rules:
+                    continue
 
-        decompiled_rules.append(rule)
-        unique_rules.add(rule)
+                decompiled_rules.append(rule)
+                unique_rules.add(rule)
+        except (ValueError, AssertionError) as e:
+            color_print(f'Skipping invalid rule line: {e}', color=Color.RED)
 
     return decompiled_rules

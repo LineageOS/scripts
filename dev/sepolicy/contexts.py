@@ -346,8 +346,14 @@ def find_contexts_used_types(
                     | ContextsType.VNDSERVICE_CONTEXTS_NAME
                     | ContextsType.SERVICE_CONTEXTS_NAME
                 ):
-                    t = trim_contexts_label(rule[1])
-                    used_types.add(t)
+                    try:
+                        t = trim_contexts_label(rule[1])
+                        used_types.add(t)
+                    except AssertionError:
+                        color_print(
+                            f'Skipping rule with invalid context format in {contexts_type}: {rule}',
+                            color=Color.RED,
+                        )
                 case ContextsType.BUG_MAP_NAME:
                     used_types.add(rule[0])
                     used_types.add(rule[1])
