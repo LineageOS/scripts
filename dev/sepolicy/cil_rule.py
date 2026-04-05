@@ -227,16 +227,17 @@ class CilRule(Rule):
             version = version.replace('.', '_')
             version_suffix = f'_{version}'
 
-        assert isinstance(parts[0], str), line
+        rule_type = parts[0]
+        assert isinstance(rule_type, str), line
 
-        if allowed_types is not None and parts[0] not in allowed_types:
+        if allowed_types is not None and rule_type not in allowed_types:
             return
 
-        if disallowed_types is not None and parts[0] in disallowed_types:
+        if disallowed_types is not None and rule_type in disallowed_types:
             return
 
         # Remove rules that don't have a meaningful source mapping
-        if parts[0] in unknown_rule_types:
+        if rule_type in unknown_rule_types:
             return
 
         # Remove allow $3 $1:process sigchld as it is part of an ifelse
@@ -245,7 +246,7 @@ class CilRule(Rule):
         if is_allow_process_sigchld(parts):
             return
 
-        match parts[0]:
+        match rule_type:
             case (
                 RuleType.ALLOW.value
                 | RuleType.NEVERALLOW.value
@@ -271,7 +272,7 @@ class CilRule(Rule):
                 perms = assert_parts_str_list(parts[3][1], line)
 
                 rule = Rule(
-                    parts[0],
+                    rule_type,
                     (src, dst, parts[3][0]),
                     tuple(perms),
                 )
@@ -300,13 +301,13 @@ class CilRule(Rule):
                 if is_type_generated(dst):
                     dst = conditional_types_map[dst]
 
-                if parts[0] == CilRuleType.ALLOWX.value:
+                if rule_type == CilRuleType.ALLOWX.value:
                     rule_type = RuleType.ALLOWXPERM.value
-                elif parts[0] == CilRuleType.AUDITALLOWX.value:
+                elif rule_type == CilRuleType.AUDITALLOWX.value:
                     rule_type = RuleType.AUDITALLOWXPERM.value
-                elif parts[0] == CilRuleType.NEVERALLOWX.value:
+                elif rule_type == CilRuleType.NEVERALLOWX.value:
                     rule_type = RuleType.NEVERALLOWXPERM.value
-                elif parts[0] == CilRuleType.DONTAUDITX.value:
+                elif rule_type == CilRuleType.DONTAUDITX.value:
                     rule_type = RuleType.DONTAUDITXPERM.value
                 else:
                     assert False, line
@@ -388,7 +389,7 @@ class CilRule(Rule):
                     parts[2] = parts[2][1:-1]
 
                 rule = Rule(
-                    parts[0],
+                    rule_type,
                     (parts[1], parts[2], parts[3][2]),
                     (),
                 )
@@ -443,7 +444,7 @@ class CilRule(Rule):
                 assert isinstance(parts[1], str)
 
                 rule = Rule(
-                    parts[0],
+                    rule_type,
                     (parts[1],),
                     (),
                 )
