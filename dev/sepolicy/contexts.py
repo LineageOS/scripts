@@ -349,6 +349,8 @@ def find_contexts_used_types(
                     | ContextsType.VNDSERVICE_CONTEXTS_NAME
                     | ContextsType.SERVICE_CONTEXTS_NAME
                 ):
+                    if len(rule) == 3 and rule[1] == '--':
+                        rule = (rule[0], rule[2])
                     try:
                         t = trim_contexts_label(rule[1])
                         used_types.add(t)
