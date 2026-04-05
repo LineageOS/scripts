@@ -95,29 +95,15 @@ def rule_fill(rule: Rule, arg_values: args_type):
     return Rule(rule.rule_type, tuple(new_parts), rule.varargs)
 
 
-def rule_arity(rule: Rule):
-    macro_rule_args = rule_extract_part_iter(
-        rule.parts,
-        rule.parts,
-    )
-    assert macro_rule_args is not None
-    return len(macro_rule_args)
-
-
 def match_macro_rule(
     rules: RuleContainer,
     macro_rule: Rule,
+    macro_rule_args: args_type,
     rule_match: RuleMatch,
     verbose: bool,
 ):
     if verbose:
         print(f'Processing rule: {macro_rule}')
-
-    macro_rule_args = rule_extract_part_iter(
-        macro_rule.parts,
-        macro_rule.parts,
-    )
-    assert macro_rule_args is not None
 
     # Check if this rule requires only already completed args
     is_match_keys_full = macro_rule_args.keys() <= rule_match.filled_args()
@@ -204,20 +190,21 @@ def match_macro_rule(
 
 def match_macro_rule_depth(
     rules: RuleContainer,
-    macro_rules: List[Rule],
+    macro_rules_args: List[Tuple[Rule, args_type]],
     rule_match: RuleMatch,
     results: List[RuleMatch],
     verbose: bool,
 ):
-    if not macro_rules:
+    if not macro_rules_args:
         results.append(rule_match)
         return
 
-    macro_rule = macro_rules[0]
+    macro_rule, macro_rule_args = macro_rules_args[0]
 
     next_matches = match_macro_rule(
         rules,
         macro_rule,
+        macro_rule_args,
         rule_match,
         verbose,
     )
@@ -228,7 +215,7 @@ def match_macro_rule_depth(
     for next_match in next_matches:
         match_macro_rule_depth(
             rules,
-            macro_rules[1:],
+            macro_rules_args[1:],
             next_match,
             results,
             verbose,
@@ -238,25 +225,21 @@ def match_macro_rule_depth(
 def match_macro_rules(
     rules: RuleContainer,
     macro_name: str,
-    macro_rules: List[Rule],
+    macro_rules_args: List[Tuple[Rule, args_type]],
     all_rule_matches: List[RuleMatch],
     verbose: bool,
 ):
     if verbose:
         print(f'Processing macro: {macro_name}')
-        for macro_rule in macro_rules:
+        for macro_rule, _ in macro_rules_args:
             print(macro_rule)
         print()
-
-    # Inside the macro, prefer rules with higher arity to help
-    # the arg matching algorithm
-    macro_rules.sort(key=rule_arity, reverse=True)
 
     rule_matches: List[RuleMatch] = []
 
     match_macro_rule_depth(
         rules,
-        macro_rules,
+        macro_rules_args,
         RuleMatch(macro_name),
         rule_matches,
         verbose,
@@ -279,10 +262,24 @@ def match_macros_rules(
     rule_matches: List[RuleMatch] = []
 
     for macro_name, macro_rules in macros_name_rules:
+        macro_rules_args: List[Tuple[Rule, args_type]] = []
+
+        for macro_rule in macro_rules:
+            macro_rule_args = rule_extract_part_iter(
+                macro_rule.parts,
+                macro_rule.parts,
+            )
+            assert macro_rule_args is not None
+            macro_rules_args.append((macro_rule, macro_rule_args))
+
+        # Inside the macro, prefer rules with higher arity to help
+        # the arg matching algorithm
+        macro_rules_args.sort(key=lambda ma: len(ma[1]), reverse=True)
+
         match_macro_rules(
             rules,
             macro_name,
-            macro_rules,
+            macro_rules_args,
             rule_matches,
             verbose,
         )
