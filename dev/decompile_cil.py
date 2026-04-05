@@ -519,6 +519,8 @@ def decompile_cil():
             nlmsg_defines,
         )
     )
+    ioctl_nlmsg_defines_names.add('starting_at_board_api')
+    ioctl_nlmsg_defines_names.add('until_board_api')
 
     expanded_macros_text = expand_macro_bodies(
         macros_texts,
