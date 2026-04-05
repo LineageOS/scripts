@@ -18,16 +18,6 @@ from sepolicy.rule import (
 from utils.utils import Color, color_print
 
 
-def remove_type_suffix(suffix: Optional[str], t: str):
-    if suffix is None:
-        return t
-
-    if t.endswith(suffix):
-        return t[: -len(suffix)]
-
-    return t
-
-
 def is_conditional_typeattr(part: raw_part):
     if isinstance(part[0], list):
         part = part[0][0]
@@ -37,10 +27,7 @@ def is_conditional_typeattr(part: raw_part):
     return part in ['and', 'not', 'all']
 
 
-def create_conditional_type(
-    version_suffix: Optional[str],
-    parts: raw_parts_list,
-):
+def create_conditional_type(version_suffix: str, parts: raw_parts_list):
     # ((and (...) ((not (...))))) -> (and (...) ((not (...))))
     # ((not (...))) -> (not (...))
 
@@ -98,7 +85,7 @@ def create_conditional_type(
             return None
 
         new_types = map(
-            lambda t: remove_type_suffix(version_suffix, t),
+            lambda t: t.removesuffix(version_suffix),
             new_group,
         )
         if group[0] == 'and':
@@ -229,7 +216,7 @@ class CilRule(Rule):
         allowed_types: Optional[FrozenSet[str]] = None,
         disallowed_types: Optional[FrozenSet[str]] = None,
     ):
-        version_suffix = None
+        version_suffix = ''
         if version is not None:
             version = version.replace('.', '_')
             version_suffix = f'_{version}'
@@ -273,11 +260,11 @@ class CilRule(Rule):
                     assert isinstance(part, str), line
                     varargs.append(part)
 
-                src = remove_type_suffix(version_suffix, parts[1])
+                src = parts[1].removesuffix(version_suffix)
                 if is_type_generated(src):
                     src = conditional_types_map[src]
 
-                dst = remove_type_suffix(version_suffix, parts[2])
+                dst = parts[2].removesuffix(version_suffix)
                 if is_type_generated(dst):
                     dst = conditional_types_map[dst]
 
@@ -306,11 +293,11 @@ class CilRule(Rule):
                 for ioctl in unpack_ioctls(parts[3][2]):
                     varargs.append(ioctl)
 
-                src = remove_type_suffix(version_suffix, parts[1])
+                src = parts[1].removesuffix(version_suffix)
                 if is_type_generated(src):
                     src = conditional_types_map[src]
 
-                dst = remove_type_suffix(version_suffix, parts[2])
+                dst = parts[2].removesuffix(version_suffix)
                 if is_type_generated(dst):
                     dst = conditional_types_map[dst]
 
@@ -341,7 +328,7 @@ class CilRule(Rule):
                 if is_type_generated(parts[1]):
                     return
 
-                t = remove_type_suffix(version_suffix, parts[1])
+                t = parts[1].removesuffix(version_suffix)
 
                 # Rename typeattribute to attribute to match source
                 # typeattribute rules in source expand to typeattributeset,
@@ -354,7 +341,7 @@ class CilRule(Rule):
                 add_rule(rule)
             case CilRuleType.TYPEATTRIBUTESET.value:
                 assert isinstance(parts[1], str), line
-                v = remove_type_suffix(version_suffix, parts[1])
+                v = parts[1].removesuffix(version_suffix)
 
                 # Process conditional types and add them to a map to be replaced
                 # into the other rules later
@@ -375,7 +362,7 @@ class CilRule(Rule):
                 # Expand typeattributeset into multiple typeattribute rules
                 for t in parts[2]:
                     assert isinstance(t, str), line
-                    t = remove_type_suffix(version_suffix, t)
+                    t = t.removesuffix(version_suffix)
 
                     rule = Rule(
                         RuleType.TYPEATTRIBUTE.value,
@@ -424,11 +411,11 @@ class CilRule(Rule):
                 else:
                     varargs = []
 
-                src = remove_type_suffix(version_suffix, parts[1])
+                src = parts[1].removesuffix(version_suffix)
                 if is_type_generated(src):
                     src = conditional_types_map[src]
 
-                dst = remove_type_suffix(version_suffix, parts[2])
+                dst = parts[2].removesuffix(version_suffix)
                 if is_type_generated(dst):
                     dst = conditional_types_map[dst]
 
