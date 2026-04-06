@@ -122,7 +122,7 @@ def match_macro_rule(
     if rule_index == len(macro_rules_args):
         rule_match = RuleMatch(
             macro_name,
-            macro_rules,
+            macro_rules.copy(),
             macro_arg_values,
         )
         results.append(rule_match)
@@ -194,19 +194,20 @@ def match_macro_rule(
                 print('Arg values incompatible, skip')
             continue
 
-        new_rules = macro_rules.copy()
-        new_rules.append(matched_rule)
+        macro_rules.append(matched_rule)
 
         match_macro_rule(
             rules,
             macro_rules_args,
             rule_index + 1,
             macro_name,
-            new_rules,
+            macro_rules,
             new_arg_values,
             results,
             verbose,
         )
+
+        macro_rules.pop()
 
 
 def match_macro_rules(
