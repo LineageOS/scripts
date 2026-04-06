@@ -49,7 +49,7 @@ class RuleMatch:
         )
         self.hash = hash(self.hash_values)
 
-        args = tuple(arg_values[k] for k in sorted(arg_values.keys()))
+        args = tuple(arg_values[k] for k in sorted(arg_values))
         self.macro = Rule(macro_name, args, (), is_macro=True)
 
     def filled_args(self):
