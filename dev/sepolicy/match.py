@@ -316,8 +316,6 @@ def discard_rule_matches(
                 rule_matches_map[rule] = []
             rule_matches_map[rule].append(rule_match)
 
-    discarded_rule_matches: Set[RuleMatch] = set()
-
     if verbose:
         for rule, rule_matches in rule_matches_map.items():
             print(f'Rule matches for: {rule}')
@@ -325,6 +323,7 @@ def discard_rule_matches(
                 print(rule_match)
             print()
 
+    new_rule_matches: List[RuleMatch] = []
     for rule_match in all_rule_matches:
         if verbose:
             print(f'Finding supersets for rule match: {rule_match}')
@@ -360,6 +359,7 @@ def discard_rule_matches(
             print()
 
         rules_set = set(rule_match.rules)
+        discarded = False
         for candidate in candidate_supersets:
             candidate_rules_set = set(candidate.rules)
 
@@ -375,21 +375,20 @@ def discard_rule_matches(
                 print(f'Discarding {rule_match}')
                 print(f'in favor of {candidate}')
 
-            discarded_rule_matches.add(rule_match)
+            discarded = True
             break
 
         if verbose:
             print()
 
+        if not discarded:
+            new_rule_matches.append(rule_match)
+
+    num_discarded_rule_matches = len(all_rule_matches) - len(new_rule_matches)
     color_print(
-        f'Discarded subset macros: {len(discarded_rule_matches)}',
+        f'Discarded subset macros: {num_discarded_rule_matches}',
         color=Color.GREEN,
     )
-
-    new_rule_matches: List[RuleMatch] = []
-    for rule_match in all_rule_matches:
-        if rule_match not in discarded_rule_matches:
-            new_rule_matches.append(rule_match)
 
     return new_rule_matches
 
