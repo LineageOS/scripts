@@ -227,6 +227,7 @@ def parse_source_rules(
         variables=variables,
         split_fn=split_normalize_rules_text,
         map_fn=rule_body,
+        preserve_macros=False,
         text_name='expanded_rules',
         verbose=verbose,
     )
@@ -261,6 +262,7 @@ def parse_source_contexts(
             variables=variables,
             split_fn=split_normalize_contexts_text,
             map_fn=lambda s: s,
+            preserve_macros=False,
             text_name=context_type,
             verbose=verbose,
         )
@@ -306,6 +308,7 @@ def parse_source_macros(
         variables=variables,
         split_fn=split_normalize_rules_text,
         map_fn=macro_required_name_body_raw,
+        preserve_macros=True,
         text_name='ioctl_defines',
         verbose=verbose,
     )
@@ -316,6 +319,7 @@ def parse_source_macros(
         variables=variables,
         split_fn=split_normalize_rules_text,
         map_fn=macro_required_name_body_raw,
+        preserve_macros=True,
         text_name='nlmsg_defines',
         verbose=verbose,
     )
@@ -329,6 +333,7 @@ def parse_source_macros(
         variables=variables,
         split_fn=split_normalize_rules_text,
         map_fn=macro_required_name_body_raw,
+        preserve_macros=True,
         text_name='ioctl_macros',
         verbose=verbose,
     )
@@ -342,6 +347,7 @@ def parse_source_macros(
         variables=variables,
         split_fn=split_normalize_rules_text,
         map_fn=macro_required_name_body_raw,
+        preserve_macros=True,
         text_name='nlmsg_macros',
         verbose=verbose,
     )
@@ -352,6 +358,7 @@ def parse_source_macros(
         variables=variables,
         split_fn=split_normalize_rules_text,
         map_fn=macro_required_name_body_raw,
+        preserve_macros=True,
         text_name='expanded_macros',
         verbose=verbose,
     )
@@ -415,8 +422,9 @@ def parse_source_classmap(
         [access_vectors],
         [source_macros_text.flagging_macros],
         metadata.variables,
-        'access_vectors',
-        verbose,
+        preserve_macros=True,
+        text_name='access_vectors',
+        verbose=verbose,
     )
 
     return Classmap(classmap_text)

@@ -42,6 +42,7 @@ def expand_macro_calls(
     texts: Iterable[str],
     environment_texts: List[str],
     variables: FrozenDict[str, str],
+    preserve_macros: bool,
     text_name: str,
     verbose: bool,
 ):
@@ -70,15 +71,16 @@ define(`divert', `')
     # ifelse($1, `init', `', `allow $3 $1:process sigchld;')
 
     text_parts: List[str] = []
-    for text in texts:
-        name = macro_name(text)
-        if name is None:
-            continue
+    if preserve_macros:
+        for text in texts:
+            name = macro_name(text)
+            if name is None:
+                continue
 
-        arity = macro_arity(text)
-        dummy_call = macro_dummy_call(name, arity)
-        text_parts.append(dummy_call)
-        text_parts.append('\n')
+            arity = macro_arity(text)
+            dummy_call = macro_dummy_call(name, arity)
+            text_parts.append(dummy_call)
+            text_parts.append('\n')
 
     input_text += '\n'.join(environment_texts)
     input_text += '\n'.join(texts)
@@ -120,13 +122,20 @@ def expand_macro_calls_and_split(
     variables: FrozenDict[str, str],
     split_fn: Callable[[str], List[str]],
     map_fn: Callable[[str], Optional[T]],
+    preserve_macros: bool,
     text_name: str,
     verbose: bool,
 ):
+    if preserve_macros:
+        texts = list(split_fn(text))
+    else:
+        texts = [text]
+
     expanded_text = expand_macro_calls(
-        list(split_fn(text)),
+        texts,
         environment_texts,
         variables,
+        preserve_macros,
         text_name,
         verbose,
     )
