@@ -341,7 +341,7 @@ def discard_rule_matches(
                 print()
 
             if candidate_supersets is None:
-                candidate_supersets = rule_matches
+                candidate_supersets = rule_matches.copy()
             else:
                 new_candidate_supersets: List[RuleMatch] = []
                 for r in rule_matches:
