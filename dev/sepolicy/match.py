@@ -49,9 +49,17 @@ class RuleMatch:
             frozenset(rules),
         )
         self.__hash = hash(self.__hash_values)
+        self.__macro: Optional[Rule] = None
 
-        args = tuple(arg_values[k] for k in sorted(arg_values))
-        self.macro = Rule(macro_name, args, (), is_macro=True)
+    @property
+    def macro(self):
+        macro = self.__macro
+        if macro is None:
+            args = tuple(self.arg_values[k] for k in sorted(self.arg_values))
+            macro = Rule(self.macro_name, args, (), is_macro=True)
+            self.__macro = macro
+
+        return macro
 
     def filled_args(self):
         return self.arg_values.keys()
