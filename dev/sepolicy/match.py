@@ -158,35 +158,36 @@ def match_macro_rule(
 
         if is_match_keys_full:
             # If the rule is fully filled don't expand the args
-            new_args_values = {}
+            new_arg_values = macro_arg_values
         else:
             new_args_values = rule_extract_part_iter(
                 filled_rule.parts,
                 matched_rule.parts,
             )
-
-        new_arg_values = merge_arg_values(
-            macro_arg_values,
-            new_args_values,
-        )
-
-        if verbose:
-            arg_values_str = {k: str(v) for k, v in macro_arg_values.items()}
-            new_arg_values_str = (
-                {k: str(v) for k, v in new_args_values.items()}
-                if new_args_values is not None
-                else 'None'
-            )
-            merged_arg_values_str = (
-                {k: str(v) for k, v in new_arg_values.items()}
-                if new_arg_values is not None
-                else 'None'
+            new_arg_values = merge_arg_values(
+                macro_arg_values,
+                new_args_values,
             )
 
-            print(f'Merging arg values: {arg_values_str}')
-            print(f'with: {new_arg_values_str}')
-            print(f'= {merged_arg_values_str}')
-            print()
+            if verbose:
+                arg_values_str = {
+                    k: str(v) for k, v in macro_arg_values.items()
+                }
+                new_arg_values_str = (
+                    {k: str(v) for k, v in new_args_values.items()}
+                    if new_args_values is not None
+                    else 'None'
+                )
+                merged_arg_values_str = (
+                    {k: str(v) for k, v in new_arg_values.items()}
+                    if new_arg_values is not None
+                    else 'None'
+                )
+
+                print(f'Merging arg values: {arg_values_str}')
+                print(f'with: {new_arg_values_str}')
+                print(f'= {merged_arg_values_str}')
+                print()
 
         if new_arg_values is None:
             if verbose:
