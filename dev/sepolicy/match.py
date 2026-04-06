@@ -42,12 +42,13 @@ class RuleMatch:
         self.macro_name = macro_name
         self.rules = rules
         self.arg_values = arg_values
-        self.hash_values = (
+
+        self.__hash_values = (
             self.macro_name,
             frozenset(self.arg_values.items()),
             frozenset(rules),
         )
-        self.hash = hash(self.hash_values)
+        self.__hash = hash(self.__hash_values)
 
         args = tuple(arg_values[k] for k in sorted(arg_values))
         self.macro = Rule(macro_name, args, (), is_macro=True)
@@ -56,13 +57,13 @@ class RuleMatch:
         return self.arg_values.keys()
 
     def __hash__(self):
-        return self.hash
+        return self.__hash
 
     def __eq__(self, other: object):
         if not isinstance(other, RuleMatch):
             return NotImplemented
 
-        return self.hash_values == other.hash_values
+        return self.__hash_values == other.__hash_values
 
     def __str__(self):
         return str(self.macro)
