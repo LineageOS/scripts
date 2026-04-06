@@ -59,7 +59,8 @@ class RuleMatch:
         return self.hash
 
     def __eq__(self, other: object):
-        assert isinstance(other, RuleMatch)
+        if not isinstance(other, RuleMatch):
+            return NotImplemented
 
         return self.hash_values == other.hash_values
 
