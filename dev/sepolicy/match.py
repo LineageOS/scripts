@@ -31,9 +31,14 @@ class RuleMatch:
     def __init__(
         self,
         macro_name: str,
-        rules: List[Rule] = [],
-        arg_values: args_type = {},
+        rules: Optional[List[Rule]] = None,
+        arg_values: Optional[args_type] = None,
     ):
+        if rules is None:
+            rules = []
+        if arg_values is None:
+            arg_values = {}
+
         self.macro_name = macro_name
         self.rules = rules
         self.arg_values = arg_values
