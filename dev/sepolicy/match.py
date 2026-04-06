@@ -3,7 +3,8 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional, Set, Tuple
+from collections import defaultdict
+from typing import DefaultDict, Dict, List, Optional, Set, Tuple
 
 from sepolicy.class_set import ClassSet
 from sepolicy.classmap import Classmap
@@ -309,12 +310,10 @@ def discard_rule_matches(
         color=Color.GREEN,
     )
 
-    rule_matches_map: Dict[Rule, List[RuleMatch]] = {}
+    rule_matches_map: DefaultDict[Rule, Set[RuleMatch]] = defaultdict(set)
     for rule_match in all_rule_matches:
         for rule in rule_match.rules:
-            if rule not in rule_matches_map:
-                rule_matches_map[rule] = []
-            rule_matches_map[rule].append(rule_match)
+            rule_matches_map[rule].add(rule_match)
 
     if verbose:
         for rule, rule_matches in rule_matches_map.items():
@@ -328,31 +327,22 @@ def discard_rule_matches(
         if verbose:
             print(f'Finding supersets for rule match: {rule_match}')
 
-        candidate_supersets: Optional[List[RuleMatch]] = None
+        rule_match_sets = [rule_matches_map[rule] for rule in rule_match.rules]
+        rule_match_sets.sort(key=len)
 
-        for rule in rule_match.rules:
-            rule_matches = rule_matches_map[rule]
-
-            if verbose:
-                print(f'Found {len(rule_matches)} candidates for rule: {rule}')
-                for r in rule_matches:
-                    print(r)
-                print()
-
+        candidate_supersets: Optional[Set[RuleMatch]] = None
+        for rule_matches in rule_match_sets:
             if candidate_supersets is None:
                 candidate_supersets = rule_matches.copy()
             else:
-                new_candidate_supersets: List[RuleMatch] = []
-                for r in rule_matches:
-                    if r in candidate_supersets:
-                        new_candidate_supersets.append(r)
-                candidate_supersets = new_candidate_supersets
+                candidate_supersets = candidate_supersets & rule_matches
 
         assert candidate_supersets is not None
 
         candidate_supersets.remove(rule_match)
 
         if verbose:
+            # TODO: sort output for determinism
             print(f'Found {len(candidate_supersets)} candidates')
             for candidate in candidate_supersets:
                 print(candidate)
@@ -363,7 +353,7 @@ def discard_rule_matches(
         for candidate in candidate_supersets:
             candidate_rules_set = set(candidate.rules)
 
-            if rules_set > candidate_rules_set:
+            if candidate_rules_set < rules_set:
                 continue
 
             if rules_set == candidate_rules_set and len(
@@ -372,6 +362,7 @@ def discard_rule_matches(
                 continue
 
             if verbose:
+                # TODO: sort output for determinism
                 print(f'Discarding {rule_match}')
                 print(f'in favor of {candidate}')
 
