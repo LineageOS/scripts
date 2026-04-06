@@ -42,12 +42,10 @@ class RuleMatch:
         self.macro_name = macro_name
         self.rules = rules
         self.arg_values = arg_values
-        self.hash_values = tuple(
-            [
-                self.macro_name,
-                frozenset(self.arg_values.items()),
-                frozenset(rules),
-            ]
+        self.hash_values = (
+            self.macro_name,
+            frozenset(self.arg_values.items()),
+            frozenset(rules),
         )
         self.hash = hash(self.hash_values)
 
