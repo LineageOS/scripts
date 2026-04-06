@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from enum import StrEnum
 from typing import Callable, Dict, FrozenSet, List, Optional, Set, cast
 
@@ -16,6 +17,19 @@ from sepolicy.rule import (
     unpack_line,
 )
 from utils.utils import Color, color_print
+
+CIL_COMMENT_LINE_START_MARKER = ';;* lmx '
+CIL_COMMENT_LINE_END_MARKER = ';;* lme'
+
+
+@dataclass
+class CilSectionStart:
+    name: str
+
+
+@dataclass
+class CilSectionEnd:
+    pass
 
 
 def assert_parts_str_list(value: raw_parts_list, line: str) -> List[str]:

@@ -6,15 +6,23 @@ from __future__ import annotations
 import json
 from functools import cache
 from pathlib import Path
-from typing import Dict, FrozenSet, List, Optional, Set, Tuple
+from typing import Dict, FrozenSet, List, Optional, Set, Tuple, Union
 
-from sepolicy.cil_rule import CilRule, CilRuleType, unpack_cil_line
+from sepolicy.cil_rule import (
+    CIL_COMMENT_LINE_END_MARKER,
+    CIL_COMMENT_LINE_START_MARKER,
+    CilRule,
+    CilRuleType,
+    CilSectionEnd,
+    CilSectionStart,
+    unpack_cil_line,
+)
 from sepolicy.conditional_type import ConditionalType
 from sepolicy.contexts import (
     parse_contexts_texts,
     split_normalize_contexts_text,
 )
-from sepolicy.match import flush_same_ioctl_rules, merge_ioctl_rule_or_add
+from sepolicy.merge import merge_rules
 from sepolicy.policy import (
     ContextsType,
     Policy,
@@ -29,7 +37,17 @@ from sepolicy.policy import (
 from sepolicy.rule import Rule, raw_parts_list
 from sepolicy.rule_container import RuleContainer
 from utils.frozendict import FrozenDict
-from utils.utils import Color, color_print, read_texts, resolve_paths
+from utils.utils import read_texts, resolve_paths
+
+cil_line_type = Union[
+    Tuple[
+        str,
+        raw_parts_list,
+    ],
+    CilSectionStart,
+    CilSectionEnd,
+]
+
 
 # From system/sepolicy/flagging/Android.bp
 NEEDED_BUILD_FLAGS = {
@@ -232,44 +250,41 @@ def parse_dump_policy_variables(
 
 
 def _parse_cil_lines(
-    line_parts_list: List[Tuple[str, raw_parts_list]],
+    line_parts_list: List[cil_line_type],
     rules: RuleContainer,
     genfs_rules: RuleContainer,
     conditional_types_map: Dict[str, ConditionalType],
     version: str,
-    name: str,
     allowed_types: Optional[FrozenSet[str]] = None,
     disallowed_types: Optional[FrozenSet[str]] = None,
 ):
-    same_rules: List[Rule] = []
-    merged_ioctl_rules = 0
-    added_ioctl_rules = 0
-
-    # ioctl rules are split at comments / newlines by the compiler
-    # merge adjacent ioctl rules of the same type back
-    # TODO: this won't work if the rules end up next to eachother but
-    # they weren't next to eachother initially, but the chances for that
-    # are very low
+    section_rules: List[Rule] = []
+    section: Optional[CilSectionStart] = None
 
     def add_rule(rule: Rule):
-        nonlocal merged_ioctl_rules
-        nonlocal added_ioctl_rules
+        if section is None:
+            rules.add(rule)
+            return
 
-        new_merged_ioctl_rules, new_added_ioctl_rules = merge_ioctl_rule_or_add(
-            rules,
-            same_rules,
-            rule,
-        )
-
-        merged_ioctl_rules += new_merged_ioctl_rules
-        added_ioctl_rules += new_added_ioctl_rules
+        section_rules.append(rule)
 
     def add_genfs_rule(rule: Rule):
         genfs_rules.add(rule)
 
-    for line, parts in line_parts_list:
+    for line in line_parts_list:
+        if isinstance(line, CilSectionStart):
+            section = line
+            continue
+        elif isinstance(line, CilSectionEnd):
+            new_rules = merge_rules(section_rules)
+            rules.add_many(new_rules)
+            section_rules.clear()
+            section = None
+            continue
+
+        text, parts = line
         CilRule.from_line(
-            line,
+            text,
             parts,
             conditional_types_map=conditional_types_map,
             allowed_types=allowed_types,
@@ -278,23 +293,6 @@ def _parse_cil_lines(
             add_genfs_rule=add_genfs_rule,
             version=version,
         )
-
-    new_merged_ioctl_rules, new_added_ioctl_rules = flush_same_ioctl_rules(
-        rules,
-        same_rules,
-    )
-    merged_ioctl_rules += new_merged_ioctl_rules
-    added_ioctl_rules += new_added_ioctl_rules
-
-    if not merged_ioctl_rules:
-        return
-
-    color_print(
-        f'Merged {merged_ioctl_rules} rules '
-        f'into {added_ioctl_rules} ioctl rules '
-        f'for {name}',
-        color=Color.GREEN,
-    )
 
 
 def parse_cil_lines(
@@ -326,7 +324,6 @@ def parse_cil_lines(
         genfs_rules,
         conditional_types_map,
         version,
-        name=name,
         allowed_types=frozenset({CilRuleType.TYPEATTRIBUTESET}),
     )
 
@@ -336,7 +333,6 @@ def parse_cil_lines(
         genfs_rules,
         conditional_types_map,
         version,
-        name=name,
         disallowed_types=frozenset({CilRuleType.TYPEATTRIBUTESET}),
     )
 
@@ -353,13 +349,55 @@ def read_cil_lines(
 
     cil_data = cil_path.read_text()
 
-    line_parts_list: List[Tuple[str, raw_parts_list]] = []
+    line_parts_list: List[cil_line_type] = []
+
+    # There can be multiple sections originating from the same line,
+    # merge them together
+    section_name: Optional[str] = None
+    section_open = False
+    last_section_broken_end = False
+
     for line in cil_data.splitlines():
+        if not line:
+            continue
+
+        if line.startswith(CIL_COMMENT_LINE_START_MARKER):
+            new_section_name = line[len(CIL_COMMENT_LINE_START_MARKER) :]
+
+            assert not section_open
+            section_open = True
+
+            if section_name is not None:
+                if new_section_name == section_name:
+                    continue
+
+                line_parts_list.append(CilSectionEnd())
+
+            line_parts_list.append(CilSectionStart(new_section_name))
+            section_name = new_section_name
+            continue
+
+        if line.startswith(CIL_COMMENT_LINE_END_MARKER):
+            assert not last_section_broken_end
+
+            # Allow a single broken ;;* lme at the end of the file
+            if not section_open:
+                last_section_broken_end = True
+                continue
+
+            section_open = False
+            continue
+
         parts = unpack_cil_line(line)
         if parts is None:
             continue
 
         line_parts_list.append((line, parts))
+
+    assert not section_open
+
+    if section_name is not None:
+        line_parts_list.append(CilSectionEnd())
 
     return line_parts_list
 

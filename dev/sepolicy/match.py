@@ -472,53 +472,6 @@ def merge_typeattribute_rules(
     )
 
 
-def flush_same_ioctl_rules(
-    rules: RuleContainer,
-    same_rules: list[Rule],
-):
-    if not same_rules:
-        return 0, 0
-
-    first = same_rules[0]
-
-    if len(same_rules) == 1:
-        rules.add(first)
-        same_rules.clear()
-        return 0, 0
-
-    rules.add(
-        Rule(
-            first.rule_type,
-            first.parts,
-            tuple(v for r in same_rules for v in r.varargs),
-        )
-    )
-    removed = len(same_rules)
-    same_rules.clear()
-    return removed, 1
-
-
-def merge_ioctl_rule_or_add(
-    rules: RuleContainer,
-    same_rules: list[Rule],
-    rule: Rule,
-):
-    if rule.rule_type not in IOCTL_RULE_TYPES:
-        removed, added = flush_same_ioctl_rules(rules, same_rules)
-        rules.add(rule)
-        return removed, added
-
-    if same_rules:
-        first = same_rules[0]
-        if rule.rule_type != first.rule_type or rule.parts != first.parts:
-            removed, added = flush_same_ioctl_rules(rules, same_rules)
-            same_rules.append(rule)
-            return removed, added
-
-    same_rules.append(rule)
-    return 0, 0
-
-
 def replace_perms_set(
     perms: List[Tuple[str, Set[str]]],
     class_all_perms: Set[str],
