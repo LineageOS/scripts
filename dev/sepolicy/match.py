@@ -16,6 +16,7 @@ from sepolicy.match_template import (
     fill_rule_template,
     iter_rule_fill_arg_values,
     rule_template_match_keys,
+    rule_template_sort_key,
 )
 from sepolicy.rule import (
     ALLOW_RULE_TYPES,
@@ -197,7 +198,7 @@ def match_macros_rules(
         # Inside the macro, prefer rules with higher arity to help
         # the arg matching algorithm
         macro_rule_templates.sort(
-            key=lambda t: len(t.arg_indices),
+            key=rule_template_sort_key,
             reverse=True,
         )
 

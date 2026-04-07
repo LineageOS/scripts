@@ -686,3 +686,10 @@ def iter_rule_fill_arg_values(
         matched_parts=matched_rule.parts,
         arg_values=arg_values,
     )
+
+
+def rule_template_sort_key(rule_template: RuleTemplate):
+    return (
+        len(rule_template.literals),
+        len(rule_template.arg_indices),
+    )
