@@ -9,13 +9,14 @@ from typing import DefaultDict, Dict, List, Optional, Set, Tuple
 from sepolicy.class_set import ClassSet
 from sepolicy.classmap import Classmap
 from sepolicy.macro import ioctl_type_name
-from sepolicy.match_extract import (
+from sepolicy.match_template import (
+    RuleTemplate,
     args_type,
-    merge_arg_values,
-    rule_extract_part,
-    rule_extract_part_iter,
+    compile_rule_template,
+    fill_rule_template,
+    iter_rule_fill_arg_values,
+    rule_template_match_keys,
 )
-from sepolicy.match_replace import rule_replace_part_iter
 from sepolicy.rule import (
     ALLOW_RULE_TYPES,
     CLASS_SETS_RULE_TYPES,
@@ -78,40 +79,9 @@ class RuleMatch:
         return str(self.macro)
 
 
-def rule_match_keys(rule: Rule, is_match_keys_full: bool):
-    match_keys: List[Optional[rule_hash_value]] = [rule.rule_type]
-
-    for part in rule.parts:
-        # A fully filled rule doesn't need to have its parts tested
-        # to check if they need to be filled
-        if is_match_keys_full:
-            match_keys.append(part)
-            continue
-
-        # Match part to itself to see if it has any args
-        part_args_values = rule_extract_part(part, part)
-
-        if part_args_values:
-            match_keys.append(None)
-        else:
-            match_keys.append(part)
-
-    match_keys.append(rule.varargs_hash_value)
-
-    return match_keys
-
-
-def rule_fill(rule: Rule, arg_values: args_type):
-    new_parts = rule_replace_part_iter(rule.parts, arg_values)
-    if new_parts is None:
-        return None
-
-    return Rule(rule.rule_type, tuple(new_parts), rule.varargs)
-
-
 def match_macro_rule(
     rules: RuleContainer,
-    macro_rules_args: List[Tuple[Rule, args_type]],
+    macro_rule_templates: List[RuleTemplate],
     rule_index: int,
     macro_name: str,
     macro_rules: List[Rule],
@@ -119,7 +89,7 @@ def match_macro_rule(
     results: List[RuleMatch],
     verbose: bool,
 ):
-    if rule_index == len(macro_rules_args):
+    if rule_index == len(macro_rule_templates):
         rule_match = RuleMatch(
             macro_name,
             macro_rules.copy(),
@@ -128,23 +98,22 @@ def match_macro_rule(
         results.append(rule_match)
         return
 
-    macro_rule, macro_rule_args = macro_rules_args[rule_index]
+    macro_rule_template = macro_rule_templates[rule_index]
 
     if verbose:
-        print(f'Processing rule: {macro_rule}')
+        print(f'Processing rule: {macro_rule_template.rule}')
 
-    # Check if this rule requires only already completed args
-    is_match_keys_full = macro_rule_args.keys() <= macro_arg_values.keys()
-
-    # TODO: make rule args extraction build a path that can be used for
-    # filling no matter the args
-    filled_rule = rule_fill(macro_rule, macro_arg_values)
-    if verbose:
-        print(f'Constructed filled rule: {filled_rule}')
-    if filled_rule is None:
+    filled_macro_rule_template = fill_rule_template(
+        macro_rule_template,
+        macro_arg_values,
+    )
+    if filled_macro_rule_template is None:
         return
 
-    match_keys = rule_match_keys(filled_rule, is_match_keys_full)
+    if verbose:
+        print('Filled rule template:', macro_rule_template)
+
+    match_keys = rule_template_match_keys(filled_macro_rule_template)
     if verbose:
         match_keys_str = [
             sorted(v) if isinstance(v, frozenset) else str(v)
@@ -156,78 +125,46 @@ def match_macro_rule(
         if verbose:
             print(f'Found matching rule: {matched_rule}')
 
-        if is_match_keys_full:
-            # If the rule is fully filled don't expand the args
-            new_arg_values = macro_arg_values
-        else:
-            new_args_values = rule_extract_part_iter(
-                filled_rule.parts,
-                matched_rule.parts,
-            )
-            new_arg_values = merge_arg_values(
-                macro_arg_values,
-                new_args_values,
-            )
-
+        for new_arg_values in iter_rule_fill_arg_values(
+            filled_macro_rule_template,
+            macro_arg_values,
+            matched_rule,
+        ):
             if verbose:
-                arg_values_str = {
-                    k: str(v) for k, v in macro_arg_values.items()
-                }
-                new_arg_values_str = (
-                    {k: str(v) for k, v in new_args_values.items()}
-                    if new_args_values is not None
-                    else 'None'
-                )
-                merged_arg_values_str = (
-                    {k: str(v) for k, v in new_arg_values.items()}
-                    if new_arg_values is not None
-                    else 'None'
-                )
+                print(f'Found new arg values: {new_arg_values}')
 
-                print(f'Merging arg values: {arg_values_str}')
-                print(f'with: {new_arg_values_str}')
-                print(f'= {merged_arg_values_str}')
-                print()
-
-        if new_arg_values is None:
-            if verbose:
-                print('Arg values incompatible, skip')
-            continue
-
-        macro_rules.append(matched_rule)
-
-        match_macro_rule(
-            rules,
-            macro_rules_args,
-            rule_index + 1,
-            macro_name,
-            macro_rules,
-            new_arg_values,
-            results,
-            verbose,
-        )
-
-        macro_rules.pop()
+            macro_rules.append(matched_rule)
+            match_macro_rule(
+                rules,
+                macro_rule_templates,
+                rule_index + 1,
+                macro_name,
+                macro_rules,
+                new_arg_values,
+                results,
+                verbose,
+            )
+            macro_rules.pop()
 
 
 def match_macro_rules(
     rules: RuleContainer,
     macro_name: str,
-    macro_rules_args: List[Tuple[Rule, args_type]],
+    macro_rule_templates: List[RuleTemplate],
     all_rule_matches: List[RuleMatch],
     verbose: bool,
 ):
     if verbose:
         print(f'Processing macro: {macro_name}')
-        for macro_rule, _ in macro_rules_args:
-            print(macro_rule)
+        for rule_template in macro_rule_templates:
+            print(rule_template.rule)
         print()
 
     rule_matches: List[RuleMatch] = []
 
     match_macro_rule(
         rules,
-        macro_rules_args,
+        macro_rule_templates,
         0,
         macro_name,
         [],
@@ -253,24 +190,21 @@ def match_macros_rules(
     rule_matches: List[RuleMatch] = []
 
     for macro_name, macro_rules in macros_name_rules:
-        macro_rules_args: List[Tuple[Rule, args_type]] = []
-
-        for macro_rule in macro_rules:
-            macro_rule_args = rule_extract_part_iter(
-                macro_rule.parts,
-                macro_rule.parts,
-            )
-            assert macro_rule_args is not None
-            macro_rules_args.append((macro_rule, macro_rule_args))
+        macro_rule_templates: List[RuleTemplate] = [
+            compile_rule_template(r) for r in macro_rules
+        ]
 
         # Inside the macro, prefer rules with higher arity to help
         # the arg matching algorithm
-        macro_rules_args.sort(key=lambda ma: len(ma[1]), reverse=True)
+        macro_rule_templates.sort(
+            key=lambda t: len(t.arg_indices),
+            reverse=True,
+        )
 
         match_macro_rules(
             rules,
             macro_name,
-            macro_rules_args,
+            macro_rule_templates,
             rule_matches,
             verbose,
         )

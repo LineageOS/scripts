@@ -10,11 +10,13 @@ class ConditionalType:
     def __init__(self, positive: List[str], negative: List[str], is_all: bool):
         self.__positive = positive
         self.__negative = negative
+        self.__positive_set = frozenset(positive)
+        self.__negative_set = frozenset(negative)
         self.__is_all = is_all
         self.__hash_values = tuple(
             [
-                frozenset(positive),
-                frozenset(negative),
+                self.__positive_set,
+                self.__negative_set,
                 is_all,
             ],
         )
@@ -27,6 +29,14 @@ class ConditionalType:
     @property
     def hash_values(self) -> Hashable:
         return self.__hash_values
+
+    @property
+    def positive_set(self):
+        return self.__positive_set
+
+    @property
+    def negative_set(self):
+        return self.__negative_set
 
     @property
     def positive(self):
