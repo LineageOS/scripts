@@ -5,8 +5,9 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from enum import StrEnum
-from typing import Callable, Dict, FrozenSet, List, Optional, Set, cast
+from typing import Callable, Dict, FrozenSet, List, Optional, Set, Tuple, cast
 
+from sepolicy.classmap import Classmap
 from sepolicy.conditional_type import ConditionalType
 from sepolicy.rule import (
     Rule,
@@ -16,6 +17,7 @@ from sepolicy.rule import (
     raw_parts_list,
     unpack_line,
 )
+from sepolicy.varargs import Ioctls, Perms, TypeTransitionTag
 from utils.utils import Color, color_print
 
 CIL_COMMENT_LINE_START_MARKER = ';;* lmx '
@@ -144,9 +146,12 @@ def is_allow_process_sigchld(parts: raw_parts_list):
 def unpack_ioctls(parts: raw_parts_list):
     # (. (range . .) ((range . .)))
 
+    ranges: List[Tuple[int, int]] = []
+
     for part in parts:
         if isinstance(part, str):
-            yield part
+            ioctl = int(part, base=16)
+            ranges.append((ioctl, ioctl))
             continue
 
         assert isinstance(part, list), parts
@@ -162,9 +167,9 @@ def unpack_ioctls(parts: raw_parts_list):
         assert isinstance(part[2], str), parts
         end_ioctl = int(part[2], base=16)
 
-        # TODO: maybe do not expand ranges
-        for n in range(start_ioctl, end_ioctl + 1):
-            yield hex(n)
+        ranges.append((start_ioctl, end_ioctl))
+
+    return Ioctls(ranges)
 
 
 class CilRuleType(StrEnum):
@@ -235,6 +240,7 @@ class CilRule(Rule):
         version: Optional[str],
         allowed_types: Optional[FrozenSet[str]] = None,
         disallowed_types: Optional[FrozenSet[str]] = None,
+        classmap: Optional[Classmap] = None,
     ):
         version_suffix = ''
         if version is not None:
@@ -283,12 +289,23 @@ class CilRule(Rule):
                 if is_type_generated(dst):
                     dst = conditional_types_map[dst]
 
+                class_name = parts[3][0]
+
                 perms = assert_parts_str_list(parts[3][1], line)
+                is_all = False
+                if classmap is not None:
+                    class_perms = classmap.class_perms(class_name)
+
+                    if perms != class_perms:
+                        assert frozenset(perms) != frozenset(class_perms)
+
+                    if perms == class_perms:
+                        is_all = True
 
                 rule = Rule(
                     rule_type,
-                    (src, dst, parts[3][0]),
-                    tuple(perms),
+                    (src, dst, class_name),
+                    Perms(perms, is_all),
                 )
                 add_rule(rule)
             case (
@@ -329,7 +346,7 @@ class CilRule(Rule):
                 rule = Rule(
                     rule_type,
                     (src, dst, parts[3][1], parts[3][0]),
-                    tuple(unpack_ioctls(parts[3][2])),
+                    unpack_ioctls(parts[3][2]),
                 )
                 add_rule(rule)
             case CilRuleType.TYPEATTRIBUTE.value:
@@ -350,7 +367,6 @@ class CilRule(Rule):
                 rule = Rule(
                     RuleType.ATTRIBUTE.value,
                     (t,),
-                    (),
                 )
                 add_rule(rule)
             case CilRuleType.TYPEATTRIBUTESET.value:
@@ -381,7 +397,6 @@ class CilRule(Rule):
                     rule = Rule(
                         RuleType.TYPEATTRIBUTE.value,
                         (t, v),
-                        (),
                     )
                     add_rule(rule)
             case RuleType.GENFSCON.value:
@@ -405,7 +420,6 @@ class CilRule(Rule):
                 rule = Rule(
                     rule_type,
                     (parts[1], parts[2], parts[3][2]),
-                    (),
                 )
                 assert add_genfs_rule is not None
                 add_genfs_rule(rule)
@@ -421,9 +435,9 @@ class CilRule(Rule):
                 if len(parts) == 6:
                     assert isinstance(parts[4], str), line
                     # assert parts[4] == '"[userfaultfd]"', line
-                    varargs = (parts[4],)
+                    tag = TypeTransitionTag(parts[4])
                 else:
-                    varargs = tuple()
+                    tag = None
 
                 src = parts[1].removesuffix(version_suffix)
                 if is_type_generated(src):
@@ -436,7 +450,7 @@ class CilRule(Rule):
                 rule = Rule(
                     RuleType.TYPE_TRANSITION.value,
                     (src, dst, parts[3], parts[-1]),
-                    varargs,
+                    tag,
                 )
                 add_rule(rule)
             case CilRuleType.EXPANDTYPEATTRIBUTE.value:
@@ -450,7 +464,6 @@ class CilRule(Rule):
                 rule = Rule(
                     RuleType.EXPANDATTRIBUTE.value,
                     (parts[1][0], parts[2]),
-                    (),
                 )
                 add_rule(rule)
             case RuleType.TYPE.value:
@@ -460,7 +473,6 @@ class CilRule(Rule):
                 rule = Rule(
                     rule_type,
                     (parts[1],),
-                    (),
                 )
                 add_rule(rule)
             case _:

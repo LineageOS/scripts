@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 from itertools import product
-from typing import Callable, List, Set
+from typing import Callable, List, Set, Tuple
 
 from sepolicy.classmap import Classmap
 from sepolicy.conditional_type import ConditionalType
@@ -17,11 +17,16 @@ from sepolicy.rule import (
     trim_contexts_label,
     unpack_line,
 )
+from sepolicy.varargs import Ioctls, Perms, TypeTransitionTag
 
 
 def trim_ioctl(ioctl: int):
     # Only keep bottom two bytes for type and number
     return ioctl & 0xFFFF
+
+
+def trim_ioctl_str(ioctl_str: str):
+    return trim_ioctl(int(ioctl_str, base=0))
 
 
 def format_ioctl(ioctl: int):
@@ -32,31 +37,43 @@ def format_ioctl_str(ioctl_str: str):
     return format_ioctl(int(ioctl_str, base=0))
 
 
-def unpack_ioctls(ioctls: List[str], negative_ioctls: bool = False):
-    if negative_ioctls:
-        missing_ioctls = set(trim_ioctl(int(i, base=0)) for i in ioctls)
+def unpack_negative_ioctls(ioctls: List[str]):
+    ranges: List[Tuple[int, int]] = []
 
-        # TODO: maybe do not expand ranges
-        for n in range(0x0000, 0x10000):
-            if n in missing_ioctls:
-                continue
+    missing = sorted(trim_ioctl_str(i) for i in ioctls)
 
-            yield format_ioctl(n)
+    prev = -1
+    for m in missing:
+        if m < prev:
+            raise ValueError('missing ioctls must be sorted and unique')
 
-        return
+        if prev + 1 <= m - 1:
+            ranges.append((prev + 1, m - 1))
+
+        prev = m
+
+    if prev < 0xFFFF:
+        ranges.append((prev + 1, 0xFFFF))
+
+    return Ioctls(ranges)
+
+
+def unpack_ioctls(ioctls: List[str]):
+    ranges: List[Tuple[int, int]] = []
 
     for part in ioctls:
         if '-' not in part:
-            yield format_ioctl(int(part, base=0))
+            value = trim_ioctl(int(part, base=0))
+            ranges.append((value, value))
             continue
 
-        parts = part.split('-', 1)
-        start_ioctl = int(parts[0], base=0)
-        end_ioctl = int(parts[1], base=0)
+        start_s, end_s = part.split('-', 1)
+        start = trim_ioctl(int(start_s, base=0))
+        end = trim_ioctl(int(end_s, base=0))
 
-        # TODO: maybe do not expand ranges
-        for n in range(start_ioctl, end_ioctl + 1):
-            yield format_ioctl(n)
+        ranges.append((start, end))
+
+    return Ioctls(ranges)
 
 
 # TODO: implement this properly by allowing macros to have conditional
@@ -147,7 +164,6 @@ class SourceRule(Rule):
         rule = Rule(
             parts[0],
             (parts[1], parts[2], t),
-            (),
         )
         return rule
 
@@ -221,20 +237,27 @@ class SourceRule(Rule):
                 dsts = structure_conditional_types(parts[2], negative_dsts)
                 class_names = list(flatten_parts(parts[3]))
                 varargs = list(flatten_parts(parts[4]))
+                is_all = varargs == ['*']
 
                 for src, dst, class_name in product(srcs, dsts, class_names):
-                    class_varargs = varargs
-                    if varargs == ['*'] or negative_varargs:
-                        class_varargs = classmap.class_perms(class_name)
-
+                    class_perms_set = classmap.class_perms_set(class_name)
                     if negative_varargs:
+                        assert varargs is not None
+                        class_varargs = class_perms_set
                         for v in varargs:
                             class_varargs.remove(v)
+                        class_is_all = False
+                    elif is_all:
+                        class_varargs = class_perms_set
+                        class_is_all = True
+                    else:
+                        class_varargs = set(varargs)
+                        class_is_all = class_varargs == class_perms_set
 
                     rule = Rule(
                         parts[0],
                         (src, dst, class_name),
-                        tuple(class_varargs),
+                        Perms(class_varargs, class_is_all),
                     )
                     add_rule(rule)
             case RuleType.TYPE_TRANSITION.value:
@@ -249,15 +272,15 @@ class SourceRule(Rule):
                 if len(parts) == 6:
                     assert isinstance(parts[5], str), line
                     # assert parts[5] == '"[userfaultfd]"', line
-                    varargs = [parts[5]]
+                    tag = TypeTransitionTag(parts[5])
                 else:
-                    varargs = []
+                    tag = None
 
                 for src, dst, class_name in product(srcs, dsts, class_names):
                     rule = Rule(
                         parts[0],
                         (src, dst, class_name, parts[4]),
-                        tuple(varargs),
+                        tag,
                     )
                     add_rule(rule)
             case (
@@ -266,27 +289,27 @@ class SourceRule(Rule):
                 | RuleType.NEVERALLOWXPERM.value
                 | RuleType.DONTAUDITXPERM.value
             ):
-                # neverallowxperm a b:c ioctl ~{ d };
-                negative_ioctls = False
-                if len(parts) > 6 and parts[5] == '~':
-                    negative_ioctls = True
-                    del parts[5]
-
-                assert len(parts) == 6
+                assert len(parts) in (6, 7), line
                 assert isinstance(parts[4], str), line
+
+                # neverallowxperm a b:c ioctl ~{ d };
+                if len(parts) > 6 and parts[5] == '~':
+                    varargs = list(flatten_parts(parts[6]))
+                    ioctls = unpack_negative_ioctls(varargs)
+                else:
+                    varargs = list(flatten_parts(parts[5]))
+                    ioctls = unpack_ioctls(varargs)
 
                 srcs = structure_conditional_types(parts[1])
                 dsts = structure_conditional_types(parts[2])
                 class_names = flatten_parts(parts[3])
                 ioctl_or_nlmsg = parts[4]
-                varargs = list(flatten_parts(parts[5]))
-                ioctls = list(unpack_ioctls(varargs, negative_ioctls))
 
                 for src, dst, class_name in product(srcs, dsts, class_names):
                     rule = Rule(
                         parts[0],
                         (src, dst, class_name, ioctl_or_nlmsg),
-                        tuple(ioctls),
+                        ioctls,
                     )
                     add_rule(rule)
 
@@ -297,7 +320,6 @@ class SourceRule(Rule):
                 rule = Rule(
                     parts[0],
                     (parts[1],),
-                    (),
                 )
                 add_rule(rule)
             case RuleType.TYPEATTRIBUTE.value:
@@ -308,7 +330,6 @@ class SourceRule(Rule):
                     rule = Rule(
                         parts[0],
                         (parts[1], t),
-                        (),
                     )
                     add_rule(rule)
             case RuleType.TYPE.value:
@@ -317,7 +338,6 @@ class SourceRule(Rule):
                 rule = Rule(
                     RuleType.TYPE.value,
                     (parts[1],),
-                    (),
                 )
                 add_rule(rule)
 
@@ -328,7 +348,6 @@ class SourceRule(Rule):
                     rule = Rule(
                         RuleType.TYPEATTRIBUTE.value,
                         (parts[1], t),
-                        (),
                     )
                     add_rule(rule)
             case RuleType.EXPANDATTRIBUTE.value:
@@ -339,7 +358,6 @@ class SourceRule(Rule):
                 rule = Rule(
                     parts[0],
                     (parts[1], parts[2]),
-                    (),
                 )
                 add_rule(rule)
             case _:

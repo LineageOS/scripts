@@ -22,9 +22,7 @@ from sepolicy.match import (
     match_macros_rules,
     merge_class_sets,
     merge_typeattribute_rules,
-    replace_ioctls,
     replace_macro_rules,
-    replace_perms,
 )
 from sepolicy.output import group_rules, output_grouped_rules
 from sepolicy.policy import (
@@ -132,26 +130,6 @@ def process_policy_post_split(
         policy.pretty_name,
     )
 
-    replace_perms(
-        rules,
-        source.classmap,
-        source.macros.perms,
-        policy.pretty_name,
-    )
-    replace_ioctls(
-        rules,
-        source.macros.ioctls,
-        source.macros.ioctl_defines,
-        policy.pretty_name,
-        is_nlmsg=False,
-    )
-    replace_ioctls(
-        rules,
-        source.macros.nlmsgs,
-        source.macros.nlmsg_defines,
-        policy.pretty_name,
-        is_nlmsg=True,
-    )
     merge_class_sets(
         rules,
         source.macros.class_sets,
@@ -170,7 +148,12 @@ def process_policy_post_split(
     output_genfs_contexts(genfs_rules, policy_output_dir)
 
     grouped_rules = group_rules(rules)
-    output_grouped_rules(grouped_rules, rule_matches, policy_output_dir)
+    output_grouped_rules(
+        grouped_rules,
+        rule_matches,
+        source=source,
+        output_dir=policy_output_dir,
+    )
 
 
 def process_policy_pre_split(

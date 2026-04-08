@@ -4,9 +4,10 @@
 from __future__ import annotations
 
 from collections import defaultdict
-from typing import DefaultDict, List, Set, Tuple
+from typing import DefaultDict, List, Optional, Tuple
 
 from sepolicy.rule import IOCTL_RULE_TYPES, Rule, rule_part
+from sepolicy.varargs import Ioctls
 
 
 def merge_ioctl_rules(rules: List[Rule]):
@@ -35,14 +36,18 @@ def merge_ioctl_rules(rules: List[Rule]):
 
         first_rule = same_rules[0]
 
-        varargs: Set[str] = set()
+        varargs: Optional[Ioctls] = None
         for rule in same_rules:
-            varargs.update(rule.varargs)
+            assert isinstance(rule.varargs, Ioctls)
+            if varargs is None:
+                varargs = rule.varargs
+            else:
+                varargs = varargs.merge(rule.varargs)
 
         new_rule = Rule(
             first_rule.rule_type,
             first_rule.parts,
-            tuple(varargs),
+            varargs,
         )
         new_rules.append(new_rule)
 

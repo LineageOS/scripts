@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import re
 from functools import partial
-from itertools import chain
 from typing import (
     Dict,
     FrozenSet,
@@ -17,7 +16,12 @@ from typing import (
 from sepolicy.classmap import Classmap
 from sepolicy.rule import Rule, flatten_parts, unpack_line
 from sepolicy.rules import split_normalize_rules_text
-from sepolicy.source_rule import SourceRule, format_ioctl_str, unpack_ioctls
+from sepolicy.source_rule import (
+    SourceRule,
+    trim_ioctl_str,
+    unpack_ioctls,
+)
+from sepolicy.varargs import Ioctls
 from utils.utils import Color, color_print
 
 MACRO_DEFINITION_START = 'define(`'
@@ -193,7 +197,7 @@ def parse_ioctls(
     is_nlmsg: bool,
 ):
     ioctl_type_name_cap = ioctl_type_name(is_nlmsg).capitalize()
-    decompiled_ioctls: List[Tuple[str, Set[str]]] = []
+    decompiled_ioctls: List[Tuple[str, Ioctls]] = []
 
     for name, text in ioctls:
         parts = unpack_line(
@@ -206,7 +210,7 @@ def parse_ioctls(
         )
         flattened_parts = list(flatten_parts(parts))
         try:
-            unpacked_ioctls = list(unpack_ioctls(flattened_parts))
+            unpacked_ioctls = unpack_ioctls(flattened_parts)
         except ValueError:
             color_print(
                 f'{ioctl_type_name_cap} macro {name} contains invalid ioctls: {text}',
@@ -214,8 +218,7 @@ def parse_ioctls(
             )
             continue
 
-        parts_set = set(chain.from_iterable(unpacked_ioctls))
-        decompiled_ioctls.append((name, parts_set))
+        decompiled_ioctls.append((name, unpacked_ioctls))
 
     return decompiled_ioctls
 
@@ -226,11 +229,11 @@ def parse_ioctl_defines(
     is_nlmsg: bool,
 ):
     ioctl_type_name_cap = ioctl_type_name(is_nlmsg).capitalize()
-    decompiled_ioctl_defines: Dict[str, str] = {}
+    decompiled_ioctl_defines: Dict[int, str] = {}
 
-    duplicate_ioctls: Set[str] = set()
+    duplicate_ioctls: Set[int] = set()
     for name, text in ioctl_defines:
-        value = format_ioctl_str(text)
+        value = trim_ioctl_str(text)
 
         if value not in decompiled_ioctl_defines:
             decompiled_ioctl_defines[value] = name

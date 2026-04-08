@@ -7,8 +7,6 @@ from collections import defaultdict
 from typing import DefaultDict, Dict, List, Optional, Set, Tuple
 
 from sepolicy.class_set import ClassSet
-from sepolicy.classmap import Classmap
-from sepolicy.macro import ioctl_type_name
 from sepolicy.match_template import (
     RuleTemplate,
     args_type,
@@ -19,14 +17,13 @@ from sepolicy.match_template import (
     rule_template_sort_key,
 )
 from sepolicy.rule import (
-    ALLOW_RULE_TYPES,
     CLASS_SETS_RULE_TYPES,
-    IOCTL_RULE_TYPES,
     Rule,
     RuleType,
     rule_hash_value,
 )
 from sepolicy.rule_container import RuleContainer
+from sepolicy.varargs import Types
 from utils.utils import Color, color_print
 
 
@@ -59,7 +56,7 @@ class RuleMatch:
         macro = self.__macro
         if macro is None:
             args = tuple(self.arg_values[k] for k in sorted(self.arg_values))
-            macro = Rule(self.macro_name, args, (), is_macro=True)
+            macro = Rule(self.macro_name, args, is_macro=True)
             self.__macro = macro
 
         return macro
@@ -338,7 +335,7 @@ def merge_typeattribute_rules(
     match_keys: Tuple[Optional[rule_hash_value], ...] = (
         RuleType.TYPE.value,
         None,
-        frozenset(),
+        None,
     )
 
     for rule in rules.match(match_keys):
@@ -354,7 +351,7 @@ def merge_typeattribute_rules(
         RuleType.TYPEATTRIBUTE.value,
         None,
         None,
-        frozenset(),
+        None,
     )
     for rule in rules.match(match_keys):
         t = rule.parts[0]
@@ -377,192 +374,12 @@ def merge_typeattribute_rules(
         new_rule = Rule(
             RuleType.TYPE.value,
             (t,),
-            tuple(values),
+            Types(values),
         )
         rules.add(new_rule)
 
     color_print(
         f'Merged {len(removed_rules)} typeattributes into {len(types)} types in {name}',
-        color=Color.GREEN,
-    )
-
-
-def replace_perms_set(
-    perms: List[Tuple[str, Set[str]]],
-    class_all_perms: Set[str],
-    rule_varargs_set: Set[str],
-):
-    if class_all_perms == rule_varargs_set:
-        return set(['*'])
-
-    varargs_set = rule_varargs_set
-    for name, caps in perms:
-        if caps <= varargs_set:
-            varargs_set = varargs_set - caps
-            varargs_set.add(name)
-            # TODO: find out if there are cases of multiple
-            # perms
-            break
-
-    return varargs_set
-
-
-def replace_type_perm(
-    rules: RuleContainer,
-    classmap: Classmap,
-    perms: List[Tuple[str, Set[str]]],
-    classes: List[str],
-    removed_rules: Set[Rule],
-    added_rules: Set[Rule],
-):
-    for rule_type in ALLOW_RULE_TYPES:
-        for c in classes:
-            match_tuple = (rule_type.value, None, None, c, None)
-            class_all_perms = set(classmap.class_perms(c))
-
-            for matched_rule in rules.match(match_tuple):
-                rule_varargs_set = set(matched_rule.varargs)
-                varargs_set = replace_perms_set(
-                    perms,
-                    class_all_perms,
-                    rule_varargs_set,
-                )
-
-                if varargs_set == rule_varargs_set:
-                    continue
-
-                new_rule = Rule(
-                    matched_rule.rule_type,
-                    matched_rule.parts,
-                    tuple(sorted(varargs_set)),
-                )
-                added_rules.add(new_rule)
-                removed_rules.add(matched_rule)
-
-
-def replace_perms(
-    rules: RuleContainer,
-    classmap: Classmap,
-    all_perms: List[Tuple[str, Set[str]]],
-    name: str,
-):
-    file_classes = list(classmap.class_types('file'))
-    dir_classes = list(classmap.class_types('dir'))
-    socket_classes = list(classmap.class_types('socket'))
-
-    file_perms: List[Tuple[str, Set[str]]] = []
-    dir_perms: List[Tuple[str, Set[str]]] = []
-    socket_perms: List[Tuple[str, Set[str]]] = []
-
-    for perm in all_perms:
-        perm_name = perm[0]
-
-        if '_file_' in perm_name:
-            file_perms.append(perm)
-        elif '_dir_' in perm_name:
-            dir_perms.append(perm)
-        elif '_socket_' in perm_name:
-            socket_perms.append(perm)
-        elif '_ipc_' in perm_name:
-            # _ipc_ perms are unused, don't bother
-            continue
-        else:
-            assert False, perm
-
-    removed_rules: Set[Rule] = set()
-    added_rules: Set[Rule] = set()
-
-    def _replace_type_perm(
-        perms: List[Tuple[str, Set[str]]],
-        classes: List[str],
-    ):
-        replace_type_perm(
-            rules,
-            classmap,
-            perms,
-            classes,
-            removed_rules,
-            added_rules,
-        )
-
-    _replace_type_perm(file_perms, file_classes)
-    _replace_type_perm(dir_perms, dir_classes)
-    _replace_type_perm(socket_perms, socket_classes)
-
-    for rule in removed_rules:
-        rules.remove(rule)
-
-    for rule in added_rules:
-        rules.add(rule)
-
-    color_print(
-        f'Replaced perm macros in {len(removed_rules)} rules in {name}',
-        color=Color.GREEN,
-    )
-
-
-def replace_ioctls(
-    rules: RuleContainer,
-    ioctls: List[Tuple[str, Set[str]]],
-    ioctl_defines: Dict[str, str],
-    name: str,
-    is_nlmsg: bool,
-):
-    removed_rules: Set[Rule] = set()
-    added_rules: Set[Rule] = set()
-
-    for rule_type in IOCTL_RULE_TYPES:
-        match_tuple = (rule_type.value, None, None, None, None, None)
-        for matched_rule in rules.match(match_tuple):
-            ioctl_rule_type = matched_rule.parts[3]
-            if ioctl_rule_type == 'ioctl':
-                if is_nlmsg:
-                    continue
-            elif ioctl_rule_type == 'nlmsg':
-                if not is_nlmsg:
-                    continue
-            else:
-                assert False, ioctl_rule_type
-
-            rule_varargs_set = set(matched_rule.varargs)
-
-            varargs_set = rule_varargs_set
-            for ioctl_name, values in ioctls:
-                if values <= varargs_set:
-                    varargs_set = varargs_set - values
-                    varargs_set.add(ioctl_name)
-
-            added_ioctls: Set[str] = set()
-            removed_ioctls: Set[str] = set()
-            for value in varargs_set:
-                if value in ioctl_defines:
-                    removed_ioctls.add(value)
-                    added_ioctls.add(ioctl_defines[value])
-
-            if added_ioctls or removed_ioctls:
-                varargs_set = varargs_set - removed_ioctls
-                varargs_set = varargs_set | added_ioctls
-
-            if varargs_set == rule_varargs_set:
-                continue
-
-            new_rule = Rule(
-                matched_rule.rule_type,
-                matched_rule.parts,
-                tuple(sorted(varargs_set)),
-            )
-            added_rules.add(new_rule)
-            removed_rules.add(matched_rule)
-
-    for rule in removed_rules:
-        rules.remove(rule)
-
-    for rule in added_rules:
-        rules.add(rule)
-
-    ioctl_type_name_str = ioctl_type_name(is_nlmsg)
-    color_print(
-        f'Replaced {ioctl_type_name_str} macros in {len(removed_rules)} rules in {name}',
         color=Color.GREEN,
     )
 
@@ -573,7 +390,7 @@ def merge_class_set_rule_type(
     class_sets: List[Tuple[str, Set[str]]],
 ):
     rules_dict: Dict[
-        Tuple[rule_hash_value, ...],
+        Tuple[Optional[rule_hash_value], ...],
         Tuple[Set[str], Set[Rule]],
     ] = {}
 
@@ -584,7 +401,7 @@ def merge_class_set_rule_type(
             matched_rule.rule_type,
             matched_rule.parts[0],
             matched_rule.parts[1],
-            matched_rule.varargs_hash_value,
+            matched_rule.varargs,
         )
         if key not in rules_dict:
             rules_dict[key] = (set(), set())

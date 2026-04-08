@@ -5,17 +5,18 @@ from __future__ import annotations
 
 import re
 from enum import StrEnum
-from typing import FrozenSet, Generator, List, Optional, Tuple, Union
+from typing import Dict, Generator, List, Optional, Set, Tuple, Union
 
 from sepolicy.class_set import ClassSet
 from sepolicy.conditional_type import ConditionalType
+from sepolicy.varargs import Ioctls, Perms, Types, TypeTransitionTag
 
 macro_argument_regex = re.compile(r'\$(\d+)')
 
 raw_part = Union[str, List['raw_part']]
 raw_parts_list = List[raw_part]
 rule_part = Union[str, ConditionalType, ClassSet]
-rule_hash_value = Union[rule_part, FrozenSet[str]]
+rule_hash_value = Union[rule_part, Perms, Ioctls, TypeTransitionTag, Types]
 
 
 def is_type_generated(part: rule_part):
@@ -145,16 +146,36 @@ def trim_contexts_label(t: str):
     return t[len(CONTEXTS_LABEL_START) : -len(CONTEXTS_LABEL_END)]
 
 
-def join_varargs(varargs: Tuple[str, ...]):
-    s = ' '.join(varargs)
+def get_class_name_perms(
+    class_name: Union[str, ClassSet],
+    class_perms: Optional[Dict[str, List[Tuple[str, Set[str]]]]] = None,
+):
+    if class_perms is None:
+        return None
 
-    if len(varargs) > 1:
-        s = '{ ' + s + ' }'
+    if isinstance(class_name, str):
+        return class_perms.get(class_name, None)
 
-    return s
+    class_name_perms = None
+    for cn in class_name:
+        cnp = class_perms.get(cn, None)
+        if class_name_perms is None:
+            class_name_perms = cnp
+        else:
+            if cnp != class_name_perms:
+                return None
+
+    return class_name_perms
 
 
-def format_rule(rule: Rule):
+def format_rule(
+    rule: Rule,
+    class_perms: Optional[Dict[str, List[Tuple[str, Set[str]]]]] = None,
+    ioctls: Optional[List[Tuple[str, Ioctls]]] = None,
+    ioctl_defines: Optional[Dict[int, str]] = None,
+    nlmsgs: Optional[List[Tuple[str, Ioctls]]] = None,
+    nlmsg_defines: Optional[Dict[int, str]] = None,
+):
     match rule.rule_type:
         case (
             RuleType.ALLOW
@@ -162,12 +183,24 @@ def format_rule(rule: Rule):
             | RuleType.AUDITALLOW
             | RuleType.DONTAUDIT
         ):
+            assert isinstance(rule.varargs, Perms)
+            assert isinstance(rule.parts[2], (str, ClassSet))
+
+            class_name = rule.parts[2]
+            class_name_perms = get_class_name_perms(
+                class_name,
+                class_perms,
+            )
+            perms_str = rule.varargs.format(
+                class_perms=class_name_perms,
+            )
+
             return '{} {} {}:{} {};'.format(
                 rule.rule_type,
                 rule.parts[0],
                 rule.parts[1],
                 rule.parts[2],
-                join_varargs(rule.varargs),
+                perms_str,
             )
         case (
             RuleType.ALLOWXPERM
@@ -175,27 +208,47 @@ def format_rule(rule: Rule):
             | RuleType.NEVERALLOWXPERM
             | RuleType.DONTAUDITXPERM
         ):
+            assert isinstance(rule.varargs, Ioctls)
+
+            if rule.parts[3] == 'ioctl':
+                varargs_str = rule.varargs.format(
+                    ioctls=ioctls,
+                    ioctl_defines=ioctl_defines,
+                )
+            elif rule.parts[3] == 'nlmsg':
+                varargs_str = rule.varargs.format(
+                    ioctls=nlmsgs,
+                    ioctl_defines=nlmsg_defines,
+                )
+            else:
+                assert False, rule
+
             return '{} {} {}:{} {} {};'.format(
                 rule.rule_type,
                 rule.parts[0],
                 rule.parts[1],
                 rule.parts[2],
                 rule.parts[3],
-                join_varargs(rule.varargs),
+                varargs_str,
             )
         case RuleType.TYPE:
-            varargs = sorted(rule.varargs)
-            assert isinstance(rule.parts[0], str)
-            parts = (rule.parts[0], *varargs)
-            parts_str = ', '.join(parts)
-            return '{} {};'.format(rule.rule_type, parts_str)
-        case RuleType.TYPE_TRANSITION:
-            assert len(rule.varargs) in [0, 1]
-
-            if len(rule.varargs) == 1:
-                name = f'{list(rule.varargs)[0]} '
+            if isinstance(rule.varargs, Types):
+                types_str = str(rule.varargs)
             else:
+                types_str = ''
+
+            return '{} {}{};'.format(
+                rule.rule_type,
+                rule.parts[0],
+                types_str,
+            )
+        case RuleType.TYPE_TRANSITION:
+            if isinstance(rule.varargs, TypeTransitionTag):
+                name = f'{rule.varargs} '
+            elif rule.varargs is None:
                 name = ''
+            else:
+                assert False
 
             return '{} {} {}:{} {}{};'.format(
                 rule.rule_type,
@@ -232,26 +285,46 @@ class Rule:
         self,
         rule_type: str,
         parts: Tuple[rule_part, ...],
-        varargs: Tuple[str, ...],
+        varargs: Optional[
+            Union[
+                Perms,
+                Ioctls,
+                TypeTransitionTag,
+                Types,
+            ]
+        ] = None,
         is_macro: bool = False,
     ):
         self.rule_type = rule_type
         self.parts = parts
-        self.varargs = tuple(sorted(varargs))
+        self.varargs = varargs
         self.is_macro = is_macro
-        self.varargs_hash_value = frozenset(varargs)
-        self.hash_values: Tuple[rule_hash_value, ...] = (
+        self.hash_values: Tuple[Optional[rule_hash_value], ...] = (
             self.rule_type,
             *self.parts,
-            frozenset(varargs),
+            varargs,
         )
-
-        # Postpone hash calculation so that ConditionalTypes are fully
-        # gathered and ConditionalTypeRedirect can find them
-        self.__hash: Optional[int] = None
+        self.__hash = hash(self.hash_values)
 
     def __str__(self):
         return format_rule(self)
+
+    def format(
+        self,
+        class_perms: Dict[str, List[Tuple[str, Set[str]]]],
+        ioctls: List[Tuple[str, Ioctls]],
+        ioctl_defines: Dict[int, str],
+        nlmsgs: List[Tuple[str, Ioctls]],
+        nlmsg_defines: Dict[int, str],
+    ):
+        return format_rule(
+            self,
+            class_perms=class_perms,
+            ioctls=ioctls,
+            ioctl_defines=ioctl_defines,
+            nlmsgs=nlmsgs,
+            nlmsg_defines=nlmsg_defines,
+        )
 
     def __eq__(self, other: object):
         assert isinstance(other, Rule)
@@ -259,9 +332,6 @@ class Rule:
         return self.hash_values == other.hash_values
 
     def __hash__(self):
-        if self.__hash is None:
-            self.__hash = hash(self.hash_values)
-
         return self.__hash
 
 
@@ -279,7 +349,20 @@ def rule_type_order(rule: Rule):
 
 
 def rule_sort_key(rule: Rule):
-    compare_values: List[Union[rule_part, Tuple[str, ...]]] = [
+    compare_values: List[
+        Union[
+            rule_part,
+            Tuple[str, ...],
+            Optional[
+                Union[
+                    Perms,
+                    Ioctls,
+                    TypeTransitionTag,
+                    Types,
+                ]
+            ],
+        ]
+    ] = [
         rule.rule_type,
         *rule.parts,
         rule.varargs,

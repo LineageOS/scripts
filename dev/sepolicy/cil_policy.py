@@ -17,6 +17,7 @@ from sepolicy.cil_rule import (
     CilSectionStart,
     unpack_cil_line,
 )
+from sepolicy.classmap import Classmap
 from sepolicy.conditional_type import ConditionalType
 from sepolicy.contexts import (
     parse_contexts_texts,
@@ -255,6 +256,7 @@ def _parse_cil_lines(
     rules: RuleContainer,
     genfs_rules: RuleContainer,
     conditional_types_map: Dict[str, ConditionalType],
+    classmap: Classmap,
     version: str,
     allowed_types: Optional[FrozenSet[str]] = None,
     disallowed_types: Optional[FrozenSet[str]] = None,
@@ -292,6 +294,7 @@ def _parse_cil_lines(
             disallowed_types=disallowed_types,
             add_rule=add_rule,
             add_genfs_rule=add_genfs_rule,
+            classmap=classmap,
             version=version,
         )
 
@@ -302,6 +305,7 @@ def parse_cil_lines(
     rules: RuleContainer,
     genfs_rules: RuleContainer,
     conditional_types_map: Dict[str, ConditionalType],
+    classmap: Classmap,
     version: str,
     name: str,
     verbose: bool,
@@ -324,7 +328,8 @@ def parse_cil_lines(
         rules,
         genfs_rules,
         conditional_types_map,
-        version,
+        classmap=classmap,
+        version=version,
         allowed_types=frozenset({CilRuleType.TYPEATTRIBUTESET}),
     )
 
@@ -333,7 +338,8 @@ def parse_cil_lines(
         rules,
         genfs_rules,
         conditional_types_map,
-        version,
+        classmap=classmap,
+        version=version,
         disallowed_types=frozenset({CilRuleType.TYPEATTRIBUTESET}),
     )
 
@@ -406,6 +412,7 @@ def read_cil_lines(
 def parse_dump_policy_rules(
     dump_root: Path,
     policy_type: PolicyType,
+    classmap: Classmap,
     verbose: bool,
 ):
     assert isinstance(policy_type.origin, PolicyDumpOrigin)
@@ -430,7 +437,8 @@ def parse_dump_policy_rules(
             rules,
             genfs_rules,
             conditional_types_map,
-            version,
+            classmap=classmap,
+            version=version,
             name=environment_type.pretty_name,
             verbose=verbose,
         )
@@ -441,7 +449,8 @@ def parse_dump_policy_rules(
         rules,
         genfs_rules,
         conditional_types_map,
-        version,
+        classmap=classmap,
+        version=version,
         name=policy_type.pretty_name,
         verbose=verbose,
     )
@@ -511,12 +520,13 @@ def parse_dump_policies(
             variables,
         )
 
-        source_index.get_source_policy(metadata)
+        source_policy = source_index.get_source_policy(metadata)
 
         rules, genfs_rules = parse_dump_policy_rules(
             dump_root,
             policy_type,
             verbose=verbose,
+            classmap=source_policy.classmap,
         )
         contexts = parse_dump_policy_contexts(
             dump_root,

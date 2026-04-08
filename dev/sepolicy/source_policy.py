@@ -39,6 +39,7 @@ from sepolicy.rule import Rule
 from sepolicy.rule_container import RuleContainer
 from sepolicy.rules import split_normalize_rules_text
 from sepolicy.source_rule import SourceRule
+from sepolicy.varargs import Ioctls
 from utils.frozendict import FrozenDict
 from utils.utils import android_root, read_texts, resolve_paths
 
@@ -64,17 +65,19 @@ class SourceMacrosText:
 
 @dataclass
 class SourceMacros:
-    perms: List[Tuple[str, Set[str]]]
+    class_perms: Dict[str, List[Tuple[str, Set[str]]]]
     class_sets: List[Tuple[str, Set[str]]]
-    ioctls: List[Tuple[str, Set[str]]]
-    nlmsgs: List[Tuple[str, Set[str]]]
-    ioctl_defines: Dict[str, str]
-    nlmsg_defines: Dict[str, str]
+    ioctls: List[Tuple[str, Ioctls]]
+    nlmsgs: List[Tuple[str, Ioctls]]
+    ioctl_defines: Dict[int, str]
+    nlmsg_defines: Dict[int, str]
     macros_name_rules: List[Tuple[str, List[Rule]]]
 
     def __repr__(self):
+        perms = set(t[0] for perms in self.class_perms.values() for t in perms)
+
         return (
-            f'perms: {len(self.perms)}\n'
+            f'perms: {len(perms)}\n'
             f'class sets: {len(self.class_sets)}\n'
             f'ioctls: {len(self.ioctls)}\n'
             f'nlmsgs: {len(self.nlmsgs)}\n'
@@ -284,6 +287,50 @@ def parse_source_contexts(
     return contexts, genfs_rules
 
 
+def group_perms_by_class(perms: List[Tuple[str, Set[str]]], classmap: Classmap):
+    # Sort longest perms first help the matching algorithm
+    perms.sort(key=lambda np: len(np[1]), reverse=True)
+
+    file_classes = list(classmap.class_types('file'))
+    dir_classes = list(classmap.class_types('dir'))
+    socket_classes = list(classmap.class_types('socket'))
+
+    file_perms: List[Tuple[str, Set[str]]] = []
+    dir_perms: List[Tuple[str, Set[str]]] = []
+    socket_perms: List[Tuple[str, Set[str]]] = []
+
+    for perm in perms:
+        perm_name = perm[0]
+
+        if '_file_' in perm_name:
+            file_perms.append(perm)
+        elif '_dir_' in perm_name:
+            dir_perms.append(perm)
+        elif '_socket_' in perm_name:
+            socket_perms.append(perm)
+        elif '_ipc_' in perm_name:
+            # _ipc_ perms are unused, don't bother
+            continue
+        else:
+            assert False, perm
+
+    class_perms: DefaultDict[
+        str,
+        List[Tuple[str, Set[str]]],
+    ] = defaultdict(list)
+
+    for class_name in file_classes:
+        class_perms[class_name] = file_perms
+
+    for class_name in dir_classes:
+        class_perms[class_name] = dir_perms
+
+    for class_name in socket_classes:
+        class_perms[class_name] = socket_perms
+
+    return class_perms
+
+
 def parse_source_macros(
     source_macros_text: SourceMacrosText,
     variables: FrozenDict[str, str],
@@ -370,6 +417,8 @@ def parse_source_macros(
     ) = categorize_macros(expanded_macros)
 
     source_perms = parse_perms(perms)
+    class_perms = group_perms_by_class(source_perms, classmap)
+
     source_class_sets = parse_perms(class_sets)
     source_ioctls = parse_ioctls(ioctl_macros, is_nlmsg=False)
     source_nlmsgs = parse_ioctls(nlmsg_macros, is_nlmsg=True)
@@ -387,7 +436,7 @@ def parse_source_macros(
     macros_name_rules = parse_macros(classmap, macros)
 
     return SourceMacros(
-        perms=source_perms,
+        class_perms=class_perms,
         class_sets=source_class_sets,
         ioctls=source_ioctls,
         nlmsgs=source_nlmsgs,

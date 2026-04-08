@@ -71,3 +71,6 @@ class Classmap:
 
     def class_perms(self, class_name: str):
         return self.__class_perms_map[class_name][:]
+
+    def class_perms_set(self, class_name: str):
+        return set(self.__class_perms_map[class_name])

@@ -11,6 +11,9 @@ class ClassSet:
         self.__hash_values = frozenset(values)
         self.__hash = hash(self.__hash_values)
 
+    def __iter__(self):
+        return iter(self.__values)
+
     def __eq__(self, other: object):
         if not isinstance(other, ClassSet):
             return False

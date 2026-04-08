@@ -158,7 +158,7 @@ add_policy_type(
             rules=(
                 # This rule is automatically added by
                 # external/selinux/libsepol/src/module_to_cil.c
-                Rule('attribute', ('cil_gen_require',), ()),
+                Rule('attribute', ('cil_gen_require',)),
             )
         ),
     )

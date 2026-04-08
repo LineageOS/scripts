@@ -377,7 +377,7 @@ def rule_template_match_keys(rule_template: RuleTemplate):
     parts[0] = rule_template.rule.rule_type
     for i, part in rule_template.literals:
         parts[i + 1] = part
-    parts[-1] = rule_template.rule.varargs_hash_value
+    parts[-1] = rule_template.rule.varargs
 
     return parts
 
@@ -670,7 +670,7 @@ def iter_rule_fill_arg_values(
     if matched_rule.rule_type != rule_template.rule.rule_type:
         return
 
-    if matched_rule.varargs_hash_value != rule_template.rule.varargs_hash_value:
+    if matched_rule.varargs != rule_template.rule.varargs:
         return
 
     if len(matched_rule.parts) != rule_template.num_parts:

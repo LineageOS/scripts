@@ -11,6 +11,8 @@ from typing import Dict, List, Optional, Set
 from sepolicy.match import RuleMatch
 from sepolicy.rule import Rule, RuleType, rule_sort_key, rule_type_order
 from sepolicy.rule_container import RuleContainer
+from sepolicy.source_policy import Source
+from sepolicy.varargs import Types
 
 
 @cache
@@ -49,6 +51,8 @@ def domain_type(rule: Rule):
 
 def rule_simple_type_name(rule: Rule):
     if rule.rule_type == RuleType.TYPE.value:
+        assert isinstance(rule.varargs, Types)
+
         if 'dev_type' in rule.varargs:
             return DEVICE_TYPE_RULES_NAME, False
         elif 'file_type' in rule.varargs or 'fs_type' in rule.varargs:
@@ -141,6 +145,7 @@ def rule_macro_sort_key(
 def output_grouped_rules(
     grouped_rules: Dict[str, Set[Rule]],
     rule_matches: List[RuleMatch],
+    source: Source,
     output_dir: Path,
 ):
     rule_matches_dict: Dict[Rule, List[Rule]] = {
@@ -165,5 +170,13 @@ def output_grouped_rules(
                 if last_type is not None and rule.rule_type != last_type:
                     o.write('\n')
                 last_type = rule.rule_type
-                o.write(str(rule))
+                o.write(
+                    rule.format(
+                        class_perms=source.macros.class_perms,
+                        ioctls=source.macros.ioctls,
+                        ioctl_defines=source.macros.ioctl_defines,
+                        nlmsgs=source.macros.nlmsgs,
+                        nlmsg_defines=source.macros.nlmsg_defines,
+                    )
+                )
                 o.write('\n')
