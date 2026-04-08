@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 from itertools import product
-from typing import Callable, List, Optional, Set
+from typing import Callable, List, Set
 
 from sepolicy.classmap import Classmap
 from sepolicy.conditional_type import ConditionalType
@@ -156,7 +156,7 @@ class SourceRule(Rule):
         cls,
         line: str,
         add_rule: Callable[[Rule], None],
-        classmap: Optional[Classmap],
+        classmap: Classmap,
     ):
         parts = unpack_line(
             line,
@@ -225,7 +225,6 @@ class SourceRule(Rule):
                 for src, dst, class_name in product(srcs, dsts, class_names):
                     class_varargs = varargs
                     if varargs == ['*'] or negative_varargs:
-                        assert classmap is not None
                         class_varargs = classmap.class_perms(class_name)
 
                     if negative_varargs:
