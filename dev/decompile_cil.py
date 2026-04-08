@@ -34,7 +34,7 @@ from sepolicy.policy import (
     get_hardcoded_policy,
 )
 from sepolicy.rule_container import RuleContainer
-from sepolicy.source_policy import Source, parse_source_policies
+from sepolicy.source_policy import Source, SourceIndex
 from utils.utils import Color, color_print
 
 
@@ -280,36 +280,26 @@ def decompile_cil():
     output_dir = Path(args.output)
     dump_dir = Path(args.dump)
 
-    hardcoded_policy_index = {p.name: p for p in get_hardcoded_policy()}
-
-    cil_policy_index = parse_dump_policies(dump_dir, verbose)
-    for policy in cil_policy_index.values():
-        print(f'Found policy: {policy}')
-        print()
-
-    cil_policy_metadatas = list(
-        set(
-            p.metadata
-            for p in cil_policy_index.values()
-            if p.metadata is not None
-        )
-    )
-    print(f'Found {len(cil_policy_metadatas)} distinct metadatas')
-
-    source_index = parse_source_policies(
-        cil_policy_metadatas,
-        extra_rules_paths,
-        extra_macros_paths,
+    source_index = SourceIndex(
+        extra_rules_paths=extra_rules_paths,
+        extra_macros_paths=extra_macros_paths,
         current=current_policy,
         verbose=verbose,
     )
+
+    hardcoded_policy_index = {p.name: p for p in get_hardcoded_policy()}
+
+    cil_policy_index = parse_dump_policies(dump_dir, source_index, verbose)
+    for policy in cil_policy_index.values():
+        print(f'Found policy: {policy}')
+        print()
 
     shutil.rmtree(output_dir, ignore_errors=True)
     output_dir.mkdir(parents=True, exist_ok=True)
 
     for policy in cil_policy_index.values():
         assert policy.metadata is not None
-        source = source_index[policy.metadata]
+        source = source_index.get_source_policy(policy.metadata)
         policy_index = (
             cil_policy_index | hardcoded_policy_index | source.policy_index
         )

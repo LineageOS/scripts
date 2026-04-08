@@ -36,6 +36,7 @@ from sepolicy.policy import (
 )
 from sepolicy.rule import Rule, raw_parts_list
 from sepolicy.rule_container import RuleContainer
+from sepolicy.source_policy import SourceIndex
 from utils.frozendict import FrozenDict
 from utils.utils import read_texts, resolve_paths
 
@@ -482,7 +483,11 @@ def parse_dump_policy_contexts(
     return contexts
 
 
-def parse_dump_policies(dump_root: Path, verbose: bool):
+def parse_dump_policies(
+    dump_root: Path,
+    source_index: SourceIndex,
+    verbose: bool,
+):
     policy_index: Dict[PolicyName, Policy] = {}
 
     for policy_type in get_policy_types_by_origin(PolicyDumpOrigin):
@@ -494,6 +499,19 @@ def parse_dump_policies(dump_root: Path, verbose: bool):
             dump_root,
             policy_type.origin.version_source,
         )
+
+        variables = parse_dump_policy_variables(
+            dump_root,
+            version=version,
+            partition=partition,
+        )
+
+        metadata = PolicyMetadata(
+            version,
+            variables,
+        )
+
+        source_index.get_source_policy(metadata)
 
         rules, genfs_rules = parse_dump_policy_rules(
             dump_root,
@@ -507,21 +525,13 @@ def parse_dump_policies(dump_root: Path, verbose: bool):
             name=policy_type.pretty_name,
             verbose=verbose,
         )
-        variables = parse_dump_policy_variables(
-            dump_root,
-            version=version,
-            partition=partition,
-        )
 
         policy = Policy(
             policy_type.name,
             rules,
             genfs_rules,
             contexts,
-            metadata=PolicyMetadata(
-                version,
-                variables,
-            ),
+            metadata=metadata,
         )
 
         policy_index[policy_type.name] = policy

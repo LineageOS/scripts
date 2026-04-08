@@ -533,27 +533,41 @@ def parse_metadata_source_policies(
     )
 
 
-def parse_source_policies(
-    metadatas: List[PolicyMetadata],
-    extra_rules_paths: List[Path],
-    extra_macros_paths: List[Path],
-    current: bool,
-    verbose: bool,
-):
-    source_index: DefaultDict[PolicyMetadata, Source] = defaultdict()
-    version_macros_text_map: Dict[str, SourceMacrosText] = {}
-    versions = sorted(set(m.version for m in metadatas))
+class SourceIndex:
+    def __init__(
+        self,
+        extra_rules_paths: List[Path],
+        extra_macros_paths: List[Path],
+        current: bool,
+        verbose: bool,
+    ):
+        self.__extra_rules_paths = extra_rules_paths
+        self.__extra_macros_paths = extra_macros_paths
+        self.__current = current
+        self.__verbose = verbose
 
-    for version in versions:
-        version_macros_text_map[version] = read_source_macros_text(
-            extra_macros_paths,
+        self.__version_macros_text_map: Dict[str, SourceMacrosText] = {}
+        self.__source_index: DefaultDict[PolicyMetadata, Source] = defaultdict()
+
+    def __load_texts(self, version: str):
+        if version in self.__version_macros_text_map:
+            return self.__version_macros_text_map[version]
+
+        version_macros_text = read_source_macros_text(
+            self.__extra_macros_paths,
             version,
-            current,
-            verbose,
+            self.__current,
+            self.__verbose,
         )
+        self.__version_macros_text_map[version] = version_macros_text
 
-    for metadata in metadatas:
-        if verbose:
+        return version_macros_text
+
+    def get_source_policy(self, metadata: PolicyMetadata):
+        if metadata in self.__source_index:
+            return self.__source_index[metadata]
+
+        if self.__verbose:
             print(
                 f'Loading source policies for metadata version: '
                 f'{metadata.version}'
@@ -562,20 +576,20 @@ def parse_source_policies(
             for k, v in metadata.variables.items():
                 print(f'{k}={v}')
 
-        source_macros_text = version_macros_text_map[metadata.version]
+        source_macros_text = self.__load_texts(metadata.version)
 
         classmap = parse_source_classmap(
             source_macros_text,
             metadata,
-            current=current,
-            verbose=verbose,
+            current=self.__current,
+            verbose=self.__verbose,
         )
 
         macros = parse_source_macros(
             source_macros_text,
             metadata.variables,
             classmap,
-            verbose=verbose,
+            verbose=self.__verbose,
         )
 
         print(f'Found macros:\n{macros}')
@@ -585,23 +599,25 @@ def parse_source_policies(
             assert isinstance(policy_type.origin, PolicySourceOrigin)
 
             policy = parse_metadata_source_policies(
-                extra_rules_paths,
+                self.__extra_rules_paths,
                 policy_type,
                 metadata,
                 source_macros_text,
                 classmap,
-                current=current,
-                verbose=verbose,
+                current=self.__current,
+                verbose=self.__verbose,
             )
 
             policy_index[policy_type.name] = policy
 
             print(f'Found policy: {policy}')
 
-        source_index[metadata] = Source(
+        source = Source(
             macros,
             classmap,
             policy_index,
         )
 
-    return source_index
+        self.__source_index[metadata] = source
+
+        return source
