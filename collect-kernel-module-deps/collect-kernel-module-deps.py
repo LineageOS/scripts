@@ -4,12 +4,14 @@ import sys
 import subprocess
 import argparse
 
-def find_module_path(build_dir, module_name):
-    """Search for a .ko file under build_dir matching module_name."""
+def build_module_index(build_dir):
+    """Build a mapping from module filename to full path."""
+    module_index = {}
     for root, _, files in os.walk(build_dir):
-        if module_name in files:
-            return os.path.join(root, module_name)
-    return None
+        for f in files:
+            if f.endswith(".ko"):
+                module_index[f] = os.path.join(root, f)
+    return module_index
 
 def get_module_dependencies(mod_path):
     """Return a list of dependencies for the given module using modinfo."""
@@ -26,8 +28,7 @@ def get_module_dependencies(mod_path):
         sys.stderr.write(f"Warning: failed to get dependencies for {mod_path}: {e}\n")
         return []
 
-def collect_all_dependencies(build_dir, module_name, visited=None):
-    """Recursively collect all dependencies for the given module."""
+def collect_all_dependencies(module_index, module_name, visited=None):
     if visited is None:
         visited = set()
 
@@ -41,9 +42,9 @@ def collect_all_dependencies(build_dir, module_name, visited=None):
     if module_name in visited:
         return visited
 
-    mod_path = find_module_path(build_dir, module_name)
+    mod_path = module_index.get(module_name)
     if not mod_path:
-        sys.stderr.write(f"Warning: module {module_name} not found in {build_dir}\n")
+        sys.stderr.write(f"Warning: module {module_name} not found\n")
         return visited
 
     visited.add(module_name)
@@ -51,10 +52,9 @@ def collect_all_dependencies(build_dir, module_name, visited=None):
     for dep in get_module_dependencies(mod_path):
         dep_name = dep.strip()
         if dep_name:
-            # modinfo often returns just 'name', we need to check for 'name.ko'
             if not dep_name.endswith(".ko"):
                 dep_name += ".ko"
-            collect_all_dependencies(build_dir, dep_name, visited)
+            collect_all_dependencies(module_index, dep_name, visited)
 
     return visited
 
@@ -87,9 +87,11 @@ def main():
         if not args.non_interactive:
             print("\n--- End of input. Processing dependencies... ---\n", file=sys.stderr)
 
+    module_index = build_module_index(args.build_dir)
+
     all_deps = set()
     for mod in input_modules:
-        all_deps |= collect_all_dependencies(args.build_dir, mod)
+        all_deps |= collect_all_dependencies(module_index, mod)
 
     # Normalize input module names (with .ko suffix) for subtraction
     input_mods_normalized = set(m if m.endswith(".ko") else m + ".ko" for m in input_modules)
