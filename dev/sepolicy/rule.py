@@ -35,35 +35,53 @@ def unpack_line(
 ) -> raw_parts_list:
     stack: List[raw_parts_list] = []
     current: raw_parts_list = []
-    token = ''
-
-    def add_token():
-        nonlocal token
-
-        if token:
-            current.append(token)
-            token = ''
 
     if open_by_default:
         rule = f'{open_char}{rule}{close_char}'
 
-    for c in rule:
+    stack_append = stack.append
+    stack_pop = stack.pop
+
+    i = 0
+    n = len(rule)
+    while i < n:
+        c = rule[i]
+
         if c in ignored_chars:
+            i += 1
             continue
 
         if c == open_char:
-            add_token()
-            stack.append(current)
+            stack_append(current)
             current = []
-        elif c == close_char:
-            add_token()
-            last = stack.pop()
+            i += 1
+            continue
+
+        if c == close_char:
+            last = stack_pop()
             last.append(current)
             current = last
-        elif c in separators:
-            add_token()
-        else:
-            token += c
+            i += 1
+            continue
+
+        if c in separators:
+            i += 1
+            continue
+
+        start = i
+        i += 1
+        while i < n:
+            c = rule[i]
+            if (
+                c == open_char
+                or c == close_char
+                or c in separators
+                or c in ignored_chars
+            ):
+                break
+            i += 1
+
+        current.append(rule[start:i])
 
     assert isinstance(current[0], list)
 
