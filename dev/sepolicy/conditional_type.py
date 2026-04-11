@@ -13,12 +13,10 @@ class ConditionalType:
         self.__positive_set = frozenset(positive)
         self.__negative_set = frozenset(negative)
         self.__is_all = is_all
-        self.__hash_values = tuple(
-            [
-                self.__positive_set,
-                self.__negative_set,
-                is_all,
-            ],
+        self.__hash_values = (
+            self.__positive_set,
+            self.__negative_set,
+            is_all,
         )
         self.__hash = hash(self.__hash_values)
 
