@@ -602,15 +602,18 @@ def merge_class_set_rule_type(
         if len(matched_classes) == 1:
             continue
 
-        new_classes = matched_classes
+        names: Set[str] = set()
+        remaining_classes = matched_classes
         for name, classes in class_sets:
-            if classes <= new_classes:
-                new_classes = new_classes - classes
-                new_classes.add(name)
+            if classes <= remaining_classes:
+                remaining_classes = remaining_classes - classes
+                names.add(name)
 
         for rule in matched_rules:
             rules.remove(rule)
             removed_rules += 1
+
+        names = names | remaining_classes
 
         matched_rule = next(iter(matched_rules))
         new_rule = Rule(
@@ -619,7 +622,7 @@ def merge_class_set_rule_type(
                 [
                     matched_rule.parts[0],
                     matched_rule.parts[1],
-                    ClassSet(sorted(new_classes)),
+                    ClassSet(sorted(names), sorted(matched_classes)),
                 ]
             ),
             matched_rule.varargs,
