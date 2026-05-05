@@ -129,8 +129,6 @@ class RuleContainer:
     def match(self, keys: Sequence[Hashable]) -> Iterator[Rule]:
         assert self.__sparse_match
 
-        keys = tuple(keys)
-
         levels = len(keys)
         levels_data = self.__data.get(levels)
         if levels_data is None:
