@@ -6,7 +6,15 @@ from __future__ import annotations
 import json
 from functools import cache
 from pathlib import Path
-from typing import Dict, FrozenSet, List, Optional, Set, Tuple, Union
+from typing import (
+    Dict,
+    FrozenSet,
+    List,
+    Optional,
+    Set,
+    Tuple,
+    Union,
+)
 
 from sepolicy.cil_rule import (
     CIL_COMMENT_LINE_END_MARKER,
@@ -32,7 +40,6 @@ from sepolicy.policy import (
     PolicyName,
     PolicyType,
     PolicyVersionSource,
-    get_policy_type_by_name,
     get_policy_types_by_origin,
 )
 from sepolicy.rule import Rule, raw_parts_list
@@ -256,6 +263,7 @@ def _parse_cil_lines(
     rules: RuleContainer,
     genfs_rules: RuleContainer,
     conditional_types_map: Dict[str, ConditionalType],
+    reference_conditional_types_maps: List[Dict[str, ConditionalType]],
     classmap: Classmap,
     version: str,
     allowed_types: Optional[FrozenSet[str]] = None,
@@ -290,6 +298,7 @@ def _parse_cil_lines(
             text,
             parts,
             conditional_types_map=conditional_types_map,
+            reference_conditional_types_maps=reference_conditional_types_maps,
             allowed_types=allowed_types,
             disallowed_types=disallowed_types,
             add_rule=add_rule,
@@ -305,6 +314,7 @@ def parse_cil_lines(
     rules: RuleContainer,
     genfs_rules: RuleContainer,
     conditional_types_map: Dict[str, ConditionalType],
+    reference_conditional_types_maps: List[Dict[str, ConditionalType]],
     classmap: Classmap,
     version: str,
     name: str,
@@ -328,6 +338,7 @@ def parse_cil_lines(
         rules,
         genfs_rules,
         conditional_types_map,
+        reference_conditional_types_maps,
         classmap=classmap,
         version=version,
         allowed_types=frozenset({CilRuleType.TYPEATTRIBUTESET}),
@@ -338,6 +349,7 @@ def parse_cil_lines(
         rules,
         genfs_rules,
         conditional_types_map,
+        reference_conditional_types_maps,
         classmap=classmap,
         version=version,
         disallowed_types=frozenset({CilRuleType.TYPEATTRIBUTESET}),
@@ -410,9 +422,11 @@ def read_cil_lines(
 
 
 def parse_dump_policy_rules(
+    policy_index: Dict[PolicyName, Policy],
     dump_root: Path,
     policy_type: PolicyType,
     classmap: Classmap,
+    conditional_types_maps: Dict[PolicyName, Dict[str, ConditionalType]],
     verbose: bool,
 ):
     assert isinstance(policy_type.origin, PolicyDumpOrigin)
@@ -422,26 +436,20 @@ def parse_dump_policy_rules(
         policy_type.origin.version_source,
     )
 
-    conditional_types_map: Dict[str, ConditionalType] = {}
-
     genfs_rules = RuleContainer()
     rules = RuleContainer(sparse_match=True)
+    conditional_types_map: Dict[str, ConditionalType] = {}
+    reference_conditional_types_maps: List[Dict[str, ConditionalType]] = []
 
     for environment_name in policy_type.origin.needed_policy or ():
-        environment_type = get_policy_type_by_name(environment_name)
-        assert isinstance(environment_type.origin, PolicyDumpOrigin)
+        assert environment_name in policy_index
+        environment_policy = policy_index[environment_name]
 
-        parse_cil_lines(
-            dump_root,
-            environment_type.origin,
-            rules,
-            genfs_rules,
-            conditional_types_map,
-            classmap=classmap,
-            version=version,
-            name=environment_type.pretty_name,
-            verbose=verbose,
-        )
+        rules.add_many(environment_policy.rules)
+        reference_conditional_types_map = conditional_types_maps[
+            environment_name
+        ]
+        reference_conditional_types_maps.append(reference_conditional_types_map)
 
     parse_cil_lines(
         dump_root,
@@ -449,13 +457,14 @@ def parse_dump_policy_rules(
         rules,
         genfs_rules,
         conditional_types_map,
+        reference_conditional_types_maps,
         classmap=classmap,
         version=version,
         name=policy_type.pretty_name,
         verbose=verbose,
     )
 
-    return rules, genfs_rules
+    return rules, genfs_rules, conditional_types_map
 
 
 def parse_dump_policy_contexts(
@@ -497,6 +506,7 @@ def parse_dump_policies(
     source_index: SourceIndex,
     verbose: bool,
 ):
+    conditional_types_maps: Dict[PolicyName, Dict[str, ConditionalType]] = {}
     policy_index: Dict[PolicyName, Policy] = {}
 
     for policy_type in get_policy_types_by_origin(PolicyDumpOrigin):
@@ -522,12 +532,15 @@ def parse_dump_policies(
 
         source_policy = source_index.get_source_policy(metadata)
 
-        rules, genfs_rules = parse_dump_policy_rules(
+        rules, genfs_rules, conditional_types_map = parse_dump_policy_rules(
+            policy_index,
             dump_root,
             policy_type,
-            verbose=verbose,
             classmap=source_policy.classmap,
+            conditional_types_maps=conditional_types_maps,
+            verbose=verbose,
         )
+
         contexts = parse_dump_policy_contexts(
             dump_root,
             partition=partition,
@@ -545,6 +558,7 @@ def parse_dump_policies(
         )
 
         policy_index[policy_type.name] = policy
+        conditional_types_maps[policy_type.name] = conditional_types_map
 
         print(f'Found policy: {policy}')
 

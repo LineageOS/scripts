@@ -228,6 +228,21 @@ def unpack_cil_line(line: str):
     return parts
 
 
+def conditional_type_by_name(
+    conditional_types_map: Dict[str, ConditionalType],
+    reference_conditional_types_maps: List[Dict[str, ConditionalType]],
+    name: str,
+):
+    if name in conditional_types_map:
+        return conditional_types_map[name]
+
+    for m in reference_conditional_types_maps:
+        if name in m:
+            return m[name]
+
+    assert False, f'Failed to find conditional type: {name}'
+
+
 class CilRule(Rule):
     @classmethod
     def from_line(
@@ -235,6 +250,7 @@ class CilRule(Rule):
         line: str,
         parts: raw_parts_list,
         conditional_types_map: Dict[str, ConditionalType],
+        reference_conditional_types_maps: List[Dict[str, ConditionalType]],
         add_rule: Callable[[Rule], None],
         add_genfs_rule: Optional[Callable[[Rule], None]],
         version: Optional[str],
@@ -283,11 +299,19 @@ class CilRule(Rule):
 
                 src = parts[1].removesuffix(version_suffix)
                 if is_type_generated(src):
-                    src = conditional_types_map[src]
+                    src = conditional_type_by_name(
+                        conditional_types_map,
+                        reference_conditional_types_maps,
+                        src,
+                    )
 
                 dst = parts[2].removesuffix(version_suffix)
                 if is_type_generated(dst):
-                    dst = conditional_types_map[dst]
+                    dst = conditional_type_by_name(
+                        conditional_types_map,
+                        reference_conditional_types_maps,
+                        dst,
+                    )
 
                 class_name = parts[3][0]
 
@@ -326,11 +350,19 @@ class CilRule(Rule):
 
                 src = parts[1].removesuffix(version_suffix)
                 if is_type_generated(src):
-                    src = conditional_types_map[src]
+                    src = conditional_type_by_name(
+                        conditional_types_map,
+                        reference_conditional_types_maps,
+                        src,
+                    )
 
                 dst = parts[2].removesuffix(version_suffix)
                 if is_type_generated(dst):
-                    dst = conditional_types_map[dst]
+                    dst = conditional_type_by_name(
+                        conditional_types_map,
+                        reference_conditional_types_maps,
+                        dst,
+                    )
 
                 if rule_type == CilRuleType.ALLOWX.value:
                     rule_type = RuleType.ALLOWXPERM.value
@@ -441,11 +473,19 @@ class CilRule(Rule):
 
                 src = parts[1].removesuffix(version_suffix)
                 if is_type_generated(src):
-                    src = conditional_types_map[src]
+                    src = conditional_type_by_name(
+                        conditional_types_map,
+                        reference_conditional_types_maps,
+                        src,
+                    )
 
                 dst = parts[2].removesuffix(version_suffix)
                 if is_type_generated(dst):
-                    dst = conditional_types_map[dst]
+                    dst = conditional_type_by_name(
+                        conditional_types_map,
+                        reference_conditional_types_maps,
+                        dst,
+                    )
 
                 rule = Rule(
                     RuleType.TYPE_TRANSITION.value,

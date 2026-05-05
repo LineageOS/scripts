@@ -506,6 +506,7 @@ def parse_source_cil_rules(
             line,
             parts,
             conditional_types_map={},
+            reference_conditional_types_maps=[],
             add_rule=add_rule,
             add_genfs_rule=None,
             version=None,
