@@ -243,7 +243,7 @@ class SourceRule(Rule):
                     class_perms_set = classmap.class_perms_set(class_name)
                     if negative_varargs:
                         assert varargs is not None
-                        class_varargs = class_perms_set
+                        class_varargs = class_perms_set.copy()
                         for v in varargs:
                             class_varargs.remove(v)
                         class_is_all = False
