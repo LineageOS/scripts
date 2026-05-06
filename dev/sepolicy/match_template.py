@@ -128,7 +128,6 @@ class RuleTemplate:
     rule: Rule
     literals: Tuple[Tuple[int, rule_part], ...]
     templates: Tuple[Tuple[int, PartTemplate], ...]
-    arg_indices: FrozenSet[int]
 
     @property
     def num_parts(self):
@@ -136,7 +135,12 @@ class RuleTemplate:
 
     @property
     def arity(self):
-        return max(self.arg_indices, default=0)
+        max_i = 0
+        for _, t in self.templates:
+            for i in t.arg_indices:
+                if i > max_i:
+                    max_i = i
+        return max_i
 
 
 def compile_single_value_template(value: str):
@@ -380,21 +384,19 @@ def compile_rule_template(rule: Rule):
         rule=rule,
         literals=tuple(literals),
         templates=tuple(templates),
-        arg_indices=frozenset(arg_indices),
     )
 
 
 def fill_rule_template(rule_template: RuleTemplate, arg_values: ArgValues):
     literals: List[Tuple[int, rule_part]] = list(rule_template.literals)
     templates: List[Tuple[int, PartTemplate]] = []
-    remaining_arg_indices: Set[int] = set()
 
     for i, part in rule_template.templates:
         has_missing = False
         for arg_index in part.arg_indices:
             if not arg_values.has(arg_index):
                 has_missing = True
-                remaining_arg_indices.add(arg_index)
+                break
 
         if has_missing:
             templates.append((i, part))
@@ -423,7 +425,6 @@ def fill_rule_template(rule_template: RuleTemplate, arg_values: ArgValues):
         rule=rule_template.rule,
         literals=tuple(literals),
         templates=tuple(templates),
-        arg_indices=frozenset(remaining_arg_indices),
     )
 
 
@@ -729,5 +730,5 @@ def iter_rule_fill_arg_values(
 def rule_template_sort_key(rule_template: RuleTemplate):
     return (
         len(rule_template.literals),
-        len(rule_template.arg_indices),
+        rule_template.arity,
     )
