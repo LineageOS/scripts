@@ -388,7 +388,7 @@ def merge_typeattribute_rules(
 
 def merge_class_set_rule_type(
     rules: RuleContainer,
-    rule_type: RuleType,
+    rule_type: str,
     class_sets: List[Tuple[str, Set[str]]],
 ):
     rules_dict: Dict[

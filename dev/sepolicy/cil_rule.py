@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from enum import StrEnum
 from typing import Callable, Dict, FrozenSet, List, Optional, Set, Tuple, cast
 
 from sepolicy.classmap import Classmap
@@ -172,7 +171,7 @@ def unpack_ioctls(parts: raw_parts_list):
     return Ioctls(ranges)
 
 
-class CilRuleType(StrEnum):
+class CilRuleType:
     ALLOWX = 'allowx'
     AUDITALLOWX = 'auditallowx'
     NEVERALLOWX = 'neverallowx'

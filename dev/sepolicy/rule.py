@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import re
-from enum import StrEnum
 from typing import (
     Dict,
     FrozenSet,
@@ -112,7 +111,7 @@ def flatten_parts(parts: raw_part) -> Generator[str, None, None]:
             yield part
 
 
-class RuleType(StrEnum):
+class RuleType:
     ALLOW = 'allow'
     ALLOWXPERM = 'allowxperm'
     ATTRIBUTE = 'attribute'
