@@ -62,8 +62,10 @@ class RuleContainer:
 
     def add(self, value: Rule):
         keys = value.hash_values
-        if value in self.__all_data:
-            assert self.__all_data[value] == keys, value
+
+        existing = self.__all_data.get(value)
+        if existing is not None:
+            assert existing == keys
             return
 
         self.__all_data[value] = keys
