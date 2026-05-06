@@ -342,8 +342,6 @@ def rule_type_order(rule: Rule):
         return -2
     elif rule.rule_type == RuleType.TYPEATTRIBUTE:
         return -1
-    elif rule.is_macro:
-        return 0
     else:
         return 1
 
@@ -368,4 +366,4 @@ def rule_sort_key(rule: Rule):
         rule.varargs,
     ]
 
-    return (rule_type_order(rule), *(str(h) for h in compare_values))
+    return tuple(str(h) for h in compare_values)

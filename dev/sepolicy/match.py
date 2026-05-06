@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
-from typing import DefaultDict, Dict, List, Optional, Set, Tuple
+from typing import DefaultDict, Dict, FrozenSet, List, Optional, Set, Tuple
 
 from sepolicy.class_set import ClassSet
 from sepolicy.match_template import (
@@ -31,11 +31,11 @@ class RuleMatch:
     def __init__(
         self,
         macro_name: str,
-        rules: Optional[List[Rule]] = None,
+        rules: Optional[FrozenSet[Rule]] = None,
         arg_values: Optional[args_type] = None,
     ):
         if rules is None:
-            rules = []
+            rules = frozenset()
         if arg_values is None:
             arg_values = {}
 
@@ -46,7 +46,7 @@ class RuleMatch:
         self.__hash_values = (
             self.macro_name,
             frozenset(self.arg_values.items()),
-            frozenset(rules),
+            rules,
         )
         self.__hash = hash(self.__hash_values)
         self.__macro: Optional[Rule] = None
@@ -90,7 +90,7 @@ def match_macro_rule(
     if rule_index == len(macro_rule_templates):
         rule_match = RuleMatch(
             macro_name,
-            macro_rules.copy(),
+            frozenset(macro_rules),
             macro_arg_values,
         )
         results.append(rule_match)
@@ -257,15 +257,12 @@ def discard_rule_matches(
                 print(candidate)
             print()
 
-        rules_set = set(rule_match.rules)
         discarded = False
         for candidate in candidate_supersets:
-            candidate_rules_set = set(candidate.rules)
-
-            if candidate_rules_set < rules_set:
+            if candidate.rules < rule_match.rules:
                 continue
 
-            if rules_set == candidate_rules_set and len(
+            if rule_match.rules == candidate.rules and len(
                 rule_match.arg_values
             ) < len(candidate.arg_values):
                 continue

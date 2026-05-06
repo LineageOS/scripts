@@ -6,10 +6,17 @@ from __future__ import annotations
 import re
 from functools import cache, partial
 from pathlib import Path
-from typing import Dict, List, Optional, Set
+from typing import Dict, FrozenSet, List, Optional, Set
 
+from sepolicy.conditional_type import ConditionalType
 from sepolicy.match import RuleMatch
-from sepolicy.rule import Rule, RuleType, rule_sort_key, rule_type_order
+from sepolicy.rule import (
+    Rule,
+    RuleType,
+    rule_part,
+    rule_sort_key,
+    rule_type_order,
+)
 from sepolicy.rule_container import RuleContainer
 from sepolicy.source_policy import Source
 from sepolicy.varargs import Types
@@ -125,21 +132,131 @@ def group_rules(rules: RuleContainer):
     return regrouped_rules
 
 
+def _rule_used_types(rule: Rule, used_types: Set[str]):
+    def handle_type(t: rule_part):
+        if isinstance(t, str):
+            used_types.add(t)
+        elif isinstance(t, ConditionalType):
+            for p in t.positive:
+                used_types.add(p)
+            for n in t.negative:
+                used_types.add(n)
+
+    match rule.rule_type:
+        case (
+            RuleType.ALLOW.value
+            | RuleType.NEVERALLOW.value
+            | RuleType.AUDITALLOW.value
+            | RuleType.DONTAUDIT.value
+            | RuleType.ALLOWXPERM.value
+            | RuleType.NEVERALLOWXPERM.value
+            | RuleType.AUDITALLOWXPERM.value
+            | RuleType.DONTAUDITXPERM.value
+            | RuleType.TYPE_TRANSITION.value
+        ):
+            handle_type(rule.parts[0])
+            handle_type(rule.parts[1])
+        case RuleType.GENFSCON.value:
+            handle_type(rule.parts[2])
+        case RuleType.TYPE.value | RuleType.TYPEATTRIBUTE.value:
+            pass
+        case RuleType.ATTRIBUTE.value | RuleType.EXPANDATTRIBUTE.value:
+            # TODO: figure out if these should be taken into account
+            pass
+        case _:
+            assert False, rule
+
+
+def rule_used_types(
+    rule_matches_dict: Dict[Rule, FrozenSet[Rule]],
+    rule: Rule,
+):
+    used_types: Set[str] = set()
+
+    if rule.is_macro:
+        for r in rule_matches_dict[rule]:
+            _rule_used_types(r, used_types)
+    else:
+        _rule_used_types(rule, used_types)
+
+    return used_types
+
+
+def _rule_defined_types(
+    rule: Rule,
+    defined_types: Set[str],
+):
+    if rule.rule_type != RuleType.TYPE.value:
+        return None
+
+    assert isinstance(rule.parts[0], str)
+    defined_types.add(rule.parts[0])
+
+
+def rule_defined_types(
+    rule_matches_dict: Dict[Rule, FrozenSet[Rule]],
+    rule: Rule,
+):
+    defined_types: Set[str] = set()
+
+    if rule.is_macro:
+        for r in rule_matches_dict[rule]:
+            _rule_defined_types(r, defined_types)
+    else:
+        _rule_defined_types(rule, defined_types)
+
+    return defined_types
+
+
 def rule_macro_sort_key(
-    rule_matches_dict: Dict[Rule, List[Rule]],
+    rule_matches_dict: Dict[Rule, FrozenSet[Rule]],
     rule: Rule,
 ):
     key = rule_sort_key(rule)
 
-    # TODO: improve this
-    if rule.is_macro:
-        for r in rule_matches_dict[rule]:
-            order = rule_type_order(r)
-            if order < 0:
-                key = (order, *key[1:])
-                break
+    if not rule.is_macro:
+        min_order = rule_type_order(rule)
+        return (min_order, key)
 
-    return key
+    min_order = 0
+
+    for r in rule_matches_dict[rule]:
+        order = rule_type_order(r)
+        if order < min_order:
+            min_order = order
+
+    return (min_order, key)
+
+
+def enforce_type_decl_order(
+    rule_matches_dict: Dict[Rule, FrozenSet[Rule]],
+    rules: List[Rule],
+):
+    type_rules: Dict[str, Rule] = {}
+
+    for rule in rules:
+        for t in rule_defined_types(rule_matches_dict, rule):
+            type_rules[t] = rule
+
+    emitted: Set[Rule] = set()
+    result: List[Rule] = []
+
+    def emit(rule: Rule):
+        if rule in emitted:
+            return
+
+        for t in sorted(rule_used_types(rule_matches_dict, rule)):
+            dep = type_rules.get(t)
+            if dep is not None and dep != rule:
+                emit(dep)
+
+        emitted.add(rule)
+        result.append(rule)
+
+    for rule in rules:
+        emit(rule)
+
+    return result
 
 
 def output_grouped_rules(
@@ -148,7 +265,7 @@ def output_grouped_rules(
     source: Source,
     output_dir: Path,
 ):
-    rule_matches_dict: Dict[Rule, List[Rule]] = {
+    rule_matches_dict: Dict[Rule, FrozenSet[Rule]] = {
         rm.macro: rm.rules for rm in rule_matches
     }
 
@@ -161,6 +278,11 @@ def output_grouped_rules(
         sorted_rules = sorted(
             rules,
             key=rule_macro_sort_key_fn,
+        )
+
+        sorted_rules = enforce_type_decl_order(
+            rule_matches_dict,
+            sorted_rules,
         )
 
         output_path = output_dir / name
