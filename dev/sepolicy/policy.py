@@ -66,7 +66,7 @@ def build_contexts_map(
 
     # This is always unprefixed
     d[ContextsType.VNDSERVICE_CONTEXTS_NAME] = (
-        ContextsType.VNDSERVICE_CONTEXTS_NAME.value
+        ContextsType.VNDSERVICE_CONTEXTS_NAME
     )
 
     return FrozenDict(d)
@@ -136,7 +136,7 @@ class PolicyType:
 
     @property
     def pretty_name(self):
-        return self.name.value.replace('_', ' ')
+        return self.name.replace('_', ' ')
 
 
 policy_type_index: Dict[PolicyName, PolicyType] = {}

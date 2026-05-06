@@ -184,10 +184,10 @@ class CilRuleType(StrEnum):
 
 
 CIL_XPERM_RULE_MAP = {
-    CilRuleType.ALLOWX.value: RuleType.ALLOWXPERM.value,
-    CilRuleType.AUDITALLOWX.value: RuleType.AUDITALLOWXPERM.value,
-    CilRuleType.NEVERALLOWX.value: RuleType.NEVERALLOWXPERM.value,
-    CilRuleType.DONTAUDITX.value: RuleType.DONTAUDITXPERM.value,
+    CilRuleType.ALLOWX: RuleType.ALLOWXPERM,
+    CilRuleType.AUDITALLOWX: RuleType.AUDITALLOWXPERM,
+    CilRuleType.NEVERALLOWX: RuleType.NEVERALLOWXPERM,
+    CilRuleType.DONTAUDITX: RuleType.DONTAUDITXPERM,
 }
 
 unknown_rule_types: Set[str] = set(
@@ -291,10 +291,10 @@ class CilRule(Rule):
 
         match rule_type:
             case (
-                RuleType.ALLOW.value
-                | RuleType.NEVERALLOW.value
-                | RuleType.AUDITALLOW.value
-                | RuleType.DONTAUDIT.value
+                RuleType.ALLOW
+                | RuleType.NEVERALLOW
+                | RuleType.AUDITALLOW
+                | RuleType.DONTAUDIT
             ):
                 # (allow a b (c (...)))
                 assert len(parts) == 4, line
@@ -338,10 +338,10 @@ class CilRule(Rule):
                 )
                 add_rule(rule)
             case (
-                CilRuleType.ALLOWX.value
-                | CilRuleType.AUDITALLOWX.value
-                | CilRuleType.NEVERALLOWX.value
-                | CilRuleType.DONTAUDITX.value
+                CilRuleType.ALLOWX
+                | CilRuleType.AUDITALLOWX
+                | CilRuleType.NEVERALLOWX
+                | CilRuleType.DONTAUDITX
             ):
                 # (allowx a b (ioctl c (... (range . .) ((range . .)))))
                 assert len(parts) == 4, line
@@ -375,7 +375,7 @@ class CilRule(Rule):
                     unpack_ioctls(parts[3][2]),
                 )
                 add_rule(rule)
-            case CilRuleType.TYPEATTRIBUTE.value:
+            case CilRuleType.TYPEATTRIBUTE:
                 # (typeattribute a)
                 assert len(parts) == 2, line
                 assert isinstance(parts[1], str), line
@@ -391,11 +391,11 @@ class CilRule(Rule):
                 # typeattribute rules in source expand to typeattributeset,
                 # while attribute rules expand to typeattribute
                 rule = Rule(
-                    RuleType.ATTRIBUTE.value,
+                    RuleType.ATTRIBUTE,
                     (t,),
                 )
                 add_rule(rule)
-            case CilRuleType.TYPEATTRIBUTESET.value:
+            case CilRuleType.TYPEATTRIBUTESET:
                 assert isinstance(parts[1], str), line
                 v = parts[1].removesuffix(version_suffix)
 
@@ -421,11 +421,11 @@ class CilRule(Rule):
                     t = t.removesuffix(version_suffix)
 
                     rule = Rule(
-                        RuleType.TYPEATTRIBUTE.value,
+                        RuleType.TYPEATTRIBUTE,
                         (t, v),
                     )
                     add_rule(rule)
-            case RuleType.GENFSCON.value:
+            case RuleType.GENFSCON:
                 # (genfscon sysfs /kernel/aov (u object_r sysfs_adspd ((s0) (s0))))
                 assert len(parts) == 4, line
                 assert len(parts[3]) == 4, line
@@ -449,7 +449,7 @@ class CilRule(Rule):
                 )
                 assert add_genfs_rule is not None
                 add_genfs_rule(rule)
-            case CilRuleType.TYPETRANSITION.value:
+            case CilRuleType.TYPETRANSITION:
                 # (typetransition a b c d)
                 # (typetransition a b c "[userfaultfd]" d)
                 assert len(parts) in [5, 6], line
@@ -482,12 +482,12 @@ class CilRule(Rule):
                     )
 
                 rule = Rule(
-                    RuleType.TYPE_TRANSITION.value,
+                    RuleType.TYPE_TRANSITION,
                     (src, dst, parts[3], parts[-1]),
                     tag,
                 )
                 add_rule(rule)
-            case CilRuleType.EXPANDTYPEATTRIBUTE.value:
+            case CilRuleType.EXPANDTYPEATTRIBUTE:
                 # (expandtypeattribute (a) true)
                 assert len(parts) == 3, line
                 assert isinstance(parts[1], list), line
@@ -496,11 +496,11 @@ class CilRule(Rule):
                 assert isinstance(parts[2], str), line
 
                 rule = Rule(
-                    RuleType.EXPANDATTRIBUTE.value,
+                    RuleType.EXPANDATTRIBUTE,
                     (parts[1][0], parts[2]),
                 )
                 add_rule(rule)
-            case RuleType.TYPE.value:
+            case RuleType.TYPE:
                 assert len(parts) == 2
                 assert isinstance(parts[1], str)
 

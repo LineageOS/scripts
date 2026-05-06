@@ -199,10 +199,10 @@ class SourceRule(Rule):
 
         match parts[0]:
             case (
-                RuleType.ALLOW.value
-                | RuleType.NEVERALLOW.value
-                | RuleType.AUDITALLOW.value
-                | RuleType.DONTAUDIT.value
+                RuleType.ALLOW
+                | RuleType.NEVERALLOW
+                | RuleType.AUDITALLOW
+                | RuleType.DONTAUDIT
             ):
                 # neverallow ~{ a b } c:d e;
                 negative_srcs = False
@@ -260,7 +260,7 @@ class SourceRule(Rule):
                         Perms(class_varargs, class_is_all),
                     )
                     add_rule(rule)
-            case RuleType.TYPE_TRANSITION.value:
+            case RuleType.TYPE_TRANSITION:
                 assert len(parts) in [5, 6], line
                 assert isinstance(parts[4], str), line
 
@@ -284,10 +284,10 @@ class SourceRule(Rule):
                     )
                     add_rule(rule)
             case (
-                RuleType.ALLOWXPERM.value
+                RuleType.ALLOWXPERM
                 | RuleType.AUDITALLOWXPERM
-                | RuleType.NEVERALLOWXPERM.value
-                | RuleType.DONTAUDITXPERM.value
+                | RuleType.NEVERALLOWXPERM
+                | RuleType.DONTAUDITXPERM
             ):
                 assert len(parts) in (6, 7), line
                 assert isinstance(parts[4], str), line
@@ -313,7 +313,7 @@ class SourceRule(Rule):
                     )
                     add_rule(rule)
 
-            case RuleType.ATTRIBUTE.value:
+            case RuleType.ATTRIBUTE:
                 assert len(parts) == 2, line
                 assert isinstance(parts[1], str), line
 
@@ -322,7 +322,7 @@ class SourceRule(Rule):
                     (parts[1],),
                 )
                 add_rule(rule)
-            case RuleType.TYPEATTRIBUTE.value:
+            case RuleType.TYPEATTRIBUTE:
                 assert isinstance(parts[1], str), line
 
                 for t in parts[2:]:
@@ -332,11 +332,11 @@ class SourceRule(Rule):
                         (parts[1], t),
                     )
                     add_rule(rule)
-            case RuleType.TYPE.value:
+            case RuleType.TYPE:
                 assert isinstance(parts[1], str), line
 
                 rule = Rule(
-                    RuleType.TYPE.value,
+                    RuleType.TYPE,
                     (parts[1],),
                 )
                 add_rule(rule)
@@ -346,11 +346,11 @@ class SourceRule(Rule):
                 for t in parts[2:]:
                     assert isinstance(t, str)
                     rule = Rule(
-                        RuleType.TYPEATTRIBUTE.value,
+                        RuleType.TYPEATTRIBUTE,
                         (parts[1], t),
                     )
                     add_rule(rule)
-            case RuleType.EXPANDATTRIBUTE.value:
+            case RuleType.EXPANDATTRIBUTE:
                 assert len(parts) == 3
                 assert isinstance(parts[1], str), line
                 assert isinstance(parts[2], str), line

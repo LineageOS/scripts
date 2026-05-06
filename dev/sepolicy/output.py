@@ -56,7 +56,7 @@ def domain_type(rule: Rule):
 
 
 def rule_simple_type_name(rule: Rule):
-    if rule.rule_type == RuleType.TYPE.value:
+    if rule.rule_type == RuleType.TYPE:
         assert isinstance(rule.varargs, Types)
 
         if 'dev_type' in rule.varargs:
@@ -74,8 +74,8 @@ def rule_simple_type_name(rule: Rule):
         return None, False
     elif rule.rule_type in set(
         [
-            RuleType.ATTRIBUTE.value,
-            RuleType.EXPANDATTRIBUTE.value,
+            RuleType.ATTRIBUTE,
+            RuleType.EXPANDATTRIBUTE,
             'hal_attribute',
         ]
     ):
@@ -143,23 +143,23 @@ def _rule_used_types(rule: Rule, used_types: Set[str]):
 
     match rule.rule_type:
         case (
-            RuleType.ALLOW.value
-            | RuleType.NEVERALLOW.value
-            | RuleType.AUDITALLOW.value
-            | RuleType.DONTAUDIT.value
-            | RuleType.ALLOWXPERM.value
-            | RuleType.NEVERALLOWXPERM.value
-            | RuleType.AUDITALLOWXPERM.value
-            | RuleType.DONTAUDITXPERM.value
-            | RuleType.TYPE_TRANSITION.value
+            RuleType.ALLOW
+            | RuleType.NEVERALLOW
+            | RuleType.AUDITALLOW
+            | RuleType.DONTAUDIT
+            | RuleType.ALLOWXPERM
+            | RuleType.NEVERALLOWXPERM
+            | RuleType.AUDITALLOWXPERM
+            | RuleType.DONTAUDITXPERM
+            | RuleType.TYPE_TRANSITION
         ):
             handle_type(rule.parts[0])
             handle_type(rule.parts[1])
-        case RuleType.GENFSCON.value:
+        case RuleType.GENFSCON:
             handle_type(rule.parts[2])
-        case RuleType.TYPE.value | RuleType.TYPEATTRIBUTE.value:
+        case RuleType.TYPE | RuleType.TYPEATTRIBUTE:
             pass
-        case RuleType.ATTRIBUTE.value | RuleType.EXPANDATTRIBUTE.value:
+        case RuleType.ATTRIBUTE | RuleType.EXPANDATTRIBUTE:
             # TODO: figure out if these should be taken into account
             pass
         case _:
@@ -183,7 +183,7 @@ def _rule_defined_types(
     rule: Rule,
     defined_types: Set[str],
 ):
-    if rule.rule_type != RuleType.TYPE.value:
+    if rule.rule_type != RuleType.TYPE:
         return None
 
     assert isinstance(rule.parts[0], str)

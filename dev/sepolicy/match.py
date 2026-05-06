@@ -335,7 +335,7 @@ def merge_typeattribute_rules(
 
     removed_rules: Set[Rule] = set()
     match_keys: Tuple[Optional[rule_hash_value], ...] = (
-        RuleType.TYPE.value,
+        RuleType.TYPE,
         None,
         None,
     )
@@ -350,7 +350,7 @@ def merge_typeattribute_rules(
         removed_rules.add(rule)
 
     match_keys: Tuple[Optional[rule_hash_value], ...] = (
-        RuleType.TYPEATTRIBUTE.value,
+        RuleType.TYPEATTRIBUTE,
         None,
         None,
         None,
@@ -374,7 +374,7 @@ def merge_typeattribute_rules(
 
     for t, values in types.items():
         new_rule = Rule(
-            RuleType.TYPE.value,
+            RuleType.TYPE,
             (t,),
             Types(values),
         )
@@ -396,7 +396,7 @@ def merge_class_set_rule_type(
         Tuple[Set[str], Set[Rule]],
     ] = {}
 
-    match_tuple = (rule_type.value, None, None, None, None)
+    match_tuple = (rule_type, None, None, None, None)
     for matched_rule in rules.match(match_tuple):
         # Keep class out of the key
         key = (
