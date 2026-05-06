@@ -320,11 +320,9 @@ class CilRule(Rule):
                 if classmap is not None:
                     class_perms = classmap.class_perms(class_name)
 
-                    if perms != class_perms:
+                    is_all = perms == class_perms
+                    if not is_all:
                         assert frozenset(perms) != frozenset(class_perms)
-
-                    if perms == class_perms:
-                        is_all = True
 
                 rule = Rule(
                     rule_type,
