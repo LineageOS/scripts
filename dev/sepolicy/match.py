@@ -4,7 +4,16 @@
 from __future__ import annotations
 
 from collections import defaultdict
-from typing import DefaultDict, Dict, FrozenSet, List, Optional, Set, Tuple
+from typing import (
+    DefaultDict,
+    Dict,
+    FrozenSet,
+    Hashable,
+    List,
+    Optional,
+    Set,
+    Tuple,
+)
 
 from sepolicy.class_set import ClassSet
 from sepolicy.match_template import (
@@ -90,6 +99,7 @@ def match_macro_rule(
     macro_rules: List[Rule],
     macro_arg_values: args_type,
     results: List[RuleMatch],
+    rule_match_cache: Dict[Hashable, List[Rule]],
     verbose: bool,
 ):
     if rule_index == len(macro_rule_templates):
@@ -124,7 +134,12 @@ def match_macro_rule(
         ]
         print(f'Constructed match keys: {match_keys_str}')
 
-    for matched_rule in rules.match(match_keys):
+    matched_rules = rule_match_cache.get(match_keys)
+    if matched_rules is None:
+        matched_rules = rules.match(match_keys)
+        rule_match_cache[match_keys] = matched_rules
+
+    for matched_rule in matched_rules:
         if verbose:
             print(f'Found matching rule: {matched_rule}')
 
@@ -145,6 +160,7 @@ def match_macro_rule(
                 macro_rules,
                 new_arg_values,
                 results,
+                rule_match_cache,
                 verbose,
             )
             macro_rules.pop()
@@ -155,6 +171,7 @@ def match_macro_rules(
     macro_name: str,
     macro_rule_templates: List[RuleTemplate],
     all_rule_matches: List[RuleMatch],
+    rule_match_cache: Dict[Hashable, List[Rule]],
     verbose: bool,
 ):
     if verbose:
@@ -173,6 +190,7 @@ def match_macro_rules(
         [],
         {},
         rule_matches,
+        rule_match_cache,
         verbose,
     )
 
@@ -191,6 +209,7 @@ def match_macros_rules(
     verbose: bool,
 ):
     rule_matches: List[RuleMatch] = []
+    rule_match_cache: Dict[Hashable, List[Rule]] = {}
 
     for macro_name, macro_rules in macros_name_rules:
         macro_rule_templates: List[RuleTemplate] = [
@@ -209,6 +228,7 @@ def match_macros_rules(
             macro_name,
             macro_rule_templates,
             rule_matches,
+            rule_match_cache,
             verbose,
         )
 

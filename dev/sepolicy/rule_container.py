@@ -9,7 +9,6 @@ from typing import (
     DefaultDict,
     Dict,
     Iterable,
-    Iterator,
     List,
     Optional,
     Sequence,
@@ -128,13 +127,13 @@ class RuleContainer:
 
         return removed_count
 
-    def match(self, keys: Sequence[Hashable]) -> Iterator[Rule]:
+    def match(self, keys: Sequence[Hashable]) -> List[Rule]:
         assert self.__sparse_match
 
         levels = len(keys)
         levels_data = self.__data.get(levels)
         if levels_data is None:
-            return
+            return []
 
         buckets: List[Dict[Rule, None]] = []
         saw_not_none = False
@@ -147,11 +146,11 @@ class RuleContainer:
 
             position_data = levels_data.get(i)
             if position_data is None:
-                return
+                return []
 
             bucket = position_data.get(key)
             if bucket is None:
-                return
+                return []
 
             buckets.append(bucket)
 
@@ -167,6 +166,9 @@ class RuleContainer:
             common = common & bucket.keys()
 
         # Keep original order
+        values: List[Rule] = []
         for value in smallest_bucket:
             if value in common:
-                yield value
+                values.append(value)
+
+        return values

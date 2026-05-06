@@ -370,16 +370,16 @@ def fill_rule_template(rule_template: RuleTemplate, arg_values: args_type):
 
 
 def rule_template_match_keys(rule_template: RuleTemplate):
-    parts: List[Optional[rule_hash_value]] = [None] * (
-        rule_template.num_parts + 2
-    )
+    parts: List[Optional[rule_hash_value]] = [None] * (rule_template.num_parts)
 
-    parts[0] = rule_template.rule.rule_type
     for i, part in rule_template.literals:
-        parts[i + 1] = part
-    parts[-1] = rule_template.rule.varargs
+        parts[i] = part
 
-    return parts
+    return (
+        rule_template.rule.rule_type,
+        *parts,
+        rule_template.rule.varargs,
+    )
 
 
 def bind_arg(
