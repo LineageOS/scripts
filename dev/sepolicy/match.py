@@ -56,7 +56,12 @@ class RuleMatch:
         macro = self.__macro
         if macro is None:
             args = tuple(self.arg_values[k] for k in sorted(self.arg_values))
-            macro = Rule(self.macro_name, args, is_macro=True)
+            macro = Rule(
+                self.macro_name,
+                args,
+                is_macro=True,
+                expanded_rules=self.rules,
+            )
             self.__macro = macro
 
         return macro

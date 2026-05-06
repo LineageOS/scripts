@@ -4,12 +4,11 @@
 from __future__ import annotations
 
 import re
-from functools import cache, partial
+from functools import cache
 from pathlib import Path
-from typing import Dict, FrozenSet, List, Optional, Set
+from typing import Dict, List, Optional, Set
 
 from sepolicy.conditional_type import ConditionalType
-from sepolicy.match import RuleMatch
 from sepolicy.rule import (
     Rule,
     RuleType,
@@ -167,14 +166,12 @@ def _rule_used_types(rule: Rule, used_types: Set[str]):
             assert False, rule
 
 
-def rule_used_types(
-    rule_matches_dict: Dict[Rule, FrozenSet[Rule]],
-    rule: Rule,
-):
+def rule_used_types(rule: Rule):
     used_types: Set[str] = set()
 
     if rule.is_macro:
-        for r in rule_matches_dict[rule]:
+        assert rule.expanded_rules is not None
+        for r in rule.expanded_rules:
             _rule_used_types(r, used_types)
     else:
         _rule_used_types(rule, used_types)
@@ -193,14 +190,12 @@ def _rule_defined_types(
     defined_types.add(rule.parts[0])
 
 
-def rule_defined_types(
-    rule_matches_dict: Dict[Rule, FrozenSet[Rule]],
-    rule: Rule,
-):
+def rule_defined_types(rule: Rule):
     defined_types: Set[str] = set()
 
     if rule.is_macro:
-        for r in rule_matches_dict[rule]:
+        assert rule.expanded_rules is not None
+        for r in rule.expanded_rules:
             _rule_defined_types(r, defined_types)
     else:
         _rule_defined_types(rule, defined_types)
@@ -208,10 +203,7 @@ def rule_defined_types(
     return defined_types
 
 
-def rule_macro_sort_key(
-    rule_matches_dict: Dict[Rule, FrozenSet[Rule]],
-    rule: Rule,
-):
+def rule_macro_sort_key(rule: Rule):
     key = rule_sort_key(rule)
 
     if not rule.is_macro:
@@ -220,7 +212,8 @@ def rule_macro_sort_key(
 
     min_order = 0
 
-    for r in rule_matches_dict[rule]:
+    assert rule.expanded_rules is not None
+    for r in rule.expanded_rules:
         order = rule_type_order(r)
         if order < min_order:
             min_order = order
@@ -228,14 +221,11 @@ def rule_macro_sort_key(
     return (min_order, key)
 
 
-def enforce_type_decl_order(
-    rule_matches_dict: Dict[Rule, FrozenSet[Rule]],
-    rules: List[Rule],
-):
+def enforce_type_decl_order(rules: List[Rule]):
     type_rules: Dict[str, Rule] = {}
 
     for rule in rules:
-        for t in rule_defined_types(rule_matches_dict, rule):
+        for t in rule_defined_types(rule):
             type_rules[t] = rule
 
     emitted: Set[Rule] = set()
@@ -245,7 +235,7 @@ def enforce_type_decl_order(
         if rule in emitted:
             return
 
-        for t in sorted(rule_used_types(rule_matches_dict, rule)):
+        for t in sorted(rule_used_types(rule)):
             dep = type_rules.get(t)
             if dep is not None and dep != rule:
                 emit(dep)
@@ -261,29 +251,16 @@ def enforce_type_decl_order(
 
 def output_grouped_rules(
     grouped_rules: Dict[str, Set[Rule]],
-    rule_matches: List[RuleMatch],
     source: Source,
     output_dir: Path,
 ):
-    rule_matches_dict: Dict[Rule, FrozenSet[Rule]] = {
-        rm.macro: rm.rules for rm in rule_matches
-    }
-
-    rule_macro_sort_key_fn = partial(
-        rule_macro_sort_key,
-        rule_matches_dict,
-    )
-
     for name, rules in grouped_rules.items():
         sorted_rules = sorted(
             rules,
-            key=rule_macro_sort_key_fn,
+            key=rule_macro_sort_key,
         )
 
-        sorted_rules = enforce_type_decl_order(
-            rule_matches_dict,
-            sorted_rules,
-        )
+        sorted_rules = enforce_type_decl_order(sorted_rules)
 
         output_path = output_dir / name
         with open(output_path, 'w') as o:

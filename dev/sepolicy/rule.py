@@ -5,7 +5,16 @@ from __future__ import annotations
 
 import re
 from enum import StrEnum
-from typing import Dict, Generator, List, Optional, Set, Tuple, Union
+from typing import (
+    Dict,
+    FrozenSet,
+    Generator,
+    List,
+    Optional,
+    Set,
+    Tuple,
+    Union,
+)
 
 from sepolicy.class_set import ClassSet
 from sepolicy.conditional_type import ConditionalType
@@ -294,11 +303,13 @@ class Rule:
             ]
         ] = None,
         is_macro: bool = False,
+        expanded_rules: Optional[FrozenSet[Rule]] = None,
     ):
         self.rule_type = rule_type
         self.parts = parts
         self.varargs = varargs
         self.is_macro = is_macro
+        self.expanded_rules = expanded_rules
         self.hash_values: Tuple[Optional[rule_hash_value], ...] = (
             self.rule_type,
             *self.parts,

@@ -150,7 +150,6 @@ def process_policy_post_split(
     grouped_rules = group_rules(rules)
     output_grouped_rules(
         grouped_rules,
-        rule_matches,
         source=source,
         output_dir=policy_output_dir,
     )
