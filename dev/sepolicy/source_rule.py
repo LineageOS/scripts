@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 from itertools import product
-from typing import Callable, List, Set, Tuple
+from typing import Callable, Dict, List, Set, Tuple
 
 from sepolicy.classmap import Classmap
 from sepolicy.conditional_type import ConditionalType
@@ -239,13 +239,13 @@ class SourceRule(Rule):
                 varargs = list(flatten_parts(parts[4]))
                 is_all = varargs == ['*']
 
-                for src, dst, class_name in product(srcs, dsts, class_names):
+                class_varargs_map: Dict[str, Perms] = {}
+
+                for class_name in class_names:
                     class_perms_set = classmap.class_perms_set(class_name)
+
                     if negative_varargs:
-                        assert varargs is not None
-                        class_varargs = class_perms_set.copy()
-                        for v in varargs:
-                            class_varargs.remove(v)
+                        class_varargs = class_perms_set - set(varargs)
                         class_is_all = False
                     elif is_all:
                         class_varargs = class_perms_set
@@ -254,10 +254,13 @@ class SourceRule(Rule):
                         class_varargs = set(varargs)
                         class_is_all = class_varargs == class_perms_set
 
+                    class_varargs_map[class_name] = Perms(class_varargs, class_is_all)
+
+                for src, dst, class_name in product(srcs, dsts, class_names):
                     rule = Rule(
                         parts[0],
                         (src, dst, class_name),
-                        Perms(class_varargs, class_is_all),
+                        class_varargs_map[class_name],
                     )
                     add_rule(rule)
             case RuleType.TYPE_TRANSITION:
