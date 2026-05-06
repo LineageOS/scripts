@@ -5,7 +5,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import (
-    Dict,
     FrozenSet,
     Iterator,
     List,
@@ -18,7 +17,63 @@ from typing import (
 from sepolicy.conditional_type import ConditionalType
 from sepolicy.rule import Rule, rule_hash_value, rule_part
 
-args_type = Dict[int, rule_part]
+
+class ArgValues:
+    __UNKNOWN = 'UNKNOWN'
+
+    __slots__ = ('__values', '__len')
+
+    def __init__(self, values: List[Optional[rule_part]]):
+        self.__values = values
+        self.__len = len(values) - 1
+
+    def __len__(self):
+        return self.__len
+
+    def __getitem__(self, index: int):
+        value = self.__values[index]
+        assert value is not None
+        return value
+
+    def copy(self):
+        return ArgValues(self.__values[:])
+
+    def values(self):
+        return tuple(
+            v if v is not None else ArgValues.__UNKNOWN
+            for v in self.__values[1:]
+        )
+
+    @classmethod
+    def empty(cls, size: int):
+        return cls([None] * (size + 1))
+
+    def has(self, index: int):
+        return self.__values[index] is not None
+
+    def get(self, index: int):
+        return self.__values[index]
+
+    def with_item(self, index: int, value: Optional[rule_part]):
+        existing = self.__values[index]
+
+        if existing is None:
+            self.__values[index] = value
+            return True
+
+        if existing == value:
+            return False
+
+        return None
+
+    def pop_item(self, index: int, pop: Optional[bool]):
+        if pop is not True:
+            return
+
+        self.__values[index] = None
+
+    def __str__(self):
+        return f'{self.__values}'
 
 
 @dataclass(frozen=True, slots=True)
@@ -78,6 +133,10 @@ class RuleTemplate:
     @property
     def num_parts(self):
         return len(self.literals) + len(self.templates)
+
+    @property
+    def arity(self):
+        return max(self.arg_indices, default=0)
 
 
 def compile_single_value_template(value: str):
@@ -174,12 +233,12 @@ def compile_string_template(value: str):
 
 def fill_single_value_template(
     template: SingleValueTemplate,
-    arg_values: args_type,
+    arg_values: ArgValues,
 ):
     return arg_values[template.arg_index]
 
 
-def _fill_affix_template(template: AffixTemplate, arg_values: args_type):
+def _fill_affix_template(template: AffixTemplate, arg_values: ArgValues):
     arg_value = arg_values.get(template.arg_index)
     if arg_value is None:
         return None
@@ -190,7 +249,7 @@ def _fill_affix_template(template: AffixTemplate, arg_values: args_type):
     return f'{template.prefix}{arg_value}{template.suffix}'
 
 
-def _fill_string_template(template: StringTemplate, arg_values: args_type):
+def _fill_string_template(template: StringTemplate, arg_values: ArgValues):
     parts: List[str] = []
     for segment in template.segments:
         if isinstance(segment, str):
@@ -208,7 +267,7 @@ def _fill_string_template(template: StringTemplate, arg_values: args_type):
     return value
 
 
-def fill_string_template(template: AnyStringTemplate, arg_values: args_type):
+def fill_string_template(template: AnyStringTemplate, arg_values: ArgValues):
     if isinstance(template, AffixTemplate):
         return _fill_affix_template(template, arg_values)
 
@@ -266,7 +325,7 @@ def compile_conditional_template(value: ConditionalType):
 
 def fill_conditional_template(
     template: ConditionalTemplate,
-    arg_values: args_type,
+    arg_values: ArgValues,
 ):
     positive: List[str] = [''] * template.num_positive
     negative: List[str] = [''] * template.num_negative
@@ -325,20 +384,19 @@ def compile_rule_template(rule: Rule):
     )
 
 
-def fill_rule_template(rule_template: RuleTemplate, arg_values: args_type):
-    arg_keys = arg_values.keys()
-
-    if not arg_keys & rule_template.arg_indices:
-        return rule_template
-
+def fill_rule_template(rule_template: RuleTemplate, arg_values: ArgValues):
     literals: List[Tuple[int, rule_part]] = list(rule_template.literals)
     templates: List[Tuple[int, PartTemplate]] = []
     remaining_arg_indices: Set[int] = set()
 
     for i, part in rule_template.templates:
-        missing = part.arg_indices - arg_keys
-        if missing:
-            remaining_arg_indices.update(missing)
+        has_missing = False
+        for arg_index in part.arg_indices:
+            if not arg_values.has(arg_index):
+                has_missing = True
+                remaining_arg_indices.add(arg_index)
+
+        if has_missing:
             templates.append((i, part))
             continue
 
@@ -382,30 +440,13 @@ def rule_template_match_keys(rule_template: RuleTemplate):
     )
 
 
-def bind_arg(
-    arg_values: args_type,
-    index: int,
-    value: Union[str, ConditionalType],
-):
-    existing = arg_values.get(index)
-    if existing is None:
-        new_arg_values = dict(arg_values)
-        new_arg_values[index] = value
-        return new_arg_values
-
-    if existing == value:
-        return arg_values
-
-    return None
-
-
 def _iter_string_template_arg_values(
-    arg_values: args_type,
+    arg_values: ArgValues,
     template: StringTemplate,
     segment_index: int,
     value: str,
     value_index: int,
-) -> Iterator[args_type]:
+) -> Iterator[ArgValues]:
     num_segments = len(template.segments)
 
     while segment_index < num_segments:
@@ -422,14 +463,12 @@ def _iter_string_template_arg_values(
         arg_index = segment
 
         if segment_index + 1 == num_segments:
-            new_arg_values = bind_arg(
-                arg_values,
-                arg_index,
-                value[value_index:],
-            )
+            pop = arg_values.with_item(arg_index, value[value_index:])
 
-            if new_arg_values is not None:
-                yield new_arg_values
+            if pop is not None:
+                yield arg_values
+
+            arg_values.pop_item(arg_index, pop)
 
             return
 
@@ -446,24 +485,27 @@ def _iter_string_template_arg_values(
                 return
 
             candidate = value[value_index:next_pos]
-            new_arg_values = bind_arg(arg_values, arg_index, candidate)
-            if new_arg_values is not None:
+            pop = arg_values.with_item(arg_index, candidate)
+
+            if pop is not None:
                 yield from _iter_string_template_arg_values(
-                    new_arg_values,
+                    arg_values,
                     template,
                     segment_index + 1,
                     value,
                     next_pos,
                 )
 
+            arg_values.pop_item(arg_index, pop)
+
             search_start = next_pos + 1
 
 
 def _iter_affix_template_arg_values(
-    arg_values: args_type,
+    arg_values: ArgValues,
     template: AffixTemplate,
     value: str,
-) -> Iterator[args_type]:
+) -> Iterator[ArgValues]:
     if not value.startswith(template.prefix):
         return
 
@@ -474,21 +516,19 @@ def _iter_affix_template_arg_values(
 
     value = value.removesuffix(template.suffix)
 
-    new_arg_values = bind_arg(
-        arg_values,
-        template.arg_index,
-        value,
-    )
+    pop = arg_values.with_item(template.arg_index, value)
 
-    if new_arg_values is not None:
-        yield new_arg_values
+    if pop is not None:
+        yield arg_values
+
+    arg_values.pop_item(template.arg_index, pop)
 
 
 def iter_string_template_arg_values(
-    arg_values: args_type,
+    arg_values: ArgValues,
     template: AnyStringTemplate,
     value: str,
-) -> Iterator[args_type]:
+) -> Iterator[ArgValues]:
     if isinstance(template, AffixTemplate):
         yield from _iter_affix_template_arg_values(
             arg_values,
@@ -507,27 +547,25 @@ def iter_string_template_arg_values(
 
 
 def iter_single_value_template_arg_values(
-    arg_values: args_type,
+    arg_values: ArgValues,
     template: SingleValueTemplate,
     value: Union[str, ConditionalType],
-) -> Iterator[args_type]:
-    new_arg_values = bind_arg(
-        arg_values,
-        template.arg_index,
-        value,
-    )
+) -> Iterator[ArgValues]:
+    pop = arg_values.with_item(template.arg_index, value)
 
-    if new_arg_values is not None:
-        yield new_arg_values
+    if pop is not None:
+        yield arg_values
+
+    arg_values.pop_item(template.arg_index, pop)
 
 
 def _iter_string_set_template_arg_values(
-    arg_values: args_type,
+    arg_values: ArgValues,
     template_parts: Tuple[Tuple[int, AnyStringTemplate], ...],
     template_part_index: int,
     value_parts: Tuple[str, ...],
     used: List[bool],
-) -> Iterator[args_type]:
+) -> Iterator[ArgValues]:
     if template_part_index == len(template_parts):
         yield arg_values
         return
@@ -555,10 +593,10 @@ def _iter_string_set_template_arg_values(
 
 
 def iter_string_set_template_arg_values(
-    arg_values: args_type,
+    arg_values: ArgValues,
     template_parts: Tuple[Tuple[int, AnyStringTemplate], ...],
     value_parts: Tuple[str, ...],
-) -> Iterator[args_type]:
+) -> Iterator[ArgValues]:
     used = [False] * len(value_parts)
 
     yield from _iter_string_set_template_arg_values(
@@ -571,10 +609,10 @@ def iter_string_set_template_arg_values(
 
 
 def iter_conditional_template_arg_values(
-    arg_values: args_type,
+    arg_values: ArgValues,
     template: ConditionalTemplate,
     value: ConditionalType,
-) -> Iterator[args_type]:
+) -> Iterator[ArgValues]:
     if template.is_all != value.is_all:
         return
 
@@ -612,8 +650,8 @@ def _iter_rule_fill_arg_values(
     template_parts: Tuple[Tuple[int, PartTemplate], ...],
     template_part_index: int,
     matched_parts: Tuple[rule_part, ...],
-    arg_values: args_type,
-) -> Iterator[args_type]:
+    arg_values: ArgValues,
+) -> Iterator[ArgValues]:
     if template_part_index == len(template_parts):
         yield arg_values
         return
@@ -621,7 +659,7 @@ def _iter_rule_fill_arg_values(
     part_index, template_part = template_parts[template_part_index]
     rule_part = matched_parts[part_index]
 
-    new_arg_values_iter: Optional[Iterator[args_type]] = None
+    new_arg_values_iter: Optional[Iterator[ArgValues]] = None
 
     if isinstance(template_part, SingleValueTemplate):
         if not isinstance(rule_part, (str, ConditionalType)):
@@ -664,9 +702,9 @@ def _iter_rule_fill_arg_values(
 
 def iter_rule_fill_arg_values(
     rule_template: RuleTemplate,
-    arg_values: args_type,
+    arg_values: ArgValues,
     matched_rule: Rule,
-) -> Iterator[args_type]:
+) -> Iterator[ArgValues]:
     if matched_rule.rule_type != rule_template.rule.rule_type:
         return
 

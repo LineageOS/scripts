@@ -17,8 +17,8 @@ from typing import (
 
 from sepolicy.class_set import ClassSet
 from sepolicy.match_template import (
+    ArgValues,
     RuleTemplate,
-    args_type,
     compile_rule_template,
     fill_rule_template,
     iter_rule_fill_arg_values,
@@ -40,21 +40,16 @@ class RuleMatch:
     def __init__(
         self,
         macro_name: str,
-        rules: Optional[FrozenSet[Rule]] = None,
-        arg_values: Optional[args_type] = None,
+        rules: FrozenSet[Rule],
+        arg_values: ArgValues,
     ):
-        if rules is None:
-            rules = frozenset()
-        if arg_values is None:
-            arg_values = {}
-
         self.macro_name = macro_name
         self.rules = rules
         self.arg_values = arg_values
 
         self.__hash_values = (
             self.macro_name,
-            frozenset(self.arg_values.items()),
+            self.arg_values,
             rules,
         )
         self.__hash = hash(self.__hash_values)
@@ -64,19 +59,15 @@ class RuleMatch:
     def macro(self):
         macro = self.__macro
         if macro is None:
-            args = tuple(self.arg_values[k] for k in sorted(self.arg_values))
             macro = Rule(
                 self.macro_name,
-                args,
+                self.arg_values.values(),
                 is_macro=True,
                 expanded_rules=self.rules,
             )
             self.__macro = macro
 
         return macro
-
-    def filled_args(self):
-        return self.arg_values.keys()
 
     def __hash__(self):
         return self.__hash
@@ -97,7 +88,7 @@ def match_macro_rule(
     rule_index: int,
     macro_name: str,
     macro_rules: List[Rule],
-    macro_arg_values: args_type,
+    macro_arg_values: ArgValues,
     results: List[RuleMatch],
     rule_match_cache: Dict[Hashable, List[Rule]],
     verbose: bool,
@@ -106,7 +97,7 @@ def match_macro_rule(
         rule_match = RuleMatch(
             macro_name,
             frozenset(macro_rules),
-            macro_arg_values,
+            macro_arg_values.copy(),
         )
         results.append(rule_match)
         return
@@ -182,13 +173,14 @@ def match_macro_rules(
 
     rule_matches: List[RuleMatch] = []
 
+    arity = max(m.arity for m in macro_rule_templates)
     match_macro_rule(
         rules,
         macro_rule_templates,
         0,
         macro_name,
         [],
-        {},
+        ArgValues.empty(arity),
         rule_matches,
         rule_match_cache,
         verbose,
