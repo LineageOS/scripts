@@ -183,6 +183,13 @@ class CilRuleType(StrEnum):
     TYPETRANSITION = 'typetransition'
 
 
+CIL_XPERM_RULE_MAP = {
+    CilRuleType.ALLOWX.value: RuleType.ALLOWXPERM.value,
+    CilRuleType.AUDITALLOWX.value: RuleType.AUDITALLOWXPERM.value,
+    CilRuleType.NEVERALLOWX.value: RuleType.NEVERALLOWXPERM.value,
+    CilRuleType.DONTAUDITX.value: RuleType.DONTAUDITXPERM.value,
+}
+
 unknown_rule_types: Set[str] = set(
     [
         'category',
@@ -362,19 +369,8 @@ class CilRule(Rule):
                         dst,
                     )
 
-                if rule_type == CilRuleType.ALLOWX.value:
-                    rule_type = RuleType.ALLOWXPERM.value
-                elif rule_type == CilRuleType.AUDITALLOWX.value:
-                    rule_type = RuleType.AUDITALLOWXPERM.value
-                elif rule_type == CilRuleType.NEVERALLOWX.value:
-                    rule_type = RuleType.NEVERALLOWXPERM.value
-                elif rule_type == CilRuleType.DONTAUDITX.value:
-                    rule_type = RuleType.DONTAUDITXPERM.value
-                else:
-                    assert False, line
-
                 rule = Rule(
-                    rule_type,
+                    CIL_XPERM_RULE_MAP[rule_type],
                     (src, dst, parts[3][1], parts[3][0]),
                     unpack_ioctls(parts[3][2]),
                 )
