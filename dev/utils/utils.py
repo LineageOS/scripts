@@ -81,23 +81,6 @@ def color_print(*args: object, color: Color):
     print(args_str)
 
 
-def remove_comments(line: str):
-    index = line.find('#')
-    if index != -1:
-        line = line[:index]
-
-    return line
-
-
-def squash_spaces(line: str):
-    line = line.lstrip()
-    return re.sub(r'[ \t]+', ' ', line)
-
-
-def is_empty_line(line: str):
-    return not line.strip()
-
-
 def read_texts(text_file_paths: List[Path]):
     texts: List[str] = []
     for text_file_path in text_file_paths:
@@ -107,13 +90,24 @@ def read_texts(text_file_paths: List[Path]):
     return ''.join(texts)
 
 
-def split_normalize_text(text: str):
-    lines = text.splitlines(keepends=True)
-    lines = list(map(remove_comments, lines))
-    lines = list(map(squash_spaces, lines))
-    lines = list(filter(lambda line: not is_empty_line(line), lines))
-    return lines
+SPACE_RE = re.compile(r'[ \t]+')
 
+
+def split_normalize_text(text: str):
+    out: list[str] = []
+
+    for line in text.splitlines(keepends=True):
+        comment_index = line.find('#')
+
+        if comment_index != -1:
+            line = line[:comment_index]
+
+        line = SPACE_RE.sub(' ', line.lstrip())
+
+        if line.strip():
+            out.append(line)
+
+    return out
 
 @contextmanager
 def WorkingDirectory(dir_path: str) -> Generator[None, None, None]:
