@@ -138,6 +138,8 @@ unknown_rule_types: Set[str] = set(
     ]
 )
 
+ALL_PERMS_SET = {'*'}
+
 
 class SourceRule(Rule):
     @classmethod
@@ -236,8 +238,8 @@ class SourceRule(Rule):
                 srcs = structure_conditional_types(parts[1], negative_srcs)
                 dsts = structure_conditional_types(parts[2], negative_dsts)
                 class_names = list(flatten_parts(parts[3]))
-                varargs = list(flatten_parts(parts[4]))
-                is_all = varargs == ['*']
+                varargs = set(flatten_parts(parts[4]))
+                is_all = varargs == ALL_PERMS_SET
 
                 class_varargs_map: Dict[str, Perms] = {}
 
@@ -245,13 +247,13 @@ class SourceRule(Rule):
                     class_perms_set = classmap.class_perms_set(class_name)
 
                     if negative_varargs:
-                        class_varargs = class_perms_set - set(varargs)
+                        class_varargs = class_perms_set - varargs
                         class_is_all = False
                     elif is_all:
                         class_varargs = class_perms_set
                         class_is_all = True
                     else:
-                        class_varargs = set(varargs)
+                        class_varargs = varargs
                         class_is_all = class_varargs == class_perms_set
 
                     class_varargs_map[class_name] = Perms(class_varargs, class_is_all)
