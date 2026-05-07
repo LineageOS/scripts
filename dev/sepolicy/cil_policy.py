@@ -27,10 +27,7 @@ from sepolicy.cil_rule import (
 )
 from sepolicy.classmap import Classmap
 from sepolicy.conditional_type import ConditionalType
-from sepolicy.contexts import (
-    parse_contexts_texts,
-    split_normalize_contexts_text,
-)
+from sepolicy.contexts import parse_contexts_texts
 from sepolicy.merge import merge_rules
 from sepolicy.policy import (
     ContextsType,
@@ -46,7 +43,7 @@ from sepolicy.rule import Rule, raw_parts_list
 from sepolicy.rule_container import RuleContainer
 from sepolicy.source_policy import SourceIndex
 from utils.frozendict import FrozenDict
-from utils.utils import read_texts, resolve_paths
+from utils.utils import read_texts, resolve_paths, split_normalize_text
 
 cil_line_type = Union[
     Tuple[
@@ -477,7 +474,7 @@ def parse_dump_policy_contexts(
     selinux_path = Path(dump_root, partition, 'etc/selinux')
 
     contexts_texts = {
-        context_type: split_normalize_contexts_text(
+        context_type: split_normalize_text(
             read_texts(
                 resolve_paths(
                     [selinux_path],

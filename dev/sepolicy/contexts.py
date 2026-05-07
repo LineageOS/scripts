@@ -9,25 +9,12 @@ from typing import Dict, List, Set, Tuple
 from sepolicy.policy import ContextsType
 from sepolicy.rule import trim_contexts_label
 from sepolicy.rule_container import RuleContainer
-from sepolicy.rules import split_rules
 from sepolicy.source_rule import SourceRule
 from utils.utils import split_normalize_text
 
 
 def split_normalize_contexts_text(text: str):
-    input_text_lines = split_normalize_text(text)
-
-    return list(
-        split_rules(
-            input_text_lines,
-            # Only end a rule if level is 0 and line ended
-            ending_char='\n',
-            # We make the assumption that anyone writing macro calls in
-            # contexts won't place stray characters anywhere...
-            # This will blow up later if that's the case
-            only_end_at_ending_char=True,
-        )
-    )
+    return split_normalize_text(text)
 
 
 def parse_genfs_contexts(texts: List[str]):

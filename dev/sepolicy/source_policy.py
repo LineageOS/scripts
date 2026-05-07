@@ -14,7 +14,6 @@ from sepolicy.contexts import (
     ContextsType,
     parse_contexts_texts,
     parse_genfs_contexts,
-    split_normalize_contexts_text,
 )
 from sepolicy.expand import expand_macro_calls, expand_macro_calls_and_split
 from sepolicy.macro import (
@@ -41,7 +40,12 @@ from sepolicy.rules import split_normalize_rules_text
 from sepolicy.source_rule import SourceRule
 from sepolicy.varargs import Ioctls
 from utils.frozendict import FrozenDict
-from utils.utils import android_root, read_texts, resolve_paths
+from utils.utils import (
+    android_root,
+    read_texts,
+    resolve_paths,
+    split_normalize_text,
+)
 
 system_sepolicy_path = Path(android_root, 'system/sepolicy')
 
@@ -263,7 +267,7 @@ def parse_source_contexts(
                 source_macros_text.flagging_macros,
             ],
             variables=variables,
-            split_fn=split_normalize_contexts_text,
+            split_fn=split_normalize_text,
             map_fn=lambda s: s,
             preserve_macros=False,
             text_name=context_type,
