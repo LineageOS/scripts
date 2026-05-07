@@ -128,7 +128,7 @@ def expand_macro_calls_and_split(
     verbose: bool,
 ):
     if preserve_macros:
-        texts = list(split_fn(text))
+        texts = split_fn(text)
     else:
         texts = [text]
 
