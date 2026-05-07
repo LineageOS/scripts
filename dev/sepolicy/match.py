@@ -26,7 +26,8 @@ from sepolicy.match_template import (
     rule_template_sort_key,
 )
 from sepolicy.rule import (
-    CLASS_SETS_RULE_TYPES,
+    ALLOW_RULE_TYPES,
+    IOCTL_RULE_TYPES,
     Rule,
     RuleType,
     rule_hash_value,
@@ -400,7 +401,7 @@ def merge_typeattribute_rules(
 
 def merge_class_set_rule_type(
     rules: RuleContainer,
-    rule_type: str,
+    match_keys: Tuple[Optional[rule_hash_value], ...],
     class_sets: List[Tuple[str, Set[str]]],
 ):
     rules_dict: Dict[
@@ -408,13 +409,13 @@ def merge_class_set_rule_type(
         Tuple[Set[str], Set[Rule]],
     ] = {}
 
-    match_tuple = (rule_type, None, None, None, None)
-    for matched_rule in rules.match(match_tuple):
+    for matched_rule in rules.match(match_keys):
         # Keep class out of the key
         key = (
             matched_rule.rule_type,
             matched_rule.parts[0],
             matched_rule.parts[1],
+            *matched_rule.parts[3:],
             matched_rule.varargs,
         )
         if key not in rules_dict:
@@ -449,12 +450,14 @@ def merge_class_set_rule_type(
         matched_rule = next(iter(matched_rules))
         new_rule = Rule(
             matched_rule.rule_type,
-            tuple(
-                [
-                    matched_rule.parts[0],
-                    matched_rule.parts[1],
-                    ClassSet(sorted(names), sorted(matched_classes)),
-                ]
+            (
+                matched_rule.parts[0],
+                matched_rule.parts[1],
+                ClassSet(
+                    sorted(names),
+                    sorted(matched_classes),
+                ),
+                *matched_rule.parts[3:],
             ),
             matched_rule.varargs,
         )
@@ -471,10 +474,20 @@ def merge_class_sets(
 ):
     removed_rules = 0
     added_rules = 0
-    for rule_type in CLASS_SETS_RULE_TYPES:
+
+    for rule_type in ALLOW_RULE_TYPES:
         new_removed_rules, new_added_rules = merge_class_set_rule_type(
             rules,
-            rule_type,
+            (rule_type, None, None, None, None),
+            class_sets,
+        )
+        removed_rules += new_removed_rules
+        added_rules += new_added_rules
+
+    for rule_type in IOCTL_RULE_TYPES:
+        new_removed_rules, new_added_rules = merge_class_set_rule_type(
+            rules,
+            (rule_type, None, None, None, None, None),
             class_sets,
         )
         removed_rules += new_removed_rules
