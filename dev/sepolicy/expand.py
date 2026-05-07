@@ -88,6 +88,7 @@ define(`divert', `')
 
     if verbose:
         text_path = Path(f'/tmp/m4/input_macro_{text_name}.txt')
+        text_path.parent.mkdir(exist_ok=True)
         print(f'Writing {text_path}')
         text_path.write_text(input_text)
 
