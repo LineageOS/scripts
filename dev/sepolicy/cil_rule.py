@@ -132,16 +132,6 @@ def is_valid_cil_line(line: str):
     return True
 
 
-# TODO: implement this properly by allowing macros to have conditional
-# rules based on input params
-def is_allow_process_sigchld(parts: raw_parts_list):
-    return (
-        parts[0] == RuleType.ALLOW
-        and len(parts) == 4
-        and parts[3] == ['process', ['sigchld']]
-    )
-
-
 def unpack_ioctls(parts: raw_parts_list):
     # (. (range . .) ((range . .)))
 
@@ -282,12 +272,6 @@ class CilRule(Rule):
         if rule_type in unknown_rule_types:
             return
 
-        # Remove allow $3 $1:process sigchld as it is part of an ifelse
-        # statement based on one of the parameters and it is not possible
-        # to generate the checks for it as part of macro expansion
-        if is_allow_process_sigchld(parts):
-            return
-
         match rule_type:
             case (
                 RuleType.ALLOW
@@ -295,6 +279,15 @@ class CilRule(Rule):
                 | RuleType.AUDITALLOW
                 | RuleType.DONTAUDIT
             ):
+                # Remove allow $3 $1:process sigchld as it is part of an ifelse
+                # statement based on one of the parameters and it is not
+                # possible to generate the checks for it as part of macro
+                # expansion
+                # TODO: implement this properly by allowing macros to have
+                # conditional rules based on input params
+                if len(parts) == 4 and parts[3] == ['process', ['sigchld']]:
+                    return
+
                 # (allow a b (c (...)))
                 assert len(parts) == 4, line
                 assert len(parts[3]) == 2, line

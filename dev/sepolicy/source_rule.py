@@ -13,7 +13,6 @@ from sepolicy.rule import (
     RuleType,
     flatten_parts,
     raw_part,
-    raw_parts_list,
     trim_contexts_label,
     unpack_line,
 )
@@ -74,16 +73,6 @@ def unpack_ioctls(ioctls: List[str]):
         ranges.append((start, end))
 
     return Ioctls(ranges)
-
-
-# TODO: implement this properly by allowing macros to have conditional
-# rules based on input params
-def is_allow_process_sigchld(parts: raw_parts_list):
-    return (
-        parts[0] == RuleType.ALLOW
-        and len(parts) == 5
-        and parts[3:] == ['process', 'sigchld']
-    )
 
 
 def structure_conditional_types(parts: raw_part, all_negatives: bool = False):
@@ -193,12 +182,6 @@ class SourceRule(Rule):
         if parts[0] in unknown_rule_types:
             return
 
-        # Remove allow $3 $1:process sigchld as it is part of an ifelse
-        # statement based on one of the parameters and it is not possible
-        # to generate the checks for it as part of macro expansion
-        if is_allow_process_sigchld(parts):
-            return
-
         match parts[0]:
             case (
                 RuleType.ALLOW
@@ -206,6 +189,19 @@ class SourceRule(Rule):
                 | RuleType.AUDITALLOW
                 | RuleType.DONTAUDIT
             ):
+                # Remove allow $3 $1:process sigchld as it is part of an ifelse
+                # statement based on one of the parameters and it is not
+                # possible to generate the checks for it as part of macro
+                # expansion
+                # TODO: implement this properly by allowing macros to have
+                # conditional rules based on input params
+                if (
+                    len(parts) == 5
+                    and parts[3] == 'process'
+                    and parts[4] == 'sigchld'
+                ):
+                    return
+
                 # neverallow ~{ a b } c:d e;
                 negative_srcs = False
                 if len(parts) > 5 and parts[1] == '~':
