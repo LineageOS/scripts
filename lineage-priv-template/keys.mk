@@ -1,6 +1,10 @@
 # SPDX-FileCopyrightText: The LineageOS Project
 # SPDX-License-Identifier: Apache-2.0
 
+# AVB_CUSTOM_KEY_PATH := vendor/lineage-priv/keys/avb.pk8
+# AVB_CUSTOM_ALGORITHM := SHA256_RSA4096
+WITH_AVB ?= false
+
 PRODUCT_CERTIFICATE_OVERRIDES := \
     com.android.adbd:com.android.adbd.certificate.override \
     com.android.adservices:com.android.adservices.certificate.override \
