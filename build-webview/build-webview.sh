@@ -5,8 +5,9 @@
 
 set -e
 
-chromium_version="148.0.7778.120"
-chromium_code="7778120"
+chromium_version="149.0.7827.59"
+chromium_code="7827059"
+ccache=0
 clean=0
 gsync=0
 supported_archs=(arm arm64 x86 x64)
@@ -21,6 +22,7 @@ usage() {
     echo
     echo "  Options:"
     echo "    -a <arch> Build specified arch"
+    echo "    -C Use ccache"
     echo "    -c Clean"
     echo "    -h Show this message"
     echo "    -r <release> Specify chromium release"
@@ -58,6 +60,10 @@ build() {
     fi
     build_args+=' android_default_version_code="'$code'"'
 
+    if [ "$ccache" -eq 1 ] ; then
+        build_args+=' cc_wrapper="'ccache'"'
+    fi
+
     gn gen "out/$1" --args="$build_args"
     ninja -C out/$1 system_webview_apk
     if [ "$?" -eq 0 ]; then
@@ -79,7 +85,7 @@ build() {
     fi
 }
 
-while getopts ":a:chr:s" opt; do
+while getopts ":a:Cchr:s" opt; do
     case $opt in
         a) for arch in ${supported_archs[@]}; do
                [ "$OPTARG" '==' "$arch" ] && build_arch="$OPTARG"
@@ -90,6 +96,7 @@ while getopts ":a:chr:s" opt; do
                exit 1
            fi
            ;;
+        C) ccache=1 ;;
         c) clean=1 ;;
         h) usage ;;
         r) version=(${OPTARG//:/ })
