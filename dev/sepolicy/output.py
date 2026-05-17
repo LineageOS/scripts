@@ -8,12 +8,12 @@ from functools import cache
 from pathlib import Path
 from typing import Dict, List, Optional, Set, Tuple
 
-from sepolicy.conditional_type import ConditionalType
 from sepolicy.rule import (
     Rule,
     RuleType,
-    rule_part,
+    rule_defined_types,
     rule_type_order,
+    rule_used_types,
 )
 from sepolicy.rule_container import RuleContainer
 from sepolicy.source_policy import Source
@@ -128,78 +128,6 @@ def group_rules(rules: RuleContainer):
             regrouped_rules[group_name].add(rule)
 
     return regrouped_rules
-
-
-def _rule_used_types(rule: Rule, used_types: Set[str]):
-    def handle_type(t: rule_part):
-        if isinstance(t, str):
-            used_types.add(t)
-        elif isinstance(t, ConditionalType):
-            for p in t.positive:
-                used_types.add(p)
-            for n in t.negative:
-                used_types.add(n)
-
-    match rule.rule_type:
-        case (
-            RuleType.ALLOW
-            | RuleType.NEVERALLOW
-            | RuleType.AUDITALLOW
-            | RuleType.DONTAUDIT
-            | RuleType.ALLOWXPERM
-            | RuleType.NEVERALLOWXPERM
-            | RuleType.AUDITALLOWXPERM
-            | RuleType.DONTAUDITXPERM
-            | RuleType.TYPE_TRANSITION
-        ):
-            handle_type(rule.parts[0])
-            handle_type(rule.parts[1])
-        case RuleType.GENFSCON:
-            handle_type(rule.parts[2])
-        case RuleType.TYPE | RuleType.TYPEATTRIBUTE:
-            pass
-        case RuleType.ATTRIBUTE | RuleType.EXPANDATTRIBUTE:
-            # TODO: figure out if these should be taken into account
-            pass
-        case _:
-            assert False, rule
-
-
-def rule_used_types(rule: Rule):
-    used_types: Set[str] = set()
-
-    if rule.is_macro:
-        assert rule.expanded_rules is not None
-        for r in rule.expanded_rules:
-            _rule_used_types(r, used_types)
-    else:
-        _rule_used_types(rule, used_types)
-
-    return used_types
-
-
-def _rule_defined_types(
-    rule: Rule,
-    defined_types: Set[str],
-):
-    if rule.rule_type != RuleType.TYPE:
-        return None
-
-    assert isinstance(rule.parts[0], str)
-    defined_types.add(rule.parts[0])
-
-
-def rule_defined_types(rule: Rule):
-    defined_types: Set[str] = set()
-
-    if rule.is_macro:
-        assert rule.expanded_rules is not None
-        for r in rule.expanded_rules:
-            _rule_defined_types(r, defined_types)
-    else:
-        _rule_defined_types(rule, defined_types)
-
-    return defined_types
 
 
 def rule_macro_sort_key(rule_formatted: Tuple[Rule, str]):
