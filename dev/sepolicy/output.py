@@ -6,14 +6,13 @@ from __future__ import annotations
 import re
 from functools import cache
 from pathlib import Path
-from typing import Dict, List, Optional, Set
+from typing import Dict, List, Optional, Set, Tuple
 
 from sepolicy.conditional_type import ConditionalType
 from sepolicy.rule import (
     Rule,
     RuleType,
     rule_part,
-    rule_sort_key,
     rule_type_order,
 )
 from sepolicy.rule_container import RuleContainer
@@ -203,12 +202,12 @@ def rule_defined_types(rule: Rule):
     return defined_types
 
 
-def rule_macro_sort_key(rule: Rule):
-    key = rule_sort_key(rule)
+def rule_macro_sort_key(rule_formatted: Tuple[Rule, str]):
+    rule, formatted = rule_formatted
 
     if not rule.is_macro:
         min_order = rule_type_order(rule)
-        return (min_order, key)
+        return (min_order, formatted)
 
     min_order = 0
 
@@ -218,33 +217,35 @@ def rule_macro_sort_key(rule: Rule):
         if order < min_order:
             min_order = order
 
-    return (min_order, key)
+    return (min_order, formatted)
 
 
-def enforce_type_decl_order(rules: List[Rule]):
-    type_rules: Dict[str, Rule] = {}
+def enforce_type_decl_order(rules_formatted: List[Tuple[Rule, str]]):
+    type_rules: Dict[str, Tuple[Rule, str]] = {}
 
-    for rule in rules:
+    for rf in rules_formatted:
+        rule, _ = rf
         for t in rule_defined_types(rule):
-            type_rules[t] = rule
+            type_rules[t] = rf
 
     emitted: Set[Rule] = set()
-    result: List[Rule] = []
+    result: List[Tuple[Rule, str]] = []
 
-    def emit(rule: Rule):
+    def emit(rf: Tuple[Rule, str]):
+        rule, _ = rf
         if rule in emitted:
             return
 
         for t in sorted(rule_used_types(rule)):
             dep = type_rules.get(t)
-            if dep is not None and dep != rule:
+            if dep is not None and dep[0] != rule:
                 emit(dep)
 
         emitted.add(rule)
-        result.append(rule)
+        result.append(rf)
 
-    for rule in rules:
-        emit(rule)
+    for rf in rules_formatted:
+        emit(rf)
 
     return result
 
@@ -255,8 +256,21 @@ def output_grouped_rules(
     output_dir: Path,
 ):
     for name, rules in grouped_rules.items():
+        rules_formatted = (
+            (
+                r,
+                r.format(
+                    class_perms=source.macros.class_perms,
+                    ioctls=source.macros.ioctls,
+                    ioctl_defines=source.macros.ioctl_defines,
+                    nlmsgs=source.macros.nlmsgs,
+                    nlmsg_defines=source.macros.nlmsg_defines,
+                ),
+            )
+            for r in rules
+        )
         sorted_rules = sorted(
-            rules,
+            rules_formatted,
             key=rule_macro_sort_key,
         )
 
@@ -265,17 +279,9 @@ def output_grouped_rules(
         output_path = output_dir / name
         with open(output_path, 'w') as o:
             last_type = None
-            for rule in sorted_rules:
+            for rule, formatted in sorted_rules:
                 if last_type is not None and rule.rule_type != last_type:
                     o.write('\n')
                 last_type = rule.rule_type
-                o.write(
-                    rule.format(
-                        class_perms=source.macros.class_perms,
-                        ioctls=source.macros.ioctls,
-                        ioctl_defines=source.macros.ioctl_defines,
-                        nlmsgs=source.macros.nlmsgs,
-                        nlmsg_defines=source.macros.nlmsg_defines,
-                    )
-                )
+                o.write(formatted)
                 o.write('\n')

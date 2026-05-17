@@ -353,26 +353,3 @@ def rule_type_order(rule: Rule):
         return -1
     else:
         return 1
-
-
-def rule_sort_key(rule: Rule):
-    compare_values: List[
-        Union[
-            rule_part,
-            Tuple[str, ...],
-            Optional[
-                Union[
-                    Perms,
-                    Ioctls,
-                    TypeTransitionTag,
-                    Types,
-                ]
-            ],
-        ]
-    ] = [
-        rule.rule_type,
-        *rule.parts,
-        rule.varargs,
-    ]
-
-    return tuple(str(h) for h in compare_values)
