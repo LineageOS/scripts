@@ -282,8 +282,7 @@ def _parse_cil_lines(
 
 
 def parse_cil_lines(
-    dump_root: Path,
-    origin: PolicyDumpOrigin,
+    cil_path: Path,
     rules: RuleContainer,
     genfs_rules: RuleContainer,
     conditional_types_map: Dict[str, ConditionalType],
@@ -293,14 +292,8 @@ def parse_cil_lines(
     name: str,
     verbose: bool,
 ):
-
-    selinux_path = Path(dump_root, origin.partition, 'etc/selinux')
-
-    cil_prefix = origin.cil_prefix or origin.partition
-    cil_name = origin.cil_file_name or f'{cil_prefix}_sepolicy.cil'
     line_parts_list = read_cil_lines(
-        selinux_path,
-        cil_name,
+        cil_path,
         name=name,
         verbose=verbose,
     )
@@ -330,12 +323,10 @@ def parse_cil_lines(
 
 
 def read_cil_lines(
-    selinux_path: Path,
-    cil_name: str,
+    cil_path: Path,
     name: str,
     verbose: bool,
 ):
-    cil_path = Path(selinux_path, cil_name)
     if verbose:
         print(f'Loading {name}: {cil_path}')
 
@@ -390,9 +381,13 @@ def parse_dump_policy_rules(
         ]
         reference_conditional_types_maps.append(reference_conditional_types_map)
 
+    selinux_path = Path(dump_root, origin.partition, 'etc/selinux')
+    cil_prefix = origin.cil_prefix or origin.partition
+    cil_name = origin.cil_file_name or f'{cil_prefix}_sepolicy.cil'
+    cil_path = Path(selinux_path, cil_name)
+
     parse_cil_lines(
-        dump_root,
-        origin,
+        cil_path,
         rules,
         genfs_rules,
         conditional_types_map,
