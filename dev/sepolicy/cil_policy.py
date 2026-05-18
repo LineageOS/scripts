@@ -374,7 +374,6 @@ def parse_dump_policy_rules(
     policy_index: Dict[PolicyName, Policy],
     dump_root: Path,
     policy_type: PolicyType,
-    conditional_types_maps: Dict[PolicyName, Dict[str, ConditionalType]],
     verbose: bool,
 ):
     origin = policy_type.origin
@@ -395,10 +394,11 @@ def parse_dump_policy_rules(
         environment_policy = policy_index[environment_name]
 
         rules.add_many(environment_policy.rules)
-        reference_conditional_types_map = conditional_types_maps[
-            environment_name
-        ]
-        reference_conditional_types_maps.append(reference_conditional_types_map)
+
+        if environment_policy.conditional_types_map is not None:
+            reference_conditional_types_maps.append(
+                environment_policy.conditional_types_map,
+            )
 
     classmap = None
     if origin.classmap_source_policy is not None:
@@ -476,7 +476,6 @@ def parse_dump_policies(
     source_index: SourceIndex,
     verbose: bool,
 ):
-    conditional_types_maps: Dict[PolicyName, Dict[str, ConditionalType]] = {}
     policy_index: Dict[PolicyName, Policy] = {}
 
     for policy_type in get_policy_types_by_origin(PolicyDumpOrigin):
@@ -506,7 +505,6 @@ def parse_dump_policies(
             policy_index,
             dump_root,
             policy_type,
-            conditional_types_maps=conditional_types_maps,
             verbose=verbose,
         )
         if parse_result is None:
@@ -527,12 +525,12 @@ def parse_dump_policies(
             rules,
             genfs_rules,
             contexts,
+            conditional_types_map=conditional_types_map,
             metadata=metadata,
             classmap=classmap,
         )
 
         policy_index[policy_type.name] = policy
-        conditional_types_maps[policy_type.name] = conditional_types_map
 
         print(f'Found policy: {policy}')
 

@@ -6,6 +6,7 @@ from enum import StrEnum
 from typing import Dict, List, Optional, Tuple, Type
 
 from sepolicy.classmap import Classmap
+from sepolicy.conditional_type import ConditionalType
 from sepolicy.rule import Rule
 from sepolicy.rule_container import RuleContainer
 from utils.frozendict import FrozenDict
@@ -469,6 +470,7 @@ class Policy:
     rules: RuleContainer
     genfs_rules: RuleContainer
     contexts: Dict[ContextsType, List[Tuple[str, ...]]]
+    conditional_types_map: Optional[Dict[str, ConditionalType]] = None
     metadata: Optional[PolicyMetadata] = None
     classmap: Optional[Classmap] = None
 
