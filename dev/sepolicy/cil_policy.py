@@ -381,7 +381,10 @@ def parse_dump_policy_rules(
         ]
         reference_conditional_types_maps.append(reference_conditional_types_map)
 
-    selinux_path = Path(dump_root, origin.partition, 'etc/selinux')
+    selinux_location = (
+        origin.location if origin.location is not None else 'etc/selinux'
+    )
+    selinux_path = Path(dump_root, origin.partition, selinux_location)
     cil_prefix = origin.cil_prefix or origin.partition
     cil_name = origin.cil_file_name or f'{cil_prefix}_sepolicy.cil'
     cil_path = Path(selinux_path, cil_name)

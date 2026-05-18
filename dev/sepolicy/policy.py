@@ -103,6 +103,7 @@ class PolicySourceOrigin(PolicyParsedOrigin):
 class PolicyDumpOrigin(PolicyParsedOrigin):
     partition: str
     version_source: PolicyVersionSource
+    location: Optional[str] = None
     cil_file_name: Optional[str] = None
     cil_prefix: Optional[str] = None
     # Needed at parse time
