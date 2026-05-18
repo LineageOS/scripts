@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Dict
 
 from bp.bp_utils import ANDROID_BP_COPYRIGHT
-from utils.utils import Color, android_root, color_print
+from utils.utils import android_root
 
 aconfig_protos = Path(
     android_root,
@@ -62,15 +62,6 @@ def extract_aconfig():
     )
     parser.add_argument('aconfig_flags_pb')
     parser.add_argument('output_dir')
-
-    aconfig_storage_rel_path = 'out/host/linux-x86/bin/aconfig-storage'
-    aconfig_storage_path = Path(android_root, aconfig_storage_rel_path)
-    if not aconfig_storage_path.exists():
-        color_print(
-            f'{aconfig_storage_rel_path} does not exist, run "m aconfig-storage"',
-            color=Color.RED,
-        )
-        exit(-1)
 
     args = parser.parse_args()
     output_dir: str = args.output_dir
