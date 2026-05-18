@@ -126,6 +126,9 @@ def unpack_ioctls(parts: raw_parts_list):
     ranges: List[Tuple[int, int]] = []
 
     for part in parts:
+        if isinstance(part, list) and part[0] != 'range':
+            part = part[0]
+
         if isinstance(part, str):
             ioctl = int(part, base=16)
             ranges.append((ioctl, ioctl))
