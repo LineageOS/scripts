@@ -3,7 +3,6 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 from typing import Callable, Dict, FrozenSet, List, Optional, Set, Tuple, cast
 
 from sepolicy.classmap import Classmap
@@ -19,18 +18,7 @@ from sepolicy.rule import (
 from sepolicy.varargs import Ioctls, Perms, TypeTransitionTag
 from utils.utils import Color, color_print
 
-CIL_COMMENT_LINE_START_MARKER = ';;* lmx '
-CIL_COMMENT_LINE_END_MARKER = ';;* lme'
-
-
-@dataclass
-class CilSectionStart:
-    name: str
-
-
-@dataclass
-class CilSectionEnd:
-    pass
+CIL_COMMENT_MARKER = ';'
 
 
 def assert_parts_str_list(value: raw_parts_list, line: str) -> List[str]:

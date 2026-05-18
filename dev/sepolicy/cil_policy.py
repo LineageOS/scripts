@@ -13,22 +13,18 @@ from typing import (
     Optional,
     Set,
     Tuple,
-    Union,
 )
 
 from sepolicy.cil_rule import (
-    CIL_COMMENT_LINE_END_MARKER,
-    CIL_COMMENT_LINE_START_MARKER,
+    CIL_COMMENT_MARKER,
     CilRule,
     CilRuleType,
-    CilSectionEnd,
-    CilSectionStart,
     unpack_cil_line,
 )
 from sepolicy.classmap import Classmap
 from sepolicy.conditional_type import ConditionalType
 from sepolicy.contexts import parse_contexts_texts
-from sepolicy.merge import merge_rules
+from sepolicy.merge import add_mergeable_rule, merge_current_rules
 from sepolicy.policy import (
     ContextsType,
     Policy,
@@ -45,14 +41,7 @@ from sepolicy.source_policy import SourceIndex
 from utils.frozendict import FrozenDict
 from utils.utils import read_texts, resolve_paths, split_normalize_text
 
-cil_line_type = Union[
-    Tuple[
-        str,
-        raw_parts_list,
-    ],
-    CilSectionStart,
-    CilSectionEnd,
-]
+cil_line_type = Tuple[str, raw_parts_list]
 
 
 # From system/sepolicy/flagging/Android.bp
@@ -266,30 +255,15 @@ def _parse_cil_lines(
     allowed_types: Optional[FrozenSet[str]] = None,
     disallowed_types: Optional[FrozenSet[str]] = None,
 ):
-    section_rules: List[Rule] = []
-    section: Optional[CilSectionStart] = None
+    mergeable_rules: List[Rule] = []
 
     def add_rule(rule: Rule):
-        if section is None:
-            rules.add(rule)
-            return
-
-        section_rules.append(rule)
+        add_mergeable_rule(rule, mergeable_rules, rules)
 
     def add_genfs_rule(rule: Rule):
         genfs_rules.add(rule)
 
     for line in line_parts_list:
-        if isinstance(line, CilSectionStart):
-            section = line
-            continue
-        elif isinstance(line, CilSectionEnd):
-            new_rules = merge_rules(section_rules)
-            rules.add_many(new_rules)
-            section_rules.clear()
-            section = None
-            continue
-
         text, parts = line
         CilRule.from_line(
             text,
@@ -303,6 +277,8 @@ def _parse_cil_lines(
             classmap=classmap,
             version=version,
         )
+
+    merge_current_rules(mergeable_rules, rules)
 
 
 def parse_cil_lines(
@@ -367,41 +343,11 @@ def read_cil_lines(
 
     line_parts_list: List[cil_line_type] = []
 
-    # There can be multiple sections originating from the same line,
-    # merge them together
-    section_name: Optional[str] = None
-    section_open = False
-    last_section_broken_end = False
-
     for line in cil_data.splitlines():
         if not line:
             continue
 
-        if line.startswith(CIL_COMMENT_LINE_START_MARKER):
-            new_section_name = line[len(CIL_COMMENT_LINE_START_MARKER) :]
-
-            assert not section_open
-            section_open = True
-
-            if section_name is not None:
-                if new_section_name == section_name:
-                    continue
-
-                line_parts_list.append(CilSectionEnd())
-
-            line_parts_list.append(CilSectionStart(new_section_name))
-            section_name = new_section_name
-            continue
-
-        if line.startswith(CIL_COMMENT_LINE_END_MARKER):
-            assert not last_section_broken_end
-
-            # Allow a single broken ;;* lme at the end of the file
-            if not section_open:
-                last_section_broken_end = True
-                continue
-
-            section_open = False
+        if line.startswith(CIL_COMMENT_MARKER):
             continue
 
         parts = unpack_cil_line(line)
@@ -409,11 +355,6 @@ def read_cil_lines(
             continue
 
         line_parts_list.append((line, parts))
-
-    assert not section_open
-
-    if section_name is not None:
-        line_parts_list.append(CilSectionEnd())
 
     return line_parts_list
 
