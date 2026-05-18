@@ -90,7 +90,7 @@ def process_policy_post_split(
 
     for policy_name in policy.type.output.cleanup_policy:
         cleanup_policy = policy_index[policy_name]
-        print(f'Removing policy {cleanup_policy} from {policy.pretty_name}')
+        print(f'Removing policy {policy_name} from {policy.pretty_name}')
 
         removed_rules = rules.remove_many(
             cleanup_policy.rules,
@@ -117,6 +117,7 @@ def process_policy_post_split(
             f'Removed {removed_genfs_rules} genfs rules from {policy.pretty_name}',
             color=Color.GREEN,
         )
+        print()
 
     replace_macro_rules(
         rules,
