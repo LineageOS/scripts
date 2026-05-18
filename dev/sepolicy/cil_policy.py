@@ -385,12 +385,12 @@ def parse_dump_policy_rules(
         origin.location if origin.location is not None else 'etc/selinux'
     )
     selinux_path = Path(dump_root, origin.partition, selinux_location)
-    cil_prefix = origin.cil_prefix or origin.partition
-    cil_name = origin.cil_file_name or f'{cil_prefix}_sepolicy.cil'
-    cil_path = Path(selinux_path, cil_name)
+    prefix = origin.file_prefix or origin.partition
+    file_name = origin.file_name or f'{prefix}_sepolicy.cil'
+    file_path = Path(selinux_path, file_name)
 
     parse_cil_lines(
-        cil_path,
+        file_path,
         rules,
         genfs_rules,
         conditional_types_map,

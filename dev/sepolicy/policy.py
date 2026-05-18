@@ -48,18 +48,18 @@ class PolicyName(StrEnum):
 
 
 def build_contexts_map(
-    cil_prefix: Optional[str] = None,
+    prefix: Optional[str] = None,
     bug_map_name: Optional[str] = None,
 ):
-    if cil_prefix is not None:
-        cil_prefix = f'{cil_prefix}_'
+    if prefix is not None:
+        prefix = f'{prefix}_'
     else:
-        cil_prefix = ''
+        prefix = ''
 
     if bug_map_name is None:
         bug_map_name = str(ContextsType.BUG_MAP_NAME)
 
-    d = {k: f'{cil_prefix}{k}' for k in ContextsType}
+    d = {k: f'{prefix}{k}' for k in ContextsType}
 
     # Special name on vendor
     d[ContextsType.BUG_MAP_NAME] = bug_map_name
@@ -104,8 +104,8 @@ class PolicyDumpOrigin(PolicyParsedOrigin):
     partition: str
     version_source: PolicyVersionSource
     location: Optional[str] = None
-    cil_file_name: Optional[str] = None
-    cil_prefix: Optional[str] = None
+    file_name: Optional[str] = None
+    file_prefix: Optional[str] = None
     # Needed at parse time
     needed_policy: Optional[Tuple[PolicyName, ...]] = None
 
@@ -255,9 +255,9 @@ add_policy_type(
             format=PolicyParseFormat.CIL,
             partition='system',
             version_source=PolicyVersionSource.SDK,
-            cil_prefix='plat',
+            file_prefix='plat',
             contexts_name_map=build_contexts_map(
-                cil_prefix='plat',
+                prefix='plat',
             ),
         ),
         referencing=PolicyReferencing(
@@ -303,9 +303,9 @@ add_policy_type(
             format=PolicyParseFormat.CIL,
             partition='system_ext',
             version_source=PolicyVersionSource.SDK,
-            cil_prefix='system_ext',
+            file_prefix='system_ext',
             contexts_name_map=build_contexts_map(
-                cil_prefix='system_ext',
+                prefix='system_ext',
             ),
             needed_policy=(PolicyName.CIL_PLATFORM,),
         ),
@@ -354,9 +354,9 @@ add_policy_type(
             format=PolicyParseFormat.CIL,
             partition='product',
             version_source=PolicyVersionSource.SDK,
-            cil_prefix='product',
+            file_prefix='product',
             contexts_name_map=build_contexts_map(
-                cil_prefix='product',
+                prefix='product',
             ),
             needed_policy=(PolicyName.CIL_PLATFORM,),
         ),
@@ -407,7 +407,7 @@ add_policy_type(
             format=PolicyParseFormat.CIL,
             partition='vendor',
             version_source=PolicyVersionSource.BOARD_API,
-            cil_file_name='plat_pub_versioned.cil',
+            file_name='plat_pub_versioned.cil',
             # Do not read contexts
             contexts_name_map=FrozenDict({}),
         ),
@@ -421,9 +421,9 @@ add_policy_type(
             format=PolicyParseFormat.CIL,
             partition='vendor',
             version_source=PolicyVersionSource.BOARD_API,
-            cil_prefix='vendor',
+            file_prefix='vendor',
             contexts_name_map=build_contexts_map(
-                cil_prefix='vendor',
+                prefix='vendor',
                 bug_map_name='selinux_denial_metadata',
             ),
             needed_policy=(PolicyName.CIL_VERSIONED_PLATFORM,),
