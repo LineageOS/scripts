@@ -257,6 +257,13 @@ class CilRuleParser:
 
         assert False, f'Failed to find conditional type: {name}'
 
+    def prepare_type(self, name: str):
+        name = name.removesuffix(self.version_suffix)
+        if is_type_generated(name):
+            return self.conditional_type_by_name(name)
+
+        return name
+
     def parse_line(
         self,
         line: str,
@@ -305,14 +312,8 @@ class CilRuleParser:
                 assert isinstance(parts[3][0], str), line
                 assert isinstance(parts[3][1], list), line
 
-                src = parts[1].removesuffix(self.version_suffix)
-                if is_type_generated(src):
-                    src = self.conditional_type_by_name(src)
-
-                dst = parts[2].removesuffix(self.version_suffix)
-                if is_type_generated(dst):
-                    dst = self.conditional_type_by_name(dst)
-
+                src = self.prepare_type(parts[1])
+                dst = self.prepare_type(parts[2])
                 class_name = parts[3][0]
 
                 perms = assert_parts_str_list(parts[3][1], line)
@@ -346,13 +347,8 @@ class CilRuleParser:
                 assert isinstance(parts[3][1], str), line
                 assert isinstance(parts[3][2], list), line
 
-                src = parts[1].removesuffix(self.version_suffix)
-                if is_type_generated(src):
-                    src = self.conditional_type_by_name(src)
-
-                dst = parts[2].removesuffix(self.version_suffix)
-                if is_type_generated(dst):
-                    dst = self.conditional_type_by_name(dst)
+                src = self.prepare_type(parts[1])
+                dst = self.prepare_type(parts[2])
 
                 rule = Rule(
                     CIL_XPERM_RULE_MAP[rule_type],
@@ -449,13 +445,8 @@ class CilRuleParser:
                 else:
                     tag = None
 
-                src = parts[1].removesuffix(self.version_suffix)
-                if is_type_generated(src):
-                    src = self.conditional_type_by_name(src)
-
-                dst = parts[2].removesuffix(self.version_suffix)
-                if is_type_generated(dst):
-                    dst = self.conditional_type_by_name(dst)
+                src = self.prepare_type(parts[1])
+                dst = self.prepare_type(parts[2])
 
                 rule = Rule(
                     RuleType.TYPE_TRANSITION,
