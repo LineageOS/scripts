@@ -8,7 +8,7 @@ from dataclasses import astuple, dataclass
 from pathlib import Path
 from typing import DefaultDict, Dict, List, Optional, Set, Tuple
 
-from sepolicy.cil_rule import CilRule, unpack_cil_line
+from sepolicy.cil_rule import CilRuleParser, unpack_cil_line
 from sepolicy.classmap import Classmap
 from sepolicy.contexts import (
     ContextsType,
@@ -503,20 +503,20 @@ def parse_source_cil_rules(
     def add_rule(rule: Rule):
         rules.add(rule)
 
+    parser = CilRuleParser(
+        conditional_types_map={},
+        reference_conditional_types_maps=[],
+        add_rule=add_rule,
+        add_genfs_rule=None,
+        version=None,
+    )
+
     for line in source_cil_rules_path.read_text().splitlines():
         parts = unpack_cil_line(line)
         if parts is None:
             continue
 
-        CilRule.from_line(
-            line,
-            parts,
-            conditional_types_map={},
-            reference_conditional_types_maps=[],
-            add_rule=add_rule,
-            add_genfs_rule=None,
-            version=None,
-        )
+        parser.parse_line(line, parts)
 
     return rules
 

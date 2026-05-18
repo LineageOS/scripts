@@ -222,27 +222,9 @@ def unpack_cil_line(line: str):
     return parts
 
 
-def conditional_type_by_name(
-    conditional_types_map: Dict[str, ConditionalType],
-    reference_conditional_types_maps: List[Dict[str, ConditionalType]],
-    name: str,
-):
-    if name in conditional_types_map:
-        return conditional_types_map[name]
-
-    for m in reference_conditional_types_maps:
-        if name in m:
-            return m[name]
-
-    assert False, f'Failed to find conditional type: {name}'
-
-
-class CilRule(Rule):
-    @classmethod
-    def from_line(
-        cls,
-        line: str,
-        parts: raw_parts_list,
+class CilRuleParser:
+    def __init__(
+        self,
         conditional_types_map: Dict[str, ConditionalType],
         reference_conditional_types_maps: List[Dict[str, ConditionalType]],
         add_rule: Callable[[Rule], None],
@@ -252,18 +234,47 @@ class CilRule(Rule):
         disallowed_types: Optional[FrozenSet[str]] = None,
         classmap: Optional[Classmap] = None,
     ):
-        version_suffix = ''
+        self.conditional_types_map = conditional_types_map
+        self.reference_conditional_types_maps = reference_conditional_types_maps
+        self.add_rule = add_rule
+        self.add_genfs_rule = add_genfs_rule
+        self.allowed_types = allowed_types
+        self.disallowed_types = disallowed_types
+        self.classmap = classmap
+
+        self.version_suffix = ''
         if version is not None:
             version = version.replace('.', '_')
-            version_suffix = f'_{version}'
+            self.version_suffix = f'_{version}'
 
+    def conditional_type_by_name(self, name: str):
+        if name in self.conditional_types_map:
+            return self.conditional_types_map[name]
+
+        for m in self.reference_conditional_types_maps:
+            if name in m:
+                return m[name]
+
+        assert False, f'Failed to find conditional type: {name}'
+
+    def parse_line(
+        self,
+        line: str,
+        parts: raw_parts_list,
+    ):
         rule_type = parts[0]
         assert isinstance(rule_type, str), line
 
-        if allowed_types is not None and rule_type not in allowed_types:
+        if (
+            self.allowed_types is not None
+            and rule_type not in self.allowed_types
+        ):
             return
 
-        if disallowed_types is not None and rule_type in disallowed_types:
+        if (
+            self.disallowed_types is not None
+            and rule_type in self.disallowed_types
+        ):
             return
 
         # Remove rules that don't have a meaningful source mapping
@@ -294,28 +305,20 @@ class CilRule(Rule):
                 assert isinstance(parts[3][0], str), line
                 assert isinstance(parts[3][1], list), line
 
-                src = parts[1].removesuffix(version_suffix)
+                src = parts[1].removesuffix(self.version_suffix)
                 if is_type_generated(src):
-                    src = conditional_type_by_name(
-                        conditional_types_map,
-                        reference_conditional_types_maps,
-                        src,
-                    )
+                    src = self.conditional_type_by_name(src)
 
-                dst = parts[2].removesuffix(version_suffix)
+                dst = parts[2].removesuffix(self.version_suffix)
                 if is_type_generated(dst):
-                    dst = conditional_type_by_name(
-                        conditional_types_map,
-                        reference_conditional_types_maps,
-                        dst,
-                    )
+                    dst = self.conditional_type_by_name(dst)
 
                 class_name = parts[3][0]
 
                 perms = assert_parts_str_list(parts[3][1], line)
                 is_all = False
-                if classmap is not None:
-                    class_perms = classmap.class_perms(class_name)
+                if self.classmap is not None:
+                    class_perms = self.classmap.class_perms(class_name)
 
                     is_all = perms == class_perms
                     if not is_all:
@@ -326,7 +329,7 @@ class CilRule(Rule):
                     (src, dst, class_name),
                     Perms(perms, is_all),
                 )
-                add_rule(rule)
+                self.add_rule(rule)
             case (
                 CilRuleType.ALLOWX
                 | CilRuleType.AUDITALLOWX
@@ -343,28 +346,20 @@ class CilRule(Rule):
                 assert isinstance(parts[3][1], str), line
                 assert isinstance(parts[3][2], list), line
 
-                src = parts[1].removesuffix(version_suffix)
+                src = parts[1].removesuffix(self.version_suffix)
                 if is_type_generated(src):
-                    src = conditional_type_by_name(
-                        conditional_types_map,
-                        reference_conditional_types_maps,
-                        src,
-                    )
+                    src = self.conditional_type_by_name(src)
 
-                dst = parts[2].removesuffix(version_suffix)
+                dst = parts[2].removesuffix(self.version_suffix)
                 if is_type_generated(dst):
-                    dst = conditional_type_by_name(
-                        conditional_types_map,
-                        reference_conditional_types_maps,
-                        dst,
-                    )
+                    dst = self.conditional_type_by_name(dst)
 
                 rule = Rule(
                     CIL_XPERM_RULE_MAP[rule_type],
                     (src, dst, parts[3][1], parts[3][0]),
                     unpack_ioctls(parts[3][2]),
                 )
-                add_rule(rule)
+                self.add_rule(rule)
             case CilRuleType.TYPEATTRIBUTE:
                 # (typeattribute a)
                 assert len(parts) == 2, line
@@ -375,7 +370,7 @@ class CilRule(Rule):
                 if is_type_generated(parts[1]):
                     return
 
-                t = parts[1].removesuffix(version_suffix)
+                t = parts[1].removesuffix(self.version_suffix)
 
                 # Rename typeattribute to attribute to match source
                 # typeattribute rules in source expand to typeattributeset,
@@ -384,10 +379,10 @@ class CilRule(Rule):
                     RuleType.ATTRIBUTE,
                     (t,),
                 )
-                add_rule(rule)
+                self.add_rule(rule)
             case CilRuleType.TYPEATTRIBUTESET:
                 assert isinstance(parts[1], str), line
-                v = parts[1].removesuffix(version_suffix)
+                v = parts[1].removesuffix(self.version_suffix)
 
                 # Process conditional types and add them to a map to be replaced
                 # into the other rules later
@@ -395,26 +390,25 @@ class CilRule(Rule):
                     assert isinstance(parts[2], list)
 
                     conditional_type = create_conditional_type(
-                        version_suffix,
+                        self.version_suffix,
                         parts[2],
                     )
                     if conditional_type is None:
                         return
 
-                    assert v not in conditional_types_map, line
-                    conditional_types_map[v] = conditional_type
+                    assert v not in self.conditional_types_map, line
+                    self.conditional_types_map[v] = conditional_type
                     return
 
                 # Expand typeattributeset into multiple typeattribute rules
                 for t in parts[2]:
                     assert isinstance(t, str), line
-                    t = t.removesuffix(version_suffix)
-
+                    t = t.removesuffix(self.version_suffix)
                     rule = Rule(
                         RuleType.TYPEATTRIBUTE,
                         (t, v),
                     )
-                    add_rule(rule)
+                    self.add_rule(rule)
             case RuleType.GENFSCON:
                 # (genfscon sysfs /kernel/aov (u object_r sysfs_adspd ((s0) (s0))))
                 assert len(parts) == 4, line
@@ -437,8 +431,8 @@ class CilRule(Rule):
                     rule_type,
                     (parts[1], parts[2], parts[3][2]),
                 )
-                assert add_genfs_rule is not None
-                add_genfs_rule(rule)
+                assert self.add_genfs_rule is not None
+                self.add_genfs_rule(rule)
             case CilRuleType.TYPETRANSITION:
                 # (typetransition a b c d)
                 # (typetransition a b c "[userfaultfd]" d)
@@ -455,28 +449,20 @@ class CilRule(Rule):
                 else:
                     tag = None
 
-                src = parts[1].removesuffix(version_suffix)
+                src = parts[1].removesuffix(self.version_suffix)
                 if is_type_generated(src):
-                    src = conditional_type_by_name(
-                        conditional_types_map,
-                        reference_conditional_types_maps,
-                        src,
-                    )
+                    src = self.conditional_type_by_name(src)
 
-                dst = parts[2].removesuffix(version_suffix)
+                dst = parts[2].removesuffix(self.version_suffix)
                 if is_type_generated(dst):
-                    dst = conditional_type_by_name(
-                        conditional_types_map,
-                        reference_conditional_types_maps,
-                        dst,
-                    )
+                    dst = self.conditional_type_by_name(dst)
 
                 rule = Rule(
                     RuleType.TYPE_TRANSITION,
                     (src, dst, parts[3], parts[-1]),
                     tag,
                 )
-                add_rule(rule)
+                self.add_rule(rule)
             case CilRuleType.EXPANDTYPEATTRIBUTE:
                 # (expandtypeattribute (a) true)
                 assert len(parts) == 3, line
@@ -489,7 +475,7 @@ class CilRule(Rule):
                     RuleType.EXPANDATTRIBUTE,
                     (parts[1][0], parts[2]),
                 )
-                add_rule(rule)
+                self.add_rule(rule)
             case RuleType.TYPE:
                 assert len(parts) == 2
                 assert isinstance(parts[1], str)
@@ -498,7 +484,7 @@ class CilRule(Rule):
                     rule_type,
                     (parts[1],),
                 )
-                add_rule(rule)
+                self.add_rule(rule)
             case CilRuleType.COMMON | CilRuleType.CLASS:
                 assert len(parts) == 3, line
                 assert isinstance(parts[1], str), line
@@ -510,7 +496,7 @@ class CilRule(Rule):
                     (parts[1],),
                     OrderedPerms(perms),
                 )
-                add_rule(rule)
+                self.add_rule(rule)
             case CilRuleType.CLASSCOMMON:
                 assert len(parts) == 3, line
                 assert isinstance(parts[1], str), line
@@ -522,6 +508,6 @@ class CilRule(Rule):
                         parts[2],
                     ),
                 )
-                add_rule(rule)
+                self.add_rule(rule)
             case _:
                 assert False, line

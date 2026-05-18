@@ -18,7 +18,7 @@ from typing import (
 from sepolicy.cil_rule import (
     CIL_CLASSPERM_TYPES,
     CIL_COMMENT_MARKER,
-    CilRule,
+    CilRuleParser,
     CilRuleType,
     unpack_cil_line,
 )
@@ -264,20 +264,20 @@ def _parse_cil_lines(
     def add_genfs_rule(rule: Rule):
         genfs_rules.add(rule)
 
+    parser = CilRuleParser(
+        conditional_types_map=conditional_types_map,
+        reference_conditional_types_maps=reference_conditional_types_maps,
+        add_rule=add_rule,
+        add_genfs_rule=add_genfs_rule,
+        version=version,
+        allowed_types=allowed_types,
+        disallowed_types=disallowed_types,
+        classmap=classmap,
+    )
+
     for line in line_parts_list:
         text, parts = line
-        CilRule.from_line(
-            text,
-            parts,
-            conditional_types_map=conditional_types_map,
-            reference_conditional_types_maps=reference_conditional_types_maps,
-            allowed_types=allowed_types,
-            disallowed_types=disallowed_types,
-            add_rule=add_rule,
-            add_genfs_rule=add_genfs_rule,
-            classmap=classmap,
-            version=version,
-        )
+        parser.parse_line(text, parts)
 
     merge_current_rules(mergeable_rules, rules)
 
