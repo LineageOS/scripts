@@ -385,7 +385,11 @@ def parse_dump_policy_rules(
         origin.location if origin.location is not None else 'etc/selinux'
     )
     selinux_path = Path(dump_root, origin.partition, selinux_location)
-    prefix = origin.file_prefix or origin.partition
+    prefix = (
+        origin.file_prefix
+        if origin.file_prefix is not None
+        else origin.partition
+    )
     file_name = origin.file_name or f'{prefix}_sepolicy.cil'
     file_path = Path(selinux_path, file_name)
 
