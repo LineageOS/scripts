@@ -11,7 +11,6 @@ from typing import (
     FrozenSet,
     List,
     Optional,
-    Set,
     Tuple,
 )
 
@@ -45,24 +44,26 @@ cil_line_type = Tuple[str, raw_parts_list]
 
 
 # From system/sepolicy/flagging/Android.bp
-NEEDED_BUILD_FLAGS = {
-    'RELEASE_AVF_SUPPORT_CUSTOM_VM_WITH_PARAVIRTUALIZED_DEVICES',
-    'RELEASE_AVF_ENABLE_EARLY_VM',
-    'RELEASE_AVF_ENABLE_DEVICE_ASSIGNMENT',
-    'RELEASE_AVF_ENABLE_LLPVM_CHANGES',
-    'RELEASE_AVF_ENABLE_NETWORK',
-    'RELEASE_AVF_ENABLE_MICROFUCHSIA',
-    'RELEASE_AVF_ENABLE_VM_TO_TEE_SERVICES_ALLOWLIST',
-    'RELEASE_AVF_ENABLE_WIDEVINE_PVM',
-    'RELEASE_RANGING_STACK',
-    'RELEASE_READ_FROM_NEW_STORAGE',
-    'RELEASE_SUPERVISION_SERVICE',
-    'RELEASE_HARDWARE_BLUETOOTH_RANGING_SERVICE',
-    'RELEASE_UNLOCKED_STORAGE_API',
-    'RELEASE_BLUETOOTH_SOCKET_SERVICE',
-    'RELEASE_SEPOLICY_RESTRICT_KERNEL_KEYRING_SEARCH',
-    'RELEASE_TELEPHONY_MODULE',
-}
+NEEDED_BUILD_FLAGS = frozenset(
+    {
+        'RELEASE_AVF_SUPPORT_CUSTOM_VM_WITH_PARAVIRTUALIZED_DEVICES',
+        'RELEASE_AVF_ENABLE_EARLY_VM',
+        'RELEASE_AVF_ENABLE_DEVICE_ASSIGNMENT',
+        'RELEASE_AVF_ENABLE_LLPVM_CHANGES',
+        'RELEASE_AVF_ENABLE_NETWORK',
+        'RELEASE_AVF_ENABLE_MICROFUCHSIA',
+        'RELEASE_AVF_ENABLE_VM_TO_TEE_SERVICES_ALLOWLIST',
+        'RELEASE_AVF_ENABLE_WIDEVINE_PVM',
+        'RELEASE_RANGING_STACK',
+        'RELEASE_READ_FROM_NEW_STORAGE',
+        'RELEASE_SUPERVISION_SERVICE',
+        'RELEASE_HARDWARE_BLUETOOTH_RANGING_SERVICE',
+        'RELEASE_UNLOCKED_STORAGE_API',
+        'RELEASE_BLUETOOTH_SOCKET_SERVICE',
+        'RELEASE_SEPOLICY_RESTRICT_KERNEL_KEYRING_SEARCH',
+        'RELEASE_TELEPHONY_MODULE',
+    }
+)
 
 
 def get_build_prop(lines: List[str], prop_name: str):
@@ -85,14 +86,14 @@ def sdk_value_to_version(sdk_value: str):
     return f'{sdk_value}.0'
 
 
-@cache
 def read_build_flags_data(build_flags_path: Path):
     return json.loads(build_flags_path.read_text())
 
 
+@cache
 def get_build_flag_variables(
     build_flags_path: Path,
-    build_flags: Set[str],
+    build_flags: FrozenSet[str],
 ):
     build_flags_data = read_build_flags_data(build_flags_path)
     flags = build_flags_data['flags']
@@ -153,10 +154,19 @@ def get_dump_policy_version(
 def parse_dump_policy_variables(
     dump_root: Path,
     version: str,
-    partition: str,
 ):
     platform_build_prop_path = Path(dump_root, 'system/build.prop')
+    platform_build_flags_path = Path(
+        dump_root,
+        'system',
+        'etc/build_flags.json',
+    )
     vendor_build_prop_path = Path(dump_root, 'vendor/build.prop')
+    vendor_build_flags_path = Path(
+        dump_root,
+        'vendor',
+        'etc/build_flags.json',
+    )
 
     target_arch = read_build_prop(
         vendor_build_prop_path,
@@ -168,21 +178,30 @@ def parse_dump_policy_variables(
         'ro.build.type',
     )
 
-    build_flags_path = Path(
-        dump_root,
-        partition,
-        'etc/build_flags.json',
-    )
-    build_flag_variables = get_build_flag_variables(
-        build_flags_path,
+    platform_build_flag_variables = get_build_flag_variables(
+        platform_build_flags_path,
         NEEDED_BUILD_FLAGS,
     )
+    vendor_build_flag_variables = get_build_flag_variables(
+        vendor_build_flags_path,
+        NEEDED_BUILD_FLAGS,
+    )
+
+    for key in (
+        platform_build_flag_variables.keys()
+        & vendor_build_flag_variables.keys()
+    ):
+        assert (
+            platform_build_flag_variables[key]
+            == vendor_build_flag_variables[key]
+        ), key
 
     #
     # Gather all variables needed for conditional
     #
     variables: Dict[str, str] = {}
-    variables.update(build_flag_variables)
+    variables.update(platform_build_flag_variables)
+    variables.update(vendor_build_flag_variables)
 
     #
     # From system/sepolicy/buid/soong/policy.go
@@ -486,7 +505,6 @@ def parse_dump_policies(dump_root: Path, verbose: bool):
         variables = parse_dump_policy_variables(
             dump_root,
             version=version,
-            partition=partition,
         )
 
         metadata = PolicyMetadata(
