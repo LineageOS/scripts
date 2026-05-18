@@ -27,7 +27,7 @@ from utils.utils import Color, color_print
 MACRO_DEFINITION_START = 'define(`'
 
 
-def macro_name_body_raw(macro: str):
+def _macro_name_body(macro: str):
     if not macro.startswith(MACRO_DEFINITION_START):
         return None, macro
 
@@ -51,11 +51,11 @@ def macro_name_body_raw(macro: str):
 
 
 def macro_name(macro: str):
-    return macro_name_body_raw(macro)[0]
+    return _macro_name_body(macro)[0]
 
 
-def macro_required_name_body_raw(macro: str):
-    name, body = macro_name_body_raw(macro)
+def macro_name_body(macro: str):
+    name, body = _macro_name_body(macro)
     if name is None:
         # color_print(f'Rule {macro} present among macros', color=Color.YELLOW)
         return None
@@ -64,7 +64,7 @@ def macro_required_name_body_raw(macro: str):
 
 
 def rule_body(text: str):
-    name, body = macro_name_body_raw(text)
+    name, body = _macro_name_body(text)
     if name is not None:
         color_print(f'Macro {name} present among rules', color=Color.YELLOW)
         return None
