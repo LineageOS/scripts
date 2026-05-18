@@ -56,7 +56,10 @@ def macro_name(macro: str):
 
 def macro_required_name_body_raw(macro: str):
     name, body = macro_name_body_raw(macro)
-    assert name is not None
+    if name is None:
+        # color_print(f'Rule {macro} present among macros', color=Color.YELLOW)
+        return None
+
     return name, body
 
 

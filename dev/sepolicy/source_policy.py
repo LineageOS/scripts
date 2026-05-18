@@ -98,11 +98,13 @@ class Source:
     policy_index: Dict[PolicyName, Policy]
 
 
-MACRO_FILES = {
+MACRO_FILES = [
     'global_macros',
     'neverallow_macros',
     'te_macros',
-}
+    # TODO: avoid rules parsing from re-parsing attributes every time...
+    'attributes',
+]
 IOCTL_DEFINES_FILE = 'ioctl_defines'
 IOCTL_MACROS_FILE = 'ioctl_macros'
 NLMSG_DEFINES_FILE = 'nlmsg_defines'
@@ -117,12 +119,12 @@ def read_source_macros_text(
 ):
     sepolicy_path = get_source_policy_path(version, current)
 
-    def _resolve_paths(names: Set[str]):
+    def _resolve_paths(names: List[str]):
         system_paths = [Path(sepolicy_path, 'public', n) for n in names]
 
         return system_paths + resolve_paths(
             extra_macros_paths,
-            names=names,
+            names=set(names),
             recursive=True,
             paths_name='macros',
             verbose=verbose,
@@ -130,10 +132,10 @@ def read_source_macros_text(
 
     return SourceMacrosText(
         macros=read_texts(_resolve_paths(MACRO_FILES)),
-        ioctl_defines=read_texts(_resolve_paths({IOCTL_DEFINES_FILE})),
-        nlmsg_defines=read_texts(_resolve_paths({NLMSG_DEFINES_FILE})),
-        ioctl_macros=read_texts(_resolve_paths({IOCTL_MACROS_FILE})),
-        nlmsg_macros=read_texts(_resolve_paths({NLMSG_MACROS_FILE})),
+        ioctl_defines=read_texts(_resolve_paths([IOCTL_DEFINES_FILE])),
+        nlmsg_defines=read_texts(_resolve_paths([NLMSG_DEFINES_FILE])),
+        ioctl_macros=read_texts(_resolve_paths([IOCTL_MACROS_FILE])),
+        nlmsg_macros=read_texts(_resolve_paths([NLMSG_MACROS_FILE])),
         flagging_macros=read_texts(
             [
                 Path(
