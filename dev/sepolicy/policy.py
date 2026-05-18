@@ -374,6 +374,7 @@ add_policy_type(
             relative_dir='product/public',
             cleanup_policy=(
                 PolicyName.CIL_PLATFORM,
+                PolicyName.CIL_SYSTEM_EXT_PUBLIC,
                 PolicyName.AUTOMATICALLY_ADDED,
                 PolicyName.SOURCE_PRODUCT_PUBLIC,
                 PolicyName.SOURCE_PLATFORM_TECHNICAL_DEBT,
@@ -389,6 +390,7 @@ add_policy_type(
             relative_dir='product/private',
             cleanup_policy=(
                 PolicyName.CIL_PLATFORM,
+                PolicyName.CIL_SYSTEM_EXT_PRIVATE,
                 PolicyName.AUTOMATICALLY_ADDED,
                 PolicyName.SOURCE_PRODUCT_PRIVATE,
                 PolicyName.SOURCE_PLATFORM_TECHNICAL_DEBT,

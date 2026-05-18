@@ -168,7 +168,7 @@ def process_policy_pre_split(
 
     if policy.type.output is None and policy.type.referencing is None:
         print(f'Skipping {policy.pretty_name}')
-        return
+        return ()
 
     rule_matches = match_macros_rules(
         policy.rules,
@@ -186,7 +186,7 @@ def process_policy_pre_split(
             output_dir,
             verbose,
         )
-        return
+        return (policy,)
 
     referencing_policy = policy_index[policy.type.referencing.name]
 
@@ -208,6 +208,8 @@ def process_policy_pre_split(
             output_dir,
             verbose,
         )
+
+    return split_policies
 
 
 def decompile_cil():
@@ -279,20 +281,27 @@ def decompile_cil():
     shutil.rmtree(output_dir, ignore_errors=True)
     output_dir.mkdir(parents=True, exist_ok=True)
 
+    new_cil_policy_index: Dict[PolicyName, Policy] = {}
     for policy in cil_policy_index.values():
         assert policy.metadata is not None
         source = source_index.get_source_policy(policy.metadata)
         policy_index = (
-            cil_policy_index | hardcoded_policy_index | source.policy_index
+            cil_policy_index
+            | new_cil_policy_index
+            | hardcoded_policy_index
+            | source.policy_index
         )
 
-        process_policy_pre_split(
+        policies = process_policy_pre_split(
             policy=policy,
             policy_index=policy_index,
             source=source,
             output_dir=output_dir,
             verbose=verbose,
         )
+        for policy in policies:
+            if policy.name not in cil_policy_index:
+                new_cil_policy_index[policy.name] = policy
 
 
 if __name__ == '__main__':
