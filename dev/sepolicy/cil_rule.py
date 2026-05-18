@@ -15,7 +15,7 @@ from sepolicy.rule import (
     raw_parts_list,
     unpack_line,
 )
-from sepolicy.varargs import Ioctls, Perms, TypeTransitionTag
+from sepolicy.varargs import Ioctls, OrderedPerms, Perms, TypeTransitionTag
 from utils.utils import Color, color_print
 
 CIL_COMMENT_MARKER = ';'
@@ -161,6 +161,16 @@ class CilRuleType:
     TYPEATTRIBUTE = 'typeattribute'
     TYPEATTRIBUTESET = 'typeattributeset'
     TYPETRANSITION = 'typetransition'
+    COMMON = 'common'
+    CLASSCOMMON = 'classcommon'
+    CLASS = 'class'
+
+
+CIL_CLASSPERM_TYPES = {
+    CilRuleType.COMMON,
+    CilRuleType.CLASSCOMMON,
+    CilRuleType.CLASS,
+}
 
 
 CIL_XPERM_RULE_MAP = {
@@ -174,8 +184,6 @@ unknown_rule_types: Set[str] = set(
     [
         'category',
         'categoryorder',
-        'class',
-        'classcommon',
         'classorder',
         'handleunknown',
         'mls',
@@ -191,7 +199,6 @@ unknown_rule_types: Set[str] = set(
         'sidcontext',
         'sidorder',
         'fsuse',
-        'common',
         'typealias',
         'typealiasactual',
         'typepermissive',
@@ -490,6 +497,30 @@ class CilRule(Rule):
                 rule = Rule(
                     rule_type,
                     (parts[1],),
+                )
+                add_rule(rule)
+            case CilRuleType.COMMON | CilRuleType.CLASS:
+                assert len(parts) == 3, line
+                assert isinstance(parts[1], str), line
+                assert isinstance(parts[2], list), line
+
+                perms = assert_parts_str_list(parts[2], line)
+                rule = Rule(
+                    rule_type,
+                    (parts[1],),
+                    OrderedPerms(perms),
+                )
+                add_rule(rule)
+            case CilRuleType.CLASSCOMMON:
+                assert len(parts) == 3, line
+                assert isinstance(parts[1], str), line
+                assert isinstance(parts[2], str), line
+                rule = Rule(
+                    rule_type,
+                    (
+                        parts[1],
+                        parts[2],
+                    ),
                 )
                 add_rule(rule)
             case _:

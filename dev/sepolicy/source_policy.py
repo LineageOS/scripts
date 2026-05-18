@@ -482,7 +482,7 @@ def parse_source_classmap(
         verbose=verbose,
     )
 
-    return Classmap(classmap_text)
+    return Classmap.from_text(classmap_text)
 
 
 def parse_source_cil_rules(

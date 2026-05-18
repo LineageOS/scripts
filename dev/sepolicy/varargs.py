@@ -86,6 +86,30 @@ class Perms:
         )
 
 
+class OrderedPerms:
+    def __init__(self, values: Iterable[str]):
+        self.__values = tuple(values)
+        self.__hash = hash(self.__values)
+
+    def __iter__(self):
+        return iter(self.__values)
+
+    def __len__(self):
+        return len(self.__values)
+
+    def __eq__(self, other: object):
+        if not isinstance(other, OrderedPerms):
+            return NotImplemented
+
+        return self.__values == other.__values
+
+    def __hash__(self):
+        return self.__hash
+
+    def __str__(self):
+        return join_varargs(list(self.__values))
+
+
 class Types:
     def __init__(self, values: Iterable[str]):
         self.__values = frozenset(values)

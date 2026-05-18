@@ -17,14 +17,27 @@ from typing import (
 
 from sepolicy.class_set import ClassSet
 from sepolicy.conditional_type import ConditionalType
-from sepolicy.varargs import Ioctls, Perms, Types, TypeTransitionTag
+from sepolicy.varargs import (
+    Ioctls,
+    OrderedPerms,
+    Perms,
+    Types,
+    TypeTransitionTag,
+)
 
 macro_argument_regex = re.compile(r'\$(\d+)')
 
 raw_part = Union[str, List['raw_part']]
 raw_parts_list = List[raw_part]
 rule_part = Union[str, ConditionalType, ClassSet]
-rule_hash_value = Union[rule_part, Perms, Ioctls, TypeTransitionTag, Types]
+rule_hash_value = Union[
+    rule_part,
+    OrderedPerms,
+    Perms,
+    Ioctls,
+    TypeTransitionTag,
+    Types,
+]
 
 
 def is_type_generated(part: rule_part):
@@ -295,6 +308,7 @@ class Rule:
         varargs: Optional[
             Union[
                 Perms,
+                OrderedPerms,
                 Ioctls,
                 TypeTransitionTag,
                 Types,

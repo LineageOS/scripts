@@ -16,6 +16,7 @@ from typing import (
 )
 
 from sepolicy.cil_rule import (
+    CIL_CLASSPERM_TYPES,
     CIL_COMMENT_MARKER,
     CilRule,
     CilRuleType,
@@ -250,8 +251,8 @@ def _parse_cil_lines(
     genfs_rules: RuleContainer,
     conditional_types_map: Dict[str, ConditionalType],
     reference_conditional_types_maps: List[Dict[str, ConditionalType]],
-    classmap: Classmap,
     version: str,
+    classmap: Optional[Classmap] = None,
     allowed_types: Optional[FrozenSet[str]] = None,
     disallowed_types: Optional[FrozenSet[str]] = None,
 ):
@@ -287,7 +288,7 @@ def parse_cil_lines(
     genfs_rules: RuleContainer,
     conditional_types_map: Dict[str, ConditionalType],
     reference_conditional_types_maps: List[Dict[str, ConditionalType]],
-    classmap: Classmap,
+    classmap: Optional[Classmap],
     version: str,
     name: str,
     verbose: bool,
@@ -297,6 +298,21 @@ def parse_cil_lines(
         name=name,
         verbose=verbose,
     )
+
+    if classmap is None:
+        classmap_rules = RuleContainer()
+        _parse_cil_lines(
+            line_parts_list,
+            classmap_rules,
+            # unused
+            RuleContainer(),
+            conditional_types_map,
+            reference_conditional_types_maps,
+            version=version,
+            allowed_types=frozenset(CIL_CLASSPERM_TYPES),
+        )
+
+        classmap = Classmap.from_rules(classmap_rules)
 
     # Parse twice to avoid having to deal with generated typeattributesets
     _parse_cil_lines(
@@ -318,8 +334,12 @@ def parse_cil_lines(
         reference_conditional_types_maps,
         classmap=classmap,
         version=version,
-        disallowed_types=frozenset({CilRuleType.TYPEATTRIBUTESET}),
+        disallowed_types=frozenset(
+            {CilRuleType.TYPEATTRIBUTESET} | CIL_CLASSPERM_TYPES
+        ),
     )
+
+    return classmap
 
 
 def read_cil_lines(
@@ -354,7 +374,6 @@ def parse_dump_policy_rules(
     policy_index: Dict[PolicyName, Policy],
     dump_root: Path,
     policy_type: PolicyType,
-    classmap: Classmap,
     conditional_types_maps: Dict[PolicyName, Dict[str, ConditionalType]],
     verbose: bool,
 ):
@@ -381,6 +400,10 @@ def parse_dump_policy_rules(
         ]
         reference_conditional_types_maps.append(reference_conditional_types_map)
 
+    classmap = None
+    if origin.classmap_source_policy is not None:
+        classmap = policy_index[origin.classmap_source_policy].classmap
+
     selinux_location = (
         origin.location if origin.location is not None else 'etc/selinux'
     )
@@ -399,7 +422,7 @@ def parse_dump_policy_rules(
 
         raise ValueError(f'{file_path} does not exist')
 
-    parse_cil_lines(
+    classmap = parse_cil_lines(
         file_path,
         rules,
         genfs_rules,
@@ -411,7 +434,7 @@ def parse_dump_policy_rules(
         verbose=verbose,
     )
 
-    return rules, genfs_rules, conditional_types_map
+    return rules, classmap, genfs_rules, conditional_types_map
 
 
 def parse_dump_policy_contexts(
@@ -477,20 +500,19 @@ def parse_dump_policies(
             variables,
         )
 
-        source_policy = source_index.get_source_policy(metadata)
+        source_index.get_source_policy(metadata)
 
         parse_result = parse_dump_policy_rules(
             policy_index,
             dump_root,
             policy_type,
-            classmap=source_policy.classmap,
             conditional_types_maps=conditional_types_maps,
             verbose=verbose,
         )
         if parse_result is None:
             continue
 
-        rules, genfs_rules, conditional_types_map = parse_result
+        rules, classmap, genfs_rules, conditional_types_map = parse_result
 
         contexts = parse_dump_policy_contexts(
             dump_root,
@@ -506,6 +528,7 @@ def parse_dump_policies(
             genfs_rules,
             contexts,
             metadata=metadata,
+            classmap=classmap,
         )
 
         policy_index[policy_type.name] = policy

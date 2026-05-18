@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from enum import StrEnum
 from typing import Dict, List, Optional, Tuple, Type
 
+from sepolicy.classmap import Classmap
 from sepolicy.rule import Rule
 from sepolicy.rule_container import RuleContainer
 from utils.frozendict import FrozenDict
@@ -103,6 +104,7 @@ class PolicySourceOrigin(PolicyParsedOrigin):
 class PolicyDumpOrigin(PolicyParsedOrigin):
     partition: str
     version_source: PolicyVersionSource
+    classmap_source_policy: Optional[PolicyName] = None
     location: Optional[str] = None
     file_name: Optional[str] = None
     file_prefix: Optional[str] = None
@@ -309,6 +311,7 @@ add_policy_type(
                 prefix='system_ext',
             ),
             needed_policy=(PolicyName.CIL_PLATFORM,),
+            classmap_source_policy=PolicyName.CIL_PLATFORM,
         ),
         referencing=PolicyReferencing(
             name=PolicyName.CIL_VERSIONED_PLATFORM,
@@ -360,6 +363,7 @@ add_policy_type(
                 prefix='product',
             ),
             needed_policy=(PolicyName.CIL_PLATFORM,),
+            classmap_source_policy=PolicyName.CIL_PLATFORM,
         ),
         referencing=PolicyReferencing(
             name=PolicyName.CIL_VERSIONED_PLATFORM,
@@ -411,6 +415,7 @@ add_policy_type(
             file_name='plat_pub_versioned.cil',
             # Do not read contexts
             contexts_name_map=FrozenDict({}),
+            classmap_source_policy=PolicyName.CIL_PLATFORM,
         ),
     )
 )
@@ -427,6 +432,7 @@ add_policy_type(
                 prefix='vendor',
                 bug_map_name='selinux_denial_metadata',
             ),
+            classmap_source_policy=PolicyName.CIL_PLATFORM,
             needed_policy=(PolicyName.CIL_VERSIONED_PLATFORM,),
         ),
         output=PolicyOutput(
@@ -464,6 +470,7 @@ class Policy:
     genfs_rules: RuleContainer
     contexts: Dict[ContextsType, List[Tuple[str, ...]]]
     metadata: Optional[PolicyMetadata] = None
+    classmap: Optional[Classmap] = None
 
     @property
     def type(self):
