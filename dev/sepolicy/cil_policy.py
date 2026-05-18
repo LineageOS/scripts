@@ -367,11 +367,12 @@ def parse_dump_policy_rules(
     conditional_types_maps: Dict[PolicyName, Dict[str, ConditionalType]],
     verbose: bool,
 ):
-    assert isinstance(policy_type.origin, PolicyDumpOrigin)
+    origin = policy_type.origin
+    assert isinstance(origin, PolicyDumpOrigin)
 
     version = get_dump_policy_version(
         dump_root,
-        policy_type.origin.version_source,
+        origin.version_source,
     )
 
     genfs_rules = RuleContainer()
@@ -379,7 +380,7 @@ def parse_dump_policy_rules(
     conditional_types_map: Dict[str, ConditionalType] = {}
     reference_conditional_types_maps: List[Dict[str, ConditionalType]] = []
 
-    for environment_name in policy_type.origin.needed_policy or ():
+    for environment_name in origin.needed_policy or ():
         assert environment_name in policy_index
         environment_policy = policy_index[environment_name]
 
@@ -391,7 +392,7 @@ def parse_dump_policy_rules(
 
     parse_cil_lines(
         dump_root,
-        policy_type.origin,
+        origin,
         rules,
         genfs_rules,
         conditional_types_map,
