@@ -389,6 +389,12 @@ def parse_dump_policy_rules(
     file_name = origin.file_name or f'{prefix}_sepolicy.cil'
     file_path = Path(selinux_path, file_name)
 
+    if not file_path.exists():
+        if origin.optional:
+            return
+
+        raise ValueError(f'{file_path} does not exist')
+
     parse_cil_lines(
         file_path,
         rules,
@@ -469,7 +475,7 @@ def parse_dump_policies(
 
         source_policy = source_index.get_source_policy(metadata)
 
-        rules, genfs_rules, conditional_types_map = parse_dump_policy_rules(
+        parse_result = parse_dump_policy_rules(
             policy_index,
             dump_root,
             policy_type,
@@ -477,6 +483,10 @@ def parse_dump_policies(
             conditional_types_maps=conditional_types_maps,
             verbose=verbose,
         )
+        if parse_result is None:
+            continue
+
+        rules, genfs_rules, conditional_types_map = parse_result
 
         contexts = parse_dump_policy_contexts(
             dump_root,

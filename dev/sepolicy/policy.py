@@ -106,6 +106,7 @@ class PolicyDumpOrigin(PolicyParsedOrigin):
     location: Optional[str] = None
     file_name: Optional[str] = None
     file_prefix: Optional[str] = None
+    optional: bool = False
     # Needed at parse time
     needed_policy: Optional[Tuple[PolicyName, ...]] = None
 
