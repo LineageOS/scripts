@@ -37,7 +37,7 @@ from sepolicy.policy import (
 from sepolicy.rule import Rule
 from sepolicy.rule_container import RuleContainer
 from sepolicy.rules import split_normalize_rules_text
-from sepolicy.source_rule import SourceRule
+from sepolicy.source_rule import SourceRuleParser
 from sepolicy.varargs import Ioctls
 from utils.frozendict import FrozenDict
 from utils.utils import (
@@ -243,15 +243,12 @@ def parse_source_rules(
 
     rules = RuleContainer()
 
-    def add_rule(rule: Rule):
-        rules.add(rule)
-
+    parser = SourceRuleParser(
+        rules.add,
+        classmap,
+    )
     for source_line in expanded_rules:
-        SourceRule.from_line(
-            source_line,
-            add_rule=add_rule,
-            classmap=classmap,
-        )
+        parser.parse_line(source_line)
 
     return rules
 

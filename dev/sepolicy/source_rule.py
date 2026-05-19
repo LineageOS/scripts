@@ -130,12 +130,17 @@ unknown_rule_types: Set[str] = set(
 ALL_PERMS_SET = {'*'}
 
 
-class SourceRule(Rule):
-    @classmethod
-    def genfscon_from_line(
-        cls,
-        line: str,
+class SourceRuleParser:
+    def __init__(
+        self,
+        add_rule: Callable[[Rule], None],
+        classmap: Classmap,
     ):
+        self.add_rule = add_rule
+        self.classmap = classmap
+
+    @staticmethod
+    def genfscon_from_line(line: str):
         parts = unpack_line(
             line,
             '{',
@@ -158,13 +163,7 @@ class SourceRule(Rule):
         )
         return rule
 
-    @classmethod
-    def from_line(
-        cls,
-        line: str,
-        add_rule: Callable[[Rule], None],
-        classmap: Classmap,
-    ):
+    def parse_line(self, line: str):
         parts = unpack_line(
             line,
             '{',
@@ -240,7 +239,7 @@ class SourceRule(Rule):
                 class_varargs_map: Dict[str, Perms] = {}
 
                 for class_name in class_names:
-                    class_perms_set = classmap.class_perms_set(class_name)
+                    class_perms_set = self.classmap.class_perms_set(class_name)
 
                     if negative_varargs:
                         class_varargs = class_perms_set - varargs
@@ -260,7 +259,7 @@ class SourceRule(Rule):
                         (src, dst, class_name),
                         class_varargs_map[class_name],
                     )
-                    add_rule(rule)
+                    self.add_rule(rule)
             case RuleType.TYPE_TRANSITION:
                 assert len(parts) in [5, 6], line
                 assert isinstance(parts[4], str), line
@@ -283,7 +282,7 @@ class SourceRule(Rule):
                         (src, dst, class_name, parts[4]),
                         tag,
                     )
-                    add_rule(rule)
+                    self.add_rule(rule)
             case (
                 RuleType.ALLOWXPERM
                 | RuleType.AUDITALLOWXPERM
@@ -312,7 +311,7 @@ class SourceRule(Rule):
                         (src, dst, class_name, ioctl_or_nlmsg),
                         ioctls,
                     )
-                    add_rule(rule)
+                    self.add_rule(rule)
 
             case RuleType.ATTRIBUTE:
                 assert len(parts) == 2, line
@@ -322,7 +321,7 @@ class SourceRule(Rule):
                     parts[0],
                     (parts[1],),
                 )
-                add_rule(rule)
+                self.add_rule(rule)
             case RuleType.TYPEATTRIBUTE:
                 assert isinstance(parts[1], str), line
 
@@ -332,7 +331,7 @@ class SourceRule(Rule):
                         parts[0],
                         (parts[1], t),
                     )
-                    add_rule(rule)
+                    self.add_rule(rule)
             case RuleType.TYPE:
                 assert isinstance(parts[1], str), line
 
@@ -340,7 +339,7 @@ class SourceRule(Rule):
                     RuleType.TYPE,
                     (parts[1],),
                 )
-                add_rule(rule)
+                self.add_rule(rule)
 
                 # Convert type rules to typeattribute to allow easy matching
                 # with split typeattributeset rules
@@ -350,7 +349,7 @@ class SourceRule(Rule):
                         RuleType.TYPEATTRIBUTE,
                         (parts[1], t),
                     )
-                    add_rule(rule)
+                    self.add_rule(rule)
             case RuleType.EXPANDATTRIBUTE:
                 assert len(parts) == 3
                 assert isinstance(parts[1], str), line
@@ -360,6 +359,6 @@ class SourceRule(Rule):
                     parts[0],
                     (parts[1], parts[2]),
                 )
-                add_rule(rule)
+                self.add_rule(rule)
             case _:
                 assert False, line

@@ -9,7 +9,7 @@ from typing import Dict, List, Set, Tuple
 from sepolicy.policy import ContextsType
 from sepolicy.rule import trim_contexts_label
 from sepolicy.rule_container import RuleContainer
-from sepolicy.source_rule import SourceRule
+from sepolicy.source_rule import SourceRuleParser
 from utils.utils import split_normalize_text
 
 
@@ -23,7 +23,7 @@ def parse_genfs_contexts(texts: List[str]):
     for text in texts:
         text = text.strip()
 
-        genfs_rule = SourceRule.genfscon_from_line(text)
+        genfs_rule = SourceRuleParser.genfscon_from_line(text)
         genfs_rules.add(genfs_rule)
 
     return genfs_rules

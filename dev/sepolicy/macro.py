@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import re
-from functools import partial
 from typing import (
     Dict,
     FrozenSet,
@@ -17,7 +16,7 @@ from sepolicy.classmap import Classmap
 from sepolicy.rule import Rule, flatten_parts, unpack_line
 from sepolicy.rules import split_normalize_rules_text
 from sepolicy.source_rule import (
-    SourceRule,
+    SourceRuleParser,
     trim_ioctl_str,
     unpack_ioctls,
 )
@@ -120,21 +119,18 @@ def parse_macros(
     unique_macro_rules: Dict[FrozenSet[Rule], str] = {}
     invalid_macro_names: Set[str] = set()
     macro_names: Set[str] = set()
+
     for name, body in expanded_macros:
         rules: List[Rule] = []
 
-        def add_rule(rule: Rule):
-            rules.append(rule)
-
-        from_line_fn = partial(
-            SourceRule.from_line,
-            classmap=classmap,
-            add_rule=add_rule,
+        parser = SourceRuleParser(
+            rules.append,
+            classmap,
         )
 
         try:
             for rule_text in split_normalize_rules_text(body):
-                from_line_fn(rule_text)
+                parser.parse_line(rule_text)
         except (ValueError, AssertionError) as e:
             if name not in invalid_macro_names:
                 color_print(f'Invalid macro {name}: {e}', color=Color.YELLOW)
