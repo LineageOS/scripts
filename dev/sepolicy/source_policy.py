@@ -25,6 +25,7 @@ from sepolicy.macro import (
     parse_perms,
     rule_body,
 )
+from sepolicy.merge import add_mergeable_rule, merge_current_rules
 from sepolicy.policy import (
     Policy,
     PolicyMetadata,
@@ -242,13 +243,19 @@ def parse_source_rules(
     )
 
     rules = RuleContainer()
+    mergeable_rules: List[Rule] = []
+
+    def add_rule(rule: Rule):
+        add_mergeable_rule(rule, mergeable_rules, rules)
 
     parser = SourceRuleParser(
-        rules.add,
+        add_rule,
         classmap,
     )
     for source_line in expanded_rules:
         parser.parse_line(source_line)
+
+    merge_current_rules(mergeable_rules, rules)
 
     return rules
 
