@@ -275,9 +275,6 @@ def decompile_cil():
     hardcoded_policy_index = {p.name: p for p in get_hardcoded_policy()}
 
     cil_policy_index = parse_dump_policies(dump_dir, source_index, verbose)
-    for policy in cil_policy_index.values():
-        print(f'Found policy: {policy}')
-        print()
 
     shutil.rmtree(output_dir, ignore_errors=True)
     output_dir.mkdir(parents=True, exist_ok=True)
