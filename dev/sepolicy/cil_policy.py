@@ -38,7 +38,6 @@ from sepolicy.policy import (
 )
 from sepolicy.rule import Rule, raw_parts_list
 from sepolicy.rule_container import RuleContainer
-from sepolicy.source_policy import SourceIndex
 from utils.frozendict import FrozenDict
 from utils.utils import read_texts, resolve_paths, split_normalize_text
 
@@ -471,11 +470,7 @@ def parse_dump_policy_contexts(
     return contexts
 
 
-def parse_dump_policies(
-    dump_root: Path,
-    source_index: SourceIndex,
-    verbose: bool,
-):
+def parse_dump_policies(dump_root: Path, verbose: bool):
     policy_index: Dict[PolicyName, Policy] = {}
 
     for policy_type in get_policy_types_by_origin(PolicyDumpOrigin):
@@ -498,8 +493,6 @@ def parse_dump_policies(
             version,
             variables,
         )
-
-        source_index.get_source_policy(metadata)
 
         parse_result = parse_dump_policy_rules(
             policy_index,

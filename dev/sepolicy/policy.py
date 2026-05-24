@@ -49,6 +49,14 @@ class PolicyName(StrEnum):
     CIL_PRODUCT_PRIVATE = 'prebuilt_product_private'
 
 
+SOURCE_PREFIX = 'source_'
+SOURCE_POLICY_NAMES = [
+    p.removesuffix(SOURCE_PREFIX)
+    for p in PolicyName
+    if p.startswith(SOURCE_PREFIX)
+]
+
+
 def build_contexts_map(
     prefix: Optional[str] = None,
     bug_map_name: Optional[str] = None,
@@ -97,7 +105,30 @@ class PolicyParsedOrigin(PolicyOrigin):
 
 @dataclass(frozen=True)
 class PolicySourceOrigin(PolicyParsedOrigin):
-    subdir: Optional[str] = None
+    rules_subdirs: Optional[
+        Tuple[
+            Tuple[
+                # subdir
+                str,
+                # versioned
+                bool,
+            ],
+            ...,
+        ]
+    ] = None
+    macros_subdirs: Optional[
+        Tuple[
+            Tuple[
+                # subdir
+                str,
+                # versioned
+                bool,
+            ],
+            ...,
+        ]
+    ] = None
+    macro_sources: Optional[Tuple[PolicyName, ...]] = None
+    rule_sources: Optional[Tuple[PolicyName, ...]] = None
     cil_file_name: Optional[str] = None
 
 
@@ -112,6 +143,11 @@ class PolicyDumpOrigin(PolicyParsedOrigin):
     optional: bool = False
     # Needed at parse time
     needed_policy: Optional[Tuple[PolicyName, ...]] = None
+
+
+@dataclass(frozen=True)
+class PolicyMacroMatching:
+    macros_source: PolicyName
 
 
 @dataclass(frozen=True)
@@ -137,6 +173,7 @@ class PolicyType:
     name: PolicyName
     origin: Optional[PolicyOrigin] = None
     output: Optional[PolicyOutput] = None
+    macro_matching: Optional[PolicyMacroMatching] = None
     referencing: Optional[PolicyReferencing] = None
 
     @property
@@ -173,8 +210,7 @@ add_policy_type(
         name=PolicyName.SOURCE_PLATFORM_TECHNICAL_DEBT,
         origin=PolicySourceOrigin(
             format=PolicyParseFormat.CIL,
-            subdir='private',
-            cil_file_name='technical_debt.cil',
+            cil_file_name='private/technical_debt.cil',
             contexts_name_map=FrozenDict({}),
         ),
     ),
@@ -184,7 +220,11 @@ add_policy_type(
         name=PolicyName.SOURCE_PLATFORM_PUBLIC,
         origin=PolicySourceOrigin(
             format=PolicyParseFormat.TE,
-            subdir='public',
+            rules_subdirs=(('public', True),),
+            macros_subdirs=(
+                ('public', True),
+                ('private', True),
+            ),
             contexts_name_map=build_contexts_map(),
         ),
     )
@@ -195,7 +235,8 @@ add_policy_type(
         name=PolicyName.SOURCE_PLATFORM_PRIVATE,
         origin=PolicySourceOrigin(
             format=PolicyParseFormat.TE,
-            subdir='private',
+            rules_subdirs=(('private', True),),
+            macro_sources=(PolicyName.SOURCE_PLATFORM_PUBLIC,),
             contexts_name_map=build_contexts_map(),
         ),
     )
@@ -206,6 +247,7 @@ add_policy_type(
         name=PolicyName.SOURCE_SYSTEM_EXT_PUBLIC,
         origin=PolicySourceOrigin(
             format=PolicyParseFormat.TE,
+            macro_sources=(PolicyName.SOURCE_PLATFORM_PUBLIC,),
             contexts_name_map=build_contexts_map(),
         ),
     )
@@ -216,6 +258,7 @@ add_policy_type(
         name=PolicyName.SOURCE_SYSTEM_EXT_PRIVATE,
         origin=PolicySourceOrigin(
             format=PolicyParseFormat.TE,
+            macro_sources=(PolicyName.SOURCE_PLATFORM_PUBLIC,),
             contexts_name_map=build_contexts_map(),
         ),
     )
@@ -226,6 +269,7 @@ add_policy_type(
         name=PolicyName.SOURCE_PRODUCT_PUBLIC,
         origin=PolicySourceOrigin(
             format=PolicyParseFormat.TE,
+            macro_sources=(PolicyName.SOURCE_PLATFORM_PUBLIC,),
             contexts_name_map=build_contexts_map(),
         ),
     )
@@ -236,6 +280,7 @@ add_policy_type(
         name=PolicyName.SOURCE_PRODUCT_PRIVATE,
         origin=PolicySourceOrigin(
             format=PolicyParseFormat.TE,
+            macro_sources=(PolicyName.SOURCE_PLATFORM_PUBLIC,),
             contexts_name_map=build_contexts_map(),
         ),
     )
@@ -246,7 +291,8 @@ add_policy_type(
         name=PolicyName.SOURCE_VENDOR,
         origin=PolicySourceOrigin(
             format=PolicyParseFormat.TE,
-            subdir='vendor',
+            rules_subdirs=(('vendor', False),),
+            macro_sources=(PolicyName.SOURCE_PLATFORM_PUBLIC,),
             contexts_name_map=build_contexts_map(),
         ),
     )
@@ -263,6 +309,9 @@ add_policy_type(
             contexts_name_map=build_contexts_map(
                 prefix='plat',
             ),
+        ),
+        macro_matching=PolicyMacroMatching(
+            macros_source=PolicyName.SOURCE_PLATFORM_PUBLIC,
         ),
         referencing=PolicyReferencing(
             name=PolicyName.CIL_VERSIONED_PLATFORM,
@@ -313,6 +362,9 @@ add_policy_type(
             ),
             needed_policy=(PolicyName.CIL_PLATFORM,),
             classmap_source_policy=PolicyName.CIL_PLATFORM,
+        ),
+        macro_matching=PolicyMacroMatching(
+            macros_source=PolicyName.SOURCE_PLATFORM_PUBLIC,
         ),
         referencing=PolicyReferencing(
             name=PolicyName.CIL_VERSIONED_PLATFORM,
@@ -366,6 +418,9 @@ add_policy_type(
             needed_policy=(PolicyName.CIL_PLATFORM,),
             classmap_source_policy=PolicyName.CIL_PLATFORM,
         ),
+        macro_matching=PolicyMacroMatching(
+            macros_source=PolicyName.SOURCE_PLATFORM_PUBLIC,
+        ),
         referencing=PolicyReferencing(
             name=PolicyName.CIL_VERSIONED_PLATFORM,
             in_name=PolicyName.CIL_PRODUCT_PUBLIC,
@@ -418,6 +473,9 @@ add_policy_type(
             contexts_name_map=FrozenDict({}),
             classmap_source_policy=PolicyName.CIL_PLATFORM,
         ),
+        macro_matching=PolicyMacroMatching(
+            macros_source=PolicyName.SOURCE_PLATFORM_PUBLIC,
+        ),
     )
 )
 
@@ -435,6 +493,9 @@ add_policy_type(
             ),
             classmap_source_policy=PolicyName.CIL_PLATFORM,
             needed_policy=(PolicyName.CIL_VERSIONED_PLATFORM,),
+        ),
+        macro_matching=PolicyMacroMatching(
+            macros_source=PolicyName.SOURCE_PLATFORM_PUBLIC,
         ),
         output=PolicyOutput(
             relative_dir='vendor',

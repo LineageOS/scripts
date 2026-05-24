@@ -118,7 +118,7 @@ def not_none(x: Optional[T]) -> TypeGuard[T]:
 
 
 def expand_macro_calls_and_split(
-    text: str,
+    texts: List[str],
     environment_texts: List[str],
     variables: FrozenDict[str, str],
     split_fn: Callable[[str], List[str]],
@@ -127,13 +127,15 @@ def expand_macro_calls_and_split(
     text_name: str,
     verbose: bool,
 ):
+    text = '\n'.join(texts)
+
     if preserve_macros:
-        texts = split_fn(text)
+        split_texts = split_fn(text)
     else:
-        texts = [text]
+        split_texts = [text]
 
     expanded_text = expand_macro_calls(
-        texts,
+        split_texts,
         environment_texts,
         variables,
         preserve_macros,
