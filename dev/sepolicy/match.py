@@ -94,6 +94,8 @@ def match_macro_rule(
     rule_match_cache: Dict[Hashable, List[Rule]],
     verbose: bool,
 ):
+    indent = '\t' * rule_index
+
     if rule_index == len(macro_rule_templates):
         rule_match = RuleMatch(
             macro_name,
@@ -106,7 +108,7 @@ def match_macro_rule(
     macro_rule_template = macro_rule_templates[rule_index]
 
     if verbose:
-        print(f'Processing rule: {macro_rule_template.rule}')
+        print(f'{indent}Processing rule: {macro_rule_template.rule}')
 
     filled_macro_rule_template = fill_rule_template(
         macro_rule_template,
@@ -116,7 +118,7 @@ def match_macro_rule(
         return
 
     if verbose:
-        print('Filled rule template:', macro_rule_template)
+        print(f'{indent}Filled rule template:', macro_rule_template)
 
     match_keys = rule_template_match_keys(filled_macro_rule_template)
     if verbose:
@@ -124,7 +126,7 @@ def match_macro_rule(
             sorted(v) if isinstance(v, frozenset) else str(v)
             for v in match_keys
         ]
-        print(f'Constructed match keys: {match_keys_str}')
+        print(f'{indent}Constructed match keys: {match_keys_str}')
 
     matched_rules = rule_match_cache.get(match_keys)
     if matched_rules is None:
@@ -133,15 +135,17 @@ def match_macro_rule(
 
     for matched_rule in matched_rules:
         if verbose:
-            print(f'Found matching rule: {matched_rule}')
+            print(f'{indent}Found matching rule: {matched_rule}')
 
+        found = False
         for new_arg_values in iter_rule_fill_arg_values(
             filled_macro_rule_template,
             macro_arg_values,
             matched_rule,
         ):
+            found = True
             if verbose:
-                print(f'Found new arg values: {new_arg_values}')
+                print(f'{indent}Found new arg values: {new_arg_values}')
 
             macro_rules.append(matched_rule)
             match_macro_rule(
@@ -156,6 +160,10 @@ def match_macro_rule(
                 verbose,
             )
             macro_rules.pop()
+
+        if verbose:
+            if not found:
+                print(f'{indent}Found no matching arg values')
 
 
 def match_macro_rules(
