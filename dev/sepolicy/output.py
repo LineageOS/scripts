@@ -16,7 +16,7 @@ from sepolicy.rule import (
     rule_used_types,
 )
 from sepolicy.rule_container import RuleContainer
-from sepolicy.source_policy import Source
+from sepolicy.source_macros import SourceMacros
 from sepolicy.varargs import Types
 
 
@@ -180,7 +180,7 @@ def enforce_type_decl_order(rules_formatted: List[Tuple[Rule, str]]):
 
 def output_grouped_rules(
     grouped_rules: Dict[str, Set[Rule]],
-    source: Source,
+    macros: SourceMacros,
     output_dir: Path,
 ):
     for name, rules in grouped_rules.items():
@@ -188,11 +188,11 @@ def output_grouped_rules(
             (
                 r,
                 r.format(
-                    class_perms=source.macros.class_perms,
-                    ioctls=source.macros.ioctls,
-                    ioctl_defines=source.macros.ioctl_defines,
-                    nlmsgs=source.macros.nlmsgs,
-                    nlmsg_defines=source.macros.nlmsg_defines,
+                    class_perms=macros.class_perms,
+                    ioctls=macros.ioctls,
+                    ioctl_defines=macros.ioctl_defines,
+                    nlmsgs=macros.nlmsgs,
+                    nlmsg_defines=macros.nlmsg_defines,
                 ),
             )
             for r in rules

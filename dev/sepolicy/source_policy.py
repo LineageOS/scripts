@@ -4,11 +4,17 @@
 from __future__ import annotations
 
 from collections import defaultdict
-from dataclasses import astuple, dataclass
 from pathlib import Path
-from typing import DefaultDict, Dict, List, Optional, Set, Tuple
+from typing import (
+    DefaultDict,
+    Dict,
+    List,
+    Optional,
+    Set,
+    Tuple,
+)
 
-from sepolicy.cil_rule import CilRuleParser, unpack_cil_line
+from sepolicy.cil_policy import parse_cil_lines
 from sepolicy.classmap import Classmap
 from sepolicy.contexts import (
     ContextsType,
@@ -33,18 +39,18 @@ from sepolicy.policy import (
     PolicyParseFormat,
     PolicySourceOrigin,
     PolicyType,
-    get_policy_types_by_origin,
+    get_policy_type_by_name,
 )
 from sepolicy.rule import Rule
 from sepolicy.rule_container import RuleContainer
 from sepolicy.rules import split_normalize_rules_text
 from sepolicy.source_macros import SourceMacros
 from sepolicy.source_rule import SourceRuleParser
+from sepolicy.source_text import PolicyFileType, SourceText
 from utils.frozendict import FrozenDict
 from utils.utils import (
     android_root,
     read_texts,
-    resolve_paths,
     split_normalize_text,
 )
 
@@ -58,158 +64,50 @@ def get_source_policy_path(version: str, current: bool):
     return Path(system_sepolicy_path, f'prebuilts/api/{version}')
 
 
-@dataclass
-class SourceMacrosText:
-    flagging_macros: str
-    ioctl_defines: str
-    nlmsg_defines: str
-    ioctl_macros: str
-    nlmsg_macros: str
-    macros: str
+def read_source_contexts_text(rules_paths: List[Tuple[Path, PolicyName]]):
+    contexts_paths: DefaultDict[ContextsType, List[Path]] = defaultdict(list)
 
+    for file_path, policy_name in rules_paths:
+        policy_type = get_policy_type_by_name(policy_name)
+        assert isinstance(policy_type.origin, PolicySourceOrigin)
 
-@dataclass
-class Source:
-    macros: SourceMacros
-    classmap: Classmap
-    policy_index: Dict[PolicyName, Policy]
+        contexts_name_map = policy_type.origin.contexts_name_map
+        for context_type, context_name in contexts_name_map.items():
+            context_path = Path(file_path, context_name)
+            if not context_path.is_file():
+                continue
 
-
-MACRO_FILES = [
-    'global_macros',
-    'neverallow_macros',
-    'te_macros',
-    # TODO: avoid rules parsing from re-parsing attributes every time...
-    'attributes',
-]
-IOCTL_DEFINES_FILE = 'ioctl_defines'
-IOCTL_MACROS_FILE = 'ioctl_macros'
-NLMSG_DEFINES_FILE = 'nlmsg_defines'
-NLMSG_MACROS_FILE = 'nlmsg_macros'
-
-
-def read_source_macros_text(
-    extra_macros_paths: List[Path],
-    version: str,
-    current: bool,
-    verbose: bool,
-):
-    sepolicy_path = get_source_policy_path(version, current)
-
-    def _resolve_paths(names: List[str]):
-        system_paths = [Path(sepolicy_path, 'public', n) for n in names]
-
-        return system_paths + resolve_paths(
-            extra_macros_paths,
-            names=set(names),
-            recursive=True,
-            paths_name='macros',
-            verbose=verbose,
-        )
-
-    return SourceMacrosText(
-        macros=read_texts(_resolve_paths(MACRO_FILES)),
-        ioctl_defines=read_texts(_resolve_paths([IOCTL_DEFINES_FILE])),
-        nlmsg_defines=read_texts(_resolve_paths([NLMSG_DEFINES_FILE])),
-        ioctl_macros=read_texts(_resolve_paths([IOCTL_MACROS_FILE])),
-        nlmsg_macros=read_texts(_resolve_paths([NLMSG_MACROS_FILE])),
-        flagging_macros=read_texts(
-            [
-                Path(
-                    # These do not exist per-version
-                    system_sepolicy_path,
-                    'flagging',
-                    'flagging_macros',
-                )
-            ],
-        ),
-    )
-
-
-def read_source_rules_text(
-    extra_rules_paths: List[Path],
-    policy_type: PolicyType,
-    subdir: Optional[str],
-    version: str,
-    current: bool,
-    verbose: bool,
-):
-    sepolicy_path = get_source_policy_path(version, current)
-    names = {'*.te', 'attributes'}
-
-    source_paths = []
-    if subdir:
-        source_paths = resolve_paths(
-            [Path(sepolicy_path, subdir)],
-            names=names,
-            recursive=False,
-            paths_name=f'{policy_type.pretty_name} rules',
-            verbose=verbose,
-        )
-
-    return read_texts(
-        source_paths
-        + resolve_paths(
-            extra_rules_paths,
-            names=names,
-            recursive=True,
-            paths_name=f'{policy_type.pretty_name} rules',
-            verbose=verbose,
-        )
-    )
-
-
-def read_source_contexts_text(
-    extra_rules_paths: List[Path],
-    origin: PolicySourceOrigin,
-    version: str,
-    current: bool,
-    name: str,
-    verbose: bool,
-):
-    sepolicy_path = get_source_policy_path(version, current)
-
-    def _source_paths(context_name: str):
-        source_paths = []
-
-        if origin.subdir:
-            source_paths = resolve_paths(
-                [Path(sepolicy_path, origin.subdir)],
-                names={context_name},
-                recursive=False,
-                paths_name=f'{name} {context_name}',
-                verbose=verbose,
-            )
-
-        return source_paths
+            contexts_paths[context_type].append(context_path)
 
     contexts = {
-        context_type: read_texts(
-            _source_paths(context_name)
-            + resolve_paths(
-                extra_rules_paths,
-                names={context_name},
-                recursive=True,
-                paths_name=f'{name} {context_name}',
-                verbose=verbose,
-            )
-        )
-        for context_type, context_name in origin.contexts_name_map.items()
+        context_type: read_texts(context_paths)
+        for context_type, context_paths in contexts_paths.items()
     }
 
     return contexts
 
 
 def parse_source_rules(
-    rules_text: str,
-    source_macros_text: SourceMacrosText,
+    source_text: SourceText,
     variables: FrozenDict[str, str],
     classmap: Classmap,
     verbose: bool,
 ):
     expanded_rules = expand_macro_calls_and_split(
-        text=rules_text,
-        environment_texts=list(astuple(source_macros_text)),
+        texts=source_text.get_texts({PolicyFileType.TE}),
+        environment_texts=source_text.get_texts(
+            {
+                PolicyFileType.FLAGGING_MACROS,
+                PolicyFileType.IOCTL_DEFINES,
+                PolicyFileType.NLMSG_DEFINES,
+                PolicyFileType.IOCTL_MACROS,
+                PolicyFileType.NLMSG_MACROS,
+                PolicyFileType.GLOBAL_MACROS,
+                PolicyFileType.NEVERALLOW_MACROS,
+                PolicyFileType.TE_MACROS,
+                PolicyFileType.ATTRIBUTES,
+            }
+        ),
         variables=variables,
         split_fn=split_normalize_rules_text,
         map_fn=rule_body,
@@ -238,16 +136,16 @@ def parse_source_rules(
 
 def parse_source_contexts(
     contexts_text: Dict[ContextsType, str],
-    source_macros_text: SourceMacrosText,
+    source_macros_text: SourceText,
     variables: FrozenDict[str, str],
     verbose: bool,
 ):
     expanded_contexts = {
         context_type: expand_macro_calls_and_split(
-            text=context_text,
-            environment_texts=[
-                source_macros_text.flagging_macros,
-            ],
+            texts=[context_text],
+            environment_texts=source_macros_text.get_texts(
+                {PolicyFileType.FLAGGING_MACROS}
+            ),
             variables=variables,
             split_fn=split_normalize_text,
             map_fn=lambda s: s,
@@ -318,26 +216,18 @@ def group_perms_by_class(perms: List[Tuple[str, Set[str]]], classmap: Classmap):
 
 
 def parse_source_macros(
-    source_macros_text: SourceMacrosText,
+    source_text: SourceText,
     variables: FrozenDict[str, str],
     classmap: Classmap,
     verbose: bool,
 ):
-    base_environment_texts = [
-        source_macros_text.flagging_macros,
-    ]
-
-    macros_environment_texts = [
-        source_macros_text.flagging_macros,
-        source_macros_text.ioctl_defines,
-        source_macros_text.ioctl_macros,
-        source_macros_text.nlmsg_defines,
-        source_macros_text.nlmsg_macros,
-    ]
-
     ioctl_defines = expand_macro_calls_and_split(
-        text=source_macros_text.ioctl_defines,
-        environment_texts=base_environment_texts,
+        texts=source_text.get_texts({PolicyFileType.IOCTL_DEFINES}),
+        environment_texts=source_text.get_texts(
+            {
+                PolicyFileType.FLAGGING_MACROS,
+            }
+        ),
         variables=variables,
         split_fn=split_normalize_rules_text,
         map_fn=macro_name_body,
@@ -347,8 +237,12 @@ def parse_source_macros(
     )
 
     nlmsg_defines = expand_macro_calls_and_split(
-        text=source_macros_text.nlmsg_defines,
-        environment_texts=base_environment_texts,
+        texts=source_text.get_texts({PolicyFileType.NLMSG_DEFINES}),
+        environment_texts=source_text.get_texts(
+            {
+                PolicyFileType.FLAGGING_MACROS,
+            }
+        ),
         variables=variables,
         split_fn=split_normalize_rules_text,
         map_fn=macro_name_body,
@@ -358,11 +252,13 @@ def parse_source_macros(
     )
 
     ioctl_macros = expand_macro_calls_and_split(
-        text=source_macros_text.ioctl_macros,
-        environment_texts=[
-            source_macros_text.flagging_macros,
-            source_macros_text.ioctl_defines,
-        ],
+        texts=source_text.get_texts({PolicyFileType.IOCTL_MACROS}),
+        environment_texts=source_text.get_texts(
+            {
+                PolicyFileType.FLAGGING_MACROS,
+                PolicyFileType.IOCTL_DEFINES,
+            }
+        ),
         variables=variables,
         split_fn=split_normalize_rules_text,
         map_fn=macro_name_body,
@@ -372,11 +268,13 @@ def parse_source_macros(
     )
 
     nlmsg_macros = expand_macro_calls_and_split(
-        text=source_macros_text.nlmsg_macros,
-        environment_texts=[
-            source_macros_text.flagging_macros,
-            source_macros_text.nlmsg_defines,
-        ],
+        texts=source_text.get_texts({PolicyFileType.NLMSG_MACROS}),
+        environment_texts=source_text.get_texts(
+            {
+                PolicyFileType.FLAGGING_MACROS,
+                PolicyFileType.NLMSG_DEFINES,
+            }
+        ),
         variables=variables,
         split_fn=split_normalize_rules_text,
         map_fn=macro_name_body,
@@ -386,8 +284,23 @@ def parse_source_macros(
     )
 
     expanded_macros = expand_macro_calls_and_split(
-        text=source_macros_text.macros,
-        environment_texts=macros_environment_texts,
+        texts=source_text.get_texts(
+            {
+                PolicyFileType.GLOBAL_MACROS,
+                PolicyFileType.NEVERALLOW_MACROS,
+                PolicyFileType.TE_MACROS,
+                PolicyFileType.ATTRIBUTES,
+            }
+        ),
+        environment_texts=source_text.get_texts(
+            {
+                PolicyFileType.FLAGGING_MACROS,
+                PolicyFileType.IOCTL_DEFINES,
+                PolicyFileType.NLMSG_DEFINES,
+                PolicyFileType.IOCTL_MACROS,
+                PolicyFileType.NLMSG_MACROS,
+            }
+        ),
         variables=variables,
         split_fn=split_normalize_rules_text,
         map_fn=macro_name_body,
@@ -433,29 +346,14 @@ def parse_source_macros(
 
 
 def parse_source_classmap(
-    source_macros_text: SourceMacrosText,
+    flagging_macros_text: str,
+    access_vectors_text: str,
     metadata: PolicyMetadata,
-    current: bool,
     verbose: bool,
 ):
-    versioned_system_sepolicy_path = get_source_policy_path(
-        metadata.version,
-        current,
-    )
-
-    access_vectors = read_texts(
-        [
-            Path(
-                versioned_system_sepolicy_path,
-                'private',
-                'access_vectors',
-            )
-        ]
-    )
-
     classmap_text = expand_macro_calls(
-        [access_vectors],
-        [source_macros_text.flagging_macros],
+        [access_vectors_text],
+        [flagging_macros_text],
         metadata.variables,
         preserve_macros=True,
         text_name='access_vectors',
@@ -465,89 +363,87 @@ def parse_source_classmap(
     return Classmap.from_text(classmap_text)
 
 
-def parse_source_cil_rules(
-    origin: PolicySourceOrigin,
-    version: str,
-    current: bool,
+def __parse_source_cil_policies(
+    policy_type: PolicyType,
+    file_path: Path,
+    metadata: PolicyMetadata,
+    classmap: Optional[Classmap],
+    verbose: bool,
 ):
-    assert origin.cil_file_name is not None
+    genfs_rules = RuleContainer()
+    rules = RuleContainer(sparse_match=True)
 
-    sepolicy_path = get_source_policy_path(version, current)
-    source_cil_rules_path = Path(
-        sepolicy_path,
-        origin.subdir or '',
-        origin.cil_file_name,
-    )
-    rules = RuleContainer()
-
-    def add_rule(rule: Rule):
-        rules.add(rule)
-
-    parser = CilRuleParser(
+    parse_cil_lines(
+        file_path,
+        rules,
+        genfs_rules,
         conditional_types_map={},
         reference_conditional_types_maps=[],
-        add_rule=add_rule,
-        add_genfs_rule=None,
-        version=None,
+        classmap=classmap,
+        version=metadata.version,
+        name=policy_type.pretty_name,
+        verbose=verbose,
     )
 
-    for line in source_cil_rules_path.read_text().splitlines():
-        parts = unpack_cil_line(line)
-        if parts is None:
-            continue
+    return Policy(
+        policy_type.name,
+        rules,
+        genfs_rules=genfs_rules,
+        contexts={},
+        metadata=metadata,
+    )
 
-        parser.parse_line(line, parts)
 
-    return rules
-
-
-def parse_metadata_source_policies(
-    extra_rules_paths: List[Path],
+def parse_source_cil_policies(
     policy_type: PolicyType,
     metadata: PolicyMetadata,
-    source_macros_text: SourceMacrosText,
-    classmap: Classmap,
+    classmap: Optional[Classmap],
     current: bool,
     verbose: bool,
 ):
     assert isinstance(policy_type.origin, PolicySourceOrigin)
 
-    if policy_type.origin.format == PolicyParseFormat.CIL:
-        rules = parse_source_cil_rules(
-            policy_type.origin,
-            metadata.version,
-            current,
-        )
+    cil_file_name = policy_type.origin.cil_file_name
+    assert cil_file_name is not None
 
-        return Policy(
-            policy_type.name,
-            rules,
-            genfs_rules=RuleContainer(),
-            contexts={},
-            metadata=metadata,
-        )
+    sepolicy_path = get_source_policy_path(
+        metadata.version,
+        current,
+    )
+    source_cil_rules_path = Path(
+        sepolicy_path,
+        cil_file_name,
+    )
 
-    rules_text = read_source_rules_text(
-        extra_rules_paths,
+    return __parse_source_cil_policies(
         policy_type,
-        subdir=policy_type.origin.subdir,
-        version=metadata.version,
-        current=current,
+        source_cil_rules_path,
+        metadata,
+        classmap,
         verbose=verbose,
     )
 
-    contexts_text = read_source_contexts_text(
-        extra_rules_paths,
-        policy_type.origin,
-        version=metadata.version,
-        current=current,
-        name=policy_type.pretty_name,
-        verbose=verbose,
+
+def parse_metadata_source_policies(
+    rules_dir_paths: List[Tuple[Path, PolicyName]],
+    policy_type: PolicyType,
+    metadata: PolicyMetadata,
+    source_text: SourceText,
+    classmap: Classmap,
+    verbose: bool,
+):
+    assert isinstance(policy_type.origin, PolicySourceOrigin)
+
+    source_text.load_texts(
+        tuple(v[0] for v in rules_dir_paths),
+        # Only load rules
+        allowed_types={PolicyFileType.TE},
     )
+
+    contexts_text = read_source_contexts_text(rules_dir_paths)
 
     rules = parse_source_rules(
-        rules_text,
-        source_macros_text,
+        source_text,
         metadata.variables,
         classmap,
         verbose=verbose,
@@ -555,7 +451,7 @@ def parse_metadata_source_policies(
 
     contexts, genfs_rules = parse_source_contexts(
         contexts_text,
-        source_macros_text,
+        source_text,
         metadata.variables,
         verbose=verbose,
     )
@@ -572,8 +468,8 @@ def parse_metadata_source_policies(
 class SourceIndex:
     def __init__(
         self,
-        extra_rules_paths: List[Path],
-        extra_macros_paths: List[Path],
+        extra_rules_paths: Dict[Optional[PolicyName], List[Path]],
+        extra_macros_paths: Dict[Optional[PolicyName], List[Path]],
         current: bool,
         verbose: bool,
     ):
@@ -582,78 +478,308 @@ class SourceIndex:
         self.__current = current
         self.__verbose = verbose
 
-        self.__version_macros_text_map: Dict[str, SourceMacrosText] = {}
-        self.__source_index: DefaultDict[PolicyMetadata, Source] = defaultdict()
+        self.__source_index: DefaultDict[
+            PolicyMetadata,
+            Dict[PolicyName, Policy],
+        ] = defaultdict(dict)
 
-    def __load_texts(self, version: str):
-        if version in self.__version_macros_text_map:
-            return self.__version_macros_text_map[version]
+        self.__macro_dir_paths_index: Dict[
+            Tuple[
+                # version
+                str,
+                # policy name
+                PolicyName,
+            ],
+            Tuple[Path, ...],
+        ] = {}
+        self.__classmap_index: Dict[
+            Tuple[PolicyMetadata, Tuple[Path, ...]],
+            Classmap,
+        ] = {}
+        self.__macros_source_text_index: Dict[
+            Tuple[Path, ...],
+            SourceText,
+        ] = {}
+        self.__macros_index: Dict[
+            Tuple[PolicyMetadata, Tuple[Path, ...]],
+            SourceMacros,
+        ] = {}
 
-        version_macros_text = read_source_macros_text(
-            self.__extra_macros_paths,
+    def __get_policy_dir_paths(
+        self,
+        policy_type: PolicyType,
+        version: str,
+        macros: bool,
+    ):
+        assert isinstance(policy_type.origin, PolicySourceOrigin)
+        dir_paths: List[Tuple[Path, PolicyName]] = []
+
+        def add_subdirs(subdirs: Tuple[Tuple[str, bool], ...]):
+            for subdir, versioned in subdirs:
+                current = self.__current
+                if not versioned:
+                    current = True
+
+                source_policy_path = get_source_policy_path(version, current)
+                dir_path = Path(source_policy_path, subdir)
+                if not dir_path.exists():
+                    continue
+
+                dir_paths.append((dir_path, policy_type.name))
+
+        if macros and policy_type.origin.macros_subdirs is not None:
+            add_subdirs(policy_type.origin.macros_subdirs)
+        elif not macros and policy_type.origin.rules_subdirs is not None:
+            add_subdirs(policy_type.origin.rules_subdirs)
+
+        if macros:
+            extras = self.__extra_macros_paths
+        else:
+            extras = self.__extra_rules_paths
+
+        def add_extras(policy_name: Optional[PolicyName]):
+            if policy_name not in extras:
+                return
+
+            dir_paths.extend((e, policy_type.name) for e in extras[policy_name])
+
+        add_extras(None)
+        add_extras(policy_type.name)
+
+        return dir_paths
+
+    def __get_policy_all_paths(
+        self,
+        policy_type: PolicyType,
+        version: str,
+        macros: bool,
+    ):
+        assert isinstance(policy_type.origin, PolicySourceOrigin)
+
+        dir_paths: List[Tuple[Path, PolicyName]] = []
+
+        if macros:
+            # flagging_macros are not versioned and must always be loaded
+            dir_path = Path(system_sepolicy_path, 'flagging')
+            dir_paths.append((dir_path, policy_type.name))
+
+        sources = None
+        if macros and policy_type.origin.macro_sources:
+            sources = policy_type.origin.macro_sources
+        elif not macros and policy_type.origin.rule_sources:
+            sources = policy_type.origin.rule_sources
+
+        if sources is not None:
+            for source_name in sources:
+                source_policy_type = get_policy_type_by_name(source_name)
+                source_macro_paths = self.__get_policy_dir_paths(
+                    source_policy_type,
+                    version,
+                    macros,
+                )
+                dir_paths.extend(source_macro_paths)
+
+        own_dir_paths = self.__get_policy_dir_paths(
+            policy_type,
             version,
-            self.__current,
-            self.__verbose,
+            macros,
         )
-        self.__version_macros_text_map[version] = version_macros_text
+        dir_paths.extend(own_dir_paths)
 
-        return version_macros_text
+        return dir_paths
 
-    def get_source_policy(self, metadata: PolicyMetadata):
-        if metadata in self.__source_index:
-            return self.__source_index[metadata]
+    def __get_policy_key_paths(
+        self,
+        policy_type: PolicyType,
+        version: str,
+        macros: bool,
+    ):
+        dir_paths = self.__get_policy_all_paths(policy_type, version, macros)
+        return tuple(v[0] for v in dir_paths)
+
+    def __get_macro_dir_paths(
+        self,
+        metadata: PolicyMetadata,
+        policy_name: PolicyName,
+    ):
+        key = (metadata.version, policy_name)
+
+        macro_dir_paths = self.__macro_dir_paths_index.get(key)
+        if macro_dir_paths is not None:
+            return macro_dir_paths
+
+        policy_type = get_policy_type_by_name(policy_name)
+        macro_dir_paths = self.__get_policy_key_paths(
+            policy_type,
+            version=metadata.version,
+            macros=True,
+        )
+
+        self.__macro_dir_paths_index[key] = macro_dir_paths
+
+        return macro_dir_paths
+
+    def __get_macros_source_text(
+        self,
+        metadata: PolicyMetadata,
+        policy_name: PolicyName,
+    ):
+        macro_dir_paths = self.__get_macro_dir_paths(metadata, policy_name)
+
+        source_text = self.__macros_source_text_index.get(macro_dir_paths)
+        if source_text is not None:
+            return source_text
+
+        source_text = SourceText()
+        source_text.load_texts(
+            macro_dir_paths,
+            disallowed_types={PolicyFileType.TE},
+        )
+        self.__macros_source_text_index[macro_dir_paths] = source_text
+
+        return source_text
+
+    def __get_classmap(
+        self,
+        metadata: PolicyMetadata,
+        policy_name: PolicyName,
+    ):
+        source_text = self.__get_macros_source_text(metadata, policy_name)
+
+        access_vectors_path = source_text.get_path(
+            PolicyFileType.ACCESS_VECTORS,
+        )
+        flagging_macros_path = source_text.get_path(
+            PolicyFileType.FLAGGING_MACROS,
+        )
+
+        key = (
+            metadata,
+            (
+                access_vectors_path,
+                flagging_macros_path,
+            ),
+        )
+        classmap = self.__classmap_index.get(key)
+        if classmap is not None:
+            return classmap
+
+        classmap = parse_source_classmap(
+            source_text.get_text(PolicyFileType.FLAGGING_MACROS),
+            source_text.get_text(PolicyFileType.ACCESS_VECTORS),
+            metadata,
+            verbose=self.__verbose,
+        )
+        self.__classmap_index[key] = classmap
+
+        return classmap
+
+    def __parse_macros(
+        self,
+        metadata: PolicyMetadata,
+        policy_name: PolicyName,
+    ):
+        if self.__verbose:
+            print(f'Loading macros for metadata version: {metadata.version}')
+            print('Variables:')
+            for k, v in metadata.variables.items():
+                print(f'{k}={v}')
+
+        macro_dir_paths = self.__get_macro_dir_paths(metadata, policy_name)
+        source_text = self.__get_macros_source_text(metadata, policy_name)
+        classmap = self.__get_classmap(metadata, policy_name)
+
+        key = (metadata, macro_dir_paths)
+        macros = self.__macros_index.get(key)
+        if macros is not None:
+            return source_text, classmap, macros
+
+        macros = parse_source_macros(
+            source_text,
+            metadata.variables,
+            classmap,
+            verbose=self.__verbose,
+        )
+        self.__macros_index[key] = macros
+
+        print(f'Found macros:\n{macros}')
+
+        return source_text, classmap, macros
+
+    def get_macros(self, metadata: PolicyMetadata, policy_name: PolicyName):
+        _, _, macros = self.__parse_macros(metadata, policy_name)
+        return macros
+
+    def get_macros_source_text(
+        self,
+        metadata: PolicyMetadata,
+        policy_name: PolicyName,
+    ):
+        source_text, _, _ = self.__parse_macros(metadata, policy_name)
+        return source_text
+
+    def get_classmap(self, metadata: PolicyMetadata, policy_name: PolicyName):
+        _, classmap, _ = self.__parse_macros(metadata, policy_name)
+        return classmap
+
+    def get_source_index(self, metadata: PolicyMetadata):
+        return self.__source_index[metadata]
+
+    def parse_source_policy(
+        self,
+        metadata: PolicyMetadata,
+        policy_name: PolicyName,
+    ):
+        if policy_name in self.__source_index[metadata]:
+            return self.__source_index[metadata][policy_name]
+
+        policy_type = get_policy_type_by_name(policy_name)
 
         if self.__verbose:
             print(
-                f'Loading source policies for metadata version: '
+                f'Loading {policy_type.pretty_name} for metadata version: '
                 f'{metadata.version}'
             )
             print('Variables:')
             for k, v in metadata.variables.items():
                 print(f'{k}={v}')
 
-        source_macros_text = self.__load_texts(metadata.version)
+        assert isinstance(policy_type.origin, PolicySourceOrigin)
 
-        classmap = parse_source_classmap(
-            source_macros_text,
-            metadata,
-            current=self.__current,
-            verbose=self.__verbose,
-        )
-
-        macros = parse_source_macros(
-            source_macros_text,
-            metadata.variables,
-            classmap,
-            verbose=self.__verbose,
-        )
-
-        print(f'Found macros:\n{macros}')
-
-        policy_index: Dict[PolicyName, Policy] = {}
-        for policy_type in get_policy_types_by_origin(PolicySourceOrigin):
-            assert isinstance(policy_type.origin, PolicySourceOrigin)
-
-            policy = parse_metadata_source_policies(
-                self.__extra_rules_paths,
+        if policy_type.origin.format == PolicyParseFormat.CIL:
+            policy = parse_source_cil_policies(
                 policy_type,
                 metadata,
-                source_macros_text,
-                classmap,
+                classmap=None,
                 current=self.__current,
                 verbose=self.__verbose,
             )
+        else:
+            rules_dir_paths = self.__get_policy_all_paths(
+                policy_type,
+                version=metadata.version,
+                macros=False,
+            )
 
-            policy_index[policy_type.name] = policy
+            source_text = self.get_macros_source_text(metadata, policy_name)
 
-            print(f'Found policy: {policy}')
+            # Avoid mutating the original source text which might end up being
+            # used by other policies
+            source_text = source_text.copy()
 
-        source = Source(
-            macros,
-            classmap,
-            policy_index,
-        )
+            classmap = self.get_classmap(metadata, policy_name)
 
-        self.__source_index[metadata] = source
+            policy = parse_metadata_source_policies(
+                rules_dir_paths,
+                policy_type,
+                metadata,
+                source_text,
+                classmap,
+                verbose=self.__verbose,
+            )
 
-        return source
+        print(f'Found policy: {policy}')
+
+        self.__source_index[metadata][policy_name] = policy
+
+        return policy
