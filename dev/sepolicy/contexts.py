@@ -112,11 +112,10 @@ def output_genfs_contexts(genfs_rules: RuleContainer, output_dir: Path):
     if not genfs_rules:
         return
 
+    lines = sorted(f'{rule}\n' for rule in genfs_rules)
+
     output_path = output_dir / ContextsType.GENFS_CONTEXTS_NAME
-    with open(output_path, 'w') as o:
-        for rule in genfs_rules:
-            o.write(str(rule))
-            o.write('\n')
+    output_path.write_text(''.join(lines))
 
 
 DOMAIN_PREFIX = 'domain='
