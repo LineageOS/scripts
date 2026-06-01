@@ -403,7 +403,7 @@ def parse_dump_policy_rules(
     )
 
     genfs_rules = RuleContainer()
-    rules = RuleContainer(sparse_match=True)
+    rules = RuleContainer()
     conditional_types_map: Dict[str, ConditionalType] = {}
     reference_conditional_types_maps: List[Dict[str, ConditionalType]] = []
 

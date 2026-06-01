@@ -80,8 +80,8 @@ def split_policy_in_out(
     assert not other_policy.contexts, other_policy.contexts
     assert not other_policy.genfs_rules, other_policy.genfs_rules
 
-    in_other_rules = RuleContainer(sparse_match=True)
-    out_other_rules = RuleContainer(sparse_match=True)
+    in_other_rules = RuleContainer()
+    out_other_rules = RuleContainer()
 
     for rule in policy.rules:
         if rule in other_policy.rules:
@@ -119,7 +119,7 @@ def process_policy_post_split(
 
     assert policy.type.output is not None
 
-    rules = RuleContainer(policy.rules, sparse_match=True)
+    rules = RuleContainer(policy.rules)
     contexts = policy.contexts
     genfs_rules = policy.genfs_rules
 
