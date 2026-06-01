@@ -259,7 +259,22 @@ def main():
 
         def add_attribute(self, key, field=None, value=None):
             if value is not None:
-                self.attributes[key] = value
+                if key == 'type':
+                    new_value = []
+
+                    for i in value:
+                        name = apn.DESCRIPTOR.fields_by_name[
+                            'type'
+                        ].enum_type.values_by_number[i].name
+
+                        if name == 'ALL':
+                            name = '*'
+
+                        new_value.append(name)
+
+                    self.attributes[key] = ','.join(new_value).lower()
+                else:
+                    self.attributes[key] = value
             else:
                 if field is None:
                     field = key
@@ -306,15 +321,7 @@ def main():
             self.add_attribute('password')
             self.add_attribute('server')
             self.add_attribute('authtype')
-            self.add_attribute(
-                'type',
-                value=','.join(
-                    apn.DESCRIPTOR.fields_by_name[
-                        'type'
-                    ].enum_type.values_by_number[i].name
-                    for i in self.apn.type
-                ).lower(),
-            )
+            self.add_attribute('type', value=self.apn.type)
             self.add_attribute('protocol')
             self.add_attribute('roaming_protocol')
             self.add_attribute('bearer_bitmask')
