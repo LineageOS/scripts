@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import re
+from functools import cache
 from typing import (
     Dict,
     FrozenSet,
@@ -26,6 +27,21 @@ from sepolicy.varargs import (
 )
 
 macro_argument_regex = re.compile(r'\$(\d+)')
+
+
+@cache
+def _get_tokenizer(
+    open_char: str,
+    close_char: str,
+    separators: str,
+    ignored_chars: str,
+) -> re.Pattern[str]:
+    delimiters = open_char + close_char + separators + ignored_chars
+    pattern = (
+        f'[{re.escape(open_char + close_char)}]'
+        f'|[^{re.escape(delimiters)}]+'
+    )
+    return re.compile(pattern)
 
 raw_part = Union[str, List['raw_part']]
 raw_parts_list = List[raw_part]
@@ -64,46 +80,23 @@ def unpack_line(
     stack_append = stack.append
     stack_pop = stack.pop
 
-    i = 0
-    n = len(rule)
-    while i < n:
-        c = rule[i]
+    tokenizer = _get_tokenizer(
+        open_char,
+        close_char,
+        separators,
+        ignored_chars,
+    )
 
-        if c in ignored_chars:
-            i += 1
-            continue
-
-        if c == open_char:
+    for token in tokenizer.findall(rule):
+        if token == open_char:
             stack_append(current)
             current = []
-            i += 1
-            continue
-
-        if c == close_char:
+        elif token == close_char:
             last = stack_pop()
             last.append(current)
             current = last
-            i += 1
-            continue
-
-        if c in separators:
-            i += 1
-            continue
-
-        start = i
-        i += 1
-        while i < n:
-            c = rule[i]
-            if (
-                c == open_char
-                or c == close_char
-                or c in separators
-                or c in ignored_chars
-            ):
-                break
-            i += 1
-
-        current.append(rule[start:i])
+        else:
+            current.append(token)
 
     assert isinstance(current[0], list)
 
