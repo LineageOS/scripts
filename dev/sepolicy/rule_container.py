@@ -13,38 +13,34 @@ from typing import (
     Optional,
     Sequence,
     Tuple,
+    Union,
 )
 
 from sepolicy.rule import Rule
+
+MatchIndex = DefaultDict[
+    # levels
+    int,
+    DefaultDict[
+        # position
+        int,
+        DefaultDict[
+            # keys
+            Hashable,
+            # values
+            Dict[Rule, None],
+        ],
+    ],
+]
 
 
 class RuleContainer:
     def __init__(
         self,
         iterable: Optional[Iterable[Rule]] = None,
-        sparse_match: bool = False,
     ):
         self.__all_data: Dict[Rule, Tuple[Hashable, ...]] = {}
-        self.__sparse_match = sparse_match
-
-        self.__data: DefaultDict[
-            # levels
-            int,
-            DefaultDict[
-                # position
-                int,
-                DefaultDict[
-                    # keys
-                    Hashable,
-                    # values
-                    Dict[Rule, None],
-                ],
-            ],
-        ] = defaultdict(
-            lambda: defaultdict(
-                lambda: defaultdict(dict),
-            ),
-        )
+        self.__index: Optional[MatchIndex] = None
 
         if iterable is not None:
             for value in iterable:
@@ -68,15 +64,7 @@ class RuleContainer:
             return
 
         self.__all_data[value] = keys
-
-        if not self.__sparse_match:
-            return
-
-        levels = len(keys)
-        levels_data = self.__data[levels]
-
-        for i, k in enumerate(keys):
-            levels_data[i][k][value] = None
+        self.__index = None
 
     def add_many(self, values: Iterable[Rule]):
         for value in values:
@@ -92,28 +80,7 @@ class RuleContainer:
         assert self.__all_data[value] == keys, value
 
         del self.__all_data[value]
-
-        if not self.__sparse_match:
-            return
-
-        levels = len(keys)
-        levels_data = self.__data[levels]
-
-        for i, key in enumerate(keys):
-            position_data = levels_data[i]
-            bucket = position_data[key]
-
-            del bucket[value]
-
-            if bucket:
-                continue
-
-            del position_data[key]
-
-            if position_data:
-                continue
-
-            del levels_data[i]
+        self.__index = None
 
         return True
 
@@ -127,11 +94,36 @@ class RuleContainer:
 
         return removed_count
 
-    def match(self, keys: Sequence[Hashable]) -> List[Rule]:
-        assert self.__sparse_match
+    def __build_index(self):
+        self.__index = defaultdict(
+            lambda: defaultdict(
+                lambda: defaultdict(dict),
+            ),
+        )
+
+        for value, keys in self.__all_data.items():
+            levels_data = self.__index[len(keys)]
+            for i, k in enumerate(keys):
+                levels_data[i][k][value] = None
+
+        return self.__index
+
+    def match(
+        self,
+        keys: Sequence[
+            Union[
+                Hashable,
+                Set[Hashable],
+                None,
+            ],
+        ],
+    ) -> List[Rule]:
+        index = self.__index
+        if index is None:
+            index = self.__build_index()
 
         levels = len(keys)
-        levels_data = self.__data.get(levels)
+        levels_data = index.get(levels)
         if levels_data is None:
             return []
 
