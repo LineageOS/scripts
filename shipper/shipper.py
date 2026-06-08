@@ -32,7 +32,7 @@ class WikiData:
         ]))
 
 
-def get_build_targets(git_head: str) -> dict:
+def get_build_targets(git_head: str) -> list[dict, str]:
     build_targets = {}
 
     for line in subprocess.run(['git', 'show', f'{git_head}:lineage-build-targets'],
@@ -42,7 +42,11 @@ def get_build_targets(git_head: str) -> dict:
             device, build_type, version, cadence = line.split()
             build_targets[device] = version
 
-    return build_targets
+    build_targets_head = subprocess.run(['git', 'rev-parse', git_head],
+                                        cwd=f'{CROOT}/lineage/hudson',
+                                        stdout=subprocess.PIPE).stdout.decode().strip()
+
+    return build_targets, build_targets_head
 
 
 def get_wiki_data(codename: str) -> WikiData:
@@ -71,14 +75,17 @@ def parse_cmdline() -> argparse.Namespace:
 def main() -> None:
     args = parse_cmdline()
 
-    build_targets_before = get_build_targets(args.hudson_git_head)
-    build_targets_after = get_build_targets('HEAD')
+    build_targets_before, build_targets_head_before = get_build_targets(args.hudson_git_head)
+    build_targets_after, build_targets_head_after = get_build_targets('HEAD')
 
     new_devices = collections.defaultdict(list)
 
     for codename, branch in build_targets_after.items():
         if build_targets_before.get(codename, None) != branch:
             new_devices[branch].append(codename)
+
+    print(f'<!-- {build_targets_head_before}..{build_targets_head_after} -->')
+    print()
 
     for branch, codenames in new_devices.items():
         _, version = branch.split('-')
