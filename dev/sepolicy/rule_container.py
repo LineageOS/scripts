@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
-from collections.abc import Hashable
+from collections.abc import Hashable, Set
 from typing import (
     DefaultDict,
     Dict,
@@ -140,11 +140,20 @@ class RuleContainer:
             if position_data is None:
                 return []
 
-            bucket = position_data.get(key)
-            if bucket is None:
-                return []
-
-            buckets.append(bucket)
+            if isinstance(key, Set):
+                merged: Dict[Rule, None] = {}
+                for value in key:
+                    bucket = position_data.get(value)
+                    if bucket is not None:
+                        merged.update(bucket)
+                if not merged:
+                    return []
+                buckets.append(merged)
+            else:
+                bucket = position_data.get(key)
+                if bucket is None:
+                    return []
+                buckets.append(bucket)
 
         # Querries that are only None are not allowed
         assert saw_not_none
