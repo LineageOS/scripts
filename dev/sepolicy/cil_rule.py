@@ -125,29 +125,29 @@ def unpack_ioctls(parts: raw_parts_list):
 
     ranges: List[Tuple[int, int]] = []
 
-    for part in parts:
-        if isinstance(part, list) and part[0] != 'range':
-            part = part[0]
+    def collect(items: raw_parts_list):
+        for part in items:
+            if isinstance(part, str):
+                ioctl = int(part, base=16)
+                ranges.append((ioctl, ioctl))
+                continue
 
-        if isinstance(part, str):
-            ioctl = int(part, base=16)
-            ranges.append((ioctl, ioctl))
-            continue
+            assert isinstance(part, list), parts
 
-        assert isinstance(part, list), parts
+            if part[0] == 'range':
+                assert isinstance(part[1], str), parts
+                start_ioctl = int(part[1], base=16)
 
-        if isinstance(part[0], list):
-            part = part[0]
+                assert isinstance(part[2], str), parts
+                end_ioctl = int(part[2], base=16)
 
-        assert part[0] == 'range', parts
+                ranges.append((start_ioctl, end_ioctl))
+                continue
 
-        assert isinstance(part[1], str), parts
-        start_ioctl = int(part[1], base=16)
+            # A nested list of values / ranges - flatten it.
+            collect(part)
 
-        assert isinstance(part[2], str), parts
-        end_ioctl = int(part[2], base=16)
-
-        ranges.append((start_ioctl, end_ioctl))
+    collect(parts)
 
     return Ioctls(ranges)
 
