@@ -38,10 +38,10 @@ def _get_tokenizer(
 ) -> re.Pattern[str]:
     delimiters = open_char + close_char + separators + ignored_chars
     pattern = (
-        f'[{re.escape(open_char + close_char)}]'
-        f'|[^{re.escape(delimiters)}]+'
+        f'[{re.escape(open_char + close_char)}]|[^{re.escape(delimiters)}]+'
     )
     return re.compile(pattern)
+
 
 raw_part = Union[str, List['raw_part']]
 raw_parts_list = List[raw_part]
@@ -327,11 +327,11 @@ class Rule:
 
     def format(
         self,
-        class_perms: Dict[str, List[Tuple[str, Set[str]]]],
-        ioctls: List[Tuple[str, Ioctls]],
-        ioctl_defines: Dict[int, str],
-        nlmsgs: List[Tuple[str, Ioctls]],
-        nlmsg_defines: Dict[int, str],
+        class_perms: Optional[Dict[str, List[Tuple[str, Set[str]]]]],
+        ioctls: Optional[List[Tuple[str, Ioctls]]],
+        ioctl_defines: Optional[Dict[int, str]],
+        nlmsgs: Optional[List[Tuple[str, Ioctls]]],
+        nlmsg_defines: Optional[Dict[int, str]],
     ):
         return format_rule(
             self,

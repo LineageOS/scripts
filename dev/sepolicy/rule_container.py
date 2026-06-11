@@ -55,6 +55,14 @@ class RuleContainer:
     def __contains__(self, value: Rule):
         return value in self.__all_data
 
+    def __and__(self, other: RuleContainer):
+        common = self.__all_data.keys() & other.__all_data.keys()
+        return RuleContainer(common)
+
+    def __sub__(self, other: RuleContainer):
+        only = self.__all_data.keys() - other.__all_data.keys()
+        return RuleContainer(only)
+
     def add(self, value: Rule):
         keys = value.hash_values
 
