@@ -10,12 +10,25 @@ from collections import defaultdict
 from pathlib import Path
 from typing import DefaultDict, List, Optional
 
+from sepolicy.add_policy_provider import AddPolicyProvider
+from sepolicy.binary_compiled_policy_provider import (
+    BinaryCompiledPolicyProvider,
+)
 from sepolicy.cleanup_policy_provider import CleanupPolicyProvider
+from sepolicy.combined_policy_provider import CombinedPolicyProvider
+from sepolicy.compiled_policy_provider import CompiledPolicyProvider
 from sepolicy.contexts import (
     output_contexts,
     output_genfs_contexts,
 )
+from sepolicy.dump_binary_policy_provider import DumpBinaryPolicyProvider
 from sepolicy.dump_cil_policy_provider import DumpCilPolicyProvider
+from sepolicy.expanded_guard_policy_provider import (
+    ExpandedGuardPolicyProvider,
+)
+from sepolicy.gather_source_text_policy_provider import (
+    GatherSourceTextPolicyProvider,
+)
 from sepolicy.hardcoded_policy_provider import HardcodedPolicyProvider
 from sepolicy.macro_match_policy_provider import MacroMatchPolicyProvider
 from sepolicy.macro_replace_policy_provider import MacroReplacePolicyProvider
@@ -76,12 +89,12 @@ def process_policy_output(
     output_contexts(policy.contexts, policy_output_dir)
     output_genfs_contexts(policy.genfs_rules, policy_output_dir)
 
-    grouped_rules = group_rules(policy.rules)
+    grouped_rules = group_rules(policy.rules, policy.guarded_rules)
     output_grouped_rules(
         grouped_rules,
         macros=policy.macros,
         output_dir=policy_output_dir,
-        guard=policy.type.output.guard,
+        rule_guard=policy.guarded_rules,
     )
 
 
@@ -163,7 +176,29 @@ def decompile_cil():
             verbose=verbose,
         )
     )
+    policy_index.register(
+        DumpBinaryPolicyProvider(
+            dump_root=dump_dir,
+            verbose=verbose,
+        )
+    )
+    policy_index.register(AddPolicyProvider())
     policy_index.register(CleanupPolicyProvider())
+    policy_index.register(
+        CombinedPolicyProvider(
+            verbose=verbose,
+        )
+    )
+    policy_index.register(
+        CompiledPolicyProvider(
+            verbose=verbose,
+        )
+    )
+    policy_index.register(
+        BinaryCompiledPolicyProvider(
+            verbose=verbose,
+        )
+    )
     policy_index.register(
         MacroMatchPolicyProvider(
             verbose=verbose,
@@ -171,6 +206,16 @@ def decompile_cil():
     )
     policy_index.register(
         MacroReplacePolicyProvider(
+            verbose=verbose,
+        )
+    )
+    policy_index.register(
+        GatherSourceTextPolicyProvider(
+            verbose=verbose,
+        )
+    )
+    policy_index.register(
+        ExpandedGuardPolicyProvider(
             verbose=verbose,
         )
     )

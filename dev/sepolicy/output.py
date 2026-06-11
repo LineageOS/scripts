@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import re
+from collections import defaultdict
 from functools import cache
 from pathlib import Path
 from typing import Dict, List, Optional, Set, Tuple
@@ -87,9 +88,12 @@ def rule_simple_type_name(rule: Rule):
     return None, False
 
 
-def group_rules(rules: RuleContainer):
+def group_rules(
+    rules: RuleContainer,
+    rule_guard: Optional[Dict[Rule, str]] = None,
+):
     rules = RuleContainer(rules)
-    merge_typeattribute_rules(rules)
+    merge_typeattribute_rules(rules, rule_guard)
 
     # Group rules based on main type
     grouped_rules: Dict[str, Set[Rule]] = {}
@@ -185,7 +189,7 @@ def enforce_type_decl_order(rules_formatted: List[Tuple[Rule, str]]):
 def render_grouped_rules(
     grouped_rules: Dict[str, Set[Rule]],
     macros: Optional[SourceMacros],
-    guard: Optional[str] = None,
+    rule_guard: Optional[Dict[Rule, str]] = None,
 ) -> Dict[str, str]:
     class_perms = None
     class_sets = None
@@ -201,11 +205,25 @@ def render_grouped_rules(
         nlmsgs = macros.nlmsgs
         nlmsg_defines = macros.nlmsg_defines
 
+    if rule_guard is None:
+        rule_guard = {}
+
     rendered: Dict[str, str] = {}
     for name, rules in sorted(grouped_rules.items()):
-        if class_sets is not None:
-            rules = RuleContainer(rules)
-            merge_class_sets(rules, class_sets)
+        by_guard: Dict[Optional[str], List[Rule]] = defaultdict(list)
+        for rule in rules:
+            by_guard[rule_guard.get(rule)].append(rule)
+
+        file_guard: Dict[Rule, str] = {}
+        file_rules: List[Rule] = []
+        for guard_name, group in by_guard.items():
+            merged = RuleContainer(group)
+            if class_sets is not None:
+                merge_class_sets(merged, class_sets)
+            for rule in merged:
+                file_rules.append(rule)
+                if guard_name is not None:
+                    file_guard[rule] = guard_name
 
         rules_formatted = (
             (
@@ -218,27 +236,40 @@ def render_grouped_rules(
                     nlmsg_defines=nlmsg_defines,
                 ),
             )
-            for r in rules
+            for r in file_rules
         )
         sorted_rules = sorted(
             rules_formatted,
-            key=rule_macro_sort_key,
+            key=lambda rf, fg=file_guard: (
+                rule_macro_sort_key(rf)[0],
+                fg.get(rf[0]) or '',
+                rf[1],
+            ),
         )
 
         sorted_rules = enforce_type_decl_order(sorted_rules)
 
         parts: List[str] = []
-        if guard:
-            parts.append(f'{guard}(`\n\n')
+        active_guard: Optional[str] = None
         last_type = None
         for rule, formatted in sorted_rules:
+            this_guard = file_guard.get(rule)
+            if this_guard != active_guard:
+                if active_guard is not None:
+                    parts.append("')\n")
+                if parts:
+                    parts.append('\n')
+                if this_guard is not None:
+                    parts.append(f'{this_guard}(`\n')
+                active_guard = this_guard
+                last_type = None
             if last_type is not None and rule.rule_type != last_type:
                 parts.append('\n')
             last_type = rule.rule_type
             parts.append(formatted)
             parts.append('\n')
-        if guard:
-            parts.append("\n')\n")
+        if active_guard is not None:
+            parts.append("')\n")
         rendered[name] = ''.join(parts)
 
     return rendered
@@ -248,9 +279,13 @@ def output_grouped_rules(
     grouped_rules: Dict[str, Set[Rule]],
     macros: Optional[SourceMacros],
     output_dir: Path,
-    guard: Optional[str] = None,
+    rule_guard: Optional[Dict[Rule, str]] = None,
 ):
-    rendered = render_grouped_rules(grouped_rules, macros, guard)
+    rendered = render_grouped_rules(
+        grouped_rules,
+        macros,
+        rule_guard,
+    )
     for name, text in rendered.items():
         output_path = output_dir / name
         with open(output_path, 'w') as o:
