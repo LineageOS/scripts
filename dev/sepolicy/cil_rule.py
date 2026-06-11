@@ -21,12 +21,6 @@ from utils.utils import Color, color_print
 CIL_COMMENT_MARKER = ';'
 
 
-def assert_parts_str_list(value: raw_parts_list, line: str) -> List[str]:
-    assert isinstance(value, list), line
-    assert all(isinstance(item, str) for item in value), line
-    return cast(List[str], value)
-
-
 def is_conditional_typeattr(part: raw_part):
     if isinstance(part[0], list):
         part = part[0][0]
@@ -316,7 +310,7 @@ class CilRuleParser:
                 dst = self.prepare_type(parts[2])
                 class_name = parts[3][0]
 
-                perms = assert_parts_str_list(parts[3][1], line)
+                perms = cast(List[str], parts[3][1])
                 is_all = False
                 if self.classmap is not None:
                     class_perms = self.classmap.class_perms(class_name)
@@ -481,7 +475,7 @@ class CilRuleParser:
                 assert isinstance(parts[1], str), line
                 assert isinstance(parts[2], list), line
 
-                perms = assert_parts_str_list(parts[2], line)
+                perms = cast(List[str], parts[2])
                 rule = Rule(
                     rule_type,
                     (parts[1],),
