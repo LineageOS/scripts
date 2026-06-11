@@ -7,10 +7,10 @@ import bisect
 from typing import Dict, Iterable, List, Optional, Set, Tuple
 
 
-def join_varargs(varargs: List[str]):
+def join_varargs(varargs: List[str], force: bool = False):
     s = ' '.join(varargs)
 
-    if len(varargs) > 1:
+    if force or len(varargs) > 1:
         s = '{ ' + s + ' }'
 
     return s
@@ -321,10 +321,14 @@ class Ioctls:
                     parts.append(name)
                     remaining = remaining - ioctl_ranges
 
+        # Single ranges need brances too (e.g. 0x89a0-0x89a3)
+        has_range = False
         for start, end in remaining.__ranges:
             parts.append(self.__format_range(start, end, ioctl_defines))
+            if start != end:
+                has_range = True
 
-        s = join_varargs(parts)
+        s = join_varargs(parts, force=has_range)
 
         if inverted:
             return f'~{s}'
