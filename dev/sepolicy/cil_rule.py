@@ -456,18 +456,22 @@ class CilRuleParser:
                 assert isinstance(parts[1][0], str), line
                 assert isinstance(parts[2], str), line
 
+                attr = parts[1][0].removesuffix(self.version_suffix)
+
                 rule = Rule(
                     RuleType.EXPANDATTRIBUTE,
-                    (parts[1][0], parts[2]),
+                    (attr, parts[2]),
                 )
                 self.add_rule(rule)
             case RuleType.TYPE:
                 assert len(parts) == 2
                 assert isinstance(parts[1], str)
 
+                t = parts[1].removesuffix(self.version_suffix)
+
                 rule = Rule(
                     rule_type,
-                    (parts[1],),
+                    (t,),
                 )
                 self.add_rule(rule)
             case CilRuleType.COMMON | CilRuleType.CLASS:

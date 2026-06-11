@@ -178,21 +178,34 @@ def enforce_type_decl_order(rules_formatted: List[Tuple[Rule, str]]):
     return result
 
 
-def output_grouped_rules(
+def render_grouped_rules(
     grouped_rules: Dict[str, Set[Rule]],
-    macros: SourceMacros,
-    output_dir: Path,
-):
-    for name, rules in grouped_rules.items():
+    macros: Optional[SourceMacros],
+    guard: Optional[str] = None,
+) -> Dict[str, str]:
+    class_perms = None
+    ioctls = None
+    ioctl_defines = None
+    nlmsgs = None
+    nlmsg_defines = None
+    if macros is not None:
+        class_perms = macros.class_perms
+        ioctls = macros.ioctls
+        ioctl_defines = macros.ioctl_defines
+        nlmsgs = macros.nlmsgs
+        nlmsg_defines = macros.nlmsg_defines
+
+    rendered: Dict[str, str] = {}
+    for name, rules in sorted(grouped_rules.items()):
         rules_formatted = (
             (
                 r,
                 r.format(
-                    class_perms=macros.class_perms,
-                    ioctls=macros.ioctls,
-                    ioctl_defines=macros.ioctl_defines,
-                    nlmsgs=macros.nlmsgs,
-                    nlmsg_defines=macros.nlmsg_defines,
+                    class_perms=class_perms,
+                    ioctls=ioctls,
+                    ioctl_defines=ioctl_defines,
+                    nlmsgs=nlmsgs,
+                    nlmsg_defines=nlmsg_defines,
                 ),
             )
             for r in rules
@@ -204,12 +217,31 @@ def output_grouped_rules(
 
         sorted_rules = enforce_type_decl_order(sorted_rules)
 
+        parts: List[str] = []
+        if guard:
+            parts.append(f'{guard}(`\n\n')
+        last_type = None
+        for rule, formatted in sorted_rules:
+            if last_type is not None and rule.rule_type != last_type:
+                parts.append('\n')
+            last_type = rule.rule_type
+            parts.append(formatted)
+            parts.append('\n')
+        if guard:
+            parts.append("\n')\n")
+        rendered[name] = ''.join(parts)
+
+    return rendered
+
+
+def output_grouped_rules(
+    grouped_rules: Dict[str, Set[Rule]],
+    macros: Optional[SourceMacros],
+    output_dir: Path,
+    guard: Optional[str] = None,
+):
+    rendered = render_grouped_rules(grouped_rules, macros, guard)
+    for name, text in rendered.items():
         output_path = output_dir / name
         with open(output_path, 'w') as o:
-            last_type = None
-            for rule, formatted in sorted_rules:
-                if last_type is not None and rule.rule_type != last_type:
-                    o.write('\n')
-                last_type = rule.rule_type
-                o.write(formatted)
-                o.write('\n')
+            o.write(text)

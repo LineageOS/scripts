@@ -22,23 +22,27 @@ from sepolicy.cil_rule import (
     unpack_cil_line,
 )
 from sepolicy.classmap import Classmap
+from sepolicy.compile_utils import binary_to_cil_policy
 from sepolicy.conditional_type import ConditionalType
 from sepolicy.contexts import parse_contexts_texts
 from sepolicy.merge import add_mergeable_rule, merge_current_rules
 from sepolicy.policy import (
     ContextsType,
     Policy,
-    PolicyDumpOrigin,
+    PolicyDumpCilOrigin,
+    PolicyIndex,
     PolicyMetadata,
-    PolicyName,
     PolicyType,
     PolicyVersionSource,
-    get_policy_types_by_origin,
 )
 from sepolicy.rule import Rule, raw_parts_list
 from sepolicy.rule_container import RuleContainer
 from utils.frozendict import FrozenDict
-from utils.utils import read_texts, resolve_paths, split_normalize_text
+from utils.utils import (
+    read_texts,
+    resolve_paths,
+    split_normalize_text,
+)
 
 cil_line_type = Tuple[str, raw_parts_list]
 
@@ -387,14 +391,48 @@ def read_cil_lines(
     return line_parts_list
 
 
+def decompile_binary_to_policy(
+    binary_path: Path,
+    policy_type: PolicyType,
+    metadata: PolicyMetadata,
+    verbose: bool,
+):
+    genfs_rules = RuleContainer()
+    rules = RuleContainer()
+    conditional_types_map: Dict[str, ConditionalType] = {}
+
+    with binary_to_cil_policy(binary_path) as cil_policy_path:
+        parse_cil_lines(
+            cil_policy_path,
+            rules,
+            genfs_rules,
+            conditional_types_map,
+            reference_conditional_types_maps=[],
+            classmap=None,
+            version=metadata.version,
+            name=policy_type.pretty_name,
+            verbose=verbose,
+        )
+
+    return Policy(
+        policy_type,
+        rules,
+        genfs_rules,
+        contexts={},
+        conditional_types_map=conditional_types_map,
+        metadata=metadata,
+    )
+
+
 def parse_dump_policy_rules(
-    policy_index: Dict[PolicyName, Policy],
+    policy_index: PolicyIndex,
     dump_root: Path,
     policy_type: PolicyType,
+    metadata: PolicyMetadata,
     verbose: bool,
 ):
     origin = policy_type.origin
-    assert isinstance(origin, PolicyDumpOrigin)
+    assert isinstance(origin, PolicyDumpCilOrigin)
 
     version = get_dump_policy_version(
         dump_root,
@@ -406,9 +444,11 @@ def parse_dump_policy_rules(
     conditional_types_map: Dict[str, ConditionalType] = {}
     reference_conditional_types_maps: List[Dict[str, ConditionalType]] = []
 
-    for environment_name in origin.needed_policy or ():
-        assert environment_name in policy_index
-        environment_policy = policy_index[environment_name]
+    for environment_type in origin.needed or ():
+        environment_policy = policy_index.get(
+            environment_type,
+            metadata,
+        )
 
         rules.add_many(environment_policy.rules)
 
@@ -418,13 +458,17 @@ def parse_dump_policy_rules(
             )
 
     classmap = None
-    if origin.classmap_source_policy is not None:
-        classmap = policy_index[origin.classmap_source_policy].classmap
+    if origin.classmap_source is not None:
+        classmap_source_policy = policy_index.find(
+            origin.classmap_source,
+            metadata,
+        )
 
-    selinux_location = (
-        origin.location if origin.location is not None else 'etc/selinux'
-    )
-    selinux_path = Path(dump_root, origin.partition, selinux_location)
+        if classmap_source_policy is not None:
+            classmap = classmap_source_policy.classmap
+            assert classmap is not None
+
+    selinux_path = Path(dump_root, origin.partition, 'etc/selinux')
     prefix = (
         origin.file_prefix
         if origin.file_prefix is not None
@@ -434,10 +478,7 @@ def parse_dump_policy_rules(
     file_path = Path(selinux_path, file_name)
 
     if not file_path.exists():
-        if origin.optional:
-            return
-
-        raise ValueError(f'{file_path} does not exist')
+        return None
 
     classmap = parse_cil_lines(
         file_path,
@@ -451,7 +492,12 @@ def parse_dump_policy_rules(
         verbose=verbose,
     )
 
-    return rules, classmap, genfs_rules, conditional_types_map
+    return (
+        rules,
+        classmap,
+        genfs_rules,
+        conditional_types_map,
+    )
 
 
 def parse_dump_policy_contexts(
@@ -486,62 +532,3 @@ def parse_dump_policy_contexts(
     }
 
     return contexts
-
-
-def parse_dump_policies(dump_root: Path, verbose: bool):
-    policy_index: Dict[PolicyName, Policy] = {}
-
-    for policy_type in get_policy_types_by_origin(PolicyDumpOrigin):
-        assert isinstance(policy_type.origin, PolicyDumpOrigin)
-
-        partition = policy_type.origin.partition
-
-        version = get_dump_policy_version(
-            dump_root,
-            policy_type.origin.version_source,
-        )
-
-        variables = parse_dump_policy_variables(
-            dump_root,
-            version=version,
-        )
-
-        metadata = PolicyMetadata(
-            version,
-            variables,
-        )
-
-        parse_result = parse_dump_policy_rules(
-            policy_index,
-            dump_root,
-            policy_type,
-            verbose=verbose,
-        )
-        if parse_result is None:
-            continue
-
-        rules, classmap, genfs_rules, conditional_types_map = parse_result
-
-        contexts = parse_dump_policy_contexts(
-            dump_root,
-            partition=partition,
-            contexts_name_map=policy_type.origin.contexts_name_map,
-            name=policy_type.pretty_name,
-            verbose=verbose,
-        )
-
-        policy = Policy(
-            policy_type.name,
-            rules,
-            genfs_rules,
-            contexts,
-            conditional_types_map=conditional_types_map,
-            metadata=metadata,
-            classmap=classmap,
-        )
-
-        policy_index[policy_type.name] = policy
-
-        print(f'Found policy: {policy}')
-
-    return policy_index
