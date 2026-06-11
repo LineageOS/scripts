@@ -154,6 +154,7 @@ def get_dump_policy_version(
 def parse_dump_policy_variables(
     dump_root: Path,
     version: str,
+    recovery: bool = False,
 ):
     platform_build_prop_path = Path(dump_root, 'system/build.prop')
     platform_build_flags_path = Path(
@@ -167,6 +168,9 @@ def parse_dump_policy_variables(
         'vendor',
         'etc/build_flags.json',
     )
+
+    is_not_recovery_str = 'false' if recovery else 'true'
+    is_recovery_str = 'true' if recovery else 'false'
 
     target_arch = read_build_prop(
         vendor_build_prop_path,
@@ -222,19 +226,15 @@ def parse_dump_policy_variables(
     # CLANG_COVERAGE or NATIVE_COVERAGE
     variables['target_with_native_coverage'] = 'false'
 
-    # TODO: set to false for recovery
-    variables['target_full_treble'] = 'true'
+    variables['target_full_treble'] = is_not_recovery_str
 
-    # TODO: set to false for recovery
-    variables['target_compatible_property'] = 'true'
+    variables['target_compatible_property'] = is_not_recovery_str
 
-    # TODO: set to false for recovery, allow for parsing from user
     # BUILD_BROKEN_TREBLE_SYSPROP_NEVERALLOW
-    variables['target_treble_sysprop_neverallow'] = 'true'
+    variables['target_treble_sysprop_neverallow'] = is_not_recovery_str
 
-    # TODO: set to false for recovery, allow for parsing from user
     # BUILD_BROKEN_ENFORCE_SYSPROP_OWNER
-    variables['target_enforce_sysprop_owner'] = 'true'
+    variables['target_enforce_sysprop_owner'] = is_not_recovery_str
 
     # Set to true for CTS only
     variables['target_exclude_build_test'] = 'false'
@@ -245,8 +245,7 @@ def parse_dump_policy_variables(
     # PRODUCT_SET_DEBUGFS_RESTRICTIONS
     variables['target_enforce_debugfs_restriction'] = 'true'
 
-    # TODO: set to true for recovery
-    variables['target_recovery'] = 'false'
+    variables['target_recovery'] = is_recovery_str
 
     # BOARD_API_LEVEL
     variables['target_board_api_level'] = version
