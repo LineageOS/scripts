@@ -70,13 +70,15 @@ def cil_to_binary_policy(policy_path: Path):
         run_cmd(
             [
                 str(secilc_path),
-                '-v',
+                # '-v', # no verbose
                 '-m',
                 '-M',
                 'true',
                 '-G',
                 '-c',
                 '30',
+                # ignore neverallows
+                '-N',
                 str(policy_path),
                 '-o',
                 str(binary_path),
