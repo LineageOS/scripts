@@ -97,6 +97,23 @@ class PolicySourceOrigin(PolicyOrigin):
 
 
 @dataclass(frozen=True)
+class PolicyCombinedOrigin(PolicyOrigin):
+    macro_sources: Optional[Tuple[PolicyType, ...]] = None
+    rule_sources: Optional[Tuple[PolicyType, ...]] = None
+    attribute_sources: Optional[Tuple[PolicyType, ...]] = None
+
+
+@dataclass(frozen=True)
+class PolicyCompiledOrigin(PolicyOrigin):
+    source: PolicyType
+
+
+@dataclass(frozen=True)
+class PolicyBinaryCompiledOrigin(PolicyOrigin):
+    source: PolicyType
+
+
+@dataclass(frozen=True)
 class PolicySourceCilOrigin(PolicyOrigin):
     cil_file_name: str
 
@@ -115,6 +132,12 @@ class PolicyDumpCilOrigin(PolicyDumpOrigin):
     contexts_name_map: Optional[FrozenDict[ContextsType, str]] = None
     # Needed at parse time
     needed: Optional[Tuple[PolicyType, ...]] = None
+
+
+@dataclass(frozen=True)
+class PolicyDumpBinaryOrigin(PolicyDumpOrigin):
+    file_name: Optional[str] = None
+    recovery: Optional[bool] = False
 
 
 @dataclass(frozen=True)
@@ -147,9 +170,28 @@ class PolicyMacroReplaceOrigin(PolicyOrigin):
 
 
 @dataclass(frozen=True)
+class PolicyGatherSourceTextOrigin(PolicyOrigin):
+    source: PolicyType
+
+
+@dataclass(frozen=True)
+class PolicyExpandedGuardOrigin(PolicyOrigin):
+    source: PolicyType
+    expander_source: PolicyType
+    reference: PolicyType
+    guard: str
+
+
+@dataclass(frozen=True)
+class PolicyAddOrigin(PolicyOrigin):
+    source: PolicyType
+    added: PolicyType
+    guard: str
+
+
+@dataclass(frozen=True)
 class PolicyOutput:
     relative_dir: str
-    guard: Optional[str] = None
 
 
 policy_type_index: Dict[str, PolicyType] = {}
@@ -213,8 +255,37 @@ class PolicyType:
     def macro_replace(self) -> PolicyType:
         return self.__child('replaced', PolicyMacroReplaceOrigin(self))
 
-    def output_to(self, *, relative_dir: str, guard: Optional[str] = None):
-        self.__output = PolicyOutput(relative_dir, guard)
+    def gather_source_text(self) -> PolicyType:
+        return self.__child(
+            'source_text',
+            PolicyGatherSourceTextOrigin(self),
+        )
+
+    def expanded_guard(
+        self,
+        *,
+        expander: PolicyType,
+        reference: PolicyType,
+        guard: str,
+    ) -> PolicyType:
+        return self.__child(
+            'guarded',
+            PolicyExpandedGuardOrigin(self, expander, reference, guard),
+        )
+
+    def add(
+        self,
+        *,
+        added: PolicyType,
+        guard: str,
+    ) -> PolicyType:
+        return self.__child(
+            f'with_{guard}',
+            PolicyAddOrigin(self, added, guard),
+        )
+
+    def output_to(self, *, relative_dir: str):
+        self.__output = PolicyOutput(relative_dir)
         return self
 
 
@@ -248,6 +319,45 @@ def source_cil(*, name: str, cil_file_name: str):
     )
 
 
+def combined(
+    *,
+    name: str,
+    macro_sources: Tuple[PolicyType, ...] = (),
+    rule_sources: Tuple[PolicyType, ...] = (),
+    attribute_sources: Tuple[PolicyType, ...] = (),
+):
+    return PolicyType(
+        f'{SOURCE_PREFIX}{name}',
+        PolicyCombinedOrigin(
+            macro_sources=macro_sources or None,
+            rule_sources=rule_sources or None,
+            attribute_sources=attribute_sources or None,
+        ),
+    )
+
+
+def compiled(
+    *,
+    name: str,
+    source: PolicyType,
+):
+    return PolicyType(
+        f'{SOURCE_PREFIX}{name}',
+        PolicyCompiledOrigin(source=source),
+    )
+
+
+def binary_compiled(
+    *,
+    name: str,
+    source: PolicyType,
+):
+    return PolicyType(
+        f'{SOURCE_PREFIX}{name}',
+        PolicyBinaryCompiledOrigin(source=source),
+    )
+
+
 def dump_cil(
     *,
     name: str,
@@ -270,6 +380,25 @@ def dump_cil(
             contexts_name_map=contexts,
             needed=needed or None,
         ),
+    )
+
+
+def dump_binary(
+    *,
+    name: str,
+    version_source: PolicyVersionSource,
+    file_name: Optional[str] = None,
+    optional: bool = False,
+    recovery: bool = False,
+):
+    return PolicyType(
+        f'{PREBUILT_PREFIX}{name}',
+        PolicyDumpBinaryOrigin(
+            version_source=version_source,
+            file_name=file_name,
+            recovery=recovery,
+        ),
+        optional=optional,
     )
 
 
@@ -377,6 +506,13 @@ vendor = dump_cil(
     classmap_source=platform,
     needed=(versioned_platform,),
 )
+recovery = dump_binary(
+    name='recovery',
+    version_source=PolicyVersionSource.BOARD_API,
+    file_name='recovery/sepolicy',
+    optional=True,
+    recovery=True,
+)
 
 #
 # Prebuilt policy pipelines
@@ -386,38 +522,23 @@ vendor = dump_cil(
 platform_matched = platform.macro_match(
     macros=source_platform_public,
 )
-platform_public_replaced = (
-    platform_matched.public(
-        reference=versioned_platform,
-    )
-    .cleanup(
-        names=(
-            automatically_added,
-            source_platform_public,
-            source_platform_technical_debt,
-        ),
-    )
-    .macro_replace()
-    .output_to(
-        relative_dir='system/public',
-    )
+platform_public_clean = platform_matched.public(
+    reference=versioned_platform,
+).cleanup(
+    names=(
+        automatically_added,
+        source_platform_public,
+        source_platform_technical_debt,
+    ),
 )
-
-platform_private_replaced = (
-    platform_matched.private(
-        reference=versioned_platform,
-    )
-    .cleanup(
-        names=(
-            automatically_added,
-            source_platform_private,
-            source_platform_technical_debt,
-        ),
-    )
-    .macro_replace()
-    .output_to(
-        relative_dir='system/private',
-    )
+platform_private_clean = platform_matched.private(
+    reference=versioned_platform,
+).cleanup(
+    names=(
+        automatically_added,
+        source_platform_private,
+        source_platform_technical_debt,
+    ),
 )
 
 # System ext
@@ -427,97 +548,204 @@ system_ext_matched = system_ext.macro_match(
 system_ext_public = system_ext_matched.public(
     reference=versioned_platform,
 )
-system_ext_public_replaced = (
-    system_ext_public.cleanup(
-        names=(
-            platform,
-            automatically_added,
-            source_system_ext_public,
-            source_platform_technical_debt,
-        ),
-    )
-    .macro_replace()
-    .output_to(
-        relative_dir='system_ext/public',
-    )
+system_ext_public_clean = system_ext_public.cleanup(
+    names=(
+        platform,
+        automatically_added,
+        source_system_ext_public,
+        source_platform_technical_debt,
+    ),
 )
-
 system_ext_private = system_ext_matched.private(
     reference=versioned_platform,
 )
-system_ext_private_replaced = (
-    system_ext_private.cleanup(
-        names=(
-            platform,
-            automatically_added,
-            source_system_ext_private,
-            source_platform_technical_debt,
-        ),
-    )
-    .macro_replace()
-    .output_to(
-        relative_dir='system_ext/private',
-    )
+system_ext_private_clean = system_ext_private.cleanup(
+    names=(
+        platform,
+        automatically_added,
+        source_system_ext_private,
+        source_platform_technical_debt,
+    ),
 )
 
 # Product
 product_matched = product.macro_match(
     macros=source_platform_public,
 )
-product_public_replaced = (
-    product_matched.public(
-        reference=versioned_platform,
-    )
-    .cleanup(
-        names=(
-            platform,
-            system_ext_public,
-            automatically_added,
-            source_product_public,
-            source_platform_technical_debt,
-        ),
-    )
-    .macro_replace()
-    .output_to(
-        relative_dir='product/public',
-    )
+product_public_clean = product_matched.public(
+    reference=versioned_platform,
+).cleanup(
+    names=(
+        platform,
+        system_ext_public,
+        automatically_added,
+        source_product_public,
+        source_platform_technical_debt,
+    ),
 )
-
-product_private_replaced = (
-    product_matched.private(
-        reference=versioned_platform,
-    )
-    .cleanup(
-        names=(
-            platform,
-            system_ext_private,
-            automatically_added,
-            source_product_private,
-            source_platform_technical_debt,
-        ),
-    )
-    .macro_replace()
-    .output_to(
-        relative_dir='product/private',
-    )
+product_private_clean = product_matched.private(
+    reference=versioned_platform,
+).cleanup(
+    names=(
+        platform,
+        system_ext_private,
+        automatically_added,
+        source_product_private,
+        source_platform_technical_debt,
+    ),
 )
 
 # Vendor
-vendor_replaced = (
-    vendor.macro_match(
-        macros=source_platform_public,
-    )
-    .cleanup(
+vendor_clean = vendor.macro_match(
+    macros=source_platform_public,
+).cleanup(
+    names=(
+        versioned_platform,
+        automatically_added,
+        source_vendor,
+    ),
+)
+
+
+#
+# Recovery reference
+#
+
+#
+# Gather the prebuilt-only partition rules and compile them with the platform
+# source to CIL.
+# Then use this reference CIL-compiled policy to help expand individual source
+# rules, as the reference CIL contains fully built typeattributesets.
+# The expanded source rules can then be mapped to the prebuilt recovery binary.
+# Use the mapping to guard source rules which are not present in the recovery
+# binary with not_recovery().
+#
+
+
+def reference_gathered(clean: PolicyType) -> PolicyType:
+    return clean.macro_replace().gather_source_text()
+
+
+recovery_reference_gathered = (
+    reference_gathered(platform_public_clean),
+    reference_gathered(platform_private_clean),
+    reference_gathered(system_ext_public_clean),
+    reference_gathered(system_ext_private_clean),
+    reference_gathered(product_public_clean),
+    reference_gathered(product_private_clean),
+    reference_gathered(vendor_clean),
+)
+recovery_reference_combined = combined(
+    name='recovery_reference_combined',
+    macro_sources=(source_platform_public,),
+    attribute_sources=recovery_reference_gathered,
+    rule_sources=(
+        source_platform_public,
+        source_platform_private,
+        source_system_ext_public,
+        source_system_ext_private,
+        source_product_public,
+        source_product_private,
+        source_vendor,
+        *recovery_reference_gathered,
+    ),
+)
+recovery_reference_compiled = compiled(
+    name='recovery_reference_compiled',
+    source=recovery_reference_combined,
+)
+
+
+def guarded_replaced(clean: PolicyType) -> PolicyType:
+    return clean.expanded_guard(
+        expander=recovery_reference_compiled,
+        reference=recovery,
+        guard='not_recovery',
+    ).macro_replace()
+
+
+#
+# Partition rules with the not_recovery() guard data in place
+#
+
+platform_public_guarded = guarded_replaced(platform_public_clean)
+platform_private_guarded = guarded_replaced(platform_private_clean)
+system_ext_public_guarded = guarded_replaced(system_ext_public_clean)
+system_ext_private_guarded = guarded_replaced(system_ext_private_clean)
+product_public_guarded = guarded_replaced(product_public_clean)
+product_private_guarded = guarded_replaced(product_private_clean)
+vendor_guarded = guarded_replaced(vendor_clean)
+
+platform_public_guarded.output_to(relative_dir='system/public')
+platform_private_guarded.output_to(relative_dir='system/private')
+system_ext_public_guarded.output_to(relative_dir='system_ext/public')
+system_ext_private_guarded.output_to(relative_dir='system_ext/private')
+product_public_guarded.output_to(relative_dir='product/public')
+product_private_guarded.output_to(relative_dir='product/private')
+
+#
+# Reuse the same guarded output data to find out recovery_only() policy
+# Compile the guarded output data down to binary policy and subtract it
+# from the prebuilt recovery binary policy.
+# The recovery_only() rules will be added to vendor.
+#
+
+recovery_reference_guarded_gathered = (
+    platform_public_guarded.gather_source_text(),
+    platform_private_guarded.gather_source_text(),
+    system_ext_public_guarded.gather_source_text(),
+    system_ext_private_guarded.gather_source_text(),
+    product_public_guarded.gather_source_text(),
+    product_private_guarded.gather_source_text(),
+    vendor_guarded.gather_source_text(),
+)
+recovery_reference_guarded_combined = combined(
+    name='recovery_reference_guarded_combined',
+    macro_sources=(source_platform_public,),
+    attribute_sources=recovery_reference_guarded_gathered,
+    rule_sources=(
+        source_platform_public,
+        source_platform_private,
+        source_system_ext_public,
+        source_system_ext_private,
+        source_product_public,
+        source_product_private,
+        source_vendor,
+        *recovery_reference_guarded_gathered,
+    ),
+)
+recovery_reference_guarded_compiled = compiled(
+    name='recovery_reference_guarded_compiled',
+    source=recovery_reference_guarded_combined,
+)
+recovery_reference_guarded = binary_compiled(
+    name='recovery_reference_guarded',
+    source=recovery_reference_guarded_compiled,
+)
+
+recovery_only_replaced = (
+    recovery.cleanup(
         names=(
+            recovery_reference_guarded,
+            # For genfs contexts only
+            platform,
+            system_ext,
+            product,
             versioned_platform,
-            automatically_added,
-            source_vendor,
+            vendor,
         ),
     )
-    .macro_replace()
-    .output_to(
-        relative_dir='vendor',
+    .macro_match(
+        macros=source_platform_public,
     )
+    .macro_replace()
+)
+
+vendor_guarded.add(
+    added=recovery_only_replaced,
+    guard='recovery_only',
+).output_to(
+    relative_dir='vendor',
 )
 
 
@@ -554,6 +782,7 @@ class Policy:
     macros: Optional[SourceMacros] = None
     rule_matches: Optional[List[RuleMatch]] = None
     source_text: Optional[SourceText] = None
+    guarded_rules: Optional[Dict[Rule, str]] = None
     text: Optional[str] = None
 
     def copy(
@@ -574,6 +803,7 @@ class Policy:
             self.macros,
             self.rule_matches,
             self.source_text,
+            self.guarded_rules,
         )
 
     @property

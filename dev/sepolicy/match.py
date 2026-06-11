@@ -350,6 +350,7 @@ def replace_macro_rules(
 
 def merge_typeattribute_rules(
     rules: RuleContainer,
+    rule_guard: Optional[Dict[Rule, str]] = None,
 ):
     types: Dict[str, Set[str]] = {}
 
@@ -383,6 +384,9 @@ def merge_typeattribute_rules(
         assert isinstance(v, str)
 
         if t not in types:
+            continue
+
+        if rule_guard is not None and rule in rule_guard:
             continue
 
         types[t].add(v)
