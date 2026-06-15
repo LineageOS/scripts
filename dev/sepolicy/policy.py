@@ -249,8 +249,8 @@ class PolicyType:
             PolicyReferencedOrigin(self, reference, in_or_out=False),
         )
 
-    def cleanup(self, *, names: Tuple[PolicyType, ...]) -> PolicyType:
-        return self.__child('clean', PolicyCleanupOrigin(self, names))
+    def cleanup(self, *, removed: Tuple[PolicyType, ...]) -> PolicyType:
+        return self.__child('clean', PolicyCleanupOrigin(self, removed))
 
     def macro_replace(self) -> PolicyType:
         return self.__child('replaced', PolicyMacroReplaceOrigin(self))
@@ -525,7 +525,7 @@ platform_matched = platform.macro_match(
 platform_public_clean = platform_matched.public(
     reference=versioned_platform,
 ).cleanup(
-    names=(
+    removed=(
         automatically_added,
         source_platform_public,
         source_platform_technical_debt,
@@ -534,7 +534,7 @@ platform_public_clean = platform_matched.public(
 platform_private_clean = platform_matched.private(
     reference=versioned_platform,
 ).cleanup(
-    names=(
+    removed=(
         automatically_added,
         source_platform_private,
         source_platform_technical_debt,
@@ -549,7 +549,7 @@ system_ext_public = system_ext_matched.public(
     reference=versioned_platform,
 )
 system_ext_public_clean = system_ext_public.cleanup(
-    names=(
+    removed=(
         platform,
         automatically_added,
         source_system_ext_public,
@@ -560,7 +560,7 @@ system_ext_private = system_ext_matched.private(
     reference=versioned_platform,
 )
 system_ext_private_clean = system_ext_private.cleanup(
-    names=(
+    removed=(
         platform,
         automatically_added,
         source_system_ext_private,
@@ -575,7 +575,7 @@ product_matched = product.macro_match(
 product_public_clean = product_matched.public(
     reference=versioned_platform,
 ).cleanup(
-    names=(
+    removed=(
         platform,
         system_ext_public,
         automatically_added,
@@ -586,7 +586,7 @@ product_public_clean = product_matched.public(
 product_private_clean = product_matched.private(
     reference=versioned_platform,
 ).cleanup(
-    names=(
+    removed=(
         platform,
         system_ext_private,
         automatically_added,
@@ -599,7 +599,7 @@ product_private_clean = product_matched.private(
 vendor_clean = vendor.macro_match(
     macros=source_platform_public,
 ).cleanup(
-    names=(
+    removed=(
         versioned_platform,
         automatically_added,
         source_vendor,
@@ -725,7 +725,7 @@ recovery_reference_guarded = binary_compiled(
 
 recovery_only_replaced = (
     recovery.cleanup(
-        names=(
+        removed=(
             recovery_reference_guarded,
             # For genfs contexts only
             platform,
