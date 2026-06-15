@@ -82,9 +82,13 @@ define(`divert', `')
             text_parts.append(dummy_call)
             text_parts.append('\n')
 
-    input_text += '\n'.join(environment_texts)
-    input_text += '\n'.join(texts)
-    input_text += '\n'.join(text_parts)
+    input_text += '\n'.join(
+        [
+            *environment_texts,
+            *texts,
+            *text_parts,
+        ]
+    )
 
     if verbose:
         text_path = Path(f'/tmp/m4/input_macro_{text_name}.txt')
