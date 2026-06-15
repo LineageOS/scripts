@@ -6,7 +6,6 @@ from __future__ import annotations
 from typing import Optional
 
 from sepolicy.match import (
-    merge_class_sets,
     merge_typeattribute_rules,
     replace_macro_rules,
 )
@@ -67,11 +66,6 @@ class MacroReplacePolicyProvider(PolicyProvider):
         )
         merge_typeattribute_rules(
             rules,
-            source_policy.pretty_name,
-        )
-        merge_class_sets(
-            rules,
-            source_policy.macros.class_sets,
             source_policy.pretty_name,
         )
 

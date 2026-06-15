@@ -8,6 +8,7 @@ from functools import cache
 from pathlib import Path
 from typing import Dict, List, Optional, Set, Tuple
 
+from sepolicy.match import merge_class_sets
 from sepolicy.rule import (
     Rule,
     RuleType,
@@ -184,12 +185,14 @@ def render_grouped_rules(
     guard: Optional[str] = None,
 ) -> Dict[str, str]:
     class_perms = None
+    class_sets = None
     ioctls = None
     ioctl_defines = None
     nlmsgs = None
     nlmsg_defines = None
     if macros is not None:
         class_perms = macros.class_perms
+        class_sets = macros.class_sets
         ioctls = macros.ioctls
         ioctl_defines = macros.ioctl_defines
         nlmsgs = macros.nlmsgs
@@ -197,6 +200,10 @@ def render_grouped_rules(
 
     rendered: Dict[str, str] = {}
     for name, rules in sorted(grouped_rules.items()):
+        if class_sets is not None:
+            rules = RuleContainer(rules)
+            merge_class_sets(rules, class_sets)
+
         rules_formatted = (
             (
                 r,
