@@ -37,7 +37,7 @@ class FrozenDict(Mapping[K, V], Generic[K, V]):
     def __eq__(self, other: object) -> bool:
         if isinstance(other, FrozenDict):
             other = cast(FrozenDict[K, V], other)
-            return dict(self.__data) == dict(other)
+            return self.__data == other.__data
 
         return NotImplemented
 
