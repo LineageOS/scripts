@@ -98,9 +98,12 @@ def unpack_line(
         else:
             current.append(token)
 
+    if not current:
+        return []
+
     assert isinstance(current[0], list)
 
-    return current[0] if current else []
+    return current[0]
 
 
 def flatten_parts(parts: raw_part) -> Generator[str, None, None]:
