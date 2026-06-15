@@ -7,14 +7,8 @@ from pathlib import Path
 from typing import Dict, List, Set, Tuple
 
 from sepolicy.policy import ContextsType
-from sepolicy.rule import trim_contexts_label
 from sepolicy.rule_container import RuleContainer
 from sepolicy.source_rule import SourceRuleParser
-from utils.utils import split_normalize_text
-
-
-def split_normalize_contexts_text(text: str):
-    return split_normalize_text(text)
 
 
 def parse_genfs_contexts(texts: List[str]):
@@ -66,23 +60,6 @@ def remove_source_contexts(
     return new_contexts, removed_rules
 
 
-def remove_source_genfs_rules(
-    genfs_rules: RuleContainer,
-    source_genfs_rules: RuleContainer,
-):
-    clean_genfs_rules = RuleContainer()
-    removed_rules = 0
-
-    for rule in genfs_rules:
-        if rule in source_genfs_rules:
-            removed_rules += 1
-            continue
-
-        clean_genfs_rules.add(rule)
-
-    return clean_genfs_rules, removed_rules
-
-
 def output_contexts(
     contexts: Dict[ContextsType, List[Tuple[str, ...]]],
     output_dir: Path,
@@ -116,38 +93,3 @@ def output_genfs_contexts(genfs_rules: RuleContainer, output_dir: Path):
 
     output_path = output_dir / ContextsType.GENFS_CONTEXTS_NAME
     output_path.write_text(''.join(lines))
-
-
-DOMAIN_PREFIX = 'domain='
-TYPE_PREFIX = 'type='
-
-
-def find_contexts_used_types(
-    contexts: Dict[ContextsType, List[Tuple[str, ...]]],
-    used_types: Set[str],
-):
-    for contexts_type, contexts_rules in contexts.items():
-        assert contexts_type != ContextsType.GENFS_CONTEXTS_NAME
-
-        for rule in contexts_rules:
-            match contexts_type:
-                case (
-                    ContextsType.PROPERTY_CONTEXTS_NAME
-                    | ContextsType.FILE_CONTEXTS_NAME
-                    | ContextsType.HWSERVICE_CONTEXTS_NAME
-                    | ContextsType.VNDSERVICE_CONTEXTS_NAME
-                    | ContextsType.SERVICE_CONTEXTS_NAME
-                ):
-                    t = trim_contexts_label(rule[1])
-                    used_types.add(t)
-                case ContextsType.BUG_MAP_NAME:
-                    used_types.add(rule[0])
-                    used_types.add(rule[1])
-                case ContextsType.SEAPP_CONTEXTS_NAME:
-                    for part in rule:
-                        if part.startswith(DOMAIN_PREFIX):
-                            part = part[len(DOMAIN_PREFIX) :]
-                            used_types.add(part)
-                        elif part.startswith(TYPE_PREFIX):
-                            part = part[len(TYPE_PREFIX) :]
-                            used_types.add(part)
