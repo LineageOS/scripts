@@ -283,15 +283,23 @@ def discard_rule_matches(
                 print(candidate)
             print()
 
+        rule_match_str = str(rule_match.macro)
         discarded = False
         for candidate in candidate_supersets:
             if candidate.rules < rule_match.rules:
                 continue
 
-            if rule_match.rules == candidate.rules and len(
-                rule_match.arg_values
-            ) < len(candidate.arg_values):
-                continue
+            if rule_match.rules == candidate.rules:
+                arg_diff = len(rule_match.arg_values) - len(
+                    candidate.arg_values
+                )
+                if arg_diff < 0:
+                    continue
+
+                # If rule sets and arg counts are equal, keep the match with the
+                # smaller output
+                if arg_diff == 0 and rule_match_str < str(candidate.macro):
+                    continue
 
             if verbose:
                 # TODO: sort output for determinism
