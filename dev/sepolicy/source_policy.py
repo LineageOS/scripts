@@ -29,7 +29,7 @@ from sepolicy.policy import (
     get_policy_type_by_name,
 )
 from sepolicy.rule import Rule
-from sepolicy.rule_container import RuleContainer
+from sepolicy.rule_container import LineMark, RuleContainer
 from sepolicy.rules import split_normalize_rules_text
 from sepolicy.source_macros import SourceMacros
 from sepolicy.source_rule import SourceRuleParser
@@ -102,9 +102,16 @@ def parse_source_rules(
 
     rules = RuleContainer()
     mergeable_rules: List[Rule] = []
+    mergeable_marks: Set[LineMark] = set()
 
     def add_rule(rule: Rule):
-        add_mergeable_rule(rule, mergeable_rules, rules)
+        add_mergeable_rule(
+            rule,
+            None,
+            mergeable_rules,
+            mergeable_marks,
+            rules,
+        )
 
     parser = SourceRuleParser(
         add_rule,
@@ -113,7 +120,7 @@ def parse_source_rules(
     for source_line in expanded_rules:
         parser.parse_line(source_line)
 
-    merge_current_rules(mergeable_rules, rules)
+    merge_current_rules(mergeable_rules, mergeable_marks, rules)
 
     return rules
 

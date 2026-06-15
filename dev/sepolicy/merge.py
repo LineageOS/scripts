@@ -3,11 +3,11 @@
 
 from __future__ import annotations
 
-from typing import List
+from typing import List, Optional, Set
 
 from sepolicy.class_set import ClassSet
 from sepolicy.rule import IOCTL_RULE_TYPES, Rule
-from sepolicy.rule_container import RuleContainer
+from sepolicy.rule_container import LineMark, RuleContainer
 from sepolicy.varargs import Ioctls
 
 
@@ -205,27 +205,37 @@ def can_ioctl_rule_be_merged(rule: Rule, rules: List[Rule]):
     return True
 
 
-def merge_current_rules(mergeable_rules: List[Rule], rules: RuleContainer):
+def merge_current_rules(
+    mergeable_rules: List[Rule],
+    mergeable_marks: Set[LineMark],
+    rules: RuleContainer,
+):
     if not mergeable_rules:
         return
 
     merged_rules = merge_ioctl_rules(mergeable_rules)
-    rules.add_many(merged_rules)
+    for merged_rule in merged_rules:
+        rules.add(merged_rule, mergeable_marks)
 
     mergeable_rules.clear()
+    mergeable_marks.clear()
 
 
 def add_mergeable_rule(
     rule: Rule,
+    mark: Optional[LineMark],
     mergeable_rules: List[Rule],
+    mergeable_marks: Set[LineMark],
     rules: RuleContainer,
 ):
     if not is_ioctl_rule_mergeable(rule):
-        merge_current_rules(mergeable_rules, rules)
-        rules.add(rule)
+        merge_current_rules(mergeable_rules, mergeable_marks, rules)
+        rules.add(rule, (mark,) if mark is not None else None)
         return
 
     if not can_ioctl_rule_be_merged(rule, mergeable_rules):
-        merge_current_rules(mergeable_rules, rules)
+        merge_current_rules(mergeable_rules, mergeable_marks, rules)
 
     mergeable_rules.append(rule)
+    if mark is not None:
+        mergeable_marks.add(mark)
