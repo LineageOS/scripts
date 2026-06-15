@@ -370,7 +370,7 @@ def merge_typeattribute_rules(
 
         removed_rules.add(rule)
 
-    match_keys: Tuple[Optional[rule_hash_value], ...] = (
+    match_keys = (
         RuleType.TYPEATTRIBUTE,
         None,
         None,
@@ -435,9 +435,6 @@ def merge_class_set_rule_type(
         rules_dict[key][0].add(matched_cls)
         rules_dict[key][1].add(matched_rule)
 
-    removed_rules = 0
-    added_rules = 0
-
     for matched_classes, matched_rules in rules_dict.values():
         if len(matched_classes) == 1:
             continue
@@ -451,7 +448,6 @@ def merge_class_set_rule_type(
 
         for rule in matched_rules:
             rules.remove(rule)
-            removed_rules += 1
 
         names = names | remaining_classes
 
@@ -470,38 +466,22 @@ def merge_class_set_rule_type(
             matched_rule.varargs,
         )
         rules.add(new_rule)
-        added_rules += 1
-
-    return removed_rules, added_rules
 
 
 def merge_class_sets(
     rules: RuleContainer,
     class_sets: List[Tuple[str, Set[str]]],
-    name: str,
 ):
-    removed_rules = 0
-    added_rules = 0
-
     for rule_type in ALLOW_RULE_TYPES:
-        new_removed_rules, new_added_rules = merge_class_set_rule_type(
+        merge_class_set_rule_type(
             rules,
             (rule_type, None, None, None, None),
             class_sets,
         )
-        removed_rules += new_removed_rules
-        added_rules += new_added_rules
 
     for rule_type in IOCTL_RULE_TYPES:
-        new_removed_rules, new_added_rules = merge_class_set_rule_type(
+        merge_class_set_rule_type(
             rules,
             (rule_type, None, None, None, None, None),
             class_sets,
         )
-        removed_rules += new_removed_rules
-        added_rules += new_added_rules
-
-    color_print(
-        f'Merged {removed_rules} rules into {added_rules} class set rules in {name}',
-        color=Color.GREEN,
-    )
