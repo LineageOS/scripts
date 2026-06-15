@@ -118,7 +118,7 @@ def match_macro_rule(
         return
 
     if verbose:
-        print(f'{indent}Filled rule template:', macro_rule_template)
+        print(f'{indent}Filled rule template:', filled_macro_rule_template)
 
     match_keys = rule_template_match_keys(filled_macro_rule_template)
     if verbose:
