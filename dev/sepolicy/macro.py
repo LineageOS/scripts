@@ -31,7 +31,6 @@ def _macro_name_body(macro: str):
     if not macro.startswith(MACRO_DEFINITION_START):
         return None, macro
 
-    assert macro.startswith(MACRO_DEFINITION_START), macro
     assert macro.endswith(')'), macro
     macro = macro[len(MACRO_DEFINITION_START) : -1]
     name, body = macro.split("'", 1)
