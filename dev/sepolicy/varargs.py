@@ -59,6 +59,18 @@ class Perms:
     def __hash__(self):
         return self.__hash
 
+    def __le__(self, other: object):
+        if not isinstance(other, Perms):
+            return NotImplemented
+
+        if other.__is_all:
+            return True
+
+        if self.__is_all:
+            return False
+
+        return self.__values <= other.__values
+
     def __is_star(self):
         # fd, property_service are 1-perm, lockdown is 2-perm, avoid replacing
         # them
