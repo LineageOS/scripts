@@ -8,7 +8,7 @@ from functools import cache
 from pathlib import Path
 from typing import Dict, List, Optional, Set, Tuple
 
-from sepolicy.match import merge_class_sets
+from sepolicy.match import merge_class_sets, merge_typeattribute_rules
 from sepolicy.rule import (
     Rule,
     RuleType,
@@ -88,6 +88,9 @@ def rule_simple_type_name(rule: Rule):
 
 
 def group_rules(rules: RuleContainer):
+    rules = RuleContainer(rules)
+    merge_typeattribute_rules(rules)
+
     # Group rules based on main type
     grouped_rules: Dict[str, Set[Rule]] = {}
     for rule in rules:

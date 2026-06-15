@@ -5,10 +5,7 @@ from __future__ import annotations
 
 from typing import Optional
 
-from sepolicy.match import (
-    merge_typeattribute_rules,
-    replace_macro_rules,
-)
+from sepolicy.match import replace_macro_rules
 from sepolicy.policy import (
     PolicyIndex,
     PolicyMacroReplaceOrigin,
@@ -54,7 +51,6 @@ class MacroReplacePolicyProvider(PolicyProvider):
             return None
 
         assert source_policy.rule_matches is not None
-        assert source_policy.macros is not None
 
         rules = RuleContainer(source_policy.rules)
 
@@ -63,10 +59,6 @@ class MacroReplacePolicyProvider(PolicyProvider):
             source_policy.rule_matches,
             source_policy.pretty_name,
             self.__verbose,
-        )
-        merge_typeattribute_rules(
-            rules,
-            source_policy.pretty_name,
         )
 
         return source_policy.copy(

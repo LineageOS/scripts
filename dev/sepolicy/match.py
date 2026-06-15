@@ -350,7 +350,6 @@ def replace_macro_rules(
 
 def merge_typeattribute_rules(
     rules: RuleContainer,
-    name: str,
 ):
     types: Dict[str, Set[str]] = {}
 
@@ -400,11 +399,6 @@ def merge_typeattribute_rules(
             Types(values),
         )
         rules.add(new_rule)
-
-    color_print(
-        f'Merged {len(removed_rules)} typeattributes into {len(types)} types in {name}',
-        color=Color.GREEN,
-    )
 
 
 def merge_class_set_rule_type(
