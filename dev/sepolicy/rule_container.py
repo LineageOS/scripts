@@ -4,19 +4,30 @@
 from __future__ import annotations
 
 from collections import defaultdict
-from collections.abc import Hashable, Set
+from collections.abc import Hashable
+from collections.abc import Set as AbstractSet
 from typing import (
     DefaultDict,
     Dict,
     Iterable,
     List,
+    NamedTuple,
     Optional,
     Sequence,
+    Set,
     Tuple,
     Union,
 )
 
 from sepolicy.rule import Rule
+
+
+class LineMark(NamedTuple):
+    # Source file and line a rule was compiled from, recovered from CIL
+    # ';;* lmx <line> <file>' markers.
+    path: str
+    line: int
+
 
 MatchIndex = DefaultDict[
     # levels
@@ -40,11 +51,13 @@ class RuleContainer:
         iterable: Optional[Iterable[Rule]] = None,
     ):
         self.__all_data: Dict[Rule, Tuple[Hashable, ...]] = {}
+        self.__marks: DefaultDict[Rule, Set[LineMark]] = defaultdict(set)
+        self.__by_file: DefaultDict[str, Set[Rule]] = defaultdict(set)
+        self.__by_file_line: DefaultDict[LineMark, Set[Rule]] = defaultdict(set)
         self.__index: Optional[MatchIndex] = None
 
         if iterable is not None:
-            for value in iterable:
-                self.add(value)
+            self.add_many(iterable)
 
     def __len__(self):
         return len(self.__all_data)
@@ -57,14 +70,31 @@ class RuleContainer:
 
     def __and__(self, other: RuleContainer):
         common = self.__all_data.keys() & other.__all_data.keys()
-        return RuleContainer(common)
+        result = RuleContainer()
+        for value in common:
+            result.add(value, self.__marks.get(value))
+            result.add(value, other.__marks.get(value))
+        return result
 
     def __sub__(self, other: RuleContainer):
         only = self.__all_data.keys() - other.__all_data.keys()
-        return RuleContainer(only)
+        result = RuleContainer()
+        for value in only:
+            result.add(value, self.__marks.get(value))
+        return result
 
-    def add(self, value: Rule):
+    def add(self, value: Rule, marks: Optional[Iterable[LineMark]] = None):
         keys = value.hash_values
+
+        if marks:
+            rule_marks = self.__marks[value]
+            for mark in marks:
+                if mark in rule_marks:
+                    continue
+
+                rule_marks.add(mark)
+                self.__by_file[mark.path].add(value)
+                self.__by_file_line[mark].add(value)
 
         existing = self.__all_data.get(value)
         if existing is not None:
@@ -75,8 +105,12 @@ class RuleContainer:
         self.__index = None
 
     def add_many(self, values: Iterable[Rule]):
-        for value in values:
-            self.add(value)
+        if isinstance(values, RuleContainer):
+            for value in values:
+                self.add(value, values.__marks.get(value))
+        else:
+            for value in values:
+                self.add(value)
 
     def remove(self, value: Rule, optional: bool = False):
         if optional and value not in self.__all_data:
@@ -88,6 +122,18 @@ class RuleContainer:
         assert self.__all_data[value] == keys, value
 
         del self.__all_data[value]
+
+        for mark in self.__marks.pop(value, ()):
+            file_rules = self.__by_file[mark.path]
+            file_rules.discard(value)
+            if not file_rules:
+                del self.__by_file[mark.path]
+
+            line_rules = self.__by_file_line[mark]
+            line_rules.discard(value)
+            if not line_rules:
+                del self.__by_file_line[mark]
+
         self.__index = None
 
         return True
@@ -101,6 +147,15 @@ class RuleContainer:
                 removed_count += 1
 
         return removed_count
+
+    def marks(self, value: Rule) -> AbstractSet[LineMark]:
+        return self.__marks.get(value, frozenset())
+
+    def group_by_file(self) -> DefaultDict[str, Set[Rule]]:
+        return self.__by_file
+
+    def group_by_file_line(self) -> DefaultDict[LineMark, Set[Rule]]:
+        return self.__by_file_line
 
     def __build_index(self):
         self.__index = defaultdict(
@@ -121,7 +176,7 @@ class RuleContainer:
         keys: Sequence[
             Union[
                 Hashable,
-                Set[Hashable],
+                AbstractSet[Hashable],
                 None,
             ],
         ],
@@ -148,7 +203,7 @@ class RuleContainer:
             if position_data is None:
                 return []
 
-            if isinstance(key, Set):
+            if isinstance(key, AbstractSet):
                 merged: Dict[Rule, None] = {}
                 for value in key:
                     bucket = position_data.get(value)

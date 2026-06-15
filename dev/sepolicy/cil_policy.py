@@ -11,6 +11,7 @@ from typing import (
     FrozenSet,
     List,
     Optional,
+    Set,
     Tuple,
 )
 
@@ -36,7 +37,7 @@ from sepolicy.policy import (
     PolicyVersionSource,
 )
 from sepolicy.rule import Rule, raw_parts_list
-from sepolicy.rule_container import RuleContainer
+from sepolicy.rule_container import LineMark, RuleContainer
 from utils.frozendict import FrozenDict
 from utils.utils import (
     read_texts,
@@ -44,7 +45,10 @@ from utils.utils import (
     split_normalize_text,
 )
 
-cil_line_type = Tuple[str, raw_parts_list]
+cil_line_type = Tuple[str, raw_parts_list, Optional[LineMark]]
+
+LMX_PREFIX = ';;* lmx '
+LME_MARKER = ';;* lme'
 
 
 # From system/sepolicy/flagging/Android.bp
@@ -278,9 +282,17 @@ def _parse_cil_lines(
     disallowed_types: Optional[FrozenSet[str]] = None,
 ):
     mergeable_rules: List[Rule] = []
+    mergeable_marks: Set[LineMark] = set()
+    current_mark: List[Optional[LineMark]] = [None]
 
     def add_rule(rule: Rule):
-        add_mergeable_rule(rule, mergeable_rules, rules)
+        add_mergeable_rule(
+            rule,
+            current_mark[0],
+            mergeable_rules,
+            mergeable_marks,
+            rules,
+        )
 
     def add_genfs_rule(rule: Rule):
         genfs_rules.add(rule)
@@ -297,10 +309,11 @@ def _parse_cil_lines(
     )
 
     for line in line_parts_list:
-        text, parts = line
+        text, parts, mark = line
+        current_mark[0] = mark
         parser.parse_line(text, parts)
 
-    merge_current_rules(mergeable_rules, rules)
+    merge_current_rules(mergeable_rules, mergeable_marks, rules)
 
 
 def parse_cil_lines(
@@ -374,19 +387,25 @@ def read_cil_lines(
     cil_data = cil_path.read_text()
 
     line_parts_list: List[cil_line_type] = []
+    current_mark: Optional[LineMark] = None
 
     for line in cil_data.splitlines():
         if not line:
             continue
 
         if line.startswith(CIL_COMMENT_MARKER):
+            if line.startswith(LMX_PREFIX):
+                number, path = line[len(LMX_PREFIX) :].split(' ', 1)
+                current_mark = LineMark(path, int(number))
+            elif line == LME_MARKER:
+                current_mark = None
             continue
 
         parts = unpack_cil_line(line)
         if parts is None:
             continue
 
-        line_parts_list.append((line, parts))
+        line_parts_list.append((line, parts, current_mark))
 
     return line_parts_list
 
