@@ -62,42 +62,31 @@ decompile_cil() {
 
   lineage/scripts/dev/decompile_cil.py \
       --current \
-      --selinux "${factory_dir}/system_ext/etc/selinux" \
-      --extra-rules device/google/gs-common/sepolicy/ignored/system_ext \
-      --extra-rules hardware/google/pixel-sepolicy/common/system_ext \
-      --extra-rules hardware/google/pixel-sepolicy/flipendo \
-      --output "${dev_dir}/sepolicy/system_ext"
-
-  lineage/scripts/dev/decompile_cil.py \
-      --current \
-      --selinux "${factory_dir}/product/etc/selinux" \
-      --extra-rules device/google/gs-common/sepolicy/ignored/product \
-      --output "${dev_dir}/sepolicy/product"
-
-  lineage/scripts/dev/decompile_cil.py \
-      --current \
-      --selinux "${factory_dir}/vendor/etc/selinux" \
+      --dump "${factory_dir}" \
       --extra-macros hardware/google/pixel-sepolicy/common/vendor \
-      --extra-rules device/google/gs-common/sepolicy/ignored/vendor \
-      --extra-rules hardware/google/pixel-sepolicy/common/vendor \
-      --extra-rules hardware/google/pixel-sepolicy/googlebattery \
-      --extra-rules hardware/google/pixel-sepolicy/hardware_info_app \
-      --extra-rules hardware/google/pixel-sepolicy/input \
-      --extra-rules hardware/google/pixel-sepolicy/logger_app \
-      --extra-rules hardware/google/pixel-sepolicy/mm/gki \
-      --extra-rules hardware/google/pixel-sepolicy/pixelstats \
-      --extra-rules hardware/google/pixel-sepolicy/pixelsystemservice \
-      --extra-rules hardware/google/pixel-sepolicy/power-libperfmgr \
-      --extra-rules hardware/google/pixel-sepolicy/powerstats \
-      --extra-rules hardware/google/pixel-sepolicy/rebalance_interrupts \
-      --extra-rules hardware/google/pixel-sepolicy/turbo_adapter/vendor \
-      --extra-rules hardware/google/pixel-sepolicy/vibrator/common \
-      --extra-rules hardware/google/pixel-sepolicy/vibrator/cs40l25 \
-      --extra-rules hardware/google/pixel-sepolicy/vibrator/cs40l26 \
-      --extra-rules hardware/google/pixel-sepolicy/wifi_ext \
-      --extra-rules hardware/google/pixel-sepolicy/wifi_perf_diag \
-      --extra-rules hardware/google/pixel-sepolicy/wifi_sniffer \
-      --output "${dev_dir}/sepolicy/vendor"
+      --cleanup-rules device/google/gs-common/sepolicy/ignored/system_ext \
+      --cleanup-rules hardware/google/pixel-sepolicy/common/system_ext \
+      --cleanup-rules hardware/google/pixel-sepolicy/flipendo \
+      --cleanup-rules device/google/gs-common/sepolicy/ignored/product \
+      --cleanup-rules device/google/gs-common/sepolicy/ignored/vendor \
+      --cleanup-rules hardware/google/pixel-sepolicy/common/vendor \
+      --cleanup-rules hardware/google/pixel-sepolicy/googlebattery \
+      --cleanup-rules hardware/google/pixel-sepolicy/hardware_info_app \
+      --cleanup-rules hardware/google/pixel-sepolicy/logger_app \
+      --cleanup-rules hardware/google/pixel-sepolicy/mm/gki \
+      --cleanup-rules hardware/google/pixel-sepolicy/pixelstats \
+      --cleanup-rules hardware/google/pixel-sepolicy/pixelsystemservice \
+      --cleanup-rules hardware/google/pixel-sepolicy/power-libperfmgr \
+      --cleanup-rules hardware/google/pixel-sepolicy/powerstats \
+      --cleanup-rules hardware/google/pixel-sepolicy/rebalance_interrupts \
+      --cleanup-rules hardware/google/pixel-sepolicy/turbo_adapter/vendor \
+      --cleanup-rules hardware/google/pixel-sepolicy/vibrator/common \
+      --cleanup-rules hardware/google/pixel-sepolicy/vibrator/cs40l25 \
+      --cleanup-rules hardware/google/pixel-sepolicy/vibrator/cs40l26 \
+      --cleanup-rules hardware/google/pixel-sepolicy/wifi_ext \
+      --cleanup-rules hardware/google/pixel-sepolicy/wifi_perf_diag \
+      --cleanup-rules hardware/google/pixel-sepolicy/wifi_sniffer \
+      --output "${dev_dir}/sepolicy"
 
   popd > /dev/null
 }
