@@ -32,7 +32,7 @@ from sepolicy.rule import (
     RuleType,
     rule_hash_value,
 )
-from sepolicy.rule_container import RuleContainer
+from sepolicy.rule_container import LineMark, RuleContainer
 from sepolicy.varargs import Types
 from utils.utils import Color, color_print
 
@@ -491,3 +491,39 @@ def merge_class_sets(
             (rule_type, None, None, None, None, None),
             class_sets,
         )
+
+
+def device_marks(
+    rule_match: RuleMatch,
+    rules: RuleContainer,
+    reference: RuleContainer,
+):
+    common: Optional[Set[LineMark]] = None
+    for rule in rule_match.rules:
+        if rule in reference:
+            continue
+
+        marks = rules.marks(rule)
+        if not marks:
+            continue
+
+        common = set(marks) if common is None else common & set(marks)
+        if not common:
+            break
+
+    return common
+
+
+def select_macros_by_group(
+    rule_matches: List[RuleMatch],
+    rules: RuleContainer,
+    reference: RuleContainer,
+    verbose: bool,
+) -> List[RuleMatch]:
+    anchored = [
+        rule_match
+        for rule_match in rule_matches
+        if device_marks(rule_match, rules, reference) != set()
+    ]
+
+    return discard_rule_matches(anchored, verbose)
