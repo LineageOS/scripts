@@ -62,7 +62,7 @@ decompile_cil() {
 
   lineage/scripts/dev/decompile_cil.py \
       --current \
-      --selinux "${factory_dir}/system_ext/etc/selinux" \
+      --dump "${factory_dir}" \
       --extra-rules device/google/gs-common/sepolicy/ignored/system_ext \
       --extra-rules hardware/google/pixel-sepolicy/common/system_ext \
       --extra-rules hardware/google/pixel-sepolicy/flipendo \
@@ -70,19 +70,18 @@ decompile_cil() {
 
   lineage/scripts/dev/decompile_cil.py \
       --current \
-      --selinux "${factory_dir}/product/etc/selinux" \
+      --dump "${factory_dir}" \
       --extra-rules device/google/gs-common/sepolicy/ignored/product \
       --output "${dev_dir}/sepolicy/product"
 
   lineage/scripts/dev/decompile_cil.py \
       --current \
-      --selinux "${factory_dir}/vendor/etc/selinux" \
+      --dump "${factory_dir}" \
       --extra-macros hardware/google/pixel-sepolicy/common/vendor \
       --extra-rules device/google/gs-common/sepolicy/ignored/vendor \
       --extra-rules hardware/google/pixel-sepolicy/common/vendor \
       --extra-rules hardware/google/pixel-sepolicy/googlebattery \
       --extra-rules hardware/google/pixel-sepolicy/hardware_info_app \
-      --extra-rules hardware/google/pixel-sepolicy/input \
       --extra-rules hardware/google/pixel-sepolicy/logger_app \
       --extra-rules hardware/google/pixel-sepolicy/mm/gki \
       --extra-rules hardware/google/pixel-sepolicy/pixelstats \
