@@ -120,32 +120,12 @@ def group_rules(
     # Re-group simple rules into common files
     regrouped_rules: Dict[str, Set[Rule]] = {}
     for name, group in grouped_rules.items():
-        # If all rules of this group are simple, re-group them
-        is_all_simple_type = True
-        simple_type_names: List[Optional[str]] = []
-        force_in_simple_types: List[bool] = []
-        for rule in group:
-            simple_type_name, force_in_simple_type = rule_simple_type_name(rule)
-            simple_type_names.append(simple_type_name)
-            force_in_simple_types.append(force_in_simple_type)
-
-            if simple_type_name is None:
-                is_all_simple_type = False
-
-        for new_name, force_in_simple_type, rule in zip(
-            simple_type_names,
-            force_in_simple_types,
-            group,
-        ):
-            group_name = name
-            if is_all_simple_type or force_in_simple_type:
-                assert new_name is not None
-                group_name = new_name
-
-            if group_name not in regrouped_rules:
-                regrouped_rules[group_name] = set()
-
-            regrouped_rules[group_name].add(rule)
+        simple_names = {rule: rule_simple_type_name(rule) for rule in group}
+        all_simple = all(n is not None for n, _ in simple_names.values())
+        for rule, (simple_name, force) in simple_names.items():
+            group_name = simple_name if all_simple or force else name
+            assert group_name is not None
+            regrouped_rules.setdefault(group_name, set()).add(rule)
 
     return regrouped_rules
 
