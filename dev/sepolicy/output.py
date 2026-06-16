@@ -4,10 +4,10 @@
 from __future__ import annotations
 
 import re
-from collections import defaultdict
+from collections import Counter, defaultdict
 from functools import cache
 from pathlib import Path
-from typing import Dict, List, Optional, Set, Tuple
+from typing import DefaultDict, Dict, List, Optional, Set, Tuple
 
 from sepolicy.match import merge_class_sets, merge_typeattribute_rules
 from sepolicy.rule import (
@@ -46,12 +46,19 @@ ATTRIBUTE_RULES_NAME = 'attributes'
 ATTRIBUTE_RULE_TYPES = (RuleType.ATTRIBUTE, RuleType.EXPANDATTRIBUTE)
 
 
-def domain_type(rule: Rule):
+def rule_domain_type(rule: Rule) -> Optional[str]:
     domain = rule.parts[0]
     if not isinstance(domain, str) and len(rule.parts) >= 2:
         domain = rule.parts[1]
 
     if not isinstance(domain, str):
+        return None
+
+    return domain
+
+
+def domain_file_name(domain: Optional[str]):
+    if domain is None:
         return LEFTOVER_RULES_NAME
 
     t = extract_domain_type(domain)
@@ -107,10 +114,39 @@ def group_rules(
     rules = RuleContainer(rules)
     merge_typeattribute_rules(rules, rule_guard)
 
-    # Group rules based on main type
+    domain_files: DefaultDict[str, Counter[str]] = defaultdict(Counter)
+    for rule in rules:
+        domain = rule_domain_type(rule)
+        if domain is None:
+            continue
+
+        for mark in rules.marks(rule):
+            file_name = Path(mark.path).name
+            domain_files[domain][file_name] += 1
+
+    domain_file: Dict[str, str] = {}
+    for domain, files in domain_files.items():
+        name = max(
+            files,
+            key=lambda f: (
+                # Sort by number of rules for this domain using this file
+                files[f],
+                # Alphabetically, to preserve a stable order
+                f,
+            ),
+        )
+
+        if name.endswith('.te'):
+            domain_file[domain] = name
+
     grouped_rules: Dict[str, Set[Rule]] = {}
     for rule in rules:
-        name = domain_type(rule)
+        domain = rule_domain_type(rule)
+        name = None
+        if domain is not None:
+            name = domain_file.get(domain)
+        if name is None:
+            name = domain_file_name(domain)
 
         if name not in grouped_rules:
             grouped_rules[name] = set()
