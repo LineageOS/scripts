@@ -338,6 +338,21 @@ def replace_macro_rules(
             for rule in rule_match.rules:
                 print(rule)
             print()
+
+        marks: Optional[Set[LineMark]] = None
+        for body_rule in rule_match.rules:
+            body_marks = rules.marks(body_rule)
+            if not body_marks:
+                continue
+
+            if marks is None:
+                marks = set(body_marks)
+            else:
+                marks = marks & set(body_marks)
+
+            if not marks:
+                break
+
         removed_count = rules.remove_many(rule_match.rules, optional=True)
         if not removed_count:
             if verbose:
@@ -348,7 +363,7 @@ def replace_macro_rules(
         removed_rules += removed_count
         added_macros += 1
         rule = rule_match.macro
-        rules.add(rule)
+        rules.add(rule, marks)
 
     color_print(
         f'Replaced {removed_rules} rules with {added_macros} macros in {name}',
