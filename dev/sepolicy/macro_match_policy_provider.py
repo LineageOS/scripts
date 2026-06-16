@@ -5,7 +5,7 @@ from __future__ import annotations
 
 from typing import Optional
 
-from sepolicy.match import discard_rule_matches, match_macros_rules
+from sepolicy.match import match_macros_rules, select_macros_by_group
 from sepolicy.policy import (
     PolicyIndex,
     PolicyMacroMatchOrigin,
@@ -13,6 +13,7 @@ from sepolicy.policy import (
     PolicyProvider,
     PolicyType,
 )
+from sepolicy.rule_container import RuleContainer
 
 
 class MacroMatchPolicyProvider(PolicyProvider):
@@ -56,12 +57,24 @@ class MacroMatchPolicyProvider(PolicyProvider):
         assert macros_policy.macros is not None
         macros = macros_policy.macros
 
+        reference = RuleContainer()
+        if policy_type.origin.reference is not None:
+            reference = policy_index.get(
+                policy_type.origin.reference,
+                source_policy.metadata,
+            ).rules
+
         rule_matches = match_macros_rules(
             source_policy.rules,
             macros.macros_name_rules,
             self.__verbose,
         )
-        rule_matches = discard_rule_matches(rule_matches, self.__verbose)
+        rule_matches = select_macros_by_group(
+            rule_matches,
+            source_policy.rules,
+            reference,
+            self.__verbose,
+        )
 
         policy = source_policy.copy(
             policy_type=policy_type,
