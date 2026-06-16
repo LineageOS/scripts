@@ -45,6 +45,14 @@ ATTRIBUTE_RULES_NAME = 'attributes'
 
 ATTRIBUTE_RULE_TYPES = (RuleType.ATTRIBUTE, RuleType.EXPANDATTRIBUTE)
 
+DECLARATION_RULE_TYPES = (
+    RuleType.TYPE,
+    RuleType.TYPEATTRIBUTE,
+    RuleType.ATTRIBUTE,
+    RuleType.EXPANDATTRIBUTE,
+    RuleType.GENFSCON,
+)
+
 
 def rule_domain_type(rule: Rule) -> Optional[str]:
     domain = rule.parts[0]
@@ -107,6 +115,25 @@ def rule_simple_type_name(rule: Rule):
     return None, False
 
 
+def type_usage_owner(
+    rule: Rule,
+    usage_files: Dict[str, Set[str]],
+    rule_domains: Set[str],
+):
+    if rule.rule_type != RuleType.TYPE:
+        return None
+
+    for defined in rule_defined_types(rule):
+        if defined in rule_domains:
+            return None
+
+        files = usage_files.get(defined)
+        if files and len(files) == 1:
+            return next(iter(files))
+
+    return None
+
+
 def group_rules(
     rules: RuleContainer,
     rule_guard: Optional[Dict[Rule, str]] = None,
@@ -139,12 +166,34 @@ def group_rules(
         if name.endswith('.te'):
             domain_file[domain] = name
 
+    usage_files: DefaultDict[str, Set[str]] = defaultdict(set)
+    rule_domains: Set[str] = set()
+    for rule in rules:
+        if rule.rule_type not in DECLARATION_RULE_TYPES and isinstance(
+            rule.parts[0], str
+        ):
+            rule_domains.add(rule.parts[0])
+
+        te_files: Set[str] = set()
+        for mark in rules.marks(rule):
+            file_name = Path(mark.path).name
+            if file_name.endswith('.te'):
+                te_files.add(file_name)
+
+        if not te_files:
+            continue
+
+        for used in rule_used_types(rule):
+            usage_files[used].update(te_files)
+
     grouped_rules: Dict[str, Set[Rule]] = {}
     for rule in rules:
         domain = rule_domain_type(rule)
         name = None
         if domain is not None:
             name = domain_file.get(domain)
+        if name is None:
+            name = type_usage_owner(rule, usage_files, rule_domains)
         if name is None:
             name = domain_file_name(domain)
 
