@@ -162,6 +162,7 @@ class PolicyReferencedOrigin(PolicyOrigin):
 class PolicyMacroMatchOrigin(PolicyOrigin):
     source: PolicyType
     macros: PolicyType
+    reference: Optional[PolicyType] = None
 
 
 @dataclass(frozen=True)
@@ -234,8 +235,16 @@ class PolicyType:
             optional=self.optional,
         )
 
-    def macro_match(self, *, macros: PolicyType) -> PolicyType:
-        return self.__child('matched', PolicyMacroMatchOrigin(self, macros))
+    def macro_match(
+        self,
+        *,
+        macros: PolicyType,
+        reference: Optional[PolicyType] = None,
+    ) -> PolicyType:
+        return self.__child(
+            'matched',
+            PolicyMacroMatchOrigin(self, macros, reference),
+        )
 
     def public(self, *, reference: PolicyType) -> PolicyType:
         return self.__child(
@@ -544,6 +553,7 @@ platform_private_clean = platform_matched.private(
 # System ext
 system_ext_matched = system_ext.macro_match(
     macros=source_platform_public,
+    reference=platform,
 )
 system_ext_public = system_ext_matched.public(
     reference=versioned_platform,
@@ -571,6 +581,7 @@ system_ext_private_clean = system_ext_private.cleanup(
 # Product
 product_matched = product.macro_match(
     macros=source_platform_public,
+    reference=platform,
 )
 product_public_clean = product_matched.public(
     reference=versioned_platform,
@@ -598,6 +609,7 @@ product_private_clean = product_matched.private(
 # Vendor
 vendor_clean = vendor.macro_match(
     macros=source_platform_public,
+    reference=versioned_platform,
 ).cleanup(
     removed=(
         versioned_platform,
