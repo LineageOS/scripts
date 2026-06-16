@@ -43,6 +43,8 @@ PROPERTY_RULES_NAME = 'property.te'
 LEFTOVER_RULES_NAME = 'leftover.te'
 ATTRIBUTE_RULES_NAME = 'attributes'
 
+ATTRIBUTE_RULE_TYPES = (RuleType.ATTRIBUTE, RuleType.EXPANDATTRIBUTE, 'hal_attribute')
+
 
 def domain_type(rule: Rule):
     domain = rule.parts[0]
@@ -73,13 +75,7 @@ def rule_simple_type_name(rule: Rule):
                 return SERVICE_TYPE_RULES_NAME, False
 
         return None, False
-    elif rule.rule_type in set(
-        [
-            RuleType.ATTRIBUTE,
-            RuleType.EXPANDATTRIBUTE,
-            'hal_attribute',
-        ]
-    ):
+    elif rule.rule_type in ATTRIBUTE_RULE_TYPES:
         return ATTRIBUTE_RULES_NAME, True
     elif isinstance(rule.parts[0], str):
         if rule.parts[0].endswith('_prop'):
