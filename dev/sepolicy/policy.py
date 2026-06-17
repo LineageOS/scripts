@@ -465,6 +465,12 @@ source_vendor = source_te(
     contexts=build_contexts_map(),
 )
 
+source_cleanup = source_te(
+    name='cleanup',
+    macro_sources=(source_platform_public,),
+    contexts=build_contexts_map(),
+)
+
 #
 # Prebuilt policies
 #
@@ -676,6 +682,10 @@ def guarded_replaced(clean: PolicyType) -> PolicyType:
     ).macro_replace()
 
 
+def cleaned_output(clean: PolicyType) -> PolicyType:
+    return guarded_replaced(clean.cleanup(removed=(source_cleanup,)))
+
+
 #
 # Partition rules with the not_recovery() guard data in place
 #
@@ -688,12 +698,24 @@ product_public_guarded = guarded_replaced(product_public_clean)
 product_private_guarded = guarded_replaced(product_private_clean)
 vendor_guarded = guarded_replaced(vendor_clean)
 
-platform_public_guarded.output_to(relative_dir='system/public')
-platform_private_guarded.output_to(relative_dir='system/private')
-system_ext_public_guarded.output_to(relative_dir='system_ext/public')
-system_ext_private_guarded.output_to(relative_dir='system_ext/private')
-product_public_guarded.output_to(relative_dir='product/public')
-product_private_guarded.output_to(relative_dir='product/private')
+cleaned_output(platform_public_clean).output_to(
+    relative_dir='system/public',
+)
+cleaned_output(platform_private_clean).output_to(
+    relative_dir='system/private',
+)
+cleaned_output(system_ext_public_clean).output_to(
+    relative_dir='system_ext/public'
+)
+cleaned_output(system_ext_private_clean).output_to(
+    relative_dir='system_ext/private'
+)
+cleaned_output(product_public_clean).output_to(
+    relative_dir='product/public',
+)
+cleaned_output(product_private_clean).output_to(
+    relative_dir='product/private',
+)
 
 #
 # Reuse the same guarded output data to find out recovery_only() policy
@@ -753,19 +775,12 @@ recovery_only_replaced = (
     .macro_replace()
 )
 
-vendor_guarded.add(
+cleaned_output(vendor_clean).add(
     added=recovery_only_replaced,
     guard='recovery_only',
 ).output_to(
     relative_dir='vendor',
 )
-
-
-SOURCE_POLICY_NAMES = [
-    name.removeprefix(SOURCE_PREFIX)
-    for name in policy_type_index
-    if name.startswith(SOURCE_PREFIX)
-]
 
 
 def get_policy_types() -> Iterator[PolicyType]:
