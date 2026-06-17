@@ -6,9 +6,8 @@ from __future__ import annotations
 
 import shutil
 from argparse import ArgumentParser
-from collections import defaultdict
 from pathlib import Path
-from typing import DefaultDict, List, Optional
+from typing import List
 
 from sepolicy.add_policy_provider import AddPolicyProvider
 from sepolicy.binary_compiled_policy_provider import (
@@ -34,45 +33,18 @@ from sepolicy.macro_match_policy_provider import MacroMatchPolicyProvider
 from sepolicy.macro_replace_policy_provider import MacroReplacePolicyProvider
 from sepolicy.output import group_rules, output_grouped_rules
 from sepolicy.policy import (
-    SOURCE_POLICY_NAMES,
     Policy,
     PolicyIndex,
     get_policy_types,
+    source_cleanup,
 )
 from sepolicy.referenced_policy_provider import ReferencedPolicyProvider
 from sepolicy.source_cil_policy_provider import SourceCilPolicyProvider
 from sepolicy.source_te_policy_provider import SourceTePolicyProvider
-from utils.utils import Color, color_print
 
 
-def parse_extra_source_paths(extra_paths: List[str]):
-    extra_paths_map: DefaultDict[
-        Optional[str],
-        List[Path],
-    ] = defaultdict(list)
-
-    for arg in extra_paths:
-        parts = arg.split(':', 1)
-        if len(parts) == 1:
-            policy_name = None
-            policy_path = arg
-        else:
-            policy_name, policy_path = parts
-
-        source_policy_name = None
-        if policy_name is not None:
-            if policy_name not in SOURCE_POLICY_NAMES:
-                color_print(
-                    f'Invalid policy name: {policy_name}',
-                    color=Color.YELLOW,
-                )
-                continue
-
-            source_policy_name = f'source_{policy_name}'
-
-        extra_paths_map[source_policy_name].append(Path(policy_path))
-
-    return extra_paths_map
+def to_paths(paths: List[str]) -> List[Path]:
+    return [Path(p) for p in paths]
 
 
 def process_policy_output(
@@ -124,17 +96,15 @@ def decompile_cil():
         '--extra-macros',
         action='append',
         default=[],
-        metavar='[POLICY:]PATH',
-        help='Path to files or directories containing extra macros\n'
-        f'POLICY: {"|".join(SOURCE_POLICY_NAMES)}',
+        metavar='PATH',
+        help='Path to files or directories containing extra macros',
     )
     parser.add_argument(
-        '--extra-rules',
+        '--cleanup-rules',
         action='append',
         default=[],
-        metavar='[POLICY:]PATH',
-        help='Path to files or directories containing extra rules and contexts\n'
-        f'POLICY: {"|".join(SOURCE_POLICY_NAMES)}',
+        metavar='PATH',
+        help='Path to files or directories with rules to remove from the output',
     )
     parser.add_argument(
         '-o',
@@ -148,8 +118,8 @@ def decompile_cil():
 
     current_policy: bool = args.current
     verbose: bool = args.verbose
-    extra_macros_paths = parse_extra_source_paths(args.extra_macros)
-    extra_rules_paths = parse_extra_source_paths(args.extra_rules)
+    extra_macros_paths = {None: to_paths(args.extra_macros)}
+    extra_rules_paths = {source_cleanup.name: to_paths(args.cleanup_rules)}
     output_dir = Path(args.output)
     dump_dir = Path(args.dump)
 
