@@ -51,11 +51,6 @@ decompile_cil() {
 
   pushd "${top}" > /dev/null
 
-  if [ ! -d "${factory_dir}/system_ext/etc/selinux" ] && \
-     [ ! -d "${factory_dir}/product/etc/selinux" ] && \
-     [ ! -d "${factory_dir}/vendor/etc/selinux" ]; then
-    tools/extract-utils/extract.py --pixel-factory --pixel-firmware --all --download-dir ${download_dir} --download-sha256 ${image_sha256} ${image_url}
-  fi
   if [ -d "${dev_dir}/sepolicy" ]; then
     rm -rf "${dev_dir}/sepolicy"
   fi
