@@ -762,11 +762,6 @@ generate_rro() {
 
   pushd "${top}" > /dev/null
 
-  if [ ! -d "${factory_dir}/product/overlay" ] && \
-     [ ! -d "${factory_dir}/vendor/overlay" ] && \
-     [ ! -f "${factory_dir}/system/framework/framework-res.apk" ]; then
-    tools/extract-utils/extract.py --pixel-factory --pixel-firmware --all --download-dir ${download_dir} --download-sha256 ${image_sha256} ${image_url}
-  fi
   if [ -d "${dev_dir}/overlay" ]; then
     rm -rf "${dev_dir}/overlay"
   fi
