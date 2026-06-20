@@ -67,6 +67,7 @@ def process_policy_output(
         macros=policy.macros,
         output_dir=policy_output_dir,
         rule_guard=policy.guarded_rules,
+        mark_source=policy.rules,
     )
 
 

@@ -267,6 +267,7 @@ def render_grouped_rules(
     grouped_rules: Dict[str, Set[Rule]],
     macros: Optional[SourceMacros],
     rule_guard: Optional[Dict[Rule, str]] = None,
+    mark_source: Optional[RuleContainer] = None,
 ) -> Dict[str, str]:
     class_perms = None
     class_sets = None
@@ -296,7 +297,7 @@ def render_grouped_rules(
         for guard_name, group in by_guard.items():
             merged = RuleContainer(group)
             if class_sets is not None:
-                merge_class_sets(merged, class_sets)
+                merge_class_sets(merged, class_sets, mark_source)
             for rule in merged:
                 file_rules.append(rule)
                 if guard_name is not None:
@@ -357,11 +358,13 @@ def output_grouped_rules(
     macros: Optional[SourceMacros],
     output_dir: Path,
     rule_guard: Optional[Dict[Rule, str]] = None,
+    mark_source: Optional[RuleContainer] = None,
 ):
     rendered = render_grouped_rules(
         grouped_rules,
         macros,
         rule_guard,
+        mark_source,
     )
     for name, text in rendered.items():
         output_path = output_dir / name

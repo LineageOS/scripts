@@ -432,6 +432,7 @@ def merge_class_set_rule_type(
     rules: RuleContainer,
     match_keys: Tuple[Optional[rule_hash_value], ...],
     class_sets: List[Tuple[str, Set[str]]],
+    mark_source: Optional[RuleContainer] = None,
 ):
     rules_dict: Dict[
         Tuple[Optional[rule_hash_value], ...],
@@ -459,6 +460,20 @@ def merge_class_set_rule_type(
     for matched_classes, matched_rules in rules_dict.values():
         if len(matched_classes) == 1:
             continue
+
+        # Only merge classes in rules that come from a single source statement
+        if mark_source is not None:
+            common_marks: Optional[Set[LineMark]] = None
+            for rule in matched_rules:
+                rule_marks = mark_source.marks(rule)
+                if common_marks is None:
+                    common_marks = set(rule_marks)
+                else:
+                    common_marks = common_marks & rule_marks
+                if not common_marks:
+                    break
+            if not common_marks:
+                continue
 
         names: Set[str] = set()
         remaining_classes = matched_classes
@@ -492,12 +507,14 @@ def merge_class_set_rule_type(
 def merge_class_sets(
     rules: RuleContainer,
     class_sets: List[Tuple[str, Set[str]]],
+    mark_source: Optional[RuleContainer] = None,
 ):
     for rule_type in ALLOW_RULE_TYPES:
         merge_class_set_rule_type(
             rules,
             (rule_type, None, None, None, None),
             class_sets,
+            mark_source,
         )
 
     for rule_type in IOCTL_RULE_TYPES:
@@ -505,6 +522,7 @@ def merge_class_sets(
             rules,
             (rule_type, None, None, None, None, None),
             class_sets,
+            mark_source,
         )
 
 
