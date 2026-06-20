@@ -62,6 +62,7 @@ class GatherSourceTextPolicyProvider(PolicyProvider):
             grouped_rules,
             source_policy.macros,
             rule_guard=source_policy.guarded_rules,
+            mark_source=source_policy.rules,
         )
 
         source_text = SourceText()
