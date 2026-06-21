@@ -569,6 +569,8 @@ system_ext_public_clean = system_ext_public.cleanup(
         platform,
         automatically_added,
         source_system_ext_public,
+        source_platform_public,
+        source_platform_private,
         source_platform_technical_debt,
     ),
 )
@@ -580,6 +582,8 @@ system_ext_private_clean = system_ext_private.cleanup(
         platform,
         automatically_added,
         source_system_ext_private,
+        source_platform_public,
+        source_platform_private,
         source_platform_technical_debt,
     ),
 )
@@ -597,6 +601,8 @@ product_public_clean = product_matched.public(
         system_ext_public,
         automatically_added,
         source_product_public,
+        source_platform_public,
+        source_platform_private,
         source_platform_technical_debt,
     ),
 )
@@ -608,6 +614,8 @@ product_private_clean = product_matched.private(
         system_ext_private,
         automatically_added,
         source_product_private,
+        source_platform_public,
+        source_platform_private,
         source_platform_technical_debt,
     ),
 )
@@ -621,6 +629,8 @@ vendor_clean = vendor.macro_match(
         versioned_platform,
         automatically_added,
         source_vendor,
+        source_platform_public,
+        source_platform_private,
     ),
 )
 
