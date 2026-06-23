@@ -58,9 +58,11 @@ declare -a exclude_overlay_names=(
   com.google.android.overlay.devicelockcontroller
   com.google.android.overlay.googlewebview
   com.google.android.overlay.permissioncontroller
+  com.google.android.overlay.personalcontextconfig
   com.google.android.overlay.trafficlightfaceoverlay
   com.google.android.overlay.udfpsoverlay
   com.google.android.settings.overlay.pixelvpnconfig
+  com.google.android.settings.overlay.proactiveassistoverlay2026
   com.google.android.systemui.gxoverlay
   com.google.android.verifier.overlay
 )
@@ -354,14 +356,17 @@ declare -a remove_resource_names=(
   android:bookmarks.xml
   android:config_accessComputerControlKnownSigners
   android:config_allowedSecureInstantAppSettings
+  android:config_allowlistProviderServicePackage
   android:config_ambientContextEventArrayExtraKey
   android:config_ambientContextPackageNameExtraKey
   android:config_appFunctionDeviceSettingsPackages
+  android:config_appInteractionDeviceAssistancePackages
   android:config_appsAuthorizedForSharedAccounts
   android:config_assistLongPressHomeEnabledDefault
   android:config_assistTouchGestureEnabledDefault
   android:config_backupHealthConnectDataAndSettingsKnownSigners
   android:config_batteryPackageTypeService
+  android:config_biometric_protected_package_names
   android:config_biometricFrrNotificationEnabled
   android:config_biometricNotificationFrrThreshold
   android:config_bodyFontFamily
@@ -409,6 +414,7 @@ declare -a remove_resource_names=(
   android:config_defaultProfcollectReportUploaderAction
   android:config_defaultProfcollectReportUploaderApp
   android:config_defaultQrCodeComponent
+  android:config_defaultQrCodeComponentIntentAction
   android:config_defaultRetailDemo
   android:config_defaultRingtonePickerEnabled
   android:config_defaultSearchSelectorPackageName
@@ -431,6 +437,7 @@ declare -a remove_resource_names=(
   android:config_disabledUntilUsedPreinstalledImes
   android:config_doubleTapPowerGestureMode
   android:config_dreamsDefaultComponent
+  android:config_dynamicInstrumentationEventConsumer
   android:config_emergency_dialer_package
   android:config_enablePrimaryLocationTimeZoneProvider
   android:config_enabledCredentialProviderService
@@ -467,8 +474,10 @@ declare -a remove_resource_names=(
   android:config_intrusionDetectionEventTransport
   android:config_keep_warming_services
   android:config_keyChordPowerVolumeUp
+  android:config_listenerHintsExemptPackages
   android:config_locationExtraPackageNames
   android:config_locationProviderPackageNames
+  android:config_lockscreenLockoutShortlink
   android:config_loggable_dream_prefixes
   android:config_longPressOnHomeBehavior
   android:config_longPressOnPowerBehavior
@@ -483,6 +492,7 @@ declare -a remove_resource_names=(
   android:config_persistentDataPackageName
   android:config_pinnerCameraApp
   android:config_powerSaveModeChangedListenerPackage
+  android:config_pr_dexopt_sync_forced_packages
   android:config_preferredSystemImageEditor
   android:config_primaryCredentialProviderService
   android:config_primaryLocationTimeZoneProviderPackageName
@@ -507,6 +517,7 @@ declare -a remove_resource_names=(
   android:config_shortPressOnPowerBehavior
   android:config_showGesturalNavigationHints
   android:config_smart_battery_available
+  android:config_speechCompassAvailable
   android:config_storageManagerDaystoRetainDefault
   android:config_supervisedUserCreationPackage
   android:config_supportDoubleTapSleep
@@ -632,6 +643,7 @@ declare -a remove_resource_names=(
   com.android.settings:config_avatar_picker_package
   com.android.settings:config_face_enroll_guidance_page
   com.android.settings:config_face_enroll_supported_posture
+  com.android.settings:config_gazeEnabled
   com.android.settings:config_hspa_data_distinguishable
   com.android.settings:config_network_selection_list_aggregation_enabled
   com.android.settings:config_settings_slices_accessibility_components
@@ -670,6 +682,10 @@ declare -a remove_resource_names=(
   com.android.settings:lottie_animation_view_margin_top
   com.android.settings:peak_refresh_rate_summary
   com.android.settings:regional_pref_footer_learn_more_link
+  com.android.settings:security_settings_face_settings_gaze
+  com.android.settings:security_settings_face_settings_gaze_details
+  com.android.settings:security_settings_face_settings_require_attention
+  com.android.settings:security_settings_face_settings_require_attention_details
   com.android.settings:security_settings_fingerprint_enroll_consent_introduction_title
   com.android.settings:security_settings_fingerprint_enroll_introduction_message_unlock_disabled
   com.android.settings:security_settings_fingerprint_enroll_introduction_title
@@ -694,7 +710,10 @@ declare -a remove_resource_names=(
   com.android.storagemanager:ic_5g_plus_mobiledata.xml
   com.android.storagemanager:ic_5g_plus_mobiledata_updated.xml
   com.android.storagemanager:settingslib_learn_more_text
+  com.android.systemui:a11ymenu_intro.xml
   com.android.systemui:ambientcue_first_time_edu_text
+  com.android.systemui:assistant_color
+  com.android.systemui:assistant_utterance
   com.android.systemui:config_avatar_picker_package
   com.android.systemui:config_controlsPreferredPackages
   com.android.systemui:config_face_auth_props
@@ -708,7 +727,10 @@ declare -a remove_resource_names=(
   com.android.systemui:data_connection_5g_plus
   com.android.systemui:ic_5g_plus_mobiledata.xml
   com.android.systemui:ic_5g_plus_mobiledata_updated.xml
+  com.android.systemui:ic_logo_a11y_assistant.xml
+  com.android.systemui:quick_settings_large_tiles_default_split
   com.android.systemui:quick_settings_tiles_default
+  com.android.systemui:quick_settings_tiles_default_split
   com.android.systemui:quick_settings_tiles_new_default
   com.android.systemui:settingslib_learn_more_text
   com.android.systemui:stat_sys_branded_vpn.xml
@@ -818,7 +840,7 @@ commonize_rro_chain() {
       ;;
     zumapro)
       commonize_rro_one caimito caiman komodo tokay
-      commonize_rro_one zumapro caimito comet tegu
+      commonize_rro_one zumapro caimito comet tegu stallion
       ;;
     laguna)
       commonize_rro_one muzel blazer frankel mustang
@@ -888,7 +910,7 @@ beautify_rro_chain() {
     beautify_rro_one husky shiba shusky akita zuma
     ;;
   zumapro)
-    beautify_rro_one caiman komodo tokay caimito comet tegu zumapro
+    beautify_rro_one caiman komodo tokay caimito comet tegu stallion zumapro
     ;;
   laguna)
     beautify_rro_one blazer frankel mustang muzel rango laguna
@@ -934,7 +956,7 @@ print_packages_rro() {
 
   print_packages_rro_one husky shiba shusky akita zuma
 
-  print_packages_rro_one caiman komodo tokay caimito comet tegu zumapro
+  print_packages_rro_one caiman komodo tokay caimito comet tegu stallion zumapro
 
   print_packages_rro_one blazer frankel mustang muzel rango laguna
 
