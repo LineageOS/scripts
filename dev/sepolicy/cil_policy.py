@@ -221,6 +221,9 @@ def parse_dump_policy_variables(
     variables.update(platform_build_flag_variables)
     variables.update(vendor_build_flag_variables)
 
+    for flag_name in needed_build_flags:
+        variables.setdefault(f'target_flag_{flag_name}', 'false')
+
     #
     # From system/sepolicy/buid/soong/policy.go
     #
