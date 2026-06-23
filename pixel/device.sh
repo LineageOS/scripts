@@ -63,7 +63,9 @@ device() {
     local factory_dir="${download_dir}/$(basename ${image_url} .zip)"
     local extract_args="--download-dir ${download_dir} --download-sha256 ${image_sha256} --regenerate"
 
+    pushd "${top}"
     tools/extract-utils/extract.py --pixel-factory --pixel-firmware --all --extra-partition recovery --download-dir ${download_dir} --download-sha256 ${image_sha256} ${image_url}
+    popd
 
     if [ "$KEEP_DUMP" == "true" ] || [ "$KEEP_DUMP" == "1" ]; then
       extract_args+=" --keep-dump"
