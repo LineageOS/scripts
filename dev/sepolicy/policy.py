@@ -534,11 +534,11 @@ recovery = dump_binary(
 #
 
 # Platform
-platform_matched = platform.macro_match(
+platform_public = platform.public(reference=versioned_platform)
+platform_private = platform.private(reference=versioned_platform)
+
+platform_public_clean = platform_public.macro_match(
     macros=source_platform_public,
-)
-platform_public_clean = platform_matched.public(
-    reference=versioned_platform,
 ).cleanup(
     removed=(
         automatically_added,
@@ -546,8 +546,9 @@ platform_public_clean = platform_matched.public(
         source_platform_technical_debt,
     ),
 )
-platform_private_clean = platform_matched.private(
-    reference=versioned_platform,
+platform_private_clean = platform_private.macro_match(
+    macros=source_platform_public,
+    references=(platform_public,),
 ).cleanup(
     removed=(
         automatically_added,
@@ -557,14 +558,13 @@ platform_private_clean = platform_matched.private(
 )
 
 # System ext
-system_ext_matched = system_ext.macro_match(
+system_ext_public = system_ext.public(reference=versioned_platform)
+system_ext_private = system_ext.private(reference=versioned_platform)
+
+system_ext_public_clean = system_ext_public.macro_match(
     macros=source_platform_public,
-    references=(platform,),
-)
-system_ext_public = system_ext_matched.public(
-    reference=versioned_platform,
-)
-system_ext_public_clean = system_ext_public.cleanup(
+    references=(platform_public,),
+).cleanup(
     removed=(
         platform,
         automatically_added,
@@ -574,10 +574,14 @@ system_ext_public_clean = system_ext_public.cleanup(
         source_platform_technical_debt,
     ),
 )
-system_ext_private = system_ext_matched.private(
-    reference=versioned_platform,
-)
-system_ext_private_clean = system_ext_private.cleanup(
+system_ext_private_clean = system_ext_private.macro_match(
+    macros=source_platform_public,
+    references=(
+        platform_public,
+        platform_private,
+        system_ext_public,
+    ),
+).cleanup(
     removed=(
         platform,
         automatically_added,
@@ -589,12 +593,15 @@ system_ext_private_clean = system_ext_private.cleanup(
 )
 
 # Product
-product_matched = product.macro_match(
+product_public = product.public(reference=versioned_platform)
+product_private = product.private(reference=versioned_platform)
+
+product_public_clean = product_public.macro_match(
     macros=source_platform_public,
-    references=(platform,),
-)
-product_public_clean = product_matched.public(
-    reference=versioned_platform,
+    references=(
+        platform_public,
+        system_ext_public,
+    ),
 ).cleanup(
     removed=(
         platform,
@@ -606,8 +613,15 @@ product_public_clean = product_matched.public(
         source_platform_technical_debt,
     ),
 )
-product_private_clean = product_matched.private(
-    reference=versioned_platform,
+product_private_clean = product_private.macro_match(
+    macros=source_platform_public,
+    references=(
+        platform_public,
+        platform_private,
+        system_ext_public,
+        system_ext_private,
+        product_public,
+    ),
 ).cleanup(
     removed=(
         platform,
