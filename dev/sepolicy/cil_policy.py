@@ -13,8 +13,11 @@ from typing import (
     Optional,
     Set,
     Tuple,
+    cast,
 )
 
+from bp.bp_module import BpModule
+from bp.bp_parser import bp_parser  # type: ignore
 from sepolicy.cil_rule import (
     CIL_CLASSPERM_TYPES,
     CIL_COMMENT_MARKER,
@@ -40,6 +43,7 @@ from sepolicy.rule import Rule, raw_parts_list
 from sepolicy.rule_container import LineMark, RuleContainer
 from utils.frozendict import FrozenDict
 from utils.utils import (
+    android_root,
     read_texts,
     resolve_paths,
     split_normalize_text,
@@ -51,27 +55,28 @@ LMX_PREFIX = ';;* lmx '
 LME_MARKER = ';;* lme'
 
 
-# From system/sepolicy/flagging/Android.bp
-NEEDED_BUILD_FLAGS = frozenset(
-    {
-        'RELEASE_AVF_SUPPORT_CUSTOM_VM_WITH_PARAVIRTUALIZED_DEVICES',
-        'RELEASE_AVF_ENABLE_EARLY_VM',
-        'RELEASE_AVF_ENABLE_DEVICE_ASSIGNMENT',
-        'RELEASE_AVF_ENABLE_LLPVM_CHANGES',
-        'RELEASE_AVF_ENABLE_NETWORK',
-        'RELEASE_AVF_ENABLE_MICROFUCHSIA',
-        'RELEASE_AVF_ENABLE_VM_TO_TEE_SERVICES_ALLOWLIST',
-        'RELEASE_AVF_ENABLE_WIDEVINE_PVM',
-        'RELEASE_RANGING_STACK',
-        'RELEASE_READ_FROM_NEW_STORAGE',
-        'RELEASE_SUPERVISION_SERVICE',
-        'RELEASE_HARDWARE_BLUETOOTH_RANGING_SERVICE',
-        'RELEASE_UNLOCKED_STORAGE_API',
-        'RELEASE_BLUETOOTH_SOCKET_SERVICE',
-        'RELEASE_SEPOLICY_RESTRICT_KERNEL_KEYRING_SEARCH',
-        'RELEASE_TELEPHONY_MODULE',
-    }
+SEPOLICY_FLAGGING_BP_PATH = Path(
+    android_root,
+    'system/sepolicy/flagging/Android.bp',
 )
+
+
+@cache
+def get_needed_build_flags(flagging_bp_path: Path) -> FrozenSet[str]:
+    statements = bp_parser.parse(flagging_bp_path.read_text())  # type: ignore
+    statements = cast(List[BpModule], statements)
+
+    flags: Set[str] = set()
+    for statement in statements:
+        if statement.get('module') != 'se_flags':
+            continue
+
+        module_flags = statement.get('flags', [])  # type: ignore
+        flags.update(module_flags)
+
+    assert flags, f'Failed to parse se_flags from {flagging_bp_path}'
+
+    return frozenset(flags)
 
 
 def get_build_prop(lines: List[str], prop_name: str):
@@ -190,13 +195,14 @@ def parse_dump_policy_variables(
         'ro.build.type',
     )
 
+    needed_build_flags = get_needed_build_flags(SEPOLICY_FLAGGING_BP_PATH)
     platform_build_flag_variables = get_build_flag_variables(
         platform_build_flags_path,
-        NEEDED_BUILD_FLAGS,
+        needed_build_flags,
     )
     vendor_build_flag_variables = get_build_flag_variables(
         vendor_build_flags_path,
-        NEEDED_BUILD_FLAGS,
+        needed_build_flags,
     )
 
     for key in (
