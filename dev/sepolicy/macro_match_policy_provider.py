@@ -58,14 +58,18 @@ class MacroMatchPolicyProvider(PolicyProvider):
         macros = macros_policy.macros
 
         reference = RuleContainer()
-        if policy_type.origin.reference is not None:
-            reference = policy_index.get(
-                policy_type.origin.reference,
+        for reference_type in policy_type.origin.references:
+            reference_policy = policy_index.get(
+                reference_type,
                 source_policy.metadata,
-            ).rules
+            )
+            reference.add_many(reference_policy.rules)
+
+        match_pool = RuleContainer(source_policy.rules)
+        match_pool.add_many(reference)
 
         rule_matches = match_macros_rules(
-            source_policy.rules,
+            match_pool,
             macros.macros_name_rules,
             self.__verbose,
         )
