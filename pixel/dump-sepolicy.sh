@@ -59,12 +59,12 @@ decompile_cil() {
       --current \
       --dump "${factory_dir}" \
       --extra-macros hardware/google/pixel-sepolicy/common/vendor \
-      --cleanup-rules device/google/gs-common/sepolicy/ignored/system_ext \
+      --cleanup-rules hardware/google/pixel-sepolicy/ignored/product \
+      --cleanup-rules hardware/google/pixel-sepolicy/ignored/system_ext \
+      --cleanup-rules hardware/google/pixel-sepolicy/ignored/vendor \
       --cleanup-rules hardware/google/pixel-sepolicy/common/system_ext \
-      --cleanup-rules hardware/google/pixel-sepolicy/flipendo \
-      --cleanup-rules device/google/gs-common/sepolicy/ignored/product \
-      --cleanup-rules device/google/gs-common/sepolicy/ignored/vendor \
       --cleanup-rules hardware/google/pixel-sepolicy/common/vendor \
+      --cleanup-rules hardware/google/pixel-sepolicy/flipendo \
       --cleanup-rules hardware/google/pixel-sepolicy/googlebattery \
       --cleanup-rules hardware/google/pixel-sepolicy/hardware_info_app \
       --cleanup-rules hardware/google/pixel-sepolicy/logger_app \
