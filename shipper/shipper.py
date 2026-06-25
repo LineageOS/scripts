@@ -58,7 +58,10 @@ def get_wiki_data(codename: str) -> WikiData:
             f'{CROOT}/lineage/wiki/_data/devices/{codename}_variant*.yml')):
         doc = yaml.load(open(path, 'r').read(), Loader=yaml.SafeLoader)
         if doc['maintainers']:
-            device_names.append(f'{doc["vendor"]} {doc["name"]}')
+            if doc['vendor'] not in doc['name']:
+                device_names.append(f'{doc["vendor"]} {doc["name"]}')
+            else:
+                device_names.append(doc['name'])
             maintainers = doc['maintainers']
             versions = doc['versions']
 
