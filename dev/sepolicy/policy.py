@@ -834,6 +834,7 @@ class Policy:
     rule_matches: Optional[List[RuleMatch]] = None
     source_text: Optional[SourceText] = None
     guarded_rules: Optional[Dict[Rule, str]] = None
+    absent_memberships: Optional[Dict[Tuple[str, str], str]] = None
     text: Optional[str] = None
 
     def copy(
@@ -855,6 +856,7 @@ class Policy:
             self.rule_matches,
             self.source_text,
             self.guarded_rules,
+            self.absent_memberships,
         )
 
     @property

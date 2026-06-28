@@ -123,6 +123,33 @@ def finalize_guards(
     return guards
 
 
+def guard_membership_macros(
+    rules: RuleContainer,
+    guards: Dict[Rule, str],
+    absent_memberships: Dict[Tuple[str, str], str],
+):
+    if not absent_memberships:
+        return
+
+    for rule in rules:
+        if not rule.is_macro or rule in guards or rule.expanded_rules is None:
+            continue
+
+        guard = None
+        for atom in rule.expanded_rules:
+            if atom.rule_type != RuleType.TYPEATTRIBUTE:
+                continue
+
+            member, attribute = atom.parts[0], atom.parts[1]
+            if isinstance(member, str) and isinstance(attribute, str):
+                guard = absent_memberships.get((attribute, member))
+                if guard is not None:
+                    break
+
+        if guard is not None:
+            guards[rule] = guard
+
+
 class MacroReplacePolicyProvider(PolicyProvider):
     def __init__(self, verbose: bool):
         super().__init__(PolicyMacroReplaceOrigin)
@@ -172,6 +199,12 @@ class MacroReplacePolicyProvider(PolicyProvider):
         split = 0
         if source_policy.guarded_rules is not None:
             guards, split = assign_guards(rules, source_policy.guarded_rules)
+
+        guard_membership_macros(
+            rules,
+            guards,
+            source_policy.absent_memberships or {},
+        )
 
         new_policy = source_policy.copy(
             policy_type=policy_type,

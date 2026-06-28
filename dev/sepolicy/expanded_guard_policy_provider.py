@@ -242,4 +242,8 @@ class ExpandedGuardPolicyProvider(PolicyProvider):
             guarded[rule] = origin.guard
         new_policy.guarded_rules = guarded
 
+        new_policy.absent_memberships = {
+            pair: origin.guard for pair in absent_memberships
+        }
+
         return new_policy
