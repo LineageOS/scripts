@@ -641,6 +641,13 @@ def do_git_fetch_pull(args, item):
         cmd = ["git", "pull", "--no-edit"]
     else:
         cmd = ["git", "fetch"]
+
+        is_shallow_repository = subprocess.check_output(
+            ["git", "rev-parse", "--is-shallow-repository"], cwd=project_path
+        )
+
+        if is_shallow_repository == "true":
+            cmd += ["--depth=1"]
     if args.quiet:
         cmd.append("--quiet")
     cmd.extend(["", item["fetch"][method]["ref"]])
