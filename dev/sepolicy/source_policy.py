@@ -19,7 +19,6 @@ from sepolicy.macro import (
     parse_perms,
     rule_body,
 )
-from sepolicy.merge import add_mergeable_rule, merge_current_rules
 from sepolicy.policy import (
     ContextsType,
     Policy,
@@ -28,8 +27,7 @@ from sepolicy.policy import (
     PolicyType,
     get_policy_type_by_name,
 )
-from sepolicy.rule import Rule
-from sepolicy.rule_container import LineMark, RuleContainer
+from sepolicy.rule_container import RuleContainer
 from sepolicy.rules import split_normalize_rules_text
 from sepolicy.source_macros import SourceMacros
 from sepolicy.source_rule import SourceRuleParser
@@ -101,26 +99,13 @@ def parse_source_rules(
     )
 
     rules = RuleContainer()
-    mergeable_rules: List[Rule] = []
-    mergeable_marks: Set[LineMark] = set()
-
-    def add_rule(rule: Rule):
-        add_mergeable_rule(
-            rule,
-            None,
-            mergeable_rules,
-            mergeable_marks,
-            rules,
-        )
 
     parser = SourceRuleParser(
-        add_rule,
+        rules.add,
         classmap,
     )
     for source_line in expanded_rules:
         parser.parse_line(source_line)
-
-    merge_current_rules(mergeable_rules, mergeable_marks, rules)
 
     return rules
 
