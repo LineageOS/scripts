@@ -194,12 +194,20 @@ def is_ioctl_rule_mergeable(rule: Rule):
     return rule.rule_type in IOCTL_RULE_TYPES
 
 
-def can_ioctl_rule_be_merged(rule: Rule, rules: List[Rule]):
+def can_ioctl_rule_be_merged(
+    rule: Rule,
+    mark: Optional[LineMark],
+    rules: List[Rule],
+    marks: Set[LineMark],
+):
     if not rules:
         return False
 
     base_rule = rules[0]
     if rule.rule_type != base_rule.rule_type:
+        return False
+
+    if mark is not None and marks and mark not in marks:
         return False
 
     return True
@@ -233,7 +241,12 @@ def add_mergeable_rule(
         rules.add(rule, (mark,) if mark is not None else None)
         return
 
-    if not can_ioctl_rule_be_merged(rule, mergeable_rules):
+    if not can_ioctl_rule_be_merged(
+        rule,
+        mark,
+        mergeable_rules,
+        mergeable_marks,
+    ):
         merge_current_rules(mergeable_rules, mergeable_marks, rules)
 
     mergeable_rules.append(rule)
