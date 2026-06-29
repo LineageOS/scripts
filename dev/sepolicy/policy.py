@@ -722,22 +722,39 @@ product_public_guarded = guarded_replaced(product_public_clean)
 product_private_guarded = guarded_replaced(product_private_clean)
 vendor_guarded = guarded_replaced(vendor_clean)
 
-cleaned_output(platform_public_clean).output_to(
+platform_public_output = cleaned_output(
+    platform_public_clean,
+).output_to(
     relative_dir='system/public',
 )
-cleaned_output(platform_private_clean).output_to(
+
+platform_private_output = cleaned_output(
+    platform_private_clean,
+).output_to(
     relative_dir='system/private',
 )
-cleaned_output(system_ext_public_clean).output_to(
-    relative_dir='system_ext/public'
+
+system_ext_public_output = cleaned_output(
+    system_ext_public_clean,
+).output_to(
+    relative_dir='system_ext/public',
 )
-cleaned_output(system_ext_private_clean).output_to(
-    relative_dir='system_ext/private'
+
+system_ext_private_output = cleaned_output(
+    system_ext_private_clean,
+).output_to(
+    relative_dir='system_ext/private',
 )
-cleaned_output(product_public_clean).output_to(
+
+product_public_output = cleaned_output(
+    product_public_clean,
+).output_to(
     relative_dir='product/public',
 )
-cleaned_output(product_private_clean).output_to(
+
+product_private_output = cleaned_output(
+    product_private_clean,
+).output_to(
     relative_dir='product/private',
 )
 
@@ -799,11 +816,101 @@ recovery_only_replaced = (
     .macro_replace()
 )
 
-cleaned_output(vendor_clean).add(
-    added=recovery_only_replaced,
-    guard='recovery_only',
-).output_to(
-    relative_dir='vendor',
+vendor_output = (
+    cleaned_output(vendor_clean)
+    .add(
+        added=recovery_only_replaced,
+        guard='recovery_only',
+    )
+    .output_to(
+        relative_dir='vendor',
+    )
+)
+
+
+#
+# Reconstructed output policies, used by check_policy to recompile the output
+# the way the build does and diff it against the prebuilts
+#
+
+reconstructed_platform_gathered = (
+    platform_public_output.gather_source_text(),
+    platform_private_output.gather_source_text(),
+)
+reconstructed_system_ext_gathered = (
+    *reconstructed_platform_gathered,
+    system_ext_public_output.gather_source_text(),
+    system_ext_private_output.gather_source_text(),
+)
+reconstructed_product_gathered = (
+    *reconstructed_system_ext_gathered,
+    product_public_output.gather_source_text(),
+    product_private_output.gather_source_text(),
+)
+reconstructed_all_gathered = (
+    *reconstructed_product_gathered,
+    vendor_output.gather_source_text(),
+)
+
+reconstructed_platform_sources = (
+    source_platform_public,
+    source_platform_private,
+)
+reconstructed_system_ext_sources = (
+    *reconstructed_platform_sources,
+    source_system_ext_public,
+    source_system_ext_private,
+)
+reconstructed_product_sources = (
+    *reconstructed_system_ext_sources,
+    source_product_public,
+    source_product_private,
+)
+reconstructed_all_sources = (
+    *reconstructed_product_sources,
+    source_vendor,
+)
+
+
+def reconstructed(
+    name: str,
+    gathered: Tuple[PolicyType, ...],
+    sources: Tuple[PolicyType, ...],
+) -> PolicyType:
+    return compiled(
+        name=f'reconstructed_{name}',
+        source=combined(
+            name=f'reconstructed_{name}_combined',
+            macro_sources=(source_platform_public,),
+            attribute_sources=gathered,
+            rule_sources=(*sources, *gathered),
+        ),
+    )
+
+
+reconstructed_platform = reconstructed(
+    'platform',
+    reconstructed_platform_gathered,
+    reconstructed_platform_sources,
+)
+reconstructed_system_ext = reconstructed(
+    'system_ext',
+    reconstructed_system_ext_gathered,
+    reconstructed_system_ext_sources,
+)
+reconstructed_product = reconstructed(
+    'product',
+    reconstructed_product_gathered,
+    reconstructed_product_sources,
+)
+reconstructed_vendor = reconstructed(
+    'vendor',
+    reconstructed_all_gathered,
+    reconstructed_all_sources,
+)
+reconstructed_recovery = binary_compiled(
+    name='reconstructed_recovery',
+    source=reconstructed_vendor,
 )
 
 

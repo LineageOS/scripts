@@ -5,6 +5,7 @@
 from __future__ import annotations
 
 import shutil
+import sys
 from argparse import ArgumentParser
 from pathlib import Path
 from typing import List
@@ -13,6 +14,7 @@ from sepolicy.add_policy_provider import AddPolicyProvider
 from sepolicy.binary_compiled_policy_provider import (
     BinaryCompiledPolicyProvider,
 )
+from sepolicy.check_policy import run_checks
 from sepolicy.cleanup_policy_provider import CleanupPolicyProvider
 from sepolicy.combined_policy_provider import CombinedPolicyProvider
 from sepolicy.compiled_policy_provider import CompiledPolicyProvider
@@ -85,6 +87,11 @@ def decompile_cil():
         '--current',
         action='store_true',
         help='Use current macros',
+    )
+    parser.add_argument(
+        '--check',
+        action='store_true',
+        help='Recompile the output and check it against the prebuilt variants',
     )
     parser.add_argument(
         '-d',
@@ -190,6 +197,10 @@ def decompile_cil():
             verbose=verbose,
         )
     )
+
+    if args.check:
+        if not run_checks(policy_index):
+            sys.exit(1)
 
     shutil.rmtree(output_dir, ignore_errors=True)
     output_dir.mkdir(parents=True, exist_ok=True)
