@@ -50,6 +50,7 @@ PRODUCT_CERTIFICATE_OVERRIDES := \
     com.android.networkstack.tethering:com.android.networkstack.tethering.certificate.override \
     com.android.neuralnetworks:com.android.neuralnetworks.certificate.override \
     com.android.nfcservices:com.android.nfcservices.certificate.override \
+    com.android.npumanager:com.android.npumanager.certificate.override \
     com.android.ondevicepersonalization:com.android.ondevicepersonalization.certificate.override \
     com.android.os.statsd:com.android.os.statsd.certificate.override \
     com.android.permission:com.android.permission.certificate.override \
