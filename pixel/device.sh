@@ -64,6 +64,7 @@ device() {
     local extract_args="--download-dir ${download_dir} --download-sha256 ${image_sha256} --regenerate"
 
     pushd "${top}"
+    mkdir -p ${download_dir}
     tools/extract-utils/extract.py --pixel-factory --pixel-firmware --all --extra-partition recovery --download-dir ${download_dir} --download-sha256 ${image_sha256} ${image_url}
     popd
 
