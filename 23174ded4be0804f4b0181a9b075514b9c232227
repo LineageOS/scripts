@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17e184b4_e3045447",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19979
+      },
+      "writtenOn": "2026-08-03T16:22:10Z",
+      "side": 1,
+      "message": "Unsure if this is the best approach, but it at least will no longer fail when given a motorola dump",
+      "revId": "23174ded4be0804f4b0181a9b075514b9c232227",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
