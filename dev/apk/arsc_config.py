@@ -8,19 +8,24 @@ from apk.utils import str_from_c
 
 
 def get_locale_qualifier(config: ResTable_config) -> str:
-    assert not (bytes(config.language)[0] & 0x80), (
-        'Packed 3-letter language codes not implemented'
-    )
+    lang_bytes = bytes(config.language)
+    if lang_bytes[0] & 0x80:
+        val = ((lang_bytes[0] & 0x7F) << 8) | lang_bytes[1]
+        language = "".join(chr(ord('a') + ((val >> shift) & 0x1F)) for shift in (10, 5, 0))
+    else:
+        language = str_from_c(config.language)
 
-    assert not (bytes(config.country)[0] & 0x80), (
-        'Packed 3-letter region codes not implemented'
-    )
-
-    language = str_from_c(config.language)
     if not language:
         return ''
 
-    region = str_from_c(config.country)
+    country_bytes = bytes(config.country)
+    if country_bytes[0] & 0x80:
+        val = ((country_bytes[0] & 0x7F) << 8) | country_bytes[1]
+        base = ord('0') if not (country_bytes[0] & 0x40) else ord('a')
+        region = "".join(chr(base + ((val >> shift) & 0x1F)) for shift in (10, 5, 0))
+    else:
+        region = str_from_c(config.country)
+
     script = str_from_c(config.localeScript)
     variant = str_from_c(config.localeVariant)
     numbering = str_from_c(config.localeNumberingSystem)
