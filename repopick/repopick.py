@@ -85,9 +85,7 @@ def fetch_query_via_ssh(remote_url, query):
                         "fetch": {
                             "ssh": {
                                 "ref": patch_set["ref"],
-                                "url": "ssh://{0}:{1}/{2}".format(
-                                    userhost, port, data["project"]
-                                ),
+                                "url": f"ssh://{userhost}:{port}/{data['project']}",
                             }
                         },
                         "commit": {
@@ -362,7 +360,7 @@ def main():
         if needs_abandon:
             # Perform the abandon only if the branch already exists
             if not args.quiet:
-                print("Abandoning branch: %s" % args.start_branch[0])
+                print(f"Abandoning branch: {args.start_branch[0]}")
             subprocess.run(["repo", "abandon", args.start_branch[0]])
             if not args.quiet:
                 print("")
@@ -416,12 +414,12 @@ def main():
 
     # get data on requested changes
     if args.topic:
-        reviews = fetch_query(args.gerrit, "topic:{0}".format(args.topic))
+        reviews = fetch_query(args.gerrit, f"topic:{args.topic}")
         change_numbers = [
             str(r["number"]) for r in sorted(reviews, key=cmp_to_key(cmp_reviews))
         ]
     elif args.hashtag:
-        reviews = fetch_query(args.gerrit, "hashtag:{0}".format(args.hashtag))
+        reviews = fetch_query(args.gerrit, f"hashtag:{args.hashtag}")
         change_numbers = [
             str(r["number"]) for r in sorted(reviews, key=cmp_to_key(cmp_reviews))
         ]
@@ -445,7 +443,7 @@ def main():
                 change_numbers.append(c)
         reviews = fetch_query(
             args.gerrit,
-            " OR ".join("change:{0}".format(x.split("/")[0]) for x in change_numbers),
+            " OR ".join(f"change:{x.split('/')[0]}" for x in change_numbers),
         )
     else:
         parser.print_help()
@@ -474,15 +472,13 @@ def main():
 
         review = next((x for x in reviews if x["number"] == change), None)
         if review is None:
-            print("Change %d not found, skipping" % change)
+            print(f"Change {change} not found, skipping")
             continue
 
         # Check if change is open and exit if it's not, unless -f is specified
         if is_closed(review["status"]) and not args.force:
             print(
-                "Change {} status is {}. Skipping the cherry pick.\nUse -f to force this pick.".format(
-                    change, review["status"]
-                )
+                f"Change {change} status is {review['status']}. Skipping the cherry pick.\nUse -f to force this pick."
             )
             continue
 
@@ -502,22 +498,16 @@ def main():
             local_branch = list(project_name_to_data[review["project"]])[0]
             project_path = project_name_to_data[review["project"]][local_branch]
             print(
-                'WARNING: Project {0} has a different branch ("{1}" != "{2}")'.format(
-                    project_path, local_branch, review["branch"]
-                )
+                f"WARNING: Project {project_path} has a different branch ('{local_branch}' != '{review['branch']}')"
             )
         elif args.ignore_missing:
             print(
-                "WARNING: Skipping {0} since there is no project directory for: {1}\n".format(
-                    review["number"], review["project"]
-                )
+                f"WARNING: Skipping {review['number']} since there is no project directory for: {review['project']}\n"
             )
             continue
         else:
             sys.stderr.write(
-                "ERROR: For {0}, could not determine the project path for project {1}\n".format(
-                    review["number"], review["project"]
-                )
+                f"ERROR: For {review['number']}, could not determine the project path for project {review['project']}\n"
             )
             sys.exit(1)
 
@@ -538,16 +528,14 @@ def main():
             for x in review["revisions"]:
                 if review["revisions"][x]["_number"] == patchset:
                     item["fetch"] = review["revisions"][x]["fetch"]
-                    item["id"] = "{0}/{1}".format(change, patchset)
+                    item["id"] = f"{change}/{patchset}"
                     item["patchset"] = patchset
                     item["revision"] = x
                     break
             else:
                 if not args.quiet:
                     print(
-                        "ERROR: The patch set {0}/{1} could not be found, using CURRENT_REVISION instead.".format(
-                            change, patchset
-                        )
+                        f"ERROR: The patch set {change}/{patchset} could not be found, using CURRENT_REVISION instead."
                     )
 
         mergables[project_path].append(item)
@@ -579,7 +567,7 @@ def main():
 
         picked_change_ids = []
         for i in range(check_picked_count):
-            if not commit_exists(project_path, "HEAD~{0}".format(i)):
+            if not commit_exists(project_path, f"HEAD~{i}"):
                 continue
             output = subprocess.check_output(
                 ["git", "show", "-q", f"HEAD~{i}"], cwd=project_path, text=True
@@ -595,11 +583,7 @@ def main():
         def filter_picked(item):
             # Check if change is already picked to HEAD...HEAD~check_picked_count
             if item["change_id"] in picked_change_ids:
-                print(
-                    "Skipping {0} - already picked in {1}".format(
-                        item["id"], project_path
-                    )
-                )
+                print(f"Skipping {item['id']} - already picked in {project_path}")
                 return False
             return True
 
@@ -666,7 +650,7 @@ def do_git_fetch_pull(args, item):
                 "Fetching from GitHub didn't work, trying to fetch the change from Gerrit"
             )
         else:
-            print("Fetching from {0}".format(args.gerrit))
+            print(f"Fetching from {args.gerrit}")
 
     cmd[-2] = item["fetch"][method]["url"]
     if not args.quiet:
@@ -679,7 +663,7 @@ def do_git_fetch_pull(args, item):
 
 def apply_change(args, item):
     if not args.quiet:
-        print("Applying change number {0}...".format(item["id"]))
+        print(f"Applying change number {item['id']}...")
     if is_closed(item["status"]):
         print("!! Force-picking a closed change !!\n")
 
@@ -687,13 +671,9 @@ def apply_change(args, item):
 
     # Print out some useful info
     if not args.quiet:
-        print('--> Subject:       "{0}"'.format(item["subject"]))
-        print("--> Project path:  {0}".format(project_path))
-        print(
-            "--> Change number: {0} (Patch Set {1})".format(
-                item["id"], item["patchset"]
-            )
-        )
+        print(f"--> Subject:       '{item['subject']}'")
+        print(f"--> Project path:  {project_path}")
+        print(f"--> Change number: {item['id']} (Patch Set {item['patchset']})")
 
     if args.pull:
         do_git_fetch_pull(args, item)
