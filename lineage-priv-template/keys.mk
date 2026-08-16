@@ -29,6 +29,7 @@ PRODUCT_CERTIFICATE_OVERRIDES := \
     com.android.hardware.boot:com.android.hardware.boot.certificate.override \
     com.android.hardware.cas:com.android.hardware.cas.certificate.override \
     com.android.hardware.contexthub:com.android.hardware.contexthub.certificate.override \
+    com.android.hardware.drm.clearkey:com.android.hardware.drm.clearkey.certificate.override \
     com.android.hardware.dumpstate:com.android.hardware.dumpstate.certificate.override \
     com.android.hardware.gatekeeper.nonsecure:com.android.hardware.gatekeeper.nonsecure.certificate.override \
     com.android.hardware.neuralnetworks:com.android.hardware.neuralnetworks.certificate.override \
