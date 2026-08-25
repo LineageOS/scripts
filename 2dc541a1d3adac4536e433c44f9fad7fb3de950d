@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0770693_9315ac07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19252
+      },
+      "writtenOn": "2026-08-25T07:40:33Z",
+      "side": 1,
+      "message": "This fixes the script for my rtwo, which was giving me the wrong result\n\nBefore:\nBuild fingerprint:     motorola/rtwo_g/msi:16/TTR3S3HV-W1-ST34/cb3b97-65907:user/release-keys\nBuild description:     rtwo_g-user 16 TTR3S3HV-W1-ST34 cb3b97-65907 release-keys MW-419\n\nAfter:\nBuild fingerprint:     motorola/rtwo_g/rtwo:16/W1TRS36H.56-13-1-3/cb3b97-65907:user/release-keys\nBuild description:     rtwo_g-user 16 W1TRS36H.56-13-1-3 cb3b97-65907 release-keys MW-419\n\nWhich matches what\u0027s in my RTWO_G_W1TRS36H.56_13_1_3_subsidy_DEFAULT_regulatory_DEFAULT_cid50_CFC.info.txt",
+      "revId": "2dc541a1d3adac4536e433c44f9fad7fb3de950d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
