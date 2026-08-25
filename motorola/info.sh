@@ -51,7 +51,7 @@ info() {
 
   local manufacturer=$(get_prop "ro.product.system.manufacturer" "$system_prop")
   local name=$(get_prop "ro.product.system.name" "$system_prop")
-  local device=$(get_prop "ro.product.system.device" "$system_prop")
+  local device=$(get_prop "ro.product.vendor.device" "$vendor_prop")
   local release=$(get_prop "ro.system.build.version.release" "$system_prop")
   local system_incremental=$(get_prop "ro.system.build.version.incremental" "$system_prop")
   local type=$(get_prop "ro.system.build.type" "$system_prop")
@@ -59,7 +59,10 @@ info() {
 
   local platform_id=$(get_prop "ro.mot.platform.build_id" "$system_ext_prop")
 
-  local build_id=$(get_prop "ro.vendor.build.id" "$vendor_prop")
+  local build_id=$(get_prop "ro.meta.build.id" "$system_prop")
+    if [[ -z "$build_id" ]]; then
+      build_id=$(get_prop "ro.vendor.build.id" "$vendor_prop")
+    fi
   local vendor_incremental=$(get_prop "ro.vendor.build.version.incremental" "$vendor_prop")
 
   local security_patch=$(python3 ${avbtool} info_image --image ${source}/vbmeta.img | grep "com.android.build.vendor.security_patch" | cut -c 54- | sed s/\'//g)
