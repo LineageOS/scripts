@@ -5,8 +5,8 @@
 
 set -e
 
-chromium_version="153.0.8010.36"
-chromium_code="8010036"
+chromium_version="154.0.8037.49"
+chromium_code="8037049"
 ccache=0
 clean=0
 gsync=0
