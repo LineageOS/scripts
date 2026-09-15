@@ -57,7 +57,16 @@ def parse_devices(root):
         rows = {}
         for m in dev.findall('FpsOffsetMap'):
             fps = int(m.get('fps'))
-            pct = int(m.get('SfDurationPercentage'))
+            duration_pct = m.get('SfDurationPercentage')
+            if duration_pct is not None:
+                pct = int(duration_pct)
+            else:
+                offset = m.get('advancedSfOffsetPercentage')
+                if offset is None:
+                    sys.exit(
+                        f'error: no SF duration percentage for {fps} Hz in file'
+                    )
+                pct = 100 + int(offset)
             app = m.get('AppDuration')
             rows[fps] = (pct, int(app) if app is not None else None)
         devices[version] = rows
