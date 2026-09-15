@@ -6,6 +6,8 @@
 Usage:
     sf_offsets_to_props.py [advanced_sf_offsets.xml] [--version N] [--fps 60,90,120]
                            [--base-sf NS --base-app NS] [--late-only] [--list]
+                           [--early-sf-phase NS --early-gl-sf-phase NS]
+                           [--late-app-phase NS --late-sf-phase NS]
 """
 
 import argparse
@@ -14,6 +16,11 @@ import sys
 import xml.etree.ElementTree as ET
 
 MODES = ('early', 'earlyGl', 'late')
+PHASE_MODES = {
+    'early': 'early_sf',
+    'earlyGl': 'early_gl_sf',
+    'late': 'late_sf',
+}
 
 
 def adb_advanced_sf_offsets(serial=None):
@@ -82,6 +89,44 @@ def sf_duration_ns(fps, pct):
     return round(period * pct / 100)
 
 
+def vsync_period(fps):
+    return 10**9 // fps
+
+
+def app_duration_ns(fps, app_phase, sf_phase):
+    period = vsync_period(fps)
+    duration = period + sf_phase - app_phase
+    if duration < period:
+        duration += period
+    return duration
+
+
+def mode_durations(fps, row, mode, phases):
+    period = vsync_period(fps)
+    pct, app = row if row is not None else (None, None)
+
+    if pct is not None:
+        sf_phase = period - sf_duration_ns(fps, pct)
+        if period < 15_000_000 and phases is not None:
+            app_phase = phases['late_app']
+        elif period >= 15_000_000 and phases is not None:
+            app_phase = 1_000_000
+        else:
+            app_phase = None
+    elif period >= 15_000_000:
+        app_phase = 1_000_000
+        sf_phase = 1_000_000
+    else:
+        app_phase = phases['late_app'] if phases is not None else None
+        if phases is None:
+            return app, None
+        sf_phase = phases[PHASE_MODES[mode]]
+
+    if app is None and app_phase is not None:
+        app = app_duration_ns(fps, app_phase, sf_phase)
+    return app, period - sf_phase
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument('xml', nargs='?', help='path to advanced_sf_offsets.xml')
@@ -116,6 +161,34 @@ def main():
         help='also emit base debug.sf.*.app.duration props with this value (ns)',
     )
     ap.add_argument(
+        '--early-sf-phase',
+        type=int,
+        default=None,
+        metavar='NS',
+        help='debug.sf.high_fps_early_phase_offset_ns',
+    )
+    ap.add_argument(
+        '--early-gl-sf-phase',
+        type=int,
+        default=None,
+        metavar='NS',
+        help='debug.sf.high_fps_early_gl_phase_offset_ns',
+    )
+    ap.add_argument(
+        '--late-app-phase',
+        type=int,
+        default=None,
+        metavar='NS',
+        help='debug.sf.high_fps_late_app_phase_offset_ns',
+    )
+    ap.add_argument(
+        '--late-sf-phase',
+        type=int,
+        default=None,
+        metavar='NS',
+        help='debug.sf.high_fps_late_sf_phase_offset_ns',
+    )
+    ap.add_argument(
         '--late-only',
         action='store_true',
         help='emit only late.* props (skip the early/earlyGl mirrors)',
@@ -126,6 +199,19 @@ def main():
         help='list device versions found in the XML and exit',
     )
     args = ap.parse_args()
+
+    phase_values = {
+        'early_sf': args.early_sf_phase,
+        'early_gl_sf': args.early_gl_sf_phase,
+        'late_app': args.late_app_phase,
+        'late_sf': args.late_sf_phase,
+    }
+    if any(value is not None for value in phase_values.values()):
+        if not all(value is not None for value in phase_values.values()):
+            sys.exit('error: all four phase offsets are required together')
+        phases = phase_values
+    else:
+        phases = None
 
     if args.xml is not None:
         with open(args.xml) as f:
@@ -189,22 +275,38 @@ def main():
                 f'# note: no XML entry for {missing} Hz - base props apply there',
                 file=sys.stderr,
             )
-        rows = {f: rows[f] for f in wanted if f in rows}
+        if phases is None:
+            rows = {f: rows[f] for f in wanted if f in rows}
+        else:
+            rows = {f: rows.get(f) for f in wanted}
+    if phases is not None:
+        rows.setdefault(60, None)
 
     modes = ('late',) if args.late_only else MODES
     print(f'# Generated from {args.xml} (Device version {version})')
     for mode in sorted(modes, key=str.lower):
-        if args.base_app is not None:
-            print(f'debug.sf.{mode}.app.duration={args.base_app}')
-        for fps, (_, app) in sorted(rows.items()):
+        base_app = args.base_app
+        base_sf = args.base_sf
+        if phases is not None:
+            generated_app, generated_sf = mode_durations(
+                60, rows.get(60), mode, phases
+            )
+            if base_app is None:
+                base_app = generated_app
+            if base_sf is None:
+                base_sf = generated_sf
+        if base_app is not None:
+            print(f'debug.sf.{mode}.app.duration={base_app}')
+        for fps, row in sorted(rows.items()):
+            app, sf = mode_durations(fps, row, mode, phases)
             if app is not None:
                 print(f'debug.sf.{mode}.app.duration.{fps}={app}')
-        if args.base_sf is not None:
-            print(f'debug.sf.{mode}.sf.duration={args.base_sf}')
-        for fps, (pct, _) in sorted(rows.items()):
-            print(
-                f'debug.sf.{mode}.sf.duration.{fps}={sf_duration_ns(fps, pct)}'
-            )
+        if base_sf is not None:
+            print(f'debug.sf.{mode}.sf.duration={base_sf}')
+        for fps, row in sorted(rows.items()):
+            _, sf = mode_durations(fps, row, mode, phases)
+            if sf is not None:
+                print(f'debug.sf.{mode}.sf.duration.{fps}={sf}')
 
 
 if __name__ == '__main__':
