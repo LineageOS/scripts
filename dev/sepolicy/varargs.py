@@ -143,6 +143,9 @@ class Types:
         return self.__hash
 
     def __str__(self):
+        if not self.__values:
+            return ''
+
         values = sorted(self.__values)
         values_str = ', '.join(values)
         return f', {values_str}'
