@@ -72,9 +72,11 @@ device() {
       extract_args+=" --keep-dump"
     fi
 
-    pushd "${top}/device/google/${device}"
-    ./extract-files.py ${extract_args} ${factory_dir}
-    popd
+    if [ "$EXTRACT_ONLY" != "true" ] && [ "$EXTRACT_ONLY" != "1" ]; then
+      pushd "${top}/device/google/${device}"
+      ./extract-files.py ${extract_args} ${factory_dir}
+      popd
+    fi
   fi
 }
 
