@@ -57,6 +57,7 @@ declare -a exclude_overlay_names=(
   com.google.android.pixel.avatarpicker
   com.google.android.overlay.devicelockcontroller
   com.google.android.overlay.googlewebview
+  com.google.android.overlay.messagingreadrestrictionallowlist
   com.google.android.overlay.permissioncontroller
   com.google.android.overlay.personalcontextconfig
   com.google.android.overlay.trafficlightfaceoverlay
