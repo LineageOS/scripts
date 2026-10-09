@@ -27,6 +27,7 @@ from sepolicy.varargs import (
 )
 
 macro_argument_regex = re.compile(r'\$(\d+)')
+generated_type_regex = re.compile(r'[a-z_]+_typeattr_\d+')
 
 
 @cache
@@ -60,7 +61,7 @@ def is_type_generated(part: rule_part):
     if not isinstance(part, str):
         return False
 
-    return part.startswith('base_typeattr_')
+    return generated_type_regex.match(part) is not None
 
 
 def unpack_line(
