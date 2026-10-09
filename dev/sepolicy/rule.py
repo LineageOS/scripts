@@ -260,7 +260,7 @@ def format_rule(
             )
         case RuleType.TYPE_TRANSITION:
             if isinstance(rule.varargs, TypeTransitionTag):
-                name = f'{rule.varargs} '
+                name = f' {rule.varargs}'
             elif rule.varargs is None:
                 name = ''
             else:
@@ -271,8 +271,8 @@ def format_rule(
                 rule.parts[0],
                 rule.parts[1],
                 rule.parts[2],
-                name,
                 rule.parts[-1],
+                name,
             )
         case RuleType.GENFSCON:
             return '{} {} {} {}{}{}'.format(
