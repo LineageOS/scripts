@@ -47,7 +47,7 @@ class DumpBinaryPolicyProvider(PolicyProvider):
         variables = parse_dump_policy_variables(
             self.__dump_root,
             version=version,
-            recovery=policy_type.origin.recovery or False,
+            recovery=policy_type.origin.recovery,
         )
 
         return PolicyMetadata(version, variables)
@@ -60,7 +60,6 @@ class DumpBinaryPolicyProvider(PolicyProvider):
     ):
         assert isinstance(policy_type.origin, PolicyDumpBinaryOrigin)
         assert metadata is not None
-        assert policy_type.origin.file_name is not None
 
         binary_policy_path = Path(
             self.__dump_root,
