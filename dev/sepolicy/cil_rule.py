@@ -391,7 +391,7 @@ class CilRuleParser:
                 self.add_genfs_rule(rule)
             case CilRuleType.TYPETRANSITION:
                 # (typetransition a b c d)
-                # (typetransition a b c "[userfaultfd]" d)
+                # (typetransition a b c "name" d)
                 assert len(parts) in [5, 6], line
                 assert isinstance(parts[1], str), line
                 assert isinstance(parts[2], str), line
@@ -400,7 +400,6 @@ class CilRuleParser:
 
                 if len(parts) == 6:
                     assert isinstance(parts[4], str), line
-                    # assert parts[4] == '"[userfaultfd]"', line
                     tag = TypeTransitionTag(parts[4])
                 else:
                     tag = None
