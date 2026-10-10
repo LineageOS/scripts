@@ -113,7 +113,6 @@ class ConditionalTemplate(PartTemplate):
     negative_literals_set: FrozenSet[str]
     negative_templates: Tuple[Tuple[int, AnyStringTemplate], ...]
 
-    arg_indices: FrozenSet[int]
     is_all: bool
 
     @property
@@ -259,9 +258,6 @@ def compile_conditional_template_list(
 
 
 def compile_conditional_template(value: ConditionalType):
-    negative_literals: List[Tuple[int, str]] = []
-    negative_literals_set: Set[str] = set()
-    negative_templates: List[Tuple[int, AnyStringTemplate]] = []
     arg_indices: Set[int] = set()
 
     positive_literals, positive_literals_set, positive_templates = (
@@ -337,8 +333,6 @@ def compile_rule_template(rule: Rule):
     literals: List[Tuple[int, rule_part]] = []
     templates: List[Tuple[int, PartTemplate]] = []
 
-    arg_indices: Set[int] = set()
-
     for i, part in enumerate(rule.parts):
         if isinstance(part, str):
             compiled_part = compile_single_value_template(part)
@@ -354,7 +348,6 @@ def compile_rule_template(rule: Rule):
             continue
 
         templates.append((i, compiled_part))
-        arg_indices.update(compiled_part.arg_indices)
 
     return RuleTemplate(
         rule=rule,
