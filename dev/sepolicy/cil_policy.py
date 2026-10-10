@@ -462,11 +462,6 @@ def parse_dump_policy_rules(
     origin = policy_type.origin
     assert isinstance(origin, PolicyDumpCilOrigin)
 
-    version = get_dump_policy_version(
-        dump_root,
-        origin.version_source,
-    )
-
     genfs_rules = RuleContainer()
     rules = RuleContainer()
     conditional_types_map: Dict[str, ConditionalType] = {}
@@ -515,7 +510,7 @@ def parse_dump_policy_rules(
         conditional_types_map,
         reference_conditional_types_maps,
         classmap=classmap,
-        version=version,
+        version=metadata.version,
         name=policy_type.pretty_name,
         verbose=verbose,
     )
