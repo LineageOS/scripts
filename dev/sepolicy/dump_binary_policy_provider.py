@@ -8,8 +8,7 @@ from typing import Optional
 
 from sepolicy.cil_policy import (
     decompile_binary_to_policy,
-    get_dump_policy_version,
-    parse_dump_policy_variables,
+    get_dump_policy_metadata,
 )
 from sepolicy.policy import (
     PolicyDumpBinaryOrigin,
@@ -39,18 +38,11 @@ class DumpBinaryPolicyProvider(PolicyProvider):
     ):
         assert isinstance(policy_type.origin, PolicyDumpBinaryOrigin)
 
-        version = get_dump_policy_version(
+        return get_dump_policy_metadata(
             self.__dump_root,
             policy_type.origin.version_source,
-        )
-
-        variables = parse_dump_policy_variables(
-            self.__dump_root,
-            version=version,
             recovery=policy_type.origin.recovery,
         )
-
-        return PolicyMetadata(version, variables)
 
     def get_policy(
         self,

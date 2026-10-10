@@ -279,6 +279,20 @@ def parse_dump_policy_variables(
     return FrozenDict(variables)
 
 
+def get_dump_policy_metadata(
+    dump_root: Path,
+    version_source: PolicyVersionSource,
+    recovery: bool = False,
+):
+    version = get_dump_policy_version(dump_root, version_source)
+    variables = parse_dump_policy_variables(
+        dump_root,
+        version=version,
+        recovery=recovery,
+    )
+    return PolicyMetadata(version, variables)
+
+
 def _parse_cil_lines(
     line_parts_list: List[cil_line_type],
     rules: RuleContainer,
