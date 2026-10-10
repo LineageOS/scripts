@@ -21,14 +21,11 @@ from sepolicy.source_text import PolicyFileType, SourceText
 def _merge_sources(
     policy_index: PolicyIndex,
     source_text: SourceText,
-    sources: Optional[Tuple[PolicyType, ...]],
+    sources: Tuple[PolicyType, ...],
     metadata: PolicyMetadata,
     allowed_types: Optional[Set[PolicyFileType]] = None,
     disallowed_types: Optional[Set[PolicyFileType]] = None,
 ):
-    if sources is None:
-        return
-
     for policy_type in sources:
         policy = policy_index.get(policy_type, metadata)
         assert policy.source_text is not None
@@ -42,11 +39,11 @@ def _merge_sources(
 
 def combine_and_expand_sources(
     policy_index: PolicyIndex,
-    macro_sources: Optional[Tuple[PolicyType, ...]],
-    rule_sources: Optional[Tuple[PolicyType, ...]],
+    macro_sources: Tuple[PolicyType, ...],
+    rule_sources: Tuple[PolicyType, ...],
     metadata: PolicyMetadata,
     verbose: bool,
-    attribute_sources: Optional[Tuple[PolicyType, ...]] = None,
+    attribute_sources: Tuple[PolicyType, ...] = (),
 ) -> str:
     source_text = SourceText()
 

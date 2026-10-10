@@ -90,9 +90,9 @@ class SourceTePolicyProvider(PolicyProvider):
 
                 dir_paths.append(dir_path)
 
-        if macros and policy_type.origin.macros_subdirs is not None:
+        if macros:
             add_subdirs(policy_type.origin.macros_subdirs)
-        elif not macros and policy_type.origin.rules_subdirs is not None:
+        else:
             add_subdirs(policy_type.origin.rules_subdirs)
 
         return dir_paths
@@ -119,12 +119,8 @@ class SourceTePolicyProvider(PolicyProvider):
 
         extras = self.__extras(macros)
 
-        sources = None
-        if macros and policy_type.origin.macro_sources:
-            sources = policy_type.origin.macro_sources
-
-        if sources is not None:
-            for source_policy_type in sources:
+        if macros:
+            for source_policy_type in policy_type.origin.macro_sources:
                 source_macro_paths = self.__get_policy_dir_paths(
                     source_policy_type,
                     version,
