@@ -12,6 +12,7 @@ from typing import (
     Set,
     Tuple,
     Union,
+    cast,
 )
 
 from sepolicy.conditional_type import ConditionalType
@@ -186,52 +187,17 @@ def compile_string_template(value: str):
     if literal_start < value_len:
         segments.append(value[literal_start:])
 
-    if len(segments) == 1:
-        # $1
-        arg_index = segments[0]
+    arg_positions = [i for i, s in enumerate(segments) if isinstance(s, int)]
+    if len(arg_positions) == 1:
+        position = arg_positions[0]
+        arg_index = segments[position]
         assert isinstance(arg_index, int)
         return AffixTemplate(
-            prefix='',
+            prefix=''.join(cast(List[str], segments[:position])),
             arg_index=arg_index,
-            suffix='',
+            suffix=''.join(cast(List[str], segments[position + 1 :])),
             arg_indices=frozenset((arg_index,)),
         )
-
-    if len(segments) == 2:
-        # $1_a
-        if isinstance(segments[0], int) and isinstance(segments[1], str):
-            arg_index = segments[0]
-            return AffixTemplate(
-                prefix='',
-                arg_index=arg_index,
-                suffix=segments[1],
-                arg_indices=frozenset((arg_index,)),
-            )
-
-        # a_$1
-        if isinstance(segments[0], str) and isinstance(segments[1], int):
-            arg_index = segments[1]
-            return AffixTemplate(
-                prefix=segments[0],
-                arg_index=arg_index,
-                suffix='',
-                arg_indices=frozenset((arg_index,)),
-            )
-
-    if len(segments) == 3:
-        # a_$1_b
-        if (
-            isinstance(segments[0], str)
-            and isinstance(segments[1], int)
-            and isinstance(segments[2], str)
-        ):
-            arg_index = segments[1]
-            return AffixTemplate(
-                prefix=segments[0],
-                arg_index=arg_index,
-                suffix=segments[2],
-                arg_indices=frozenset((arg_index,)),
-            )
 
     return StringTemplate(
         segments=tuple(segments),
