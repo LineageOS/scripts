@@ -136,8 +136,8 @@ class PolicyDumpCilOrigin(PolicyDumpOrigin):
 
 @dataclass(frozen=True)
 class PolicyDumpBinaryOrigin(PolicyDumpOrigin):
-    file_name: Optional[str] = None
-    recovery: Optional[bool] = False
+    file_name: str
+    recovery: bool = False
 
 
 @dataclass(frozen=True)
@@ -422,7 +422,7 @@ def dump_binary(
     *,
     name: str,
     version_source: PolicyVersionSource,
-    file_name: Optional[str] = None,
+    file_name: str,
     optional: bool = False,
     recovery: bool = False,
 ):
