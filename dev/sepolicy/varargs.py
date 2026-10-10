@@ -208,8 +208,7 @@ class ArgVarargs:
 class Ioctls:
     def __init__(self, ranges: Iterable[Tuple[int, int]]):
         self.__ranges = self._normalize_ranges(ranges)
-        self.__ranges_set = frozenset(self.__ranges)
-        self.__hash = hash(self.__ranges_set)
+        self.__hash = hash(self.__ranges)
 
     @staticmethod
     def _normalize_ranges(
@@ -271,7 +270,7 @@ class Ioctls:
         if self.__hash != other.__hash:
             return False
 
-        return self.__ranges_set == other.__ranges_set
+        return self.__ranges == other.__ranges
 
     def __le__(self, other: Ioctls) -> bool:
         i = j = 0
