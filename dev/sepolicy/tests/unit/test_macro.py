@@ -8,9 +8,11 @@ import unittest
 from contextlib import redirect_stdout
 
 from sepolicy.macro import (
+    ArgCondition,
     MacroVariant,
     categorize_macros,
     macro_arity,
+    macro_body_variants,
     macro_name_body,
     parse_ioctl_defines,
     parse_ioctls,
@@ -180,6 +182,100 @@ class ParseMacrosTest(unittest.TestCase):
         )
 
         self.assertEqual([m.name for m in macros], ['first'])
+
+    def test_arg_ifelse_variants(self):
+        macros = parse_macros_bodies(
+            (
+                'domain_trans',
+                """
+allow $1 $3:process transition;
+ARG_IFELSE $1 init
+
+ARG_ELSE
+allow $3 $1:process sigchld;
+ARG_END
+""",
+            ),
+        )
+
+        self.assertEqual(
+            macros,
+            [
+                MacroVariant(
+                    'domain_trans',
+                    [allow('$1', '$3', 'process', ['transition'])],
+                    (ArgCondition(1, 'init', True),),
+                ),
+                MacroVariant(
+                    'domain_trans',
+                    [
+                        allow('$1', '$3', 'process', ['transition']),
+                        allow('$3', '$1', 'process', ['sigchld']),
+                    ],
+                    (ArgCondition(1, 'init', False),),
+                ),
+            ],
+        )
+
+
+class MacroBodyVariantsTest(unittest.TestCase):
+    def test_without_conditions(self):
+        self.assertEqual(
+            macro_body_variants('allow $1 $2:file read;'),
+            [('allow $1 $2:file read;', ())],
+        )
+
+    def test_branches(self):
+        self.assertEqual(
+            macro_body_variants(
+                'a;\nARG_IFELSE $2 init\nb;\nARG_ELSE\nc;\nARG_END\nd;'
+            ),
+            [
+                ('a;\nb;\nd;', (ArgCondition(2, 'init', True),)),
+                ('a;\nc;\nd;', (ArgCondition(2, 'init', False),)),
+            ],
+        )
+
+    def test_derived_argument_takes_else_branch(self):
+        self.assertEqual(
+            macro_body_variants(
+                'ARG_IFELSE $1_exec init\nb;\nARG_ELSE\nc;\nARG_END'
+            ),
+            [('c;', ())],
+        )
+
+    def test_drops_contradictory_variants(self):
+        body = (
+            'ARG_IFELSE $1 init\na;\nARG_ELSE\nb;\nARG_END\n'
+            'ARG_IFELSE $1 vendor_init\nc;\nARG_ELSE\nd;\nARG_END'
+        )
+
+        self.assertEqual(
+            macro_body_variants(body),
+            [
+                (
+                    'a;\nd;',
+                    (
+                        ArgCondition(1, 'init', True),
+                        ArgCondition(1, 'vendor_init', False),
+                    ),
+                ),
+                (
+                    'b;\nc;',
+                    (
+                        ArgCondition(1, 'init', False),
+                        ArgCondition(1, 'vendor_init', True),
+                    ),
+                ),
+                (
+                    'b;\nd;',
+                    (
+                        ArgCondition(1, 'init', False),
+                        ArgCondition(1, 'vendor_init', False),
+                    ),
+                ),
+            ],
+        )
 
 
 if __name__ == '__main__':
