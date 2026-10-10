@@ -230,6 +230,27 @@ allowxperm mali_target_sdk gpu_device:chr_file ioctl 0xa;
         self.assertEqual(match(rules, SET_XPERM_FILTER), [])
 
 
+DEFINE_PROP = (
+    'define_prop',
+    'type $1, property_type, $2_property_type, $2_$3_property_type;',
+)
+
+
+class StringTemplateArgumentTest(unittest.TestCase):
+    def test_literal_after_arguments(self):
+        rules = parse_te(
+            'type vendor_foo_prop, property_type, vendor_property_type, '
+            'vendor_public_property_type;'
+        )
+
+        matches = match(rules, DEFINE_PROP)
+
+        self.assertEqual(
+            [str(m) for m in matches],
+            ['define_prop(vendor_foo_prop, vendor, public)'],
+        )
+
+
 class DiscardRuleMatchesTest(unittest.TestCase):
     def test_discards_subset(self):
         rules = parse_te(APP_TE)
