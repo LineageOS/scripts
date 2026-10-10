@@ -75,7 +75,7 @@ class SourceTePolicyProvider(PolicyProvider):
         macros: bool,
     ):
         assert isinstance(policy_type.origin, PolicySourceOrigin)
-        dir_paths: List[Tuple[Path, str]] = []
+        dir_paths: List[Path] = []
 
         def add_subdirs(subdirs: Tuple[Tuple[str, bool], ...]):
             for subdir, versioned in subdirs:
@@ -88,7 +88,7 @@ class SourceTePolicyProvider(PolicyProvider):
                 if not dir_path.exists():
                     continue
 
-                dir_paths.append((dir_path, policy_type.name))
+                dir_paths.append(dir_path)
 
         if macros and policy_type.origin.macros_subdirs is not None:
             add_subdirs(policy_type.origin.macros_subdirs)
@@ -111,18 +111,13 @@ class SourceTePolicyProvider(PolicyProvider):
     ):
         assert isinstance(policy_type.origin, PolicySourceOrigin)
 
-        dir_paths: List[Tuple[Path, str]] = []
+        dir_paths: List[Path] = []
 
         if macros:
             # flagging_macros are not versioned and must always be loaded
-            dir_path = Path(system_sepolicy_path, 'flagging')
-            dir_paths.append((dir_path, policy_type.name))
+            dir_paths.append(Path(system_sepolicy_path, 'flagging'))
 
         extras = self.__extras(macros)
-
-        def add_extras(policy_name: Optional[str]):
-            extra_paths = extras.get(policy_name, ())
-            dir_paths.extend((e, policy_type.name) for e in extra_paths)
 
         sources = None
         if macros and policy_type.origin.macro_sources:
@@ -136,7 +131,7 @@ class SourceTePolicyProvider(PolicyProvider):
                     macros,
                 )
                 dir_paths.extend(source_macro_paths)
-                add_extras(source_policy_type.name)
+                dir_paths.extend(extras.get(source_policy_type.name, ()))
 
         own_dir_paths = self.__get_policy_dir_paths(
             policy_type,
@@ -144,19 +139,10 @@ class SourceTePolicyProvider(PolicyProvider):
             macros,
         )
         dir_paths.extend(own_dir_paths)
-        add_extras(None)
-        add_extras(policy_type.name)
+        dir_paths.extend(extras.get(None, ()))
+        dir_paths.extend(extras.get(policy_type.name, ()))
 
         return dir_paths
-
-    def __get_policy_key_paths(
-        self,
-        policy_type: PolicyType,
-        version: str,
-        macros: bool,
-    ):
-        dir_paths = self.__get_policy_all_paths(policy_type, version, macros)
-        return tuple(v[0] for v in dir_paths)
 
     def __get_macro_dir_paths(
         self,
@@ -170,10 +156,12 @@ class SourceTePolicyProvider(PolicyProvider):
             return macro_dir_paths
 
         policy_type = get_policy_type_by_name(policy_name)
-        macro_dir_paths = self.__get_policy_key_paths(
-            policy_type,
-            version=metadata.version,
-            macros=True,
+        macro_dir_paths = tuple(
+            self.__get_policy_all_paths(
+                policy_type,
+                version=metadata.version,
+                macros=True,
+            )
         )
 
         self.__macro_dir_paths_index[key] = macro_dir_paths
