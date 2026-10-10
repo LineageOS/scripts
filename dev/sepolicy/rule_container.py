@@ -51,8 +51,6 @@ class RuleContainer:
     ):
         self.__all_data: Dict[Rule, None] = {}
         self.__marks: DefaultDict[Rule, Set[LineMark]] = defaultdict(set)
-        self.__by_file: DefaultDict[str, Set[Rule]] = defaultdict(set)
-        self.__by_file_line: DefaultDict[LineMark, Set[Rule]] = defaultdict(set)
         self.__index: Optional[MatchIndex] = None
 
         if iterable is not None:
@@ -84,14 +82,7 @@ class RuleContainer:
 
     def add(self, value: Rule, marks: Optional[Iterable[LineMark]] = None):
         if marks:
-            rule_marks = self.__marks[value]
-            for mark in marks:
-                if mark in rule_marks:
-                    continue
-
-                rule_marks.add(mark)
-                self.__by_file[mark.path].add(value)
-                self.__by_file_line[mark].add(value)
+            self.__marks[value].update(marks)
 
         if value in self.__all_data:
             return
@@ -114,17 +105,7 @@ class RuleContainer:
         assert value in self.__all_data, value
 
         del self.__all_data[value]
-
-        for mark in self.__marks.pop(value, ()):
-            file_rules = self.__by_file[mark.path]
-            file_rules.discard(value)
-            if not file_rules:
-                del self.__by_file[mark.path]
-
-            line_rules = self.__by_file_line[mark]
-            line_rules.discard(value)
-            if not line_rules:
-                del self.__by_file_line[mark]
+        self.__marks.pop(value, None)
 
         self.__index = None
 
