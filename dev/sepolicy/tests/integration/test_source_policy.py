@@ -130,6 +130,14 @@ class SourcePolicyTest(unittest.TestCase):
             ('userfaultfd_use', {'$1': 'foo_app'}),
             ('binder_call', {'$1': 'foo_app', '$2': 'foo_service'}),
             ('init_daemon_domain', {'$1': 'foo_daemon'}),
+            (
+                'domain_auto_trans',
+                {'$1': 'shell', '$2': 'foo_exec', '$3': 'foo'},
+            ),
+            (
+                'domain_auto_trans',
+                {'$1': 'init', '$2': 'foo_exec', '$3': 'foo'},
+            ),
         ):
             with self.subTest(macro=name, args=args):
                 rules = RuleContainer(
@@ -146,6 +154,17 @@ class SourcePolicyTest(unittest.TestCase):
                     [m.macro.parts for m in matches],
                     [tuple(args.values())],
                 )
+
+    def test_domain_trans_sigchld_depends_on_caller(self):
+        sigchld = Rule('allow', ('$3', '$1', 'process'), None)
+        shell_rules = self.variant_rules('domain_trans', {'$1': 'shell'})
+        init_rules = self.variant_rules('domain_trans', {'$1': 'init'})
+
+        def has_sigchld(rules: List[Rule]):
+            return any(r.parts == sigchld.parts for r in rules)
+
+        self.assertTrue(has_sigchld(shell_rules))
+        self.assertFalse(has_sigchld(init_rules))
 
     def test_policy_rules(self):
         self.assertIn(Rule('attribute', ('domain',)), self.policy.rules)

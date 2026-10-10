@@ -110,6 +110,80 @@ class MatchMacrosRulesTest(unittest.TestCase):
         self.assertEqual(match(rules, USERFAULTFD_USE), [])
 
 
+DOMAIN_TRANS = (
+    'domain_trans',
+    """
+allow $1 $2:file execute;
+allow $1 $3:process transition;
+ARG_IFELSE $1 init
+
+ARG_ELSE
+allow $3 $1:process sigchld;
+ARG_END
+""",
+)
+
+
+class ArgConditionTest(unittest.TestCase):
+    def test_not_equal_variant(self):
+        rules = parse_te(
+            """
+allow shell foo_exec:file execute;
+allow shell foo:process transition;
+allow foo shell:process sigchld;
+"""
+        )
+
+        matches = match(rules, DOMAIN_TRANS)
+
+        self.assertEqual(
+            [str(m) for m in matches],
+            ['domain_trans(shell, foo_exec, foo)'],
+        )
+        self.assertEqual(len(matches[0].rules), 3)
+
+    def test_equal_variant(self):
+        rules = parse_te(
+            """
+allow init foo_exec:file execute;
+allow init foo:process transition;
+"""
+        )
+
+        matches = match(rules, DOMAIN_TRANS)
+
+        self.assertEqual(
+            [str(m) for m in matches],
+            ['domain_trans(init, foo_exec, foo)'],
+        )
+
+    def test_equal_variant_leaves_extra_rule(self):
+        rules = parse_te(
+            """
+allow init foo_exec:file execute;
+allow init foo:process transition;
+allow foo init:process sigchld;
+"""
+        )
+
+        matches = match(rules, DOMAIN_TRANS)
+
+        self.assertEqual(
+            [(str(m), len(m.rules)) for m in matches],
+            [('domain_trans(init, foo_exec, foo)', 2)],
+        )
+
+    def test_not_equal_variant_requires_conditional_rule(self):
+        rules = parse_te(
+            """
+allow shell foo_exec:file execute;
+allow shell foo:process transition;
+"""
+        )
+
+        self.assertEqual(match(rules, DOMAIN_TRANS), [])
+
+
 class DiscardRuleMatchesTest(unittest.TestCase):
     def test_discards_subset(self):
         rules = parse_te(APP_TE)
