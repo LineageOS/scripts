@@ -46,9 +46,6 @@ def unpack_negative_ioctls(ioctls: List[str]):
 
     prev = -1
     for m in missing:
-        if m < prev:
-            raise ValueError('missing ioctls must be sorted and unique')
-
         if prev + 1 <= m - 1:
             ranges.append((prev + 1, m - 1))
 
@@ -65,15 +62,12 @@ def unpack_ioctls(ioctls: List[str]):
 
     for part in ioctls:
         if '-' not in part:
-            value = trim_ioctl(int(part, base=0))
+            value = trim_ioctl_str(part)
             ranges.append((value, value))
             continue
 
         start_s, end_s = part.split('-', 1)
-        start = trim_ioctl(int(start_s, base=0))
-        end = trim_ioctl(int(end_s, base=0))
-
-        ranges.append((start, end))
+        ranges.append((trim_ioctl_str(start_s), trim_ioctl_str(end_s)))
 
     return Ioctls(ranges)
 
