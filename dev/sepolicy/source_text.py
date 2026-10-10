@@ -65,6 +65,13 @@ POLICY_ORDER_MAP = {
 }
 
 
+def policy_file_type(policy_path: Path):
+    if policy_path.name.endswith('.te'):
+        return PolicyFileType.TE
+
+    return POLICY_ORDER_MAP.get(policy_path.stem)
+
+
 def is_type_selected(
     order: int,
     allowed_types: Optional[Set[PolicyFileType]],
@@ -115,19 +122,13 @@ class SourceText:
                 self.paths[order].append(path)
                 self.texts[path] = other.texts[path]
 
-    def __policy_type(self, policy_path: Path):
-        if policy_path.name.endswith('.te'):
-            return PolicyFileType.TE
-
-        return POLICY_ORDER_MAP.get(policy_path.stem)
-
     def __add_path(
         self,
         policy_path: Path,
         allowed_types: Optional[Set[PolicyFileType]] = None,
         disallowed_types: Optional[Set[PolicyFileType]] = None,
     ):
-        order = self.__policy_type(policy_path)
+        order = policy_file_type(policy_path)
         if order is None:
             return
 
