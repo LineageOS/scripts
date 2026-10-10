@@ -723,19 +723,9 @@ def iter_rule_fill_arg_values(
     arg_values: ArgValues,
     matched_rule: Rule,
 ) -> Iterator[ArgValues]:
-    if matched_rule.rule_type != rule_template.rule.rule_type:
-        return
-
     varargs = rule_template.varargs
     if not isinstance(varargs, ArgVarargs) and matched_rule.varargs != varargs:
         return
-
-    if len(matched_rule.parts) != rule_template.num_parts:
-        return
-
-    for i, part in rule_template.literals:
-        if matched_rule.parts[i] != part:
-            return
 
     pop = None
     if isinstance(varargs, ArgVarargs):
