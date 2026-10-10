@@ -142,13 +142,13 @@ class PipelineTest(unittest.TestCase):
         self.index = PolicyIndex()
         self.index.register(HardcodedPolicyProvider())
         self.index.register(CleanupPolicyProvider())
-        self.index.register(ExpandedGuardPolicyProvider(verbose=False))
+        self.index.register(ExpandedGuardPolicyProvider())
         self.index.register(RestoreOptimizedPolicyProvider())
         self.index.register(MacroMatchPolicyProvider(verbose=False))
         self.index.register(MacroReplacePolicyProvider(verbose=False))
         self.index.register(AddPolicyProvider())
         self.index.register(ReferencedPolicyProvider())
-        self.index.register(GatherSourceTextPolicyProvider(verbose=False))
+        self.index.register(GatherSourceTextPolicyProvider())
         self.index.register(
             MacrosPolicyProvider(
                 {'dir': [('r_dir_perms', R_DIR_PERMS)]},
