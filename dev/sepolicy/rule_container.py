@@ -184,18 +184,12 @@ class RuleContainer:
             return []
 
         buckets: List[Dict[Rule, None]] = []
-        saw_not_none = False
 
         for i, key in enumerate(keys):
             if key is None:
                 continue
 
-            saw_not_none = True
-
-            position_data = levels_data.get(i)
-            if position_data is None:
-                return []
-
+            position_data = levels_data[i]
             if isinstance(key, AbstractSet):
                 merged: Dict[Rule, None] = {}
                 for value in key:
@@ -212,7 +206,7 @@ class RuleContainer:
                 buckets.append(bucket)
 
         # Querries that are only None are not allowed
-        assert saw_not_none
+        assert buckets
 
         buckets.sort(key=len)
         smallest_bucket = buckets[0]
