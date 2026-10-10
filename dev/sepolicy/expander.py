@@ -168,3 +168,108 @@ class Resolver:
         rest = rule.parts[2:]
         for s, t in self.expanded_pairs(rule):
             yield Rule(rule.rule_type, (s, t, *rest), rule.varargs)
+
+
+def varargs_union(
+    a: Union[Perms, Ioctls],
+    b: Union[Perms, Ioctls],
+) -> Union[Perms, Ioctls]:
+    if isinstance(a, Perms) and isinstance(b, Perms):
+        return a | b
+    elif isinstance(a, Ioctls) and isinstance(b, Ioctls):
+        return a.merge(b)
+
+    assert False
+
+
+def varargs_difference(
+    a: Union[Perms, Ioctls],
+    b: Union[Perms, Ioctls],
+) -> Union[Perms, Ioctls]:
+    if isinstance(a, Perms) and isinstance(b, Perms):
+        return a - b
+    elif isinstance(a, Ioctls) and isinstance(b, Ioctls):
+        return a - b
+
+    assert False
+
+
+class Coverage:
+    def __init__(self, rules: RuleContainer):
+        self.__attributes: Dict[str, Set[str]] = defaultdict(set)
+        self.__members: Dict[str, Set[str]] = defaultdict(set)
+        self.__supersets: Dict[str, Set[str]] = {}
+        self.__varargs: Dict[Tuple[rule_part, ...], Union[Perms, Ioctls]] = {}
+
+        for rule in rules:
+            if rule.rule_type == RuleType.TYPEATTRIBUTE:
+                member = str_part(rule, 0)
+                attribute = str_part(rule, 1)
+                self.__attributes[member].add(attribute)
+                self.__members[attribute].add(member)
+                continue
+
+            if rule.rule_type not in EXPAND_TYPES:
+                continue
+
+            assert isinstance(rule.varargs, (Perms, Ioctls))
+            key = (rule.rule_type, *rule.parts)
+            existing = self.__varargs.get(key)
+            if existing is not None:
+                self.__varargs[key] = varargs_union(existing, rule.varargs)
+            else:
+                self.__varargs[key] = rule.varargs
+
+    def __attribute_supersets(self, attribute: str) -> Set[str]:
+        supersets = self.__supersets.get(attribute)
+        if supersets is not None:
+            return supersets
+
+        members = self.__members[attribute]
+        supersets = {
+            other
+            for other, other_members in self.__members.items()
+            if other != attribute and members <= other_members
+        }
+        self.__supersets[attribute] = supersets
+        return supersets
+
+    def __names(self, part: rule_part) -> Set[rule_part]:
+        if not isinstance(part, str):
+            return {part}
+
+        if self.__members.get(part):
+            return {part} | self.__attribute_supersets(part)
+
+        return {part} | self.__attributes.get(part, set())
+
+    def uncovered(self, rule: Rule) -> Union[Perms, Ioctls]:
+        assert isinstance(rule.varargs, (Perms, Ioctls))
+
+        src, dst = rule.parts[0], rule.parts[1]
+        rest = rule.parts[2:]
+        remaining = rule.varargs
+
+        direct = self.__varargs.get((rule.rule_type, *rule.parts))
+        if direct is not None:
+            remaining = varargs_difference(remaining, direct)
+            if remaining.is_empty():
+                return remaining
+
+        srcs = self.__names(src)
+        if dst == 'self':
+            dsts = self.__names(src) | {'self'}
+        else:
+            dsts = self.__names(dst)
+
+        for s in srcs:
+            for t in dsts:
+                covering = self.__varargs.get((rule.rule_type, s, t, *rest))
+                if covering is None:
+                    continue
+
+                remaining = varargs_difference(remaining, covering)
+                if remaining.is_empty():
+                    return remaining
+
+        return remaining
