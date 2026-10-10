@@ -17,9 +17,9 @@ from sepolicy.policy import (
 )
 from sepolicy.rule_container import RuleContainer
 from sepolicy.source_text import (
-    POLICY_ORDER_MAP,
     PolicyFileType,
     SourceText,
+    policy_file_type,
 )
 
 
@@ -56,13 +56,9 @@ class GatherSourceTextPolicyProvider(PolicyProvider):
         name_prefix = Path(policy_type.name)
         for name, text in rendered.items():
             path = name_prefix / name
-            if name.endswith('.te'):
+            file_type = policy_file_type(path)
+            if file_type is None:
                 file_type = PolicyFileType.TE
-            else:
-                file_type = POLICY_ORDER_MAP.get(
-                    Path(name).stem,
-                    PolicyFileType.TE,
-                )
             source_text.texts[path] = text
             source_text.paths[file_type].append(path)
 
