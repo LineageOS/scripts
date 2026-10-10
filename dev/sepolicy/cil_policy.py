@@ -292,34 +292,29 @@ def _parse_cil_lines(
 ):
     mergeable_rules: List[Rule] = []
     mergeable_marks: Set[LineMark] = set()
-    current_mark: List[Optional[LineMark]] = [None]
+    current_mark: Optional[LineMark] = None
 
     def add_rule(rule: Rule):
         add_mergeable_rule(
             rule,
-            current_mark[0],
+            current_mark,
             mergeable_rules,
             mergeable_marks,
             rules,
         )
 
-    def add_genfs_rule(rule: Rule):
-        genfs_rules.add(rule)
-
     parser = CilRuleParser(
         conditional_types_map=conditional_types_map,
         reference_conditional_types_maps=reference_conditional_types_maps,
         add_rule=add_rule,
-        add_genfs_rule=add_genfs_rule,
+        add_genfs_rule=genfs_rules.add,
         version=version,
         allowed_types=allowed_types,
         disallowed_types=disallowed_types,
         classmap=classmap,
     )
 
-    for line in line_parts_list:
-        text, parts, mark = line
-        current_mark[0] = mark
+    for text, parts, current_mark in line_parts_list:
         parser.parse_line(text, parts)
 
     merge_current_rules(mergeable_rules, mergeable_marks, rules)
