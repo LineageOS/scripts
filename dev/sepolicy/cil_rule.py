@@ -54,7 +54,6 @@ def create_conditional_type(version_suffix: str, parts: raw_parts_list):
         and isinstance(parts[2], list)
         and parts[2][0] == 'not'
     ):
-        assert isinstance(parts[2], list), parts
         parts.append(parts[2][1])
         parts[2] = parts[2][0]
 
@@ -77,23 +76,18 @@ def create_conditional_type(version_suffix: str, parts: raw_parts_list):
         assert group[0] in ['and', 'not'], parts
         assert isinstance(group[1], list), parts
 
-        # Type narrowing
-        new_group: List[str] = []
-        for t in group[1]:
-            if isinstance(t, str):
-                new_group.append(t)
-                continue
-
+        new_types = [
+            t.removesuffix(version_suffix)
+            for t in group[1]
+            if isinstance(t, str)
+        ]
+        if len(new_types) != len(group[1]):
             color_print('Ignored conditional type: ', parts, color=Color.YELLOW)
             return None
 
-        new_types = map(
-            lambda t: t.removesuffix(version_suffix),
-            new_group,
-        )
         if group[0] == 'and':
             positive.extend(new_types)
-        elif group[0] == 'not':
+        else:
             negative.extend(new_types)
 
     return ConditionalType(positive, negative, False)
