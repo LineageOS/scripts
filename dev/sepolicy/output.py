@@ -206,14 +206,11 @@ def group_rules(
     return regrouped_rules
 
 
-def rule_macro_sort_key(rule_formatted: Tuple[Rule, str]):
-    rule, formatted = rule_formatted
-
+def rule_order(rule: Rule):
     if not rule.is_macro:
-        return (rule_type_order(rule), formatted)
+        return rule_type_order(rule)
 
-    orders = [rule_type_order(r) for r in atomic_rules(rule)]
-    return (min([0, *orders]), formatted)
+    return min([0, *(rule_type_order(r) for r in atomic_rules(rule))])
 
 
 def enforce_type_decl_order(rules_formatted: List[Tuple[Rule, str]]):
@@ -302,7 +299,7 @@ def render_grouped_rules(
         sorted_rules = sorted(
             rules_formatted,
             key=lambda rf, fg=file_guard: (
-                rule_macro_sort_key(rf)[0],
+                rule_order(rf[0]),
                 fg.get(rf[0]) or '',
                 rf[1],
             ),
