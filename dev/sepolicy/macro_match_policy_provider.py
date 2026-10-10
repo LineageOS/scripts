@@ -22,19 +22,6 @@ class MacroMatchPolicyProvider(PolicyProvider):
 
         self.__verbose = verbose
 
-    def resolve_metadata(
-        self,
-        policy_index: PolicyIndex,
-        policy_type: PolicyType,
-        requested: Optional[PolicyMetadata],
-    ):
-        assert isinstance(policy_type.origin, PolicyMacroMatchOrigin)
-
-        return policy_index.resolve_metadata(
-            policy_type.origin.source,
-            requested,
-        )
-
     def get_policy(
         self,
         policy_index: PolicyIndex,

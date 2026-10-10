@@ -141,15 +141,18 @@ class PolicyDumpBinaryOrigin(PolicyDumpOrigin):
 
 
 @dataclass(frozen=True)
-class PolicyCleanupOrigin(PolicyOrigin):
+class PolicySourceMetadataOrigin(PolicyOrigin):
     source: PolicyType
+
+
+@dataclass(frozen=True)
+class PolicyCleanupOrigin(PolicySourceMetadataOrigin):
     removed: Tuple[PolicyType, ...]
     covered: Tuple[PolicyType, ...] = ()
 
 
 @dataclass(frozen=True)
-class PolicyRestoreOptimizedOrigin(PolicyOrigin):
-    source: PolicyType
+class PolicyRestoreOptimizedOrigin(PolicySourceMetadataOrigin):
     macros: PolicyType
     reference: PolicyType
 
@@ -160,40 +163,36 @@ class PolicyHardcodedOrigin(PolicyOrigin):
 
 
 @dataclass(frozen=True)
-class PolicyReferencedOrigin(PolicyOrigin):
-    source: PolicyType
+class PolicyReferencedOrigin(PolicySourceMetadataOrigin):
     reference: PolicyType
     in_or_out: bool
 
 
 @dataclass(frozen=True)
-class PolicyMacroMatchOrigin(PolicyOrigin):
-    source: PolicyType
+class PolicyMacroMatchOrigin(PolicySourceMetadataOrigin):
     macros: PolicyType
     references: Tuple[PolicyType, ...] = ()
 
 
 @dataclass(frozen=True)
-class PolicyMacroReplaceOrigin(PolicyOrigin):
-    source: PolicyType
+class PolicyMacroReplaceOrigin(PolicySourceMetadataOrigin):
+    pass
 
 
 @dataclass(frozen=True)
-class PolicyGatherSourceTextOrigin(PolicyOrigin):
-    source: PolicyType
+class PolicyGatherSourceTextOrigin(PolicySourceMetadataOrigin):
+    pass
 
 
 @dataclass(frozen=True)
-class PolicyExpandedGuardOrigin(PolicyOrigin):
-    source: PolicyType
+class PolicyExpandedGuardOrigin(PolicySourceMetadataOrigin):
     expander_source: PolicyType
     reference: PolicyType
     guard: str
 
 
 @dataclass(frozen=True)
-class PolicyAddOrigin(PolicyOrigin):
-    source: PolicyType
+class PolicyAddOrigin(PolicySourceMetadataOrigin):
     added: PolicyType
     guard: str
 
@@ -934,6 +933,10 @@ class PolicyProvider(ABC):
         policy_type: PolicyType,
         requested: Optional[PolicyMetadata],
     ) -> Optional[PolicyMetadata]:
+        origin = policy_type.origin
+        if isinstance(origin, PolicySourceMetadataOrigin):
+            return policy_index.resolve_metadata(origin.source, requested)
+
         return requested
 
     @abstractmethod
