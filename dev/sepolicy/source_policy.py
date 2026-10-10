@@ -5,7 +5,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 from pathlib import Path
-from typing import DefaultDict, Dict, List, Set, Tuple
+from typing import DefaultDict, Dict, List, Optional, Set, Tuple
 
 from sepolicy.classmap import Classmap
 from sepolicy.contexts import parse_contexts_texts, parse_genfs_contexts
@@ -25,7 +25,6 @@ from sepolicy.policy import (
     PolicyMetadata,
     PolicySourceOrigin,
     PolicyType,
-    get_policy_type_by_name,
 )
 from sepolicy.rule_container import RuleContainer
 from sepolicy.rules import split_normalize_rules_text
@@ -45,15 +44,14 @@ def get_source_policy_path(version: str, current: bool):
     return Path(system_sepolicy_path, f'prebuilts/api/{version}')
 
 
-def read_source_contexts_text(rules_paths: List[Tuple[Path, str]]):
+def read_source_contexts_text(
+    rules_paths: List[Path],
+    contexts_name_map: Optional[FrozenDict[ContextsType, str]],
+):
     contexts_paths: DefaultDict[ContextsType, List[Path]] = defaultdict(list)
 
-    for file_path, policy_name in rules_paths:
-        policy_type = get_policy_type_by_name(policy_name)
-        assert isinstance(policy_type.origin, PolicySourceOrigin)
-
-        contexts_name_map = policy_type.origin.contexts_name_map
-        if contexts_name_map is not None:
+    if contexts_name_map is not None:
+        for file_path in rules_paths:
             for context_type, context_name in contexts_name_map.items():
                 context_path = Path(file_path, context_name)
                 if not context_path.is_file():
@@ -343,7 +341,7 @@ def parse_source_classmap(
 
 
 def parse_metadata_source_policies(
-    rules_dir_paths: List[Tuple[Path, str]],
+    rules_dir_paths: List[Path],
     policy_type: PolicyType,
     metadata: PolicyMetadata,
     source_text: SourceText,
@@ -353,12 +351,15 @@ def parse_metadata_source_policies(
     assert isinstance(policy_type.origin, PolicySourceOrigin)
 
     source_text.load_texts(
-        tuple(v[0] for v in rules_dir_paths),
+        tuple(rules_dir_paths),
         # Only load rules
         allowed_types={PolicyFileType.TE},
     )
 
-    contexts_text = read_source_contexts_text(rules_dir_paths)
+    contexts_text = read_source_contexts_text(
+        rules_dir_paths,
+        policy_type.origin.contexts_name_map,
+    )
 
     rules = parse_source_rules(
         source_text,
