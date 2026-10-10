@@ -13,6 +13,7 @@ from sepolicy.match import merge_class_sets, merge_typeattribute_rules
 from sepolicy.rule import (
     Rule,
     RuleType,
+    atomic_rules,
     rule_defined_types,
     rule_type_order,
     rule_used_types,
@@ -74,19 +75,7 @@ def domain_file_name(domain: Optional[str]):
 
 
 def is_attribute_rule(rule: Rule) -> bool:
-    if rule.rule_type in ATTRIBUTE_RULE_TYPES:
-        return True
-
-    if not rule.is_macro:
-        return False
-
-    assert rule.expanded_rules is not None
-
-    for r in rule.expanded_rules:
-        if r.rule_type in ATTRIBUTE_RULE_TYPES:
-            return True
-
-    return False
+    return any(r.rule_type in ATTRIBUTE_RULE_TYPES for r in atomic_rules(rule))
 
 
 def rule_simple_type_name(rule: Rule):
@@ -219,18 +208,10 @@ def rule_macro_sort_key(rule_formatted: Tuple[Rule, str]):
     rule, formatted = rule_formatted
 
     if not rule.is_macro:
-        min_order = rule_type_order(rule)
-        return (min_order, formatted)
+        return (rule_type_order(rule), formatted)
 
-    min_order = 0
-
-    assert rule.expanded_rules is not None
-    for r in rule.expanded_rules:
-        order = rule_type_order(r)
-        if order < min_order:
-            min_order = order
-
-    return (min_order, formatted)
+    orders = [rule_type_order(r) for r in atomic_rules(rule)]
+    return (min([0, *orders]), formatted)
 
 
 def enforce_type_decl_order(rules_formatted: List[Tuple[Rule, str]]):
