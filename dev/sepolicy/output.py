@@ -112,13 +112,14 @@ def type_usage_owner(
     if rule.rule_type != RuleType.TYPE:
         return None
 
-    for defined in rule_defined_types(rule):
-        if defined in rule_domains:
-            return None
+    defined = rule.parts[0]
+    assert isinstance(defined, str)
+    if defined in rule_domains:
+        return None
 
-        files = usage_files.get(defined)
-        if files and len(files) == 1:
-            return next(iter(files))
+    files = usage_files.get(defined)
+    if files and len(files) == 1:
+        return next(iter(files))
 
     return None
 
