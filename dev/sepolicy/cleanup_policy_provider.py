@@ -69,7 +69,7 @@ class CleanupPolicyProvider(PolicyProvider):
 
             rules = rules - cleanup_policy.rules
             genfs_rules = genfs_rules - cleanup_policy.genfs_rules
-            contexts, _ = remove_source_contexts(
+            contexts = remove_source_contexts(
                 contexts,
                 cleanup_policy.contexts,
             )
@@ -81,7 +81,7 @@ class CleanupPolicyProvider(PolicyProvider):
             )
             rules = remove_covered_rules(rules, covered_policy.rules)
             genfs_rules = genfs_rules - covered_policy.genfs_rules
-            contexts, _ = remove_source_contexts(
+            contexts = remove_source_contexts(
                 contexts,
                 covered_policy.contexts,
             )
