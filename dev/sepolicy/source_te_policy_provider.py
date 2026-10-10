@@ -95,21 +95,13 @@ class SourceTePolicyProvider(PolicyProvider):
         elif not macros and policy_type.origin.rules_subdirs is not None:
             add_subdirs(policy_type.origin.rules_subdirs)
 
-        if macros:
-            extras = self.__extra_macros_paths
-        else:
-            extras = self.__extra_rules_paths
-
-        def add_extras(policy_name: Optional[str]):
-            if policy_name not in extras:
-                return
-
-            dir_paths.extend((e, policy_type.name) for e in extras[policy_name])
-
-        add_extras(None)
-        add_extras(policy_type.name)
-
         return dir_paths
+
+    def __extras(self, macros: bool):
+        if macros:
+            return self.__extra_macros_paths
+
+        return self.__extra_rules_paths
 
     def __get_policy_all_paths(
         self,
@@ -126,6 +118,12 @@ class SourceTePolicyProvider(PolicyProvider):
             dir_path = Path(system_sepolicy_path, 'flagging')
             dir_paths.append((dir_path, policy_type.name))
 
+        extras = self.__extras(macros)
+
+        def add_extras(policy_name: Optional[str]):
+            extra_paths = extras.get(policy_name, ())
+            dir_paths.extend((e, policy_type.name) for e in extra_paths)
+
         sources = None
         if macros and policy_type.origin.macro_sources:
             sources = policy_type.origin.macro_sources
@@ -138,6 +136,7 @@ class SourceTePolicyProvider(PolicyProvider):
                     macros,
                 )
                 dir_paths.extend(source_macro_paths)
+                add_extras(source_policy_type.name)
 
         own_dir_paths = self.__get_policy_dir_paths(
             policy_type,
@@ -145,6 +144,8 @@ class SourceTePolicyProvider(PolicyProvider):
             macros,
         )
         dir_paths.extend(own_dir_paths)
+        add_extras(None)
+        add_extras(policy_type.name)
 
         return dir_paths
 
