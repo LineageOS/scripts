@@ -686,37 +686,44 @@ vendor_clean = vendor.macro_match(
 #
 
 
-def reference_gathered(clean: PolicyType) -> PolicyType:
-    return clean.macro_replace().gather_source_text()
-
-
-recovery_reference_gathered = (
-    reference_gathered(platform_public_clean),
-    reference_gathered(platform_private_clean),
-    reference_gathered(system_ext_public_clean),
-    reference_gathered(system_ext_private_clean),
-    reference_gathered(product_public_clean),
-    reference_gathered(product_private_clean),
-    reference_gathered(vendor_clean),
+SOURCE_RULE_POLICIES = (
+    source_platform_public,
+    source_platform_private,
+    source_system_ext_public,
+    source_system_ext_private,
+    source_product_public,
+    source_product_private,
+    source_vendor,
 )
-recovery_reference_combined = combined(
-    name='recovery_reference_combined',
-    macro_sources=(source_platform_public,),
-    attribute_sources=recovery_reference_gathered,
-    rule_sources=(
-        source_platform_public,
-        source_platform_private,
-        source_system_ext_public,
-        source_system_ext_private,
-        source_product_public,
-        source_product_private,
-        source_vendor,
-        *recovery_reference_gathered,
+
+PARTITION_CLEANS = (
+    platform_public_clean,
+    platform_private_clean,
+    system_ext_public_clean,
+    system_ext_private_clean,
+    product_public_clean,
+    product_private_clean,
+    vendor_clean,
+)
+
+
+def compiled_reference(name: str, gathered: Tuple[PolicyType, ...]):
+    return compiled(
+        name=f'{name}_compiled',
+        source=combined(
+            name=f'{name}_combined',
+            macro_sources=(source_platform_public,),
+            attribute_sources=gathered,
+            rule_sources=(*SOURCE_RULE_POLICIES, *gathered),
+        ),
+    )
+
+
+recovery_reference_compiled = compiled_reference(
+    'recovery_reference',
+    tuple(
+        clean.macro_replace().gather_source_text() for clean in PARTITION_CLEANS
     ),
-)
-recovery_reference_compiled = compiled(
-    name='recovery_reference_compiled',
-    source=recovery_reference_combined,
 )
 
 
@@ -736,13 +743,7 @@ def cleaned_output(clean: PolicyType) -> PolicyType:
 # Partition rules with the not_recovery() guard data in place
 #
 
-platform_public_guarded = guarded_replaced(platform_public_clean)
-platform_private_guarded = guarded_replaced(platform_private_clean)
-system_ext_public_guarded = guarded_replaced(system_ext_public_clean)
-system_ext_private_guarded = guarded_replaced(system_ext_private_clean)
-product_public_guarded = guarded_replaced(product_public_clean)
-product_private_guarded = guarded_replaced(product_private_clean)
-vendor_guarded = guarded_replaced(vendor_clean)
+partition_guarded = tuple(guarded_replaced(c) for c in PARTITION_CLEANS)
 
 cleaned_output(platform_public_clean).output_to(
     relative_dir='system/public',
@@ -770,33 +771,9 @@ cleaned_output(product_private_clean).output_to(
 # The recovery_only() rules will be added to vendor.
 #
 
-recovery_reference_guarded_gathered = (
-    platform_public_guarded.gather_source_text(),
-    platform_private_guarded.gather_source_text(),
-    system_ext_public_guarded.gather_source_text(),
-    system_ext_private_guarded.gather_source_text(),
-    product_public_guarded.gather_source_text(),
-    product_private_guarded.gather_source_text(),
-    vendor_guarded.gather_source_text(),
-)
-recovery_reference_guarded_combined = combined(
-    name='recovery_reference_guarded_combined',
-    macro_sources=(source_platform_public,),
-    attribute_sources=recovery_reference_guarded_gathered,
-    rule_sources=(
-        source_platform_public,
-        source_platform_private,
-        source_system_ext_public,
-        source_system_ext_private,
-        source_product_public,
-        source_product_private,
-        source_vendor,
-        *recovery_reference_guarded_gathered,
-    ),
-)
-recovery_reference_guarded_compiled = compiled(
-    name='recovery_reference_guarded_compiled',
-    source=recovery_reference_guarded_combined,
+recovery_reference_guarded_compiled = compiled_reference(
+    'recovery_reference_guarded',
+    tuple(guarded.gather_source_text() for guarded in partition_guarded),
 )
 recovery_reference_guarded = binary_compiled(
     name='recovery_reference_guarded',
