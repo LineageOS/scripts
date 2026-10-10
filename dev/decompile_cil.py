@@ -184,16 +184,8 @@ def decompile_cil():
             verbose=verbose,
         )
     )
-    policy_index.register(
-        GatherSourceTextPolicyProvider(
-            verbose=verbose,
-        )
-    )
-    policy_index.register(
-        ExpandedGuardPolicyProvider(
-            verbose=verbose,
-        )
-    )
+    policy_index.register(GatherSourceTextPolicyProvider())
+    policy_index.register(ExpandedGuardPolicyProvider())
 
     shutil.rmtree(output_dir, ignore_errors=True)
     output_dir.mkdir(parents=True, exist_ok=True)
