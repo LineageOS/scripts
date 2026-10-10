@@ -27,6 +27,7 @@ if shutil.which('m4') is None:
 
 from sepolicy.cil_policy import parse_dump_policy_variables
 from sepolicy.conditional_type import ConditionalType
+from sepolicy.macro import MacroVariant
 from sepolicy.match import match_macros_rules
 from sepolicy.policy import (
     PolicyIndex,
@@ -91,9 +92,19 @@ class SourcePolicyTest(unittest.TestCase):
 
         assert cls.policy.macros is not None
         cls.macros = cls.policy.macros
-        cls.macro_rules: Dict[str, List[Rule]] = dict(
-            cls.macros.macros_name_rules
-        )
+        cls.variants: Dict[str, List[MacroVariant]] = {}
+        for variant in cls.macros.macros_name_rules:
+            cls.variants.setdefault(variant.name, []).append(variant)
+
+    def variant_rules(self, name: str, args: Dict[str, str]):
+        for variant in self.variants[name]:
+            if all(
+                (args.get(f'${c.arg_index}') == c.value) == c.equal
+                for c in variant.conditions
+            ):
+                return variant.rules
+
+        assert False, name
 
     def test_perm_macros(self):
         self.assertIn(
@@ -110,7 +121,7 @@ class SourcePolicyTest(unittest.TestCase):
                 ('$1', '$1', 'anon_inode', '$1_block_io_uring'),
                 TypeTransitionTag('"[io_uring]"'),
             ),
-            self.macro_rules['app_domain'],
+            self.variant_rules('app_domain', {}),
         )
 
     def test_macros_match_their_expansion(self):
@@ -120,14 +131,14 @@ class SourcePolicyTest(unittest.TestCase):
             ('binder_call', {'$1': 'foo_app', '$2': 'foo_service'}),
             ('init_daemon_domain', {'$1': 'foo_daemon'}),
         ):
-            with self.subTest(macro=name):
+            with self.subTest(macro=name, args=args):
                 rules = RuleContainer(
-                    substitute(r, args) for r in self.macro_rules[name]
+                    substitute(r, args) for r in self.variant_rules(name, args)
                 )
 
                 matches = match_macros_rules(
                     rules,
-                    [(name, self.macro_rules[name])],
+                    self.variants[name],
                     verbose=False,
                 )
 

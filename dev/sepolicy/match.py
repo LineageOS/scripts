@@ -16,6 +16,7 @@ from typing import (
 )
 
 from sepolicy.class_set import ClassSet
+from sepolicy.macro import ArgCondition, MacroVariant
 from sepolicy.match_template import (
     ArgValues,
     RuleTemplate,
@@ -170,6 +171,7 @@ def match_macro_rules(
     rules: RuleContainer,
     macro_name: str,
     macro_rule_templates: List[RuleTemplate],
+    conditions: Tuple[ArgCondition, ...],
     all_rule_matches: List[RuleMatch],
     rule_match_cache: Dict[Hashable, List[Rule]],
     verbose: bool,
@@ -182,18 +184,37 @@ def match_macro_rules(
 
     rule_matches: List[RuleMatch] = []
 
-    arity = max(m.arity for m in macro_rule_templates)
+    arity = max(
+        [
+            *(m.arity for m in macro_rule_templates),
+            *(c.arg_index for c in conditions),
+        ]
+    )
+    arg_values = ArgValues.empty(arity)
+    for condition in conditions:
+        if condition.equal:
+            arg_values.with_item(condition.arg_index, condition.value)
+
     match_macro_rule(
         rules,
         macro_rule_templates,
         0,
         macro_name,
         [],
-        ArgValues.empty(arity),
+        arg_values,
         rule_matches,
         rule_match_cache,
         verbose,
     )
+
+    rule_matches = [
+        rule_match
+        for rule_match in rule_matches
+        if all(
+            c.equal or rule_match.arg_values.get(c.arg_index) != c.value
+            for c in conditions
+        )
+    ]
 
     all_rule_matches.extend(rule_matches)
 
@@ -206,13 +227,13 @@ def match_macro_rules(
 
 def match_macros_rules(
     rules: RuleContainer,
-    macros_name_rules: List[Tuple[str, List[Rule]]],
+    macros_name_rules: List[MacroVariant],
     verbose: bool,
 ):
     rule_matches: List[RuleMatch] = []
     rule_match_cache: Dict[Hashable, List[Rule]] = {}
 
-    for macro_name, macro_rules in macros_name_rules:
+    for macro_name, macro_rules, conditions in macros_name_rules:
         macro_rule_templates: List[RuleTemplate] = [
             compile_rule_template(r) for r in macro_rules
         ]
@@ -228,6 +249,7 @@ def match_macros_rules(
             rules,
             macro_name,
             macro_rule_templates,
+            conditions,
             rule_matches,
             rule_match_cache,
             verbose,

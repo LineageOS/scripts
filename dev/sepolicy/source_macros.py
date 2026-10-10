@@ -11,7 +11,7 @@ from typing import (
     Tuple,
 )
 
-from sepolicy.rule import Rule
+from sepolicy.macro import MacroVariant
 from sepolicy.varargs import Ioctls
 
 
@@ -23,7 +23,7 @@ class SourceMacros:
     nlmsgs: List[Tuple[str, Ioctls]]
     ioctl_defines: Dict[int, str]
     nlmsg_defines: Dict[int, str]
-    macros_name_rules: List[Tuple[str, List[Rule]]]
+    macros_name_rules: List[MacroVariant]
 
     def __repr__(self):
         perms = set(t[0] for perms in self.class_perms.values() for t in perms)

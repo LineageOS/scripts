@@ -19,6 +19,7 @@ from sepolicy.gather_source_text_policy_provider import (
     GatherSourceTextPolicyProvider,
 )
 from sepolicy.hardcoded_policy_provider import HardcodedPolicyProvider
+from sepolicy.macro import MacroVariant
 from sepolicy.macro_match_policy_provider import MacroMatchPolicyProvider
 from sepolicy.macro_replace_policy_provider import MacroReplacePolicyProvider
 from sepolicy.policy import (
@@ -73,7 +74,7 @@ class MacrosPolicyProvider(PolicyProvider):
     def __init__(
         self,
         class_perms: Dict[str, List[Tuple[str, Set[str]]]],
-        macros_name_rules: List[Tuple[str, List[Rule]]],
+        macros_name_rules: List[MacroVariant],
     ):
         super().__init__(MacrosOrigin)
 
