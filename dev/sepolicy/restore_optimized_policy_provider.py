@@ -60,19 +60,6 @@ class RestoreOptimizedPolicyProvider(PolicyProvider):
     def __init__(self):
         super().__init__(PolicyRestoreOptimizedOrigin)
 
-    def resolve_metadata(
-        self,
-        policy_index: PolicyIndex,
-        policy_type: PolicyType,
-        requested: Optional[PolicyMetadata],
-    ):
-        assert isinstance(policy_type.origin, PolicyRestoreOptimizedOrigin)
-
-        return policy_index.resolve_metadata(
-            policy_type.origin.source,
-            requested,
-        )
-
     def get_policy(
         self,
         policy_index: PolicyIndex,
