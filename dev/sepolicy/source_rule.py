@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import re
 from itertools import product
 from typing import Callable, Dict, List, Set, Tuple
 
@@ -16,7 +17,9 @@ from sepolicy.rule import (
     trim_contexts_label,
     unpack_line,
 )
-from sepolicy.varargs import Ioctls, Perms, TypeTransitionTag
+from sepolicy.varargs import ArgVarargs, Ioctls, Perms, TypeTransitionTag
+
+arg_varargs_pattern = re.compile(r'\$([1-9][0-9]*)')
 
 
 def trim_ioctl(ioctl: int):
@@ -238,7 +241,9 @@ class SourceRuleParser:
                         class_varargs = varargs
                         class_is_all = class_varargs == class_perms_set
 
-                    class_varargs_map[class_name] = Perms(class_varargs, class_is_all)
+                    class_varargs_map[class_name] = Perms(
+                        class_varargs, class_is_all
+                    )
 
                 for src, dst, class_name in product(srcs, dsts, class_names):
                     rule = Rule(
@@ -285,7 +290,14 @@ class SourceRuleParser:
                     ioctls = unpack_negative_ioctls(varargs)
                 else:
                     varargs = list(flatten_parts(parts[5]))
-                    ioctls = unpack_ioctls(varargs)
+                    arg_match = None
+                    if len(varargs) == 1:
+                        arg_match = arg_varargs_pattern.fullmatch(varargs[0])
+
+                    if arg_match is not None:
+                        ioctls = ArgVarargs(int(arg_match.group(1)))
+                    else:
+                        ioctls = unpack_ioctls(varargs)
 
                 srcs = structure_conditional_types(parts[1])
                 dsts = structure_conditional_types(parts[2])
