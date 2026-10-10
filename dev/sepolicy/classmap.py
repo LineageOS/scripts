@@ -100,12 +100,6 @@ def extract_classmap_from_rules(rules: RuleContainer):
 
             class_name_common_map[class_name].append(common_name)
 
-        elif rule.rule_type == 'classorder':
-            continue
-
-        else:
-            continue
-
     for class_name, common_names in class_name_common_map.items():
         assert class_name in classes_map
 
