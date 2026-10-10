@@ -9,6 +9,7 @@ from typing import (
     Dict,
     FrozenSet,
     Hashable,
+    Iterable,
     List,
     Optional,
     Set,
@@ -327,6 +328,20 @@ def discard_rule_matches(
     return new_rule_matches
 
 
+def common_marks(body_rules: Iterable[Rule], rules: RuleContainer):
+    common: Optional[Set[LineMark]] = None
+    for rule in body_rules:
+        marks = rules.marks(rule)
+        if not marks:
+            continue
+
+        common = set(marks) if common is None else common & set(marks)
+        if not common:
+            break
+
+    return common
+
+
 def replace_macro_rules(
     rules: RuleContainer,
     all_rule_matches: List[RuleMatch],
@@ -342,19 +357,7 @@ def replace_macro_rules(
                 print(rule)
             print()
 
-        marks: Optional[Set[LineMark]] = None
-        for body_rule in rule_match.rules:
-            body_marks = rules.marks(body_rule)
-            if not body_marks:
-                continue
-
-            if marks is None:
-                marks = set(body_marks)
-            else:
-                marks = marks & set(body_marks)
-
-            if not marks:
-                break
+        marks = common_marks(rule_match.rules, rules)
 
         removed_count = rules.remove_many(rule_match.rules, optional=True)
         if not removed_count:
@@ -534,20 +537,10 @@ def device_marks(
     rules: RuleContainer,
     reference: RuleContainer,
 ):
-    common: Optional[Set[LineMark]] = None
-    for rule in rule_match.rules:
-        if rule in reference:
-            continue
-
-        marks = rules.marks(rule)
-        if not marks:
-            continue
-
-        common = set(marks) if common is None else common & set(marks)
-        if not common:
-            break
-
-    return common
+    return common_marks(
+        (rule for rule in rule_match.rules if rule not in reference),
+        rules,
+    )
 
 
 def select_macros_by_group(
