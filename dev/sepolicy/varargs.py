@@ -71,6 +71,25 @@ class Perms:
 
         return self.__values <= other.__values
 
+    def __or__(self, other: Perms):
+        return Perms(
+            self.__values | other.__values,
+            self.__is_all or other.__is_all,
+        )
+
+    def __sub__(self, other: Perms):
+        if other.__is_all:
+            return Perms((), False)
+
+        values = self.__values - other.__values
+        if values == self.__values:
+            return self
+
+        return Perms(values, False)
+
+    def is_empty(self):
+        return not self.__is_all and not self.__values
+
     def __is_star(self):
         # fd, property_service are 1-perm, lockdown is 2-perm, avoid replacing
         # them
@@ -199,6 +218,9 @@ class Ioctls:
 
     def merge(self, other: Ioctls):
         return Ioctls(self.__ranges + other.__ranges)
+
+    def is_empty(self):
+        return not self.__ranges
 
     def invert(self, start: int = 0x0000, end: int = 0xFFFF):
         result: List[Tuple[int, int]] = []

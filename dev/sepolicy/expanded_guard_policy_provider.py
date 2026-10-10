@@ -8,9 +8,9 @@ from typing import Dict, List, Optional, Set, Tuple
 
 from sepolicy.expander import (
     EXPAND_TYPES,
+    Coverage,
     Resolver,
     str_part,
-    varargs_subset,
 )
 from sepolicy.policy import (
     PolicyExpandedGuardOrigin,
@@ -21,7 +21,6 @@ from sepolicy.policy import (
 )
 from sepolicy.rule import Rule, RuleType
 from sepolicy.rule_container import RuleContainer
-from sepolicy.varargs import Ioctls, Perms
 from utils.utils import Color, color_print
 
 
@@ -32,17 +31,8 @@ class GuardStatus(Enum):
     EMPTY = auto()
 
 
-def is_expansion_present(
-    expanded: Rule,
-    rules: RuleContainer,
-) -> bool:
-    assert isinstance(expanded.varargs, (Perms, Ioctls))
-    match_keys = (expanded.rule_type, *expanded.parts, None)
-    return any(
-        varargs_subset(expanded.varargs, match.varargs)
-        for match in rules.match(match_keys)
-        if isinstance(match.varargs, (Perms, Ioctls))
-    )
+def is_expansion_present(expanded: Rule, coverage: Coverage) -> bool:
+    return coverage.uncovered(expanded).is_empty()
 
 
 def get_membership_pairs(
@@ -90,7 +80,7 @@ def get_absent_memberships(
 def classify_rules(
     expandable: List[Rule],
     resolver: Resolver,
-    rules: RuleContainer,
+    coverage: Coverage,
 ) -> Tuple[
     Dict[Rule, GuardStatus],
     Set[Tuple[str, str]],
@@ -107,7 +97,7 @@ def classify_rules(
         rule_absent_members: List[Tuple[str, str]] = []
         for expanded in resolver.expand_rule(rule):
             pairs = get_membership_pairs(rule, expanded, resolver)
-            if is_expansion_present(expanded, rules):
+            if is_expansion_present(expanded, coverage):
                 any_present = True
                 present_members.update(pairs)
             else:
@@ -178,6 +168,7 @@ class ExpandedGuardPolicyProvider(PolicyProvider):
             reference_policy.metadata,
         )
         resolver = Resolver(expander_policy.rules)
+        coverage = Coverage(reference_policy.rules)
 
         expandable = [
             rule
@@ -194,7 +185,7 @@ class ExpandedGuardPolicyProvider(PolicyProvider):
             results, exclusions, pass_absent = classify_rules(
                 expandable,
                 resolver,
-                reference_policy.rules,
+                coverage,
             )
             if passes == 1:
                 absent_memberships = pass_absent
