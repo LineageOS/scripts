@@ -83,25 +83,25 @@ def rule_simple_type_name(rule: Rule):
         assert isinstance(rule.varargs, Types)
 
         if 'dev_type' in rule.varargs:
-            return DEVICE_TYPE_RULES_NAME, False
+            return DEVICE_TYPE_RULES_NAME
         elif 'file_type' in rule.varargs or 'fs_type' in rule.varargs:
-            return FILE_TYPE_RULES_NAME, False
+            return FILE_TYPE_RULES_NAME
         elif isinstance(rule.parts[0], str):
             if rule.parts[0].endswith('_prop'):
-                return PROPERTY_RULES_NAME, False
+                return PROPERTY_RULES_NAME
             elif rule.parts[0].endswith('_hwservice'):
-                return HWSERVICE_TYPE_RULES_NAME, False
+                return HWSERVICE_TYPE_RULES_NAME
             elif rule.parts[0].endswith('_service'):
-                return SERVICE_TYPE_RULES_NAME, False
+                return SERVICE_TYPE_RULES_NAME
 
-        return None, False
+        return None
     elif is_attribute_rule(rule):
-        return ATTRIBUTE_RULES_NAME, True
+        return ATTRIBUTE_RULES_NAME
     elif isinstance(rule.parts[0], str):
         if rule.parts[0].endswith('_prop'):
-            return PROPERTY_RULES_NAME, False
+            return PROPERTY_RULES_NAME
 
-    return None, False
+    return None
 
 
 def type_usage_owner(
@@ -195,8 +195,9 @@ def group_rules(
     regrouped_rules: Dict[str, Set[Rule]] = {}
     for name, group in grouped_rules.items():
         simple_names = {rule: rule_simple_type_name(rule) for rule in group}
-        all_simple = all(n is not None for n, _ in simple_names.values())
-        for rule, (simple_name, force) in simple_names.items():
+        all_simple = all(n is not None for n in simple_names.values())
+        for rule, simple_name in simple_names.items():
+            force = simple_name == ATTRIBUTE_RULES_NAME
             group_name = simple_name if all_simple or force else name
             assert group_name is not None
             regrouped_rules.setdefault(group_name, set()).add(rule)
