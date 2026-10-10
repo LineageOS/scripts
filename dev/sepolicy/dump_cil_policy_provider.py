@@ -9,10 +9,9 @@ from typing import (
 )
 
 from sepolicy.cil_policy import (
-    get_dump_policy_version,
+    get_dump_policy_metadata,
     parse_dump_policy_contexts,
     parse_dump_policy_rules,
-    parse_dump_policy_variables,
 )
 from sepolicy.policy import (
     Policy,
@@ -45,17 +44,10 @@ class DumpCilPolicyProvider(PolicyProvider):
     ):
         assert isinstance(policy_type.origin, PolicyDumpCilOrigin)
 
-        version = get_dump_policy_version(
+        return get_dump_policy_metadata(
             self.__dump_root,
             policy_type.origin.version_source,
         )
-
-        variables = parse_dump_policy_variables(
-            self.__dump_root,
-            version=version,
-        )
-
-        return PolicyMetadata(version, variables)
 
     def get_policy(
         self,
