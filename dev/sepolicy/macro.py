@@ -61,7 +61,7 @@ def _macro_name_body(macro: str):
 
     # Not all macros have a quoted body
     assert (body[0] == '`') == (body[-1] == "'")
-    if body[0] == '`' and body[-1] == "'":
+    if body[0] == '`':
         body = body[1:-1]
 
     body = body.strip()
@@ -76,7 +76,6 @@ def macro_name(macro: str):
 def macro_name_body(macro: str):
     name, body = _macro_name_body(macro)
     if name is None:
-        # color_print(f'Rule {macro} present among macros', color=Color.YELLOW)
         return None
 
     return name, body
