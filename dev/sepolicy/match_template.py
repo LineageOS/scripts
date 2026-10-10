@@ -515,6 +515,9 @@ def _iter_string_template_arg_values(
 
             search_start = next_pos + 1
 
+    if value_index == len(value):
+        yield arg_values
+
 
 def _iter_affix_template_arg_values(
     arg_values: ArgValues,
