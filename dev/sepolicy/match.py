@@ -48,13 +48,6 @@ class RuleMatch:
         self.macro_name = macro_name
         self.rules = rules
         self.arg_values = arg_values
-
-        self.__hash_values = (
-            self.macro_name,
-            self.arg_values,
-            rules,
-        )
-        self.__hash = hash(self.__hash_values)
         self.__macro: Optional[Rule] = None
 
     @property
@@ -70,15 +63,6 @@ class RuleMatch:
             self.__macro = macro
 
         return macro
-
-    def __hash__(self):
-        return self.__hash
-
-    def __eq__(self, other: object):
-        if not isinstance(other, RuleMatch):
-            return NotImplemented
-
-        return self.__hash_values == other.__hash_values
 
     def __str__(self):
         return str(self.macro)
