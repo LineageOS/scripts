@@ -168,12 +168,10 @@ class SourceText:
 
         return all_texts
 
-    def get_text(self, t: PolicyFileType):
-        texts = self.get_texts({t})
-        assert len(texts) == 1
-        return next(iter(texts))
-
     def get_path(self, t: PolicyFileType):
         file_paths = self.paths[t]
         assert len(file_paths) == 1
-        return next(iter(file_paths))
+        return file_paths[0]
+
+    def get_text(self, t: PolicyFileType):
+        return self.texts[self.get_path(t)]
