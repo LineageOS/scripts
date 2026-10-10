@@ -93,21 +93,6 @@ def create_conditional_type(version_suffix: str, parts: raw_parts_list):
     return ConditionalType(positive, negative, False)
 
 
-def is_valid_cil_line(line: str):
-    line = line.strip()
-
-    if not line:
-        return False
-
-    if line.startswith('#'):
-        return False
-
-    if line.startswith(';'):
-        return False
-
-    return True
-
-
 def unpack_ioctls(parts: raw_parts_list):
     # (. (range . .) ((range . .)))
 
@@ -199,15 +184,11 @@ unknown_rule_types: Set[str] = set(
 
 
 def unpack_cil_line(line: str):
-    # Skip comments and empty lines
-    if not is_valid_cil_line(line):
+    stripped = line.strip()
+    if not stripped or stripped[0] in ('#', CIL_COMMENT_MARKER):
         return None
 
-    parts = unpack_line(line, '(', ')', ' ')
-    if not parts:
-        return None
-
-    return parts
+    return unpack_line(line, '(', ')', ' ') or None
 
 
 class CilRuleParser:

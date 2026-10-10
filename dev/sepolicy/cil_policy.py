@@ -399,9 +399,6 @@ def read_cil_lines(
     current_mark: Optional[LineMark] = None
 
     for line in cil_data.splitlines():
-        if not line:
-            continue
-
         if line.startswith(CIL_COMMENT_MARKER):
             if line.startswith(LMX_PREFIX):
                 number, path = line[len(LMX_PREFIX) :].split(' ', 1)
