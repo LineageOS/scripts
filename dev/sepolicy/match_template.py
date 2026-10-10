@@ -205,18 +205,8 @@ def compile_string_template(value: str):
     )
 
 
-def fill_single_value_template(
-    template: SingleValueTemplate,
-    arg_values: ArgValues,
-):
-    return arg_values[template.arg_index]
-
-
 def _fill_affix_template(template: AffixTemplate, arg_values: ArgValues):
     arg_value = arg_values.get(template.arg_index)
-    if arg_value is None:
-        return None
-
     if not isinstance(arg_value, str):
         return None
 
@@ -297,32 +287,48 @@ def compile_conditional_template(value: ConditionalType):
     )
 
 
+def fill_conditional_template_list(
+    size: int,
+    literals: Tuple[Tuple[int, str], ...],
+    templates: Tuple[Tuple[int, AnyStringTemplate], ...],
+    arg_values: ArgValues,
+):
+    parts: List[str] = [''] * size
+
+    for i, part in literals:
+        parts[i] = part
+
+    for i, part in templates:
+        filled = fill_string_template(part, arg_values)
+        if filled is None:
+            return None
+
+        parts[i] = filled
+
+    return parts
+
+
 def fill_conditional_template(
     template: ConditionalTemplate,
     arg_values: ArgValues,
 ):
-    positive: List[str] = [''] * template.num_positive
-    negative: List[str] = [''] * template.num_negative
+    positive = fill_conditional_template_list(
+        template.num_positive,
+        template.positive_literals,
+        template.positive_templates,
+        arg_values,
+    )
+    if positive is None:
+        return None
 
-    for i, part in template.positive_literals:
-        positive[i] = part
-
-    for i, part in template.negative_literals:
-        negative[i] = part
-
-    for i, part in template.positive_templates:
-        filled = fill_string_template(part, arg_values)
-        if filled is None:
-            return None
-
-        positive[i] = filled
-
-    for i, part in template.negative_templates:
-        filled = fill_string_template(part, arg_values)
-        if filled is None:
-            return None
-
-        negative[i] = filled
+    negative = fill_conditional_template_list(
+        template.num_negative,
+        template.negative_literals,
+        template.negative_templates,
+        arg_values,
+    )
+    if negative is None:
+        return None
 
     return ConditionalType(positive, negative, template.is_all)
 
@@ -374,7 +380,7 @@ def fill_rule_template(rule_template: RuleTemplate, arg_values: ArgValues):
             continue
 
         if isinstance(part, SingleValueTemplate):
-            part = fill_single_value_template(part, arg_values)
+            part = arg_values[part.arg_index]
             assert isinstance(part, (str, ConditionalType))
         elif isinstance(part, (AffixTemplate, StringTemplate)):
             part = fill_string_template(part, arg_values)
