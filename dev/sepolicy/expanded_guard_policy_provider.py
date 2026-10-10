@@ -123,10 +123,8 @@ def classify_rules(
 
 
 class ExpandedGuardPolicyProvider(PolicyProvider):
-    def __init__(self, verbose: bool):
+    def __init__(self):
         super().__init__(PolicyExpandedGuardOrigin)
-
-        self.__verbose = verbose
 
     def get_policy(
         self,

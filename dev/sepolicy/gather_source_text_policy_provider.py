@@ -24,10 +24,8 @@ from sepolicy.source_text import (
 
 
 class GatherSourceTextPolicyProvider(PolicyProvider):
-    def __init__(self, verbose: bool):
+    def __init__(self):
         super().__init__(PolicyGatherSourceTextOrigin)
-
-        self.__verbose = verbose
 
     def get_policy(
         self,
