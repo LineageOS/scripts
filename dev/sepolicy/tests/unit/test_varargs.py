@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import unittest
 
-from sepolicy.varargs import Ioctls, Perms, Types
+from sepolicy.varargs import ArgVarargs, Ioctls, Perms, Types
 
 
 class PermsTest(unittest.TestCase):
@@ -74,6 +74,16 @@ class TypesTest(unittest.TestCase):
 
     def test_str_empty(self):
         self.assertEqual(str(Types(set())), '')
+
+
+class ArgVarargsTest(unittest.TestCase):
+    def test_equality(self):
+        self.assertEqual(ArgVarargs(3), ArgVarargs(3))
+        self.assertNotEqual(ArgVarargs(3), ArgVarargs(4))
+        self.assertEqual(hash(ArgVarargs(3)), hash(ArgVarargs(3)))
+
+    def test_str(self):
+        self.assertEqual(str(ArgVarargs(3)), '$3')
 
 
 if __name__ == '__main__':

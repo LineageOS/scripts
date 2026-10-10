@@ -9,7 +9,7 @@ import tempfile
 import unittest
 from contextlib import redirect_stdout
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Union
 
 from utils.utils import android_root
 
@@ -38,13 +38,14 @@ from sepolicy.rule import Rule, rule_part
 from sepolicy.rule_container import RuleContainer
 from sepolicy.source_te_policy_provider import SourceTePolicyProvider
 from sepolicy.tests.helpers import R_DIR_PERMS, VERSION, write_fake_dump
-from sepolicy.varargs import TypeTransitionTag
+from sepolicy.varargs import ArgVarargs, Ioctls, TypeTransitionTag
 
 
-def substitute(rule: Rule, args: Dict[str, str]) -> Rule:
+def substitute(rule: Rule, args: Dict[str, Union[str, Ioctls]]) -> Rule:
     def sub_str(value: str):
         for arg, replacement in args.items():
-            value = value.replace(arg, replacement)
+            if isinstance(replacement, str):
+                value = value.replace(arg, replacement)
 
         return value
 
@@ -61,10 +62,14 @@ def substitute(rule: Rule, args: Dict[str, str]) -> Rule:
 
         return value
 
+    varargs = rule.varargs
+    if isinstance(varargs, ArgVarargs):
+        varargs = args[str(varargs)]
+
     return Rule(
         rule.rule_type,
         tuple(sub(p) for p in rule.parts),
-        rule.varargs,
+        varargs,
     )
 
 
@@ -133,6 +138,16 @@ class SourcePolicyTest(unittest.TestCase):
             (
                 'domain_auto_trans',
                 {'$1': 'shell', '$2': 'foo_exec', '$3': 'foo'},
+            ),
+            (
+                'set_xperm_filter',
+                {
+                    '$1': 'foo_device',
+                    '$2': 'foo_app',
+                    '$3': Ioctls([(0x1, 0x2)]),
+                    '$4': Ioctls([(0x3, 0x3)]),
+                    '$5': Ioctls([(0x4, 0x4)]),
+                },
             ),
             (
                 'domain_auto_trans',

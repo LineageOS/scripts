@@ -6,7 +6,7 @@ from __future__ import annotations
 import unittest
 
 from sepolicy.rule import Rule, RuleType, is_type_generated
-from sepolicy.varargs import Types, TypeTransitionTag
+from sepolicy.varargs import ArgVarargs, Ioctls, Types, TypeTransitionTag
 
 
 class FormatTypeTest(unittest.TestCase):
@@ -49,6 +49,44 @@ class FormatTypeTransitionTest(unittest.TestCase):
         self.assertEqual(
             str(rule),
             'type_transition app tmpfs:file appdomain_tmpfs;',
+        )
+
+
+class FormatXpermTest(unittest.TestCase):
+    def test_argument(self):
+        rule = Rule(
+            RuleType.ALLOWXPERM,
+            ('appdomain', '$1', 'chr_file', 'ioctl'),
+            ArgVarargs(3),
+        )
+
+        self.assertEqual(
+            str(rule),
+            'allowxperm appdomain $1:chr_file ioctl { $3 };',
+        )
+
+
+class FormatMacroTest(unittest.TestCase):
+    def test_ioctls_argument(self):
+        rule = Rule(
+            'set_xperm_filter',
+            (
+                'gpu_device',
+                Ioctls([(0x1, 0x1), (0x5, 0x6)]),
+                Ioctls([(0x9, 0x9)]),
+            ),
+            is_macro=True,
+        )
+
+        self.assertEqual(
+            rule.format(
+                class_perms=None,
+                ioctls=None,
+                ioctl_defines={0x1: 'GPU_INFO', 0x9: 'GPU_DEBUG'},
+                nlmsgs=None,
+                nlmsg_defines=None,
+            ),
+            'set_xperm_filter(gpu_device, GPU_INFO 0x5-0x6, GPU_DEBUG)',
         )
 
 

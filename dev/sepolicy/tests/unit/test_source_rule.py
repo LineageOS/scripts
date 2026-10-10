@@ -14,7 +14,7 @@ from sepolicy.source_rule import (
     unpack_negative_ioctls,
 )
 from sepolicy.tests.helpers import CLASSMAP, FILE_PERMS, allow, member, parse_te
-from sepolicy.varargs import Ioctls, Perms, TypeTransitionTag
+from sepolicy.varargs import ArgVarargs, Ioctls, Perms, TypeTransitionTag
 
 
 class StructureConditionalTypesTest(unittest.TestCase):
@@ -192,6 +192,38 @@ neverallowxperm app block_device:blk_file ioctl ~{ 0x1 };
                 ),
             },
         )
+
+    def test_allowxperm_argument(self):
+        rules = parse_te(
+            """
+allowxperm appdomain $1:chr_file ioctl { $3 };
+allowxperm $2 $1:chr_file ioctl $4;
+"""
+        )
+
+        self.assertEqual(
+            set(rules),
+            {
+                Rule(
+                    RuleType.ALLOWXPERM,
+                    ('appdomain', '$1', 'chr_file', 'ioctl'),
+                    ArgVarargs(3),
+                ),
+                Rule(
+                    RuleType.ALLOWXPERM,
+                    ('$2', '$1', 'chr_file', 'ioctl'),
+                    ArgVarargs(4),
+                ),
+            },
+        )
+
+    def test_allowxperm_argument_with_values(self):
+        parser = SourceRuleParser(lambda r: None, CLASSMAP)
+
+        with self.assertRaises(ValueError):
+            parser.parse_line(
+                'allowxperm appdomain $1:chr_file ioctl { $3 0x1 };'
+            )
 
     def test_attribute_and_expandattribute(self):
         rules = parse_te(
