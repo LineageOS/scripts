@@ -91,11 +91,8 @@ def rule_body(text: str):
     return body
 
 
-macro_arity_pattern = re.compile(r'\$([1-9][0-9]*)')
-
-
 def macro_arity(body: str):
-    found_args = macro_arity_pattern.finditer(body)
+    found_args = arg_pattern.finditer(body)
     used_args = set(int(m.group(1)) for m in found_args)
     return max(used_args) if used_args else 0
 
