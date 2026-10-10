@@ -123,8 +123,11 @@ class SourceRuleParserTest(unittest.TestCase):
             ),
         )
 
-    def test_skips_sigchld(self):
-        self.assertEqual(len(parse_te('allow $3 $1:process sigchld;')), 0)
+    def test_sigchld(self):
+        self.assertEqual(
+            list(parse_te('allow $3 $1:process sigchld;')),
+            [allow('$3', '$1', 'process', ['sigchld'])],
+        )
 
     def test_type_with_attributes(self):
         rules = parse_te('type app, domain, appdomain;')

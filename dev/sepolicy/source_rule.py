@@ -188,19 +188,6 @@ class SourceRuleParser:
                 | RuleType.AUDITALLOW
                 | RuleType.DONTAUDIT
             ):
-                # Remove allow $3 $1:process sigchld as it is part of an ifelse
-                # statement based on one of the parameters and it is not
-                # possible to generate the checks for it as part of macro
-                # expansion
-                # TODO: implement this properly by allowing macros to have
-                # conditional rules based on input params
-                if (
-                    len(parts) == 5
-                    and parts[3] == 'process'
-                    and parts[4] == 'sigchld'
-                ):
-                    return
-
                 # neverallow ~{ a b } c:d e;
                 negative_srcs = False
                 if len(parts) > 5 and parts[1] == '~':

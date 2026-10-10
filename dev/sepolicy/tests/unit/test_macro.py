@@ -8,6 +8,7 @@ import unittest
 from contextlib import redirect_stdout
 
 from sepolicy.macro import (
+    MacroVariant,
     categorize_macros,
     macro_arity,
     macro_name_body,
@@ -151,7 +152,7 @@ class ParseMacrosTest(unittest.TestCase):
         self.assertEqual(
             macros,
             [
-                (
+                MacroVariant(
                     'r_dir_file',
                     [
                         allow('$1', '$2', 'dir', ['search']),
@@ -169,7 +170,7 @@ class ParseMacrosTest(unittest.TestCase):
 
         self.assertEqual(
             macros,
-            [('valid', [Rule(RuleType.ATTRIBUTE, ('$1',))])],
+            [MacroVariant('valid', [Rule(RuleType.ATTRIBUTE, ('$1',))])],
         )
 
     def test_skips_duplicate_rules(self):
@@ -178,7 +179,7 @@ class ParseMacrosTest(unittest.TestCase):
             ('second', 'attribute $1;'),
         )
 
-        self.assertEqual([name for name, _ in macros], ['first'])
+        self.assertEqual([m.name for m in macros], ['first'])
 
 
 if __name__ == '__main__':
