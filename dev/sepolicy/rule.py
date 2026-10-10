@@ -9,6 +9,7 @@ from typing import (
     Dict,
     FrozenSet,
     Generator,
+    Iterable,
     List,
     Optional,
     Set,
@@ -388,6 +389,14 @@ def rule_type_order(rule: Rule):
         return 1
 
 
+def atomic_rules(rule: Rule) -> Iterable[Rule]:
+    if rule.is_macro:
+        assert rule.expanded_rules is not None
+        return rule.expanded_rules
+
+    return (rule,)
+
+
 def _rule_used_types(rule: Rule, used_types: Set[str]):
     def handle_type(t: rule_part):
         if isinstance(t, str):
@@ -426,35 +435,20 @@ def _rule_used_types(rule: Rule, used_types: Set[str]):
 def rule_used_types(rule: Rule):
     used_types: Set[str] = set()
 
-    if rule.is_macro:
-        assert rule.expanded_rules is not None
-        for r in rule.expanded_rules:
-            _rule_used_types(r, used_types)
-    else:
-        _rule_used_types(rule, used_types)
+    for r in atomic_rules(rule):
+        _rule_used_types(r, used_types)
 
     return used_types
-
-
-def _rule_defined_types(
-    rule: Rule,
-    defined_types: Set[str],
-):
-    if rule.rule_type != RuleType.TYPE:
-        return None
-
-    assert isinstance(rule.parts[0], str)
-    defined_types.add(rule.parts[0])
 
 
 def rule_defined_types(rule: Rule):
     defined_types: Set[str] = set()
 
-    if rule.is_macro:
-        assert rule.expanded_rules is not None
-        for r in rule.expanded_rules:
-            _rule_defined_types(r, defined_types)
-    else:
-        _rule_defined_types(rule, defined_types)
+    for r in atomic_rules(rule):
+        if r.rule_type != RuleType.TYPE:
+            continue
+
+        assert isinstance(r.parts[0], str)
+        defined_types.add(r.parts[0])
 
     return defined_types
