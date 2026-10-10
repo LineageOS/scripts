@@ -473,7 +473,7 @@ def parse_dump_policy_rules(
     conditional_types_map: Dict[str, ConditionalType] = {}
     reference_conditional_types_maps: List[Dict[str, ConditionalType]] = []
 
-    for environment_type in origin.needed or ():
+    for environment_type in origin.needed:
         environment_policy = policy_index.get(
             environment_type,
             metadata,

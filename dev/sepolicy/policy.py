@@ -70,37 +70,33 @@ class PolicyOrigin:
 
 @dataclass(frozen=True)
 class PolicySourceOrigin(PolicyOrigin):
-    rules_subdirs: Optional[
+    rules_subdirs: Tuple[
         Tuple[
-            Tuple[
-                # subdir
-                str,
-                # versioned
-                bool,
-            ],
-            ...,
-        ]
-    ] = None
-    macros_subdirs: Optional[
+            # subdir
+            str,
+            # versioned
+            bool,
+        ],
+        ...,
+    ] = ()
+    macros_subdirs: Tuple[
         Tuple[
-            Tuple[
-                # subdir
-                str,
-                # versioned
-                bool,
-            ],
-            ...,
-        ]
-    ] = None
-    macro_sources: Optional[Tuple[PolicyType, ...]] = None
+            # subdir
+            str,
+            # versioned
+            bool,
+        ],
+        ...,
+    ] = ()
+    macro_sources: Tuple[PolicyType, ...] = ()
     contexts_name_map: Optional[FrozenDict[ContextsType, str]] = None
 
 
 @dataclass(frozen=True)
 class PolicyCombinedOrigin(PolicyOrigin):
-    macro_sources: Optional[Tuple[PolicyType, ...]] = None
-    rule_sources: Optional[Tuple[PolicyType, ...]] = None
-    attribute_sources: Optional[Tuple[PolicyType, ...]] = None
+    macro_sources: Tuple[PolicyType, ...] = ()
+    rule_sources: Tuple[PolicyType, ...] = ()
+    attribute_sources: Tuple[PolicyType, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -131,7 +127,7 @@ class PolicyDumpCilOrigin(PolicyDumpOrigin):
     classmap_source: Optional[PolicyType] = None
     contexts_name_map: Optional[FrozenDict[ContextsType, str]] = None
     # Needed at parse time
-    needed: Optional[Tuple[PolicyType, ...]] = None
+    needed: Tuple[PolicyType, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -331,8 +327,8 @@ def hardcoded(*, name: str, rules: Tuple[Rule, ...]):
 def source_te(
     *,
     name: str,
-    rules_subdirs: Optional[Tuple[Tuple[str, bool], ...]] = None,
-    macros_subdirs: Optional[Tuple[Tuple[str, bool], ...]] = None,
+    rules_subdirs: Tuple[Tuple[str, bool], ...] = (),
+    macros_subdirs: Tuple[Tuple[str, bool], ...] = (),
     macro_sources: Tuple[PolicyType, ...] = (),
     contexts: Optional[FrozenDict[ContextsType, str]] = None,
 ):
@@ -341,7 +337,7 @@ def source_te(
         PolicySourceOrigin(
             rules_subdirs=rules_subdirs,
             macros_subdirs=macros_subdirs,
-            macro_sources=macro_sources or None,
+            macro_sources=macro_sources,
             contexts_name_map=contexts,
         ),
     )
@@ -364,9 +360,9 @@ def combined(
     return PolicyType(
         f'{SOURCE_PREFIX}{name}',
         PolicyCombinedOrigin(
-            macro_sources=macro_sources or None,
-            rule_sources=rule_sources or None,
-            attribute_sources=attribute_sources or None,
+            macro_sources=macro_sources,
+            rule_sources=rule_sources,
+            attribute_sources=attribute_sources,
         ),
     )
 
@@ -413,7 +409,7 @@ def dump_cil(
             file_prefix=file_prefix,
             classmap_source=classmap_source,
             contexts_name_map=contexts,
-            needed=needed or None,
+            needed=needed,
         ),
     )
 
