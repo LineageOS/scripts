@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+from functools import reduce
+from itertools import groupby
 from typing import List, Optional, Set
 
 from sepolicy.class_set import ClassSet
@@ -24,20 +26,16 @@ def ioctl_same_ioctl_key(rule: Rule, index: int):
 
 
 def merge_ioctl_rules_same_ioctls(rules: List[Rule], index: int):
-    group_rules: List[Rule] = []
     new_rules: List[Rule] = []
 
-    def merge_group_rules():
-        nonlocal group_rules
-        nonlocal new_rules
-
-        if not group_rules:
-            return
-
-        if len(group_rules) == 1:
-            new_rules.append(group_rules[0])
-            group_rules = []
-            return
+    for key, group in groupby(
+        rules,
+        key=lambda rule: ioctl_same_ioctl_key(rule, index),
+    ):
+        group_rules = list(group)
+        if key is None or len(group_rules) == 1:
+            new_rules.extend(group_rules)
+            continue
 
         objects: List[str] = []
         for rule in group_rules:
@@ -46,8 +44,6 @@ def merge_ioctl_rules_same_ioctls(rules: List[Rule], index: int):
             objects.append(obj)
 
         base_rule = group_rules[0]
-        group_rules = []
-
         new_rule = Rule(
             base_rule.rule_type,
             (
@@ -59,77 +55,32 @@ def merge_ioctl_rules_same_ioctls(rules: List[Rule], index: int):
         )
         new_rules.append(new_rule)
 
-    last_key = None
-    for rule in rules:
-        key = ioctl_same_ioctl_key(rule, index)
-        if key is None:
-            merge_group_rules()
-            new_rules.append(rule)
-            last_key = None
-            continue
-
-        if last_key is not None and key != last_key:
-            merge_group_rules()
-
-        group_rules.append(rule)
-        last_key = key
-
-    merge_group_rules()
-
     return new_rules
 
 
-def ioctl_same_class_key(rule: Rule):
-    return (
-        rule.rule_type,
-        rule.parts,
-    )
-
-
 def merge_ioctl_rules_same_class(rules: List[Rule]):
-    group_rules: List[Rule] = []
     new_rules: List[Rule] = []
 
-    def merge_group_rules():
-        nonlocal group_rules
-        nonlocal new_rules
-
-        if not group_rules:
-            return
-
+    for _, group in groupby(
+        rules, key=lambda rule: (rule.rule_type, rule.parts)
+    ):
+        group_rules = list(group)
         if len(group_rules) == 1:
-            new_rules.append(group_rules[0])
-            group_rules = []
-            return
+            new_rules.extend(group_rules)
+            continue
 
-        merged_ioctls = None
+        ioctls: List[Ioctls] = []
         for rule in group_rules:
             assert isinstance(rule.varargs, Ioctls)
-            if merged_ioctls is None:
-                merged_ioctls = rule.varargs
-            else:
-                merged_ioctls = merged_ioctls.merge(rule.varargs)
+            ioctls.append(rule.varargs)
 
         base_rule = group_rules[0]
-        group_rules = []
-
         new_rule = Rule(
             base_rule.rule_type,
             base_rule.parts,
-            merged_ioctls,
+            reduce(Ioctls.merge, ioctls),
         )
         new_rules.append(new_rule)
-
-    last_key = None
-    for rule in rules:
-        key = ioctl_same_class_key(rule)
-        if last_key is not None and key != last_key:
-            merge_group_rules()
-
-        group_rules.append(rule)
-        last_key = key
-
-    merge_group_rules()
 
     return new_rules
 
