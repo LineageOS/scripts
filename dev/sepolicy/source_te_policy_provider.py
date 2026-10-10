@@ -267,22 +267,6 @@ class SourceTePolicyProvider(PolicyProvider):
 
         return source_text, classmap, macros
 
-    def get_macros(self, metadata: PolicyMetadata, policy_name: str):
-        _, _, macros = self.__parse_macros(metadata, policy_name)
-        return macros
-
-    def get_macros_source_text(
-        self,
-        metadata: PolicyMetadata,
-        policy_name: str,
-    ):
-        source_text, _, _ = self.__parse_macros(metadata, policy_name)
-        return source_text
-
-    def get_classmap(self, metadata: PolicyMetadata, policy_name: str):
-        _, classmap, _ = self.__parse_macros(metadata, policy_name)
-        return classmap
-
     def get_policy(
         self,
         policy_index: PolicyIndex,
@@ -308,13 +292,14 @@ class SourceTePolicyProvider(PolicyProvider):
             macros=False,
         )
 
-        source_text = self.get_macros_source_text(metadata, policy_type.name)
+        source_text, classmap, macros = self.__parse_macros(
+            metadata,
+            policy_type.name,
+        )
 
         # Avoid mutating the original source text which might end up being
         # used by other policies
         source_text = source_text.copy()
-
-        classmap = self.get_classmap(metadata, policy_type.name)
 
         policy = parse_metadata_source_policies(
             rules_dir_paths,
@@ -325,6 +310,6 @@ class SourceTePolicyProvider(PolicyProvider):
             verbose=self.__verbose,
         )
 
-        policy.macros = self.get_macros(metadata, policy_type.name)
+        policy.macros = macros
 
         return policy
