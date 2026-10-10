@@ -3,7 +3,6 @@
 
 from __future__ import annotations
 
-import bisect
 from typing import Dict, Iterable, List, Optional, Set, Tuple
 
 
@@ -38,12 +37,6 @@ class Perms:
         self.__values = frozenset(values)
         self.__is_all = is_all
         self.__hash = hash(Perms.__ALL if self.__is_all else self.__values)
-
-    def __contains__(self, value: str):
-        if self.__is_all:
-            return True
-
-        return value in self.__values
 
     def __eq__(self, other: object):
         if not isinstance(other, Perms):
@@ -254,14 +247,6 @@ class Ioctls:
             result.append((cur, end))
 
         return Ioctls(result)
-
-    def __contains__(self, value: int):
-        i = bisect.bisect_right(self.__ranges, value, key=lambda t: t[0]) - 1
-        if i >= 0:
-            start, end = self.__ranges[i]
-            return start <= value <= end
-
-        return False
 
     def __eq__(self, other: object):
         if not isinstance(other, Ioctls):
