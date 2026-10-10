@@ -33,10 +33,12 @@ from sepolicy.policy import (
     PolicyIndex,
     PolicyMetadata,
     source_platform_public,
+    source_vendor,
 )
 from sepolicy.rule import Rule, rule_part
 from sepolicy.rule_container import RuleContainer
 from sepolicy.source_te_policy_provider import SourceTePolicyProvider
+from sepolicy.source_text import PolicyFileType
 from sepolicy.tests.helpers import R_DIR_PERMS, VERSION, write_fake_dump
 from sepolicy.varargs import ArgVarargs, Ioctls, TypeTransitionTag
 
@@ -187,6 +189,50 @@ class SourcePolicyTest(unittest.TestCase):
 
     def test_policy_rules(self):
         self.assertIn(Rule('attribute', ('domain',)), self.policy.rules)
+
+
+class ExtraMacrosTest(unittest.TestCase):
+    def test_extra_macros_load_once(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            dump_root = Path(temp_dir, 'dump')
+            write_fake_dump(dump_root)
+            variables = parse_dump_policy_variables(dump_root, VERSION)
+
+            extra_dir = Path(temp_dir, 'extra')
+            extra_dir.mkdir()
+            extra_macros = Path(extra_dir, 'te_macros')
+            extra_macros.write_text(
+                "define(`extra_macro', `allow $1 $2:file read;')\n"
+            )
+
+            index = PolicyIndex()
+            index.register(
+                SourceTePolicyProvider(
+                    extra_rules_paths={},
+                    extra_macros_paths={None: [extra_dir]},
+                    current=True,
+                    verbose=False,
+                )
+            )
+
+            with redirect_stdout(io.StringIO()):
+                policy = index.get(
+                    source_vendor,
+                    PolicyMetadata(VERSION, variables),
+                )
+
+        assert policy.source_text is not None
+        assert policy.macros is not None
+        self.assertEqual(
+            policy.source_text.paths[PolicyFileType.TE_MACROS].count(
+                extra_macros
+            ),
+            1,
+        )
+        self.assertIn(
+            'extra_macro',
+            [m.name for m in policy.macros.macros_name_rules],
+        )
 
 
 if __name__ == '__main__':
