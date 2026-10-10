@@ -53,7 +53,6 @@ class DumpCilPolicyProvider(PolicyProvider):
         variables = parse_dump_policy_variables(
             self.__dump_root,
             version=version,
-            recovery=policy_type.origin.partition == 'recovery',
         )
 
         return PolicyMetadata(version, variables)
