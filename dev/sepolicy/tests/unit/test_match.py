@@ -24,7 +24,7 @@ from sepolicy.tests.helpers import (
     parse_macros_bodies,
     parse_te,
 )
-from sepolicy.varargs import Types
+from sepolicy.varargs import Ioctls, Types
 
 USERFAULTFD_USE = (
     'userfaultfd_use',
@@ -182,6 +182,52 @@ allow shell foo:process transition;
         )
 
         self.assertEqual(match(rules, DOMAIN_TRANS), [])
+
+
+SET_XPERM_FILTER = (
+    'set_xperm_filter',
+    """
+allowxperm appdomain $1:chr_file ioctl { $3 };
+neverallowxperm { appdomain -$2 } $1:chr_file ioctl { $4 };
+allowxperm $2 $1:chr_file ioctl { $4 };
+""",
+)
+
+
+class VarargsArgumentTest(unittest.TestCase):
+    def test_binds_ioctls(self):
+        rules = parse_te(
+            """
+allowxperm appdomain gpu_device:chr_file ioctl { 0x1 0x5-0x6 };
+neverallowxperm { appdomain -mali_target_sdk } gpu_device:chr_file ioctl 0x9;
+allowxperm mali_target_sdk gpu_device:chr_file ioctl 0x9;
+"""
+        )
+
+        matches = match(rules, SET_XPERM_FILTER)
+
+        self.assertEqual(
+            [m.macro.parts for m in matches],
+            [
+                (
+                    'gpu_device',
+                    'mali_target_sdk',
+                    Ioctls([(0x1, 0x1), (0x5, 0x6)]),
+                    Ioctls([(0x9, 0x9)]),
+                ),
+            ],
+        )
+
+    def test_reused_argument_must_match(self):
+        rules = parse_te(
+            """
+allowxperm appdomain gpu_device:chr_file ioctl 0x1;
+neverallowxperm { appdomain -mali_target_sdk } gpu_device:chr_file ioctl 0x9;
+allowxperm mali_target_sdk gpu_device:chr_file ioctl 0xa;
+"""
+        )
+
+        self.assertEqual(match(rules, SET_XPERM_FILTER), [])
 
 
 class DiscardRuleMatchesTest(unittest.TestCase):
