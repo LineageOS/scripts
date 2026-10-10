@@ -65,6 +65,17 @@ POLICY_ORDER_MAP = {
 }
 
 
+def is_type_selected(
+    order: int,
+    allowed_types: Optional[Set[PolicyFileType]],
+    disallowed_types: Optional[Set[PolicyFileType]],
+):
+    if allowed_types is not None and order not in allowed_types:
+        return False
+
+    return disallowed_types is None or order not in disallowed_types
+
+
 @dataclass
 class SourceText:
     paths: DefaultDict[int, List[Path]] = field(
@@ -93,10 +104,7 @@ class SourceText:
         disallowed_types: Optional[Set[PolicyFileType]] = None,
     ):
         for order, paths in other.paths.items():
-            if allowed_types is not None and order not in allowed_types:
-                continue
-
-            if disallowed_types is not None and order in disallowed_types:
+            if not is_type_selected(order, allowed_types, disallowed_types):
                 continue
 
             for path in paths:
@@ -123,10 +131,7 @@ class SourceText:
         if order is None:
             return
 
-        if allowed_types is not None and order not in allowed_types:
-            return
-
-        if disallowed_types is not None and order in disallowed_types:
+        if not is_type_selected(order, allowed_types, disallowed_types):
             return
 
         text = policy_path.read_text()
