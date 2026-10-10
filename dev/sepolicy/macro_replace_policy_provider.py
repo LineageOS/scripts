@@ -103,12 +103,12 @@ def assign_guards(
     return guards, split
 
 
-def finalize_guards(
+def report_lost_guards(
     guards: Dict[Rule, str],
     incoming: Dict[Rule, str],
     split: int,
     name: str,
-) -> Dict[Rule, str]:
+):
     covered: Set[Rule] = set()
     for rule in guards:
         covered.update(guardable_atoms(rule))
@@ -120,8 +120,6 @@ def finalize_guards(
             color=Color.YELLOW,
         )
 
-    return guards
-
 
 def guard_membership_macros(
     rules: RuleContainer,
@@ -132,8 +130,10 @@ def guard_membership_macros(
         return
 
     for rule in rules:
-        if not rule.is_macro or rule in guards or rule.expanded_rules is None:
+        if not rule.is_macro or rule in guards:
             continue
+
+        assert rule.expanded_rules is not None
 
         guard = None
         for atom in rule.expanded_rules:
@@ -182,28 +182,26 @@ class MacroReplacePolicyProvider(PolicyProvider):
             self.__verbose,
         )
 
-        guards: Dict[Rule, str] = {}
-        split = 0
-        if source_policy.guarded_rules is not None:
-            guards, split = assign_guards(rules, source_policy.guarded_rules)
-
-        guard_membership_macros(
-            rules,
-            guards,
-            source_policy.absent_memberships or {},
-        )
-
         new_policy = source_policy.copy(
             policy_type=policy_type,
             rules=rules,
             genfs_rules=source_policy.genfs_rules,
             contexts=source_policy.contexts,
         )
+
         if source_policy.guarded_rules is not None:
-            new_policy.guarded_rules = finalize_guards(
+            guards, split = assign_guards(rules, source_policy.guarded_rules)
+            guard_membership_macros(
+                rules,
+                guards,
+                source_policy.absent_memberships or {},
+            )
+            report_lost_guards(
                 guards,
                 source_policy.guarded_rules,
                 split,
                 source_policy.pretty_name,
             )
+            new_policy.guarded_rules = guards
+
         return new_policy
