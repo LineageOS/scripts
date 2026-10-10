@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from typing import Hashable, List
+from typing import List
 
 
 class ConditionalType:
@@ -19,14 +19,6 @@ class ConditionalType:
             is_all,
         )
         self.__hash = hash(self.__hash_values)
-
-    @property
-    def hash(self):
-        return self.__hash
-
-    @property
-    def hash_values(self) -> Hashable:
-        return self.__hash_values
 
     @property
     def positive_set(self):
@@ -52,10 +44,10 @@ class ConditionalType:
         if not isinstance(other, ConditionalType):
             return False
 
-        if self.__hash != other.hash:
+        if self.__hash != other.__hash:
             return False
 
-        return self.__hash_values == other.hash_values
+        return self.__hash_values == other.__hash_values
 
     def __hash__(self):
         return self.__hash
