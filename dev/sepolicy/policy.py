@@ -144,6 +144,7 @@ class PolicyDumpBinaryOrigin(PolicyDumpOrigin):
 class PolicyCleanupOrigin(PolicyOrigin):
     source: PolicyType
     removed: Tuple[PolicyType, ...]
+    covered: Tuple[PolicyType, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -258,8 +259,16 @@ class PolicyType:
             PolicyReferencedOrigin(self, reference, in_or_out=False),
         )
 
-    def cleanup(self, *, removed: Tuple[PolicyType, ...]) -> PolicyType:
-        return self.__child('clean', PolicyCleanupOrigin(self, removed))
+    def cleanup(
+        self,
+        *,
+        removed: Tuple[PolicyType, ...] = (),
+        covered: Tuple[PolicyType, ...] = (),
+    ) -> PolicyType:
+        return self.__child(
+            'clean',
+            PolicyCleanupOrigin(self, removed, covered),
+        )
 
     def macro_replace(self) -> PolicyType:
         return self.__child('replaced', PolicyMacroReplaceOrigin(self))
@@ -783,8 +792,8 @@ recovery_reference_guarded = binary_compiled(
 
 recovery_only_replaced = (
     recovery.cleanup(
+        covered=(recovery_reference_guarded,),
         removed=(
-            recovery_reference_guarded,
             # For genfs contexts only
             platform,
             system_ext,
