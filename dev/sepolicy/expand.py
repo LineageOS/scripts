@@ -12,7 +12,6 @@ from typing import (
     Iterable,
     List,
     Optional,
-    TypeGuard,
     TypeVar,
 )
 
@@ -138,10 +137,6 @@ define(`divert', `')
 T = TypeVar('T')
 
 
-def not_none(x: Optional[T]) -> TypeGuard[T]:
-    return x is not None
-
-
 def expand_macro_calls_and_split(
     texts: List[str],
     environment_texts: List[str],
@@ -168,9 +163,5 @@ def expand_macro_calls_and_split(
         verbose,
     )
 
-    return list(
-        filter(
-            not_none,
-            map(map_fn, split_fn(expanded_text)),
-        )
-    )
+    mapped = map(map_fn, split_fn(expanded_text))
+    return [value for value in mapped if value is not None]
