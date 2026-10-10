@@ -254,10 +254,8 @@ class SourceRuleParser:
                 dsts = structure_conditional_types(parts[2])
                 class_names = flatten_parts(parts[3])
 
-                # Optional string for userfaultfd
                 if len(parts) == 6:
                     assert isinstance(parts[5], str), line
-                    # assert parts[5] == '"[userfaultfd]"', line
                     tag = TypeTransitionTag(parts[5])
                 else:
                     tag = None
