@@ -148,6 +148,13 @@ class PolicyCleanupOrigin(PolicyOrigin):
 
 
 @dataclass(frozen=True)
+class PolicyRestoreOptimizedOrigin(PolicyOrigin):
+    source: PolicyType
+    macros: PolicyType
+    reference: PolicyType
+
+
+@dataclass(frozen=True)
 class PolicyHardcodedOrigin(PolicyOrigin):
     rules: Tuple[Rule, ...]
 
@@ -268,6 +275,17 @@ class PolicyType:
         return self.__child(
             'clean',
             PolicyCleanupOrigin(self, removed, covered),
+        )
+
+    def restore_optimized(
+        self,
+        *,
+        macros: PolicyType,
+        reference: PolicyType,
+    ) -> PolicyType:
+        return self.__child(
+            'restored',
+            PolicyRestoreOptimizedOrigin(self, macros, reference),
         )
 
     def macro_replace(self) -> PolicyType:
@@ -801,6 +819,10 @@ recovery_only_replaced = (
             versioned_platform,
             vendor,
         ),
+    )
+    .restore_optimized(
+        macros=source_platform_public,
+        reference=recovery,
     )
     .macro_match(
         macros=source_platform_public,
