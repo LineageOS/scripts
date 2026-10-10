@@ -78,16 +78,12 @@ class Resolver:
     def is_attribute(self, name: str) -> bool:
         return name in self.__attributes
 
-    def exclude_member(self, attribute: str, member: str) -> bool:
+    def exclude_member(self, attribute: str, member: str):
         # Drop a single member from an attribute's effective expansion,
         # mirroring how a recovery build (with the not_recovery()-guarded
-        # membership removed) would expand it. Returns True if newly excluded.
-        excluded = self.__excluded[attribute]
-        if member in excluded:
-            return False
-        excluded.add(member)
+        # membership removed) would expand it.
+        self.__excluded[attribute].add(member)
         self.__cache.clear()
-        return True
 
     def resolve(
         self,

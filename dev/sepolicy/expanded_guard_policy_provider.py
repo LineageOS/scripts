@@ -163,26 +163,24 @@ class ExpandedGuardPolicyProvider(PolicyProvider):
             if rule.rule_type in EXPAND_TYPES
         ]
 
+        results, exclusions, absent_memberships = classify_rules(
+            expandable,
+            resolver,
+            coverage,
+        )
         excluded: Set[Tuple[str, str]] = set()
-        results: Dict[Rule, GuardStatus] = {}
-        absent_memberships: Set[Tuple[str, str]] = set()
-        passes = 0
-        while True:
-            passes += 1
-            results, exclusions, pass_absent = classify_rules(
+        passes = 1
+        while new_exclusions := exclusions - excluded:
+            excluded |= new_exclusions
+            for attribute, member in new_exclusions:
+                resolver.exclude_member(attribute, member)
+
+            results, exclusions, _ = classify_rules(
                 expandable,
                 resolver,
                 coverage,
             )
-            if passes == 1:
-                absent_memberships = pass_absent
-            added = False
-            for attribute, member in exclusions - excluded:
-                excluded.add((attribute, member))
-                resolver.exclude_member(attribute, member)
-                added = True
-            if not added:
-                break
+            passes += 1
 
         guarded_rules = RuleContainer()
         counts = {status: 0 for status in GuardStatus}
