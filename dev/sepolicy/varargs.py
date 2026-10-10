@@ -188,6 +188,23 @@ class TypeTransitionTag:
         return self.__value
 
 
+class ArgVarargs:
+    def __init__(self, arg_index: int):
+        self.arg_index = arg_index
+
+    def __eq__(self, other: object):
+        if not isinstance(other, ArgVarargs):
+            return NotImplemented
+
+        return self.arg_index == other.arg_index
+
+    def __hash__(self):
+        return hash((ArgVarargs, self.arg_index))
+
+    def __str__(self):
+        return f'${self.arg_index}'
+
+
 class Ioctls:
     def __init__(self, ranges: Iterable[Tuple[int, int]]):
         self.__ranges = self._normalize_ranges(ranges)

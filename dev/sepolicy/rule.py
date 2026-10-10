@@ -19,6 +19,7 @@ from typing import (
 from sepolicy.class_set import ClassSet
 from sepolicy.conditional_type import ConditionalType
 from sepolicy.varargs import (
+    ArgVarargs,
     Ioctls,
     OrderedPerms,
     Perms,
@@ -49,6 +50,7 @@ raw_parts_list = List[raw_part]
 rule_part = Union[str, ConditionalType, ClassSet]
 rule_hash_value = Union[
     rule_part,
+    ArgVarargs,
     OrderedPerms,
     Perms,
     Ioctls,
@@ -185,6 +187,21 @@ def get_class_name_perms(
     return class_name_perms
 
 
+def format_macro_arg(
+    part: rule_hash_value,
+    ioctls: Optional[List[Tuple[str, Ioctls]]],
+    ioctl_defines: Optional[Dict[int, str]],
+):
+    if not isinstance(part, Ioctls):
+        return str(part)
+
+    formatted = part.format(ioctls=ioctls, ioctl_defines=ioctl_defines)
+    if formatted.startswith('{ ') and formatted.endswith(' }'):
+        formatted = formatted[2:-2]
+
+    return formatted
+
+
 def format_rule(
     rule: Rule,
     class_perms: Optional[Dict[str, List[Tuple[str, Set[str]]]]] = None,
@@ -225,9 +242,11 @@ def format_rule(
             | RuleType.NEVERALLOWXPERM
             | RuleType.DONTAUDITXPERM
         ):
-            assert isinstance(rule.varargs, Ioctls)
+            assert isinstance(rule.varargs, (Ioctls, ArgVarargs))
 
-            if rule.parts[3] == 'ioctl':
+            if isinstance(rule.varargs, ArgVarargs):
+                varargs_str = f'{{ {rule.varargs} }}'
+            elif rule.parts[3] == 'ioctl':
                 varargs_str = rule.varargs.format(
                     ioctls=ioctls,
                     ioctl_defines=ioctl_defines,
@@ -293,7 +312,9 @@ def format_rule(
             return f'{rule.rule_type} {parts_str};'
         case _:
             assert rule.is_macro
-            parts_str = ', '.join(map(str, rule.parts))
+            parts_str = ', '.join(
+                format_macro_arg(p, ioctls, ioctl_defines) for p in rule.parts
+            )
             return f'{rule.rule_type}({parts_str})'
 
 
@@ -307,6 +328,7 @@ class Rule:
                 Perms,
                 OrderedPerms,
                 Ioctls,
+                ArgVarargs,
                 TypeTransitionTag,
                 Types,
             ]

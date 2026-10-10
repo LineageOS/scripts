@@ -16,6 +16,7 @@ from typing import (
 
 from sepolicy.conditional_type import ConditionalType
 from sepolicy.rule import Rule, rule_hash_value, rule_part
+from sepolicy.varargs import ArgVarargs
 
 
 class ArgValues:
@@ -23,7 +24,7 @@ class ArgValues:
 
     __slots__ = ('__values', '__len')
 
-    def __init__(self, values: List[Optional[rule_part]]):
+    def __init__(self, values: List[Optional[rule_hash_value]]):
         self.__values = values
         self.__len = len(values) - 1
 
@@ -54,7 +55,7 @@ class ArgValues:
     def get(self, index: int):
         return self.__values[index]
 
-    def with_item(self, index: int, value: Optional[rule_part]):
+    def with_item(self, index: int, value: Optional[rule_hash_value]):
         existing = self.__values[index]
 
         if existing is None:
@@ -128,6 +129,7 @@ class RuleTemplate:
     rule: Rule
     literals: Tuple[Tuple[int, rule_part], ...]
     templates: Tuple[Tuple[int, PartTemplate], ...]
+    varargs: Optional[rule_hash_value]
 
     @property
     def num_parts(self):
@@ -136,6 +138,8 @@ class RuleTemplate:
     @property
     def arity(self):
         max_i = 0
+        if isinstance(self.varargs, ArgVarargs):
+            max_i = self.varargs.arg_index
         for _, t in self.templates:
             for i in t.arg_indices:
                 if i > max_i:
@@ -384,6 +388,7 @@ def compile_rule_template(rule: Rule):
         rule=rule,
         literals=tuple(literals),
         templates=tuple(templates),
+        varargs=rule.varargs,
     )
 
 
@@ -421,10 +426,15 @@ def fill_rule_template(rule_template: RuleTemplate, arg_values: ArgValues):
 
         literals.append((i, part))
 
+    varargs = rule_template.varargs
+    if isinstance(varargs, ArgVarargs) and arg_values.has(varargs.arg_index):
+        varargs = arg_values.get(varargs.arg_index)
+
     return RuleTemplate(
         rule=rule_template.rule,
         literals=tuple(literals),
         templates=tuple(templates),
+        varargs=varargs,
     )
 
 
@@ -434,10 +444,14 @@ def rule_template_match_keys(rule_template: RuleTemplate):
     for i, part in rule_template.literals:
         parts[i] = part
 
+    varargs = rule_template.varargs
+    if isinstance(varargs, ArgVarargs):
+        varargs = None
+
     return (
         rule_template.rule.rule_type,
         *parts,
-        rule_template.rule.varargs,
+        varargs,
     )
 
 
@@ -709,7 +723,8 @@ def iter_rule_fill_arg_values(
     if matched_rule.rule_type != rule_template.rule.rule_type:
         return
 
-    if matched_rule.varargs != rule_template.rule.varargs:
+    varargs = rule_template.varargs
+    if not isinstance(varargs, ArgVarargs) and matched_rule.varargs != varargs:
         return
 
     if len(matched_rule.parts) != rule_template.num_parts:
@@ -719,12 +734,21 @@ def iter_rule_fill_arg_values(
         if matched_rule.parts[i] != part:
             return
 
+    pop = None
+    if isinstance(varargs, ArgVarargs):
+        pop = arg_values.with_item(varargs.arg_index, matched_rule.varargs)
+        if pop is None:
+            return
+
     yield from _iter_rule_fill_arg_values(
         rule_template.templates,
         template_part_index=0,
         matched_parts=matched_rule.parts,
         arg_values=arg_values,
     )
+
+    if isinstance(varargs, ArgVarargs):
+        arg_values.pop_item(varargs.arg_index, pop)
 
 
 def rule_template_sort_key(rule_template: RuleTemplate):
