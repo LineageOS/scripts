@@ -196,10 +196,10 @@ def parse_macros(
     expanded_macros: List[Tuple[str, str]],
 ):
     expanded_macro_rules: List[MacroVariant] = []
-    unqiue_macro_name_rules: Set[
-        Tuple[str, FrozenSet[Rule], Tuple[ArgCondition, ...]]
-    ] = set()
-    unique_macro_rules: Dict[FrozenSet[Rule], str] = {}
+    unique_macro_rules: Dict[
+        FrozenSet[Rule],
+        Tuple[str, Tuple[ArgCondition, ...]],
+    ] = {}
     invalid_macro_names: Set[str] = set()
     macro_names: Set[str] = set()
 
@@ -225,29 +225,25 @@ def parse_macros(
                 continue
 
             hashable_rules = frozenset(rules)
-            hashable_macro_name_rules = (name, hashable_rules, conditions)
-
-            if hashable_macro_name_rules in unqiue_macro_name_rules:
-                continue
 
             # This is done to avoid the macros from being discard in favor of
             # the other macro with the same name
             # TODO: find better solution, although it's not really possible to
             # distinguish between the two
-            if hashable_rules in unique_macro_rules:
-                duplicate_macro_name = unique_macro_rules[hashable_rules]
-                color_print(
-                    f'Macro {name} has same rules as {duplicate_macro_name}',
-                    color=Color.YELLOW,
-                )
+            existing = unique_macro_rules.get(hashable_rules)
+            if existing is not None:
+                if existing != (name, conditions):
+                    color_print(
+                        f'Macro {name} has same rules as {existing[0]}',
+                        color=Color.YELLOW,
+                    )
                 continue
 
             if name in macro_names and not conditions:
                 print(f'Macro {name} has multiple variants')
 
             expanded_macro_rules.append(MacroVariant(name, rules, conditions))
-            unique_macro_rules[hashable_rules] = name
-            unqiue_macro_name_rules.add(hashable_macro_name_rules)
+            unique_macro_rules[hashable_rules] = (name, conditions)
             macro_names.add(name)
 
     return expanded_macro_rules
