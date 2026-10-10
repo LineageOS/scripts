@@ -140,6 +140,10 @@ class SourcePolicyTest(unittest.TestCase):
                 {'$1': 'shell', '$2': 'foo_exec', '$3': 'foo'},
             ),
             (
+                'define_prop',
+                {'$1': 'vendor_foo_prop', '$2': 'vendor', '$3': 'public'},
+            ),
+            (
                 'set_xperm_filter',
                 {
                     '$1': 'foo_device',
