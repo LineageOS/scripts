@@ -132,14 +132,24 @@ def group_rules(
     merge_typeattribute_rules(rules, rule_guard)
 
     domain_files: DefaultDict[str, Counter[str]] = defaultdict(Counter)
+    usage_files: DefaultDict[str, Set[str]] = defaultdict(set)
+    rule_domains: Set[str] = set()
     for rule in rules:
-        domain = rule_domain_type(rule)
-        if domain is None:
-            continue
+        file_names = [Path(mark.path).name for mark in rules.marks(rule)]
 
-        for mark in rules.marks(rule):
-            file_name = Path(mark.path).name
-            domain_files[domain][file_name] += 1
+        domain = rule_domain_type(rule)
+        if domain is not None and file_names:
+            domain_files[domain].update(file_names)
+
+        if rule.rule_type not in DECLARATION_RULE_TYPES and isinstance(
+            rule.parts[0], str
+        ):
+            rule_domains.add(rule.parts[0])
+
+        te_files = {f for f in file_names if f.endswith('.te')}
+        if te_files:
+            for used in rule_used_types(rule):
+                usage_files[used].update(te_files)
 
     domain_file: Dict[str, str] = {}
     for domain, files in domain_files.items():
@@ -156,26 +166,6 @@ def group_rules(
         if name.endswith('.te'):
             domain_file[domain] = name
 
-    usage_files: DefaultDict[str, Set[str]] = defaultdict(set)
-    rule_domains: Set[str] = set()
-    for rule in rules:
-        if rule.rule_type not in DECLARATION_RULE_TYPES and isinstance(
-            rule.parts[0], str
-        ):
-            rule_domains.add(rule.parts[0])
-
-        te_files: Set[str] = set()
-        for mark in rules.marks(rule):
-            file_name = Path(mark.path).name
-            if file_name.endswith('.te'):
-                te_files.add(file_name)
-
-        if not te_files:
-            continue
-
-        for used in rule_used_types(rule):
-            usage_files[used].update(te_files)
-
     grouped_rules: Dict[str, Set[Rule]] = {}
     for rule in rules:
         domain = rule_domain_type(rule)
@@ -187,10 +177,7 @@ def group_rules(
         if name is None:
             name = domain_file_name(domain)
 
-        if name not in grouped_rules:
-            grouped_rules[name] = set()
-
-        grouped_rules[name].add(rule)
+        grouped_rules.setdefault(name, set()).add(rule)
 
     # Re-group simple rules into common files
     regrouped_rules: Dict[str, Set[Rule]] = {}
