@@ -79,16 +79,6 @@ def get_needed_build_flags(flagging_bp_path: Path) -> FrozenSet[str]:
     return frozenset(flags)
 
 
-def get_build_prop(lines: List[str], prop_name: str):
-    prop_name_eq = f'{prop_name}='
-
-    for line in lines:
-        if line.startswith(prop_name_eq):
-            return line[len(prop_name_eq) :]
-
-    assert False, f'Failed to find build prop: {prop_name}'
-
-
 def sdk_value_to_version(sdk_value: str):
     # TODO: find the proper value
     if sdk_value == '36':
@@ -138,8 +128,20 @@ def read_build_prop_lines(build_prop_path: Path):
     return build_prop_path.read_text().splitlines()
 
 
+def find_build_prop(build_prop_path: Path, name: str) -> Optional[str]:
+    name_eq = f'{name}='
+
+    for line in read_build_prop_lines(build_prop_path):
+        if line.startswith(name_eq):
+            return line[len(name_eq) :]
+
+    return None
+
+
 def read_build_prop(build_prop_path: Path, name: str):
-    return get_build_prop(read_build_prop_lines(build_prop_path), name)
+    value = find_build_prop(build_prop_path, name)
+    assert value is not None, f'Failed to find build prop: {name}'
+    return value
 
 
 @cache
@@ -270,11 +272,9 @@ def parse_dump_policy_variables(
     # TARGET_BUILD_VARIANT
     variables['target_build_variant'] = build_type
 
-    try:
-        read_build_prop(platform_build_prop_path, 'ro.sanitize.address')
+    asan = find_build_prop(platform_build_prop_path, 'ro.sanitize.address')
+    if asan is not None:
         variables['target_with_asan'] = 'true'
-    except AssertionError:
-        pass
 
     return FrozenDict(variables)
 
