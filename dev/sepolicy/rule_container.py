@@ -15,7 +15,6 @@ from typing import (
     Optional,
     Sequence,
     Set,
-    Tuple,
     Union,
 )
 
@@ -50,7 +49,7 @@ class RuleContainer:
         self,
         iterable: Optional[Iterable[Rule]] = None,
     ):
-        self.__all_data: Dict[Rule, Tuple[Hashable, ...]] = {}
+        self.__all_data: Dict[Rule, None] = {}
         self.__marks: DefaultDict[Rule, Set[LineMark]] = defaultdict(set)
         self.__by_file: DefaultDict[str, Set[Rule]] = defaultdict(set)
         self.__by_file_line: DefaultDict[LineMark, Set[Rule]] = defaultdict(set)
@@ -84,8 +83,6 @@ class RuleContainer:
         return result
 
     def add(self, value: Rule, marks: Optional[Iterable[LineMark]] = None):
-        keys = value.hash_values
-
         if marks:
             rule_marks = self.__marks[value]
             for mark in marks:
@@ -96,12 +93,10 @@ class RuleContainer:
                 self.__by_file[mark.path].add(value)
                 self.__by_file_line[mark].add(value)
 
-        existing = self.__all_data.get(value)
-        if existing is not None:
-            assert existing == keys
+        if value in self.__all_data:
             return
 
-        self.__all_data[value] = keys
+        self.__all_data[value] = None
         self.__index = None
 
     def add_many(self, values: Iterable[Rule]):
@@ -116,10 +111,7 @@ class RuleContainer:
         if optional and value not in self.__all_data:
             return False
 
-        keys = value.hash_values
-
         assert value in self.__all_data, value
-        assert self.__all_data[value] == keys, value
 
         del self.__all_data[value]
 
@@ -164,7 +156,8 @@ class RuleContainer:
             ),
         )
 
-        for value, keys in self.__all_data.items():
+        for value in self.__all_data:
+            keys = value.hash_values
             levels_data = self.__index[len(keys)]
             for i, k in enumerate(keys):
                 levels_data[i][k][value] = None
