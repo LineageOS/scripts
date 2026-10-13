@@ -340,6 +340,7 @@ target_package_name_map = {
     'com.google.android.nfc': 'com.android.nfc',
     'com.google.android.permissioncontroller': 'com.android.permissioncontroller',
     'com.google.android.providers.media.module': 'com.android.providers.media.module',
+    'com.google.android.settings.future.biometrics.faceenroll': 'com.android.settings',
     'com.google.android.storagemanager': 'com.android.storagemanager',
     'com.google.android.uwb.resources': 'com.android.uwb.resources',
     'com.google.android.wifi.resources': 'com.android.wifi.resources',

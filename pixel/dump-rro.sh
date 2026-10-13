@@ -443,13 +443,6 @@ declare -a remove_resource_names=(
   android:config_enablePrimaryLocationTimeZoneProvider
   android:config_enabledCredentialProviderService
   android:config_ephemeralResolverPackage
-  android:config_faceAuthDismissesKeyguard
-  android:config_face_acquire_biometricprompt_ignorelist
-  android:config_face_acquire_enroll_ignorelist
-  android:config_face_acquire_keyguard_ignorelist
-  android:config_face_acquire_vendor_biometricprompt_ignorelist
-  android:config_face_acquire_vendor_enroll_ignorelist
-  android:config_face_acquire_vendor_keyguard_ignorelist
   android:config_feedbackIntentExtraKey
   android:config_feedbackIntentNameKey
   android:config_fingerprintFrrTargetComponent
@@ -554,11 +547,6 @@ declare -a remove_resource_names=(
   android:default_wallpaper_component_per_device_color
   android:error_color_device_default_dark
   android:error_color_device_default_light
-  android:face_acquired_vendor
-  android:face_error_vendor
-  android:face_recalibrate_notification_content
-  android:face_recalibrate_notification_name
-  android:face_recalibrate_notification_title
   android:harmful_app_warning_title
   android:ic_doc_apk.xml
   android:ic_doc_audio.xml
@@ -642,22 +630,14 @@ declare -a remove_resource_names=(
   com.android.server.telecom:call_diagnostic_service_package_name
   com.android.server.telecom:dialer_default_class
   com.android.settings:config_avatar_picker_package
-  com.android.settings:config_face_enroll_guidance_page
-  com.android.settings:config_face_enroll_supported_posture
-  com.android.settings:config_gazeEnabled
   com.android.settings:config_hspa_data_distinguishable
   com.android.settings:config_network_selection_list_aggregation_enabled
   com.android.settings:config_settings_slices_accessibility_components
   com.android.settings:config_showMin3G
-  com.android.settings:config_suw_support_face_enroll
   com.android.settings:data_connection_5g_plus
   com.android.settings:display_white_balance_summary
   com.android.settings:display_white_balance_title
   com.android.settings:face_education.mp4
-  com.android.settings:face_enroll_education_lottie_frame_margin_top
-  com.android.settings:face_enroll_icon_large_height
-  com.android.settings:face_enroll_icon_large_width
-  com.android.settings:face_enroll_intro_illustration_margin_bottom
   com.android.settings:face_preview_scale
   com.android.settings:face_preview_translate_x
   com.android.settings:face_preview_translate_y
@@ -683,10 +663,6 @@ declare -a remove_resource_names=(
   com.android.settings:lottie_animation_view_margin_top
   com.android.settings:peak_refresh_rate_summary
   com.android.settings:regional_pref_footer_learn_more_link
-  com.android.settings:security_settings_face_settings_gaze
-  com.android.settings:security_settings_face_settings_gaze_details
-  com.android.settings:security_settings_face_settings_require_attention
-  com.android.settings:security_settings_face_settings_require_attention_details
   com.android.settings:security_settings_fingerprint_enroll_consent_introduction_title
   com.android.settings:security_settings_fingerprint_enroll_introduction_message_unlock_disabled
   com.android.settings:security_settings_fingerprint_enroll_introduction_title
@@ -717,7 +693,6 @@ declare -a remove_resource_names=(
   com.android.systemui:assistant_utterance
   com.android.systemui:config_avatar_picker_package
   com.android.systemui:config_controlsPreferredPackages
-  com.android.systemui:config_face_auth_props
   com.android.systemui:config_hspa_data_distinguishable
   com.android.systemui:config_pluginAllowlist
   com.android.systemui:config_preferredScreenshotEditor
