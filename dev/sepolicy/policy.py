@@ -893,9 +893,6 @@ class PolicyProvider(ABC):
     ):
         self.__policy_origin = policy_origin
 
-    def can_provide(self, policy_type: PolicyType) -> bool:
-        return isinstance(policy_type.origin, self.__policy_origin)
-
     @property
     def policy_origin(self) -> Type[PolicyOrigin]:
         return self.__policy_origin
