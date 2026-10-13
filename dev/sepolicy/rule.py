@@ -28,7 +28,6 @@ from sepolicy.varargs import (
     TypeTransitionTag,
 )
 
-macro_argument_regex = re.compile(r'\$(\d+)')
 generated_type_regex = re.compile(r'[a-z_]+_typeattr_\d+')
 
 
