@@ -31,14 +31,6 @@ def trim_ioctl_str(ioctl_str: str):
     return trim_ioctl(int(ioctl_str, base=0))
 
 
-def format_ioctl(ioctl: int):
-    return hex(trim_ioctl(ioctl))
-
-
-def format_ioctl_str(ioctl_str: str):
-    return format_ioctl(int(ioctl_str, base=0))
-
-
 def unpack_negative_ioctls(ioctls: List[str]):
     ranges: List[Tuple[int, int]] = []
 
