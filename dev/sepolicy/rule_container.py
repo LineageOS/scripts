@@ -143,12 +143,6 @@ class RuleContainer:
     def marks(self, value: Rule) -> AbstractSet[LineMark]:
         return self.__marks.get(value, frozenset())
 
-    def group_by_file(self) -> DefaultDict[str, Set[Rule]]:
-        return self.__by_file
-
-    def group_by_file_line(self) -> DefaultDict[LineMark, Set[Rule]]:
-        return self.__by_file_line
-
     def __build_index(self):
         self.__index = defaultdict(
             lambda: defaultdict(
