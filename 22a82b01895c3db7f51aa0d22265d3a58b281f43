@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "631d4ccb_9bbae85f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2026-10-13T20:21:37Z",
+      "side": 1,
+      "message": "Can you ask your LLM to put \"Assisted-by\" before the Change-Id?",
+      "revId": "22a82b01895c3db7f51aa0d22265d3a58b281f43",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
