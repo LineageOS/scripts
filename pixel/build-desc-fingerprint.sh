@@ -66,9 +66,11 @@ main() {
       source "${dv}"
       local mk="$(ls ${top}/device/google/*/lineage_${d}.mk)"
       desc="${d}-user ${android_version} ${build_id} ${build_number} release-keys"
+      systemdesc="generic_system_google-user ${android_version} ${build_id} ${build_number} release-keys"
       fingerprint="google/${d}/${d}:${android_version}/${build_id}/${build_number}:user/release-keys"
       systemfingerprint="google/generic_system_google/generic:${android_version}/${build_id}/${build_number}:user/release-keys"
       sed -i "/BuildDesc/c\    BuildDesc=\"${desc}\" \\\\" "${mk}"
+      sed -i "/BuildSystemDesc/c\    BuildSystemDesc=${systemdesc} \\\\" "${mk}"
       sed -i "/BuildFingerprint/c\    BuildFingerprint=${fingerprint} \\\\" "${mk}"
       sed -i "/BuildSystemFingerprint/c\    BuildSystemFingerprint=${systemfingerprint} \\\\" "${mk}"
     )
