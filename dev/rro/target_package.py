@@ -27,6 +27,7 @@ from utils.utils import (
 )
 
 PACKAGE_LOCATIONS = [
+    'device/lineage/atv/apps',
     'frameworks/base/core/res',
     'frameworks/base/packages',
     'frameworks/base/libs',
