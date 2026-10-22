@@ -31,6 +31,7 @@ PACKAGE_LOCATIONS = [
     'frameworks/base/core/res',
     'frameworks/base/packages',
     'frameworks/base/libs',
+    'hardware/lineage/generic-ims',
     'lineage-sdk',
     'packages',
 ]
