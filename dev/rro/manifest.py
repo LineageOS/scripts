@@ -25,6 +25,7 @@ OVERLAY_ATTRS = [
     'priority',
     'requiredSystemPropertyName',
     'requiredSystemPropertyValue',
+    'resourcesMap',
 ]
 
 
