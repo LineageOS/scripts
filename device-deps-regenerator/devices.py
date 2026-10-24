@@ -22,6 +22,7 @@ ignorelist = [
     "laguna",
     "muzel",
     "pantah",
+    "qcs8550-ack",
     "raviole",
     "redbull",
     "sepolicy",
