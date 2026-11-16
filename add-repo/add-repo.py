@@ -28,6 +28,7 @@ def parse_cmdline() -> argparse.Namespace:
     subparser = subparsers.add_parser("add-remote", parents=[parser_common])
     subparser.add_argument("--name", help="Remote name", required=True)
     subparser.add_argument("--fetch", help="Remote path", required=True)
+    subparser.add_argument("--revision", help="Remote revision")
 
     return parser.parse_args()
 
@@ -82,6 +83,8 @@ def main() -> None:
             },
         )
 
+        if args.revision:
+            element.attrib["revision"] = args.revision
     for child in manifest.findall(element.tag):
         if element.attrib == child.attrib:
             sys.exit("Element with the same attributes already exists")
