@@ -24,6 +24,7 @@ def parse_cmdline() -> argparse.Namespace:
     subparser.add_argument("--remote", help="Project remote", required=True)
     subparser.add_argument("--revision", help="Project revision")
     subparser.add_argument("--clone-depth", help="Project clone depth")
+    subparser.add_argument("--groups", help="Project groups")
 
     subparser = subparsers.add_parser("add-remote", parents=[parser_common])
     subparser.add_argument("--name", help="Remote name", required=True)
@@ -74,6 +75,8 @@ def main() -> None:
 
         if args.clone_depth:
             element.attrib["clone-depth"] = args.clone_depth
+        if args.groups:
+            element.attrib["groups"] = args.groups
     elif args.command == "add-remote":
         element = ElementTree.Element(
             "remote",
